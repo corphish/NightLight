@@ -29,6 +29,15 @@ public class KeyValueView extends LinearLayout {
 
         LayoutInflater.from(context).inflate(R.layout.key_value_view, this);
 
+        caption = findViewById(R.id.caption);
+        value = findViewById(R.id.value);
+    }
 
+    public void setCaption(String text) {
+        caption.setText(text);
+    }
+
+    public void setValue(String text) {
+        value.setText(text);
     }
 }

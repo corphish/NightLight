@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Night Light</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="color_intensity">Filter Intensity</string>
+    <string name="color_intensity_desc">Intensity of the blue light to be filtered out. Higher value means higher intensity of blue light will be filtered out, lower value means lower intensity of blue light will be filtered out.</string>
+
+    <string name="master_switch">Enable Night Light</string>
+    <string name="master_switch_desc">Master switch to enable/disable night light.</string>
+
+    <string name="no_root_access">No root access</string>
+    <string name="no_root_desc">Root access is needed for Night Light to work.</string>
+
+    <string name="compat_check">Checking compatibility&#8230;</string>
+
+    <string name="no_kcal">Incompatible</string>
+    <string name="no_kcal_desc">Your kernel does not support KCAL. KCAL is a display driver tuning feature for Qualcomm devices. KCAL support is needed for night light to work.</string>
+
+    <string name="auto_enable">Automatic switch</string>
+    <string name="auto_enable_desc">Automatically enable Night Light between the specified time. Night Light will be automatically disabled outside this time range.</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+
+    <string name="start_time_default">00:00</string>
+    <string name="end_time_default">06:00</string>
+</resources>

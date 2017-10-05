@@ -3,6 +3,7 @@ package com.corphish.nightlight.Receivers;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -22,9 +23,15 @@ public class StartNLReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("NL","Starting NL");
+        
         // At first check whether night light should really be turned on or not
-        boolean autoSwitchEnabled = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Constants.PREF_AUTO_SWITCH, false);
-        if (!autoSwitchEnabled) return;
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        boolean masterSwitchEnabled = sharedPreferences.getBoolean(Constants.PREF_MASTER_SWITCH, false);
+        boolean autoSwitchEnabled = sharedPreferences.getBoolean(Constants.PREF_AUTO_SWITCH, false);
+
+        // Both of the switches must be on to proceed
+        if (!autoSwitchEnabled || !masterSwitchEnabled) return;
 
         Calendar calendar = Calendar.getInstance();
         int currentTime = TimeUtils.getTimeInMinutes(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));

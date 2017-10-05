@@ -23,7 +23,7 @@ public class StartNLReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("NL","Starting NL");
-        
+
         // At first check whether night light should really be turned on or not
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -33,14 +33,8 @@ public class StartNLReceiver extends BroadcastReceiver {
         // Both of the switches must be on to proceed
         if (!autoSwitchEnabled || !masterSwitchEnabled) return;
 
-        Calendar calendar = Calendar.getInstance();
-        int currentTime = TimeUtils.getTimeInMinutes(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
-
-        int startTime = TimeUtils.getTimeInMinutes(PreferenceManager.getDefaultSharedPreferences(context).getString(Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
-        int endTime = TimeUtils.getTimeInMinutes(PreferenceManager.getDefaultSharedPreferences(context).getString(Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
-
         int intensity = PreferenceManager.getDefaultSharedPreferences(context).getInt(Constants.PREF_CUSTOM_VAL, Constants.DEFAULT_INTENSITY);
 
-        if (currentTime >= startTime && currentTime <= endTime) Core.applyNightModeAsync(true, intensity);
+        Core.applyNightModeAsync(true, intensity);
     }
 }

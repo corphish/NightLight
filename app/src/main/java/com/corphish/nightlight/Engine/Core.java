@@ -9,8 +9,6 @@ import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Helpers.RootUtils;
 import com.corphish.nightlight.Helpers.TimeUtils;
 
-import java.util.Calendar;
-
 /**
  * Created by Avinaba on 10/4/2017.
  * Basic functions of the app
@@ -50,8 +48,7 @@ public class Core {
         // At this point of time, both masterSwitch and autoSwitch is on
         // Check if the current time lies between the time range
         // Return true if in range, otherwise false
-        Calendar calendar = Calendar.getInstance();
-        int currentTime = TimeUtils.getTimeInMinutes(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        int currentTime = TimeUtils.getCurrentTimeAsMinutes();
 
         int startTime = TimeUtils.getTimeInMinutes(sharedPreferences.getString(Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
         int endTime = TimeUtils.getTimeInMinutes(sharedPreferences.getString(Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));

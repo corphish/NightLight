@@ -13,12 +13,11 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.corphish.nightlight.Engine.Core;
@@ -70,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         autoSwitch = findViewById(R.id.auto_enable);
         startTime = findViewById(R.id.start_time);
         endTime = findViewById(R.id.end_time);
+
+        TextView versionTV = findViewById(R.id.app_version);
+        versionTV.setText(versionTV.getText() + " v" + BuildConfig.VERSION_NAME);
 
         boolean enabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_MASTER_SWITCH, false);
         masterSwitch.setChecked(enabled);
@@ -216,36 +218,15 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, TimeUtils.getTimeAsHourAndMinutes(startTime)[0]);
-        calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(startTime)[1] - 1);
+        calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(startTime)[1]);
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, startAlarmIntent);
 
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, TimeUtils.getTimeAsHourAndMinutes(endTime)[0]);
-        calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(endTime)[1] - 1);
+        calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(endTime)[1]);
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, endAlarmIntent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void showAlertDialog(int caption, int msg) {

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Formula for calculating effective intensity
-     * = 256 - <seekbar/defaultValue>
+     * = Constants.MAX_BLUE_LIGHT  - <seekbar/defaultValue>
      */
     int defaultIntensity = Constants.DEFAULT_INTENSITY, currentIntensity = defaultIntensity;
 

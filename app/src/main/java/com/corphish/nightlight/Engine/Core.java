@@ -1,9 +1,15 @@
 package com.corphish.nightlight.Engine;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Helpers.RootUtils;
+import com.corphish.nightlight.Helpers.TimeUtils;
+
+import java.util.Calendar;
 
 /**
  * Created by Avinaba on 10/4/2017.
@@ -27,6 +33,30 @@ public class Core {
 
     public static void applyNightModeAsync(boolean b, int i) {
         new NightModeApplier(b, i).execute();
+    }
+
+    public static boolean getNightLightState(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean masterSwitch = sharedPreferences.getBoolean(Constants.PREF_MASTER_SWITCH, false);
+
+        // Return false if masterSwitch is off
+        if (!masterSwitch) return false;
+
+        boolean autoSwitch = sharedPreferences.getBoolean(Constants.PREF_AUTO_SWITCH, false);
+
+        // Return true if autoSwitch is off, because masterSwitch is on already.
+        if (!autoSwitch) return true;
+
+        // At this point of time, both masterSwitch and autoSwitch is on
+        // Check if the current time lies between the time range
+        // Return true if in range, otherwise false
+        Calendar calendar = Calendar.getInstance();
+        int currentTime = TimeUtils.getTimeInMinutes(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+
+        int startTime = TimeUtils.getTimeInMinutes(sharedPreferences.getString(Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
+        int endTime = TimeUtils.getTimeInMinutes(sharedPreferences.getString(Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
+
+        return currentTime >= startTime && currentTime <= endTime;
     }
 
     private static class NightModeApplier extends AsyncTask<Object, Object, Object> {

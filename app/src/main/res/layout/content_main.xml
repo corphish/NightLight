@@ -15,6 +15,7 @@
 
         <include layout="@layout/card_master_switch"/>
         <include layout="@layout/card_slider"/>
+        <include layout="@layout/card_auto_enable"/>
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

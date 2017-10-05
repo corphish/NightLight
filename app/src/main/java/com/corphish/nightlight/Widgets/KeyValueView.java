@@ -1,6 +1,7 @@
 package com.corphish.nightlight.Widgets;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ import com.corphish.nightlight.R;
 
 public class KeyValueView extends LinearLayout {
     TextView caption, value;
+    LinearLayout linearLayout;
 
     public KeyValueView(Context context) {
         this(context, null);
@@ -31,6 +33,16 @@ public class KeyValueView extends LinearLayout {
 
         caption = findViewById(R.id.caption);
         value = findViewById(R.id.value);
+        linearLayout = findViewById(R.id.kv_root);
+
+        TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.KeyValueView,0,0);
+        String captionText = typedArray.getString(R.styleable.KeyValueView_caption);
+        String valueText = typedArray.getString(R.styleable.KeyValueView_value);
+
+        caption.setText(captionText);
+        value.setText(valueText);
+
+        typedArray.recycle();
     }
 
     public void setCaption(String text) {
@@ -39,5 +51,12 @@ public class KeyValueView extends LinearLayout {
 
     public void setValue(String text) {
         value.setText(text);
+    }
+
+    public void setEnabled(boolean enabled) {
+        caption.setEnabled(enabled);
+        value.setEnabled(enabled);
+        linearLayout.setEnabled(enabled);
+        super.setEnabled(enabled);
     }
 }

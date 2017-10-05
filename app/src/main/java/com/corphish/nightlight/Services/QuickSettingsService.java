@@ -1,4 +1,4 @@
-package com.corphish.nightlight;
+package com.corphish.nightlight.Services;
 
 import android.annotation.TargetApi;
 import android.content.SharedPreferences;
@@ -7,7 +7,10 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
-import android.util.Log;
+
+import com.corphish.nightlight.Data.Constants;
+import com.corphish.nightlight.Engine.Core;
+import com.corphish.nightlight.R;
 
 import static com.corphish.nightlight.R.drawable.ic_lightbulb_outline;
 import static com.corphish.nightlight.R.drawable.ic_lightbulb_outline_disabled;
@@ -23,13 +26,10 @@ public class QuickSettingsService extends TileService {
 
     /**
      * Called when the tile is added to the Quick Settings.
-     * @return TileService constant indicating tile state
      */
 
     @Override
     public void onTileAdded() {
-        Log.d("QS", "Tile added");
-
         syncTile();
     }
 
@@ -38,8 +38,6 @@ public class QuickSettingsService extends TileService {
      */
     @Override
     public void onStartListening() {
-        Log.d("QS", "Start listening");
-
         syncTile();
     }
 
@@ -48,57 +46,47 @@ public class QuickSettingsService extends TileService {
      */
     @Override
     public void onClick() {
-        Log.d("QS", "Tile tapped");
-
         updateTile();
-    }
-
-    /**
-     * Called when this tile moves out of the listening state.
-     */
-    @Override
-    public void onStopListening() {
-        Log.d("QS", "Stop Listening");
-    }
-
-    /**
-     * Called when the user removes this tile from Quick Settings.
-     */
-    @Override
-    public void onTileRemoved() {
-        Log.d("QS", "Tile removed");
     }
 
     // Changes the appearance of the tile.
     private void updateTile() {
-        boolean isActive = getServiceStatus();
-
-        updateTileIcon(isActive);
-
-
-        doService(isActive);
+        boolean mode = getServiceStatus();
+        updateTileIcon(mode);
+        doService(mode);
     }
 
     private void syncTile() {
-        updateTileIcon(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SERVICE_STATUS_FLAG, false));
+        // If auto switch and master switch is enabled, set auto mode
+        // If only master is enabled, set on mode
+        // Otherwise off mode
+        boolean masterSwitch = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SERVICE_STATUS_FLAG, false);
+
+        updateTileIcon(masterSwitch);
     }
 
-    private void updateTileIcon(boolean isActive) {
+    private void updateTileIcon(boolean mode) {
         Tile tile = this.getQsTile();
 
         Icon newIcon;
         int newState;
 
+        String title;
+
         // Change the tile to match the service status.
-        if (isActive) {
+        if (mode) {
             newIcon = Icon.createWithResource(getApplicationContext(), ic_lightbulb_outline);
             newState = Tile.STATE_ACTIVE;
+            title = getString(R.string.on);
         } else {
             newIcon = Icon.createWithResource(getApplicationContext(), ic_lightbulb_outline_disabled);
             newState = Tile.STATE_INACTIVE;
+
+            title = getString(R.string.off);
         }
 
         // Change the UI of the tile.
+        tile.setLabel(title);
         tile.setIcon(newIcon);
         tile.setState(newState);
 
@@ -111,16 +99,18 @@ public class QuickSettingsService extends TileService {
     private boolean getServiceStatus() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        boolean isActive = prefs.getBoolean(SERVICE_STATUS_FLAG, false);
-        isActive = !isActive;
+        boolean mode = prefs.getBoolean(SERVICE_STATUS_FLAG, false);
+        mode = !mode;
 
-        prefs.edit().putBoolean(SERVICE_STATUS_FLAG, isActive).apply();
+        prefs.edit().putBoolean(SERVICE_STATUS_FLAG, mode).apply();
 
-        return isActive;
+        return mode;
     }
 
-    private void doService(boolean status) {
-        int intensity = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getInt(Constants.PREF_CUSTOM_VAL, 64);
-        Core.applyNightMode(status, intensity);
+    private void doService(boolean mode) {
+        int intensity = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getInt(Constants.PREF_CUSTOM_VAL, Constants.DEFAULT_INTENSITY);
+
+        if (mode) Core.applyNightModeAsync(true, intensity);
+        else Core.applyNightModeAsync(false, intensity);
     }
 }

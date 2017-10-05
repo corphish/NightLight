@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -206,7 +205,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setAlarms(String startTime, String endTime) {
-        Log.d("NL","Setting start alarm at " + startTime + " and end alarm at " + endTime);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Intent startIntent = new Intent(this, StartNLReceiver.class);

@@ -15,7 +15,6 @@ public class Constants {
     public static final String PREF_AUTO_SWITCH     =   "auto_switch";
     public static final String PREF_START_TIME      =   "start_time";
     public static final String PREF_END_TIME        =   "end_time";
-    public static final String PREF_QS_SWITCH       =   "qs_switch";
 
     public static final String DEFAULT_START_TIME   =   "00:00";
     public static final String DEFAULT_END_TIME     =   "06:00";

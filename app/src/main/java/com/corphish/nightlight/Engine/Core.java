@@ -1,7 +1,6 @@
 package com.corphish.nightlight.Engine;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Helpers.RootUtils;
@@ -13,7 +12,6 @@ import com.corphish.nightlight.Helpers.RootUtils;
 
 public class Core {
     private static void enableNightMode(int intensity) {
-        Log.d("NL","Intensity - " + intensity);
         RootUtils.writeToFile("1", Constants.KCAL_SWITCH);
         RootUtils.writeToFile("256 256 "+(Constants.MAX_BLUE_LIGHT - intensity),Constants.KCAL_ADJUST);
     }

@@ -57,12 +57,9 @@ public class QuickSettingsService extends TileService {
     }
 
     private void syncTile() {
-        // If auto switch and master switch is enabled, set auto mode
-        // If only master is enabled, set on mode
-        // Otherwise off mode
-        boolean masterSwitch = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SERVICE_STATUS_FLAG, false);
+        boolean state = Core.getNightLightState(getApplicationContext());
 
-        updateTileIcon(masterSwitch);
+        updateTileIcon(state);
     }
 
     private void updateTileIcon(boolean mode) {

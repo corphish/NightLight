@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Night Light</string>
-    <string name="action_settings">Settings</string>
 
     <string name="color_intensity">Filter Intensity</string>
     <string name="color_intensity_desc">Intensity of the blue light to be filtered out. Higher value means higher intensity of blue light will be filtered out, lower value means lower intensity of blue light will be filtered out.</string>
@@ -26,4 +25,7 @@
 
     <string name="on">On</string>
     <string name="off">Off</string>
+
+    <string name="about">About</string>
+    <string name="app_desc">Night light uses KCAL, which is a display driver tuning feature for new generation Qualcomm devices, to adjust the intensity of blue light, which makes it more comfortable for your eyes when you are using your phone in the dark and helps you fall asleep. Since it tweaks the hardware aspect of the display, and it does not use any software overlays, it is battery friendly and the change can be seen everywhere in the display.</string>
 </resources>

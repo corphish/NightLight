@@ -46,23 +46,25 @@ public class QuickSettingsService extends TileService {
      */
     @Override
     public void onClick() {
-        updateTile();
-    }
-
-    // Changes the appearance of the tile.
-    private void updateTile() {
         boolean mode = getServiceStatus();
-        updateTileIcon(mode);
+        updateTileUI(mode);
         doService(mode);
     }
 
+    /**
+     * Syncs QSTile with current state of night light
+     */
     private void syncTile() {
         boolean state = Core.getNightLightState(getApplicationContext());
 
-        updateTileIcon(state);
+        updateTileUI(state);
     }
 
-    private void updateTileIcon(boolean mode) {
+    /**
+     * Updates the QSTile icon and label
+     * @param state - State of night light. True value means night light is on, and vice versa
+     */
+    private void updateTileUI(boolean state) {
         Tile tile = this.getQsTile();
 
         Icon newIcon;
@@ -71,7 +73,7 @@ public class QuickSettingsService extends TileService {
         String title;
 
         // Change the tile to match the service status.
-        if (mode) {
+        if (state) {
             newIcon = Icon.createWithResource(getApplicationContext(), ic_lightbulb_outline);
             newState = Tile.STATE_ACTIVE;
             title = getString(R.string.on);
@@ -91,8 +93,10 @@ public class QuickSettingsService extends TileService {
         tile.updateTile();
     }
 
-    // Access storage to see how many times the tile
-    // has been tapped.
+    /**
+     * Gets the current night light masterSwitch state, and returns its toggled value
+     * @return - Toggled value of masterSwitch
+     */
     private boolean getServiceStatus() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -104,10 +108,15 @@ public class QuickSettingsService extends TileService {
         return mode;
     }
 
-    private void doService(boolean mode) {
+    /**
+     * Does the main work when QSTile is tapped.
+     * That is it toggles night mode on or off.
+     * @param state - Current state of QSTile
+     */
+    private void doService(boolean state) {
         int intensity = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getInt(Constants.PREF_CUSTOM_VAL, Constants.DEFAULT_INTENSITY);
 
-        if (mode) Core.applyNightModeAsync(true, intensity);
+        if (state) Core.applyNightModeAsync(true, intensity);
         else Core.applyNightModeAsync(false, intensity);
     }
 }

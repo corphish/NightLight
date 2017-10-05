@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
@@ -26,8 +25,6 @@ public class StopNLReceiver extends BroadcastReceiver {
 
         // Both of the switches must be on to proceed
         if (!autoSwitchEnabled || !masterSwitchEnabled) return;
-
-        Log.d("NL","Stopping NL");
 
         int intensity = PreferenceManager.getDefaultSharedPreferences(context).getInt(Constants.PREF_CUSTOM_VAL, Constants.DEFAULT_INTENSITY);
 

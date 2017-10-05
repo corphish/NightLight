@@ -5,13 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
-import com.corphish.nightlight.Helpers.TimeUtils;
-
-import java.util.Calendar;
 
 /**
  * Created by Avinaba on 10/4/2017.
@@ -22,8 +18,6 @@ public class StartNLReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("NL","Starting NL");
-
         // At first check whether night light should really be turned on or not
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.corphish.nightlight.Engine.Core;
+import com.corphish.nightlight.Helpers.AlarmUtils;
 import com.corphish.nightlight.Helpers.RootUtils;
 import com.corphish.nightlight.Helpers.TimeUtils;
 import com.corphish.nightlight.Receivers.StartNLReceiver;
@@ -188,30 +189,7 @@ public class MainActivity extends AppCompatActivity {
         if (currentTime >= startTime && currentTime <= endTime) new Switcher(true, false).execute();
         else new Switcher(false, false).execute();
 
-        setAlarms(prefStartTime, prefEndTime);
-    }
-
-    private void setAlarms(String startTime, String endTime) {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        Intent startIntent = new Intent(this, StartNLReceiver.class);
-        PendingIntent startAlarmIntent = PendingIntent.getBroadcast(this, 0, startIntent, 0);
-
-        Intent endIntent = new Intent(this, StopNLReceiver.class);
-        PendingIntent endAlarmIntent = PendingIntent.getBroadcast(this, 0, endIntent, 0);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, TimeUtils.getTimeAsHourAndMinutes(startTime)[0]);
-        calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(startTime)[1]);
-
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, startAlarmIntent);
-
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, TimeUtils.getTimeAsHourAndMinutes(endTime)[0]);
-        calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(endTime)[1]);
-
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, endAlarmIntent);
+        AlarmUtils.setAlarms(this, prefStartTime, prefEndTime);
     }
 
     private void showAlertDialog(int caption, int msg) {

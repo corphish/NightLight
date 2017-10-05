@@ -120,24 +120,7 @@ public class MainActivity extends AppCompatActivity {
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                        String selectedHour = i < 10 ? "0" + i: "" + i;
-                        String selectedMinute = i1 < 10 ? "0" +i1: "" + i1;
-                        String timeSting = selectedHour + ":" + selectedMinute;
-                        PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit()
-                                .putString(Constants.PREF_START_TIME, timeSting)
-                                .apply();
-                        startTime.setValue(timeSting);
-
-                        doCurrentAutoFunctions();
-                    }
-                }, hour, minute, false);
-                timePickerDialog.show();
+                showTimePickerDialog(startTime, Constants.PREF_START_TIME);
             }
         });
 
@@ -145,28 +128,30 @@ public class MainActivity extends AppCompatActivity {
         endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                        String selectedHour = i < 10 ? "0" + i: "" + i;
-                        String selectedMinute = i1 < 10 ? "0" +i1: "" + i1;
-                        String timeSting = selectedHour + ":" + selectedMinute;
-                        PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit()
-                                .putString(Constants.PREF_END_TIME, timeSting)
-                                .apply();
-                        endTime.setValue(timeSting);
-
-                        doCurrentAutoFunctions();
-                    }
-                }, hour, minute, false);
-                timePickerDialog.show();
+                showTimePickerDialog(endTime, Constants.PREF_END_TIME);
             }
         });
 
         enableOrDisableViews(enabled);
+    }
+
+    private void showTimePickerDialog(final KeyValueView viewWhoIsCallingIt, final String prefKey) {
+        int time[] = TimeUtils.getCurrentTimeAsHourAndMinutes();
+        TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                String selectedHour = i < 10 ? "0" + i: "" + i;
+                String selectedMinute = i1 < 10 ? "0" +i1: "" + i1;
+                String timeSting = selectedHour + ":" + selectedMinute;
+                PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit()
+                        .putString(prefKey, timeSting)
+                        .apply();
+                viewWhoIsCallingIt.setValue(timeSting);
+
+                doCurrentAutoFunctions();
+            }
+        }, time[0], time[1], false);
+        timePickerDialog.show();
     }
 
     private void enableOrDisableViews(boolean enabled) {

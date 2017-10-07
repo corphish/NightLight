@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.corphish.nightlight"
         minSdkVersion 21
@@ -15,6 +15,19 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "buildVariant"
+
+    productFlavors {
+        generic {
+            applicationId "com.corphish.nightlight.generic"
+            dimension "buildVariant"
+        }
+        donate {
+            applicationId "com.corphish.nightlight.donate"
+            dimension "buildVariant"
         }
     }
 }

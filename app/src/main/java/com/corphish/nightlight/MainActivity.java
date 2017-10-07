@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         endTime = findViewById(R.id.end_time);
 
         TextView versionTV = findViewById(R.id.app_version);
-        versionTV.setText(versionTV.getText() + " v" + BuildConfig.VERSION_NAME);
+        versionTV.setText(getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
 
         boolean enabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_MASTER_SWITCH, false);
         masterSwitch.setChecked(enabled);

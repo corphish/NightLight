@@ -33,7 +33,9 @@
         </service>
         <receiver android:name=".Receivers.StartNLReceiver"/>
         <receiver android:name=".Receivers.StopNLReceiver"/>
-        <receiver android:name=".Receivers.BootCompleteReceiver">
+        <receiver android:name=".Receivers.BootCompleteReceiver"
+                  android:enabled="true"
+                  android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>

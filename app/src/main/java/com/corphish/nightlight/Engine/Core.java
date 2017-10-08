@@ -35,25 +35,7 @@ public class Core {
 
     public static boolean getNightLightState(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean masterSwitch = sharedPreferences.getBoolean(Constants.PREF_MASTER_SWITCH, false);
-
-        // Return false if masterSwitch is off
-        if (!masterSwitch) return false;
-
-        boolean autoSwitch = sharedPreferences.getBoolean(Constants.PREF_AUTO_SWITCH, false);
-
-        // Return true if autoSwitch is off, because masterSwitch is on already.
-        if (!autoSwitch) return true;
-
-        // At this point of time, both masterSwitch and autoSwitch is on
-        // Check if the current time lies between the time range
-        // Return true if in range, otherwise false
-        int currentTime = TimeUtils.getCurrentTimeAsMinutes();
-
-        int startTime = TimeUtils.getTimeInMinutes(sharedPreferences.getString(Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
-        int endTime = TimeUtils.getTimeInMinutes(sharedPreferences.getString(Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
-
-        return currentTime >= startTime && currentTime <= endTime;
+        return sharedPreferences.getBoolean(Constants.PREF_MASTER_SWITCH, false);
     }
 
     private static class NightModeApplier extends AsyncTask<Object, Object, Object> {

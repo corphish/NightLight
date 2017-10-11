@@ -6,3 +6,7 @@
 /build
 /captures
 .externalNativeBuild
+app/donate
+app/generic
+*.jks
+*.json

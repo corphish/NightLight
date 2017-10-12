@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ShortcutActivity"/>
         <service
             android:name=".Services.QuickSettingsService"
             android:icon="@drawable/ic_lightbulb_outline"

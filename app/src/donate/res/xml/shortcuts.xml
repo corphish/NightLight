@@ -1,0 +1,12 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="toggle"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_others"
+        android:shortcutShortLabel="@string/shortcut_toggle">
+        <intent
+            android:action="android.intent.action.VIEW.OTHERS"
+            android:targetPackage="com.corphish.nightlight.donate"
+            android:targetClass="com.corphish.nightlight.ShortcutActivity" />
+    </shortcut>
+</shortcuts>

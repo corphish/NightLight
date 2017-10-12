@@ -28,4 +28,6 @@
 
     <string name="about">About</string>
     <string name="app_desc">Night light uses KCAL, which is a display driver tuning feature for new generation Qualcomm devices, to adjust the intensity of blue light, which makes it more comfortable for your eyes when you are using your phone in the dark and helps you fall asleep. Since it tweaks the hardware aspect of the display, and it does not use any software overlays, it is battery friendly and the change can be seen everywhere in the display.</string>
+
+    <string name="shortcut_toggle">Toggle on/off</string>
 </resources>

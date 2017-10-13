@@ -29,10 +29,6 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         String sStartTime = PreferenceHelper.getStartTime(context);
         String sEndTime = PreferenceHelper.getEndTime(context);
 
-        int currentTime = TimeUtils.getCurrentTimeAsMinutes();
-        int startTime = TimeUtils.getTimeInMinutes(sStartTime);
-        int endTime = TimeUtils.getTimeInMinutes(sEndTime);
-
         if (!masterSwitch) return;
 
         if (!autoSwitch) {
@@ -40,7 +36,7 @@ public class BootCompleteReceiver extends BroadcastReceiver {
             return;
         }
 
-        if (currentTime >= startTime && currentTime <= endTime) Core.applyNightModeAsync(true, intensity);
+        Core.applyNightModeAsync(TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime), intensity);
 
         AlarmUtils.setAlarms(context, sStartTime, sEndTime);
     }

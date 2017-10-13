@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
@@ -110,7 +111,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        startTime.setValue(PreferenceHelper.getStartTime(this));
+        String startTimeVal = PreferenceHelper.getStartTime(this);
+        String endTimeVal = PreferenceHelper.getEndTime(this);
+
+        startTime.setValue(startTimeVal);
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        endTime.setValue(PreferenceHelper.getEndTime(this));
+        endTime.setValue(endTimeVal + (TimeUtils.getTimeInMinutes(endTimeVal) < TimeUtils.getTimeInMinutes(startTimeVal) ? getString(R.string.next_day):""));
         endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,19 +168,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doCurrentAutoFunctions() {
-        Calendar calendar = Calendar.getInstance();
-        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-        int currentMin = calendar.get(Calendar.MINUTE);
-        int currentTime = TimeUtils.getTimeInMinutes(currentHour, currentMin);
-
         String prefStartTime = PreferenceHelper.getStartTime(this);
         String prefEndTime = PreferenceHelper.getEndTime(this);
 
-        int startTime = TimeUtils.getTimeInMinutes(prefStartTime);
-        int endTime = TimeUtils.getTimeInMinutes(prefEndTime);
-
-        if (currentTime >= startTime && currentTime <= endTime) new Switcher(true, false).execute();
-        else new Switcher(false, false).execute();
+        boolean curState = TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefEndTime);
+        Log.d("NL","Curstate " + curState);
+        new Switcher(curState, false).execute();
 
         AlarmUtils.setAlarms(this, prefStartTime, prefEndTime);
     }

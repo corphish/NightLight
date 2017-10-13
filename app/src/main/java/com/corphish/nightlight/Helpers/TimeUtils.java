@@ -64,4 +64,31 @@ public class TimeUtils {
 
         return new int[]{currentTime/60, currentTime%60};
     }
+
+    /**
+     * Determines whether or not Night Light should be on based on given times.
+     * Alarm times are unaffected tho, coz android will fire alarms at start and end time every day if enabled
+     * We need not worry about that.
+     * @param startTime - Start time for automatic scheduling selected by user
+     * @param endTime - End time selected by user
+     * @return - boolean indicating whether or not night light should be on
+     */
+    public static boolean determineWhetherNLShouldBeOnOrNot(String startTime, String endTime) {
+        int iCurrentTime = getCurrentTimeAsMinutes(), iStartTime = getTimeInMinutes(startTime), iEndTime = getTimeInMinutes(endTime);
+
+        // Borked case: if start and end times are same, return false
+        if (iStartTime == iEndTime) return false;
+
+        // Simple case
+        if (iStartTime < iEndTime) return iCurrentTime >= iStartTime && iCurrentTime < iEndTime;
+
+        // Complex case: endTime < startTime
+
+        // if currentTime > starTime, it must be lesser than endTime, coz endTime is a time of next day, so return true
+        if (iCurrentTime > iStartTime) return true;
+
+        // if currentTime < startTime, it must be false if it is > endTime (for example: startTime - 0400, endTime - 0300, currentTime - 0330)
+        // Otherwise return true (for example: startTime - 0400, endTime - 0300, currentTime - 0230)
+        return iCurrentTime < iStartTime && iCurrentTime < iEndTime;
+    }
 }

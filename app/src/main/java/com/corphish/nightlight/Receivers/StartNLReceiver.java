@@ -3,11 +3,9 @@ package com.corphish.nightlight.Receivers;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
-import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
+import com.corphish.nightlight.Helpers.PreferenceHelper;
 
 /**
  * Created by Avinaba on 10/4/2017.
@@ -19,15 +17,14 @@ public class StartNLReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         // At first check whether night light should really be turned on or not
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        boolean masterSwitchEnabled = sharedPreferences.getBoolean(Constants.PREF_MASTER_SWITCH, false);
-        boolean autoSwitchEnabled = sharedPreferences.getBoolean(Constants.PREF_AUTO_SWITCH, false);
+        boolean masterSwitchEnabled = PreferenceHelper.getMasterSwitchStatus(context);
+        boolean autoSwitchEnabled = PreferenceHelper.getAutoSwitchStatus(context);
 
         // Both of the switches must be on to proceed
         if (!autoSwitchEnabled || !masterSwitchEnabled) return;
 
-        int intensity = PreferenceManager.getDefaultSharedPreferences(context).getInt(Constants.PREF_CUSTOM_VAL, Constants.DEFAULT_INTENSITY);
+        int intensity = PreferenceHelper.getIntensity(context);
 
         Core.applyNightModeAsync(true, intensity);
     }

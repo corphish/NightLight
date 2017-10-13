@@ -1,13 +1,11 @@
 package com.corphish.nightlight.Engine;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 
 import com.corphish.nightlight.Data.Constants;
+import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.RootUtils;
-import com.corphish.nightlight.Helpers.TimeUtils;
 
 /**
  * Created by Avinaba on 10/4/2017.
@@ -34,8 +32,7 @@ public class Core {
     }
 
     public static boolean getNightLightState(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getBoolean(Constants.PREF_MASTER_SWITCH, false);
+        return PreferenceHelper.getMasterSwitchStatus(context);
     }
 
     private static class NightModeApplier extends AsyncTask<Object, Object, Object> {

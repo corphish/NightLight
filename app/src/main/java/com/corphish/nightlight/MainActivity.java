@@ -3,10 +3,10 @@ package com.corphish.nightlight;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,6 +18,7 @@ import android.widget.TimePicker;
 
 import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Helpers.AlarmUtils;
+import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.RootUtils;
 import com.corphish.nightlight.Helpers.TimeUtils;
 import com.corphish.nightlight.Widgets.KeyValueView;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     Switch masterSwitch, autoSwitch;
     SeekBar slider;
     KeyValueView startTime, endTime;
+
+    Context context = this;
 
     /**
      * Formula for calculating effective intensity
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        currentIntensity = PreferenceManager.getDefaultSharedPreferences(this).getInt(Constants.PREF_CUSTOM_VAL, defaultIntensity);
+        currentIntensity = PreferenceHelper.getIntensity(this);
         viewInit();
         new CompatibilityChecker().execute();
     }
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         TextView versionTV = findViewById(R.id.app_version);
         versionTV.setText(getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
 
-        boolean enabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_MASTER_SWITCH, false);
+        boolean enabled = PreferenceHelper.getMasterSwitchStatus(this);
         masterSwitch.setChecked(enabled);
         masterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -88,22 +91,18 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 currentIntensity = seekBar.getProgress();
                 new Switcher(true, false).execute();
-                PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit()
-                        .putInt(Constants.PREF_CUSTOM_VAL, currentIntensity)
-                        .apply();
+                PreferenceHelper.putIntensity(context, currentIntensity);
             }
         });
         slider.setProgress(currentIntensity);
 
-        boolean autoEnabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_AUTO_SWITCH, false);
+        boolean autoEnabled = PreferenceHelper.getAutoSwitchStatus(this);
         autoSwitch.setChecked(autoEnabled);
         enableOrDisableAutoSwitchViews(autoEnabled);
         autoSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit()
-                        .putBoolean(Constants.PREF_AUTO_SWITCH,b)
-                        .apply();
+                PreferenceHelper.putAutoSwitchStatus(context, b);
 
                 if (b) doCurrentAutoFunctions();
                 else new Switcher(true, false).execute();
@@ -111,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        startTime.setValue(PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_START_TIME,getString(R.string.start_time_default)));
+        startTime.setValue(PreferenceHelper.getStartTime(this));
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        endTime.setValue(PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_END_TIME,getString(R.string.end_time_default)));
+        endTime.setValue(PreferenceHelper.getEndTime(this));
         endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,9 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 String selectedHour = i < 10 ? "0" + i: "" + i;
                 String selectedMinute = i1 < 10 ? "0" +i1: "" + i1;
                 String timeSting = selectedHour + ":" + selectedMinute;
-                PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit()
-                        .putString(prefKey, timeSting)
-                        .apply();
+                PreferenceHelper.putTime(context, prefKey, timeSting);
                 viewWhoIsCallingIt.setValue(timeSting);
 
                 doCurrentAutoFunctions();
@@ -163,9 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void toggleSwitch(boolean enabled) {
         new Switcher(enabled).execute();
-        PreferenceManager.getDefaultSharedPreferences(this).edit()
-                .putBoolean(Constants.PREF_MASTER_SWITCH, enabled)
-                .apply();
+        PreferenceHelper.putMasterSwitchStatus(this, enabled);
     }
 
     private void doCurrentAutoFunctions() {
@@ -174,8 +169,8 @@ public class MainActivity extends AppCompatActivity {
         int currentMin = calendar.get(Calendar.MINUTE);
         int currentTime = TimeUtils.getTimeInMinutes(currentHour, currentMin);
 
-        String prefStartTime = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME);
-        String prefEndTime = PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
+        String prefStartTime = PreferenceHelper.getStartTime(this);
+        String prefEndTime = PreferenceHelper.getEndTime(this);
 
         int startTime = TimeUtils.getTimeInMinutes(prefStartTime);
         int endTime = TimeUtils.getTimeInMinutes(prefEndTime);

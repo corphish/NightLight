@@ -1,15 +1,13 @@
 package com.corphish.nightlight.Services;
 
 import android.annotation.TargetApi;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Icon;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
-import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
+import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.R;
 
 import static com.corphish.nightlight.R.drawable.ic_lightbulb_outline;
@@ -22,7 +20,6 @@ import static com.corphish.nightlight.R.drawable.ic_lightbulb_outline_disabled;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class QuickSettingsService extends TileService {
-    private static final String SERVICE_STATUS_FLAG = Constants.PREF_MASTER_SWITCH;
 
     /**
      * Called when the tile is added to the Quick Settings.
@@ -98,14 +95,7 @@ public class QuickSettingsService extends TileService {
      * @return - Toggled value of masterSwitch
      */
     private boolean getServiceStatus() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        boolean mode = prefs.getBoolean(SERVICE_STATUS_FLAG, false);
-        mode = !mode;
-
-        prefs.edit().putBoolean(SERVICE_STATUS_FLAG, mode).apply();
-
-        return mode;
+        return PreferenceHelper.getToggledMasterSwitchStatus(getApplicationContext());
     }
 
     /**
@@ -114,7 +104,7 @@ public class QuickSettingsService extends TileService {
      * @param state - Current state of QSTile
      */
     private void doService(boolean state) {
-        int intensity = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getInt(Constants.PREF_CUSTOM_VAL, Constants.DEFAULT_INTENSITY);
+        int intensity = PreferenceHelper.getIntensity(getApplicationContext());
 
         if (state) Core.applyNightModeAsync(true, intensity);
         else Core.applyNightModeAsync(false, intensity);

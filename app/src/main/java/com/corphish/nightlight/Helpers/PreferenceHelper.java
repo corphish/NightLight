@@ -124,7 +124,7 @@ public class PreferenceHelper {
     public static String getEndTime(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        return sharedPreferences.getString(Constants.PREF_START_TIME, Constants.DEFAULT_END_TIME);
+        return sharedPreferences.getString(Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
     }
 
     /**

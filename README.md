@@ -10,7 +10,7 @@ I flashed a LineageOS oreo build on my device, but there was no night light feat
 ### Features
 * Easy one touch toggles, with a single slider to tweak blue light intensity.
 * Quick Setting tile for easy toggling on/off night light anywhere.
-* Automatic switching on/off night light at user specifed timings. (Limitation - Start time must be lesser in value than ending time, that is if you choose starting time at 2300 hrs and ending time at 0600 hrs (next day) it won't work for now).
+* Automatic switching on/off night light at user specifed timings.
 
 ### Requirements
 * Kernel supporting KCAL.

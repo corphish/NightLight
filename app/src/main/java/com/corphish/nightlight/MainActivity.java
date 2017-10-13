@@ -1,13 +1,9 @@
 package com.corphish.nightlight;
 
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -24,8 +20,6 @@ import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Helpers.AlarmUtils;
 import com.corphish.nightlight.Helpers.RootUtils;
 import com.corphish.nightlight.Helpers.TimeUtils;
-import com.corphish.nightlight.Receivers.StartNLReceiver;
-import com.corphish.nightlight.Receivers.StopNLReceiver;
 import com.corphish.nightlight.Widgets.KeyValueView;
 import com.corphish.nightlight.Data.Constants;
 

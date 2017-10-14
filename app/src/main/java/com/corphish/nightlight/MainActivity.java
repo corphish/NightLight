@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
@@ -185,9 +184,7 @@ public class MainActivity extends AppCompatActivity {
         String prefStartTime = PreferenceHelper.getStartTime(this);
         String prefEndTime = PreferenceHelper.getEndTime(this);
 
-        boolean curState = TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefEndTime);
-        Log.d("NL","Curstate " + curState);
-        new Switcher(curState, false).execute();
+        new Switcher(TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefEndTime), false).execute();
 
         AlarmUtils.setAlarms(this, prefStartTime, prefEndTime);
     }

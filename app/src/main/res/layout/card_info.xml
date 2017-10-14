@@ -5,6 +5,7 @@
     android:layout_margin="@dimen/layout_margin"
     android:padding="@dimen/layout_padding"
     android:elevation="@dimen/card_elevation"
+    android:id="@+id/card_info"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout

@@ -153,9 +153,14 @@ public class MainActivity extends AppCompatActivity {
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 String selectedHour = i < 10 ? "0" + i: "" + i;
                 String selectedMinute = i1 < 10 ? "0" +i1: "" + i1;
-                String timeSting = selectedHour + ":" + selectedMinute;
-                PreferenceHelper.putTime(context, prefKey, timeSting);
-                viewWhoIsCallingIt.setValue(timeSting);
+                String timeString = selectedHour + ":" + selectedMinute;
+                PreferenceHelper.putTime(context, prefKey, timeString);
+                viewWhoIsCallingIt.setValue(timeString);
+
+                int startTimeMins = TimeUtils.getTimeInMinutes(startTime.getValue());
+                int endTimeMins = TimeUtils.getTimeInMinutes(endTime.getValue());
+
+                if (endTimeMins < startTimeMins) viewWhoIsCallingIt.setValue(timeString + getString(R.string.next_day));
 
                 doCurrentAutoFunctions();
             }

@@ -53,6 +53,10 @@ public class KeyValueView extends LinearLayout {
         value.setText(text);
     }
 
+    public String getValue() {
+        return value.getText().toString();
+    }
+
     public void setEnabled(boolean enabled) {
         caption.setEnabled(enabled);
         value.setEnabled(enabled);

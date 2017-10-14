@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTimePickerDialog(startTime, Constants.PREF_START_TIME);
+                showTimePickerDialog(startTime, Constants.PREF_START_TIME, false);
             }
         });
 
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTimePickerDialog(endTime, Constants.PREF_END_TIME);
+                showTimePickerDialog(endTime, Constants.PREF_END_TIME, true);
             }
         });
 
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         enableOrDisableViews(enabled);
     }
 
-    private void showTimePickerDialog(final KeyValueView viewWhoIsCallingIt, final String prefKey) {
+    private void showTimePickerDialog(final KeyValueView viewWhoIsCallingIt, final String prefKey, final boolean showNextDay) {
         int time[] = TimeUtils.getCurrentTimeAsHourAndMinutes();
         TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -157,10 +157,13 @@ public class MainActivity extends AppCompatActivity {
                 PreferenceHelper.putTime(context, prefKey, timeString);
                 viewWhoIsCallingIt.setValue(timeString);
 
-                int startTimeMins = TimeUtils.getTimeInMinutes(startTime.getValue());
-                int endTimeMins = TimeUtils.getTimeInMinutes(endTime.getValue());
+                if (showNextDay) {
+                    int startTimeMins = TimeUtils.getTimeInMinutes(PreferenceHelper.getStartTime(context));
+                    int endTimeMins = TimeUtils.getTimeInMinutes(PreferenceHelper.getEndTime(context));
 
-                if (endTimeMins < startTimeMins) viewWhoIsCallingIt.setValue(timeString + getString(R.string.next_day));
+                    if (endTimeMins < startTimeMins)
+                        viewWhoIsCallingIt.setValue(timeString + getString(R.string.next_day));
+                }
 
                 doCurrentAutoFunctions();
             }

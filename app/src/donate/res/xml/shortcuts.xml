@@ -2,7 +2,7 @@
     <shortcut
         android:shortcutId="toggle"
         android:enabled="true"
-        android:icon="@drawable/ic_shortcut_others"
+        android:icon="@drawable/ic_shortcut_lightbulb"
         android:shortcutShortLabel="@string/shortcut_toggle">
         <intent
             android:action="android.intent.action.VIEW.OTHERS"

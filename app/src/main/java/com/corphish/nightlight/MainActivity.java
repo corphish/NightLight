@@ -27,7 +27,6 @@ import com.corphish.nightlight.Widgets.KeyValueView;
 import com.corphish.nightlight.Data.Constants;
 
 import java.io.File;
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 

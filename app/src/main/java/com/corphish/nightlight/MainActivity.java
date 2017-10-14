@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         currentIntensity = PreferenceHelper.getIntensity(this);
         viewInit();
-        new CompatibilityChecker().execute();
+        if (!BuildConfig.DEBUG) new CompatibilityChecker().execute();
     }
 
     private void viewInit() {

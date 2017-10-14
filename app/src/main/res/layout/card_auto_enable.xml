@@ -4,7 +4,7 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/layout_margin"
     android:padding="@dimen/layout_padding"
-    android:elevation="@dimen/card_elevation"
+    custom:elevation="@dimen/card_elevation"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_margin="@dimen/layout_margin"
         android:orientation="vertical">
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/auto_enable"

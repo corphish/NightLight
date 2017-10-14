@@ -8,12 +8,12 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -30,7 +30,7 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-    Switch masterSwitch, autoSwitch;
+    SwitchCompat masterSwitch, autoSwitch;
     SeekBar slider;
     KeyValueView startTime, endTime;
 

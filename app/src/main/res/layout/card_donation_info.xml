@@ -4,8 +4,9 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/layout_margin"
     android:padding="@dimen/layout_padding"
-    android:elevation="@dimen/card_elevation"
+    card_view:elevation="@dimen/card_elevation"
     android:id="@+id/card_donate"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout

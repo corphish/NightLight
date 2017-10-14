@@ -19,6 +19,7 @@ import android.widget.TimePicker;
 
 import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Helpers.AlarmUtils;
+import com.corphish.nightlight.Helpers.ExternalLink;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.RootUtils;
 import com.corphish.nightlight.Helpers.TimeUtils;
@@ -127,6 +128,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showTimePickerDialog(endTime, Constants.PREF_END_TIME);
+            }
+        });
+
+        findViewById(R.id.card_donate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ExternalLink.open(context, "market://details?id=com.corphish.nightlight.donate");
             }
         });
 

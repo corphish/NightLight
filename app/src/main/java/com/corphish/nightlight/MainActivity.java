@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.card_info).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ExternalLink.open(context,"market:///details?id="+getPackageName());
+                ExternalLink.open(context, "market://details?id="+getPackageName());
             }
         });
 

@@ -33,7 +33,7 @@ public class AlarmUtils {
         calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(startTime)[1]);
 
         timeInMillis = calendar.getTimeInMillis();
-        if (TimeUtils.getCurrentTimeAsMinutes() > TimeUtils.getTimeInMinutes(endTime)) timeInMillis += 86400000L;
+        if (TimeUtils.getCurrentTimeAsMinutes() > TimeUtils.getTimeInMinutes(startTime)) timeInMillis += 86400000L;
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, startAlarmIntent);
 

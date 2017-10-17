@@ -17,6 +17,12 @@ import java.util.Calendar;
 
 public class AlarmUtils {
 
+    /**
+     * Sets the start and end alarms on user specified time
+     * @param context - Needed by intent, pendingIntent and to get the AlarmManager service
+     * @param startTime - Starting time for alarm
+     * @param endTime - Ending time for alarm
+     */
     public static void setAlarms(Context context, String startTime, String endTime) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         long timeInMillis;

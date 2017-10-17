@@ -1,10 +1,8 @@
 package com.corphish.nightlight.Engine;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import com.corphish.nightlight.Data.Constants;
-import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.RootUtils;
 
 /**
@@ -52,15 +50,6 @@ public class Core {
      */
     public static void applyNightModeAsync(boolean b, int blueIntensity, int greenIntensity) {
         new NightModeApplier(b, blueIntensity, greenIntensity).execute();
-    }
-
-    /**
-     * Gets the current state of night light from SharedPreferences
-     * @param context - Ok where was the shrug emoji again?
-     * @return - A boolean indicating the current night light state
-     */
-    public static boolean getNightLightState(Context context) {
-        return PreferenceHelper.getMasterSwitchStatus(context);
     }
 
     /**

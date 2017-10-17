@@ -29,7 +29,7 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-    SwitchCompat masterSwitch, autoSwitch;
+    SwitchCompat masterSwitch, autoSwitch, forceSwitch;
     SeekBar blueSlider, greenSlider;
     KeyValueView startTime, endTime;
 
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void viewInit() {
         masterSwitch = findViewById(R.id.master_switch);
+        forceSwitch = findViewById(R.id.force_switch);
         blueSlider = findViewById(R.id.blue_intensity);
         greenSlider = findViewById(R.id.green_intensity);
         autoSwitch = findViewById(R.id.auto_enable);
@@ -74,12 +75,21 @@ public class MainActivity extends AppCompatActivity {
         TextView versionTV = findViewById(R.id.app_version);
         versionTV.setText(getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
 
-        boolean enabled = PreferenceHelper.getMasterSwitchStatus(this);
+        final boolean enabled = PreferenceHelper.getMasterSwitchStatus(this);
         masterSwitch.setChecked(enabled);
         masterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 toggleSwitch(b);
+            }
+        });
+
+        forceSwitch.setChecked(PreferenceHelper.getForceSwitchStatus(this));
+        forceSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Core.applyNightModeAsync(b, currentBlueIntensity, currentGreenIntensity);
+                PreferenceHelper.putForceSwitchStatus(context, b);
             }
         });
 
@@ -198,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
         blueSlider.setEnabled(enabled);
         greenSlider.setEnabled(enabled);
         autoSwitch.setEnabled(enabled);
+        forceSwitch.setEnabled(enabled);
         if (!enabled) enableOrDisableAutoSwitchViews(false);
         else enableOrDisableAutoSwitchViews(autoSwitch.isChecked());
     }

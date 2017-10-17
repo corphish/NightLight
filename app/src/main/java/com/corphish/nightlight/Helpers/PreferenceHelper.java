@@ -25,27 +25,6 @@ public class PreferenceHelper {
     }
 
     /**
-     * Gets current master switch status after toggling it
-     * @param context - ¯\_(ツ)_/¯
-     * @return - Toggled master switch status
-     */
-    public static boolean getToggledMasterSwitchStatus(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        boolean currentStatus = sharedPreferences.getBoolean(Constants.PREF_MASTER_SWITCH, false);
-
-        // Toggle it
-        currentStatus = !currentStatus;
-
-        // Save it
-        sharedPreferences.edit()
-                .putBoolean(Constants.PREF_MASTER_SWITCH, currentStatus)
-                .apply();
-
-        return currentStatus;
-    }
-
-    /**
      * Saves master switch status
      * @param context - ¯\_(ツ)_/¯
      * @param status - status of master switch
@@ -55,6 +34,50 @@ public class PreferenceHelper {
                 .edit()
                 .putBoolean(Constants.PREF_MASTER_SWITCH, status)
                 .apply();
+    }
+
+    /**
+     * Gets current force switch status
+     * @param context - ¯\_(ツ)_/¯
+     * @return - Master switch status
+     */
+    public static boolean getForceSwitchStatus(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        return sharedPreferences.getBoolean(Constants.PREF_FORCE_SWITCH, false);
+    }
+
+    /**
+     * Saves force switch status
+     * @param context - ¯\_(ツ)_/¯
+     * @param status - status of master switch
+     */
+    public static void putForceSwitchStatus(Context context, boolean status) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putBoolean(Constants.PREF_FORCE_SWITCH, status)
+                .apply();
+    }
+
+    /**
+     * Gets current force switch status after toggling it
+     * @param context - ¯\_(ツ)_/¯
+     * @return - Toggled force switch status
+     */
+    public static boolean getToggledForceSwitchStatus(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        boolean currentStatus = sharedPreferences.getBoolean(Constants.PREF_FORCE_SWITCH, false);
+
+        // Toggle it
+        currentStatus = !currentStatus;
+
+        // Save it
+        sharedPreferences.edit()
+                .putBoolean(Constants.PREF_FORCE_SWITCH, currentStatus)
+                .apply();
+
+        return currentStatus;
     }
 
     /**

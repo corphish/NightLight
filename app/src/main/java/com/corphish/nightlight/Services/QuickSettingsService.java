@@ -52,7 +52,7 @@ public class QuickSettingsService extends TileService {
      * Syncs QSTile with current state of night light
      */
     private void syncTile() {
-        boolean state = Core.getNightLightState(getApplicationContext());
+        boolean state = PreferenceHelper.getForceSwitchStatus(getApplicationContext());
 
         updateTileUI(state);
     }
@@ -93,11 +93,20 @@ public class QuickSettingsService extends TileService {
     }
 
     /**
-     * Gets the current night light masterSwitch state, and returns its toggled value
-     * @return - Toggled value of masterSwitch
+     * Gets the current night light forceSwitch state, and returns its toggled value
+     * @return - Toggled value of forceSwitch
      */
     private boolean getServiceStatus() {
-        return PreferenceHelper.getToggledMasterSwitchStatus(getApplicationContext());
+        boolean forceSwitch = PreferenceHelper.getToggledForceSwitchStatus(getApplicationContext());
+        boolean masterSwitch = PreferenceHelper.getMasterSwitchStatus(getApplicationContext());
+
+        /*
+         * If forceSwitch is on, while masterSwitch is off, turn on master switch as well
+         */
+        if (forceSwitch && !masterSwitch)
+            PreferenceHelper.putMasterSwitchStatus(getApplicationContext(), true);
+
+        return forceSwitch;
     }
 
     /**

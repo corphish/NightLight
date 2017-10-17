@@ -17,6 +17,7 @@ public class Constants {
      * SharedPreference keys
      */
     public static final String PREF_MASTER_SWITCH   =   "switch";
+    public static final String PREF_FORCE_SWITCH    =   "force_switch";
     public static final String PREF_BLUE_INTENSITY  =   "custom_val";
     public static final String PREF_GREEN_INTENSITY =   "green_intensity";
     public static final String PREF_AUTO_SWITCH     =   "auto_switch";

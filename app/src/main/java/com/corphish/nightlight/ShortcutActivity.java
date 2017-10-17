@@ -62,7 +62,15 @@ public class ShortcutActivity extends AppCompatActivity {
      * Actual night light toggling happens here
      */
     private void doToggle() {
-        boolean state = PreferenceHelper.getToggledMasterSwitchStatus(this);
+        boolean state = PreferenceHelper.getToggledForceSwitchStatus(this);
+        boolean masterSwitch = PreferenceHelper.getMasterSwitchStatus(this);
+
+        /*
+         * If state is on, while masterSwitch is off, turn on masterSwitch as well
+         */
+        if (state && !masterSwitch)
+            PreferenceHelper.putMasterSwitchStatus(this, true);
+
         int blueIntensity = PreferenceHelper.getBlueIntensity(this);
         int greenIntensity = PreferenceHelper.getGreenIntensity(this);
 

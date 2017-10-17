@@ -16,6 +16,7 @@
         <include layout="@layout/card_master_switch"/>
         <include layout="@layout/card_slider"/>
         <include layout="@layout/card_auto_enable"/>
+        <include layout="@layout/card_force_switch"/>
         <include layout="@layout/card_info"
                  android:id="@+id/card_info"/>
         <include layout="@layout/card_donation_info"

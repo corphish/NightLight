@@ -17,7 +17,8 @@ public class Constants {
      * SharedPreference keys
      */
     public static final String PREF_MASTER_SWITCH   =   "switch";
-    public static final String PREF_CUSTOM_VAL      =   "custom_val";
+    public static final String PREF_BLUE_INTENSITY  =   "custom_val";
+    public static final String PREF_GREEN_INTENSITY =   "green_intensity";
     public static final String PREF_AUTO_SWITCH     =   "auto_switch";
     public static final String PREF_START_TIME      =   "start_time";
     public static final String PREF_END_TIME        =   "end_time";
@@ -29,5 +30,7 @@ public class Constants {
     public static final String DEFAULT_START_TIME   =   "00:00";
     public static final String DEFAULT_END_TIME     =   "06:00";
     public static final int MAX_BLUE_LIGHT          =   224;
-    public static final int DEFAULT_INTENSITY       =   64;
+    public static final int DEFAULT_BLUE_INTENSITY  =   64;
+    public static final int MAX_GREEN_LIGHT         =   256;
+    public static final int DEFAULT_GREEN_INTENSITY =   0;
 }

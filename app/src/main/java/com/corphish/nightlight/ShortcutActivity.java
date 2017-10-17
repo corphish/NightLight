@@ -63,8 +63,9 @@ public class ShortcutActivity extends AppCompatActivity {
      */
     private void doToggle() {
         boolean state = PreferenceHelper.getToggledMasterSwitchStatus(this);
-        int intensity = PreferenceHelper.getIntensity(this);
+        int blueIntensity = PreferenceHelper.getBlueIntensity(this);
+        int greenIntensity = PreferenceHelper.getGreenIntensity(this);
 
-        Core.applyNightModeAsync(state, intensity);
+        Core.applyNightModeAsync(state, blueIntensity, greenIntensity);
     }
 }

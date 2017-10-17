@@ -27,18 +27,53 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/blue_light"
+            android:layout_margin="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="@dimen/layout_padding"
             android:layout_margin="@dimen/layout_margin"
             android:textSize="@dimen/text_desc"
-            android:text="@string/color_intensity_desc"/>
+            android:text="@string/blue_color_intensity_desc"/>
 
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/intensity"
+            android:id="@+id/blue_intensity"
             android:padding="@dimen/layout_padding"
             android:layout_margin="@dimen/layout_margin"
             android:max="128"
+            android:progress="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/green_light"
+            android:layout_margin="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_desc"
+            android:text="@string/green_color_intensity_desc"/>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/green_intensity"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:max="48"
             android:progress="0"/>
 
 

@@ -2,7 +2,9 @@
     <string name="app_name">Night Light</string>
 
     <string name="color_intensity">Filter Intensity</string>
-    <string name="color_intensity_desc">Intensity of the blue light to be filtered out. Higher value means higher intensity of blue light will be filtered out, lower value means lower intensity of blue light will be filtered out.</string>
+
+    <string name="blue_color_intensity_desc">Intensity of the blue light to be filtered out. Higher value means higher intensity of blue light will be filtered out, lower value means lower intensity of blue light will be filtered out.</string>
+    <string name="green_color_intensity_desc">Intensity of the green light to be filtered out. Here the range of control is limited. Filtering out green light will give a reddish tint to the screen.</string>
 
     <string name="master_switch">Enable Night Light</string>
     <string name="master_switch_desc">Master switch to enable/disable night light.</string>
@@ -32,6 +34,9 @@
     <string name="shortcut_toggle">Toggle on/off</string>
 
     <string name="next_day">&#160;(Next day)</string>
+
+    <string name="blue_light">Blue light</string>
+    <string name="green_light">Green light</string>
 
     <string name="like_this_app">Like this app?</string>
     <string name="get_donation">If you like this app, you can consider getting the donate version of the app. Although it comes with no extra features than this version, it shows your support and appreciation to the app, and it will motivate the developer and support the development of the app :)</string>

@@ -24,7 +24,8 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         boolean masterSwitch = PreferenceHelper.getMasterSwitchStatus(context);
         boolean autoSwitch = PreferenceHelper.getAutoSwitchStatus(context);
 
-        int intensity = PreferenceHelper.getIntensity(context);
+        int blueIntensity = PreferenceHelper.getBlueIntensity(context);
+        int greenIntensity = PreferenceHelper.getGreenIntensity(context);
 
         String sStartTime = PreferenceHelper.getStartTime(context);
         String sEndTime = PreferenceHelper.getEndTime(context);
@@ -32,11 +33,11 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         if (!masterSwitch) return;
 
         if (!autoSwitch) {
-            Core.applyNightModeAsync(true, intensity);
+            Core.applyNightModeAsync(true, blueIntensity, greenIntensity);
             return;
         }
 
-        Core.applyNightModeAsync(TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime), intensity);
+        Core.applyNightModeAsync(TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime), blueIntensity, greenIntensity);
 
         AlarmUtils.setAlarms(context, sStartTime, sEndTime);
     }

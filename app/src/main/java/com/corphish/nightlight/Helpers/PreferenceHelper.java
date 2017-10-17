@@ -62,22 +62,46 @@ public class PreferenceHelper {
      * @param context - ¯\_(ツ)_/¯
      * @return - Blue light intensity
      */
-    public static int getIntensity(Context context) {
+    public static int getBlueIntensity(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        return sharedPreferences.getInt(Constants.PREF_CUSTOM_VAL, Constants.DEFAULT_INTENSITY);
+        return sharedPreferences.getInt(Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
     }
 
     /**
-     * Saves user defined intensity
+     * Saves user defined blue intensity
      * @param context - ¯\_(ツ)_/¯
      * @param intensity - Intensity to be saved
      */
-    public static void putIntensity(Context context, int intensity) {
+    public static void putBlueIntensity(Context context, int intensity) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         sharedPreferences.edit()
-                .putInt(Constants.PREF_CUSTOM_VAL, intensity)
+                .putInt(Constants.PREF_BLUE_INTENSITY, intensity)
+                .apply();
+    }
+
+    /**
+     * Gets current intensity of green light
+     * @param context - ¯\_(ツ)_/¯
+     * @return - Blue light intensity
+     */
+    public static int getGreenIntensity(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        return sharedPreferences.getInt(Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
+    }
+
+    /**
+     * Saves user defined green intensity
+     * @param context - ¯\_(ツ)_/¯
+     * @param intensity - Intensity to be saved
+     */
+    public static void putGreenIntensity(Context context, int intensity) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        sharedPreferences.edit()
+                .putInt(Constants.PREF_GREEN_INTENSITY, intensity)
                 .apply();
     }
 

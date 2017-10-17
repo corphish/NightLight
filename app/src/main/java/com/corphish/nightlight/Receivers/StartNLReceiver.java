@@ -24,8 +24,9 @@ public class StartNLReceiver extends BroadcastReceiver {
         // Both of the switches must be on to proceed
         if (!autoSwitchEnabled || !masterSwitchEnabled) return;
 
-        int intensity = PreferenceHelper.getIntensity(context);
+        int blueIntensity = PreferenceHelper.getBlueIntensity(context);
+        int greenIntensity = PreferenceHelper.getGreenIntensity(context);
 
-        Core.applyNightModeAsync(true, intensity);
+        Core.applyNightModeAsync(true, blueIntensity, greenIntensity);
     }
 }

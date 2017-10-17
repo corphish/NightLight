@@ -30,7 +30,7 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     SwitchCompat masterSwitch, autoSwitch;
-    SeekBar slider;
+    SeekBar blueSlider, greenSlider;
     KeyValueView startTime, endTime;
 
     Context context = this;
@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
      * Formula for calculating effective intensity
      * = Constants.MAX_BLUE_LIGHT  - <seekbar/defaultValue>
      */
-    int defaultIntensity = Constants.DEFAULT_INTENSITY, currentIntensity = defaultIntensity;
+    int defaultBlueIntensity = Constants.DEFAULT_BLUE_INTENSITY, currentBlueIntensity = defaultBlueIntensity;
+    int defaultGreenIntensity = Constants.DEFAULT_GREEN_INTENSITY, currentGreenIntensity = defaultGreenIntensity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +57,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        currentIntensity = PreferenceHelper.getIntensity(this);
+        currentBlueIntensity = PreferenceHelper.getBlueIntensity(this);
+        currentGreenIntensity = PreferenceHelper.getGreenIntensity(this);
         viewInit();
         if (!BuildConfig.DEBUG) new CompatibilityChecker().execute();
     }
 
     private void viewInit() {
         masterSwitch = findViewById(R.id.master_switch);
-        slider = findViewById(R.id.intensity);
+        blueSlider = findViewById(R.id.blue_intensity);
+        greenSlider = findViewById(R.id.green_intensity);
         autoSwitch = findViewById(R.id.auto_enable);
         startTime = findViewById(R.id.start_time);
         endTime = findViewById(R.id.end_time);
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        blueSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {}
 
@@ -89,12 +92,32 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                currentIntensity = seekBar.getProgress();
+                currentBlueIntensity = seekBar.getProgress();
                 new Switcher(true, false).execute();
-                PreferenceHelper.putIntensity(context, currentIntensity);
+                PreferenceHelper.putBlueIntensity(context, currentBlueIntensity);
             }
         });
-        slider.setProgress(currentIntensity);
+        blueSlider.setProgress(currentBlueIntensity);
+
+        greenSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                currentGreenIntensity = seekBar.getProgress();
+                new Switcher(true, false).execute();
+                PreferenceHelper.putGreenIntensity(context, currentGreenIntensity);
+            }
+        });
+        greenSlider.setProgress(currentGreenIntensity);
 
         boolean autoEnabled = PreferenceHelper.getAutoSwitchStatus(this);
         autoSwitch.setChecked(autoEnabled);
@@ -172,7 +195,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void enableOrDisableViews(boolean enabled) {
-        slider.setEnabled(enabled);
+        blueSlider.setEnabled(enabled);
+        greenSlider.setEnabled(enabled);
         autoSwitch.setEnabled(enabled);
         if (!enabled) enableOrDisableAutoSwitchViews(false);
         else enableOrDisableAutoSwitchViews(autoSwitch.isChecked());
@@ -254,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... booms) {
-            Core.applyNightMode(enabled, currentIntensity);
+            Core.applyNightMode(enabled, currentBlueIntensity, currentGreenIntensity);
             return null;
         }
 

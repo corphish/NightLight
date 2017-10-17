@@ -106,9 +106,10 @@ public class QuickSettingsService extends TileService {
      * @param state - Current state of QSTile
      */
     private void doService(boolean state) {
-        int intensity = PreferenceHelper.getIntensity(getApplicationContext());
+        int blueIntensity = PreferenceHelper.getBlueIntensity(getApplicationContext());
+        int greenIntensity = PreferenceHelper.getGreenIntensity(getApplicationContext());
 
-        if (state) Core.applyNightModeAsync(true, intensity);
-        else Core.applyNightModeAsync(false, intensity);
+        if (state) Core.applyNightModeAsync(true, blueIntensity, greenIntensity);
+        else Core.applyNightModeAsync(false, blueIntensity, greenIntensity);
     }
 }

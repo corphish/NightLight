@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_shortcut_lightbulb"
         android:shortcutShortLabel="@string/shortcut_toggle">
         <intent
-            android:action="android.intent.action.VIEW.OTHERS"
+            android:action="android.intent.action.TOGGLE"
             android:targetPackage="com.corphish.nightlight.donate"
             android:targetClass="com.corphish.nightlight.ShortcutActivity" />
     </shortcut>

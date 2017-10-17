@@ -21,11 +21,4 @@ public class ExternalLink {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         open(context, intent);
     }
-
-    public static void open(Context context, String url, int intentFlags) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        intent.addFlags(intentFlags);
-
-        open(context, intent);
-    }
 }

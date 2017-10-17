@@ -64,6 +64,8 @@ public class QuickSettingsService extends TileService {
     private void updateTileUI(boolean state) {
         Tile tile = this.getQsTile();
 
+        if (tile == null) return;
+
         Icon newIcon;
         int newState;
 

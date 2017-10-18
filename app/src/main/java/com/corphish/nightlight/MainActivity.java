@@ -167,8 +167,6 @@ public class MainActivity extends AppCompatActivity {
                     PreferenceHelper.putTime(context, Constants.PREF_LAST_END_TIME, endTime.getValue());
 
                     doLocationStuff();
-
-                    // Set alarms
                 } else {
                     String prevStartTime = PreferenceHelper.getStartTime(context, Constants.PREF_LAST_START_TIME);
                     String prevEndTime = PreferenceHelper.getEndTime(context, Constants.PREF_LAST_END_TIME);
@@ -178,9 +176,9 @@ public class MainActivity extends AppCompatActivity {
 
                     PreferenceHelper.putTime(context, Constants.PREF_START_TIME, prevStartTime);
                     PreferenceHelper.putTime(context, Constants.PREF_END_TIME, prevEndTime);
-
-                    // Set alarms
                 }
+
+                doCurrentAutoFunctions();
             }
         });
 

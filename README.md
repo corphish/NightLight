@@ -1,5 +1,5 @@
 # Night Light
-Night light uses KCAL to adjust blue light intensity of the display colors, so that viewing the screen at dark becomes pleasant for the eyes, and help you fall asleep faster (this is what science have proven so...). 
+Night light uses KCAL to adjust blue light intensity of the display colors, so that viewing the screen at dark becomes pleasant for the eyes, and help you fall asleep faster (this is what science have proven so...).
 
 ### What is KCAL?
 KCAL is a display driver tuning feature for Qualcomm devices, written by `savoca`. Although this feature is most likely not shipped in the stock kernels of various custom ROMs, it should be available in the custom kernels available for your device, provided that your device runs on any 64-bit Qualcomm processor. To see the full list of supported qcom SoCs, visit [this thread](https://forum.xda-developers.com/android/software-hacking/dev-kcal-advanced-color-control-t3032080).
@@ -17,4 +17,4 @@ I flashed a LineageOS oreo build on my device, but there was no night light feat
 * Root access.
 
 ### Download
-[![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.corphish.nightlight)
+[![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.corphish.nightlight.generic)

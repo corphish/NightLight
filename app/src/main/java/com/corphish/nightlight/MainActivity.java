@@ -191,15 +191,16 @@ public class MainActivity extends AppCompatActivity {
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTimePickerDialog(startTime, Constants.PREF_START_TIME, false);
+                showTimePickerDialog(startTime, Constants.PREF_START_TIME);
             }
         });
 
-        endTime.setValue(endTimeVal + (TimeUtils.getTimeInMinutes(endTimeVal) < TimeUtils.getTimeInMinutes(startTimeVal) ? getString(R.string.next_day):""));
+        endTime.setValue(endTimeVal);
+        addNextDayIfNecessary();
         endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTimePickerDialog(endTime, Constants.PREF_END_TIME, true);
+                showTimePickerDialog(endTime, Constants.PREF_END_TIME);
             }
         });
 
@@ -220,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         enableOrDisableViews(enabled);
     }
 
-    private void showTimePickerDialog(final KeyValueView viewWhoIsCallingIt, final String prefKey, final boolean showNextDay) {
+    private void showTimePickerDialog(final KeyValueView viewWhoIsCallingIt, final String prefKey) {
         int time[] = TimeUtils.getCurrentTimeAsHourAndMinutes();
         TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -231,13 +232,7 @@ public class MainActivity extends AppCompatActivity {
                 PreferenceHelper.putTime(context, prefKey, timeString);
                 viewWhoIsCallingIt.setValue(timeString);
 
-                if (showNextDay) {
-                    int startTimeMins = TimeUtils.getTimeInMinutes(PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME));
-                    int endTimeMins = TimeUtils.getTimeInMinutes(PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME));
-
-                    if (endTimeMins < startTimeMins)
-                        viewWhoIsCallingIt.setValue(timeString + getString(R.string.next_day));
-                }
+                addNextDayIfNecessary();
 
                 doCurrentAutoFunctions();
             }
@@ -291,7 +286,8 @@ public class MainActivity extends AppCompatActivity {
         String sunriseTime = LocationUtils.getSunriseTime(currentLocation), sunsetTime = LocationUtils.getSunsetTime(currentLocation);
 
         startTime.setValue(sunsetTime);
-        if (TimeUtils.getTimeInMinutes(sunriseTime) < TimeUtils.getTimeInMinutes(sunsetTime)) endTime.setValue(sunriseTime + getString(R.string.next_day));
+        endTime.setValue(sunriseTime);
+        addNextDayIfNecessary();
 
         PreferenceHelper.putTime(this, Constants.PREF_START_TIME, sunsetTime);
         PreferenceHelper.putTime(this, Constants.PREF_END_TIME, sunriseTime);
@@ -310,6 +306,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    private void addNextDayIfNecessary() {
+        /*String sStartTime = PreferenceHelper.getStartTime(this, Constants.PREF_START_TIME), sEndTime = PreferenceHelper.getEndTime(this, Constants.PREF_END_TIME);
+        if (TimeUtils.getTimeInMinutes(sEndTime) < TimeUtils.getTimeInMinutes(sStartTime))
+            endTime.setValue(sEndTime + getString(R.string.next_day));*/
     }
 
     private void showAlertDialog(int caption, int msg) {

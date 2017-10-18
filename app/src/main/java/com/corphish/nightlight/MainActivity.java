@@ -1,12 +1,17 @@
 package com.corphish.nightlight;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +24,7 @@ import android.widget.TimePicker;
 import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Helpers.AlarmUtils;
 import com.corphish.nightlight.Helpers.ExternalLink;
+import com.corphish.nightlight.Helpers.LocationUtils;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.RootUtils;
 import com.corphish.nightlight.Helpers.TimeUtils;
@@ -29,7 +35,7 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-    SwitchCompat masterSwitch, autoSwitch, forceSwitch;
+    SwitchCompat masterSwitch, autoSwitch, forceSwitch, sunSwitch;
     SeekBar blueSlider, greenSlider;
     KeyValueView startTime, endTime;
 
@@ -41,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
      */
     int defaultBlueIntensity = Constants.DEFAULT_BLUE_INTENSITY, currentBlueIntensity = defaultBlueIntensity;
     int defaultGreenIntensity = Constants.DEFAULT_GREEN_INTENSITY, currentGreenIntensity = defaultGreenIntensity;
+
+    // Location stuff
+    boolean locationPermissionAvailable = false;
+    int locationRequestCode = 69;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         blueSlider = findViewById(R.id.blue_intensity);
         greenSlider = findViewById(R.id.green_intensity);
         autoSwitch = findViewById(R.id.auto_enable);
+        sunSwitch = findViewById(R.id.sun_enable);
         startTime = findViewById(R.id.start_time);
         endTime = findViewById(R.id.end_time);
 
@@ -130,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
         greenSlider.setProgress(currentGreenIntensity);
 
         boolean autoEnabled = PreferenceHelper.getAutoSwitchStatus(this);
+        boolean sunEnabled = PreferenceHelper.getSunSwitchStatus(this);
+
         autoSwitch.setChecked(autoEnabled);
         enableOrDisableAutoSwitchViews(autoEnabled);
         autoSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -143,8 +156,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String startTimeVal = PreferenceHelper.getStartTime(this);
-        String endTimeVal = PreferenceHelper.getEndTime(this);
+        sunSwitch.setChecked(sunEnabled);
+        sunSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                PreferenceHelper.putSunSwitchStatus(context, b);
+                if (b) {
+                    // Backup current timings
+                    PreferenceHelper.putTime(context, Constants.PREF_LAST_START_TIME, startTime.getValue());
+                    PreferenceHelper.putTime(context, Constants.PREF_LAST_END_TIME, endTime.getValue());
+
+                    doLocationStuff();
+
+                    // Set alarms
+                } else {
+                    String prevStartTime = PreferenceHelper.getStartTime(context, Constants.PREF_LAST_START_TIME);
+                    String prevEndTime = PreferenceHelper.getEndTime(context, Constants.PREF_LAST_END_TIME);
+
+                    startTime.setValue(prevStartTime);
+                    endTime.setValue(prevEndTime);
+
+                    PreferenceHelper.putTime(context, Constants.PREF_START_TIME, prevStartTime);
+                    PreferenceHelper.putTime(context, Constants.PREF_END_TIME, prevEndTime);
+
+                    // Set alarms
+                }
+            }
+        });
+
+        String startTimeVal = PreferenceHelper.getStartTime(this, Constants.PREF_START_TIME);
+        String endTimeVal = PreferenceHelper.getEndTime(this, Constants.PREF_END_TIME);
 
         startTime.setValue(startTimeVal);
         startTime.setOnClickListener(new View.OnClickListener() {
@@ -191,8 +232,8 @@ public class MainActivity extends AppCompatActivity {
                 viewWhoIsCallingIt.setValue(timeString);
 
                 if (showNextDay) {
-                    int startTimeMins = TimeUtils.getTimeInMinutes(PreferenceHelper.getStartTime(context));
-                    int endTimeMins = TimeUtils.getTimeInMinutes(PreferenceHelper.getEndTime(context));
+                    int startTimeMins = TimeUtils.getTimeInMinutes(PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME));
+                    int endTimeMins = TimeUtils.getTimeInMinutes(PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME));
 
                     if (endTimeMins < startTimeMins)
                         viewWhoIsCallingIt.setValue(timeString + getString(R.string.next_day));
@@ -208,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
         blueSlider.setEnabled(enabled);
         greenSlider.setEnabled(enabled);
         autoSwitch.setEnabled(enabled);
+        sunSwitch.setEnabled(enabled);
         forceSwitch.setEnabled(enabled);
         if (!enabled) enableOrDisableAutoSwitchViews(false);
         else enableOrDisableAutoSwitchViews(autoSwitch.isChecked());
@@ -216,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
     private void enableOrDisableAutoSwitchViews(boolean enabled) {
         startTime.setEnabled(enabled);
         endTime.setEnabled(enabled);
+        sunSwitch.setEnabled(enabled);
     }
 
     private void toggleSwitch(boolean enabled) {
@@ -224,12 +267,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doCurrentAutoFunctions() {
-        String prefStartTime = PreferenceHelper.getStartTime(this);
-        String prefEndTime = PreferenceHelper.getEndTime(this);
+        String prefStartTime = PreferenceHelper.getStartTime(this, Constants.PREF_START_TIME);
+        String prefEndTime = PreferenceHelper.getEndTime(this, Constants.PREF_END_TIME);
 
         new Switcher(TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefEndTime), false).execute();
 
         AlarmUtils.setAlarms(this, prefStartTime, prefEndTime);
+    }
+
+    private void requestLocationPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, locationRequestCode);
+    }
+
+    private void doLocationStuff() {
+        if (locationPermissionAvailable || LocationUtils.areLocationPermissionsAvailable(context))
+            getAndSetSunriseSunsetTimings();
+        else requestLocationPermission();
+    }
+
+    private void getAndSetSunriseSunsetTimings() {
+        Location currentLocation = LocationUtils.getLastKnownLocation(this);
+
+        String sunriseTime = LocationUtils.getSunriseTime(currentLocation), sunsetTime = LocationUtils.getSunsetTime(currentLocation);
+
+        startTime.setValue(sunsetTime);
+        if (TimeUtils.getTimeInMinutes(sunriseTime) < TimeUtils.getTimeInMinutes(sunsetTime)) endTime.setValue(sunriseTime + getString(R.string.next_day));
+
+        PreferenceHelper.putTime(this, Constants.PREF_START_TIME, sunsetTime);
+        PreferenceHelper.putTime(this, Constants.PREF_END_TIME, sunriseTime);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+        if (requestCode == locationRequestCode) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (permissions[i].equals(Manifest.permission.ACCESS_FINE_LOCATION) && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    locationPermissionAvailable = true;
+                    getAndSetSunriseSunsetTimings();
+                    break;
+                }
+            }
+        }
+
     }
 
     private void showAlertDialog(int caption, int msg) {

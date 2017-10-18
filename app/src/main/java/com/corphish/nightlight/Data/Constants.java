@@ -21,8 +21,11 @@ public class Constants {
     public static final String PREF_BLUE_INTENSITY  =   "custom_val";
     public static final String PREF_GREEN_INTENSITY =   "green_intensity";
     public static final String PREF_AUTO_SWITCH     =   "auto_switch";
+    public static final String PREF_SUN_SWITCH      =   "sun_switch";
     public static final String PREF_START_TIME      =   "start_time";
     public static final String PREF_END_TIME        =   "end_time";
+    public static final String PREF_LAST_START_TIME =   "last_start_time";
+    public static final String PREF_LAST_END_TIME   =   "last_end_time";
 
 
     /**

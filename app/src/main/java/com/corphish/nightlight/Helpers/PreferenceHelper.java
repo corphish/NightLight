@@ -153,25 +153,51 @@ public class PreferenceHelper {
     }
 
     /**
-     * Gets start time for automatic scheduling
+     * Gets current status of sun-switch
      * @param context - ¯\_(ツ)_/¯
-     * @return - Start time
+     * @return - Current status of sun-switch
      */
-    public static String getStartTime(Context context) {
+    public static boolean getSunSwitchStatus(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        return sharedPreferences.getString(Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME);
+        return sharedPreferences.getBoolean(Constants.PREF_SUN_SWITCH, false);
+    }
+
+    /**
+     * Saves user defined sun-switch
+     * @param context - ¯\_(ツ)_/¯
+     * @param status - Status of sun-switch
+     */
+    public static void putSunSwitchStatus(Context context, boolean status) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        sharedPreferences.edit()
+                .putBoolean(Constants.PREF_SUN_SWITCH, status)
+                .apply();
+    }
+
+    /**
+     * Gets start time for automatic scheduling
+     * @param context - ¯\_(ツ)_/¯
+     * @param type - Type of start time
+     * @return - Start time
+     */
+    public static String getStartTime(Context context, String type) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        return sharedPreferences.getString(type, Constants.DEFAULT_START_TIME);
     }
 
     /**
      * Gets end time for automatic scheduling
      * @param context - ¯\_(ツ)_/¯
+     * @param type - Type of end time
      * @return - End time
      */
-    public static String getEndTime(Context context) {
+    public static String getEndTime(Context context, String type) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        return sharedPreferences.getString(Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
+        return sharedPreferences.getString(type, Constants.DEFAULT_END_TIME);
     }
 
     /**

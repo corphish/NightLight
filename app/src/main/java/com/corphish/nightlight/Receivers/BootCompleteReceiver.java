@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Helpers.AlarmUtils;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
@@ -27,8 +28,8 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         int blueIntensity = PreferenceHelper.getBlueIntensity(context);
         int greenIntensity = PreferenceHelper.getGreenIntensity(context);
 
-        String sStartTime = PreferenceHelper.getStartTime(context);
-        String sEndTime = PreferenceHelper.getEndTime(context);
+        String sStartTime = PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME);
+        String sEndTime = PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME);
 
         if (!masterSwitch) return;
 

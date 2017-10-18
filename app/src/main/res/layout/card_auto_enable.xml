@@ -31,6 +31,15 @@
             android:textSize="@dimen/text_desc"
             android:text="@string/auto_enable_desc"/>
 
+        <android.support.v7.widget.SwitchCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sun_enable"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_caption"
+            android:text="@string/sun_switch"/>
+
         <com.corphish.nightlight.Widgets.KeyValueView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

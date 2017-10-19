@@ -176,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
 
                     PreferenceHelper.putTime(context, Constants.PREF_START_TIME, prevStartTime);
                     PreferenceHelper.putTime(context, Constants.PREF_END_TIME, prevEndTime);
+
+                    addNextDayIfNecessary();
                 }
 
                 doCurrentAutoFunctions();
@@ -285,10 +287,11 @@ public class MainActivity extends AppCompatActivity {
 
         startTime.setValue(sunsetTime);
         endTime.setValue(sunriseTime);
-        addNextDayIfNecessary();
 
         PreferenceHelper.putTime(this, Constants.PREF_START_TIME, sunsetTime);
         PreferenceHelper.putTime(this, Constants.PREF_END_TIME, sunriseTime);
+
+        addNextDayIfNecessary();
     }
 
     @Override

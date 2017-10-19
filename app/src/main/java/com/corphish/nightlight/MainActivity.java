@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 doCurrentAutoFunctions();
+                enableOrDisableAutoSwitchViews(autoSwitch.isChecked());
             }
         });
 
@@ -251,9 +252,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void enableOrDisableAutoSwitchViews(boolean enabled) {
-        startTime.setEnabled(enabled);
-        endTime.setEnabled(enabled);
-        sunSwitch.setEnabled(enabled);
+        // Enabled = Status of autoSwitch if masterSwitch is on, otherwise status of masterSwitch
+        boolean sunSwitchEnabled = sunSwitch.isChecked();
+
+        // If auto switch is off, or master switch off, turn them off all
+        if (!enabled) {
+            startTime.setEnabled(false);
+            endTime.setEnabled(false);
+            sunSwitch.setEnabled(false);
+        } else {
+            // autoSwitch is enabled, enable sunSwitch
+            sunSwitch.setEnabled(true);
+
+            // if sunSwitch is enabled, disable kvviews
+            startTime.setEnabled(!sunSwitchEnabled);
+            endTime.setEnabled(!sunSwitchEnabled);
+        }
     }
 
     private void toggleSwitch(boolean enabled) {

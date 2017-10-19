@@ -163,8 +163,8 @@ public class MainActivity extends AppCompatActivity {
                 PreferenceHelper.putSunSwitchStatus(context, b);
                 if (b) {
                     // Backup current timings
-                    PreferenceHelper.putTime(context, Constants.PREF_LAST_START_TIME, startTime.getValue());
-                    PreferenceHelper.putTime(context, Constants.PREF_LAST_END_TIME, endTime.getValue());
+                    PreferenceHelper.putTime(context, Constants.PREF_LAST_START_TIME, PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME));
+                    PreferenceHelper.putTime(context, Constants.PREF_LAST_END_TIME, PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME));
 
                     doLocationStuff();
                 } else {
@@ -307,9 +307,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addNextDayIfNecessary() {
-        /*String sStartTime = PreferenceHelper.getStartTime(this, Constants.PREF_START_TIME), sEndTime = PreferenceHelper.getEndTime(this, Constants.PREF_END_TIME);
+        String sStartTime = PreferenceHelper.getStartTime(this, Constants.PREF_START_TIME), sEndTime = PreferenceHelper.getEndTime(this, Constants.PREF_END_TIME);
         if (TimeUtils.getTimeInMinutes(sEndTime) < TimeUtils.getTimeInMinutes(sStartTime))
-            endTime.setValue(sEndTime + getString(R.string.next_day));*/
+            endTime.setValue(sEndTime + getString(R.string.next_day));
     }
 
     private void showAlertDialog(int caption, int msg) {

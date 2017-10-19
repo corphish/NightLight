@@ -8,9 +8,12 @@ KCAL is a display driver tuning feature for Qualcomm devices, written by `savoca
 I flashed a LineageOS oreo build on my device, but there was no night light feature available on the ROM. The build itself was early so there was no LiveDisplay, and the Android Oreo night light feature was not their as it is Pixel specific. Luckily, the kernel shipped with the build had KCAL, so I decided to harness this feature. But I had to everytime use a kernel manager app, and had to adjust the intensity, hence I decided to make an app that would make this easier for me.
 
 ### Features
+* Control blue light filter intensity to your liking.
+* Control green light filter to add reddish tint.
 * Easy one touch toggles, with a single slider to tweak blue light intensity.
 * Quick Setting tile for easy toggling on/off night light anywhere.
 * Automatic switching on/off night light at user specifed timings.
+* Supports sunset/sunrise timings. (Limitation: Once sunset/sunrise times are set, Night Light will be toggled every day at that time. Calculating sunset/sunrise times everyday and setting times based on it is not supported as of now.)
 
 ### Requirements
 * Kernel supporting KCAL.

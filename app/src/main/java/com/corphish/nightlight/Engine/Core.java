@@ -60,7 +60,7 @@ public class Core {
      * @param b - A boolean indicating whether night light should be turned on or off
      */
     public static void applyNightModeAsync(boolean b) {
-        new NightModeApplier(b, Constants.DEFAULT_BLUE_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
+        applyNightModeAsync(b, Constants.DEFAULT_BLUE_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
     }
 
     /**
@@ -69,7 +69,7 @@ public class Core {
      * @param context - A context parameter to read the intensity values from preferences
      */
     public static void applyNightModeAsync(boolean b, Context context) {
-        new NightModeApplier(b,
+        applyNightModeAsync(b,
                 PreferenceHelper.getBlueIntensity(context),
                 PreferenceHelper.getGreenIntensity(context));
     }

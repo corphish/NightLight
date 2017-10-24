@@ -19,5 +19,9 @@ I flashed a LineageOS oreo build on my device, but there was no night light feat
 * Kernel supporting KCAL.
 * Root access.
 
+### Permissions
+* Location - Needed to determine sunset/sunrise time for your current location.
+* Internet - Internet connection is needed to determine coarse location when fine location is not available.
+
 ### Download
 [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.corphish.nightlight.generic)

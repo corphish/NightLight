@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,11 +22,14 @@ import com.corphish.nightlight.UI.Fragments.MasterSwitchFragment;
 import com.corphish.nightlight.Data.Constants;
 
 import java.io.File;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MasterSwitchFragment.MasterSwitchClickListener {
 
     private boolean masterSwitchEnabled;
     private final int containerId = R.id.layout_container;
+
+    FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,32 +37,41 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        masterSwitchEnabled = PreferenceHelper.getMasterSwitchStatus(this);
-
-        if (savedInstanceState == null) viewInit(masterSwitchEnabled);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if (!BuildConfig.DEBUG) new CompatibilityChecker().execute();
+
+        init();
+        viewInit();
+        setViews(masterSwitchEnabled);
     }
 
-    @Override
-    public void onSwitchClicked(boolean status) {
-        viewInit(status);
+    private void init() {
+        masterSwitchEnabled = PreferenceHelper.getMasterSwitchStatus(this);
     }
 
-    private void viewInit(boolean show) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
+    private void viewInit() {
         // Clear container
         LinearLayout container = findViewById(containerId);
         container.removeAllViews();
 
-        // Add master switch fragment in all time
-        fragmentTransaction.add(containerId, new MasterSwitchFragment());
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
+        fragmentTransaction.add(containerId, new MasterSwitchFragment()).commit();
+    }
+
+    @Override
+    public void onSwitchClicked(boolean status) {
+        setViews(status);
+    }
+
+    private void setViews(boolean show) {
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
         if (show) {
             // Add all others conditionally
@@ -69,6 +82,11 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
             fragmentTransaction.add(containerId, new AboutFragment());
 
             if (isSupported(R.bool.donation_enabled)) fragmentTransaction.add(containerId, new DonateFragment());
+        } else {
+            List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+            for (Fragment fragment: fragmentList) {
+                if (!(fragment instanceof MasterSwitchFragment)) fragmentTransaction.remove(fragment);
+            }
         }
 
         fragmentTransaction.commit();

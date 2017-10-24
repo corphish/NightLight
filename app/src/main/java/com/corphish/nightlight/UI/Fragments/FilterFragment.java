@@ -75,7 +75,7 @@ public class FilterFragment extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 greenIntensity = seekBar.getProgress();
-                PreferenceHelper.putBlueIntensity(context, blueIntensity);
+                PreferenceHelper.putGreenIntensity(context, greenIntensity);
                 Core.applyNightModeAsync(true, blueIntensity, greenIntensity);
             }
         });

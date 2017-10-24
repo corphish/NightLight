@@ -11,16 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <include layout="@layout/card_master_switch"/>
-        <include layout="@layout/card_slider"/>
-        <include layout="@layout/card_auto_enable"/>
-        <include layout="@layout/card_force_switch"/>
-        <include layout="@layout/card_info"
-                 android:id="@+id/card_info"/>
-        <include layout="@layout/card_donation_info"
-                 android:id="@+id/card_donate"/>
-    </LinearLayout>
+        android:orientation="vertical"
+        android:id="@+id/layout_container"/>
 
 </android.support.v4.widget.NestedScrollView>

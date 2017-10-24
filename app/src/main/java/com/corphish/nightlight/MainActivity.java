@@ -1,56 +1,31 @@
 package com.corphish.nightlight;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.TimePicker;
+import android.widget.LinearLayout;
 
-import com.corphish.nightlight.Engine.Core;
-import com.corphish.nightlight.Helpers.AlarmUtils;
-import com.corphish.nightlight.Helpers.ExternalLink;
-import com.corphish.nightlight.Helpers.LocationUtils;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.RootUtils;
-import com.corphish.nightlight.Helpers.TimeUtils;
-import com.corphish.nightlight.Widgets.KeyValueView;
+import com.corphish.nightlight.UI.Fragments.AboutFragment;
+import com.corphish.nightlight.UI.Fragments.AutoFragment;
+import com.corphish.nightlight.UI.Fragments.DonateFragment;
+import com.corphish.nightlight.UI.Fragments.FilterFragment;
+import com.corphish.nightlight.UI.Fragments.ForceSwitchFragment;
+import com.corphish.nightlight.UI.Fragments.MasterSwitchFragment;
 import com.corphish.nightlight.Data.Constants;
 
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MasterSwitchFragment.MasterSwitchClickListener {
 
-    SwitchCompat masterSwitch, autoSwitch, forceSwitch, sunSwitch;
-    SeekBar blueSlider, greenSlider;
-    KeyValueView startTime, endTime;
-
-    Context context = this;
-
-    /**
-     * Formula for calculating effective intensity
-     * = Constants.MAX_BLUE_LIGHT  - <seekbar/defaultValue>
-     */
-    int defaultBlueIntensity = Constants.DEFAULT_BLUE_INTENSITY, currentBlueIntensity = defaultBlueIntensity;
-    int defaultGreenIntensity = Constants.DEFAULT_GREEN_INTENSITY, currentGreenIntensity = defaultGreenIntensity;
-
-    // Location stuff
-    boolean locationPermissionAvailable = false;
-    int locationRequestCode = 69;
+    private boolean masterSwitchEnabled;
+    private final int containerId = R.id.layout_container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,275 +33,49 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        masterSwitchEnabled = PreferenceHelper.getMasterSwitchStatus(this);
+
+        if (savedInstanceState == null) viewInit(masterSwitchEnabled);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        init();
-    }
-
-    private void init() {
-        currentBlueIntensity = PreferenceHelper.getBlueIntensity(this);
-        currentGreenIntensity = PreferenceHelper.getGreenIntensity(this);
-        viewInit();
         if (!BuildConfig.DEBUG) new CompatibilityChecker().execute();
     }
 
-    private void viewInit() {
-        masterSwitch = findViewById(R.id.master_switch);
-        forceSwitch = findViewById(R.id.force_switch);
-        blueSlider = findViewById(R.id.blue_intensity);
-        greenSlider = findViewById(R.id.green_intensity);
-        autoSwitch = findViewById(R.id.auto_enable);
-        sunSwitch = findViewById(R.id.sun_enable);
-        startTime = findViewById(R.id.start_time);
-        endTime = findViewById(R.id.end_time);
-
-        TextView versionTV = findViewById(R.id.app_version);
-        versionTV.setText(getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
-
-        final boolean enabled = PreferenceHelper.getMasterSwitchStatus(this);
-        masterSwitch.setChecked(enabled);
-        masterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                toggleSwitch(b);
-            }
-        });
-
-        forceSwitch.setChecked(PreferenceHelper.getForceSwitchStatus(this));
-        forceSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Core.applyNightModeAsync(b, currentBlueIntensity, currentGreenIntensity);
-                PreferenceHelper.putForceSwitchStatus(context, b);
-            }
-        });
-
-        blueSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {}
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                currentBlueIntensity = seekBar.getProgress();
-                new Switcher(true, false).execute();
-                PreferenceHelper.putBlueIntensity(context, currentBlueIntensity);
-            }
-        });
-        blueSlider.setProgress(currentBlueIntensity);
-
-        greenSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                currentGreenIntensity = seekBar.getProgress();
-                new Switcher(true, false).execute();
-                PreferenceHelper.putGreenIntensity(context, currentGreenIntensity);
-            }
-        });
-        greenSlider.setProgress(currentGreenIntensity);
-
-        boolean autoEnabled = PreferenceHelper.getAutoSwitchStatus(this);
-        boolean sunEnabled = PreferenceHelper.getSunSwitchStatus(this);
-
-        autoSwitch.setChecked(autoEnabled);
-        enableOrDisableAutoSwitchViews(autoEnabled);
-        autoSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                PreferenceHelper.putAutoSwitchStatus(context, b);
-
-                if (b) doCurrentAutoFunctions();
-                else new Switcher(true, false).execute();
-                enableOrDisableAutoSwitchViews(b);
-            }
-        });
-
-        sunSwitch.setChecked(sunEnabled);
-        sunSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                PreferenceHelper.putSunSwitchStatus(context, b);
-                if (b) {
-                    // Backup current timings
-                    PreferenceHelper.putTime(context, Constants.PREF_LAST_START_TIME, PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME));
-                    PreferenceHelper.putTime(context, Constants.PREF_LAST_END_TIME, PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME));
-
-                    doLocationStuff();
-                } else {
-                    String prevStartTime = PreferenceHelper.getStartTime(context, Constants.PREF_LAST_START_TIME);
-                    String prevEndTime = PreferenceHelper.getEndTime(context, Constants.PREF_LAST_END_TIME);
-
-                    startTime.setValue(prevStartTime);
-                    endTime.setValue(prevEndTime);
-
-                    PreferenceHelper.putTime(context, Constants.PREF_START_TIME, prevStartTime);
-                    PreferenceHelper.putTime(context, Constants.PREF_END_TIME, prevEndTime);
-
-                    addNextDayIfNecessary();
-                }
-
-                doCurrentAutoFunctions();
-                enableOrDisableAutoSwitchViews(autoSwitch.isChecked());
-            }
-        });
-
-        String startTimeVal = PreferenceHelper.getStartTime(this, Constants.PREF_START_TIME);
-        String endTimeVal = PreferenceHelper.getEndTime(this, Constants.PREF_END_TIME);
-
-        startTime.setValue(startTimeVal);
-        startTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showTimePickerDialog(startTime, Constants.PREF_START_TIME);
-            }
-        });
-
-        endTime.setValue(endTimeVal);
-        addNextDayIfNecessary();
-        endTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showTimePickerDialog(endTime, Constants.PREF_END_TIME);
-            }
-        });
-
-        findViewById(R.id.card_info).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ExternalLink.open(context, "market://details?id="+getPackageName());
-            }
-        });
-
-        findViewById(R.id.card_donate).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ExternalLink.open(context, "market://details?id=com.corphish.nightlight.donate");
-            }
-        });
-
-        enableOrDisableViews(enabled);
-    }
-
-    private void showTimePickerDialog(final KeyValueView viewWhoIsCallingIt, final String prefKey) {
-        int time[] = TimeUtils.getCurrentTimeAsHourAndMinutes();
-        TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                String selectedHour = i < 10 ? "0" + i: "" + i;
-                String selectedMinute = i1 < 10 ? "0" +i1: "" + i1;
-                String timeString = selectedHour + ":" + selectedMinute;
-                PreferenceHelper.putTime(context, prefKey, timeString);
-                viewWhoIsCallingIt.setValue(timeString);
-
-                addNextDayIfNecessary();
-
-                doCurrentAutoFunctions();
-            }
-        }, time[0], time[1], false);
-        timePickerDialog.show();
-    }
-
-    private void enableOrDisableViews(boolean enabled) {
-        blueSlider.setEnabled(enabled);
-        greenSlider.setEnabled(enabled);
-        autoSwitch.setEnabled(enabled);
-        sunSwitch.setEnabled(enabled);
-        forceSwitch.setEnabled(enabled);
-        if (!enabled) enableOrDisableAutoSwitchViews(false);
-        else enableOrDisableAutoSwitchViews(autoSwitch.isChecked());
-    }
-
-    private void enableOrDisableAutoSwitchViews(boolean enabled) {
-        // Enabled = Status of autoSwitch if masterSwitch is on, otherwise status of masterSwitch
-        boolean sunSwitchEnabled = sunSwitch.isChecked();
-
-        // If auto switch is off, or master switch off, turn them off all
-        if (!enabled) {
-            startTime.setEnabled(false);
-            endTime.setEnabled(false);
-            sunSwitch.setEnabled(false);
-        } else {
-            // autoSwitch is enabled, enable sunSwitch
-            sunSwitch.setEnabled(true);
-
-            // if sunSwitch is enabled, disable kvviews
-            startTime.setEnabled(!sunSwitchEnabled);
-            endTime.setEnabled(!sunSwitchEnabled);
-        }
-    }
-
-    private void toggleSwitch(boolean enabled) {
-        new Switcher(enabled).execute();
-        PreferenceHelper.putMasterSwitchStatus(this, enabled);
-    }
-
-    private void doCurrentAutoFunctions() {
-        String prefStartTime = PreferenceHelper.getStartTime(this, Constants.PREF_START_TIME);
-        String prefEndTime = PreferenceHelper.getEndTime(this, Constants.PREF_END_TIME);
-
-        new Switcher(TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefEndTime), false).execute();
-
-        AlarmUtils.setAlarms(this, prefStartTime, prefEndTime);
-    }
-
-    private void requestLocationPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, locationRequestCode);
-    }
-
-    private void doLocationStuff() {
-        if (locationPermissionAvailable || LocationUtils.areLocationPermissionsAvailable(context))
-            getAndSetSunriseSunsetTimings();
-        else requestLocationPermission();
-    }
-
-    private void getAndSetSunriseSunsetTimings() {
-        Location currentLocation = LocationUtils.getLastKnownLocation(this);
-
-        String sunriseTime = LocationUtils.getSunriseTime(currentLocation), sunsetTime = LocationUtils.getSunsetTime(currentLocation);
-
-        startTime.setValue(sunsetTime);
-        endTime.setValue(sunriseTime);
-
-        PreferenceHelper.putTime(this, Constants.PREF_START_TIME, sunsetTime);
-        PreferenceHelper.putTime(this, Constants.PREF_END_TIME, sunriseTime);
-
-        addNextDayIfNecessary();
-    }
-
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[], @NonNull int[] grantResults) {
-        if (requestCode == locationRequestCode) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (permissions[i].equals(Manifest.permission.ACCESS_FINE_LOCATION) && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    locationPermissionAvailable = true;
-                    getAndSetSunriseSunsetTimings();
-                    break;
-                }
-            }
-        }
-
+    public void onSwitchClicked(boolean status) {
+        viewInit(status);
     }
 
-    private void addNextDayIfNecessary() {
-        String sStartTime = PreferenceHelper.getStartTime(this, Constants.PREF_START_TIME), sEndTime = PreferenceHelper.getEndTime(this, Constants.PREF_END_TIME);
-        if (TimeUtils.getTimeInMinutes(sEndTime) < TimeUtils.getTimeInMinutes(sStartTime))
-            endTime.setValue(sEndTime + getString(R.string.next_day));
+    private void viewInit(boolean show) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        // Clear container
+        LinearLayout container = findViewById(containerId);
+        container.removeAllViews();
+
+        // Add master switch fragment in all time
+        fragmentTransaction.add(containerId, new MasterSwitchFragment());
+
+        if (show) {
+            // Add all others conditionally
+            if (isSupported(R.bool.filters_enabled)) fragmentTransaction.add(containerId, new FilterFragment());
+            if (isSupported(R.bool.automation_enabled)) fragmentTransaction.add(containerId, new AutoFragment());
+            if (isSupported(R.bool.force_switch_enabled)) fragmentTransaction.add(containerId, new ForceSwitchFragment());
+
+            fragmentTransaction.add(containerId, new AboutFragment());
+
+            if (isSupported(R.bool.donation_enabled)) fragmentTransaction.add(containerId, new DonateFragment());
+        }
+
+        fragmentTransaction.commit();
+    }
+
+    private boolean isSupported (int id) {
+        return getResources().getBoolean(id);
     }
 
     private void showAlertDialog(int caption, int msg) {
@@ -365,34 +114,6 @@ public class MainActivity extends AppCompatActivity {
             progressDialog.hide();
             if (!rootAccessAvailable) showAlertDialog(R.string.no_root_access, R.string.no_root_desc);
             else if (!kcalSupported) showAlertDialog(R.string.no_kcal, R.string.no_kcal_desc);
-        }
-    }
-
-    private class Switcher extends AsyncTask<String, String, String> {
-        boolean enabled, toModifyViews;
-        Switcher(boolean b) {
-            enabled = b;
-            toModifyViews = true;
-        }
-
-        Switcher(boolean e, boolean m) {
-            enabled = e;
-            toModifyViews = m;
-        }
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected String doInBackground(String... booms) {
-            Core.applyNightMode(enabled, currentBlueIntensity, currentGreenIntensity);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String boom) {
-            if (toModifyViews) enableOrDisableViews(enabled);
         }
     }
 }

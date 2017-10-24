@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="filters_enabled">true</bool>
+    <bool name="automation_enabled">true</bool>
+    <bool name="force_switch_enabled">true</bool>
+    <bool name="donation_enabled">true</bool>
+</resources>

@@ -1,8 +1,10 @@
 package com.corphish.nightlight.Engine;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.corphish.nightlight.Data.Constants;
+import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.RootUtils;
 
 /**
@@ -50,6 +52,26 @@ public class Core {
      */
     public static void applyNightModeAsync(boolean b, int blueIntensity, int greenIntensity) {
         new NightModeApplier(b, blueIntensity, greenIntensity).execute();
+    }
+
+    /**
+     * Driver method to enable/disable night light asynchronously.
+     * This should only be used to turn off night mode.
+     * @param b - A boolean indicating whether night light should be turned on or off
+     */
+    public static void applyNightModeAsync(boolean b) {
+        new NightModeApplier(b, Constants.DEFAULT_BLUE_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
+    }
+
+    /**
+     * Driver method to enable/disable night light asynchronously.
+     * @param b - A boolean indicating whether night light should be turned on or off
+     * @param context - A context parameter to read the intensity values from preferences
+     */
+    public static void applyNightModeAsync(boolean b, Context context) {
+        new NightModeApplier(b,
+                PreferenceHelper.getBlueIntensity(context),
+                PreferenceHelper.getGreenIntensity(context));
     }
 
     /**

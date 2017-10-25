@@ -124,6 +124,8 @@ public class AutoFragment extends Fragment {
 
         startTimeKV.setValue(PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME));
         endTimeKV.setValue(PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME));
+
+        enableOrDisableAutoSwitchViews(autoSwitchStatus);
     }
 
     private void enableOrDisableAutoSwitchViews(boolean enabled) {

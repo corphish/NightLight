@@ -71,7 +71,7 @@ public class AutoFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) doCurrentAutoFunctions();
-                else Core.applyNightModeAsync(false);
+                else Core.applyNightModeAsync(true);
 
                 enableOrDisableAutoSwitchViews(b);
             }

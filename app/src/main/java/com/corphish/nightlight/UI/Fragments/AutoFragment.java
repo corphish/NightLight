@@ -73,6 +73,8 @@ public class AutoFragment extends Fragment {
                 if (b) doCurrentAutoFunctions();
                 else Core.applyNightModeAsync(true);
 
+                PreferenceHelper.putAutoSwitchStatus(context, b);
+
                 enableOrDisableAutoSwitchViews(b);
             }
         });

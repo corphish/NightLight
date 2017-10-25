@@ -86,7 +86,6 @@ public class AutoFragment extends Fragment {
                     PreferenceHelper.putTime(context, Constants.PREF_LAST_START_TIME, PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME));
                     PreferenceHelper.putTime(context, Constants.PREF_LAST_END_TIME, PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME));
 
-                    // TODO: Do location stuff
                     doLocationStuff();
                 } else {
                     String prevStartTime = PreferenceHelper.getStartTime(context, Constants.PREF_LAST_START_TIME);

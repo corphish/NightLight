@@ -26,6 +26,8 @@ public class Constants {
     public static final String PREF_END_TIME        =   "end_time";
     public static final String PREF_LAST_START_TIME =   "last_start_time";
     public static final String PREF_LAST_END_TIME   =   "last_end_time";
+    public static final String LAST_LOC_LONGITUDE   =   "last_longitude";
+    public static final String LAST_LOC_LATITUDE    =   "last_latitude";
 
 
     /**
@@ -37,4 +39,6 @@ public class Constants {
     public static final int DEFAULT_BLUE_INTENSITY  =   64;
     public static final int MAX_GREEN_LIGHT         =   256;
     public static final int DEFAULT_GREEN_INTENSITY =   0;
+    public static final String DEFAULT_LONGITUDE    =   "0.00";
+    public static final String DEFAULT_LATITUDE     =   "0.00";
 }

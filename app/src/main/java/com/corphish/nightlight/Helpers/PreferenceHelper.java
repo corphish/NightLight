@@ -212,4 +212,32 @@ public class PreferenceHelper {
                 .putString(timeType, time)
                 .apply();
     }
+
+    /**
+     * Gets saved location
+     * @param context - ¯\_(ツ)_/¯
+     * @return - A double array indicating the location as {Longitude, Latitude}
+     */
+    public static double[] getLocation(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        return new double[] {
+                Double.parseDouble(sharedPreferences.getString(Constants.LAST_LOC_LONGITUDE, Constants.DEFAULT_LONGITUDE)),
+                Double.parseDouble(sharedPreferences.getString(Constants.LAST_LOC_LATITUDE, Constants.DEFAULT_LATITUDE))
+        };
+    }
+
+    /**
+     * Saves location co-ordinates as string
+     * @param context - ¯\_(ツ)_/¯
+     * @param longitude - Longitude to be saved
+     * @param latitude - Latitude to be saved
+     */
+    public static void putLocation(Context context, double longitude, double latitude) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString(Constants.LAST_LOC_LONGITUDE, "" + longitude)
+                .putString(Constants.LAST_LOC_LATITUDE, "" + latitude)
+                .apply();
+    }
 }

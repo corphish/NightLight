@@ -177,27 +177,26 @@ public class PreferenceHelper {
     }
 
     /**
-     * Gets start time for automatic scheduling
+     * Gets time for automatic scheduling
      * @param context - ¯\_(ツ)_/¯
-     * @param type - Type of start time
-     * @return - Start time
+     * @param type - Type of time
+     * @return - Request time
      */
-    public static String getStartTime(Context context, String type) {
+    public static String getTime(Context context, String type) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        return sharedPreferences.getString(type, Constants.DEFAULT_START_TIME);
-    }
+        String defaultValue = "";
 
-    /**
-     * Gets end time for automatic scheduling
-     * @param context - ¯\_(ツ)_/¯
-     * @param type - Type of end time
-     * @return - End time
-     */
-    public static String getEndTime(Context context, String type) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        /*
+         * Determine the default value from type
+         */
+        if (type.equals(Constants.PREF_START_TIME) || type.equals(Constants.PREF_LAST_START_TIME))
+            defaultValue = Constants.DEFAULT_START_TIME;
+        else if (type.equals(Constants.PREF_START_TIME) || type.equals(Constants.PREF_LAST_START_TIME))
+            defaultValue = Constants.DEFAULT_END_TIME;
 
-        return sharedPreferences.getString(type, Constants.DEFAULT_END_TIME);
+
+        return sharedPreferences.getString(type, defaultValue);
     }
 
     /**

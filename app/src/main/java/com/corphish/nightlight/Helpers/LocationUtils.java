@@ -7,11 +7,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.content.ContextCompat;
 
-import com.luckycatlabs.sunrisesunset.SunriseSunsetCalculator;
-
-import java.util.Calendar;
 import java.util.List;
-import java.util.TimeZone;
 
 /**
  * Created by Avinaba on 10/17/2017.
@@ -36,6 +32,9 @@ public class LocationUtils {
                 }
             }
         } catch (SecurityException ignored) {}
+
+
+
         return bestLocation;
     }
 
@@ -43,19 +42,5 @@ public class LocationUtils {
         int permissionStatus = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
 
         return permissionStatus == PackageManager.PERMISSION_GRANTED;
-    }
-
-    public static String getSunriseTime(Location location) {
-        com.luckycatlabs.sunrisesunset.dto.Location mlocation = new com.luckycatlabs.sunrisesunset.dto.Location(location.getLatitude(), location.getLongitude());
-        SunriseSunsetCalculator sunriseSunsetCalculator = new SunriseSunsetCalculator(mlocation, TimeZone.getDefault());
-
-        return sunriseSunsetCalculator.getOfficialSunriseForDate(Calendar.getInstance());
-    }
-
-    public static String getSunsetTime(Location location) {
-        com.luckycatlabs.sunrisesunset.dto.Location mlocation = new com.luckycatlabs.sunrisesunset.dto.Location(location.getLatitude(), location.getLongitude());
-        SunriseSunsetCalculator sunriseSunsetCalculator = new SunriseSunsetCalculator(mlocation, TimeZone.getDefault());
-
-        return sunriseSunsetCalculator.getOfficialSunsetForDate(Calendar.getInstance());
     }
 }

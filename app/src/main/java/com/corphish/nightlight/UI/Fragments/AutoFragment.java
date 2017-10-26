@@ -1,6 +1,7 @@
 package com.corphish.nightlight.UI.Fragments;
 
 import android.Manifest;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -194,6 +195,12 @@ public class AutoFragment extends Fragment {
 
     private void getAndSetSunriseSunsetTimings() {
         Location currentLocation = LocationUtils.getLastKnownLocation(context);
+        
+        if (currentLocation == null) {
+            Snackbar.make(getActivity().findViewById(R.id.layout_container), getString(R.string.location_unavailable), Snackbar.LENGTH_LONG).show();
+            sunSwitch.setChecked(false);
+            return;
+        }
 
         String sunriseTime = LocationUtils.getSunriseTime(currentLocation), sunsetTime = LocationUtils.getSunsetTime(currentLocation);
 

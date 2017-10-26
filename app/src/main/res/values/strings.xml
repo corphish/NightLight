@@ -43,6 +43,8 @@
 
     <string name="sun_switch">Use sunset/sunrise timings</string>
 
+    <string name="location_unavailable">Unable to get your last known location.</string>
+
     <string name="like_this_app">Like this app?</string>
     <string name="get_donation">If you like this app, you can consider getting the donate version of the app. Although it comes with no extra features than this version, it shows your support and appreciation to the app, and it will motivate the developer and support the development of the app :)</string>
 </resources>

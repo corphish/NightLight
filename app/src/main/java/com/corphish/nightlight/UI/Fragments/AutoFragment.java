@@ -86,13 +86,13 @@ public class AutoFragment extends Fragment {
                 PreferenceHelper.putSunSwitchStatus(context, b);
                 if (b) {
                     // Backup current timings
-                    PreferenceHelper.putTime(context, Constants.PREF_LAST_START_TIME, PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME));
-                    PreferenceHelper.putTime(context, Constants.PREF_LAST_END_TIME, PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME));
+                    PreferenceHelper.putTime(context, Constants.PREF_LAST_START_TIME, PreferenceHelper.getTime(context, Constants.PREF_START_TIME));
+                    PreferenceHelper.putTime(context, Constants.PREF_LAST_END_TIME, PreferenceHelper.getTime(context, Constants.PREF_END_TIME));
 
                     doLocationStuff();
                 } else {
-                    String prevStartTime = PreferenceHelper.getStartTime(context, Constants.PREF_LAST_START_TIME);
-                    String prevEndTime = PreferenceHelper.getEndTime(context, Constants.PREF_LAST_END_TIME);
+                    String prevStartTime = PreferenceHelper.getTime(context, Constants.PREF_LAST_START_TIME);
+                    String prevEndTime = PreferenceHelper.getTime(context, Constants.PREF_LAST_END_TIME);
 
                     startTimeKV.setValue(prevStartTime);
                     endTimeKV.setValue(prevEndTime);
@@ -124,8 +124,8 @@ public class AutoFragment extends Fragment {
         autoSwitch.setChecked(autoSwitchStatus);
         sunSwitch.setChecked(sunSwitchStatus);
 
-        startTimeKV.setValue(PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME));
-        endTimeKV.setValue(PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME));
+        startTimeKV.setValue(PreferenceHelper.getTime(context, Constants.PREF_START_TIME));
+        endTimeKV.setValue(PreferenceHelper.getTime(context, Constants.PREF_END_TIME));
 
         enableOrDisableAutoSwitchViews(autoSwitchStatus);
     }
@@ -169,14 +169,14 @@ public class AutoFragment extends Fragment {
     }
 
     private void addNextDayIfNecessary() {
-        String sStartTime = PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME), sEndTime = PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME);
+        String sStartTime = PreferenceHelper.getTime(context, Constants.PREF_START_TIME), sEndTime = PreferenceHelper.getTime(context, Constants.PREF_END_TIME);
         if (TimeUtils.getTimeInMinutes(sEndTime) < TimeUtils.getTimeInMinutes(sStartTime))
             endTimeKV.setValue(sEndTime + getString(R.string.next_day));
     }
 
     private void doCurrentAutoFunctions() {
-        String prefStartTime = PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME);
-        String prefEndTime = PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME);
+        String prefStartTime = PreferenceHelper.getTime(context, Constants.PREF_START_TIME);
+        String prefEndTime = PreferenceHelper.getTime(context, Constants.PREF_END_TIME);
 
         Core.applyNightModeAsync(TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefEndTime), context);
 

@@ -24,7 +24,7 @@ import com.corphish.nightlight.Helpers.LocationUtils;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.TimeUtils;
 import com.corphish.nightlight.R;
-import com.corphish.nightlight.Widgets.KeyValueView;
+import com.corphish.nightlight.UI.Widgets.KeyValueView;
 
 /**
  * Created by Avinaba on 10/24/2017.

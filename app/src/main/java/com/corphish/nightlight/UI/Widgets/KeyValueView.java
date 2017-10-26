@@ -1,4 +1,4 @@
-package com.corphish.nightlight.Widgets;
+package com.corphish.nightlight.UI.Widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;

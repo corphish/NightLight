@@ -200,10 +200,10 @@ public class PreferenceHelper {
     }
 
     /**
-     * Saves user defined end time for auto scheduling
+     * Saves user defined time for auto scheduling
      * @param context - ¯\_(ツ)_/¯
      * @param timeType - Can be either of startTime or endTime (preference key)
-     * @param time - End time to be saved
+     * @param time - Time to be saved
      */
     public static void putTime(Context context, String timeType, String time) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);

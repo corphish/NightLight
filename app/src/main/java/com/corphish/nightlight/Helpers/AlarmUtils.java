@@ -17,6 +17,9 @@ import java.util.Calendar;
 
 public class AlarmUtils {
 
+    private static final int REQUEST_CODE_START     = 0;
+    private static final int REQUEST_CODE_STOP      = 0;
+
     /**
      * Sets the start and end alarms on user specified time
      * @param context - Needed by intent, pendingIntent and to get the AlarmManager service
@@ -28,10 +31,10 @@ public class AlarmUtils {
         long timeInMillis;
 
         Intent startIntent = new Intent(context, StartNLReceiver.class);
-        PendingIntent startAlarmIntent = PendingIntent.getBroadcast(context, 0, startIntent, 0);
+        PendingIntent startAlarmIntent = PendingIntent.getBroadcast(context, REQUEST_CODE_START, startIntent, 0);
 
         Intent endIntent = new Intent(context, StopNLReceiver.class);
-        PendingIntent endAlarmIntent = PendingIntent.getBroadcast(context, 0, endIntent, 0);
+        PendingIntent endAlarmIntent = PendingIntent.getBroadcast(context, REQUEST_CODE_STOP, endIntent, 0);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());

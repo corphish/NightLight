@@ -192,7 +192,7 @@ public class PreferenceHelper {
          */
         if (type.equals(Constants.PREF_START_TIME) || type.equals(Constants.PREF_LAST_START_TIME))
             defaultValue = Constants.DEFAULT_START_TIME;
-        else if (type.equals(Constants.PREF_START_TIME) || type.equals(Constants.PREF_LAST_START_TIME))
+        else if (type.equals(Constants.PREF_END_TIME) || type.equals(Constants.PREF_LAST_END_TIME))
             defaultValue = Constants.DEFAULT_END_TIME;
 
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
+import com.corphish.nightlight.Engine.TwilightManager;
 import com.corphish.nightlight.Helpers.AlarmUtils;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.TimeUtils;
@@ -24,12 +25,13 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 
         boolean masterSwitch = PreferenceHelper.getMasterSwitchStatus(context);
         boolean autoSwitch = PreferenceHelper.getAutoSwitchStatus(context);
+        boolean sunSwitch = PreferenceHelper.getSunSwitchStatus(context);
 
         int blueIntensity = PreferenceHelper.getBlueIntensity(context);
         int greenIntensity = PreferenceHelper.getGreenIntensity(context);
 
-        String sStartTime = PreferenceHelper.getStartTime(context, Constants.PREF_START_TIME);
-        String sEndTime = PreferenceHelper.getEndTime(context, Constants.PREF_END_TIME);
+        String sStartTime = PreferenceHelper.getTime(context, Constants.PREF_START_TIME);
+        String sEndTime = PreferenceHelper.getTime(context, Constants.PREF_END_TIME);
 
         if (!masterSwitch) return;
 
@@ -40,6 +42,9 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 
         Core.applyNightModeAsync(TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime), blueIntensity, greenIntensity);
 
-        AlarmUtils.setAlarms(context, sStartTime, sEndTime);
+        if (!sunSwitch) AlarmUtils.setAlarms(context, sStartTime, sEndTime, true);
+        else TwilightManager.newInstance()
+                .atLocation(PreferenceHelper.getLocation(context))
+                .computeAndSaveTime(context);
     }
 }

@@ -26,7 +26,7 @@ public class AlarmUtils {
      * @param startTime - Starting time for alarm
      * @param endTime - Ending time for alarm
      */
-    public static void setAlarms(Context context, String startTime, String endTime) {
+    public static void setAlarms(Context context, String startTime, String endTime, boolean repeating) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         long timeInMillis;
 
@@ -44,7 +44,8 @@ public class AlarmUtils {
         timeInMillis = calendar.getTimeInMillis();
         if (TimeUtils.getCurrentTimeAsMinutes() > TimeUtils.getTimeInMinutes(startTime)) timeInMillis += 86400000L;
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, startAlarmIntent);
+        if (repeating) alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, startAlarmIntent);
+        else alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis,startAlarmIntent);
 
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, TimeUtils.getTimeAsHourAndMinutes(endTime)[0]);
@@ -53,6 +54,9 @@ public class AlarmUtils {
         timeInMillis = calendar.getTimeInMillis();
         if (TimeUtils.getCurrentTimeAsMinutes() > TimeUtils.getTimeInMinutes(endTime)) timeInMillis += 86400000L;
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, endAlarmIntent);
+        if (repeating) alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, endAlarmIntent);
+        else alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis,endAlarmIntent);
+
+
     }
 }

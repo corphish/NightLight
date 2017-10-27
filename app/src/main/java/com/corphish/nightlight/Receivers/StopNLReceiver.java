@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.corphish.nightlight.Engine.Core;
+import com.corphish.nightlight.Engine.TwilightManager;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 
 /**
@@ -27,5 +28,12 @@ public class StopNLReceiver extends BroadcastReceiver {
         int greenIntensity = PreferenceHelper.getGreenIntensity(context);
 
         Core.applyNightModeAsync(false, blueIntensity, greenIntensity);
+
+        // Also if sunset sunrise is used, reset the timing
+        if (PreferenceHelper.getSunSwitchStatus(context)) {
+            TwilightManager.newInstance()
+                    .atLocation(PreferenceHelper.getLocation(context))
+                    .computeAndSaveTime(context);
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.corphish.nightlight.UI.Fragments;
 
 import android.Manifest;
+import android.location.LocationListener;
+import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.app.TimePickerDialog;
@@ -19,6 +21,7 @@ import android.widget.TimePicker;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
+import com.corphish.nightlight.Engine.TwilightManager;
 import com.corphish.nightlight.Helpers.AlarmUtils;
 import com.corphish.nightlight.Helpers.LocationUtils;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
@@ -31,7 +34,7 @@ import com.corphish.nightlight.UI.Widgets.KeyValueView;
  * Auto related fragment
  */
 
-public class AutoFragment extends Fragment {
+public class AutoFragment extends Fragment implements LocationListener {
 
     private SwitchCompat autoSwitch, sunSwitch;
     private KeyValueView startTimeKV, endTimeKV;
@@ -40,6 +43,8 @@ public class AutoFragment extends Fragment {
 
     private final int locationRequestCode = 69;
     private boolean locationPermissionAvailable = false;
+
+    Location location = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +76,7 @@ public class AutoFragment extends Fragment {
         autoSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) doCurrentAutoFunctions();
+                if (b) doCurrentAutoFunctions(true);
                 else Core.applyNightModeAsync(true);
 
                 PreferenceHelper.putAutoSwitchStatus(context, b);
@@ -103,7 +108,8 @@ public class AutoFragment extends Fragment {
                     addNextDayIfNecessary();
                 }
 
-                doCurrentAutoFunctions();
+                // If sunswitch is enabled, don't set alarm as alarms are set by TwilightManager
+                doCurrentAutoFunctions(!b);
                 enableOrDisableAutoSwitchViews(autoSwitch.isChecked());
             }
         });
@@ -162,7 +168,7 @@ public class AutoFragment extends Fragment {
 
                 addNextDayIfNecessary();
 
-                doCurrentAutoFunctions();
+                doCurrentAutoFunctions(true);
             }
         }, time[0], time[1], false);
         timePickerDialog.show();
@@ -174,13 +180,13 @@ public class AutoFragment extends Fragment {
             endTimeKV.setValue(sEndTime + getString(R.string.next_day));
     }
 
-    private void doCurrentAutoFunctions() {
+    private void doCurrentAutoFunctions(boolean setAlarms) {
         String prefStartTime = PreferenceHelper.getTime(context, Constants.PREF_START_TIME);
         String prefEndTime = PreferenceHelper.getTime(context, Constants.PREF_END_TIME);
 
         Core.applyNightModeAsync(TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefEndTime), context);
 
-        AlarmUtils.setAlarms(context, prefStartTime, prefEndTime);
+        if(setAlarms) AlarmUtils.setAlarms(context, prefStartTime, prefEndTime, true);
     }
 
     private void requestLocationPermission() {
@@ -189,26 +195,37 @@ public class AutoFragment extends Fragment {
 
     private void doLocationStuff() {
         if (locationPermissionAvailable || LocationUtils.areLocationPermissionsAvailable(context))
-            getAndSetSunriseSunsetTimings();
+            getBestLocation();
         else requestLocationPermission();
     }
 
-    private void getAndSetSunriseSunsetTimings() {
-        Location currentLocation = LocationUtils.getLastKnownLocation(context);
-        
+    private void getBestLocation() {
+        // Try to get best last known location
+        Location location = LocationUtils.getLastKnownLocation(context);
+
+        if (!LocationUtils.isLocationStale(location)) getAndSetSunriseSunsetTimings(location);
+        else LocationUtils.requestCurrentLocation(context, this);
+    }
+
+    private void getAndSetSunriseSunsetTimings(Location currentLocation) {
         if (currentLocation == null) {
             Snackbar.make(getActivity().findViewById(R.id.layout_container), getString(R.string.location_unavailable), Snackbar.LENGTH_LONG).show();
             sunSwitch.setChecked(false);
             return;
+        } else {
+            // Save location
+            PreferenceHelper.putLocation(context, currentLocation.getLongitude(), currentLocation.getLatitude());
         }
 
-        String sunriseTime = LocationUtils.getSunriseTime(currentLocation), sunsetTime = LocationUtils.getSunsetTime(currentLocation);
+        TwilightManager.newInstance()
+                .atLocation(currentLocation.getLongitude(), currentLocation.getLatitude())
+                .computeAndSaveTime(context);
+
+        String sunriseTime = PreferenceHelper.getTime(context, Constants.PREF_END_TIME),
+               sunsetTime = PreferenceHelper.getTime(context, Constants.PREF_START_TIME);
 
         startTimeKV.setValue(sunsetTime);
         endTimeKV.setValue(sunriseTime);
-
-        PreferenceHelper.putTime(context, Constants.PREF_START_TIME, sunsetTime);
-        PreferenceHelper.putTime(context, Constants.PREF_END_TIME, sunriseTime);
 
         addNextDayIfNecessary();
     }
@@ -220,11 +237,38 @@ public class AutoFragment extends Fragment {
             for (int i = 0; i < permissions.length; i++) {
                 if (permissions[i].equals(Manifest.permission.ACCESS_FINE_LOCATION) && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                     locationPermissionAvailable = true;
-                    getAndSetSunriseSunsetTimings();
+                    getBestLocation();
                     break;
                 }
             }
         }
 
     }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (this.location == null) {
+            this.location = location;
+            getAndSetSunriseSunsetTimings(location);
+        }
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle bundle) {
+
+    }
+
+    /*private static class CurrentLocation extends AsyncTask<Object, Object, Object> {
+
+    }*/
 }

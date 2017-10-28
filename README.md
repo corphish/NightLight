@@ -1,5 +1,7 @@
 # Night Light
 [![Build Status](https://travis-ci.org/corphish/NightLight.svg?branch=master)](https://travis-ci.org/corphish/NightLight)
+[![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.corphish.nightlight.generic)
+
 Night light uses KCAL to adjust blue light intensity of the display colors, so that viewing the screen at dark becomes pleasant for the eyes, and help you fall asleep faster (this is what science have proven so...).
 
 ### What is KCAL?
@@ -23,6 +25,3 @@ I flashed a LineageOS oreo build on my device, but there was no night light feat
 ### Permissions
 * Location - Needed to determine sunset/sunrise time for your current location.
 * Internet - Internet connection is needed to determine coarse location when fine location is not available.
-
-### Download
-[![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.corphish.nightlight.generic)

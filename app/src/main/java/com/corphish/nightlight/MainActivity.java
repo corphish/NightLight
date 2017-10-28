@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
     }
 
     private void showAlertDialog(int caption, int msg) {
+        if (isFinishing()) return;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(caption);
         builder.setMessage(msg);

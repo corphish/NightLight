@@ -29,6 +29,13 @@ public class TwilightManager {
      */
     private double latitude;
 
+    /*
+     * Interface to handle compute completion event
+     */
+    public interface OnComputeCompleteListener {
+        void onComputeComplete();
+    }
+
     public static TwilightManager newInstance() {
         return new TwilightManager();
     }
@@ -65,9 +72,10 @@ public class TwilightManager {
     /**
      * Computes sunset and sunrise time and saves in the preference
      * @param context - Ok where was the shrug emoji again?
+     * @param onComputeCompleteListener  - OnComputeListener to invoke when compute is completed
      * @return - Current instance
      */
-    public TwilightManager computeAndSaveTime(Context context) {
+    public TwilightManager computeAndSaveTime(Context context, OnComputeCompleteListener onComputeCompleteListener) {
         Log.d("NL","Compute time in Longitude - " +longitude + " lattitude - "+latitude);
         Location mLocation = new Location(latitude, longitude);
 
@@ -82,6 +90,17 @@ public class TwilightManager {
 
         AlarmUtils.setAlarms(context, sunsetTime, sunriseTime, false);
 
+        if (onComputeCompleteListener != null) onComputeCompleteListener.onComputeComplete();;
+
         return this;
+    }
+
+    /**
+     * Computes sunset and sunrise time and saves in the preference
+     * @param context - Ok where was the shrug emoji again?
+     * @return - Current instance
+     */
+    public TwilightManager computeAndSaveTime(Context context) {
+        return computeAndSaveTime(context, null);
     }
 }

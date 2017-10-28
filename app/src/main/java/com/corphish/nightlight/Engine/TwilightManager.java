@@ -1,7 +1,6 @@
 package com.corphish.nightlight.Engine;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Helpers.AlarmUtils;
@@ -76,7 +75,6 @@ public class TwilightManager {
      * @return - Current instance
      */
     public TwilightManager computeAndSaveTime(Context context, OnComputeCompleteListener onComputeCompleteListener) {
-        Log.d("NL","Compute time in Longitude - " +longitude + " lattitude - "+latitude);
         Location mLocation = new Location(latitude, longitude);
 
         SunriseSunsetCalculator sunriseSunsetCalculator = new SunriseSunsetCalculator(mLocation, TimeZone.getDefault());

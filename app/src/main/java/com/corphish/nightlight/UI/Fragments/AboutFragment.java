@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.corphish.nightlight.BuildConfig;
 import com.corphish.nightlight.Helpers.ExternalLink;
 import com.corphish.nightlight.R;
 
@@ -32,5 +34,7 @@ public class AboutFragment extends Fragment {
                 ExternalLink.open(getContext(), "market://details?id="+ getContext().getPackageName());
             }
         });
+
+        ((TextView) getView().findViewById(R.id.app_version)).setText(getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
     }
 }

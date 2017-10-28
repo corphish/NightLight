@@ -21,6 +21,9 @@ public class LocationUtils {
         LocationManager mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         List<String> providers = mLocationManager.getProviders(true);
         Location bestLocation = null;
+
+        if (providers == null || providers.size() == 0) return null;
+
         try {
             for (String provider : providers) {
                 if (provider.equals(LocationManager.PASSIVE_PROVIDER)) continue;

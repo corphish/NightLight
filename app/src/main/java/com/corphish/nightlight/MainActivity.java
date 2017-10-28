@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -134,5 +135,12 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
             if (!rootAccessAvailable) showAlertDialog(R.string.no_root_access, R.string.no_root_desc);
             else if (!kcalSupported) showAlertDialog(R.string.no_kcal, R.string.no_kcal_desc);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment fragment: fragments) fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

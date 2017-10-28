@@ -2,7 +2,6 @@ package com.corphish.nightlight.UI.Fragments;
 
 import android.Manifest;
 import android.location.LocationListener;
-import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.app.TimePickerDialog;
@@ -73,6 +72,9 @@ public class AutoFragment extends Fragment implements LocationListener {
         startTimeKV = getView().findViewById(R.id.start_time);
         endTimeKV = getView().findViewById(R.id.end_time);
 
+        autoSwitch.setChecked(autoSwitchStatus);
+        sunSwitch.setChecked(sunSwitchStatus);
+
         autoSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -106,10 +108,8 @@ public class AutoFragment extends Fragment implements LocationListener {
                     PreferenceHelper.putTime(context, Constants.PREF_END_TIME, prevEndTime);
 
                     addNextDayIfNecessary();
+                    doCurrentAutoFunctions(true);
                 }
-
-                // If sunswitch is enabled, don't set alarm as alarms are set by TwilightManager
-                doCurrentAutoFunctions(!b);
                 enableOrDisableAutoSwitchViews(autoSwitch.isChecked());
             }
         });
@@ -126,9 +126,6 @@ public class AutoFragment extends Fragment implements LocationListener {
                 showTimePickerDialog(endTimeKV, Constants.PREF_END_TIME);
             }
         });
-
-        autoSwitch.setChecked(autoSwitchStatus);
-        sunSwitch.setChecked(sunSwitchStatus);
 
         startTimeKV.setValue(PreferenceHelper.getTime(context, Constants.PREF_START_TIME));
         endTimeKV.setValue(PreferenceHelper.getTime(context, Constants.PREF_END_TIME));
@@ -219,13 +216,15 @@ public class AutoFragment extends Fragment implements LocationListener {
 
         TwilightManager.newInstance()
                 .atLocation(currentLocation.getLongitude(), currentLocation.getLatitude())
-                .computeAndSaveTime(context);
+                .computeAndSaveTime(context, new TwilightManager.OnComputeCompleteListener() {
+                    @Override
+                    public void onComputeComplete() {
+                        doCurrentAutoFunctions(false);
 
-        String sunriseTime = PreferenceHelper.getTime(context, Constants.PREF_END_TIME),
-               sunsetTime = PreferenceHelper.getTime(context, Constants.PREF_START_TIME);
-
-        startTimeKV.setValue(sunsetTime);
-        endTimeKV.setValue(sunriseTime);
+                        startTimeKV.setValue(PreferenceHelper.getTime(context, Constants.PREF_START_TIME));
+                        endTimeKV.setValue(PreferenceHelper.getTime(context, Constants.PREF_END_TIME));
+                    }
+                });
 
         addNextDayIfNecessary();
     }

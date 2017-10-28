@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "898751444157",
+    "firebase_url": "https://night-light-64884.firebaseio.com",
+    "project_id": "night-light-64884",
+    "storage_bucket": "night-light-64884.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898751444157:android:df0083d585c9ddd2",
+        "android_client_info": {
+          "package_name": "com.corphish.nighlight.generic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898751444157-pi3ksm3mn44me4flh4eoa27ngbsktcqg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA65aMBHNeE7iZ45Y9QH8Rje5M9ba64S5c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898751444157:android:d0b869b816449062",
+        "android_client_info": {
+          "package_name": "com.corphish.nightlight.donate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898751444157-pi3ksm3mn44me4flh4eoa27ngbsktcqg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA65aMBHNeE7iZ45Y9QH8Rje5M9ba64S5c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

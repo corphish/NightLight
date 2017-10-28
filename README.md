@@ -1,4 +1,5 @@
 # Night Light
+[![Build Status](https://travis-ci.org/corphish/NightLight.svg?branch=master)](https://travis-ci.org/corphish/NightLight)
 Night light uses KCAL to adjust blue light intensity of the display colors, so that viewing the screen at dark becomes pleasant for the eyes, and help you fall asleep faster (this is what science have proven so...).
 
 ### What is KCAL?

@@ -38,11 +38,7 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
         if (!BuildConfig.DEBUG) new CompatibilityChecker().execute();
 
         init();

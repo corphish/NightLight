@@ -46,7 +46,7 @@ public class LocationUtils {
     }
 
     public static boolean isLocationStale(Location location) {
-        return location.getLatitude() == 0.0 && location.getLongitude() == 0.0;
+        return location == null || location.getLatitude() == 0.0 && location.getLongitude() == 0.0;
     }
 
     public static boolean areLocationPermissionsAvailable(Context context) {

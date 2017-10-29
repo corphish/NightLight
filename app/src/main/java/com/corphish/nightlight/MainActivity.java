@@ -42,8 +42,10 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
         if (!BuildConfig.DEBUG) new CompatibilityChecker().execute();
 
         init();
-        viewInit();
-        setViews(masterSwitchEnabled);
+        if (savedInstanceState == null) {
+            viewInit();
+            setViews(masterSwitchEnabled);
+        }
     }
 
     private void init() {

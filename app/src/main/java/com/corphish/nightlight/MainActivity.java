@@ -1,7 +1,6 @@
 package com.corphish.nightlight;
 
 import android.app.AlertDialog;
-import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;

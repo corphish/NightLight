@@ -1,6 +1,7 @@
 package com.corphish.nightlight;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
     @Override
     protected void onResume() {
         super.onResume();
-        if (!BuildConfig.DEBUG) new CompatibilityChecker().execute();
+        if (!BuildConfig.DEBUG || !PreferenceHelper.getCompatibilityStatusTest(this)) new CompatibilityChecker().execute();
 
         init();
         viewInit();
@@ -132,8 +133,9 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
         @Override
         protected void onPostExecute(String boom) {
             progressDialog.hide();
-            if (!rootAccessAvailable) showAlertDialog(R.string.no_root_access, R.string.no_root_desc);
-            else if (!kcalSupported) showAlertDialog(R.string.no_kcal, R.string.no_kcal_desc);
+            if (!rootAccessAvailable) { showAlertDialog(R.string.no_root_access, R.string.no_root_desc); PreferenceHelper.putCompatibilityStatusTest(getApplicationContext(), false); }
+            else if (!kcalSupported) { showAlertDialog(R.string.no_kcal, R.string.no_kcal_desc); PreferenceHelper.putCompatibilityStatusTest(getApplicationContext(), false); }
+            else PreferenceHelper.putCompatibilityStatusTest(getApplicationContext(), true);
         }
     }
 

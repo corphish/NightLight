@@ -240,4 +240,28 @@ public class PreferenceHelper {
                 .putString(Constants.LAST_LOC_LATITUDE, "" + latitude)
                 .apply();
     }
+
+
+    /**
+     * Gets information about Compatibility Status Test
+     * @param context - ¯\_(ツ)_/¯
+     * @return - Current information about Compatibility Status Test
+     */
+    public static boolean getCompatibilityStatusTest(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        return sharedPreferences.getBoolean(Constants.COMPATIBILITY_TEST, false);
+    }
+
+    /**
+     * Save information about Compatibility Status Test
+     * @param context - ¯\_(ツ)_/¯
+     * @param status - Information about Compatibility Status Test
+     */
+    public static void putCompatibilityStatusTest(Context context, boolean status) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putBoolean(Constants.COMPATIBILITY_TEST, status)
+                .apply();
+    }
 }

@@ -28,6 +28,7 @@ public class Constants {
     public static final String PREF_LAST_END_TIME   =   "last_end_time";
     public static final String LAST_LOC_LONGITUDE   =   "last_longitude";
     public static final String LAST_LOC_LATITUDE    =   "last_latitude";
+    public static final String COMPATIBILITY_TEST   =   "compatibility_test";
 
 
     /**

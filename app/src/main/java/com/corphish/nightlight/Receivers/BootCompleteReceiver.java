@@ -46,5 +46,7 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         else TwilightManager.newInstance()
                 .atLocation(PreferenceHelper.getLocation(context))
                 .computeAndSaveTime(context);
+
+        PreferenceHelper.putCompatibilityStatusTest(context, false);
     }
 }

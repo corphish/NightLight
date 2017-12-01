@@ -23,6 +23,8 @@ public class BootCompleteReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (!intent.getAction().equals(BOOT_COMPLETE_ANDROID_STRING)) return;
 
+        PreferenceHelper.putCompatibilityStatusTest(context, false);
+
         boolean masterSwitch = PreferenceHelper.getMasterSwitchStatus(context);
         boolean autoSwitch = PreferenceHelper.getAutoSwitchStatus(context);
         boolean sunSwitch = PreferenceHelper.getSunSwitchStatus(context);
@@ -46,7 +48,5 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         else TwilightManager.newInstance()
                 .atLocation(PreferenceHelper.getLocation(context))
                 .computeAndSaveTime(context);
-
-        PreferenceHelper.putCompatibilityStatusTest(context, false);
     }
 }

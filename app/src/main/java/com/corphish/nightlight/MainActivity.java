@@ -142,6 +142,9 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String permissions[], @NonNull int[] grantResults) {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
-        for (Fragment fragment: fragments) fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for (Fragment fragment: fragments) {
+            if (fragment instanceof AutoFragment)
+                fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }

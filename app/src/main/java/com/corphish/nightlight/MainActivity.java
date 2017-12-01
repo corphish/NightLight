@@ -1,9 +1,5 @@
 package com.corphish.nightlight;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,16 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 
 import com.corphish.nightlight.Helpers.PreferenceHelper;
-import com.corphish.nightlight.Helpers.RootUtils;
 import com.corphish.nightlight.UI.Fragments.AboutFragment;
 import com.corphish.nightlight.UI.Fragments.AutoFragment;
 import com.corphish.nightlight.UI.Fragments.DonateFragment;
 import com.corphish.nightlight.UI.Fragments.FilterFragment;
 import com.corphish.nightlight.UI.Fragments.ForceSwitchFragment;
 import com.corphish.nightlight.UI.Fragments.MasterSwitchFragment;
-import com.corphish.nightlight.Data.Constants;
 
-import java.io.File;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MasterSwitchFragment.MasterSwitchClickListener {
@@ -43,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
     @Override
     protected void onResume() {
         super.onResume();
-        if (!BuildConfig.DEBUG) if(!PreferenceHelper.getCompatibilityStatusTest(this)) new CompatibilityChecker().execute();
 
         init();
         viewInit();
@@ -95,47 +87,6 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
 
     private boolean isSupported (int id) {
         return getResources().getBoolean(id);
-    }
-
-    private void showAlertDialog(int caption, int msg) {
-        if (isFinishing()) return;
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(caption);
-        builder.setMessage(msg);
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
-            }
-        });
-        builder.show();
-    }
-
-    private class CompatibilityChecker extends AsyncTask<String, String, String> {
-        boolean rootAccessAvailable = false, kcalSupported = false;
-        ProgressDialog progressDialog;
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog = new ProgressDialog(MainActivity.this);
-            progressDialog.setMessage(getString(R.string.compat_check));
-            progressDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... booms) {
-            rootAccessAvailable = RootUtils.getRootAccess();
-            kcalSupported = new File(Constants.KCAL_ADJUST).exists();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String boom) {
-            progressDialog.hide();
-            if (!rootAccessAvailable) showAlertDialog(R.string.no_root_access, R.string.no_root_desc);
-            else if (!kcalSupported) showAlertDialog(R.string.no_kcal, R.string.no_kcal_desc);
-            else PreferenceHelper.putCompatibilityStatusTest(getApplicationContext(), true);
-        }
     }
 
     @Override

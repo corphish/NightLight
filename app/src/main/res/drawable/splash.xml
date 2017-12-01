@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="128dp"
+    android:layout_width="128dp">
+
+    <item android:drawable="@color/colorPrimary"/>
+
+    <item>
+        <bitmap
+            android:src="@drawable/ic_lightbulb_splash"
+            android:filter="true"
+            android:gravity="center" />
+    </item>
+
+</layer-list>

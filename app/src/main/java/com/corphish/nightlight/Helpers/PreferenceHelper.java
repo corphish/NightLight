@@ -248,9 +248,7 @@ public class PreferenceHelper {
      * @return - Current information about Compatibility Status Test
      */
     public static boolean getCompatibilityStatusTest(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        return sharedPreferences.getBoolean(Constants.COMPATIBILITY_TEST, false);
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Constants.COMPATIBILITY_TEST, false);
     }
 
     /**

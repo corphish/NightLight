@@ -38,14 +38,16 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
 
-        if (!BuildConfig.DEBUG || !PreferenceHelper.getCompatibilityStatusTest(this)) new CompatibilityChecker().execute();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!BuildConfig.DEBUG) if(!PreferenceHelper.getCompatibilityStatusTest(this)) new CompatibilityChecker().execute();
 
         init();
-        if (savedInstanceState == null) {
-            viewInit();
-            setViews(masterSwitchEnabled);
-        }
+        viewInit();
+        setViews(masterSwitchEnabled);
     }
 
     private void init() {
@@ -130,8 +132,8 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
         @Override
         protected void onPostExecute(String boom) {
             progressDialog.hide();
-            if (!rootAccessAvailable) { showAlertDialog(R.string.no_root_access, R.string.no_root_desc); PreferenceHelper.putCompatibilityStatusTest(getApplicationContext(), false); }
-            else if (!kcalSupported) { showAlertDialog(R.string.no_kcal, R.string.no_kcal_desc); PreferenceHelper.putCompatibilityStatusTest(getApplicationContext(), false); }
+            if (!rootAccessAvailable) showAlertDialog(R.string.no_root_access, R.string.no_root_desc);
+            else if (!kcalSupported) showAlertDialog(R.string.no_kcal, R.string.no_kcal_desc);
             else PreferenceHelper.putCompatibilityStatusTest(getApplicationContext(), true);
         }
     }

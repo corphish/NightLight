@@ -22,10 +22,10 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        if (!BuildConfig.DEBUG) {
-            if (!PreferenceHelper.getCompatibilityStatusTest(this))
+        if (getResources().getBoolean(R.bool.forced_compatibility_test_enabled) ||
+                (!BuildConfig.DEBUG && !PreferenceHelper.getCompatibilityStatusTest(this)))
                 new CompatibilityChecker().execute();
-        } else switchToMain();
+        else switchToMain();
     }
 
     private void showAlertDialog(int caption, int msg) {

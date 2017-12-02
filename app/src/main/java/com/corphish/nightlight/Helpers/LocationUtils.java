@@ -42,7 +42,7 @@ public class LocationUtils {
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         try {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000 * 60, 1000, locationListener);
-        } catch (SecurityException ignored) {}
+        } catch (SecurityException | IllegalArgumentException ignored) {}
     }
 
     public static boolean isLocationStale(Location location) {

@@ -3,13 +3,16 @@ package com.corphish.nightlight;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ShortcutManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import com.corphish.nightlight.Data.Constants;
+import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.RootUtils;
 
@@ -17,15 +20,70 @@ import java.io.File;
 
 public class StartActivity extends AppCompatActivity {
 
+    /**
+     * Declare the shortcut intent strings and id
+     */
+    private final String SHORTCUT_INTENT_STRING = "android.intent.action.TOGGLE";
+    private final String SHORTCUT_ID            = "toggle";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        if (getResources().getBoolean(R.bool.forced_compatibility_test_enabled) ||
-                (!BuildConfig.DEBUG && !PreferenceHelper.getCompatibilityStatusTest(this)))
+        if (handleIntent()) finish();
+        else {
+            if (getResources().getBoolean(R.bool.forced_compatibility_test_enabled) ||
+                    (!BuildConfig.DEBUG && !PreferenceHelper.getCompatibilityStatusTest(this)))
                 new CompatibilityChecker().execute();
-        else switchToMain();
+            else switchToMain();
+        }
+    }
+
+    /**
+     * Handle the incoming intent of shortcut
+     * Returns true if shortcut was handled, false otherwise
+     */
+    private boolean handleIntent() {
+
+        String shortcutID;
+
+        if (getIntent().getAction() != null && getIntent().getAction().equals(SHORTCUT_INTENT_STRING)) {
+            shortcutID = SHORTCUT_ID;
+            doToggle();
+        } else return false;
+
+        /*
+         * On Android 7.0 or below, bail out from now
+         * This is because app shortcuts are not supported by default in those android versions
+         * It however is supported in 3rd party launchers like nova launcher.
+         * As android API guidelines suggest to reportShortcutUsed(), but that can be done only on API 25
+         */
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1) return true;
+
+        ShortcutManager shortcutManager = this.getSystemService(ShortcutManager.class);
+        shortcutManager.reportShortcutUsed(shortcutID);
+
+        return true;
+    }
+
+    /**
+     * Actual night light toggling happens here
+     */
+    private void doToggle() {
+        boolean state = PreferenceHelper.getToggledForceSwitchStatus(this);
+        boolean masterSwitch = PreferenceHelper.getMasterSwitchStatus(this);
+
+        /*
+         * If state is on, while masterSwitch is off, turn on masterSwitch as well
+         */
+        if (state && !masterSwitch)
+            PreferenceHelper.putMasterSwitchStatus(this, true);
+
+        int blueIntensity = PreferenceHelper.getBlueIntensity(this);
+        int greenIntensity = PreferenceHelper.getGreenIntensity(this);
+
+        Core.applyNightModeAsync(state, blueIntensity, greenIntensity);
     }
 
     private void showAlertDialog(int caption, int msg) {

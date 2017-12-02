@@ -7,6 +7,6 @@
         <intent
             android:action="android.intent.action.TOGGLE"
             android:targetPackage="com.corphish.nightlight.donate"
-            android:targetClass="com.corphish.nightlight.ShortcutActivity" />
+            android:targetClass="com.corphish.nightlight.StartActivity" />
     </shortcut>
 </shortcuts>

@@ -1,4 +1,10 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 
 android {
     compileSdkVersion 27
@@ -49,4 +55,7 @@ dependencies {
     compile 'eu.chainfire:libsuperuser:1.0.0.201704021214'
 
     compile 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
+    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+        transitive = true;
+    }
 }

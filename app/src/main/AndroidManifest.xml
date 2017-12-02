@@ -54,6 +54,10 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ee5e2aeeae7ccde693df6be64bd35d8e8e9f5196" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

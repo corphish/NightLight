@@ -6,11 +6,9 @@
 
     <item android:drawable="@color/colorPrimary"/>
 
-    <item>
-        <bitmap
-            android:src="@drawable/ic_lightbulb_splash"
-            android:filter="true"
-            android:gravity="center" />
-    </item>
+    <item
+        android:drawable="@drawable/ic_lightbulb_splash_vector"
+        android:filter="true"
+        android:gravity="center"/>
 
 </layer-list>

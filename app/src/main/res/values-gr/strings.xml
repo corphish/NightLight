@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Night Light</string>
+
+    <string name="color_intensity">Ένταση φίλτρου</string>
+
+    <string name="blue_color_intensity_desc">Ένταση μπλε φωτός για φιλτράρισμα. Μεγαλύτερη τιμή σημαίνει περισσότερη ένταση μπλε φωτός που θα φιλτραριστεί, χαμηλότερη τιμή σημαίνει λιγότερη ένταση μπλε φωτός που θα φιλτραριστεί.</string>
+    <string name="green_color_intensity_desc">Ένταση πράσινου φωτός για φιλτράρισμα. Εδώ, το εύρος ελέγχου είναι περιορισμένο. Φιλτράροντας το πράσινο φως δίνεται μια πιο ερυθρόχρωμη απόχρωση στην οθόνη.</string>
+
+    <string name="master_switch">Ενεργοποίηση Night Light</string>
+    <string name="master_switch_desc">Γενικός διακόπτης για ενεργοποίηση/απενεργοποίηση του Night Light.</string>
+
+    <string name="no_root_access">Δεν υπάρχει root πρόσβαση</string>
+    <string name="no_root_desc">Απαιτείται root πρόσβαση για να λειτουργήσει το Night Light.</string>
+
+    <string name="compat_check">Έλεγχος συμβατότητας&#8230;</string>
+
+    <string name="no_kcal">Ασύμβατο</string>
+    <string name="no_kcal_desc">Ο kernel σας δεν υποστηρίζει KCAL. Το KCAL είναι ένα χαρακτηριστικό συντονισμού των οθονών για Qualcomm συσκεύες. Η υποστήριξη KCAL είναι απαραίτητη για να λειτουργήσει το Night Light.</string>
+
+    <string name="auto_enable">Αυτόματος διακόπτης</string>
+    <string name="auto_enable_desc">Αυτόματη ενεργοποίηση του Night Light στο ορισμένο χρονικό διάστημα. Το Night Light θα απενεργοποιηθεί αυτόματα εκτός αυτού του διαστήματος.</string>
+    <string name="start_time">Ώρα έναρξης</string>
+    <string name="end_time">Ώρα λήξης</string>
+
+    <string name="start_time_default" translatable="false">00:00</string>
+    <string name="end_time_default" translatable="false">06:00</string>
+
+    <string name="on">Ενεργό</string>
+    <string name="off">Ανενεργό</string>
+
+    <string name="about">Σχετικά</string>
+    <string name="app_desc">Το Night Light χρησιμοποιεί KCAL, το οποίο είναι ένα χαρακτηριστικό συντονισμού των οθονών για Qualcomm συσκεύες νέας γενιάς, για την ρύθμιση έντασης του μπλε φωτός, που καθιστά πιο ξεκούραστη για τα μάτια την χρήση του κινητού στο σκοτάδι και βοηθά στον ύπνο. Εφόσον πραγματοποιεί αλλαγές σε επίπεδο driver, και δεν χρησιμοποιεί επικαλύψεις του λογισμικού, δεν έχει μεγάλο αντίκτυπο στην μπαταρία και η αλλαγή είναι ορατή σε όλη την οθόνη.</string>
+
+    <string name="shortcut_toggle">Ενεργοποίηση/Απενεργοποίηση</string>
+
+    <string name="next_day">&#160;(Επόμενη ημέρα)</string>
+
+    <string name="blue_light">Μπλε φως</string>
+    <string name="green_light">Πράσινο φως</string>
+
+    <string name="force_switch">Επιβολή Night Light</string>
+    <string name="force_switch_desc">Θα επιβάλλει την ενεργοποίηση/απενεργοποίηση του Night Light, αγνοώντας το αυτόματο πρόγραμμα.</string>
+
+    <string name="sun_switch">Χρήση ωρών ανατολής/δύσης Ηλίου</string>
+
+    <string name="location_unavailable">Δεν ήταν δυνατή η λήψη της τελευταίας σας γνωστής τοποθεσίας.</string>
+
+    <string name="like_this_app">Σας αρέσει η εφαρμογή;</string>
+    <string name="get_donation">Αν σας αρέσει η εφαρμογή, μπορείτε να αποκτήσετε την έκδοση δωρεάς της εφαρμογής. Παρόλο που δεν περιέχει επιπλέον λειτουργίες από αυτή την έκδοση, δείχνει την υποστήριξη και την εκτίμησή σας στην εφαρμογή, θα κινητοποιήσει τον developer και θα υποστηρίξει την ανάπτυξη της εφαρμογής :)</string>
+</resources>

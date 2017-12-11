@@ -56,6 +56,6 @@ dependencies {
 
     implementation 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
     implementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
-        transitive = true;
+        transitive = true
     }
 }

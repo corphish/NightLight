@@ -7,7 +7,7 @@
     <string name="green_color_intensity_desc">Intensity of the green light to be filtered out. Here the range of control is limited. Filtering out green light will give a reddish tint to the screen.</string>
 
     <string name="master_switch">Enable Night Light</string>
-    <string name="master_switch_desc">Master switch to enable/disable night light.</string>
+    <string name="master_switch_desc">Master switch to enable/disable Night Light.</string>
 
     <string name="no_root_access">No root access</string>
     <string name="no_root_desc">Root access is needed for Night Light to work.</string>
@@ -15,7 +15,7 @@
     <string name="compat_check">Checking compatibility&#8230;</string>
 
     <string name="no_kcal">Incompatible</string>
-    <string name="no_kcal_desc">Your kernel does not support KCAL. KCAL is a display driver tuning feature for Qualcomm devices. KCAL support is needed for night light to work.</string>
+    <string name="no_kcal_desc">Your kernel does not support KCAL. KCAL is a display driver tuning feature for Qualcomm devices. KCAL support is needed for Night Light to work.</string>
 
     <string name="auto_enable">Automatic switch</string>
     <string name="auto_enable_desc">Automatically enable Night Light between the specified time. Night Light will be automatically disabled outside this time range.</string>
@@ -29,7 +29,7 @@
     <string name="off">Off</string>
 
     <string name="about">About</string>
-    <string name="app_desc">Night light uses KCAL, which is a display driver tuning feature for new generation Qualcomm devices, to adjust the intensity of blue light, which makes it more comfortable for your eyes when you are using your phone in the dark and helps you fall asleep. Since it makes changes at driver level, and it does not use any software overlays, it is battery friendly and the change can be seen everywhere in the display.</string>
+    <string name="app_desc">Night Light uses KCAL, which is a display driver tuning feature for new generation Qualcomm devices, to adjust the intensity of blue light, which makes it more comfortable for your eyes when you are using your phone in the dark and helps you fall asleep. Since it makes changes at driver level, and it does not use any software overlays, it is battery friendly and the change can be seen everywhere on the display.</string>
 
     <string name="shortcut_toggle">Toggle on/off</string>
 
@@ -46,5 +46,5 @@
     <string name="location_unavailable">Unable to get your last known location.</string>
 
     <string name="like_this_app">Like this app?</string>
-    <string name="get_donation">If you like this app, you can consider getting the donate version of the app. Although it comes with no extra features than this version, it shows your support and appreciation to the app, and it will motivate the developer and support the development of the app :)</string>
+    <string name="get_donation">If you like this app, you can consider getting the donation version of the app. Although it comes with no extra features than this version, it shows your support and appreciation to the app, and it will motivate the developer and support the development of the app :)</string>
 </resources>

@@ -9,3 +9,4 @@
 app/donate
 app/generic
 *.jks
+app/fabric.properties

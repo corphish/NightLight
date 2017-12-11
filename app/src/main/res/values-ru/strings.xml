@@ -30,7 +30,6 @@
 
     <string name="no_root_access">Нет рут-доступа</string>
     <string name="no_root_desc">Для работы Night Light необходим рут-доступ</string>
-    <string name="compat_check">Проверка совместимости&#8230;</string>
     <string name="no_kcal">Несовместимый</string>
     <string name="no_kcal_desc">Ваше ядро не поддерживает KCAL. KCAL - это функция настройки драйвера дисплея для устройств Qualcomm. Поддержка KCAL необходима для работы ночного света.</string>
 

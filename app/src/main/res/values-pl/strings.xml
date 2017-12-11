@@ -8,7 +8,6 @@
     <string name="master_switch_desc">Główny przełącznik do włączenia/wyłączenia night light</string>
     <string name="no_root_access">Brak dostepu do root</string>
     <string name="no_root_desc">Dostęp do root jest potrzebny by Night Light działał</string>
-    <string name="compat_check">Sprawdzanie kompatibilności&#8230;</string>
     <string name="no_kcal">Niekompatybilny</string>
     <string name="no_kcal_desc">Twój kernel nie obsługuje KCAL. KCAL to podrasowany sterownik ekranowy dla telefonów z procesorem Qualcomm. By aplikacja działała potrzebne jest wsparcie dla KCAL</string>
     <string name="auto_enable">Automatyczny przełacznik</string>

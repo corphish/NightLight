@@ -12,8 +12,6 @@
     <string name="no_root_access">Δεν υπάρχει root πρόσβαση</string>
     <string name="no_root_desc">Απαιτείται root πρόσβαση για να λειτουργήσει το Night Light.</string>
 
-    <string name="compat_check">Έλεγχος συμβατότητας&#8230;</string>
-
     <string name="no_kcal">Ασύμβατο</string>
     <string name="no_kcal_desc">Ο kernel σας δεν υποστηρίζει KCAL. Το KCAL είναι ένα χαρακτηριστικό συντονισμού των οθονών για Qualcomm συσκεύες. Η υποστήριξη KCAL είναι απαραίτητη για να λειτουργήσει το Night Light.</string>
 

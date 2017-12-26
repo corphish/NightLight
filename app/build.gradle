@@ -65,9 +65,10 @@ dependencies {
 
     implementation 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
 
-    if (isPlaystore) {
-        implementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
-            transitive = true
-        }
+    genericImplementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+        transitive = true
+    }
+    donateImplementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+        transitive = true
     }
 }

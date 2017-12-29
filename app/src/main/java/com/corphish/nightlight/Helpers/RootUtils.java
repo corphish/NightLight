@@ -1,5 +1,7 @@
 package com.corphish.nightlight.Helpers;
 
+import java.util.List;
+
 import eu.chainfire.libsuperuser.Shell;
 
 /**
@@ -25,5 +27,23 @@ public class RootUtils {
     public static void writeToFile(String textToBeWritten, String file) {
         String command = "echo \"" + textToBeWritten + "\" > " + file;
         Shell.SU.run(command);
+    }
+
+    /**
+     * Reads contents of file
+     * @param file File whose contents is to be read
+     * @return Contents of file
+     */
+    public static List<String> readContents(String file) {
+        return Shell.SU.run("cat " + file);
+    }
+
+    /**
+     * Reads one line for given file (path)
+     * @param file Path of file to read
+     * @return Contents of file. If It has multiple lines, first line is returned
+     */
+    public static String readOneLine(String file) {
+        return readContents(file).get(0);
     }
 }

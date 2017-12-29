@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 
+import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.R;
@@ -28,8 +29,8 @@ public class FilterFragment extends Fragment {
 
         context = getContext();
 
-        blueIntensity = PreferenceHelper.getBlueIntensity(context);
-        greenIntensity = PreferenceHelper.getGreenIntensity(context);
+        blueIntensity = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
+        greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class FilterFragment extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 blueIntensity = seekBar.getProgress();
-                PreferenceHelper.putBlueIntensity(context, blueIntensity);
+                PreferenceHelper.putInt(context, Constants.PREF_BLUE_INTENSITY ,blueIntensity);
                 Core.applyNightModeAsync(true, blueIntensity, greenIntensity);
             }
         });
@@ -75,7 +76,7 @@ public class FilterFragment extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 greenIntensity = seekBar.getProgress();
-                PreferenceHelper.putGreenIntensity(context, greenIntensity);
+                PreferenceHelper.putInt(context, Constants.PREF_GREEN_INTENSITY ,greenIntensity);
                 Core.applyNightModeAsync(true, blueIntensity, greenIntensity);
             }
         });

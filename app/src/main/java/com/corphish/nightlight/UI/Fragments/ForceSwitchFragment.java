@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.R;
@@ -25,7 +26,7 @@ public class ForceSwitchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        forceSwitchEnabled = PreferenceHelper.getForceSwitchStatus(getContext());
+        forceSwitchEnabled = PreferenceHelper.getBoolean(getContext(), Constants.PREF_FORCE_SWITCH);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class ForceSwitchFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 Core.applyNightModeAsync(b, getContext());
-                PreferenceHelper.putForceSwitchStatus(getContext(), b);
+                PreferenceHelper.putBoolean(getContext(), Constants.PREF_FORCE_SWITCH ,b);
             }
         });
     }

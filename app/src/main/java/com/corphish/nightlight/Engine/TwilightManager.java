@@ -83,8 +83,8 @@ public class TwilightManager {
         String sunsetTime = sunriseSunsetCalculator.getOfficialSunsetForDate(calendar);
         String sunriseTime = sunriseSunsetCalculator.getOfficialSunriseForDate(calendar);
 
-        PreferenceHelper.putTime(context, Constants.PREF_START_TIME, sunsetTime);
-        PreferenceHelper.putTime(context, Constants.PREF_END_TIME, sunriseTime);
+        PreferenceHelper.putString(context, Constants.PREF_START_TIME, sunsetTime);
+        PreferenceHelper.putString(context, Constants.PREF_END_TIME, sunriseTime);
 
         AlarmUtils.setAlarms(context, sunsetTime, sunriseTime, false);
 

@@ -51,8 +51,8 @@ public class AutoFragment extends Fragment implements LocationListener {
 
         context = getContext();
 
-        autoSwitchStatus = PreferenceHelper.getAutoSwitchStatus(context);
-        sunSwitchStatus = PreferenceHelper.getSunSwitchStatus(context);
+        autoSwitchStatus = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH);
+        sunSwitchStatus = PreferenceHelper.getBoolean(context, Constants.PREF_SUN_SWITCH);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class AutoFragment extends Fragment implements LocationListener {
                 if (b) doCurrentAutoFunctions(true);
                 else Core.applyNightModeAsync(true);
 
-                PreferenceHelper.putAutoSwitchStatus(context, b);
+                PreferenceHelper.putBoolean(context, Constants.PREF_AUTO_SWITCH, b);
 
                 enableOrDisableAutoSwitchViews(b);
             }
@@ -90,22 +90,22 @@ public class AutoFragment extends Fragment implements LocationListener {
         sunSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                PreferenceHelper.putSunSwitchStatus(context, b);
+                PreferenceHelper.putBoolean(context, Constants.PREF_SUN_SWITCH, b);
                 if (b) {
                     // Backup current timings
-                    PreferenceHelper.putTime(context, Constants.PREF_LAST_START_TIME, PreferenceHelper.getTime(context, Constants.PREF_START_TIME));
-                    PreferenceHelper.putTime(context, Constants.PREF_LAST_END_TIME, PreferenceHelper.getTime(context, Constants.PREF_END_TIME));
+                    PreferenceHelper.putString(context, Constants.PREF_LAST_START_TIME, PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
+                    PreferenceHelper.putString(context, Constants.PREF_LAST_END_TIME, PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
 
                     doLocationStuff();
                 } else {
-                    String prevStartTime = PreferenceHelper.getTime(context, Constants.PREF_LAST_START_TIME);
-                    String prevEndTime = PreferenceHelper.getTime(context, Constants.PREF_LAST_END_TIME);
+                    String prevStartTime = PreferenceHelper.getString(context, Constants.PREF_LAST_START_TIME, Constants.DEFAULT_START_TIME);
+                    String prevEndTime = PreferenceHelper.getString(context, Constants.PREF_LAST_END_TIME, Constants.DEFAULT_END_TIME);
 
                     startTimeKV.setValue(prevStartTime);
                     endTimeKV.setValue(prevEndTime);
 
-                    PreferenceHelper.putTime(context, Constants.PREF_START_TIME, prevStartTime);
-                    PreferenceHelper.putTime(context, Constants.PREF_END_TIME, prevEndTime);
+                    PreferenceHelper.putString(context, Constants.PREF_START_TIME, prevStartTime);
+                    PreferenceHelper.putString(context, Constants.PREF_END_TIME, prevEndTime);
 
                     addNextDayIfNecessary();
                     doCurrentAutoFunctions(true);
@@ -127,8 +127,8 @@ public class AutoFragment extends Fragment implements LocationListener {
             }
         });
 
-        startTimeKV.setValue(PreferenceHelper.getTime(context, Constants.PREF_START_TIME));
-        endTimeKV.setValue(PreferenceHelper.getTime(context, Constants.PREF_END_TIME));
+        startTimeKV.setValue(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
+        endTimeKV.setValue(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
 
         enableOrDisableAutoSwitchViews(autoSwitchStatus);
     }
@@ -169,7 +169,7 @@ public class AutoFragment extends Fragment implements LocationListener {
                 String selectedHour = i < 10 ? "0" + i: "" + i;
                 String selectedMinute = i1 < 10 ? "0" +i1: "" + i1;
                 String timeString = selectedHour + ":" + selectedMinute;
-                PreferenceHelper.putTime(context, prefKey, timeString);
+                PreferenceHelper.putString(context, prefKey, timeString);
                 viewWhoIsCallingIt.setValue(timeString);
 
                 addNextDayIfNecessary();
@@ -184,7 +184,7 @@ public class AutoFragment extends Fragment implements LocationListener {
      * Adds localised (Next Day) string if necessary
      */
     private void addNextDayIfNecessary() {
-        String sStartTime = PreferenceHelper.getTime(context, Constants.PREF_START_TIME), sEndTime = PreferenceHelper.getTime(context, Constants.PREF_END_TIME);
+        String sStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME), sEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
         if (TimeUtils.getTimeInMinutes(sEndTime) < TimeUtils.getTimeInMinutes(sStartTime))
             endTimeKV.setValue(sEndTime + getString(R.string.next_day));
     }
@@ -194,8 +194,8 @@ public class AutoFragment extends Fragment implements LocationListener {
      * @param setAlarms Boolean indicating whether or not to set alarms
      */
     private void doCurrentAutoFunctions(boolean setAlarms) {
-        String prefStartTime = PreferenceHelper.getTime(context, Constants.PREF_START_TIME);
-        String prefEndTime = PreferenceHelper.getTime(context, Constants.PREF_END_TIME);
+        String prefStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME);
+        String prefEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
 
         Core.applyNightModeAsync(TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefEndTime), context);
 
@@ -253,8 +253,8 @@ public class AutoFragment extends Fragment implements LocationListener {
                     public void onComputeComplete() {
                         doCurrentAutoFunctions(false);
 
-                        startTimeKV.setValue(PreferenceHelper.getTime(context, Constants.PREF_START_TIME));
-                        endTimeKV.setValue(PreferenceHelper.getTime(context, Constants.PREF_END_TIME));
+                        startTimeKV.setValue(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
+                        endTimeKV.setValue(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
                     }
                 });
 

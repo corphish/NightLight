@@ -70,8 +70,8 @@ public class Core {
      */
     public static void applyNightModeAsync(boolean b, Context context) {
         applyNightModeAsync(b,
-                PreferenceHelper.getBlueIntensity(context),
-                PreferenceHelper.getGreenIntensity(context));
+                PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY),
+                PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY));
     }
 
     /**

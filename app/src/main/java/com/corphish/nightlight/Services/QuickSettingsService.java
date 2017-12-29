@@ -6,6 +6,7 @@ import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
+import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.R;
@@ -51,7 +52,7 @@ public class QuickSettingsService extends TileService {
      * Syncs QSTile with current state of night light
      */
     private void syncTile() {
-        boolean state = PreferenceHelper.getForceSwitchStatus(getApplicationContext());
+        boolean state = PreferenceHelper.getBoolean(getApplicationContext(), Constants.PREF_FORCE_SWITCH);
 
         updateTileUI(state);
     }
@@ -96,14 +97,14 @@ public class QuickSettingsService extends TileService {
      * @return - Toggled value of forceSwitch
      */
     private boolean getServiceStatus() {
-        boolean forceSwitch = PreferenceHelper.getToggledForceSwitchStatus(getApplicationContext());
-        boolean masterSwitch = PreferenceHelper.getMasterSwitchStatus(getApplicationContext());
+        boolean forceSwitch = PreferenceHelper.getToggledBoolean(getApplicationContext(), Constants.PREF_FORCE_SWITCH);
+        boolean masterSwitch = PreferenceHelper.getBoolean(getApplicationContext(), Constants.PREF_MASTER_SWITCH);
 
         /*
          * If forceSwitch is on, while masterSwitch is off, turn on master switch as well
          */
         if (forceSwitch && !masterSwitch)
-            PreferenceHelper.putMasterSwitchStatus(getApplicationContext(), true);
+            PreferenceHelper.putBoolean(getApplicationContext(), Constants.PREF_MASTER_SWITCH ,true);
 
         return forceSwitch;
     }
@@ -114,8 +115,8 @@ public class QuickSettingsService extends TileService {
      * @param state - Current state of QSTile
      */
     private void doService(boolean state) {
-        int blueIntensity = PreferenceHelper.getBlueIntensity(getApplicationContext());
-        int greenIntensity = PreferenceHelper.getGreenIntensity(getApplicationContext());
+        int blueIntensity = PreferenceHelper.getInt(getApplicationContext(), Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
+        int greenIntensity = PreferenceHelper.getInt(getApplicationContext(), Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
 
         Core.applyNightModeAsync(state, blueIntensity, greenIntensity);
     }

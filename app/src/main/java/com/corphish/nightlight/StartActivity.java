@@ -37,7 +37,7 @@ public class StartActivity extends AppCompatActivity {
         if (handleIntent()) finish();
         else {
             if (getResources().getBoolean(R.bool.forced_compatibility_test_enabled) ||
-                    (!BuildConfig.DEBUG && !PreferenceHelper.getCompatibilityStatusTest(this)))
+                    (!BuildConfig.DEBUG && !PreferenceHelper.getBoolean(this, Constants.COMPATIBILITY_TEST)))
                 new CompatibilityChecker().execute();
             else switchToMain();
         }
@@ -74,17 +74,17 @@ public class StartActivity extends AppCompatActivity {
      * Actual night light toggling happens here
      */
     private void doToggle() {
-        boolean state = PreferenceHelper.getToggledForceSwitchStatus(this);
-        boolean masterSwitch = PreferenceHelper.getMasterSwitchStatus(this);
+        boolean state = PreferenceHelper.getToggledBoolean(this, Constants.PREF_FORCE_SWITCH);
+        boolean masterSwitch = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH);
 
         /*
          * If state is on, while masterSwitch is off, turn on masterSwitch as well
          */
         if (state && !masterSwitch)
-            PreferenceHelper.putMasterSwitchStatus(this, true);
+            PreferenceHelper.putBoolean(this, Constants.PREF_MASTER_SWITCH ,true);
 
-        int blueIntensity = PreferenceHelper.getBlueIntensity(this);
-        int greenIntensity = PreferenceHelper.getGreenIntensity(this);
+        int blueIntensity = PreferenceHelper.getInt(this, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
+        int greenIntensity = PreferenceHelper.getInt(this, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
 
         Core.applyNightModeAsync(state, blueIntensity, greenIntensity);
     }
@@ -132,7 +132,7 @@ public class StartActivity extends AppCompatActivity {
                 alertImage.setVisibility(View.VISIBLE);
             }
             else {
-                PreferenceHelper.putCompatibilityStatusTest(getApplicationContext(), true);
+                PreferenceHelper.putBoolean(getApplicationContext(), Constants.COMPATIBILITY_TEST, true);
                 switchToMain();
             }
         }

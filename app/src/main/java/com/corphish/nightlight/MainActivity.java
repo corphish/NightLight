@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 
+import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.UI.Fragments.AboutFragment;
 import com.corphish.nightlight.UI.Fragments.AutoFragment;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
     }
 
     private void init() {
-        masterSwitchEnabled = PreferenceHelper.getMasterSwitchStatus(this);
+        masterSwitchEnabled = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH);
     }
 
     private void viewInit() {

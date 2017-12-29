@@ -14,202 +14,106 @@ import com.corphish.nightlight.Data.Constants;
 public class PreferenceHelper {
 
     /**
-     * Gets current master switch status
-     * @param context ¯\_(ツ)_/¯
-     * @return Master switch status
+     * Gets boolean value of Preference for given key
+     * @param context Context is needed for accessing SharedPreferences
+     * @param key Key of preference to get
+     * @param defaultValue Default value to return if preference for given key is not found
+     * @return The boolean value of shared preference for given key
      */
-    public static boolean getMasterSwitchStatus(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        return sharedPreferences.getBoolean(Constants.PREF_MASTER_SWITCH, false);
+    public static boolean getBoolean(Context context, String key, boolean defaultValue) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(key, defaultValue);
     }
 
     /**
-     * Saves master switch status
-     * @param context ¯\_(ツ)_/¯
-     * @param status status of master switch
+     * Gets boolean value of Preference for given key
+     * @param context Context is needed for accessing SharedPreferences
+     * @param key Key of preference to get
+     * @return The boolean value of shared preference for given key
      */
-    public static void putMasterSwitchStatus(Context context, boolean status) {
+    public static boolean getBoolean(Context context, String key) {
+        return getBoolean(context, key, false);
+    }
+
+    /**
+     * Puts boolean value for key as shared preference
+     * @param context Context is needed for accessing SharedPreferences
+     * @param key Key for shared preference
+     * @param value Value to be put
+     */
+    public static void putBoolean(Context context, String key, boolean value) {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
-                .putBoolean(Constants.PREF_MASTER_SWITCH, status)
+                .putBoolean(key, value)
                 .apply();
     }
 
     /**
-     * Gets current force switch status
-     * @param context ¯\_(ツ)_/¯
-     * @return Master switch status
+     * Gets toggled boolean value of shared preference of given key
+     * It also saves the toggled value
+     * @param context Context is needed for accessing SharedPreferences
+     * @param key Shared Preference key
+     * @return Toggled value
      */
-    public static boolean getForceSwitchStatus(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        return sharedPreferences.getBoolean(Constants.PREF_FORCE_SWITCH, false);
-    }
-
-    /**
-     * Saves force switch status
-     * @param context ¯\_(ツ)_/¯
-     * @param status status of master switch
-     */
-    public static void putForceSwitchStatus(Context context, boolean status) {
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putBoolean(Constants.PREF_FORCE_SWITCH, status)
-                .apply();
-    }
-
-    /**
-     * Gets current force switch status after toggling it
-     * @param context ¯\_(ツ)_/¯
-     * @return Toggled force switch status
-     */
-    public static boolean getToggledForceSwitchStatus(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        boolean currentStatus = sharedPreferences.getBoolean(Constants.PREF_FORCE_SWITCH, false);
+    public static boolean getToggledBoolean(Context context, String key) {
+        boolean currentStatus = getBoolean(context, key, false);
 
         // Toggle it
         currentStatus = !currentStatus;
 
         // Save it
-        sharedPreferences.edit()
-                .putBoolean(Constants.PREF_FORCE_SWITCH, currentStatus)
-                .apply();
+        putBoolean(context, key, currentStatus);
 
         return currentStatus;
     }
 
     /**
-     * Gets current intensity of blue light
-     * @param context ¯\_(ツ)_/¯
-     * @return Blue light intensity
+     * Gets int value of Shared Preference of given key
+     * @param context Context is needed for accessing SharedPreferences
+     * @param key Shared Preference key
+     * @param defaultValue Default value to return if shared preference for given key is not found
+     * @return Value as int of required shared preference
      */
-    public static int getBlueIntensity(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        return sharedPreferences.getInt(Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
+    public static int getInt(Context context, String key, int defaultValue) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getInt(key, defaultValue);
     }
 
     /**
-     * Saves user defined blue intensity
-     * @param context ¯\_(ツ)_/¯
-     * @param intensity Intensity to be saved
+     * Puts int in required shared preference
+     * @param context Context is needed for accessing SharedPreferences
+     * @param key Shared Preference key
+     * @param value Value to put
      */
-    public static void putBlueIntensity(Context context, int intensity) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        sharedPreferences.edit()
-                .putInt(Constants.PREF_BLUE_INTENSITY, intensity)
+    public static void putInt(Context context, String key, int value) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putInt(key, value)
                 .apply();
     }
 
     /**
-     * Gets current intensity of green light
-     * @param context ¯\_(ツ)_/¯
-     * @return Blue light intensity
+     * Gets String value of Shared Preference of given key
+     * @param context Context is needed for accessing SharedPreferences
+     * @param key Shared Preference key
+     * @param defaultValue Default value to return if shared preference for given key is not found
+     * @return Value as String of required shared preference
      */
-    public static int getGreenIntensity(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        return sharedPreferences.getInt(Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
+    public static String getString(Context context, String key, String defaultValue) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(key, defaultValue);
     }
 
     /**
-     * Saves user defined green intensity
-     * @param context ¯\_(ツ)_/¯
-     * @param intensity Intensity to be saved
+     * Puts String in required shared preference
+     * @param context Context is needed for accessing SharedPreferences
+     * @param key Shared Preference key
+     * @param value Value to put
      */
-    public static void putGreenIntensity(Context context, int intensity) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        sharedPreferences.edit()
-                .putInt(Constants.PREF_GREEN_INTENSITY, intensity)
-                .apply();
-    }
-
-    /**
-     * Gets current status of auto-switch
-     * @param context ¯\_(ツ)_/¯
-     * @return Current status of auto-switch
-     */
-    public static boolean getAutoSwitchStatus(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        return sharedPreferences.getBoolean(Constants.PREF_AUTO_SWITCH, false);
-    }
-
-    /**
-     * Saves user defined auto-switch
-     * @param context ¯\_(ツ)_/¯
-     * @param status Status of auto-switch
-     */
-    public static void putAutoSwitchStatus(Context context, boolean status) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        sharedPreferences.edit()
-                .putBoolean(Constants.PREF_AUTO_SWITCH, status)
-                .apply();
-    }
-
-    /**
-     * Gets current status of sun-switch
-     * @param context ¯\_(ツ)_/¯
-     * @return Current status of sun-switch
-     */
-    public static boolean getSunSwitchStatus(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        return sharedPreferences.getBoolean(Constants.PREF_SUN_SWITCH, false);
-    }
-
-    /**
-     * Saves user defined sun-switch
-     * @param context ¯\_(ツ)_/¯
-     * @param status Status of sun-switch
-     */
-    public static void putSunSwitchStatus(Context context, boolean status) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        sharedPreferences.edit()
-                .putBoolean(Constants.PREF_SUN_SWITCH, status)
-                .apply();
-    }
-
-    /**
-     * Gets time for automatic scheduling
-     * @param context ¯\_(ツ)_/¯
-     * @param type Type of time
-     * @return Request time
-     */
-    public static String getTime(Context context, String type) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        String defaultValue = "";
-
-        /*
-         * Determine the default value from type
-         */
-        if (type.equals(Constants.PREF_START_TIME) || type.equals(Constants.PREF_LAST_START_TIME))
-            defaultValue = Constants.DEFAULT_START_TIME;
-        else if (type.equals(Constants.PREF_END_TIME) || type.equals(Constants.PREF_LAST_END_TIME))
-            defaultValue = Constants.DEFAULT_END_TIME;
-
-
-        return sharedPreferences.getString(type, defaultValue);
-    }
-
-    /**
-     * Saves user defined time for auto scheduling
-     * @param context ¯\_(ツ)_/¯
-     * @param timeType Can be either of startTime or endTime (preference key)
-     * @param time Time to be saved
-     */
-    public static void putTime(Context context, String timeType, String time) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        sharedPreferences.edit()
-                .putString(timeType, time)
+    public static void putString(Context context, String key, String value) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString(key, value)
                 .apply();
     }
 
@@ -238,28 +142,6 @@ public class PreferenceHelper {
                 .edit()
                 .putString(Constants.LAST_LOC_LONGITUDE, "" + longitude)
                 .putString(Constants.LAST_LOC_LATITUDE, "" + latitude)
-                .apply();
-    }
-
-
-    /**
-     * Gets information about Compatibility Status Test
-     * @param context ¯\_(ツ)_/¯
-     * @return Current information about Compatibility Status Test
-     */
-    public static boolean getCompatibilityStatusTest(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Constants.COMPATIBILITY_TEST, false);
-    }
-
-    /**
-     * Save information about Compatibility Status Test
-     * @param context ¯\_(ツ)_/¯
-     * @param status Information about Compatibility Status Test
-     */
-    public static void putCompatibilityStatusTest(Context context, boolean status) {
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putBoolean(Constants.COMPATIBILITY_TEST, status)
                 .apply();
     }
 }

@@ -23,17 +23,17 @@ public class BootCompleteReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (!intent.getAction().equals(BOOT_COMPLETE_ANDROID_STRING)) return;
 
-        PreferenceHelper.putCompatibilityStatusTest(context, false);
+        PreferenceHelper.putBoolean(context, Constants.COMPATIBILITY_TEST, false);
 
-        boolean masterSwitch = PreferenceHelper.getMasterSwitchStatus(context);
-        boolean autoSwitch = PreferenceHelper.getAutoSwitchStatus(context);
-        boolean sunSwitch = PreferenceHelper.getSunSwitchStatus(context);
+        boolean masterSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_MASTER_SWITCH);
+        boolean autoSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH);
+        boolean sunSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_SUN_SWITCH);
 
-        int blueIntensity = PreferenceHelper.getBlueIntensity(context);
-        int greenIntensity = PreferenceHelper.getGreenIntensity(context);
+        int blueIntensity = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
+        int greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
 
-        String sStartTime = PreferenceHelper.getTime(context, Constants.PREF_START_TIME);
-        String sEndTime = PreferenceHelper.getTime(context, Constants.PREF_END_TIME);
+        String sStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME);
+        String sEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
 
         if (!masterSwitch) return;
 

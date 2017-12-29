@@ -56,7 +56,7 @@ public class AutoFragment extends Fragment implements LocationListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.card_auto_enable, container, false);
@@ -133,6 +133,10 @@ public class AutoFragment extends Fragment implements LocationListener {
         enableOrDisableAutoSwitchViews(autoSwitchStatus);
     }
 
+    /**
+     * Enable/disable views in this fragment depending on a boolean value
+     * @param enabled A boolean indicating whether or not views should be enabled or disabled
+     */
     private void enableOrDisableAutoSwitchViews(boolean enabled) {
         // Enabled = Status of autoSwitch if masterSwitch is on, otherwise status of masterSwitch
         boolean sunSwitchEnabled = sunSwitch.isChecked();
@@ -152,6 +156,11 @@ public class AutoFragment extends Fragment implements LocationListener {
         }
     }
 
+    /**
+     * Shows time picker dialog and handles the time selected by user
+     * @param viewWhoIsCallingIt View whose time time needs to be updated after user selects time
+     * @param prefKey Preference for the key needed to be updated after user selects time
+     */
     private void showTimePickerDialog(final KeyValueView viewWhoIsCallingIt, final String prefKey) {
         int time[] = TimeUtils.getCurrentTimeAsHourAndMinutes();
         TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
@@ -171,12 +180,19 @@ public class AutoFragment extends Fragment implements LocationListener {
         timePickerDialog.show();
     }
 
+    /**
+     * Adds localised (Next Day) string if necessary
+     */
     private void addNextDayIfNecessary() {
         String sStartTime = PreferenceHelper.getTime(context, Constants.PREF_START_TIME), sEndTime = PreferenceHelper.getTime(context, Constants.PREF_END_TIME);
         if (TimeUtils.getTimeInMinutes(sEndTime) < TimeUtils.getTimeInMinutes(sStartTime))
             endTimeKV.setValue(sEndTime + getString(R.string.next_day));
     }
 
+    /**
+     * Does automation functions
+     * @param setAlarms Boolean indicating whether or not to set alarms
+     */
     private void doCurrentAutoFunctions(boolean setAlarms) {
         String prefStartTime = PreferenceHelper.getTime(context, Constants.PREF_START_TIME);
         String prefEndTime = PreferenceHelper.getTime(context, Constants.PREF_END_TIME);
@@ -186,16 +202,28 @@ public class AutoFragment extends Fragment implements LocationListener {
         if(setAlarms) AlarmUtils.setAlarms(context, prefStartTime, prefEndTime, true);
     }
 
+    /**
+     * Requests location permission
+     */
     private void requestLocationPermission() {
         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, locationRequestCode);
     }
 
+    /**
+     * Wrapper method to do various location functions
+     */
     private void doLocationStuff() {
         if (locationPermissionAvailable || LocationUtils.areLocationPermissionsAvailable(context))
             getBestLocation();
         else requestLocationPermission();
     }
 
+    /**
+     * Gets best location which is needed to determine sunset and sunrise timings
+     * It first gets last known location. It does so because getting last known location is faster than getting current location
+     * If the last known location is inappropriate, it uses current location
+     * Then it gets and sets sunset/sunrise timings.
+     */
     private void getBestLocation() {
         // Try to get best last known location
         Location location = LocationUtils.getLastKnownLocation(context);
@@ -204,6 +232,10 @@ public class AutoFragment extends Fragment implements LocationListener {
         else LocationUtils.requestCurrentLocation(context, this);
     }
 
+    /**
+     * Gets sunset/sunrise for currentLocation and sets alarms and updates views accordingly
+     * @param currentLocation Current location
+     */
     private void getAndSetSunriseSunsetTimings(Location currentLocation) {
         if (currentLocation == null) {
             Snackbar.make(getActivity().findViewById(R.id.layout_container), getString(R.string.location_unavailable), Snackbar.LENGTH_LONG).show();
@@ -253,21 +285,11 @@ public class AutoFragment extends Fragment implements LocationListener {
     }
 
     @Override
-    public void onProviderEnabled(String provider) {
-
-    }
+    public void onProviderEnabled(String provider) {}
 
     @Override
-    public void onProviderDisabled(String provider) {
-
-    }
+    public void onProviderDisabled(String provider) {}
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle bundle) {
-
-    }
-
-    /*private static class CurrentLocation extends AsyncTask<Object, Object, Object> {
-
-    }*/
+    public void onStatusChanged(String provider, int status, Bundle bundle) {}
 }

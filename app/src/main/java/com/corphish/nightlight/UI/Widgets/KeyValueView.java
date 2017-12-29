@@ -45,18 +45,34 @@ public class KeyValueView extends LinearLayout {
         typedArray.recycle();
     }
 
+    /**
+     * Sets caption of this KV view
+     * @param text Caption text
+     */
     public void setCaption(String text) {
         caption.setText(text);
     }
 
+    /**
+     * Sets value of this KV View
+     * @param text Value text
+     */
     public void setValue(String text) {
         value.setText(text);
     }
 
+    /**
+     * Gets the value of this KV View as String
+     * @return Value as String
+     */
     public String getValue() {
         return value.getText().toString();
     }
 
+    /**
+     * Enables or disables this view accordingly
+     * @param enabled A boolean indicating whether to enable/disable views
+     */
     public void setEnabled(boolean enabled) {
         caption.setEnabled(enabled);
         value.setEnabled(enabled);

@@ -16,8 +16,8 @@ public class Core {
     /**
      * Enables night light.
      * It enables KCAL, and writes the intensity
-     * @param blueIntensity - Intensity of blue light to be filtered out.
-     * @param greenIntensity - Intensity of green light to be filtered out.
+     * @param blueIntensity Intensity of blue light to be filtered out.
+     * @param greenIntensity Intensity of green light to be filtered out.
      */
     private static void enableNightMode(int blueIntensity, int greenIntensity) {
         RootUtils.writeToFile("1", Constants.KCAL_SWITCH);
@@ -34,9 +34,9 @@ public class Core {
 
     /**
      * Driver method to enable/disable night light
-     * @param e - A boolean indicating whether night light should be turned on or off
-     * @param blueIntensity - Intensity of blue light to be filtered out.
-     * @param greenIntensity - Intensity of green light to be filtered out.
+     * @param e A boolean indicating whether night light should be turned on or off
+     * @param blueIntensity Intensity of blue light to be filtered out.
+     * @param greenIntensity Intensity of green light to be filtered out.
      */
     public static void applyNightMode(boolean e, int blueIntensity, int greenIntensity) {
         if (e) enableNightMode(blueIntensity, greenIntensity);
@@ -46,9 +46,9 @@ public class Core {
     /**
      * Driver method to enable/disable night light asynchronously.
      * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background
-     * @param b - A boolean indicating whether night light should be turned on or off
-     * @param blueIntensity - Intensity of blue light to be filtered out
-     * @param greenIntensity - Intensity of green light to be filtered out.
+     * @param b A boolean indicating whether night light should be turned on or off
+     * @param blueIntensity Intensity of blue light to be filtered out
+     * @param greenIntensity Intensity of green light to be filtered out.
      */
     public static void applyNightModeAsync(boolean b, int blueIntensity, int greenIntensity) {
         new NightModeApplier(b, blueIntensity, greenIntensity).execute();
@@ -57,7 +57,7 @@ public class Core {
     /**
      * Driver method to enable/disable night light asynchronously.
      * This should only be used to turn off night mode.
-     * @param b - A boolean indicating whether night light should be turned on or off
+     * @param b A boolean indicating whether night light should be turned on or off
      */
     public static void applyNightModeAsync(boolean b) {
         applyNightModeAsync(b, Constants.DEFAULT_BLUE_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
@@ -65,8 +65,8 @@ public class Core {
 
     /**
      * Driver method to enable/disable night light asynchronously.
-     * @param b - A boolean indicating whether night light should be turned on or off
-     * @param context - A context parameter to read the intensity values from preferences
+     * @param b A boolean indicating whether night light should be turned on or off
+     * @param context A context parameter to read the intensity values from preferences
      */
     public static void applyNightModeAsync(boolean b, Context context) {
         applyNightModeAsync(b,

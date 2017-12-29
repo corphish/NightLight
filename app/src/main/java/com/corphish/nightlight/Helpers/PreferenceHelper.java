@@ -15,8 +15,8 @@ public class PreferenceHelper {
 
     /**
      * Gets current master switch status
-     * @param context - ¯\_(ツ)_/¯
-     * @return - Master switch status
+     * @param context ¯\_(ツ)_/¯
+     * @return Master switch status
      */
     public static boolean getMasterSwitchStatus(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -26,8 +26,8 @@ public class PreferenceHelper {
 
     /**
      * Saves master switch status
-     * @param context - ¯\_(ツ)_/¯
-     * @param status - status of master switch
+     * @param context ¯\_(ツ)_/¯
+     * @param status status of master switch
      */
     public static void putMasterSwitchStatus(Context context, boolean status) {
         PreferenceManager.getDefaultSharedPreferences(context)
@@ -38,8 +38,8 @@ public class PreferenceHelper {
 
     /**
      * Gets current force switch status
-     * @param context - ¯\_(ツ)_/¯
-     * @return - Master switch status
+     * @param context ¯\_(ツ)_/¯
+     * @return Master switch status
      */
     public static boolean getForceSwitchStatus(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -49,8 +49,8 @@ public class PreferenceHelper {
 
     /**
      * Saves force switch status
-     * @param context - ¯\_(ツ)_/¯
-     * @param status - status of master switch
+     * @param context ¯\_(ツ)_/¯
+     * @param status status of master switch
      */
     public static void putForceSwitchStatus(Context context, boolean status) {
         PreferenceManager.getDefaultSharedPreferences(context)
@@ -61,8 +61,8 @@ public class PreferenceHelper {
 
     /**
      * Gets current force switch status after toggling it
-     * @param context - ¯\_(ツ)_/¯
-     * @return - Toggled force switch status
+     * @param context ¯\_(ツ)_/¯
+     * @return Toggled force switch status
      */
     public static boolean getToggledForceSwitchStatus(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -82,8 +82,8 @@ public class PreferenceHelper {
 
     /**
      * Gets current intensity of blue light
-     * @param context - ¯\_(ツ)_/¯
-     * @return - Blue light intensity
+     * @param context ¯\_(ツ)_/¯
+     * @return Blue light intensity
      */
     public static int getBlueIntensity(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -93,8 +93,8 @@ public class PreferenceHelper {
 
     /**
      * Saves user defined blue intensity
-     * @param context - ¯\_(ツ)_/¯
-     * @param intensity - Intensity to be saved
+     * @param context ¯\_(ツ)_/¯
+     * @param intensity Intensity to be saved
      */
     public static void putBlueIntensity(Context context, int intensity) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -106,8 +106,8 @@ public class PreferenceHelper {
 
     /**
      * Gets current intensity of green light
-     * @param context - ¯\_(ツ)_/¯
-     * @return - Blue light intensity
+     * @param context ¯\_(ツ)_/¯
+     * @return Blue light intensity
      */
     public static int getGreenIntensity(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -117,8 +117,8 @@ public class PreferenceHelper {
 
     /**
      * Saves user defined green intensity
-     * @param context - ¯\_(ツ)_/¯
-     * @param intensity - Intensity to be saved
+     * @param context ¯\_(ツ)_/¯
+     * @param intensity Intensity to be saved
      */
     public static void putGreenIntensity(Context context, int intensity) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -130,8 +130,8 @@ public class PreferenceHelper {
 
     /**
      * Gets current status of auto-switch
-     * @param context - ¯\_(ツ)_/¯
-     * @return - Current status of auto-switch
+     * @param context ¯\_(ツ)_/¯
+     * @return Current status of auto-switch
      */
     public static boolean getAutoSwitchStatus(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -141,8 +141,8 @@ public class PreferenceHelper {
 
     /**
      * Saves user defined auto-switch
-     * @param context - ¯\_(ツ)_/¯
-     * @param status - Status of auto-switch
+     * @param context ¯\_(ツ)_/¯
+     * @param status Status of auto-switch
      */
     public static void putAutoSwitchStatus(Context context, boolean status) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -154,8 +154,8 @@ public class PreferenceHelper {
 
     /**
      * Gets current status of sun-switch
-     * @param context - ¯\_(ツ)_/¯
-     * @return - Current status of sun-switch
+     * @param context ¯\_(ツ)_/¯
+     * @return Current status of sun-switch
      */
     public static boolean getSunSwitchStatus(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -165,8 +165,8 @@ public class PreferenceHelper {
 
     /**
      * Saves user defined sun-switch
-     * @param context - ¯\_(ツ)_/¯
-     * @param status - Status of sun-switch
+     * @param context ¯\_(ツ)_/¯
+     * @param status Status of sun-switch
      */
     public static void putSunSwitchStatus(Context context, boolean status) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -178,9 +178,9 @@ public class PreferenceHelper {
 
     /**
      * Gets time for automatic scheduling
-     * @param context - ¯\_(ツ)_/¯
-     * @param type - Type of time
-     * @return - Request time
+     * @param context ¯\_(ツ)_/¯
+     * @param type Type of time
+     * @return Request time
      */
     public static String getTime(Context context, String type) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -201,9 +201,9 @@ public class PreferenceHelper {
 
     /**
      * Saves user defined time for auto scheduling
-     * @param context - ¯\_(ツ)_/¯
-     * @param timeType - Can be either of startTime or endTime (preference key)
-     * @param time - Time to be saved
+     * @param context ¯\_(ツ)_/¯
+     * @param timeType Can be either of startTime or endTime (preference key)
+     * @param time Time to be saved
      */
     public static void putTime(Context context, String timeType, String time) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -215,8 +215,8 @@ public class PreferenceHelper {
 
     /**
      * Gets saved location
-     * @param context - ¯\_(ツ)_/¯
-     * @return - A double array indicating the location as {Longitude, Latitude}
+     * @param context ¯\_(ツ)_/¯
+     * @return A double array indicating the location as {Longitude, Latitude}
      */
     public static double[] getLocation(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -229,9 +229,9 @@ public class PreferenceHelper {
 
     /**
      * Saves location co-ordinates as string
-     * @param context - ¯\_(ツ)_/¯
-     * @param longitude - Longitude to be saved
-     * @param latitude - Latitude to be saved
+     * @param context ¯\_(ツ)_/¯
+     * @param longitude Longitude to be saved
+     * @param latitude Latitude to be saved
      */
     public static void putLocation(Context context, double longitude, double latitude) {
         PreferenceManager.getDefaultSharedPreferences(context)
@@ -244,8 +244,8 @@ public class PreferenceHelper {
 
     /**
      * Gets information about Compatibility Status Test
-     * @param context - ¯\_(ツ)_/¯
-     * @return - Current information about Compatibility Status Test
+     * @param context ¯\_(ツ)_/¯
+     * @return Current information about Compatibility Status Test
      */
     public static boolean getCompatibilityStatusTest(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Constants.COMPATIBILITY_TEST, false);
@@ -253,8 +253,8 @@ public class PreferenceHelper {
 
     /**
      * Save information about Compatibility Status Test
-     * @param context - ¯\_(ツ)_/¯
-     * @param status - Information about Compatibility Status Test
+     * @param context ¯\_(ツ)_/¯
+     * @param status Information about Compatibility Status Test
      */
     public static void putCompatibilityStatusTest(Context context, boolean status) {
         PreferenceManager.getDefaultSharedPreferences(context)

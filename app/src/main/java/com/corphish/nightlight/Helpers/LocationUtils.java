@@ -17,6 +17,12 @@ import java.util.List;
 
 public class LocationUtils {
 
+    /**
+     * Gets last known location
+     * Use only when current location is not available
+     * @param context Context is required to acquire LocationManager system service
+     * @return Returns last known location as android.location.Location
+     */
     public static Location getLastKnownLocation(Context context) {
         LocationManager mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         List<String> providers = mLocationManager.getProviders(true);
@@ -38,6 +44,13 @@ public class LocationUtils {
         return bestLocation;
     }
 
+    /**
+     * Requests the LocationManager system service for current location
+     * It needs a locationListener.
+     * Once current location is available, it can be accessed from locationListener
+     * @param context Context is required to acquire LocationManager system service
+     * @param locationListener LocationListener to handle location updated
+     */
     public static void requestCurrentLocation(Context context, LocationListener locationListener) {
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         try {
@@ -45,10 +58,20 @@ public class LocationUtils {
         } catch (SecurityException | IllegalArgumentException ignored) {}
     }
 
+    /**
+     * Checks whether location is stale or not
+     * @param location Required location
+     * @return A boolean indicating whether location is stale or not
+     */
     public static boolean isLocationStale(Location location) {
         return location == null || location.getLatitude() == 0.0 && location.getLongitude() == 0.0;
     }
 
+    /**
+     * Checks whether location permissions are available or not
+     * @param context Context is required for checking permissions
+     * @return A boolean indicating whether location permissions are available or not
+     */
     public static boolean areLocationPermissionsAvailable(Context context) {
         int permissionStatus = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
 

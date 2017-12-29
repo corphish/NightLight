@@ -18,17 +18,17 @@ import java.util.TimeZone;
 
 public class TwilightManager {
 
-    /*
+    /**
      * Longitude of current location
      */
     private double longitude;
 
-    /*
+    /**
      * Latitude of current location
      */
     private double latitude;
 
-    /*
+    /**
      * Interface to handle compute completion event
      */
     public interface OnComputeCompleteListener {
@@ -43,9 +43,9 @@ public class TwilightManager {
      * Sets current location.
      * Only support setting of co-ordinates directly
      * Any error checks need to be done before calling this
-     * @param longitude - Longitude of current location
-     * @param latitude - Latitude of current location
-     * @return - Current instance
+     * @param longitude Longitude of current location
+     * @param latitude Latitude of current location
+     * @return Current instance
      */
     public TwilightManager atLocation(double longitude, double latitude) {
         this.longitude = longitude;
@@ -58,8 +58,8 @@ public class TwilightManager {
      * Sets current location.
      * Only support setting of co-ordinates directly
      * Any error checks need to be done before calling this
-     * @param location - double array as {Longitude, Latitude}
-     * @return - Current instance
+     * @param location double array as {Longitude, Latitude}
+     * @return Current instance
      */
     public TwilightManager atLocation(double[] location) {
         this.longitude = location[0];
@@ -70,9 +70,9 @@ public class TwilightManager {
 
     /**
      * Computes sunset and sunrise time and saves in the preference
-     * @param context - Ok where was the shrug emoji again?
-     * @param onComputeCompleteListener  - OnComputeListener to invoke when compute is completed
-     * @return - Current instance
+     * @param context Ok where was the shrug emoji again?
+     * @param onComputeCompleteListener OnComputeListener to invoke when compute is completed
+     * @return Current instance
      */
     public TwilightManager computeAndSaveTime(Context context, OnComputeCompleteListener onComputeCompleteListener) {
         Location mLocation = new Location(latitude, longitude);
@@ -95,8 +95,8 @@ public class TwilightManager {
 
     /**
      * Computes sunset and sunrise time and saves in the preference
-     * @param context - Ok where was the shrug emoji again?
-     * @return - Current instance
+     * @param context Ok where was the shrug emoji again?
+     * @return Current instance
      */
     public TwilightManager computeAndSaveTime(Context context) {
         return computeAndSaveTime(context, null);

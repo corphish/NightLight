@@ -24,7 +24,6 @@ public class QuickSettingsService extends TileService {
     /**
      * Called when the tile is added to the Quick Settings.
      */
-
     @Override
     public void onTileAdded() {
         syncTile();

@@ -32,6 +32,13 @@
             android:textSize="@dimen/text_desc"
             android:text="@string/master_switch_desc"/>
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/kcal_preserve_switch"
+            android:text="@string/kcal_preservce_value_msg"
+            android:checked="true"/>
+
 
     </LinearLayout>
 

@@ -13,12 +13,12 @@ import android.view.View;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
+import com.corphish.nightlight.Engine.KCALManager;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.RootUtils;
 
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
-import java.io.File;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -116,7 +116,7 @@ public class StartActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... booms) {
             rootAccessAvailable = RootUtils.getRootAccess();
-            kcalSupported = new File(Constants.KCAL_ADJUST).exists();
+            kcalSupported = KCALManager.isKCALAvailable();
             return null;
         }
 

@@ -20,16 +20,17 @@ public class Core {
      * @param greenIntensity Intensity of green light to be filtered out.
      */
     private static void enableNightMode(int blueIntensity, int greenIntensity) {
-        RootUtils.writeToFile("1", Constants.KCAL_SWITCH);
-        RootUtils.writeToFile("256 " + (Constants.MAX_GREEN_LIGHT - greenIntensity) + " " + (Constants.MAX_BLUE_LIGHT - blueIntensity),Constants.KCAL_ADJUST);
+        KCALManager.enableKCAL();
+        KCALManager.updateKCALValues(256, Constants.MAX_GREEN_LIGHT - greenIntensity, Constants.MAX_BLUE_LIGHT - blueIntensity);
     }
 
     /**
      * Disables night light by setting default color values
      * It does not disable KCAL switch though
+     * TODO: Update with preserved values
      */
     private static void disableNightMode() {
-        RootUtils.writeToFile("256 256 256", Constants.KCAL_ADJUST);
+        KCALManager.updateKCALWithDefaultValues();
     }
 
     /**

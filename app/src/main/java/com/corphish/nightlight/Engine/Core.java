@@ -16,17 +16,21 @@ public class Core {
      * Enables night light.
      * It enables KCAL, and writes the intensity
      * However, here we don't backup current user set KCAL values, otherwise it may backup night light values
+     * Also enable force switch when Night Light is enabled
      * @param blueIntensity Intensity of blue light to be filtered out.
      * @param greenIntensity Intensity of green light to be filtered out.
      */
-    private static void enableNightMode(int blueIntensity, int greenIntensity) {
+    private static void enableNightMode(Context context, int blueIntensity, int greenIntensity) {
         KCALManager.enableKCAL();
         KCALManager.updateKCALValues(256, Constants.MAX_GREEN_LIGHT - greenIntensity, Constants.MAX_BLUE_LIGHT - blueIntensity);
+
+        PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, true);
     }
 
     /**
      * Disables night light by setting default color values
      * It does not disable KCAL switch though
+     * But it does disable force switch
      * @param context Context is needed to read Preference values
      */
     private static void disableNightMode(Context context) {
@@ -37,6 +41,8 @@ public class Core {
         // Otherwise set default values
         if (kcalPreserved) KCALManager.updateKCALValues(PreferenceHelper.getString(context, Constants.KCAL_PRESERVE_VAL, Constants.DEFAULT_KCAL_VALUES));
         else KCALManager.updateKCALWithDefaultValues();
+
+        PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, false);
     }
 
     /**
@@ -47,7 +53,7 @@ public class Core {
      * @param greenIntensity Intensity of green light to be filtered out.
      */
     public static void applyNightMode(boolean e, Context context, int blueIntensity, int greenIntensity) {
-        if (e) enableNightMode(blueIntensity, greenIntensity);
+        if (e) enableNightMode(context, blueIntensity, greenIntensity);
         else disableNightMode(context);
     }
 

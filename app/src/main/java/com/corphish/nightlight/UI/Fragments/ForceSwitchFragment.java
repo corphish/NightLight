@@ -47,8 +47,8 @@ public class ForceSwitchFragment extends Fragment {
         forceSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                // Preference for this is handled in Core now
                 Core.applyNightModeAsync(b, getContext());
-                PreferenceHelper.putBoolean(getContext(), Constants.PREF_FORCE_SWITCH ,b);
             }
         });
     }

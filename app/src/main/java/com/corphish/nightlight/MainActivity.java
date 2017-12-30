@@ -1,20 +1,21 @@
 package com.corphish.nightlight;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Interfaces.NightLightStateListener;
 import com.corphish.nightlight.Services.NightLightAppService;
-import com.corphish.nightlight.UI.Fragments.AboutFragment;
 import com.corphish.nightlight.UI.Fragments.AutoFragment;
-import com.corphish.nightlight.UI.Fragments.DonateFragment;
 import com.corphish.nightlight.UI.Fragments.FilterFragment;
 import com.corphish.nightlight.UI.Fragments.ForceSwitchFragment;
 import com.corphish.nightlight.UI.Fragments.MasterSwitchFragment;
@@ -87,10 +88,6 @@ public class MainActivity
             if (isSupported(R.bool.filters_enabled)) fragmentTransaction.add(containerId, new FilterFragment());
             if (isSupported(R.bool.automation_enabled)) fragmentTransaction.add(containerId, new AutoFragment());
             if (isSupported(R.bool.force_switch_enabled)) fragmentTransaction.add(containerId, new ForceSwitchFragment());
-
-            fragmentTransaction.add(containerId, new AboutFragment());
-
-            if (isSupported(R.bool.donation_enabled)) fragmentTransaction.add(containerId, new DonateFragment());
         } else {
             List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
             for (Fragment fragment: fragmentList) {
@@ -103,6 +100,30 @@ public class MainActivity
 
     private boolean isSupported (int id) {
         return getResources().getBoolean(id);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if(id == R.id.about_menu) showAbout();
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showAbout() {
+        startActivity(new Intent(this, AboutActivity.class));
     }
 
     @Override

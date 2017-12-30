@@ -23,7 +23,7 @@ import java.util.List;
 
 public class MainActivity
         extends AppCompatActivity
-        implements MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener {
+        implements MasterSwitchFragment.MasterSwitchClickListener {
 
     private boolean masterSwitchEnabled;
     private final int containerId = R.id.layout_container;
@@ -76,17 +76,6 @@ public class MainActivity
     @Override
     public void onSwitchClicked(boolean status) {
         setViews(status);
-    }
-
-    @Override
-    public void onStateChanged(boolean newState) {
-        // Sync the force switch in ForceSwitch fragment
-        for (Fragment fragment: getSupportFragmentManager().getFragments()) {
-            if (fragment instanceof ForceSwitchFragment) {
-                ((ForceSwitchFragment) fragment).updateSwitch(newState);
-                break;
-            }
-        }
     }
 
     private void setViews(boolean show) {

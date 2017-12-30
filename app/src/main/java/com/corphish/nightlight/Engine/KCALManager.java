@@ -1,6 +1,10 @@
 package com.corphish.nightlight.Engine;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.corphish.nightlight.Data.Constants;
+import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.RootUtils;
 
 import java.io.File;
@@ -68,7 +72,7 @@ public class KCALManager {
      * @param blue Blue color value
      */
     public static void updateKCALValues(int red, int green, int blue) {
-        updateKCALValues("" + red + green + blue);
+        updateKCALValues(red + " " +  green + " " + blue);
     }
 
     public static void updateKCALWithDefaultValues() {
@@ -95,5 +99,21 @@ public class KCALManager {
                 Integer.parseInt(values[1]), // Green
                 Integer.parseInt(values[2]), // Blue
         };
+    }
+
+    /**
+     * Backs up current KCAL values
+     * This should only be called <strong>before</strong> turning on Night Light
+     * @param context Context is needed for PreferenceHelper
+     */
+    public static void backupCurrentKCALValues(Context context) {
+        // Dont backup if KCAL is off currently
+        if (!isKCALEnabled()) return;
+
+        // Don't backup if KCAL preserve switch is off (less likely case tho)
+        if (!PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true)) return;
+
+        // Backup the values
+        PreferenceHelper.putString(context, Constants.KCAL_PRESERVE_VAL, getKCALValuesAsRawString());
     }
 }

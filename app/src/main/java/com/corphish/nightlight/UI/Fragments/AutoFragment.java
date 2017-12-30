@@ -72,9 +72,6 @@ public class AutoFragment extends Fragment implements LocationListener {
         startTimeKV = getView().findViewById(R.id.start_time);
         endTimeKV = getView().findViewById(R.id.end_time);
 
-        autoSwitch.setChecked(autoSwitchStatus);
-        sunSwitch.setChecked(sunSwitchStatus);
-
         autoSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -113,6 +110,8 @@ public class AutoFragment extends Fragment implements LocationListener {
                 enableOrDisableAutoSwitchViews(autoSwitch.isChecked());
             }
         });
+        autoSwitch.setChecked(autoSwitchStatus);
+        sunSwitch.setChecked(sunSwitchStatus);
 
         startTimeKV.setOnClickListener(new View.OnClickListener() {
             @Override

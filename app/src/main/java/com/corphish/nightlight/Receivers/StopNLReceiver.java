@@ -8,6 +8,7 @@ import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Engine.TwilightManager;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
+import com.corphish.nightlight.Services.NightLightAppService;
 
 /**
  * Created by Avinaba on 10/4/2017.
@@ -29,6 +30,10 @@ public class StopNLReceiver extends BroadcastReceiver {
         int greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
 
         Core.applyNightModeAsync(false, context, blueIntensity, greenIntensity);
+
+        // Update app UI if its running
+        NightLightAppService nightLightAppService = NightLightAppService.getInstance();
+        if (nightLightAppService.isAppServiceRunning()) nightLightAppService.notifyUpdatedState(false);
 
         // Also if sunset sunrise is used, reset the timing
         if (PreferenceHelper.getBoolean(context, Constants.PREF_SUN_SWITCH)) {

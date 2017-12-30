@@ -119,5 +119,9 @@ public class QuickSettingsService extends TileService {
         int greenIntensity = PreferenceHelper.getInt(getApplicationContext(), Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
 
         Core.applyNightModeAsync(state, getApplicationContext() ,blueIntensity, greenIntensity);
+
+        // Update app UI if its running
+        NightLightAppService nightLightAppService = NightLightAppService.getInstance();
+        if (nightLightAppService.isAppServiceRunning()) nightLightAppService.notifyUpdatedState(state);
     }
 }

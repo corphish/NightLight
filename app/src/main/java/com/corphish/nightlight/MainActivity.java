@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
+import com.corphish.nightlight.Interfaces.NightLightStateListener;
+import com.corphish.nightlight.Services.NightLightAppService;
 import com.corphish.nightlight.UI.Fragments.AboutFragment;
 import com.corphish.nightlight.UI.Fragments.AutoFragment;
 import com.corphish.nightlight.UI.Fragments.DonateFragment;
@@ -19,7 +21,9 @@ import com.corphish.nightlight.UI.Fragments.MasterSwitchFragment;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MasterSwitchFragment.MasterSwitchClickListener {
+public class MainActivity
+        extends AppCompatActivity
+        implements MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener {
 
     private boolean masterSwitchEnabled;
     private final int containerId = R.id.layout_container;
@@ -37,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
     @Override
     protected void onResume() {
         super.onResume();
-
         init();
         viewInit();
         setViews(masterSwitchEnabled);
@@ -45,6 +48,18 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
 
     private void init() {
         masterSwitchEnabled = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH);
+        NightLightAppService.getInstance().setNightLightStateListener(new NightLightStateListener() {
+            @Override
+            public void onStateChanged(boolean newState) {
+                // Sync the force switch in ForceSwitch fragment
+                for (Fragment fragment: getSupportFragmentManager().getFragments()) {
+                    if (fragment instanceof ForceSwitchFragment) {
+                        ((ForceSwitchFragment) fragment).updateSwitch(newState);
+                        break;
+                    }
+                }
+            }
+        });
     }
 
     private void viewInit() {
@@ -61,6 +76,17 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
     @Override
     public void onSwitchClicked(boolean status) {
         setViews(status);
+    }
+
+    @Override
+    public void onStateChanged(boolean newState) {
+        // Sync the force switch in ForceSwitch fragment
+        for (Fragment fragment: getSupportFragmentManager().getFragments()) {
+            if (fragment instanceof ForceSwitchFragment) {
+                ((ForceSwitchFragment) fragment).updateSwitch(newState);
+                break;
+            }
+        }
     }
 
     private void setViews(boolean show) {
@@ -98,5 +124,11 @@ public class MainActivity extends AppCompatActivity implements MasterSwitchFragm
             if (fragment instanceof AutoFragment)
                 fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        NightLightAppService.getInstance().destroy();
     }
 }

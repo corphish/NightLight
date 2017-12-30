@@ -14,7 +14,9 @@ import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Engine.KCALManager;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
+import com.corphish.nightlight.Interfaces.NightLightStateListener;
 import com.corphish.nightlight.R;
+import com.corphish.nightlight.Services.NightLightAppService;
 
 /**
  * Created by Avinaba on 10/23/2017.
@@ -71,6 +73,9 @@ public class MasterSwitchFragment extends Fragment {
                 Core.applyNightModeAsync(b, getContext());
                 PreferenceHelper.putBoolean(getContext(), Constants.PREF_MASTER_SWITCH ,b);
                 if (mCallback != null) mCallback.onSwitchClicked(b);
+
+                // We dont need to check whether service is running as it must be running in this case
+                NightLightAppService.getInstance().notifyUpdatedState(b);
             }
         });
 

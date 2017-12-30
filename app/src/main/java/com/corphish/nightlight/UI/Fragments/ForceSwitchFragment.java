@@ -21,6 +21,7 @@ import com.corphish.nightlight.R;
 public class ForceSwitchFragment extends Fragment {
 
     private boolean forceSwitchEnabled;
+    SwitchCompat forceSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,6 @@ public class ForceSwitchFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        SwitchCompat forceSwitch;
         forceSwitch = getView().findViewById(R.id.force_switch);
 
         forceSwitch.setChecked(forceSwitchEnabled);
@@ -51,5 +51,9 @@ public class ForceSwitchFragment extends Fragment {
                 Core.applyNightModeAsync(b, getContext());
             }
         });
+    }
+
+    public void updateSwitch(boolean newState) {
+        if (forceSwitch != null) forceSwitch.setChecked(newState);
     }
 }

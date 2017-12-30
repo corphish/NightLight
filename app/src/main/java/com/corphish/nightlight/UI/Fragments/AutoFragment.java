@@ -1,6 +1,7 @@
 package com.corphish.nightlight.UI.Fragments;
 
 import android.Manifest;
+import android.app.Activity;
 import android.location.LocationListener;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -25,7 +26,9 @@ import com.corphish.nightlight.Helpers.AlarmUtils;
 import com.corphish.nightlight.Helpers.LocationUtils;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.TimeUtils;
+import com.corphish.nightlight.Interfaces.NightLightStateListener;
 import com.corphish.nightlight.R;
+import com.corphish.nightlight.Services.NightLightAppService;
 import com.corphish.nightlight.UI.Widgets.KeyValueView;
 
 /**
@@ -76,7 +79,12 @@ public class AutoFragment extends Fragment implements LocationListener {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) doCurrentAutoFunctions(true);
-                else Core.applyNightModeAsync(true, getContext());
+                else {
+                    Core.applyNightModeAsync(true, getContext());
+
+                    // We dont need to check whether service is running as it must be running in this case
+                    NightLightAppService.getInstance().notifyUpdatedState(true);
+                }
 
                 PreferenceHelper.putBoolean(context, Constants.PREF_AUTO_SWITCH, b);
 
@@ -196,7 +204,12 @@ public class AutoFragment extends Fragment implements LocationListener {
         String prefStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME);
         String prefEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
 
-        Core.applyNightModeAsync(TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefEndTime), context);
+        boolean toEnable = TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefEndTime);
+
+        Core.applyNightModeAsync(toEnable, context);
+
+        // We dont need to check whether service is running as it must be running in this case
+        NightLightAppService.getInstance().notifyUpdatedState(toEnable);
 
         if(setAlarms) AlarmUtils.setAlarms(context, prefStartTime, prefEndTime, true);
     }

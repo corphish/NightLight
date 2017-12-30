@@ -10,6 +10,7 @@ import com.corphish.nightlight.Engine.TwilightManager;
 import com.corphish.nightlight.Helpers.AlarmUtils;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.TimeUtils;
+import com.corphish.nightlight.Services.NightLightAppService;
 
 /**
  * Created by Avinaba on 10/5/2017.
@@ -42,7 +43,12 @@ public class BootCompleteReceiver extends BroadcastReceiver {
             return;
         }
 
-        Core.applyNightModeAsync(TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime), context, blueIntensity, greenIntensity);
+        boolean state = TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime);
+        Core.applyNightModeAsync(state, context, blueIntensity, greenIntensity);
+
+        // Update app UI if its running
+        NightLightAppService nightLightAppService = NightLightAppService.getInstance();
+        if (nightLightAppService.isAppServiceRunning()) nightLightAppService.notifyUpdatedState(state);
 
         if (!sunSwitch) AlarmUtils.setAlarms(context, sStartTime, sEndTime, true);
         else TwilightManager.newInstance()

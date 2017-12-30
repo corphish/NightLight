@@ -1,7 +1,6 @@
 package com.corphish.nightlight.UI.Fragments;
 
 import android.Manifest;
-import android.app.Activity;
 import android.location.LocationListener;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -26,7 +25,6 @@ import com.corphish.nightlight.Helpers.AlarmUtils;
 import com.corphish.nightlight.Helpers.LocationUtils;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.TimeUtils;
-import com.corphish.nightlight.Interfaces.NightLightStateListener;
 import com.corphish.nightlight.R;
 import com.corphish.nightlight.Services.NightLightAppService;
 import com.corphish.nightlight.UI.Widgets.KeyValueView;
@@ -136,6 +134,8 @@ public class AutoFragment extends Fragment implements LocationListener {
 
         startTimeKV.setValue(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
         endTimeKV.setValue(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
+
+        addNextDayIfNecessary();
 
         enableOrDisableAutoSwitchViews(autoSwitchStatus);
     }

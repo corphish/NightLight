@@ -1,7 +1,6 @@
 package com.corphish.nightlight.Engine;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Helpers.PreferenceHelper;

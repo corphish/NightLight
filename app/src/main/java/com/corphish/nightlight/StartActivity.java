@@ -16,9 +16,7 @@ import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Engine.KCALManager;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.RootUtils;
-
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+import com.corphish.nightlight.Helpers.CrashlyticsHelper;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -31,7 +29,7 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
+        CrashlyticsHelper.start(this);
         setContentView(R.layout.activity_splash);
 
         if (handleIntent()) finish();

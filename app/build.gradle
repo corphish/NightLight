@@ -1,5 +1,10 @@
+def taskRequests = getGradle().getStartParameter().getTaskRequests().toString()
+def isPlaystore = taskRequests.contains("generic") || taskRequests.contains("Generic") || taskRequests.contains("donate") || taskRequests.contains("Donate")
+
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
+if (isPlaystore) {
+    apply plugin: 'io.fabric'
+}
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -39,6 +44,10 @@ android {
             applicationId "com.corphish.nightlight.donate"
             dimension "buildVariant"
         }
+        foss {
+            applicationId "com.corphish.nightlight.generic"
+            dimension "buildVariant"
+        }
     }
 }
 
@@ -55,7 +64,11 @@ dependencies {
     implementation 'eu.chainfire:libsuperuser:1.0.0.201704021214'
 
     implementation 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
-    implementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+
+    genericImplementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+        transitive = true
+    }
+    donateImplementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
         transitive = true
     }
 }

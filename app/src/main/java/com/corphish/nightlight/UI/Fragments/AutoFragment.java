@@ -79,7 +79,7 @@ public class AutoFragment extends Fragment implements LocationListener {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) doCurrentAutoFunctions(true);
-                else Core.applyNightModeAsync(true);
+                else Core.applyNightModeAsync(true, getContext());
 
                 PreferenceHelper.putBoolean(context, Constants.PREF_AUTO_SWITCH, b);
 

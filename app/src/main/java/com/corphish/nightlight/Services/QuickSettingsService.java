@@ -118,6 +118,6 @@ public class QuickSettingsService extends TileService {
         int blueIntensity = PreferenceHelper.getInt(getApplicationContext(), Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
         int greenIntensity = PreferenceHelper.getInt(getApplicationContext(), Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
 
-        Core.applyNightModeAsync(state, blueIntensity, greenIntensity);
+        Core.applyNightModeAsync(state, getApplicationContext() ,blueIntensity, greenIntensity);
     }
 }

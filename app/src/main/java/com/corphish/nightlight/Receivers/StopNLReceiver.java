@@ -28,7 +28,7 @@ public class StopNLReceiver extends BroadcastReceiver {
         int blueIntensity = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
         int greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
 
-        Core.applyNightModeAsync(false, blueIntensity, greenIntensity);
+        Core.applyNightModeAsync(false, context, blueIntensity, greenIntensity);
 
         // Also if sunset sunrise is used, reset the timing
         if (PreferenceHelper.getBoolean(context, Constants.PREF_SUN_SWITCH)) {

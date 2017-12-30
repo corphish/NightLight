@@ -32,7 +32,7 @@
             android:textSize="@dimen/text_desc"
             android:text="@string/master_switch_desc"/>
 
-        <CheckBox
+        <android.support.v7.widget.AppCompatCheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/kcal_preserve_switch"

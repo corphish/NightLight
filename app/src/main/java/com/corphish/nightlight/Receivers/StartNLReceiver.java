@@ -28,6 +28,6 @@ public class StartNLReceiver extends BroadcastReceiver {
         int blueIntensity = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
         int greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
 
-        Core.applyNightModeAsync(true, blueIntensity, greenIntensity);
+        Core.applyNightModeAsync(true, context, blueIntensity, greenIntensity);
     }
 }

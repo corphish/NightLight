@@ -86,7 +86,7 @@ public class StartActivity extends AppCompatActivity {
         int blueIntensity = PreferenceHelper.getInt(this, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
         int greenIntensity = PreferenceHelper.getInt(this, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
 
-        Core.applyNightModeAsync(state, blueIntensity, greenIntensity);
+        Core.applyNightModeAsync(state, this ,blueIntensity, greenIntensity);
     }
 
     private void showAlertDialog(int caption, int msg) {

@@ -38,11 +38,11 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         if (!masterSwitch) return;
 
         if (!autoSwitch) {
-            Core.applyNightModeAsync(true, blueIntensity, greenIntensity);
+            Core.applyNightModeAsync(true, context, blueIntensity, greenIntensity);
             return;
         }
 
-        Core.applyNightModeAsync(TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime), blueIntensity, greenIntensity);
+        Core.applyNightModeAsync(TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime), context, blueIntensity, greenIntensity);
 
         if (!sunSwitch) AlarmUtils.setAlarms(context, sStartTime, sEndTime, true);
         else TwilightManager.newInstance()

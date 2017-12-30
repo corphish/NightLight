@@ -29,6 +29,8 @@ public class Constants {
     public static final String LAST_LOC_LONGITUDE   =   "last_longitude";
     public static final String LAST_LOC_LATITUDE    =   "last_latitude";
     public static final String COMPATIBILITY_TEST   =   "compatibility_test";
+    public static final String KCAL_PRESERVE_SWITCH =   "kcal_preserve_switch";
+    public static final String KCAL_PRESERVE_VAL    =   "kcal_preserve_val";
 
 
     /**
@@ -42,4 +44,5 @@ public class Constants {
     public static final int DEFAULT_GREEN_INTENSITY =   0;
     public static final String DEFAULT_LONGITUDE    =   "0.00";
     public static final String DEFAULT_LATITUDE     =   "0.00";
+    public static final String DEFAULT_KCAL_VALUES  =   "256 256 256";
 }

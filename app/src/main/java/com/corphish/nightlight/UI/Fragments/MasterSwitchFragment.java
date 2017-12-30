@@ -3,6 +3,7 @@ package com.corphish.nightlight.UI.Fragments;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.CompoundButton;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
+import com.corphish.nightlight.Engine.KCALManager;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.R;
 
@@ -65,9 +67,19 @@ public class MasterSwitchFragment extends Fragment {
         masterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) KCALManager.backupCurrentKCALValues(getContext());
                 Core.applyNightModeAsync(b, getContext());
                 PreferenceHelper.putBoolean(getContext(), Constants.PREF_MASTER_SWITCH ,b);
                 if (mCallback != null) mCallback.onSwitchClicked(b);
+            }
+        });
+
+        AppCompatCheckBox preserveSwitch = getView().findViewById(R.id.kcal_preserve_switch);
+        preserveSwitch.setChecked(PreferenceHelper.getBoolean(getContext(), Constants.KCAL_PRESERVE_SWITCH, true));
+        preserveSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                PreferenceHelper.putBoolean(getContext(), Constants.KCAL_PRESERVE_SWITCH, b);
             }
         });
     }

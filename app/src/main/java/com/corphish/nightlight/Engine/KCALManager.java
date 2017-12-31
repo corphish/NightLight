@@ -101,7 +101,10 @@ public class KCALManager {
     }
 
     /**
-     * Backs up current KCAL values
+     * Safely back up current KCAL values
+     * Safely in the sense, if the current KCAL reading is same as user selected ones for Night Light, then don't backup
+     * Situations may occur that night light KCAL values are tried to be backed up, avoid those situations
+     * If current KCAL value same as night light values, then it will be avoided, but that would be purely coincidental if user uses that setting by default
      * This should only be called <strong>before</strong> turning on Night Light
      * @param context Context is needed for PreferenceHelper
      */
@@ -112,7 +115,16 @@ public class KCALManager {
         // Don't backup if KCAL preserve switch is off (less likely case tho)
         if (!PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true)) return;
 
-        // Backup the values
-        PreferenceHelper.putString(context, Constants.KCAL_PRESERVE_VAL, getKCALValuesAsRawString());
+        String currentReading = getKCALValuesAsRawString();
+        String nightLightSettingReading = "256 " +  // Red
+                PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY) + " " + // Green
+                PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);  // Blue
+
+        // Bail out if currentReading is same as nightlight setting reading
+        // That is night light values are being backed up
+        if (currentReading.equals(nightLightSettingReading)) return;
+
+        // Else backup the values
+        PreferenceHelper.putString(context, Constants.KCAL_PRESERVE_VAL, currentReading);
     }
 }

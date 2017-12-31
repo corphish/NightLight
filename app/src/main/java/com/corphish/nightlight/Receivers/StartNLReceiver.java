@@ -30,9 +30,5 @@ public class StartNLReceiver extends BroadcastReceiver {
         int greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
 
         Core.applyNightModeAsync(true, context, blueIntensity, greenIntensity);
-
-        // Update app UI if its running
-        NightLightAppService nightLightAppService = NightLightAppService.getInstance();
-        if (nightLightAppService.isAppServiceRunning()) nightLightAppService.notifyUpdatedState(true);
     }
 }

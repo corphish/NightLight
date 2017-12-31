@@ -31,10 +31,6 @@ public class StopNLReceiver extends BroadcastReceiver {
 
         Core.applyNightModeAsync(false, context, blueIntensity, greenIntensity);
 
-        // Update app UI if its running
-        NightLightAppService nightLightAppService = NightLightAppService.getInstance();
-        if (nightLightAppService.isAppServiceRunning()) nightLightAppService.notifyUpdatedState(false);
-
         // Also if sunset sunrise is used, reset the timing
         if (PreferenceHelper.getBoolean(context, Constants.PREF_SUN_SWITCH)) {
             TwilightManager.newInstance()

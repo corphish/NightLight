@@ -208,9 +208,6 @@ public class AutoFragment extends Fragment implements LocationListener {
 
         Core.applyNightModeAsync(toEnable, context);
 
-        // We dont need to check whether service is running as it must be running in this case
-        NightLightAppService.getInstance().notifyUpdatedState(toEnable);
-
         if(setAlarms) AlarmUtils.setAlarms(context, prefStartTime, prefEndTime, true);
     }
 

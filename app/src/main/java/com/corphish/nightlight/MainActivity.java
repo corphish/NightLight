@@ -77,6 +77,9 @@ public class MainActivity
     @Override
     public void onSwitchClicked(boolean status) {
         setViews(status);
+
+        // We dont need to check whether service is running as it must be running in this case
+        NightLightAppService.getInstance().notifyUpdatedState(status);
     }
 
     private void setViews(boolean show) {

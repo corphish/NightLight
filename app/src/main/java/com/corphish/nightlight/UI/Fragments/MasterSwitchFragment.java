@@ -72,9 +72,6 @@ public class MasterSwitchFragment extends Fragment {
                 Core.applyNightModeAsync(b, getContext());
                 PreferenceHelper.putBoolean(getContext(), Constants.PREF_MASTER_SWITCH ,b);
                 if (mCallback != null) mCallback.onSwitchClicked(b);
-
-                // We dont need to check whether service is running as it must be running in this case
-                NightLightAppService.getInstance().notifyUpdatedState(b);
             }
         });
 

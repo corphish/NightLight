@@ -46,10 +46,6 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         boolean state = TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime);
         Core.applyNightModeAsync(state, context, blueIntensity, greenIntensity);
 
-        // Update app UI if its running
-        NightLightAppService nightLightAppService = NightLightAppService.getInstance();
-        if (nightLightAppService.isAppServiceRunning()) nightLightAppService.notifyUpdatedState(state);
-
         if (!sunSwitch) AlarmUtils.setAlarms(context, sStartTime, sEndTime, true);
         else TwilightManager.newInstance()
                 .atLocation(PreferenceHelper.getLocation(context))

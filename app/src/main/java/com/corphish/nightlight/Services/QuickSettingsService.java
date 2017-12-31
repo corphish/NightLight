@@ -97,12 +97,13 @@ public class QuickSettingsService extends TileService {
      * @return - Toggled value of forceSwitch
      */
     private boolean getServiceStatus() {
-        boolean forceSwitch = PreferenceHelper.getToggledBoolean(getApplicationContext(), Constants.PREF_FORCE_SWITCH);
+        boolean forceSwitch = PreferenceHelper.getBoolean(getApplicationContext(), Constants.PREF_FORCE_SWITCH);
         boolean masterSwitch = PreferenceHelper.getBoolean(getApplicationContext(), Constants.PREF_MASTER_SWITCH);
 
         /*
          * If forceSwitch is on, while masterSwitch is off, turn on master switch as well
          */
+        forceSwitch = !forceSwitch;
         if (forceSwitch && !masterSwitch)
             PreferenceHelper.putBoolean(getApplicationContext(), Constants.PREF_MASTER_SWITCH ,true);
 
@@ -119,9 +120,5 @@ public class QuickSettingsService extends TileService {
         int greenIntensity = PreferenceHelper.getInt(getApplicationContext(), Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
 
         Core.applyNightModeAsync(state, getApplicationContext() ,blueIntensity, greenIntensity);
-
-        // Update app UI if its running
-        NightLightAppService nightLightAppService = NightLightAppService.getInstance();
-        if (nightLightAppService.isAppServiceRunning()) nightLightAppService.notifyUpdatedState(state);
     }
 }

@@ -2,9 +2,11 @@ package com.corphish.nightlight.Engine;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
+import com.corphish.nightlight.Services.NightLightAppService;
 
 /**
  * Created by Avinaba on 10/4/2017.
@@ -21,17 +23,20 @@ public class Core {
      * @param greenIntensity Intensity of green light to be filtered out.
      */
     private static void enableNightMode(Context context, int blueIntensity, int greenIntensity) {
+        Log.d("NL_Core","Enabling night mode");
         KCALManager.enableKCAL();
-        KCALManager.updateKCALValues(256, Constants.MAX_GREEN_LIGHT - greenIntensity, Constants.MAX_BLUE_LIGHT - blueIntensity);
 
-        boolean kcalPreserved = PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true);
-
-        if (kcalPreserved) {
+        if (PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true)) {
             // Check if FORCE_SWITCH is off or not
             // If off then only backup
             if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH))
                 KCALManager.backupCurrentKCALValues(context);
         }
+
+        KCALManager.updateKCALValues(256, Constants.MAX_GREEN_LIGHT - greenIntensity, Constants.MAX_BLUE_LIGHT - blueIntensity);
+
+
+        Log.d("NL_Core","Enable night mode, force switch prev val - " + PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH));
 
         PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, true);
     }
@@ -40,16 +45,23 @@ public class Core {
      * Disables night light by setting default color values
      * It does not disable KCAL switch though
      * But it does disable force switch
+     * Set the user preserved values for KCAL only if it was enabled and only if <strong>FORCE_SWITCH was on.</strong>
      * @param context Context is needed to read Preference values
      */
     private static void disableNightMode(Context context) {
+        Log.d("NL_Core","Disabling night mode");
         // First check if KCAL value backup is enabled or not
         boolean kcalPreserved = PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true);
 
         // If KCAL was preserved (enabled by default), set preserved values
         // Otherwise set default values
-        if (kcalPreserved) KCALManager.updateKCALValues(PreferenceHelper.getString(context, Constants.KCAL_PRESERVE_VAL, Constants.DEFAULT_KCAL_VALUES));
-        else KCALManager.updateKCALWithDefaultValues();
+        if (PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH)) {
+            if (kcalPreserved)
+                KCALManager.updateKCALValues(PreferenceHelper.getString(context, Constants.KCAL_PRESERVE_VAL, Constants.DEFAULT_KCAL_VALUES));
+            else KCALManager.updateKCALWithDefaultValues();
+        }
+
+        Log.d("NL_Core","Disable night mode, force switch prev val - " + PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH));
 
         PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, false);
     }
@@ -109,6 +121,12 @@ public class Core {
         protected Object doInBackground(Object... bubbles) {
             applyNightMode(enabled, context, blueIntensity, greenIntensity);
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object bubble) {
+            if (NightLightAppService.getInstance().isAppServiceRunning())
+                NightLightAppService.getInstance().notifyUpdatedState(enabled);
         }
     }
 }

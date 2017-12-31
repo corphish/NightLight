@@ -3,6 +3,7 @@ package com.corphish.nightlight.UI.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,15 +21,7 @@ import com.corphish.nightlight.R;
 
 public class ForceSwitchFragment extends Fragment {
 
-    private boolean forceSwitchEnabled;
     SwitchCompat forceSwitch;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        forceSwitchEnabled = PreferenceHelper.getBoolean(getContext(), Constants.PREF_FORCE_SWITCH);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,10 +33,10 @@ public class ForceSwitchFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        Log.d("NL_ForceFragment","onACtivityCreated");
         forceSwitch = getView().findViewById(R.id.force_switch);
 
-        forceSwitch.setChecked(forceSwitchEnabled);
+        forceSwitch.setChecked(PreferenceHelper.getBoolean(getContext(), Constants.PREF_FORCE_SWITCH));
         forceSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

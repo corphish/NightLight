@@ -15,7 +15,7 @@ public class Core {
     /**
      * Enables night light.
      * It enables KCAL, and writes the intensity
-     * However, here we don't backup current user set KCAL values, otherwise it may backup night light values
+     * Conditionally backup KCAL values if FORCE_SWITCH is off before turning it on
      * Also enable force switch when Night Light is enabled
      * @param blueIntensity Intensity of blue light to be filtered out.
      * @param greenIntensity Intensity of green light to be filtered out.
@@ -23,6 +23,15 @@ public class Core {
     private static void enableNightMode(Context context, int blueIntensity, int greenIntensity) {
         KCALManager.enableKCAL();
         KCALManager.updateKCALValues(256, Constants.MAX_GREEN_LIGHT - greenIntensity, Constants.MAX_BLUE_LIGHT - blueIntensity);
+
+        boolean kcalPreserved = PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true);
+
+        if (kcalPreserved) {
+            // Check if FORCE_SWITCH is off or not
+            // If off then only backup
+            if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH))
+                KCALManager.backupCurrentKCALValues(context);
+        }
 
         PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, true);
     }

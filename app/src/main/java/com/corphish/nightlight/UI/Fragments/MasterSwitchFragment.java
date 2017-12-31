@@ -69,7 +69,6 @@ public class MasterSwitchFragment extends Fragment {
         masterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) KCALManager.backupCurrentKCALValues(getContext());
                 Core.applyNightModeAsync(b, getContext());
                 PreferenceHelper.putBoolean(getContext(), Constants.PREF_MASTER_SWITCH ,b);
                 if (mCallback != null) mCallback.onSwitchClicked(b);

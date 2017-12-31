@@ -5,4 +5,5 @@
     <bool name="force_switch_enabled">true</bool>
     <bool name="donation_enabled">true</bool>
     <bool name="forced_compatibility_test_enabled">false</bool>
+    <bool name="contributors_card_enabled">true</bool>
 </resources>

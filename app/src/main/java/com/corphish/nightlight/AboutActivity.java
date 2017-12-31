@@ -1,5 +1,6 @@
 package com.corphish.nightlight;
 
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,9 +19,19 @@ public class AboutActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.layout_container, new AboutFragment())
-                .add(R.id.layout_container, new DonateFragment())
-                .commit();
+        viewInit();
+    }
+
+    private void viewInit() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
+        int containerId = R.id.layout_container;
+
+        fragmentTransaction.add(containerId, new AboutFragment());
+
+        fragmentTransaction.add(containerId, new DonateFragment());
+
+        fragmentTransaction.commit();
     }
 }

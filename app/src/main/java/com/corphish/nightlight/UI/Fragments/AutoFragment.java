@@ -91,10 +91,6 @@ public class AutoFragment extends Fragment implements LocationListener {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 PreferenceHelper.putBoolean(context, Constants.PREF_SUN_SWITCH, b);
                 if (b) {
-                    // Backup current timings
-                    PreferenceHelper.putString(context, Constants.PREF_LAST_START_TIME, PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
-                    PreferenceHelper.putString(context, Constants.PREF_LAST_END_TIME, PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
-
                     doLocationStuff();
                 } else {
                     String prevStartTime = PreferenceHelper.getString(context, Constants.PREF_LAST_START_TIME, Constants.DEFAULT_START_TIME);
@@ -172,7 +168,12 @@ public class AutoFragment extends Fragment implements LocationListener {
                 String selectedHour = i < 10 ? "0" + i: "" + i;
                 String selectedMinute = i1 < 10 ? "0" +i1: "" + i1;
                 String timeString = selectedHour + ":" + selectedMinute;
+
                 PreferenceHelper.putString(context, prefKey, timeString);
+                // We also backup the time here
+                // To get the prefKey for backup, its "last_" + prefKey
+                PreferenceHelper.putString(context, "last_" + prefKey, timeString);
+
                 viewWhoIsCallingIt.setValue(timeString);
 
                 addNextDayIfNecessary();

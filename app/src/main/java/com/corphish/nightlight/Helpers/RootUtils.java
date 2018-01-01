@@ -44,6 +44,7 @@ public class RootUtils {
      * @return Contents of file. If It has multiple lines, first line is returned
      */
     public static String readOneLine(String file) {
-        return readContents(file).get(0);
+        List<String> output = readContents(file);
+        return output.size() > 0 ? output.get(0) : "";
     }
 }

@@ -3,7 +3,6 @@ package com.corphish.nightlight.UI.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,6 @@ public class ForceSwitchFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d("NL_ForceFragment","onACtivityCreated");
         forceSwitch = getView().findViewById(R.id.force_switch);
 
         forceSwitch.setChecked(PreferenceHelper.getBoolean(getContext(), Constants.PREF_FORCE_SWITCH));
@@ -41,7 +39,7 @@ public class ForceSwitchFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 // Preference for this is handled in Core now
-                Core.applyNightModeAsync(b, getContext());
+                Core.applyNightModeAsync(b, getContext(), false);
             }
         });
     }

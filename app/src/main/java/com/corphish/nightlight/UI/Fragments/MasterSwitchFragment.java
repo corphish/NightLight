@@ -12,11 +12,8 @@ import android.widget.CompoundButton;
 
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
-import com.corphish.nightlight.Engine.KCALManager;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
-import com.corphish.nightlight.Interfaces.NightLightStateListener;
 import com.corphish.nightlight.R;
-import com.corphish.nightlight.Services.NightLightAppService;
 
 /**
  * Created by Avinaba on 10/23/2017.

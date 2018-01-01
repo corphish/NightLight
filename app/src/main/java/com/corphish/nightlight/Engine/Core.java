@@ -79,7 +79,20 @@ public class Core {
      * @param greenIntensity Intensity of green light to be filtered out.
      */
     public static void applyNightModeAsync(boolean b, Context context, int blueIntensity, int greenIntensity) {
-        new NightModeApplier(b, context, blueIntensity, greenIntensity).execute();
+        new NightModeApplier(b, context, blueIntensity, greenIntensity, true).execute();
+    }
+
+    /**
+     * Driver method to enable/disable night light asynchronously.
+     * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background
+     * @param b A boolean indicating whether night light should be turned on or off
+     * @param context Context is needed to read Preference values
+     * @param blueIntensity Intensity of blue light to be filtered out
+     * @param greenIntensity Intensity of green light to be filtered out.
+     * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated
+     */
+    public static void applyNightModeAsync(boolean b, Context context, int blueIntensity, int greenIntensity, boolean toUpdateGlobalState) {
+        new NightModeApplier(b, context, blueIntensity, greenIntensity, toUpdateGlobalState).execute();
     }
 
     /**
@@ -91,22 +104,38 @@ public class Core {
         applyNightModeAsync(b,
                 context,
                 PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY),
-                PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY));
+                PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY),
+                true);
+    }
+
+    /**
+     * Driver method to enable/disable night light asynchronously.
+     * @param b A boolean indicating whether night light should be turned on or off
+     * @param context A context parameter to read the intensity values from preferences
+     * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated
+     */
+    public static void applyNightModeAsync(boolean b, Context context, boolean toUpdateGlobalState) {
+        applyNightModeAsync(b,
+                context,
+                PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY),
+                PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY),
+                toUpdateGlobalState);
     }
 
     /**
      * AsyncTask to enable/disable night light
      */
     private static class NightModeApplier extends AsyncTask<Object, Object, Object> {
-        boolean enabled;
+        boolean enabled, toUpdateGlobalState;
         int blueIntensity, greenIntensity;
         Context context;
 
-        NightModeApplier(boolean enabled, Context context, int blueIntensity, int greenIntensity) {
+        NightModeApplier(boolean enabled, Context context, int blueIntensity, int greenIntensity, boolean toUpdateGlobalState) {
             this.enabled = enabled;
             this.context = context;
             this.blueIntensity = blueIntensity;
             this.greenIntensity = greenIntensity;
+            this.toUpdateGlobalState = toUpdateGlobalState;
         }
 
         @Override
@@ -117,7 +146,7 @@ public class Core {
 
         @Override
         protected void onPostExecute(Object bubble) {
-            if (NightLightAppService.getInstance().isAppServiceRunning())
+            if (NightLightAppService.getInstance().isAppServiceRunning() && toUpdateGlobalState)
                 NightLightAppService.getInstance().notifyUpdatedState(enabled);
         }
     }

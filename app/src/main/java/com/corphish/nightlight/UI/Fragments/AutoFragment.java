@@ -26,7 +26,6 @@ import com.corphish.nightlight.Helpers.LocationUtils;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
 import com.corphish.nightlight.Helpers.TimeUtils;
 import com.corphish.nightlight.R;
-import com.corphish.nightlight.Services.NightLightAppService;
 import com.corphish.nightlight.UI.Widgets.KeyValueView;
 
 /**
@@ -79,9 +78,6 @@ public class AutoFragment extends Fragment implements LocationListener {
                 if (b) doCurrentAutoFunctions(true);
                 else {
                     Core.applyNightModeAsync(true, getContext());
-
-                    // We dont need to check whether service is running as it must be running in this case
-                    NightLightAppService.getInstance().notifyUpdatedState(true);
                 }
 
                 PreferenceHelper.putBoolean(context, Constants.PREF_AUTO_SWITCH, b);

@@ -7,7 +7,6 @@ import android.content.Intent;
 import com.corphish.nightlight.Data.Constants;
 import com.corphish.nightlight.Engine.Core;
 import com.corphish.nightlight.Helpers.PreferenceHelper;
-import com.corphish.nightlight.Services.NightLightAppService;
 
 /**
  * Created by Avinaba on 10/4/2017.

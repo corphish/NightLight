@@ -24,7 +24,7 @@ import java.util.List;
 
 public class MainActivity
         extends AppCompatActivity
-        implements MasterSwitchFragment.MasterSwitchClickListener {
+        implements MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener {
 
     private boolean masterSwitchEnabled;
     private final int containerId = R.id.layout_container;
@@ -37,6 +37,7 @@ public class MainActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        NightLightAppService.getInstance().setNightLightStateListener(this);
     }
 
     @Override
@@ -49,18 +50,6 @@ public class MainActivity
 
     private void init() {
         masterSwitchEnabled = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH);
-        NightLightAppService.getInstance().setNightLightStateListener(new NightLightStateListener() {
-            @Override
-            public void onStateChanged(boolean newState) {
-                // Sync the force switch in ForceSwitch fragment
-                for (Fragment fragment: getSupportFragmentManager().getFragments()) {
-                    if (fragment instanceof ForceSwitchFragment) {
-                        ((ForceSwitchFragment) fragment).updateSwitch(newState);
-                        break;
-                    }
-                }
-            }
-        });
     }
 
     private void viewInit() {
@@ -77,9 +66,17 @@ public class MainActivity
     @Override
     public void onSwitchClicked(boolean status) {
         setViews(status);
+    }
 
-        // We dont need to check whether service is running as it must be running in this case
-        NightLightAppService.getInstance().notifyUpdatedState(status);
+    @Override
+    public void onStateChanged(boolean newState) {
+        // Sync the force switch in ForceSwitch fragment
+        for (Fragment fragment: getSupportFragmentManager().getFragments()) {
+            if (fragment instanceof ForceSwitchFragment) {
+                ((ForceSwitchFragment) fragment).updateSwitch(newState);
+                break;
+            }
+        }
     }
 
     private void setViews(boolean show) {

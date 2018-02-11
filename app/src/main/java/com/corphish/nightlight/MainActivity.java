@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.corphish.nightlight.data.Constants;
+import com.corphish.nightlight.engine.PresetManager;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.interfaces.NightLightStateListener;
 import com.corphish.nightlight.services.NightLightAppService;
@@ -38,6 +39,7 @@ public class MainActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         NightLightAppService.getInstance().setNightLightStateListener(this);
+        initPresetManager();
     }
 
     @Override
@@ -50,6 +52,12 @@ public class MainActivity
 
     private void init() {
         masterSwitchEnabled = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH);
+    }
+
+    private void initPresetManager() {
+        PresetManager presetManager = PresetManager.getInstance();
+        presetManager.initialize(this);
+        presetManager.test();
     }
 
     private void viewInit() {

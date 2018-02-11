@@ -11,12 +11,12 @@ import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
-import com.corphish.nightlight.Data.Constants;
-import com.corphish.nightlight.Engine.Core;
-import com.corphish.nightlight.Engine.KCALManager;
-import com.corphish.nightlight.Helpers.PreferenceHelper;
-import com.corphish.nightlight.Helpers.RootUtils;
-import com.corphish.nightlight.Helpers.CrashlyticsHelper;
+import com.corphish.nightlight.data.Constants;
+import com.corphish.nightlight.engine.Core;
+import com.corphish.nightlight.engine.KCALManager;
+import com.corphish.nightlight.helpers.PreferenceHelper;
+import com.corphish.nightlight.helpers.RootUtils;
+import com.corphish.nightlight.helpers.CrashlyticsHelper;
 
 public class StartActivity extends AppCompatActivity {
 

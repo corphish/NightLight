@@ -40,7 +40,7 @@
             android:textSize="@dimen/text_caption"
             android:text="@string/sun_switch"/>
 
-        <com.corphish.nightlight.UI.Widgets.KeyValueView
+        <com.corphish.nightlight.design.widgets.KeyValueView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/start_time"
@@ -49,7 +49,7 @@
             custom:caption="@string/start_time"
             custom:value="@string/start_time_default"/>
 
-        <com.corphish.nightlight.UI.Widgets.KeyValueView
+        <com.corphish.nightlight.design.widgets.KeyValueView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/end_time"

@@ -25,7 +25,7 @@
         </activity>
 
         <service
-            android:name=".Services.QuickSettingsService"
+            android:name=".services.QuickSettingsService"
             android:icon="@drawable/ic_lightbulb_outline"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -34,10 +34,10 @@
             </intent-filter>
         </service>
 
-        <receiver android:name=".Receivers.StartNLReceiver" />
-        <receiver android:name=".Receivers.StopNLReceiver" />
+        <receiver android:name=".receivers.StartNLReceiver" />
+        <receiver android:name=".receivers.StopNLReceiver" />
         <receiver
-            android:name=".Receivers.BootCompleteReceiver"
+            android:name=".receivers.BootCompleteReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

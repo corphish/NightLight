@@ -6,9 +6,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.corphish.nightlight.UI.Fragments.AboutFragment;
-import com.corphish.nightlight.UI.Fragments.ContributorsFragment;
-import com.corphish.nightlight.UI.Fragments.DonateFragment;
+import com.corphish.nightlight.design.fragments.AboutFragment;
+import com.corphish.nightlight.design.fragments.ContributorsFragment;
+import com.corphish.nightlight.design.fragments.DonateFragment;
 
 public class AboutActivity extends AppCompatActivity {
 

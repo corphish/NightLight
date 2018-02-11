@@ -11,14 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
-import com.corphish.nightlight.Data.Constants;
-import com.corphish.nightlight.Helpers.PreferenceHelper;
-import com.corphish.nightlight.Interfaces.NightLightStateListener;
-import com.corphish.nightlight.Services.NightLightAppService;
-import com.corphish.nightlight.UI.Fragments.AutoFragment;
-import com.corphish.nightlight.UI.Fragments.FilterFragment;
-import com.corphish.nightlight.UI.Fragments.ForceSwitchFragment;
-import com.corphish.nightlight.UI.Fragments.MasterSwitchFragment;
+import com.corphish.nightlight.data.Constants;
+import com.corphish.nightlight.helpers.PreferenceHelper;
+import com.corphish.nightlight.interfaces.NightLightStateListener;
+import com.corphish.nightlight.services.NightLightAppService;
+import com.corphish.nightlight.design.fragments.AutoFragment;
+import com.corphish.nightlight.design.fragments.FilterFragment;
+import com.corphish.nightlight.design.fragments.ForceSwitchFragment;
+import com.corphish.nightlight.design.fragments.MasterSwitchFragment;
 
 import java.util.List;
 

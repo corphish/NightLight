@@ -1,4 +1,4 @@
-package com.corphish.nightlight.Helpers;
+package com.corphish.nightlight.helpers;
 
 import android.content.Context;
 

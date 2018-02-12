@@ -29,6 +29,18 @@ public class NightLightAppService {
     private NightLightAppService() {}
 
     /**
+     * Running status of this service
+     */
+    private boolean serviceStatus = false;
+
+    /**
+     * Starts this service
+     */
+    public void startService() {
+        serviceStatus = true;
+    }
+
+    /**
      * This night light state listener listens to night light toggle events and performs accordingly
      */
     private NightLightStateListener nightLightStateListener;

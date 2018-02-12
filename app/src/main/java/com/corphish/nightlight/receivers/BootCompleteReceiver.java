@@ -29,21 +29,18 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         boolean autoSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH);
         boolean sunSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_SUN_SWITCH);
 
-        int blueIntensity = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
-        int greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
-
         String sStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME);
         String sEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
 
         if (!masterSwitch) return;
 
         if (!autoSwitch) {
-            Core.applyNightModeAsync(true, context, blueIntensity, greenIntensity);
+            Core.applyNightModeAsync(true, context);
             return;
         }
 
         boolean state = TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime);
-        Core.applyNightModeAsync(state, context, blueIntensity, greenIntensity);
+        Core.applyNightModeAsync(state, context);
 
         if (!sunSwitch) AlarmUtils.setAlarms(context, sStartTime, sEndTime, true);
         else TwilightManager.newInstance()

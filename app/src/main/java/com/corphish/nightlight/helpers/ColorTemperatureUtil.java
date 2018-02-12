@@ -13,7 +13,7 @@ public class ColorTemperatureUtil {
      * @param colorTemperature Color Temperature in kelvin
      * @return RGB color int
      */
-    public int[] colorTemperatureToIntRGB(int colorTemperature) {
+    public static int[] colorTemperatureToIntRGB(int colorTemperature) {
         // Max permissible range of temperature (1000-10000K)
         if (colorTemperature < 1000 || colorTemperature > 10000) return new int[] {255, 255, 255};
 

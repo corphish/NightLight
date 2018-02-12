@@ -53,17 +53,23 @@ public class NightLightAppService {
     /**
      * This sets the defined nl state listener in this service
      * @param nightLightStateListener Defined night light state listener
+     * @return This instance to allow chaining of calls
      */
-    public void setNightLightStateListener(NightLightStateListener nightLightStateListener) {
+    public NightLightAppService registerNightLightStateListener(NightLightStateListener nightLightStateListener) {
         this.nightLightStateListener = nightLightStateListener;
+
+        return this;
     }
 
     /**
      * This sets the defined nl setting mode listener in this service
      * @param nightLightSettingModeListener Defined nl setting mode listener
+     * @return This instance to allow chaining of calls
      */
-    public void registerNightLightSettingModeChangeListener(NightLightSettingModeListener nightLightSettingModeListener) {
+    public NightLightAppService registerNightLightSettingModeChangeListener(NightLightSettingModeListener nightLightSettingModeListener) {
         this.nightLightSettingModeListener = nightLightSettingModeListener;
+
+        return this;
     }
 
     /**

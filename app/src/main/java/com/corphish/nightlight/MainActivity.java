@@ -38,7 +38,12 @@ public class MainActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        NightLightAppService.getInstance().setNightLightStateListener(this);
+
+        NightLightAppService.getInstance()
+                .registerNightLightStateListener(this)
+                .registerNightLightSettingModeChangeListener(null) // TODO: Define night light setting mode change listener
+                .startService();
+
         initPresetManager();
     }
 

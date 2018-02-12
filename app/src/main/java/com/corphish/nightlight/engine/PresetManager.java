@@ -47,18 +47,23 @@ public class PresetManager {
     private PresetDatabase presetDatabase;
 
     /**
+     * Preset thread
+     */
+    private PresetThread presetThread;
+
+    /**
      * Initializes the database
      * @param context Context is needed for databse
      */
     public void initialize(Context context) {
         presetDatabase = Room.databaseBuilder(context, PresetDatabase.class, "presets").build();
+        presetThread = new PresetThread();
     }
 
     public void test() {
-
-        new Thread(new Runnable() {
+        presetThread.withOperations(new DatabaseOperations() {
             @Override
-            public void run() {
+            public void execute() {
                 Preset preset = new Preset();
                 preset.setPresetName("Test");
                 preset.setAutomationEnabled(true);
@@ -71,7 +76,7 @@ public class PresetManager {
                 try {
                     presetDatabase.getPresetDao().insert(preset);
                 } catch (SQLiteConstraintException e) {
-                    Log.i("NL_PresetManager","Tried to insert field with duplicate unique key?");
+                    Log.e("NL_PresetManager","Tried to insert field with duplicate unique key?");
                 }
 
                 List<Preset> presets = presetDatabase.getPresetDao().getAllPresets();

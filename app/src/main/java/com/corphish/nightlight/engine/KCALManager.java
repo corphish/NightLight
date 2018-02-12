@@ -74,6 +74,16 @@ public class KCALManager {
         updateKCALValues(red + " " +  green + " " + blue);
     }
 
+    /**
+     * Updates KCAL for given RGB values
+     * No need to do sanity checks as the user controls are well controlled and hence less likely to result invalid data
+     * Even if input is invalid, driver takes care of it
+     * @param rgb RGB colors as int array
+     */
+    public static void updateKCALValues(int[] rgb) {
+        updateKCALValues(rgb[0], rgb[1], rgb[2]);
+    }
+
     public static void updateKCALWithDefaultValues() {
         updateKCALValues(256, 256, 256);
     }

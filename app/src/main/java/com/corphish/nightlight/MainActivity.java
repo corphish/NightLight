@@ -120,6 +120,8 @@ public class MainActivity
         }
 
         fragmentTransaction.commit();
+
+        NightLightAppService.getInstance().notifyNewSettingMode(PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER));
     }
 
     private boolean isSupported (int id) {

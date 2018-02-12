@@ -67,17 +67,17 @@ public class NightLightAppService {
     }
 
     /**
-     * To check whether this service is running or not, we must check if the event listeners are null or not
-     * Accessing this through @link getInstance will always create the new instance if not already and return it
-     * So to check whether this is actually running or not, we check whether event listeners are null or not
-     * When the app starts, MainActivity must define the event listener and set it here
+     * To check whether this service is running or not, service status is checked
+     * Accessing this through @link getInstance() will always create the new instance if not already and return it
+     * So to check whether this is actually running or not, service status is checked
+     * As a result, @link startService() must be called to set this service running
      * Other units can then access it through here, including QSService and other receivers
      * In this way, QSService and other external units can make changes in app (UI especially) when the app is running
      * When the app is not running, the event listener is null and thus external units cant make changes as they do not need to
      * @return Whether event listeners are null or not
      */
     public boolean isAppServiceRunning () {
-        return nightLightStateListener != null;
+        return serviceStatus;
     }
 
     /**

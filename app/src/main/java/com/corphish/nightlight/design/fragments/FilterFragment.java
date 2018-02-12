@@ -7,6 +7,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
 import com.corphish.nightlight.data.Constants;
@@ -24,6 +25,7 @@ import com.corphish.nightlight.R;
 public class FilterFragment extends Fragment {
 
     private int blueIntensity, greenIntensity;
+    boolean mode;
     private Context context;
 
     // Views
@@ -38,6 +40,8 @@ public class FilterFragment extends Fragment {
 
         blueIntensity = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
         greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
+
+        mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER) == Constants.NL_SETTING_MODE_FILTER;
     }
 
     @Override
@@ -54,6 +58,16 @@ public class FilterFragment extends Fragment {
         blueSlider = getView().findViewById(R.id.blue_intensity);
         greenSlider = getView().findViewById(R.id.green_intensity);
         switchCompat = getView().findViewById(R.id.mode_switch);
+
+        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                blueSlider.setEnabled(isChecked);
+                greenSlider.setEnabled(isChecked);
+            }
+        });
+
+        switchCompat.setChecked(mode);
 
         blueSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

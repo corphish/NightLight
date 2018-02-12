@@ -1,12 +1,14 @@
 package com.corphish.nightlight.engine;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.helpers.RootUtils;
 
 import java.io.File;
+import java.util.Arrays;
 
 /**
  * Created by avinabadalal on 30/12/17.
@@ -81,6 +83,7 @@ public class KCALManager {
      * @param rgb RGB colors as int array
      */
     public static void updateKCALValues(int[] rgb) {
+        Log.i("NL_KCALManager","Got values - " + Arrays.toString(rgb));
         updateKCALValues(rgb[0], rgb[1], rgb[2]);
     }
 

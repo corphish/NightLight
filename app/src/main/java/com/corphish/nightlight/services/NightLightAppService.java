@@ -1,5 +1,6 @@
 package com.corphish.nightlight.services;
 
+import com.corphish.nightlight.interfaces.NightLightSettingModeListener;
 import com.corphish.nightlight.interfaces.NightLightStateListener;
 
 /**
@@ -33,11 +34,24 @@ public class NightLightAppService {
     private NightLightStateListener nightLightStateListener;
 
     /**
+     * This night light setting mode change listener listens to setting mode changes and requests to make proper changes
+     */
+    private NightLightSettingModeListener nightLightSettingModeListener;
+
+    /**
      * This sets the defined nl state listener in this service
      * @param nightLightStateListener Defined night light state listener
      */
     public void setNightLightStateListener(NightLightStateListener nightLightStateListener) {
         this.nightLightStateListener = nightLightStateListener;
+    }
+
+    /**
+     * This sets the defined nl setting mode listener in this service
+     * @param nightLightSettingModeListener Defined nl setting mode listener
+     */
+    public void registerNightLightSettingModeChangeListener(NightLightSettingModeListener nightLightSettingModeListener) {
+        this.nightLightSettingModeListener = nightLightSettingModeListener;
     }
 
     /**

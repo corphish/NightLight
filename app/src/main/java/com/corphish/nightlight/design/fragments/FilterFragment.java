@@ -12,8 +12,6 @@ import android.widget.SeekBar;
 
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.engine.Core;
-import com.corphish.nightlight.engine.KCALManager;
-import com.corphish.nightlight.helpers.ColorTemperatureUtil;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.R;
 import com.corphish.nightlight.services.NightLightAppService;
@@ -38,10 +36,7 @@ public class FilterFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         context = getContext();
-
-        blueIntensity = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
-        greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
-
+        getValues();
         mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER) == Constants.NL_SETTING_MODE_FILTER;
     }
 
@@ -60,6 +55,10 @@ public class FilterFragment extends Fragment {
         greenSlider = getView().findViewById(R.id.green_intensity);
         switchCompat = getView().findViewById(R.id.mode_switch);
 
+        // Disable them by default
+        blueSlider.setEnabled(false);
+        greenSlider.setEnabled(false);
+
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -69,8 +68,13 @@ public class FilterFragment extends Fragment {
 
                 PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, settingMode);
 
+                getValues();
+
                 blueSlider.setEnabled(isChecked);
+                blueSlider.setProgress(blueIntensity);
+
                 greenSlider.setEnabled(isChecked);
+                greenSlider.setProgress(greenIntensity);
 
                 NightLightAppService.getInstance().notifyNewSettingMode(settingMode);
             }
@@ -118,5 +122,10 @@ public class FilterFragment extends Fragment {
 
     public void onStateChanged(int newMode) {
         if (switchCompat != null) switchCompat.setChecked(newMode == Constants.NL_SETTING_MODE_FILTER);
+    }
+
+    private void getValues() {
+        blueIntensity = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY);
+        greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY);
     }
 }

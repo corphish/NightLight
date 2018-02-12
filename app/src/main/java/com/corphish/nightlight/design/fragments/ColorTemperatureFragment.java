@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,9 +40,7 @@ public class ColorTemperatureFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         context = getContext();
-
-        colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_COLOR_TEMP);
-
+        getValues();
         mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER) == Constants.NL_SETTING_MODE_TEMP;
     }
 
@@ -60,6 +59,10 @@ public class ColorTemperatureFragment extends Fragment {
         seekBar = getView().findViewById(R.id.temperature_value);
         advancedAutomation = getView().findViewById(R.id.temperature_automation);
 
+        // Disable them by default
+        seekBar.setEnabled(false);
+        advancedAutomation.setEnabled(false);
+
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -68,7 +71,11 @@ public class ColorTemperatureFragment extends Fragment {
                 int settingMode = isChecked ? Constants.NL_SETTING_MODE_TEMP: Constants.NL_SETTING_MODE_FILTER;
 
                 PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, settingMode);
+
+                getValues();
+
                 seekBar.setEnabled(isChecked);
+                seekBar.setProgress(colorTemperature - 3000);
                 advancedAutomation.setEnabled(isChecked);
 
                 NightLightAppService.getInstance().notifyNewSettingMode(settingMode);
@@ -92,7 +99,7 @@ public class ColorTemperatureFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 int val = 3000 + seekBar.getProgress();
                 val = (val/100) * 100;
-
+                Log.i("NL_ColorTempFragment","val - " + val);
                 PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, val);
                 Core.applyNightModeAsync(true, context, val);
             }
@@ -103,5 +110,9 @@ public class ColorTemperatureFragment extends Fragment {
 
     public void onStateChanged(int newMode) {
         if (switchCompat != null) switchCompat.setChecked(newMode == Constants.NL_SETTING_MODE_TEMP);
+    }
+
+    private void getValues() {
+        colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_COLOR_TEMP);
     }
 }

@@ -96,7 +96,10 @@ public class MainActivity
 
     @Override
     public void onModeChanged(int newMode) {
-
+        for (Fragment fragment: getSupportFragmentManager().getFragments()) {
+            if (fragment instanceof FilterFragment) ((FilterFragment) fragment).onStateChanged(newMode);
+            if (fragment instanceof ColorTemperatureFragment) ((ColorTemperatureFragment) fragment).onStateChanged(newMode);
+        }
     }
 
     private void setViews(boolean show) {

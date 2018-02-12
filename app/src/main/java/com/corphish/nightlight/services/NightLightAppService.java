@@ -108,5 +108,7 @@ public class NightLightAppService {
      */
     public void destroy() {
         nightLightStateListener = null;
+        nightLightSettingModeListener = null;
+        serviceStatus = false;
     }
 }

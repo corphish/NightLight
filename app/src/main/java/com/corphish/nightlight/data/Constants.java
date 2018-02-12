@@ -31,6 +31,7 @@ public class Constants {
     public static final String COMPATIBILITY_TEST   =   "compatibility_test";
     public static final String KCAL_PRESERVE_SWITCH =   "kcal_preserve_switch";
     public static final String KCAL_PRESERVE_VAL    =   "kcal_preserve_val";
+    public static final String PREF_SETTING_MODE    =   "nl_setting_mode";
 
 
     /**

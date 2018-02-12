@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.engine.PresetManager;
 import com.corphish.nightlight.helpers.PreferenceHelper;
+import com.corphish.nightlight.interfaces.NightLightSettingModeListener;
 import com.corphish.nightlight.interfaces.NightLightStateListener;
 import com.corphish.nightlight.services.NightLightAppService;
 import com.corphish.nightlight.design.fragments.AutoFragment;
@@ -25,7 +26,7 @@ import java.util.List;
 
 public class MainActivity
         extends AppCompatActivity
-        implements MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener {
+        implements MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener, NightLightSettingModeListener {
 
     private boolean masterSwitchEnabled;
     private final int containerId = R.id.layout_container;
@@ -41,7 +42,7 @@ public class MainActivity
 
         NightLightAppService.getInstance()
                 .registerNightLightStateListener(this)
-                .registerNightLightSettingModeChangeListener(null) // TODO: Define night light setting mode change listener
+                .registerNightLightSettingModeChangeListener(this) // TODO: Define night light setting mode change listener
                 .startService();
 
         initPresetManager();
@@ -90,6 +91,11 @@ public class MainActivity
                 break;
             }
         }
+    }
+
+    @Override
+    public void onModeChanged(int newMode) {
+
     }
 
     private void setViews(boolean show) {

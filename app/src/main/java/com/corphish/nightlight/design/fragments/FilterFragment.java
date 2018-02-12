@@ -3,6 +3,7 @@ package com.corphish.nightlight.design.fragments;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,10 @@ public class FilterFragment extends Fragment {
     private int blueIntensity, greenIntensity;
     private Context context;
 
+    // Views
+    SeekBar blueSlider, greenSlider;
+    SwitchCompat switchCompat;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +51,9 @@ public class FilterFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        SeekBar blueSlider = getView().findViewById(R.id.blue_intensity),
-                greenSlider = getView().findViewById(R.id.green_intensity),
-                temperatureSlider = getView().findViewById(R.id.temperature);
+        blueSlider = getView().findViewById(R.id.blue_intensity);
+        greenSlider = getView().findViewById(R.id.green_intensity);
+        switchCompat = getView().findViewById(R.id.mode_switch);
 
         blueSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -86,24 +91,5 @@ public class FilterFragment extends Fragment {
 
         blueSlider.setProgress(blueIntensity);
         greenSlider.setProgress(greenIntensity);
-
-        temperatureSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                int val = seekBar.getProgress() + 1000;
-                //val = (val/100) * 100;
-                KCALManager.updateKCALValues(ColorTemperatureUtil.colorTemperatureToIntRGB(val));
-            }
-        });
     }
 }

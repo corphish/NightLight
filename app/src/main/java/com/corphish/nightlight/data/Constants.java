@@ -45,4 +45,10 @@ public class Constants {
     public static final String DEFAULT_LONGITUDE    =   "0.00";
     public static final String DEFAULT_LATITUDE     =   "0.00";
     public static final String DEFAULT_KCAL_VALUES  =   "256 256 256";
+
+    /**
+     * Night light setting modes
+     */
+    public static final int NL_SETTING_MODE_FILTER  =   0;
+    public static final int NL_SETTING_MODE_TEMP    =   1;
 }

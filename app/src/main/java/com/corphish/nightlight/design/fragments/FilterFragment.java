@@ -10,6 +10,8 @@ import android.widget.SeekBar;
 
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.engine.Core;
+import com.corphish.nightlight.engine.KCALManager;
+import com.corphish.nightlight.helpers.ColorTemperatureUtil;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.R;
 
@@ -45,7 +47,8 @@ public class FilterFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         SeekBar blueSlider = getView().findViewById(R.id.blue_intensity),
-                greenSlider = getView().findViewById(R.id.green_intensity);
+                greenSlider = getView().findViewById(R.id.green_intensity),
+                temperatureSlider = getView().findViewById(R.id.temperature);
 
         blueSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -83,5 +86,24 @@ public class FilterFragment extends Fragment {
 
         blueSlider.setProgress(blueIntensity);
         greenSlider.setProgress(greenIntensity);
+
+        temperatureSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                int val = seekBar.getProgress() + 1000;
+                //val = (val/100) * 100;
+                KCALManager.updateKCALValues(ColorTemperatureUtil.colorTemperatureToIntRGB(val));
+            }
+        });
     }
 }

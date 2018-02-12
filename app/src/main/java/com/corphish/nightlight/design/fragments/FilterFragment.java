@@ -16,6 +16,7 @@ import com.corphish.nightlight.engine.KCALManager;
 import com.corphish.nightlight.helpers.ColorTemperatureUtil;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.R;
+import com.corphish.nightlight.services.NightLightAppService;
 
 /**
  * Created by Avinaba on 10/23/2017.
@@ -62,8 +63,16 @@ public class FilterFragment extends Fragment {
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mode = isChecked;
+
+                int settingMode = isChecked ? Constants.NL_SETTING_MODE_FILTER : Constants.NL_SETTING_MODE_TEMP;
+
+                PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, settingMode);
+
                 blueSlider.setEnabled(isChecked);
                 greenSlider.setEnabled(isChecked);
+
+                NightLightAppService.getInstance().notifyNewSettingMode(settingMode);
             }
         });
 
@@ -105,5 +114,9 @@ public class FilterFragment extends Fragment {
 
         blueSlider.setProgress(blueIntensity);
         greenSlider.setProgress(greenIntensity);
+    }
+
+    public void onStateChanged(int newMode) {
+        if (switchCompat != null) switchCompat.setChecked(newMode == Constants.NL_SETTING_MODE_FILTER);
     }
 }

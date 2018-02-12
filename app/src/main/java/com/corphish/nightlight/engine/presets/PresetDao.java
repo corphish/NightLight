@@ -36,6 +36,13 @@ public interface PresetDao {
     List<Preset> getAllUserPresets();
 
     /**
+     * Gets number of all default presets
+     * @return Number of default presets
+     */
+    @Query("SELECT count(*) from presets where type IS 0")
+    int getDefaultPresetCount();
+
+    /**
      * Inserts preset into persistent store
      * @param presets Presets to be saved
      */

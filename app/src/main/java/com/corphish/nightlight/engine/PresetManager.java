@@ -74,7 +74,9 @@ public class PresetManager {
                 preset.setType(PRESET_TYPE_DEFAULT);
 
                 try {
-                    presetDatabase.getPresetDao().insert(preset);
+                    if (presetDatabase.getPresetDao().getDefaultPresetCount() < 1) {
+                        presetDatabase.getPresetDao().insert(preset);
+                    }
                 } catch (SQLiteConstraintException e) {
                     Log.e("NL_PresetManager","Tried to insert field with duplicate unique key?");
                 }

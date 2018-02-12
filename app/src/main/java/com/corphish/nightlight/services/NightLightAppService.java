@@ -95,6 +95,14 @@ public class NightLightAppService {
     }
 
     /**
+     * Notifies other units that setting mode has been changed
+     * @param newMode New setting mode
+     */
+    public void notifyNewSettingMode(int newMode) {
+        if (nightLightSettingModeListener != null) nightLightSettingModeListener.onModeChanged(newMode);
+    }
+
+    /**
      * Destroys the event listeners
      * This <strong>has to be called in onDestroy() of MainActivity</strong>
      */

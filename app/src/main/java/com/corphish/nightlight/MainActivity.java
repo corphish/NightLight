@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.corphish.nightlight.data.Constants;
+import com.corphish.nightlight.design.fragments.ColorTemperatureFragment;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.interfaces.NightLightSettingModeListener;
 import com.corphish.nightlight.interfaces.NightLightStateListener;
@@ -96,6 +97,7 @@ public class MainActivity
         if (show) {
             // Add all others conditionally
             if (isSupported(R.bool.filters_enabled)) fragmentTransaction.add(containerId, new FilterFragment());
+            if (isSupported(R.bool.color_temperature_enabled)) fragmentTransaction.add(containerId, new ColorTemperatureFragment());
             if (isSupported(R.bool.automation_enabled)) fragmentTransaction.add(containerId, new AutoFragment());
             if (isSupported(R.bool.force_switch_enabled)) fragmentTransaction.add(containerId, new ForceSwitchFragment());
         } else {

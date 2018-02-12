@@ -32,6 +32,16 @@ public class PresetManager {
     private PresetManager() {}
 
     /**
+     * Database operations interface to wrap up a database operation which will be executed inside AsyncTask/Thread
+     */
+    private interface DatabaseOperations {
+        /**
+         * Operation to be execute
+         */
+        void execute();
+    }
+
+    /**
      * Preset database
      */
     private PresetDatabase presetDatabase;
@@ -45,6 +55,7 @@ public class PresetManager {
     }
 
     public void test() {
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -70,5 +81,20 @@ public class PresetManager {
                 }
             }
         }).start();
+    }
+
+    private class PresetThread extends Thread {
+        private DatabaseOperations databaseOperations;
+
+        public PresetThread withOperations(DatabaseOperations databaseOperations) {
+            this.databaseOperations = databaseOperations;
+
+            return this;
+        }
+
+        @Override
+        public void run() {
+            databaseOperations.execute();
+        }
     }
 }

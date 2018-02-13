@@ -1,7 +1,5 @@
 package com.corphish.nightlight.helpers;
 
-import android.util.Log;
-
 import java.util.List;
 
 import eu.chainfire.libsuperuser.Shell;

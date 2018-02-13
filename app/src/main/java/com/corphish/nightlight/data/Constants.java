@@ -35,6 +35,7 @@ public class Constants {
     public static final String PREF_COLOR_TEMP      =   "color_temp_val";
     public static final String PREF_BOOT_MODE       =   "boot_mode";
     public static final String PREF_LAST_BOOT_RES   =   "last_boot_result";
+    public static final String PREF_BOOT_DELAY      =   "boot_delay";
 
 
     /**
@@ -50,6 +51,7 @@ public class Constants {
     public static final String DEFAULT_LATITUDE     =   "0.00";
     public static final String DEFAULT_KCAL_VALUES  =   "256 256 256";
     public static final int DEFAULT_COLOR_TEMP      =   4000;
+    public static final int DEFAULT_BOOT_DELAY      =   20;
 
     /**
      * Night light setting modes

@@ -34,8 +34,13 @@ public class Core {
                 KCALManager.backupCurrentKCALValues(context);
         }
 
+        boolean isModeBooting = PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false);
+
+        // Assume that set on boot failed by default
+        if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false);
+
         boolean ret = KCALManager.updateKCALValues(256, Constants.MAX_GREEN_LIGHT - greenIntensity, Constants.MAX_BLUE_LIGHT - blueIntensity);
-        if (PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false)) {
+        if (isModeBooting) {
             PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret);
         }
 
@@ -61,10 +66,14 @@ public class Core {
                 KCALManager.backupCurrentKCALValues(context);
         }
 
+        boolean isModeBooting = PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false);
+
+        // Assume that set on boot failed by default
+        if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false);
+
         boolean ret = KCALManager.updateKCALValues(ColorTemperatureUtil.colorTemperatureToIntRGB(temperature));
-        if (PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false)) {
-            PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret);
-        }
+        Log.i("NL_Core","Res " + ret);
+        if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret);
 
         PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, true);
     }

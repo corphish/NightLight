@@ -48,14 +48,17 @@ public class BootCompleteJobService extends JobService {
     public static void schedule(Context context) {
         Log.i("NL_Boot","Scheduled job");
 
+        int delay = PreferenceHelper.getInt(context, Constants.PREF_BOOT_DELAY, Constants.DEFAULT_BOOT_DELAY);
+
         // Notify that this is set on boot operation
         PreferenceHelper.putBoolean(context, Constants.PREF_BOOT_MODE, true);
 
         ComponentName component = new ComponentName(context, BootCompleteJobService.class);
         JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, component)
-                // schedule it to run any time between 1 - 5 minutes
-                .setMinimumLatency(60*LATENCY)
-                .setOverrideDeadline(300 * LATENCY);
+                // Start with user set (or default) delay
+                // Set deadline to 1 min after delay
+                .setMinimumLatency(delay * LATENCY)
+                .setOverrideDeadline((60 + delay) * LATENCY);
 
         JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         jobScheduler.schedule(builder.build());

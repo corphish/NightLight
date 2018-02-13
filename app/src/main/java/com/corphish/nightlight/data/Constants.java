@@ -33,6 +33,8 @@ public class Constants {
     public static final String KCAL_PRESERVE_VAL    =   "kcal_preserve_val";
     public static final String PREF_SETTING_MODE    =   "nl_setting_mode";
     public static final String PREF_COLOR_TEMP      =   "color_temp_val";
+    public static final String PREF_BOOT_MODE       =   "boot_mode";
+    public static final String PREF_LAST_BOOT_RES   =   "last_boot_result";
 
 
     /**

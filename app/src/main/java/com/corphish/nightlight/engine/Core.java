@@ -34,7 +34,10 @@ public class Core {
                 KCALManager.backupCurrentKCALValues(context);
         }
 
-        KCALManager.updateKCALValues(256, Constants.MAX_GREEN_LIGHT - greenIntensity, Constants.MAX_BLUE_LIGHT - blueIntensity);
+        boolean ret = KCALManager.updateKCALValues(256, Constants.MAX_GREEN_LIGHT - greenIntensity, Constants.MAX_BLUE_LIGHT - blueIntensity);
+        if (PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false)) {
+            PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret);
+        }
 
         PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, true);
     }
@@ -58,7 +61,10 @@ public class Core {
                 KCALManager.backupCurrentKCALValues(context);
         }
 
-        KCALManager.updateKCALValues(ColorTemperatureUtil.colorTemperatureToIntRGB(temperature));
+        boolean ret = KCALManager.updateKCALValues(ColorTemperatureUtil.colorTemperatureToIntRGB(temperature));
+        if (PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false)) {
+            PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret);
+        }
 
         PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, true);
     }
@@ -231,6 +237,10 @@ public class Core {
 
         @Override
         protected void onPostExecute(Object bubble) {
+            // If this is run by set on boot units, set BOOT_MODE false
+            if (PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false))
+                PreferenceHelper.putBoolean(context, Constants.PREF_BOOT_MODE, false);
+
             if (NightLightAppService.getInstance().isAppServiceRunning() && toUpdateGlobalState)
                 NightLightAppService.getInstance().notifyUpdatedState(enabled);
         }

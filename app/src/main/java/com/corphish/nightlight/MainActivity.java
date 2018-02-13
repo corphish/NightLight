@@ -1,6 +1,7 @@
 package com.corphish.nightlight;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -102,7 +103,7 @@ public class MainActivity
             // Add all others conditionally
             if (isSupported(R.bool.filters_enabled)) fragmentTransaction.add(containerId, new FilterFragment());
             if (isSupported(R.bool.color_temperature_enabled)) fragmentTransaction.add(containerId, new ColorTemperatureFragment());
-            if (isSupported(R.bool.set_on_boot_delay_enabled)) fragmentTransaction.add(containerId, new SetOnBootDelayFragment());
+            if (isSupported(R.bool.set_on_boot_delay_enabled) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) fragmentTransaction.add(containerId, new SetOnBootDelayFragment());
             if (isSupported(R.bool.automation_enabled)) fragmentTransaction.add(containerId, new AutoFragment());
             if (isSupported(R.bool.force_switch_enabled)) fragmentTransaction.add(containerId, new ForceSwitchFragment());
         } else {

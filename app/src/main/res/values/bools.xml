@@ -7,5 +7,5 @@
     <bool name="forced_compatibility_test_enabled">false</bool>
     <bool name="contributors_card_enabled">true</bool>
     <bool name="color_temperature_enabled">true</bool>
-    <bool name="set_on_boot_delay_enabled">false</bool>
+    <bool name="set_on_boot_delay_enabled">true</bool>
 </resources>

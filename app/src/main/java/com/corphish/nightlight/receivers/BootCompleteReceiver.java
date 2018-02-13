@@ -28,7 +28,7 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         Log.i("NL_Boot", "BootComplete Signal received");
         if (!intent.getAction().equals(BOOT_COMPLETE_ANDROID_STRING)) return;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) BootCompleteJobService.schedule(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) BootCompleteJobService.schedule(context);
         else BootUtils.applyOnBoot(context);
     }
 }

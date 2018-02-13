@@ -19,7 +19,7 @@ import com.corphish.nightlight.helpers.PreferenceHelper;
  * Boot Complete service for Android O
  */
 
-@RequiresApi(Build.VERSION_CODES.O)
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 public class BootCompleteJobService extends JobService {
 
     private static final int JOB_ID = 1;

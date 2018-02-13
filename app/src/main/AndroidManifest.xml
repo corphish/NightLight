@@ -72,6 +72,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.corphish.nightlight.MainActivity" />
         </activity>
+
+        <service android:name=".services.BootCompleteJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":booting" />
     </application>
 
 </manifest>

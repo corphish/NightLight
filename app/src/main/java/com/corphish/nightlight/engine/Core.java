@@ -2,6 +2,7 @@ package com.corphish.nightlight.engine;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.helpers.ColorTemperatureUtil;
@@ -47,6 +48,7 @@ public class Core {
      * @param temperature Color temperature for night light
      */
     private static void enableNightMode(Context context, int temperature) {
+        Log.i("NL_Core", "Enabling night mode");
         KCALManager.enableKCAL();
 
         if (PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true)) {
@@ -102,6 +104,7 @@ public class Core {
      * @param temperature Color temperature for Night Light
      */
     public static void applyNightMode(boolean e, Context context, int temperature) {
+        Log.i("NL_Core","Switch " + e + ", " + temperature);
         if (e) enableNightMode(context, temperature);
         else disableNightMode(context);
     }
@@ -173,7 +176,7 @@ public class Core {
      */
     public static void applyNightModeAsync(boolean b, Context context, boolean toUpdateGlobalState) {
         int mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER);
-
+        Log.d("NL_Core","Mode " + mode);
         if (mode == Constants.NL_SETTING_MODE_FILTER) {
             applyNightModeAsync(b,
                     context,
@@ -211,6 +214,8 @@ public class Core {
             this.context = context;
             this.temperature = temperature;
             this.toUpdateGlobalState = toUpdateGlobalState;
+
+            Log.i("NL_Core","Got temp " + temperature);
 
             mode = Constants.NL_SETTING_MODE_TEMP;
         }

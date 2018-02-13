@@ -64,7 +64,7 @@ public class KCALManager {
     public static boolean updateKCALValues(String rawValue) {
         // If operation is successful, there should be no output
         // Otherwise we would get output like "Permission denied"
-        return RootUtils.writeToFile(rawValue, Constants.KCAL_ADJUST) == 0;
+        return RootUtils.writeToFile(rawValue, Constants.KCAL_ADJUST);
     }
 
     /**

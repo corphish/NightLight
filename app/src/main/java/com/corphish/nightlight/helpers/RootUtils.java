@@ -1,5 +1,7 @@
 package com.corphish.nightlight.helpers;
 
+import android.util.Log;
+
 import java.util.List;
 
 import eu.chainfire.libsuperuser.Shell;
@@ -24,9 +26,10 @@ public class RootUtils {
      * @param textToBeWritten The text that is to be written.
      * @param file The file in which the text would be written.
      */
-    public static int writeToFile(String textToBeWritten, String file) {
+    public static boolean writeToFile(String textToBeWritten, String file) {
         String command = "echo \"" + textToBeWritten + "\" > " + file;
-        return Shell.SU.run(command).size();
+        Shell.SU.run(command);
+        return Shell.SU.available();
     }
 
     /**

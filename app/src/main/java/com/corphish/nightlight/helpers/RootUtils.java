@@ -24,9 +24,9 @@ public class RootUtils {
      * @param textToBeWritten The text that is to be written.
      * @param file The file in which the text would be written.
      */
-    public static void writeToFile(String textToBeWritten, String file) {
+    public static int writeToFile(String textToBeWritten, String file) {
         String command = "echo \"" + textToBeWritten + "\" > " + file;
-        Shell.SU.run(command);
+        return Shell.SU.run(command).size();
     }
 
     /**

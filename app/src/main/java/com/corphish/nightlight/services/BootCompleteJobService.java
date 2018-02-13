@@ -10,7 +10,9 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.helpers.BootUtils;
+import com.corphish.nightlight.helpers.PreferenceHelper;
 
 /**
  * Created by avinabadalal on 13/02/18.
@@ -45,6 +47,10 @@ public class BootCompleteJobService extends JobService {
     // From https://blog.klinkerapps.com/android-o-background-services/
     public static void schedule(Context context) {
         Log.i("NL_Boot","Scheduled job");
+
+        // Notify that this is set on boot operation
+        PreferenceHelper.putBoolean(context, Constants.PREF_BOOT_MODE, true);
+
         ComponentName component = new ComponentName(context, BootCompleteJobService.class);
         JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, component)
                 // schedule it to run any time between 1 - 5 minutes

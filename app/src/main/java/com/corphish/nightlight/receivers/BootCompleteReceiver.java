@@ -3,13 +3,17 @@ package com.corphish.nightlight.receivers;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.util.Log;
 
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.engine.Core;
 import com.corphish.nightlight.engine.TwilightManager;
 import com.corphish.nightlight.helpers.AlarmUtils;
+import com.corphish.nightlight.helpers.BootUtils;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.helpers.TimeUtils;
+import com.corphish.nightlight.services.BootCompleteJobService;
 
 /**
  * Created by Avinaba on 10/5/2017.
@@ -21,30 +25,10 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.i("NL_Boot", "BootComplete Signal received");
         if (!intent.getAction().equals(BOOT_COMPLETE_ANDROID_STRING)) return;
 
-        PreferenceHelper.putBoolean(context, Constants.COMPATIBILITY_TEST, false);
-
-        boolean masterSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_MASTER_SWITCH);
-        boolean autoSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH);
-        boolean sunSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_SUN_SWITCH);
-
-        String sStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME);
-        String sEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
-
-        if (!masterSwitch) return;
-
-        if (!autoSwitch) {
-            Core.applyNightModeAsync(true, context);
-            return;
-        }
-
-        boolean state = TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime);
-        Core.applyNightModeAsync(state, context);
-
-        if (!sunSwitch) AlarmUtils.setAlarms(context, sStartTime, sEndTime, true);
-        else TwilightManager.newInstance()
-                .atLocation(PreferenceHelper.getLocation(context))
-                .computeAndSaveTime(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) BootCompleteJobService.schedule(context);
+        else BootUtils.applyOnBoot(context);
     }
 }

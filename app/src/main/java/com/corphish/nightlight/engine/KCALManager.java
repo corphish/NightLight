@@ -59,9 +59,12 @@ public class KCALManager {
      * No need to do sanity checks as the user controls are well controlled and hence less likely to result invalid data
      * Even if input is invalid, driver takes care of it
      * @param rawValue Input values in form of "<Red> <Green> <Blue>" as supported by driver
+     * @return Whether setting KCAL values was success or not
      */
-    public static void updateKCALValues(String rawValue) {
-        RootUtils.writeToFile(rawValue, Constants.KCAL_ADJUST);
+    public static boolean updateKCALValues(String rawValue) {
+        // If operation is successful, there should be no output
+        // Otherwise we would get output like "Permission denied"
+        return RootUtils.writeToFile(rawValue, Constants.KCAL_ADJUST) == 0;
     }
 
     /**
@@ -71,9 +74,10 @@ public class KCALManager {
      * @param red Red color value
      * @param green Green color value
      * @param blue Blue color value
+     * @return Whether setting KCAL values was success or not
      */
-    public static void updateKCALValues(int red, int green, int blue) {
-        updateKCALValues(red + " " +  green + " " + blue);
+    public static boolean updateKCALValues(int red, int green, int blue) {
+        return updateKCALValues(red + " " +  green + " " + blue);
     }
 
     /**
@@ -81,14 +85,15 @@ public class KCALManager {
      * No need to do sanity checks as the user controls are well controlled and hence less likely to result invalid data
      * Even if input is invalid, driver takes care of it
      * @param rgb RGB colors as int array
+     * @return Whether setting KCAL values was success or not
      */
-    public static void updateKCALValues(int[] rgb) {
+    public static boolean updateKCALValues(int[] rgb) {
         Log.i("NL_KCALManager","Got values - " + Arrays.toString(rgb));
-        updateKCALValues(rgb[0], rgb[1], rgb[2]);
+        return updateKCALValues(rgb[0], rgb[1], rgb[2]);
     }
 
-    public static void updateKCALWithDefaultValues() {
-        updateKCALValues(256, 256, 256);
+    public static boolean updateKCALWithDefaultValues() {
+        return updateKCALValues(256, 256, 256);
     }
 
     /**

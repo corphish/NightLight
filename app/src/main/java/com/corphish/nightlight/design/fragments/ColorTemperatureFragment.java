@@ -72,11 +72,10 @@ public class ColorTemperatureFragment extends Fragment {
 
                 PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, settingMode);
 
-                getValues();
-
                 seekBar.setEnabled(isChecked);
-                seekBar.setProgress(colorTemperature - 3000);
                 advancedAutomation.setEnabled(isChecked);
+
+                if (isChecked) Core.applyNightModeAsync(isChecked, context, colorTemperature + 3000);
 
                 NightLightAppService.getInstance().notifyNewSettingMode(settingMode);
             }
@@ -97,15 +96,14 @@ public class ColorTemperatureFragment extends Fragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                int val = 3000 + seekBar.getProgress();
-                val = (val/100) * 100;
-                Log.i("NL_ColorTempFragment","val - " + val);
-                PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, val);
-                Core.applyNightModeAsync(true, context, val);
+                colorTemperature = seekBar.getProgress();
+                colorTemperature = (colorTemperature/100) * 100;
+                PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, colorTemperature + 3000);
+                Core.applyNightModeAsync(true, context, colorTemperature + 3000);
             }
         });
 
-        seekBar.setProgress(colorTemperature - 3000);
+        seekBar.setProgress(colorTemperature);
     }
 
     public void onStateChanged(int newMode) {
@@ -113,6 +111,6 @@ public class ColorTemperatureFragment extends Fragment {
     }
 
     private void getValues() {
-        colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_COLOR_TEMP);
+        colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP) - 3000;
     }
 }

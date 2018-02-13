@@ -68,13 +68,10 @@ public class FilterFragment extends Fragment {
 
                 PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, settingMode);
 
-                getValues();
-
                 blueSlider.setEnabled(isChecked);
-                blueSlider.setProgress(blueIntensity);
-
                 greenSlider.setEnabled(isChecked);
-                greenSlider.setProgress(greenIntensity);
+
+                if (isChecked) Core.applyNightModeAsync(isChecked, context, blueIntensity, greenIntensity);
 
                 NightLightAppService.getInstance().notifyNewSettingMode(settingMode);
             }

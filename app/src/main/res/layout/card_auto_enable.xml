@@ -7,6 +7,7 @@
     custom:elevation="@dimen/card_elevation"
     android:clickable="true"
     android:focusable="true"
+    android:id="@+id/card_auto"
     android:focusableInTouchMode="true"
     android:foreground="?android:attr/selectableItemBackground"
     xmlns:android="http://schemas.android.com/apk/res/android">

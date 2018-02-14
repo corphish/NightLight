@@ -48,7 +48,6 @@
             android:id="@+id/temperature_automation"
             android:layout_margin="@dimen/layout_margin"
             android:padding="@dimen/layout_padding"
-            android:visibility="gone"
             app:caption="@string/advanced_automation"
             app:value="@string/disabled"/>
     </LinearLayout>

@@ -60,4 +60,6 @@
     <string name="set_on_boot_delay_title">Set on boot delay</string>
     <string name="set_on_boot_delay_desc">Set the delay after which Night Light settings will be restored and applied after boot. Night Light settings will be applied after %s delay.</string>
     <string name="set_on_boot_delay_warn">Looks like Night Light settings were restored but could not be applied after most recent boot. Consider increasing this delay so that settings can be successfully restored and applied after boot.</string>
+
+    <string name="suggest_enabling_automation">Please enable Automatic switch to use advanced automation features.</string>
 </resources>

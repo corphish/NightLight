@@ -3,6 +3,7 @@ package com.corphish.nightlight.design.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
@@ -104,6 +105,26 @@ public class ColorTemperatureFragment extends Fragment {
         });
 
         seekBar.setProgress(colorTemperature);
+
+        advancedAutomation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Check whether automation is enabled in the first place
+                boolean autoEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH, false);
+
+                // If automation is not enabled, request user to enable automation
+                if (!autoEnabled) {
+                    if (getActivity() != null)  {
+                        Snackbar.make(getActivity().findViewById(R.id.clayout), R.string.suggest_enabling_automation, Snackbar.LENGTH_LONG).show();
+
+                        View autoFragmentView = getActivity().findViewById(R.id.card_auto);
+                        autoFragmentView.requestFocus();
+                        autoFragmentView.getParent().requestChildFocus(autoFragmentView, autoFragmentView);
+                    }
+
+                }
+            }
+        });
     }
 
     public void onStateChanged(int newMode) {

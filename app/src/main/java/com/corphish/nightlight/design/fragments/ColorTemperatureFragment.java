@@ -125,6 +125,8 @@ public class ColorTemperatureFragment extends Fragment {
                 }
             }
         });
+
+        advancedAutomation.setVisibility(getResources().getBoolean(R.bool.advanced_color_temperature_automation_enabled) ? View.VISIBLE : View.GONE);
     }
 
     public void onStateChanged(int newMode) {

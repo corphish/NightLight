@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+    android:padding="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/kcal_backup_set_title"
+        android:textSize="18sp"
+        android:textAppearance="?android:textAppearance"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:paddingStart="@dimen/layout_padding"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/kcal_backup_set_desc"
+        android:textSize="@dimen/text_desc"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingBottom="@dimen/layout_padding"
+        android:paddingStart="@dimen/layout_padding"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/red"
+        android:layout_margin="@dimen/layout_margin"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:paddingStart="@dimen/layout_padding"/>
+
+    <android.support.v7.widget.AppCompatSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin"
+        android:id="@+id/kcal_red"
+        android:max="256"
+        android:padding="@dimen/layout_padding"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/green"
+        android:layout_margin="@dimen/layout_margin"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:paddingStart="@dimen/layout_padding"/>
+
+    <android.support.v7.widget.AppCompatSeekBar
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/layout_margin"
+        android:layout_height="wrap_content"
+        android:id="@+id/kcal_green"
+        android:max="256"
+        android:padding="@dimen/layout_padding"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/blue"
+        android:layout_margin="@dimen/layout_margin"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:paddingStart="@dimen/layout_padding"/>
+
+    <android.support.v7.widget.AppCompatSeekBar
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/layout_margin"
+        android:layout_height="wrap_content"
+        android:id="@+id/kcal_blue"
+        android:max="256"
+        android:padding="@dimen/layout_padding"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:text="@android:string/ok"
+            android:id="@+id/button_ok"
+            app:backgroundTint="@color/colorPrimary"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/layout_padding"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="8dp"
+            android:paddingBottom="@dimen/layout_padding"
+            android:id="@+id/button_cancel"
+            android:textAppearance="?android:textAppearanceButton"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorAccent"
+            android:text="@android:string/cancel"
+            android:layout_toStartOf="@id/button_ok"/>
+    </RelativeLayout>
+</LinearLayout>

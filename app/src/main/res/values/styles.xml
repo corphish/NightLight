@@ -24,4 +24,8 @@
         <item name="colorAccent">@android:color/white</item>
     </style>
 
+    <style name="BottomSheetDialogDark" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:colorBackground">#333333</item>
+    </style>
+
 </resources>

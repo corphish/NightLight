@@ -1,6 +1,8 @@
 package com.corphish.nightlight.design.fragments;
 
 import android.app.Activity;
+import android.content.Context;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatCheckBox;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
 
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.engine.Core;
@@ -28,6 +31,10 @@ public class MasterSwitchFragment extends Fragment {
 
     MasterSwitchClickListener mCallback;
     boolean enabled;
+
+    private View kcalBackupSettingsView;
+    private BottomSheetDialog bottomSheetDialog;
+    private int r, g, b;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +85,110 @@ public class MasterSwitchFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 PreferenceHelper.putBoolean(getContext(), Constants.KCAL_PRESERVE_SWITCH, b);
+            }
+        });
+
+
+        getView().findViewById(R.id.configure_kcal_backup).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getContext();
+                if (context == null) return;
+                bottomSheetDialog = new BottomSheetDialog(context, R.style.BottomSheetDialogDark);
+                initKCALBackupView();
+                bottomSheetDialog.setContentView(kcalBackupSettingsView);
+                bottomSheetDialog.show();
+            }
+        });
+
+    }
+
+    private void initKCALBackupView() {
+        kcalBackupSettingsView = View.inflate(getContext(), R.layout.bottom_sheet_kcal_backup_set, null);
+
+        String backedUpValues = PreferenceHelper.getString(getContext(), Constants.KCAL_PRESERVE_VAL, null);
+
+        if (backedUpValues == null) {
+            r = g = b = 256;
+        } else {
+            String parts[] = backedUpValues.split(" ");
+            r = Integer.parseInt(parts[0]);
+            g = Integer.parseInt(parts[1]);
+            b = Integer.parseInt(parts[2]);
+        }
+
+        SeekBar red, green, blue;
+        red = kcalBackupSettingsView.findViewById(R.id.kcal_red);
+        green = kcalBackupSettingsView.findViewById(R.id.kcal_green);
+        blue = kcalBackupSettingsView.findViewById(R.id.kcal_blue);
+
+        red.setProgress(r);
+        green.setProgress(g);
+        blue.setProgress(b);
+
+        red.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                r = seekBar.getProgress();
+            }
+        });
+
+        green.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                g = seekBar.getProgress();
+            }
+        });
+
+        blue.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                b = seekBar.getProgress();
+            }
+        });
+
+        kcalBackupSettingsView.findViewById(R.id.button_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        kcalBackupSettingsView.findViewById(R.id.button_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PreferenceHelper.putString(getContext(), Constants.KCAL_PRESERVE_VAL, r + " " + g + " " + b);
+                bottomSheetDialog.dismiss();
             }
         });
     }

@@ -62,4 +62,12 @@
     <string name="set_on_boot_delay_warn">Looks like Night Light settings were restored but could not be applied after most recent boot. Consider increasing this delay so that settings can be successfully restored and applied after boot.</string>
 
     <string name="suggest_enabling_automation">Please enable Automatic switch to use advanced automation features.</string>
+
+    <string name="kcal_backup_set_title">KCAL backup settings</string>
+    <string name="kcal_backup_set_desc">You can configure your old KCAL settings here. These settings will applied when night light is turned off.</string>
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
+    <string name="test">Test</string>
+    <string name="kcal_backup_set"><u>Configure KCAL backup settings?</u></string>
 </resources>

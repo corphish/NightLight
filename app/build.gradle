@@ -68,6 +68,8 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:1.0.0"
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
 
+    implementation 'com.gregacucnik:editableseekbar:1.2'
+
     genericImplementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
         transitive = true
     }

@@ -17,6 +17,7 @@ import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.engine.Core;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.R;
+import com.gregacucnik.EditableSeekBar;
 
 /**
  * Created by Avinaba on 10/23/2017.
@@ -117,18 +118,18 @@ public class MasterSwitchFragment extends Fragment {
             b = Integer.parseInt(parts[2]);
         }
 
-        SeekBar red, green, blue;
+        final EditableSeekBar red, green, blue;
         red = kcalBackupSettingsView.findViewById(R.id.kcal_red);
         green = kcalBackupSettingsView.findViewById(R.id.kcal_green);
         blue = kcalBackupSettingsView.findViewById(R.id.kcal_blue);
 
-        red.setProgress(r);
-        green.setProgress(g);
-        blue.setProgress(b);
+        red.setValue(r);
+        green.setValue(g);
+        blue.setValue(b);
 
-        red.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        red.setOnEditableSeekBarChangeListener(new EditableSeekBar.OnEditableSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            public void onEditableSeekBarProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
             }
 
@@ -141,11 +142,26 @@ public class MasterSwitchFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 r = seekBar.getProgress();
             }
+
+            @Override
+            public void onEnteredValueTooHigh() {
+                red.setValue(255);
+            }
+
+            @Override
+            public void onEnteredValueTooLow() {
+                red.setValue(0);
+            }
+
+            @Override
+            public void onEditableSeekBarValueChanged(int value) {
+                r = value;
+            }
         });
 
-        green.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        green.setOnEditableSeekBarChangeListener(new EditableSeekBar.OnEditableSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            public void onEditableSeekBarProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
             }
 
@@ -158,11 +174,26 @@ public class MasterSwitchFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 g = seekBar.getProgress();
             }
+
+            @Override
+            public void onEnteredValueTooHigh() {
+                green.setValue(256);
+            }
+
+            @Override
+            public void onEnteredValueTooLow() {
+                green.setValue(0);
+            }
+
+            @Override
+            public void onEditableSeekBarValueChanged(int value) {
+                g = value;
+            }
         });
 
-        blue.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        blue.setOnEditableSeekBarChangeListener(new EditableSeekBar.OnEditableSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            public void onEditableSeekBarProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
             }
 
@@ -175,7 +206,23 @@ public class MasterSwitchFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 b = seekBar.getProgress();
             }
+
+            @Override
+            public void onEnteredValueTooHigh() {
+                blue.setValue(256);
+            }
+
+            @Override
+            public void onEnteredValueTooLow() {
+                blue.setValue(0);
+            }
+
+            @Override
+            public void onEditableSeekBarValueChanged(int value) {
+                b = value;
+            }
         });
+
 
         kcalBackupSettingsView.findViewById(R.id.button_cancel).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -29,56 +29,32 @@
         android:paddingBottom="@dimen/layout_padding"
         android:paddingStart="@dimen/layout_padding"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/red"
-        android:layout_margin="@dimen/layout_margin"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingTop="@dimen/layout_padding"
-        android:paddingStart="@dimen/layout_padding"/>
-
-    <android.support.v7.widget.AppCompatSeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_margin"
+    <com.gregacucnik.EditableSeekBar
         android:id="@+id/kcal_red"
-        android:max="256"
-        android:padding="@dimen/layout_padding"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/green"
         android:layout_margin="@dimen/layout_margin"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingTop="@dimen/layout_padding"
-        android:paddingStart="@dimen/layout_padding"/>
-
-    <android.support.v7.widget.AppCompatSeekBar
+        android:padding="@dimen/layout_padding"
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/layout_margin"
         android:layout_height="wrap_content"
+        app:esbTitle="@string/red"
+        app:esbMax="256" />
+
+    <com.gregacucnik.EditableSeekBar
         android:id="@+id/kcal_green"
-        android:max="256"
-        android:padding="@dimen/layout_padding"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/blue"
         android:layout_margin="@dimen/layout_margin"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingTop="@dimen/layout_padding"
-        android:paddingStart="@dimen/layout_padding"/>
-
-    <android.support.v7.widget.AppCompatSeekBar
+        android:padding="@dimen/layout_padding"
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/layout_margin"
         android:layout_height="wrap_content"
+        app:esbTitle="@string/green"
+        app:esbMax="256" />
+
+    <com.gregacucnik.EditableSeekBar
         android:id="@+id/kcal_blue"
-        android:max="256"
-        android:padding="@dimen/layout_padding"/>
+        android:layout_margin="@dimen/layout_margin"
+        android:padding="@dimen/layout_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:esbTitle="@string/blue"
+        app:esbMax="256" />
 
     <RelativeLayout
         android:layout_width="match_parent"

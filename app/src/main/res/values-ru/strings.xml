@@ -3,7 +3,6 @@
 
     <string name="master_switch">Включить Night Light</string>
     <string name="master_switch_desc">Главный переключатель для включения/отключения ночного света.</string>
-    <string name="kcal_preservce_value_msg">Оберегать текущие параметры KCAL</string>
 
     <string name="color_intensity">Интенсивность фильтра</string>
     <string name="blue_light">Синий свет</string>
@@ -11,7 +10,7 @@
     <string name="green_light">Зеленый свет</string>
     <string name="green_color_intensity_desc">Интенсивность зеленого света должна быть отфильтрована. Здесь диапазон регулирования ограничен. Фильтрация зеленого света даст красноватый оттенок на экране.</string>
 
-    <string name="auto_enable">Автоматическое вкл. ночного света</string>
+    <string name="auto_enable">Автоматическое вкл. Night Light</string>
     <string name="auto_enable_desc">Автоматическое включение ночного света между указанным диапазоном временем. Ночной свет будет автоматически отключен за пределами этого диапазона времени.</string>
     <string name="sun_switch">От заката до рассвета</string>
     <string name="start_time">Время начала</string>
@@ -23,6 +22,26 @@
 
     <string name="force_switch">Принудительное вкл. Night Light</string>
     <string name="force_switch_desc">Принудительное включение/отключения ночного света, игнорируя автоматическое расписание.</string>
+
+    <string name="color_temperature_title">Цветовая температура</string>
+    <string name="color_temperature_desc">Здесь вы устанавливаете значение цветовой температуры. Более низкие температуры лучше подходят для просмотра в недостаточной освещенности.</string>
+
+    <string name="advanced_automation">Дополнительная автоматизация</string>
+    <string name="suggest_enabling_automation">Пожалуйста включите автоматический переключатель для использования дополнительных функций автоматизации.</string>
+    <string name="enabled">Включено</string>
+    <string name="disabled">Отключено</string>
+
+    <string name="set_on_boot_delay_title">Установить задержку запуска</string>
+    <string name="set_on_boot_delay_desc">Установите задержку, после которой параметры ночного света будут восстановлены и применены после загрузки. Параметры ночного света будут применены после %s сек.</string>
+    <string name="set_on_boot_delay_warn">Похоже, параметры ночного света были восстановлены, но они не применились после последней загрузки. Рассмотрите возможность увеличения задержки, чтобы параметры можно было успешно восстановить и применить после загрузки.</string>
+
+    <string name="kcal_preservce_value_msg">Оберегать текущие параметры KCAL</string>
+    <string name="kcal_backup_set"><u>Настроить резервное копирование KCAL?</u></string>
+    <string name="kcal_backup_set_title">Настройки резервного копирования KCAL</string>
+    <string name="kcal_backup_set_desc">Вы можете настроить свои старые параметры KCAL здесь. Эти параметры будут применены при выключении Night Light.</string>
+    <string name="red">Красный</string>
+    <string name="green">Зеленый</string>
+    <string name="blue">Синий</string>
 
     <string name="location_unavailable">Невозможно получить ваше последнее известное местоположение.</string>
 
@@ -38,7 +57,7 @@
     <string name="app_desc">Ночной свет использует KCAL, который является функцией настройки драйвера дисплея для нового поколения Qualcomm устройств. Ночной свет регулирует интенсивность синего света, что делает его более удобным для ваших глаз, когда вы используете телефон в тёмное время суток и это помогает вам заснуть. Поскольку данное приложение вносит изменения на уровне драйвера и не использует никакие наложения программного обеспечения, то батарея более дружественная, и изменение можно увидеть повсюду на дисплее.</string>
 
     <string name="contributors">Авторы</string>
-    <string name="contributors_desc">Нажмите, чтобы узнать, кто ещё участвовал в этом проекте.</string>
+    <string name="contributors_desc">Нажмите, чтобы узнать, кто принял участие в этом проекте.</string>
 
     <string name="like_this_app">Вам нравится это приложение?</string>
     <string name="get_donation">Если вам нравится это приложение, то вы можете рассмотреть возможность получения пожертвованной версии приложения. Хотя он поставляется без дополнительных функций, чем эта версия, он показывает вашу поддержку и оценку для приложения, и он будет мотивировать разработчика и поддерживать разработку приложения :)</string>

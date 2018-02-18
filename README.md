@@ -18,10 +18,12 @@ I flashed a LineageOS oreo build on my device, but there was no night light feat
 ### Features
 * Control blue light filter intensity to your liking.
 * Control green light filter to add reddish tint.
+* Or, use color temperature setting to tune Night Light.
 * Easy one touch toggles, with a single slider to tweak blue light intensity.
 * Quick Setting tile for easy toggling on/off night light anywhere.
-* Automatic switching on/off night light at user specifed timings.
+* Automatic switching on/off night light at user specified timings.
 * Supports sunset/sunrise timings.
+* Set on boot delay.
 
 ### Requirements
 * Kernel supporting KCAL.

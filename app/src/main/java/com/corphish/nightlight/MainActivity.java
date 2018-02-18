@@ -119,7 +119,7 @@ public class MainActivity
     }
 
     private boolean isSupported (int id) {
-        return getResources().getBoolean(id);
+        return BuildConfig.DEBUG || getResources().getBoolean(id);
     }
 
     @Override

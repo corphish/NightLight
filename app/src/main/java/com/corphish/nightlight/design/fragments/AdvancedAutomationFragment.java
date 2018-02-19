@@ -204,7 +204,7 @@ public class AdvancedAutomationFragment extends Fragment {
                         // Prevent setting time below scaleDownStartTime for now
                         // Actual behavior should support setting this time in next day but before the time when automatic schedule ends
                         String scaleDownStartTime = scaleDownStart.getValue();
-                        if (setTime.compareTo(scaleDownStartTime) < 0) setTime = scaleDownStartTime;
+                        if (TimeUtils.compareTimes(scaleDownStartTime, setTime, autoEndTime) < 0) setTime = scaleDownStartTime;
 
                         scaleDownEnd.setValue(setTime);
                         peakStart.setValue(setTime);
@@ -227,7 +227,7 @@ public class AdvancedAutomationFragment extends Fragment {
                         // Prevent setting time below peakStartTime for now
                         // Actual behavior should support setting this time in next day but before the time when automatic schedule ends
                         String peakStartValue = peakStart.getValue();
-                        if (setTime.compareTo(peakStartValue) < 0) setTime = peakStartValue;
+                        if (TimeUtils.compareTimes(peakStartValue, setTime, autoEndTime) < 0) setTime = peakStartValue;
 
                         peakEnd.setValue(setTime);
                         scaleUpStart.setValue(setTime);

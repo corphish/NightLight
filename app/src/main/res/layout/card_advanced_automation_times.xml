@@ -19,6 +19,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_caption"
+            android:textAppearance="?android:textAppearance"
+            android:text="@string/time_interval"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/scale_down_period_title"
             android:layout_margin="@dimen/layout_margin"
             android:paddingStart="@dimen/layout_padding"
@@ -28,7 +39,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingBottom="@dimen/layout_padding"
             android:layout_margin="@dimen/layout_margin"
             android:textSize="@dimen/text_desc"
             android:text="@string/scale_down_period_desc"/>
@@ -63,7 +76,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingBottom="@dimen/layout_padding"
             android:layout_margin="@dimen/layout_margin"
             android:textSize="@dimen/text_desc"
             android:text="@string/peak_period_desc"/>

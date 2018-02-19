@@ -80,6 +80,7 @@
     <string name="maximum_temperature_desc">Maximum temperature from which temperature will start scaling down. This temperature will be applied during the start of the schedule, and then it will gradually decrease. Lower temperatures are better suited for viewing at night.</string>
     <string name="minimum_temperature_title">Minimum temperature</string>
     <string name="minimum_temperature_desc">Minimum temperature which will be applied at the peak time of the schedule. This temperature must be lesser than the maximum temperature setting, as temperature settings will gradually scale down from maximum temperature setting.</string>
+    <string name="time_interval">Time Interval</string>
     <string name="scale_down_period_title">Scale down period</string>
     <string name="scale_down_period_desc">Temperatures will gradually decrease during this period, and Night Light settings based on those temperatures will be applied at equal interval of times. This period will start scaling down from the maximum temperature setting and scale down until it reaches the minimum temperature setting.</string>
     <string name="peak_period_title">Peak period</string>

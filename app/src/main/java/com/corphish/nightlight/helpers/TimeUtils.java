@@ -91,4 +91,44 @@ public class TimeUtils {
         // Otherwise return true (for example: startTime - 0400, endTime - 0300, currentTime - 0230)
         return iCurrentTime < iStartTime && iCurrentTime < iEndTime;
     }
+
+    /**
+     * Compares 2 string times
+     * This does absolute comparison
+     * It does not take next day into account
+     * @param time1 Time 1
+     * @param time2 Time 2
+     * @return 0 if both are equal, positive value if time1 > time2, negative value if time1 < time2
+     */
+    public static int compareTimes(String time1, String time2) {
+        return time1.compareTo(time2);
+    }
+
+    /**
+     * Compares 2 string times taking next day into account
+     * If next day is taken into account, time2 may always be considered to be greater than time1
+     * That is why a 3rd parameter of maxNextDayTime is taken
+     * So if time2 is lesser by val than time1, but also lesser than maxNextDayTime, it is actually greater than time1.
+     * Example: time1 = 18:00, time2 = 01:00, maxNextDayTime = 06:00, here time2 is greater than time1 because time2 here infers that it is in next day.
+     * Another example: time1 = 18:00, time2 = 12:00, maxNextDayTime = 06:00, here time1 is greater than time2 because time2 inferred here is of same day.
+     * @param time1 Time 1
+     * @param time2 Time 2
+     * @param maxNextDayTime Max next day time, this is the time upto which time2 will be considered of next day
+     * @return 0 if both are equal, positive value if time1 > time2, negative value if time1 < time2, comparison done as explained above
+     */
+    public static int compareTimes(String time1, String time2, String maxNextDayTime) {
+        int val = compareTimes(time1, time2);
+        if (val > 0) return compareTimes(time2, maxNextDayTime);
+        else return val;
+    }
+
+    /**
+     * Checks whether time2 is next day compared to time 1
+     * @param time1 Time 1
+     * @param time2 Time 2
+     * @return A boolean indicating whether time2 is next day wrt time1
+     */
+    public static boolean isNextDay(String time1, String time2) {
+        return compareTimes(time1, time2) > 0;
+    }
 }

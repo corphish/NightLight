@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -228,7 +229,7 @@ public class AdvancedAutomationFragment extends Fragment {
                         // Prevent setting time below peakStartTime for now
                         // Actual behavior should support setting this time in next day but before the time when automatic schedule ends
                         String peakStartValue = peakStart.getValue();
-                        if (TimeUtils.compareTimes(peakStartValue, setTime, autoEndTime) > 0)
+                        if (TimeUtils.compareTimes(peakStartValue, setTime, autoEndTime) > 0 || TimeUtils.compareTimes(setTime, autoEndTime) > 0)
                             setTime = peakStartValue;
 
                         peakEnd.setValue(setTime);

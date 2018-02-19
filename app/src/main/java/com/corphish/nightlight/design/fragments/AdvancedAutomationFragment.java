@@ -121,6 +121,12 @@ public class AdvancedAutomationFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 PreferenceHelper.putBoolean(getContext(), Constants.PREF_ADV_AUTO_SWITCH, isChecked);
                 showSettingViews(isChecked);
+
+                // Set scaleDown start and scaleUpEnd preferences
+                if (isChecked) {
+                    PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_SCALE_DOWN_START, autoStartTime);
+                    PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_SCALE_UP_END, autoEndTime);
+                }
             }
         });
     }

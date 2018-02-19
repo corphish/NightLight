@@ -70,4 +70,22 @@
     <string name="blue">Blue</string>
     <string name="test">Test</string>
     <string name="kcal_backup_set"><u>Configure KCAL backup settings?</u></string>
+
+    <string name="title_activity_advanced_automation">Advanced Automation</string>
+
+    <string name="advanced_automation_switch">Enable advanced automation</string>
+    <string name="advanced_automation_desc">This feature adjusts the Night Light colour temperature accordingly within the automatic time period.</string>
+    <string name="temperature_settings">Color temperature settings</string>
+    <string name="maximum_temperature_title">Maximum temperature</string>
+    <string name="maximum_temperature_desc">Maximum temperature from which temperature will start scaling down. This temperature will be applied during the start of the schedule, and then it will gradually decrease. Lower temperatures are better suited for viewing at night.</string>
+    <string name="minimum_temperature_title">Minimum temperature</string>
+    <string name="minimum_temperature_desc">Minimum temperature which will be applied at the peak time of the schedule. This temperature must be lesser than the maximum temperature setting, as temperature settings will gradually scale down from maximum temperature setting.</string>
+    <string name="scale_down_period_title">Scale down period</string>
+    <string name="scale_down_period_desc">Temperatures will gradually decrease during this period, and Night Light settings based on those temperatures will be applied at equal interval of times. This period will start scaling down from the maximum temperature setting and scale down until it reaches the minimum temperature setting.</string>
+    <string name="peak_period_title">Peak period</string>
+    <string name="peak_period_desc">Night Light settings will remain constant during this period of time. The value of colour temperature applied during this period is that of minimum color temperature.</string>
+    <string name="scaling_interval_title">Scaling Interval</string>
+    <string name="scaling_interval_desc">Choose the time interval for applying the new Night Light settings.</string>
+    <string name="one_hour">1 hour</string>
+    <string name="half_hour">30 minutes</string>
 </resources>

@@ -73,9 +73,20 @@
                 android:value="com.corphish.nightlight.MainActivity" />
         </activity>
 
-        <service android:name=".services.BootCompleteJobService"
+        <service
+            android:name=".services.BootCompleteJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
             android:process=":booting" />
+
+        <activity
+            android:name=".AdvancedAutomationActivity"
+            android:label="@string/title_activity_advanced_automation"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.corphish.nightlight.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

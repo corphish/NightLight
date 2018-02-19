@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/layout_margin"
+    android:padding="@dimen/layout_padding"
+    custom:elevation="@dimen/card_elevation"
+    android:id="@+id/card_times"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scale_down_period_title"
+            android:layout_margin="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_desc"
+            android:text="@string/scale_down_period_desc"/>
+
+        <com.corphish.nightlight.design.widgets.KeyValueView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scale_down_start_time"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            custom:caption="@string/start_time"
+            custom:value="@string/start_time_default"/>
+
+        <com.corphish.nightlight.design.widgets.KeyValueView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scale_down_end_time"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            custom:caption="@string/end_time"
+            custom:value="@string/end_time_default"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/peak_period_title"
+            android:layout_margin="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_desc"
+            android:text="@string/peak_period_desc"/>
+
+        <com.corphish.nightlight.design.widgets.KeyValueView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/peak_start_time"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            custom:caption="@string/start_time"
+            custom:value="@string/start_time_default"/>
+
+        <com.corphish.nightlight.design.widgets.KeyValueView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/peak_end_time"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            custom:caption="@string/end_time"
+            custom:value="@string/end_time_default"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

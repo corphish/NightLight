@@ -117,8 +117,8 @@ public class TimeUtils {
      * @return 0 if both are equal, positive value if time1 > time2, negative value if time1 < time2, comparison done as explained above
      */
     public static int compareTimes(String time1, String time2, String maxNextDayTime) {
-        int val = compareTimes(time1, time2);
-        if (val > 0) return compareTimes(time2, maxNextDayTime);
+        int val = compareTimes(time2, time1);
+        if (val < 0) return compareTimes(maxNextDayTime, time2);
         else return val;
     }
 

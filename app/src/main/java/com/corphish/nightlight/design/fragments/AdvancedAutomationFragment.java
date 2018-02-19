@@ -207,7 +207,8 @@ public class AdvancedAutomationFragment extends Fragment {
                         if (TimeUtils.compareTimes(scaleDownStartTime, setTime, autoEndTime) < 0) setTime = scaleDownStartTime;
 
                         scaleDownEnd.setValue(setTime);
-                        peakStart.setValue(setTime);
+
+                        syncTimePeriods();
 
                         PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_SCALE_DOWN_END, setTime);
                         PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_PEAK_START, setTime);
@@ -230,7 +231,8 @@ public class AdvancedAutomationFragment extends Fragment {
                         if (TimeUtils.compareTimes(peakStartValue, setTime, autoEndTime) < 0) setTime = peakStartValue;
 
                         peakEnd.setValue(setTime);
-                        scaleUpStart.setValue(setTime);
+
+                        syncTimePeriods();
 
                         PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_SCALE_UP_START, setTime);
                         PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_PEAK_END, setTime);
@@ -259,21 +261,19 @@ public class AdvancedAutomationFragment extends Fragment {
     private void initViews() {
         mainSwitch.setChecked(enabled);
 
-        scaleDownStart.setValue(autoStartTime);
         scaleDownStart.setEnabled(false);
 
         scaleDownEnd.setValue(scaleDownEndTime);
 
-        peakStart.setValue(scaleDownEndTime);
         peakStart.setEnabled(false);
 
         peakEnd.setValue(peakEndTime);
 
-        scaleUpStart.setValue(peakEndTime);
         scaleUpStart.setEnabled(false);
 
-        scaleUpEnd.setValue(autoEndTime);
         scaleUpEnd.setEnabled(false);
+
+        syncTimePeriods();
 
         maxTemp.setProgress(maxTempVal - 3000);
         minTemp.setProgress(minTempVal - 3000);
@@ -297,5 +297,26 @@ public class AdvancedAutomationFragment extends Fragment {
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), onTimeSetListener, currentTime[0], currentTime[1], false);
         timePickerDialog.show();
+    }
+
+    private void syncTimePeriods() {
+        // Scale down start time is disabled and must always equal to automation start time
+        scaleDownStart.setValue(autoStartTime);
+
+        // Scale down end time is user set
+
+        // Peak start time is disabled and must equal to scale down end time
+        peakStart.setValue(scaleDownEnd.getValue());
+
+        // Peak end time is user set
+        // If however peak end time < peak start time, correct it to peak start
+        if (TimeUtils.compareTimes(peakStart.getValue(), peakEnd.getValue(), autoEndTime) < 0)
+            peakEnd.setValue(peakStart.getValue());
+
+        // Scale up start time is disabled and must equal to peak end time
+        scaleUpStart.setValue(peakEnd.getValue());
+
+        // Scale up end time is disabled and must equal to automation end time
+        scaleUpEnd.setValue(autoEndTime);
     }
 }

@@ -224,7 +224,9 @@ public class AdvancedAutomationFragment extends Fragment {
                         if (setTime.compareTo(peakStartValue) < 0) setTime = peakStartValue;
 
                         peakEnd.setValue(setTime);
+                        scaleUpStart.setValue(setTime);
 
+                        PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_SCALE_UP_START, setTime);
                         PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_PEAK_END, setTime);
                     }
                 });

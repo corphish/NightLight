@@ -47,6 +47,8 @@ public class Constants {
     public static final String PREF_ADV_AUTO_SCALE_DOWN_END     =   "adv_auto_scale_down_end";
     public static final String PREF_ADV_AUTO_PEAK_START         =   "adv_auto_peak_start";
     public static final String PREF_ADV_AUTO_PEAK_END           =   "adv_auto_peak_end";
+    public static final String PREF_ADV_AUTO_SCALE_UP_START     =   "adv_auto_scale_up_start";
+    public static final String PREF_ADV_AUTO_SCALE_UP_END       =   "adv_auto_scale_up_end";
     public static final String PREF_ADV_AUTO_TIME_INTERVAL      =   "adv_auto_interval";
     public static final String PREF_ADV_AUTO_SCALE_DOWN_VAL     =   "adv_auto_scale_down_val";
     public static final String PREF_ADV_AUTO_SCALE_UP_VAL       =   "adv_auto_scale_up_val";

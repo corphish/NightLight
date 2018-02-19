@@ -37,7 +37,7 @@ public class AdvancedAutomationFragment extends Fragment {
     SeekBar maxTemp, minTemp;
 
     // Times (KVView)
-    KeyValueView scaleDownStart, scaleDownEnd, peakStart, peakEnd;
+    KeyValueView scaleDownStart, scaleDownEnd, peakStart, peakEnd, scaleUpStart, scaleUpEnd;
 
     // RadioButton
     RadioButton halfHour, oneHour;
@@ -101,6 +101,8 @@ public class AdvancedAutomationFragment extends Fragment {
         scaleDownEnd = view.findViewById(R.id.scale_down_end_time);
         peakStart = view.findViewById(R.id.peak_start_time);
         peakEnd = view.findViewById(R.id.peak_end_time);
+        scaleUpStart = view.findViewById(R.id.scale_up_start_time);
+        scaleUpEnd = view.findViewById(R.id.scale_up_end_time);
 
         halfHour = view.findViewById(R.id.interval_half_hour);
         oneHour = view.findViewById(R.id.interval_one_hour);
@@ -248,13 +250,22 @@ public class AdvancedAutomationFragment extends Fragment {
 
     private void initViews() {
         mainSwitch.setChecked(enabled);
+
         scaleDownStart.setValue(autoStartTime);
         scaleDownStart.setEnabled(false);
 
         scaleDownEnd.setValue(scaleDownEndTime);
+
         peakStart.setValue(scaleDownEndTime);
         peakStart.setEnabled(false);
+
         peakEnd.setValue(peakEndTime);
+
+        scaleUpStart.setValue(peakEndTime);
+        scaleUpStart.setEnabled(false);
+
+        scaleUpEnd.setValue(autoEndTime);
+        scaleUpEnd.setEnabled(false);
 
         maxTemp.setProgress(maxTempVal - 3000);
         minTemp.setProgress(minTempVal - 3000);

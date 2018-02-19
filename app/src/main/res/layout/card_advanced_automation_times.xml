@@ -101,6 +101,43 @@
             custom:caption="@string/end_time"
             custom:value="@string/end_time_default"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scale_up_period_title"
+            android:layout_margin="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingBottom="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_desc"
+            android:text="@string/scale_up_period_desc"/>
+
+        <com.corphish.nightlight.design.widgets.KeyValueView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scale_up_start_time"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            custom:caption="@string/start_time"
+            custom:value="@string/start_time_default"/>
+
+        <com.corphish.nightlight.design.widgets.KeyValueView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scale_up_end_time"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            custom:caption="@string/end_time"
+            custom:value="@string/end_time_default"/>
+
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

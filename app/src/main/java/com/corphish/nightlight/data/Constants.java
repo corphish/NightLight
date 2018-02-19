@@ -72,6 +72,8 @@ public class Constants {
      */
     public static final String DEFAULT_PEAK_START_TIME  =   "00:00";
     public static final String DEFAULT_PEAK_END_TIME    =   "05:00";
+    public static final int DEFAULT_MAX_TEMP            =   4000;
+    public static final int DEFAULT_MIN_TEMP            =   3200;
 
     /**
      * Night light setting modes

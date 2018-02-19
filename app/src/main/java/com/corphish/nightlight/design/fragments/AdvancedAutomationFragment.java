@@ -51,6 +51,9 @@ public class AdvancedAutomationFragment extends Fragment {
     // Automatic times
     String autoStartTime, autoEndTime, scaleDownEndTime, peakEndTime;
 
+    // Temps
+    int maxTempVal, minTempVal;
+
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
@@ -63,6 +66,9 @@ public class AdvancedAutomationFragment extends Fragment {
 
         scaleDownEndTime = PreferenceHelper.getString(getContext(), Constants.PREF_ADV_AUTO_SCALE_DOWN_END, Constants.DEFAULT_PEAK_START_TIME);
         peakEndTime = PreferenceHelper.getString(getContext(), Constants.PREF_ADV_AUTO_SCALE_DOWN_END, Constants.DEFAULT_PEAK_END_TIME);
+
+        maxTempVal = PreferenceHelper.getInt(getContext(), Constants.PREF_ADV_AUTO_MAX_TEMP, Constants.DEFAULT_MAX_TEMP);
+        minTempVal = PreferenceHelper.getInt(getContext(), Constants.PREF_ADV_AUTO_MIN_TEMP, Constants.DEFAULT_MIN_TEMP);
     }
 
     @Override
@@ -249,6 +255,9 @@ public class AdvancedAutomationFragment extends Fragment {
         peakStart.setValue(scaleDownEndTime);
         peakStart.setEnabled(false);
         peakEnd.setValue(peakEndTime);
+
+        maxTemp.setProgress(maxTempVal - 3000);
+        minTemp.setProgress(minTempVal - 3000);
 
         if (interval == 60) oneHour.setChecked(true);
         else halfHour.setChecked(true);

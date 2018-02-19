@@ -1,6 +1,7 @@
 package com.corphish.nightlight.design.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
+import com.corphish.nightlight.AdvancedAutomationActivity;
+import com.corphish.nightlight.BuildConfig;
 import com.corphish.nightlight.R;
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.design.widgets.KeyValueView;
@@ -121,12 +124,11 @@ public class ColorTemperatureFragment extends Fragment {
                         autoFragmentView.requestFocus();
                         autoFragmentView.getParent().requestChildFocus(autoFragmentView, autoFragmentView);
                     }
-
-                }
+                } else getContext().startActivity(new Intent(getActivity(), AdvancedAutomationActivity.class));
             }
         });
 
-        advancedAutomation.setVisibility(getResources().getBoolean(R.bool.advanced_color_temperature_automation_enabled) ? View.VISIBLE : View.GONE);
+        advancedAutomation.setVisibility(BuildConfig.DEBUG || getResources().getBoolean(R.bool.advanced_color_temperature_automation_enabled) ? View.VISIBLE : View.GONE);
     }
 
     public void onStateChanged(int newMode) {

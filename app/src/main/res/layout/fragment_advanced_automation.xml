@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <include layout="@layout/card_advanced_automation_switch" />
+    <include layout="@layout/card_advanced_automation_temps" />
+    <include layout="@layout/card_advanced_automation_times" />
+    <include layout="@layout/card_advanced_automation_interval" />
+</LinearLayout>

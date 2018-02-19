@@ -37,6 +37,20 @@ public class Constants {
     public static final String PREF_LAST_BOOT_RES   =   "last_boot_result";
     public static final String PREF_BOOT_DELAY      =   "boot_delay";
 
+    /**
+     * Advanced automation prefs
+     */
+    public static final String PREF_ADV_AUTO_SWITCH             =   "adv_auto_switch";
+    public static final String PREF_ADV_AUTO_MAX_TEMP           =   "adv_auto_max_temp";
+    public static final String PREF_ADV_AUTO_MIN_TEMP           =   "adv_auto_min_temp";
+    public static final String PREF_ADV_AUTO_SCALE_DOWN_START   =   "adv_auto_scale_down_start";
+    public static final String PREF_ADV_AUTO_SCALE_DOWN_END     =   "adv_auto_scale_down_end";
+    public static final String PREF_ADV_AUTO_PEAK_START         =   "adv_auto_peak_start";
+    public static final String PREF_ADV_AUTO_PEAK_END           =   "adv_auto_peak_end";
+    public static final String PREF_ADV_AUTO_TIME_INTERVAL      =   "adv_auto_interval";
+    public static final String PREF_ADV_AUTO_SCALE_DOWN_VAL     =   "adv_auto_scale_down_val";
+    public static final String PREF_ADV_AUTO_SCALE_UP_VAL       =   "adv_auto_scale_up_val";
+
 
     /**
      * Fixed values (default, max values)
@@ -52,6 +66,12 @@ public class Constants {
     public static final String DEFAULT_KCAL_VALUES  =   "256 256 256";
     public static final int DEFAULT_COLOR_TEMP      =   4000;
     public static final int DEFAULT_BOOT_DELAY      =   20;
+
+    /**
+     * Default values for advanced automation
+     */
+    public static final String DEFAULT_PEAK_START_TIME  =   "00:00";
+    public static final String DEFAULT_PEAK_END_TIME    =   "05:00";
 
     /**
      * Night light setting modes

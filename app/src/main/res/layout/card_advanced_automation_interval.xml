@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/layout_margin"
+    android:padding="@dimen/layout_padding"
+    card_view:elevation="@dimen/card_elevation"
+    android:id="@+id/card_advanced_automation_interval"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_caption"
+            android:id="@+id/app_version"
+            android:textAppearance="?android:textAppearance"
+            android:text="@string/scaling_interval_title"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_desc"
+            android:text="@string/scaling_interval_desc"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/layout_margin"
+            android:padding="@dimen/layout_padding"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding"
+                android:text="@string/one_hour"
+                android:checked="true"
+                android:id="@+id/interval_one_hour"/>
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding"
+                android:text="@string/half_hour"
+                android:id="@+id/interval_half_hour"/>
+        </RadioGroup>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

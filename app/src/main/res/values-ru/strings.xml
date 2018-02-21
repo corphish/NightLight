@@ -31,14 +31,34 @@
     <string name="enabled">Включено</string>
     <string name="disabled">Отключено</string>
 
+    <string name="title_activity_advanced_automation">Расширенная автоматизация</string>
+    <string name="advanced_automation_switch">Включить расширенную автоматизацию</string>
+    <string name="advanced_automation_desc">Эта функция регулирует цветовую температуру в соответствии с автоматическим периодом времени.</string>
+    <string name="temperature_settings">Настройки цветовой температуры</string>
+    <string name="maximum_temperature_title">Максимальная температура</string>
+    <string name="maximum_temperature_desc">Максимальная температура, от которой температура начнет уменьшаться. Эта температура будет применяться в начале графика, а затем будет постепенно уменьшаться. Более низкие температуры лучше всего подходит для просмотра ночью.</string>
+    <string name="minimum_temperature_title">Минимальная температура</string>
+    <string name="minimum_temperature_desc">Минимальная температура, которая будет применяться в пиковое время графика. Эта температура должна быть меньше, чем максимальная, так как настройки температуры будут постепенно уменьшаться от максимальной температуры.</string>
+    <string name="time_interval">Временной интервал</string>
+    <string name="scale_down_period_title">Период постепенного уменьшения</string>
+    <string name="scale_down_period_desc">В течение этого периода температура будет постепенно снижаться, и настройки Night Light, основанные на этих температурах, будут применяться с равным интервалом времени. Этот период начнет уменьшаться от установленной максимальной температуры и будет уменьшаться до тех пор, пока не достигнет установленной минимальной температуры.</string>
+    <string name="peak_period_title">Пиковый период</string>
+    <string name="peak_period_desc">Настройки Night Light будут оставаться постоянными в течение этого периода времени. Значение цветовой температуры, применяемое в течение этого периода, равна минимальной цветовой температуре.</string>
+    <string name="scale_up_period_title">Период постепенного увеличения</string>
+    <string name="scale_up_period_desc">В течение этого периода температура будет постепенно повышаться от минимальной до максимальной температуры, а настройки Night Light, основанные на этих температурах, будут применяться с равным интервалом времени. Эти значения автоматически вычисляются от постепенного уменьшения и пикового значения времени.</string>
+    <string name="scaling_interval_title">Интервал</string>
+    <string name="scaling_interval_desc">Выберите временной интервал для применения новых настроек Night Light.</string>
+    <string name="one_hour">1 час</string>
+    <string name="half_hour">30 минут</string>
+
     <string name="set_on_boot_delay_title">Установить задержку запуска</string>
     <string name="set_on_boot_delay_desc">Установите задержку, после которой параметры ночного света будут восстановлены и применены после загрузки. Параметры ночного света будут применены после %s сек.</string>
     <string name="set_on_boot_delay_warn">Похоже, параметры ночного света были восстановлены, но они не применились после последней загрузки. Рассмотрите возможность увеличения задержки, чтобы параметры можно было успешно восстановить и применить после загрузки.</string>
 
-    <string name="kcal_preservce_value_msg">Оберегать текущие параметры KCAL</string>
+    <string name="kcal_preservce_value_msg">Оберегать исходные параметры KCAL</string>
     <string name="kcal_backup_set"><u>Настроить резервное копирование KCAL?</u></string>
     <string name="kcal_backup_set_title">Настройки резервного копирования KCAL</string>
-    <string name="kcal_backup_set_desc">Вы можете настроить свои старые параметры KCAL здесь. Эти параметры будут применены при выключении Night Light.</string>
+    <string name="kcal_backup_set_desc">Здесь вы можете настроить свои исходные параметры KCAL. Эти параметры будут применены при выключении Night Light.</string>
     <string name="red">Красный</string>
     <string name="green">Зеленый</string>
     <string name="blue">Синий</string>

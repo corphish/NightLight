@@ -319,5 +319,26 @@ public class AdvancedAutomationFragment extends Fragment {
 
         // Scale up end time is disabled and must equal to automation end time
         scaleUpEnd.setValue(autoEndTime);
+
+        addNextDaysIfNecessary();
+    }
+
+    private void addNextDaysIfNecessary() {
+        // Scale down start will never be on next day
+        // Also we will base scale down start time whether set times are next day or not
+        if (TimeUtils.isNextDay(autoStartTime, scaleDownEnd.getValue()))
+            scaleDownEnd.setValue(String.format(Locale.getDefault(), "%s %s", scaleDownEnd.getValue(), getString(R.string.next_day)));
+
+        if (TimeUtils.isNextDay(autoStartTime, peakStart.getValue()))
+            peakStart.setValue(String.format(Locale.getDefault(), "%s %s", peakStart.getValue(), getString(R.string.next_day)));
+
+        if (TimeUtils.isNextDay(autoStartTime, peakEnd.getValue()))
+            peakEnd.setValue(String.format(Locale.getDefault(), "%s %s", peakEnd.getValue(), getString(R.string.next_day)));
+
+        if (TimeUtils.isNextDay(autoStartTime, scaleUpStart.getValue()))
+            scaleUpStart.setValue(String.format(Locale.getDefault(), "%s %s", scaleUpStart.getValue(), getString(R.string.next_day)));
+
+        if (TimeUtils.isNextDay(autoStartTime, scaleUpEnd.getValue()))
+            scaleUpEnd.setValue(String.format(Locale.getDefault(), "%s %s", scaleUpEnd.getValue(), getString(R.string.next_day)));
     }
 }

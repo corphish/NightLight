@@ -131,4 +131,29 @@ public class TimeUtils {
     public static boolean isNextDay(String time1, String time2) {
         return compareTimes(time1, time2) > 0;
     }
+
+    /**
+     * Checks whether timeToCheck falls within the time range defined by timeLValue and timeRValue
+     * Range falling in next days are also handled here
+     * @param timeToCheck Time to check
+     * @param timeLValue L value of time range
+     * @param timeRValue R value of time range
+     * @return A boolean indicating whether timeToCheck falls within the range
+     */
+    public static boolean isWithinTimeRange(String timeToCheck, String timeLValue, String timeRValue) {
+        // Borked case
+        if (timeLValue.equals(timeRValue)) return false;
+
+        // Simple Case
+        if (compareTimes(timeLValue, timeRValue) < 1) return compareTimes(timeToCheck, timeLValue) >= 0 && compareTimes(timeToCheck, timeRValue) <= 0;
+
+        // Complex case: endTime < startTime
+
+        // if currentTime > starTime, it must be lesser than endTime, coz endTime is a time of next day, so return true
+        if (compareTimes(timeToCheck, timeLValue) >= 0) return true;
+
+        // if currentTime < startTime, it must be false if it is > endTime (for example: startTime - 0400, endTime - 0300, currentTime - 0330)
+        // Otherwise return true (for example: startTime - 0400, endTime - 0300, currentTime - 0230)
+        return compareTimes(timeToCheck, timeLValue) < 0 && compareTimes(timeToCheck, timeRValue) <= 0;
+    }
 }

@@ -84,22 +84,7 @@ public class TimeUtils {
      * @return boolean indicating whether or not night light should be on
      */
     public static boolean determineWhetherNLShouldBeOnOrNot(String startTime, String endTime) {
-        int iCurrentTime = getCurrentTimeAsMinutes(), iStartTime = getTimeInMinutes(startTime), iEndTime = getTimeInMinutes(endTime);
-
-        // Borked case: if start and end times are same, return false
-        if (iStartTime == iEndTime) return false;
-
-        // Simple case
-        if (iStartTime < iEndTime) return iCurrentTime >= iStartTime && iCurrentTime < iEndTime;
-
-        // Complex case: endTime < startTime
-
-        // if currentTime > starTime, it must be lesser than endTime, coz endTime is a time of next day, so return true
-        if (iCurrentTime > iStartTime) return true;
-
-        // if currentTime < startTime, it must be false if it is > endTime (for example: startTime - 0400, endTime - 0300, currentTime - 0330)
-        // Otherwise return true (for example: startTime - 0400, endTime - 0300, currentTime - 0230)
-        return iCurrentTime < iStartTime && iCurrentTime < iEndTime;
+        return isWithinTimeRange(getCurrentTimeAsString(), startTime, endTime);
     }
 
     /**

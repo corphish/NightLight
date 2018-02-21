@@ -28,6 +28,8 @@ import com.corphish.nightlight.helpers.TimeUtils;
 import com.corphish.nightlight.R;
 import com.corphish.nightlight.design.widgets.KeyValueView;
 
+import java.util.Locale;
+
 /**
  * Created by Avinaba on 10/24/2017.
  * Auto related fragment
@@ -189,8 +191,8 @@ public class AutoFragment extends Fragment implements LocationListener {
      */
     private void addNextDayIfNecessary() {
         String sStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME), sEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
-        if (TimeUtils.getTimeInMinutes(sEndTime) < TimeUtils.getTimeInMinutes(sStartTime))
-            endTimeKV.setValue(sEndTime + getString(R.string.next_day));
+        if (TimeUtils.isNextDay(sStartTime, sEndTime))
+            endTimeKV.setValue(String.format(Locale.getDefault(), "%s %s", sEndTime, getString(R.string.next_day)));
     }
 
     /**

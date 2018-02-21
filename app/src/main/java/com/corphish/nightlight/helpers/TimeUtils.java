@@ -66,6 +66,16 @@ public class TimeUtils {
     }
 
     /**
+     * Returns current time as string
+     * @return Current time as string
+     */
+    public static String getCurrentTimeAsString() {
+        int[] currentTime = getCurrentTimeAsHourAndMinutes();
+
+        return currentTime[0] + ":" + currentTime[1];
+    }
+
+    /**
      * Determines whether or not Night Light should be on based on given times.
      * Alarm times are unaffected tho, coz android will fire alarms at start and end time every day if enabled
      * We need not worry about that.

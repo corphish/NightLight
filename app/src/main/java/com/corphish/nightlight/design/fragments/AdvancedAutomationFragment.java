@@ -305,6 +305,9 @@ public class AdvancedAutomationFragment extends Fragment {
         scaleDownStart.setValue(autoStartTime);
 
         // Scale down end time is user set
+        // But make sure it is never less than scaleDownStart
+        if (TimeUtils.compareTimes(scaleDownStart.getValue(), scaleDownEnd.getValue(), autoEndTime) > 0)
+            scaleDownEnd.setValue(scaleDownStart.getValue());
 
         // Peak start time is disabled and must equal to scale down end time
         peakStart.setValue(scaleDownEnd.getValue());

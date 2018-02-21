@@ -31,7 +31,7 @@
 
     <string name="shortcut_toggle">Toggle on/off</string>
 
-    <string name="next_day">&#160;(Next day)</string>
+    <string name="next_day">(Next day)</string>
 
     <string name="blue_light">Blue light</string>
     <string name="green_light">Green light</string>

@@ -15,7 +15,7 @@
     <string name="sun_switch">От заката до рассвета</string>
     <string name="start_time">Время начала</string>
     <string name="end_time">Время окончания</string>
-    <string name="next_day">&#160;(Следующий день)</string>
+    <string name="next_day">(Следующий день)</string>
 
     <string name="on">Вкл.</string>
     <string name="off">Выкл.</string>

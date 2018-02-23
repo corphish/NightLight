@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="KeyValueView">
-        <attr name="caption" format="string" localization="suggested" />
-        <attr name="value" format="string" />
-    </declare-styleable>
-</resources>

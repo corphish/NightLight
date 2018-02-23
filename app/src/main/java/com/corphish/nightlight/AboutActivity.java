@@ -22,7 +22,7 @@ public class AboutActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
 
-        viewInit();
+        if (savedInstanceState == null) viewInit();
     }
 
     private void viewInit() {

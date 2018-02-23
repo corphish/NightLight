@@ -47,7 +47,9 @@
             android:padding="@dimen/layout_padding"
             android:layout_margin="@dimen/layout_margin"
             custom:keyText="@string/start_time"
-            custom:valueText="@string/start_time_default"/>
+            custom:keySize="@dimen/text_normal"
+            custom:valueText="@string/start_time_default"
+            custom:valueSize="@dimen/text_desc"/>
 
         <com.corphish.widgets.KeyValueView
             android:layout_width="match_parent"
@@ -56,7 +58,9 @@
             android:padding="@dimen/layout_padding"
             android:layout_margin="@dimen/layout_margin"
             custom:keyText="@string/end_time"
-            custom:valueText="@string/end_time_default"/>
+            custom:keySize="@dimen/text_normal"
+            custom:valueText="@string/end_time_default"
+            custom:valueSize="@dimen/text_desc"/>
 
     </LinearLayout>
 

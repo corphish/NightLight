@@ -72,7 +72,7 @@ public class TimeUtils {
     public static String getCurrentTimeAsString() {
         int[] currentTime = getCurrentTimeAsHourAndMinutes();
 
-        return currentTime[0] + ":" + currentTime[1];
+        return String.format("%02d:%02d",currentTime[0],currentTime[1]);
     }
 
     /**
@@ -150,5 +150,6 @@ public class TimeUtils {
         // if currentTime < startTime, it must be false if it is > endTime (for example: startTime - 0400, endTime - 0300, currentTime - 0330)
         // Otherwise return true (for example: startTime - 0400, endTime - 0300, currentTime - 0230)
         return compareTimes(timeToCheck, timeLValue) < 0 && compareTimes(timeToCheck, timeRValue) <= 0;
+
     }
 }

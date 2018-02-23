@@ -8,7 +8,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.helpers.BootUtils;
@@ -27,14 +26,11 @@ public class BootCompleteJobService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        Log.i("NL_Boot","Stop job");
-        //stopSelf();
         return false;
     }
 
     @Override
     public boolean onStartJob(JobParameters params) {
-        Log.i("NL_Boot","Start job");
         BootUtils.applyOnBoot(this, new BootUtils.OnApplyCompleteListener() {
             @Override
             public void onComplete() {
@@ -46,8 +42,6 @@ public class BootCompleteJobService extends JobService {
 
     // From https://blog.klinkerapps.com/android-o-background-services/
     public static void schedule(Context context) {
-        Log.i("NL_Boot","Scheduled job");
-
         int delay = PreferenceHelper.getInt(context, Constants.PREF_BOOT_DELAY, Constants.DEFAULT_BOOT_DELAY);
 
         // Notify that this is set on boot operation

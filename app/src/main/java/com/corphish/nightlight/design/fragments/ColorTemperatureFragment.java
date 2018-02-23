@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.SeekBar;
 
 import com.corphish.nightlight.R;
 import com.corphish.nightlight.data.Constants;
-import com.corphish.nightlight.design.widgets.KeyValueView;
 import com.corphish.nightlight.engine.Core;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.services.NightLightAppService;
@@ -33,7 +31,6 @@ public class ColorTemperatureFragment extends Fragment {
     // Views
     private SwitchCompat switchCompat;
     private SeekBar seekBar;
-    private KeyValueView advancedAutomation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,11 +54,9 @@ public class ColorTemperatureFragment extends Fragment {
 
         switchCompat = getView().findViewById(R.id.mode_switch);
         seekBar = getView().findViewById(R.id.temperature_value);
-        advancedAutomation = getView().findViewById(R.id.temperature_automation);
 
         // Disable them by default
         seekBar.setEnabled(false);
-        advancedAutomation.setEnabled(false);
 
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -73,7 +68,6 @@ public class ColorTemperatureFragment extends Fragment {
                 PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, settingMode);
 
                 seekBar.setEnabled(isChecked);
-                advancedAutomation.setEnabled(isChecked);
 
                 if (isChecked) Core.applyNightModeAsync(isChecked, context, colorTemperature + 3000);
 

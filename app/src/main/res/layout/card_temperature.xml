@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/layout_margin"
     android:padding="@dimen/layout_padding"
     card_view:elevation="@dimen/card_elevation"
@@ -41,14 +40,5 @@
             android:layout_margin="@dimen/layout_margin"
             android:max="1500"
             android:progress="0"/>
-
-        <com.corphish.nightlight.design.widgets.KeyValueView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/temperature_automation"
-            android:layout_margin="@dimen/layout_margin"
-            android:padding="@dimen/layout_padding"
-            app:caption="@string/advanced_automation"
-            app:value="@string/disabled"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

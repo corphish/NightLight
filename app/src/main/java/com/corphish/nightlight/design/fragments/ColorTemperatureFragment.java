@@ -69,7 +69,7 @@ public class ColorTemperatureFragment extends Fragment {
 
                 seekBar.setEnabled(isChecked);
 
-                if (isChecked) Core.applyNightModeAsync(isChecked, context, colorTemperature + 3000);
+                if (isChecked) Core.applyNightModeAsync(true, context, colorTemperature + 3000);
 
                 NightLightAppService.getInstance().notifyNewSettingMode(settingMode);
             }

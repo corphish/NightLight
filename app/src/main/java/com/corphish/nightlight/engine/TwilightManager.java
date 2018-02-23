@@ -88,7 +88,7 @@ public class TwilightManager {
 
         AlarmUtils.setAlarms(context, sunsetTime, sunriseTime, false);
 
-        if (onComputeCompleteListener != null) onComputeCompleteListener.onComputeComplete();;
+        if (onComputeCompleteListener != null) onComputeCompleteListener.onComputeComplete();
 
         return this;
     }

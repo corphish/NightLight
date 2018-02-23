@@ -16,6 +16,7 @@ import android.widget.TimePicker;
 import com.corphish.nightlight.R;
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.design.widgets.KeyValueView;
+import com.corphish.nightlight.helpers.AdvancedAutomationUtils;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.helpers.TimeUtils;
 
@@ -154,6 +155,9 @@ public class AdvancedAutomationFragment extends Fragment {
                 }
 
                 PreferenceHelper.putInt(getContext(), Constants.PREF_ADV_AUTO_MAX_TEMP, 3000 + (progress / 100)*100);
+                AdvancedAutomationUtils.calculateAndSetScaleDownChangeValue(getContext());
+                AdvancedAutomationUtils.calculateAndSetScaleUpChangeValue(getContext());
+                AdvancedAutomationUtils.setNextAlarm(getContext());
             }
         });
 
@@ -179,6 +183,9 @@ public class AdvancedAutomationFragment extends Fragment {
                 }
 
                 PreferenceHelper.putInt(getContext(), Constants.PREF_ADV_AUTO_MIN_TEMP, 3000 + (progress / 100)*100);
+                AdvancedAutomationUtils.calculateAndSetScaleDownChangeValue(getContext());
+                AdvancedAutomationUtils.calculateAndSetScaleUpChangeValue(getContext());
+                AdvancedAutomationUtils.setNextAlarm(getContext());
             }
         });
     }
@@ -208,10 +215,10 @@ public class AdvancedAutomationFragment extends Fragment {
 
                         scaleDownEnd.setValue(setTime);
 
-                        syncTimePeriods();
-
                         PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_SCALE_DOWN_END, setTime);
                         PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_PEAK_START, setTime);
+
+                        syncTimePeriods();
                     }
                 });
             }
@@ -228,15 +235,15 @@ public class AdvancedAutomationFragment extends Fragment {
                         // Prevent setting time below peakStartTime for now
                         // Actual behavior should support setting this time in next day but before the time when automatic schedule ends
                         String peakStartValue = peakStart.getValue();
-                        if (TimeUtils.compareTimes(peakStartValue, setTime, autoEndTime) > 0 || TimeUtils.compareTimes(setTime, autoEndTime) > 0)
+                        if (!TimeUtils.isWithinTimeRange(setTime, peakStartValue, autoEndTime))
                             setTime = peakStartValue;
 
                         peakEnd.setValue(setTime);
 
-                        syncTimePeriods();
-
                         PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_SCALE_UP_START, setTime);
                         PreferenceHelper.putString(getContext(), Constants.PREF_ADV_AUTO_PEAK_END, setTime);
+
+                        syncTimePeriods();
                     }
                 });
             }
@@ -324,6 +331,9 @@ public class AdvancedAutomationFragment extends Fragment {
         scaleUpEnd.setValue(autoEndTime);
 
         addNextDaysIfNecessary();
+        AdvancedAutomationUtils.calculateAndSetScaleDownChangeValue(getContext());
+        AdvancedAutomationUtils.calculateAndSetScaleUpChangeValue(getContext());
+        AdvancedAutomationUtils.setNextAlarm(getContext());
     }
 
     private void addNextDaysIfNecessary() {

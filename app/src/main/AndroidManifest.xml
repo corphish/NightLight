@@ -36,6 +36,7 @@
 
         <receiver android:name=".receivers.StartNLReceiver" />
         <receiver android:name=".receivers.StopNLReceiver" />
+        <receiver android:name=".receivers.AdvancedAutomationReceiver" />
         <receiver
             android:name=".receivers.BootCompleteReceiver"
             android:enabled="true"

@@ -52,6 +52,8 @@ public class Constants {
     public static final String PREF_ADV_AUTO_TIME_INTERVAL      =   "adv_auto_interval";
     public static final String PREF_ADV_AUTO_SCALE_DOWN_VAL     =   "adv_auto_scale_down_val";
     public static final String PREF_ADV_AUTO_SCALE_UP_VAL       =   "adv_auto_scale_up_val";
+    public static final String PREF_ADV_AUTO_LAST_ALARM         =   "adv_auto_last_alarm";
+    public static final String PREF_ADV_AUTO_LAST_TEMP          =   "adv_auto_last_temp";
 
 
     /**

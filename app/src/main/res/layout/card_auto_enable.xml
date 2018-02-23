@@ -40,23 +40,23 @@
             android:textSize="@dimen/text_caption"
             android:text="@string/sun_switch"/>
 
-        <com.corphish.nightlight.design.widgets.KeyValueView
+        <com.corphish.widgets.KeyValueView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/start_time"
             android:padding="@dimen/layout_padding"
             android:layout_margin="@dimen/layout_margin"
-            custom:caption="@string/start_time"
-            custom:value="@string/start_time_default"/>
+            custom:keyText="@string/start_time"
+            custom:valueText="@string/start_time_default"/>
 
-        <com.corphish.nightlight.design.widgets.KeyValueView
+        <com.corphish.widgets.KeyValueView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/end_time"
             android:padding="@dimen/layout_padding"
             android:layout_margin="@dimen/layout_margin"
-            custom:caption="@string/end_time"
-            custom:value="@string/end_time_default"/>
+            custom:keyText="@string/end_time"
+            custom:valueText="@string/end_time_default"/>
 
     </LinearLayout>
 

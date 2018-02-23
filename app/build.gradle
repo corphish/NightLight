@@ -66,6 +66,8 @@ dependencies {
     implementation 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
     implementation 'com.gregacucnik:editableseekbar:1.2'
 
+    implementation 'com.github.corphish:widgets:1.2'
+
     genericImplementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
         transitive = true
     }

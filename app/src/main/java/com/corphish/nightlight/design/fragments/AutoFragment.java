@@ -26,7 +26,7 @@ import com.corphish.nightlight.helpers.LocationUtils;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.helpers.TimeUtils;
 import com.corphish.nightlight.R;
-import com.corphish.nightlight.design.widgets.KeyValueView;
+import com.corphish.widgets.KeyValueView;
 
 /**
  * Created by Avinaba on 10/24/2017.
@@ -96,8 +96,8 @@ public class AutoFragment extends Fragment implements LocationListener {
                     String prevStartTime = PreferenceHelper.getString(context, Constants.PREF_LAST_START_TIME, Constants.DEFAULT_START_TIME);
                     String prevEndTime = PreferenceHelper.getString(context, Constants.PREF_LAST_END_TIME, Constants.DEFAULT_END_TIME);
 
-                    startTimeKV.setValue(prevStartTime);
-                    endTimeKV.setValue(prevEndTime);
+                    startTimeKV.setValueText(prevStartTime);
+                    endTimeKV.setValueText(prevEndTime);
 
                     PreferenceHelper.putString(context, Constants.PREF_START_TIME, prevStartTime);
                     PreferenceHelper.putString(context, Constants.PREF_END_TIME, prevEndTime);
@@ -124,8 +124,8 @@ public class AutoFragment extends Fragment implements LocationListener {
             }
         });
 
-        startTimeKV.setValue(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
-        endTimeKV.setValue(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
+        startTimeKV.setValueText(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
+        endTimeKV.setValueText(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
 
         addNextDayIfNecessary();
 
@@ -174,7 +174,7 @@ public class AutoFragment extends Fragment implements LocationListener {
                 // To get the prefKey for backup, its "last_" + prefKey
                 PreferenceHelper.putString(context, "last_" + prefKey, timeString);
 
-                viewWhoIsCallingIt.setValue(timeString);
+                viewWhoIsCallingIt.setValueText(timeString);
 
                 addNextDayIfNecessary();
 
@@ -190,7 +190,7 @@ public class AutoFragment extends Fragment implements LocationListener {
     private void addNextDayIfNecessary() {
         String sStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME), sEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
         if (TimeUtils.getTimeInMinutes(sEndTime) < TimeUtils.getTimeInMinutes(sStartTime))
-            endTimeKV.setValue(sEndTime + getString(R.string.next_day));
+            endTimeKV.setValueText(sEndTime + getString(R.string.next_day));
     }
 
     /**
@@ -259,8 +259,8 @@ public class AutoFragment extends Fragment implements LocationListener {
                     public void onComputeComplete() {
                         doCurrentAutoFunctions(false);
 
-                        startTimeKV.setValue(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
-                        endTimeKV.setValue(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
+                        startTimeKV.setValueText(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME));
+                        endTimeKV.setValueText(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME));
                     }
                 });
 

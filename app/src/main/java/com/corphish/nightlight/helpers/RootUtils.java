@@ -46,6 +46,6 @@ public class RootUtils {
      */
     public static String readOneLine(String file) {
         List<String> output = readContents(file);
-        return output.size() > 0 ? output.get(0) : "";
+        return output == null || output.size() == 0 ? "" : output.get(0);
     }
 }

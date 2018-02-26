@@ -188,6 +188,7 @@ public class AutoFragment extends Fragment implements LocationListener {
      * Adds localised (Next Day) string if necessary
      */
     private void addNextDayIfNecessary() {
+        if (getActivity() == null || !isAdded() || isDetached()) return;
         String sStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME), sEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME);
         if (TimeUtils.getTimeInMinutes(sEndTime) < TimeUtils.getTimeInMinutes(sStartTime))
             endTimeKV.setValueText(sEndTime + getString(R.string.next_day));

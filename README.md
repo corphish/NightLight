@@ -1,5 +1,6 @@
 # Night Light
 [![Build Status](https://travis-ci.org/corphish/NightLight.svg?branch=master)](https://travis-ci.org/corphish/NightLight)
+[![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://www.paypal.me/corphish)
 
 [<img alt='Get it on Google Play'  src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
 height="80"/>](https://play.google.com/store/apps/details?id=com.corphish.nightlight.generic)

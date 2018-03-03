@@ -101,7 +101,20 @@ public class ProfilesManager {
         createProfile(newName, newMode, newSettings);
     }
 
-
+    /**
+     * Applies profile setting
+     * @param name Name of profile to be applied
+     */
+    public void applyProfile(String name) {
+        // Find the profile with name at first
+        for (String profile: profilesSet) {
+            Profile p = parseProfile(profile);
+            if (name.equals(p.getName())) {
+                p.apply();
+                break;
+            }
+        }
+    }
 
     // Profiles
 
@@ -158,6 +171,10 @@ public class ProfilesManager {
         // In future if other fields are added, simply append at the end
         public String toProfileString(){
             return name + ";" + settingEnabled + ";" + settingMode + ";" + Arrays.toString(settings);
+        }
+
+        public void apply() {
+            Core.applyNightModeAsync(settingEnabled, settingMode, settings);
         }
     }
 

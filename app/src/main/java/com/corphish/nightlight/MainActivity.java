@@ -137,13 +137,18 @@ public class MainActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if(id == R.id.about_menu) showAbout();
+        if (id == R.id.about_menu) showAbout();
+        if (id == R.id.about_profiles) showProfiles();
 
         return super.onOptionsItemSelected(item);
     }
 
     private void showAbout() {
         startActivity(new Intent(this, AboutActivity.class));
+    }
+
+    private void showProfiles() {
+        startActivity(new Intent(this, ProfilesActivity.class));
     }
 
     @Override

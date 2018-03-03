@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:id="@+id/about_profiles"
+        android:title="@string/profile_title"/>
+
     <item android:id="@+id/about_menu"
         android:title="@string/title_activity_about"/>
 

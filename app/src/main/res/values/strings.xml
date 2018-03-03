@@ -63,4 +63,10 @@
     <string name="green">Green</string>
     <string name="blue">Blue</string>
     <string name="kcal_backup_set"><u>Configure KCAL backup settings?</u></string>
+
+    <string name="profile_create_title">Create profile</string>
+    <string name="profile_create_desc">Create a profile (collection of settings), which you can then apply it easily with one click, or use apps like Tasker apply it for you,</string>
+    <string name="profile_setting_mode">Setting mode</string>
+    <string name="profile_nl_switch">Night Light switch</string>
+    <string name="profile_nl_setting_unavailable">Setting unavailable</string>
 </resources>

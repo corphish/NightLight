@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+    android:padding="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_create_title"
+        android:textSize="18sp"
+        android:textAppearance="?android:textAppearance"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingBottom="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_create_desc"
+        android:textSize="@dimen/text_desc"
+        android:paddingTop="2dp"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingBottom="12dp"
+        android:paddingStart="@dimen/layout_padding"/>
+
+    <android.support.v7.widget.SwitchCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layout_padding"
+        android:text="@string/profile_nl_switch"
+        android:id="@+id/profile_night_light_switch"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:textAppearance="?android:textAppearance"
+        android:text="@string/profile_setting_mode"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingBottom="@dimen/layout_padding"
+        android:id="@+id/profile_night_light_setting_mode"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:enabled="false"
+        android:textAppearance="?android:textAppearance"
+        android:id="@+id/profile_night_light_setting_title1"
+        android:text="@string/profile_nl_setting_unavailable"/>
+
+    <android.support.v7.widget.AppCompatSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingBottom="@dimen/layout_padding"
+        android:enabled="false"
+        android:id="@+id/profile_night_light_setting_param1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:enabled="false"
+        android:textAppearance="?android:textAppearance"
+        android:id="@+id/profile_night_light_setting_title2"
+        android:text="@string/profile_nl_setting_unavailable"/>
+
+    <android.support.v7.widget.AppCompatSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingBottom="@dimen/layout_padding"
+        android:enabled="false"
+        android:id="@+id/profile_night_light_setting_param2"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:text="@android:string/ok"
+            android:id="@+id/button_ok"
+            app:backgroundTint="@color/colorPrimary"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/layout_padding"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="8dp"
+            android:paddingBottom="@dimen/layout_padding"
+            android:id="@+id/button_cancel"
+            android:textAppearance="?android:textAppearanceButton"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorAccent"
+            android:text="@android:string/cancel"
+            android:layout_toStartOf="@id/button_ok"/>
+    </RelativeLayout>
+</LinearLayout>

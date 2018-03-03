@@ -56,6 +56,7 @@
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
@@ -75,15 +76,26 @@
                 android:value="com.corphish.nightlight.MainActivity" />
         </activity>
 
-        <service android:name=".services.BootCompleteJobService"
+        <service
+            android:name=".services.BootCompleteJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
             android:process=":booting" />
-        
+
         <receiver android:name=".receivers.TaskerIntentReceiver">
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".ProfilesActivity"
+            android:label="@string/profile_title"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.corphish.nightlight.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

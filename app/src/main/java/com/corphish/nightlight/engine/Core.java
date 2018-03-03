@@ -202,6 +202,27 @@ public class Core {
     }
 
     /**
+     * Driver method to enable/disable night light asynchronously.
+     * @param b A boolean indicating whether night light should be turned on or off
+     * @param mode Mode of night light setting
+     * @param settings Settings for night light
+     * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated
+     */
+    public static void applyNightModeAsync(boolean b, int mode, int[] settings, boolean toUpdateGlobalState) {
+        new NightModeApplier(b, mode, settings, toUpdateGlobalState).execute();
+    }
+
+    /**
+     * Driver method to enable/disable night light asynchronously.
+     * @param b A boolean indicating whether night light should be turned on or off
+     * @param mode Mode of night light setting
+     * @param settings Settings for night light
+     */
+    public static void applyNightModeAsync(boolean b, int mode, int[] settings) {
+        applyNightModeAsync(b, mode, settings, false);
+    }
+
+    /**
      * AsyncTask to enable/disable night light
      */
     private static class NightModeApplier extends AsyncTask<Object, Object, Object> {
@@ -226,6 +247,19 @@ public class Core {
             this.toUpdateGlobalState = toUpdateGlobalState;
 
             mode = Constants.NL_SETTING_MODE_TEMP;
+        }
+
+        NightModeApplier(boolean enabled, int mode, int settings[], boolean toUpdateGlobalState) {
+            this.enabled = enabled;
+            this.mode = mode;
+            this.toUpdateGlobalState = toUpdateGlobalState;
+
+            if (mode == Constants.NL_SETTING_MODE_FILTER) {
+                blueIntensity = settings[0];
+                greenIntensity = settings[1];
+            } else if (mode == Constants.NL_SETTING_MODE_TEMP) {
+                temperature = settings[0];
+            } else {/* There to filter out invalid modes if any */}
         }
 
         @Override

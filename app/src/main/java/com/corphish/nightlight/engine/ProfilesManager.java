@@ -55,8 +55,10 @@ public class ProfilesManager {
      * @param name Name of profile
      * @param mode Setting mode of profile
      * @param settings Settings of profile
+     * @return A boolean indicating whether profile creation was successful or not
      */
-    public void createProfile(String name, int mode, int[] settings) {
+    public boolean createProfile(String name, int mode, int[] settings) {
+        if (isDuplicate(name)) return false;
         Profile profile = new Profile();
 
         profile.setName(name);
@@ -68,6 +70,19 @@ public class ProfilesManager {
         profilesSet.add(profile.toProfileString());
 
         storeProfiles();
+
+        return true;
+    }
+
+    /**
+     * Checks whether an entry with given name is duplicate or not
+     * @param name Name
+     * @return A boolean indicating whether entry is duplicate
+     */
+    private boolean isDuplicate(String name) {
+        for (String p: profilesSet)
+            if (parseProfile(p).getName().equals(name)) return false;
+        return true;
     }
 
     /**

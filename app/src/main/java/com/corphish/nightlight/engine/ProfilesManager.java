@@ -110,6 +110,9 @@ public class ProfilesManager {
         // Unique name
         private String name;
 
+        // Setting switch
+        boolean settingEnabled;
+
         // Setting mode
         private int settingMode;
 
@@ -122,6 +125,10 @@ public class ProfilesManager {
 
         public int[] getSettings() {
             return settings;
+        }
+
+        public boolean isSettingEnabled() {
+            return settingEnabled;
         }
 
         public String getName() {
@@ -140,13 +147,17 @@ public class ProfilesManager {
             this.settings = settings;
         }
 
+        public void setSettingEnabled(boolean settingEnabled) {
+            this.settingEnabled = settingEnabled;
+        }
+
         // This is how the profile will be stored as string in SP
         // For example -> Name - Profile, SettingMode - 1, settings - {100}
         // Will look like -> "Profile; 1; [100]"
         // DO NOT alter the sequence of data
         // In future if other fields are added, simply append at the end
         public String toProfileString(){
-            return name + ";" + settingMode + ";" + Arrays.toString(settings);
+            return name + ";" + settingEnabled + ";" + settingMode + ";" + Arrays.toString(settings);
         }
     }
 
@@ -156,8 +167,9 @@ public class ProfilesManager {
 
         try {
             profile.setName(parts[0]);
-            profile.setSettingMode(Integer.parseInt(parts[1]));
-            profile.setSettings(StringUtils.stringToIntArray(parts[2]));
+            profile.setSettingEnabled(Boolean.parseBoolean(parts[1]));
+            profile.setSettingMode(Integer.parseInt(parts[2]));
+            profile.setSettings(StringUtils.stringToIntArray(parts[3]));
         } catch (ArrayIndexOutOfBoundsException e) {
             Log.e(TAG, "Profile API mismatch, resultant -> " + profile.toProfileString());
         }

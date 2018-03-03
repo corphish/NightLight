@@ -5,23 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.corphish.nightlight.ProfilesActivity"
     tools:showIn="@layout/activity_profiles">
-    
+
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_margin="@dimen/layout_margin"
         android:layout_height="match_parent">
-        
+
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/profiles_holder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/profiles_holder"/>
-        
+            android:layout_height="match_parent" />
+
         <com.corphish.widgets.PlaceholderView
+            android:id="@+id/emptyView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:id="@+id/emptyView"/>
+            app:viewTint="#666666"
+            app:titleText="@string/profile_empty_title"
+            app:descriptionText="@string/profile_empty_desc"
+            app:srcCompat="@drawable/ic_error_large"/>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

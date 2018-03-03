@@ -72,4 +72,6 @@
     <string name="profile_nl_setting_unavailable">Setting unavailable</string>
     <string name="profile_create_name">Profile name</string>
     <string name="profile_create_name_error">A profile with same name already exists, please try another name.</string>
+    <string name="profile_empty_title">No profiles created</string>
+    <string name="profile_empty_desc">Tap the + button to start setting up a profile</string>
 </resources>

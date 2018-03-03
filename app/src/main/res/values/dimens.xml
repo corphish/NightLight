@@ -11,5 +11,7 @@
     <dimen name="layout_margin">4dp</dimen>
     <dimen name="layout_padding">4dp</dimen>
 
+    <dimen name="group_padding">12dp</dimen>
+
     <dimen name="card_elevation">8dp</dimen>
 </resources>

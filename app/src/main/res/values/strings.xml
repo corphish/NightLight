@@ -69,4 +69,6 @@
     <string name="profile_setting_mode">Setting mode</string>
     <string name="profile_nl_switch">Night Light switch</string>
     <string name="profile_nl_setting_unavailable">Setting unavailable</string>
+    <string name="profile_create_name">Profile name</string>
+    <string name="profile_create_name_error">A profile with same name already exists, please try another name.</string>
 </resources>

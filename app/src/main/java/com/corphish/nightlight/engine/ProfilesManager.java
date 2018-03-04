@@ -88,15 +88,17 @@ public class ProfilesManager {
 
     /**
      * Creates a new profile, stores it in local set and then writes it to SP
+     * @param enabled Whether the setting should be enabled or not
      * @param name Name of profile
      * @param mode Setting mode of profile
      * @param settings Settings of profile
      * @return A boolean indicating whether profile creation was successful or not
      */
-    public boolean createProfile(String name, int mode, int[] settings) {
+    public boolean createProfile(boolean enabled, String name, int mode, int[] settings) {
         if (isDuplicate(name)) return false;
         Profile profile = new Profile();
 
+        profile.setSettingEnabled(enabled);
         profile.setName(name);
         profile.setSettingMode(mode);
         profile.setSettings(settings);
@@ -145,13 +147,14 @@ public class ProfilesManager {
     /**
      * Updates an existing profile with new params
      * @param oldName Old name of profile to be update
+     * @param enabled Whether setting should be enabled or not
      * @param newName New name
      * @param newMode New mode
      * @param newSettings New settings
      */
-    public void updateProfile(String oldName, String newName, int newMode, int newSettings[]) {
+    public void updateProfile(String oldName, boolean enabled, String newName, int newMode, int newSettings[]) {
         deleteProfile(oldName);
-        createProfile(newName, newMode, newSettings);
+        createProfile(enabled, newName, newMode, newSettings);
     }
 
     /**

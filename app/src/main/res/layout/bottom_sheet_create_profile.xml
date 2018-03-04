@@ -44,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/group_padding"
+                android:id="@+id/profile_name_set"
                 android:hint="@string/profile_create_name" />
 
             <TextView
@@ -62,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/group_padding"
+                android:textSize="@dimen/text_caption"
                 android:text="@string/profile_nl_switch"
                 android:id="@+id/profile_night_light_switch"/>
 
@@ -71,6 +73,7 @@
                 android:paddingStart="@dimen/group_padding"
                 android:paddingEnd="@dimen/group_padding"
                 android:paddingTop="@dimen/group_padding"
+                android:textSize="@dimen/text_caption"
                 android:textAppearance="?android:textAppearance"
                 android:text="@string/profile_setting_mode"/>
 
@@ -80,6 +83,8 @@
                 android:paddingStart="@dimen/group_padding"
                 android:paddingEnd="@dimen/group_padding"
                 android:paddingBottom="@dimen/group_padding"
+                android:prompt="@string/color_intensity"
+                android:entries="@array/settingModes"
                 android:id="@+id/profile_night_light_setting_mode"/>
 
             <TextView
@@ -89,6 +94,7 @@
                 android:paddingEnd="@dimen/group_padding"
                 android:paddingTop="@dimen/group_padding"
                 android:enabled="false"
+                android:textSize="@dimen/text_caption"
                 android:textAppearance="?android:textAppearance"
                 android:id="@+id/profile_night_light_setting_title1"
                 android:text="@string/profile_nl_setting_unavailable"/>
@@ -110,6 +116,7 @@
                 android:paddingEnd="@dimen/group_padding"
                 android:paddingTop="@dimen/group_padding"
                 android:enabled="false"
+                android:textSize="@dimen/text_caption"
                 android:textAppearance="?android:textAppearance"
                 android:id="@+id/profile_night_light_setting_title2"
                 android:text="@string/profile_nl_setting_unavailable"/>

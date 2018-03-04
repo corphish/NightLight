@@ -100,6 +100,7 @@ public class ProfilesManager {
      * @return A boolean indicating whether entry is duplicate
      */
     private boolean isDuplicate(String name) {
+        if (profilesSet == null) return false;
         for (String p: profilesSet)
             if (parseProfile(p).getName().equals(name)) return false;
         return true;
@@ -153,7 +154,9 @@ public class ProfilesManager {
     }
 
     public ArrayList<Profile> getProfilesList() {
-        ArrayList<Profile> list = new ArrayList<>();
+        ArrayList<Profile> list = new ArrayList<> ();
+        if (profilesSet == null) return list;
+
         for (String p:profilesSet) list.add(parseProfile(p));
         return list;
     }

@@ -73,9 +73,15 @@ public class ProfilesManager {
 
         Log.i(TAG, "Set size to be stored " + profilesSet.size());
 
+        // First remove existing entries
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .remove(PREF_PROFILES_STORE)
+                .apply();
+
+        // Then save it
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
                 .putStringSet(PREF_PROFILES_STORE, profilesSet)
                 .apply();
     }

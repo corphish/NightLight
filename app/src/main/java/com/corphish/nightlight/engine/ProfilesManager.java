@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.corphish.nightlight.helpers.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -131,10 +132,16 @@ public class ProfilesManager {
         }
     }
 
+    public ArrayList<Profile> getProfilesList() {
+        ArrayList<Profile> list = new ArrayList<>();
+        for (String p:profilesSet) list.add(parseProfile(p));
+        return list;
+    }
+
     // Profiles
 
     // Profile model
-    private class Profile {
+    public class Profile {
         // Unique name
         private String name;
 

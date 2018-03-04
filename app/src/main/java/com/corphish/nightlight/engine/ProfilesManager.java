@@ -47,13 +47,17 @@ public class ProfilesManager {
 
     // Profiles will be stored as string in a set in SP
     private Set<String> profilesSet;
+    private ArrayList<Profile> list;
 
     /**
      * Loads profiles from Shared Preferences
      */
     public void loadProfiles() {
+        if (profilesSet != null) profilesSet.clear();
         profilesSet = PreferenceManager.getDefaultSharedPreferences(context)
                 .getStringSet(PREF_PROFILES_STORE, null);
+
+        Log.i(TAG, "Loaded from SP, size - " + (profilesSet == null ? 0: profilesSet.size()));
 
         dataChangeListener.onDataChanged(profilesSet == null ? 0: profilesSet.size());
     }
@@ -62,10 +66,16 @@ public class ProfilesManager {
      * Saves profiles to Shared Preferences
      */
     public void storeProfiles() {
-        if (profilesSet == null || profilesSet.size() < 1) return;
+        if (profilesSet == null || profilesSet.size() < 1) {
+            Log.e(TAG, "Cannot store empty set");
+            return;
+        }
+
+        Log.i(TAG, "Set size to be stored " + profilesSet.size());
 
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
+                .remove(PREF_PROFILES_STORE)
                 .putStringSet(PREF_PROFILES_STORE, profilesSet)
                 .apply();
     }
@@ -154,10 +164,15 @@ public class ProfilesManager {
     }
 
     public ArrayList<Profile> getProfilesList() {
-        ArrayList<Profile> list = new ArrayList<> ();
+        if (list == null) list = new ArrayList<> ();
+        list.clear();
+
         if (profilesSet == null) return list;
 
         for (String p:profilesSet) list.add(parseProfile(p));
+
+        Log.i(TAG, "List size " + list.size());
+
         return list;
     }
 

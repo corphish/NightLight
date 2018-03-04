@@ -102,8 +102,8 @@ public class ProfilesManager {
     private boolean isDuplicate(String name) {
         if (profilesSet == null) return false;
         for (String p: profilesSet)
-            if (parseProfile(p).getName().equals(name)) return false;
-        return true;
+            if (parseProfile(p).getName().equals(name)) return true;
+        return false;
     }
 
     /**

@@ -28,6 +28,23 @@ public class ProfilesManager {
         this.context = context;
     }
 
+    /**
+     * Listens to changes in data
+     */
+    public interface DataChangeListener {
+        /**
+         * Callback when data change occurs
+         * @param newDataSize Size of new data
+         */
+        void onDataChanged(int newDataSize);
+    }
+
+    private DataChangeListener dataChangeListener;
+
+    public void registerDataChangeListener(DataChangeListener dataChangeListener) {
+        this.dataChangeListener = dataChangeListener;
+    }
+
     // Profiles will be stored as string in a set in SP
     private Set<String> profilesSet;
 
@@ -37,6 +54,8 @@ public class ProfilesManager {
     public void loadProfiles() {
         profilesSet = PreferenceManager.getDefaultSharedPreferences(context)
                 .getStringSet(PREF_PROFILES_STORE, null);
+
+        dataChangeListener.onDataChanged(profilesSet == null ? 0: profilesSet.size());
     }
 
     /**
@@ -71,7 +90,7 @@ public class ProfilesManager {
         profilesSet.add(profile.toProfileString());
 
         storeProfiles();
-
+        dataChangeListener.onDataChanged(profilesSet.size());
         return true;
     }
 
@@ -103,6 +122,7 @@ public class ProfilesManager {
 
         if (profileToBeRemoved != null) profilesSet.remove(profileToBeRemoved);
         storeProfiles();
+        dataChangeListener.onDataChanged(profilesSet == null ? 0: profilesSet.size());
     }
 
     /**

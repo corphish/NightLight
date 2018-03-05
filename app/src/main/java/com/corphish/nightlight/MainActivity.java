@@ -46,14 +46,12 @@ public class MainActivity
                 .registerNightLightStateListener(this)
                 .registerNightLightSettingModeChangeListener(this) // TODO: Define night light setting mode change listener
                 .startService();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        init();
-        viewInit();
-        setViews(masterSwitchEnabled);
+        if (savedInstanceState == null) {
+            init();
+            viewInit();
+            setViews(masterSwitchEnabled);
+        }
     }
 
     private void init() {

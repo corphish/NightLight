@@ -77,6 +77,8 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
             }
         });
 
+        emptyView = findViewById(R.id.emptyView);
+
         initProfilesManager();
         initViews();
     }
@@ -89,8 +91,6 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
     }
 
     private void initViews() {
-        emptyView = findViewById(R.id.emptyView);
-
         RecyclerView recyclerView = findViewById(R.id.profiles_holder);
         profilesAdapter = new ProfilesAdapter();
         profilesAdapter.setProfiles(profiles);
@@ -210,21 +210,24 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean retVal;
                 if (curMode == MODE_CREATE) {
-                    profilesManager.createProfile(nlSwitch.isChecked(),
+                    retVal = profilesManager.createProfile(nlSwitch.isChecked(),
                             editText.getEditableText().toString(),
                             modes.getSelectedItemPosition(),
                             modes.getSelectedItemId() == Constants.NL_SETTING_MODE_TEMP ? new int[]{settingParam1.getProgress() + 3000} : new int[]{settingParam1.getProgress(), settingParam2.getProgress()});
                 } else {
-                    profilesManager.updateProfile(curProfile.getName(),
+                    retVal = profilesManager.updateProfile(curProfile.getName(),
                             nlSwitch.isChecked(),
                             editText.getEditableText().toString(),
                             modes.getSelectedItemPosition(),
                             modes.getSelectedItemId() == Constants.NL_SETTING_MODE_TEMP ? new int[]{settingParam1.getProgress() + 3000} : new int[]{settingParam1.getProgress(), settingParam2.getProgress()});
                 }
-                profiles = profilesManager.getProfilesList();
-                profilesAdapter.notifyDataSetChanged();
-                bottomSheetDialog.dismiss();
+                if (retVal) {
+                    profiles = profilesManager.getProfilesList();
+                    profilesAdapter.notifyDataSetChanged();
+                    bottomSheetDialog.dismiss();
+                } else editTextError.setVisibility(View.VISIBLE);
             }
         });
 
@@ -233,6 +236,8 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
             editText.setText(curProfile.getName());
             modes.setSelection(curProfile.getSettingMode());
         }
+
+        editTextError.setVisibility(View.GONE);
     }
 
     private void updateProfileCreatorParams(int mode, ProfilesManager.Profile profile) {

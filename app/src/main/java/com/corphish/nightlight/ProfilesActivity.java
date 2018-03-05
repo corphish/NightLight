@@ -36,7 +36,8 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
     AppCompatSeekBar settingParam1, settingParam2;
     AppCompatButton ok;
     SwitchCompat nlSwitch;
-    BottomSheetDialog bottomSheetDialog;
+    BottomSheetDialog bottomSheetDialog, optionsDialog;
+    View optionsView;
 
     private int currentModeSelection = Constants.NL_SETTING_MODE_FILTER;
     private ProfilesManager.Profile curProfile = null;
@@ -68,6 +69,7 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                curProfile = null;
                 curMode = MODE_CREATE;
                 bottomSheetDialog = new BottomSheetDialog(ProfilesActivity.this, R.style.BottomSheetDialogDark);
                 initProfileCreatorViews();
@@ -106,7 +108,7 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
     private class ProfilesAdapter extends RecyclerView.Adapter<ProfilesActivity.ProfilesAdapter.CustomViewHolder> {
         private List<ProfilesManager.Profile> profiles;
 
-        public void setProfiles(List<ProfilesManager.Profile> profiles) {
+        void setProfiles(List<ProfilesManager.Profile> profiles) {
             this.profiles = profiles;
         }
 
@@ -117,11 +119,21 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
 
                 name = v.findViewById(R.id.profile_name);
                 desc = v.findViewById(R.id.profile_desc);
+
+                v.setOnClickListener(this);
             }
 
             @Override
-            public void onClick(View v) {}
+            public void onClick(View v) {
+                curProfile = profiles.get(getAdapterPosition());
+                optionsDialog = new BottomSheetDialog(ProfilesActivity.this, R.style.BottomSheetDialogDark);
+                getOptionsView();
+                optionsDialog.setContentView(optionsView);
+                optionsDialog.show();
+            }
         }
+
+
 
         @Override
         public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -147,7 +159,7 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
             desc += getString(R.string.app_name) + " : " +
                     (profile.isSettingEnabled() ? getString(R.string.on).toLowerCase() : getString(R.string.off).toLowerCase()) + ", ";
             if (profile.getSettingMode() == Constants.NL_SETTING_MODE_TEMP) {
-                desc += getString(R.string.color_temperature_title) + " : " + (3000 + profile.getSettings()[0]) + "K";
+                desc += getString(R.string.color_temperature_title) + " : " + profile.getSettings()[0] + "K";
             } else {
                 desc += getString(R.string.blue_light) + " : " + profile.getSettings()[0] + ", " +
                         getString(R.string.green_light) + " : " + profile.getSettings()[1];
@@ -173,7 +185,7 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
         modes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                currentModeSelection = position;
+                currentModeSelection = curProfile == null ? position : curProfile.getSettingMode();
                 updateProfileCreatorParams(currentModeSelection, curProfile);
             }
 
@@ -198,14 +210,14 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
                             editText.getEditableText().toString(),
                             modes.getSelectedItemPosition(),
                             // TODO: Fix values
-                            modes.getSelectedItemId() == Constants.NL_SETTING_MODE_TEMP ? new int[]{settingParam1.getProgress()} : new int[]{settingParam1.getProgress(), settingParam2.getProgress()});
+                            modes.getSelectedItemId() == Constants.NL_SETTING_MODE_TEMP ? new int[]{settingParam1.getProgress() + 3000} : new int[]{settingParam1.getProgress(), settingParam2.getProgress()});
                 } else {
                     profilesManager.updateProfile(curProfile.getName(),
                             nlSwitch.isChecked(),
                             editText.getEditableText().toString(),
                             modes.getSelectedItemPosition(),
                             // TODO: Fix values
-                            modes.getSelectedItemId() == Constants.NL_SETTING_MODE_TEMP ? new int[]{settingParam1.getProgress()} : new int[]{settingParam1.getProgress(), settingParam2.getProgress()});
+                            modes.getSelectedItemId() == Constants.NL_SETTING_MODE_TEMP ? new int[]{settingParam1.getProgress() + 3000} : new int[]{settingParam1.getProgress(), settingParam2.getProgress()});
                 }
                 profiles = profilesManager.getProfilesList();
                 profilesAdapter.notifyDataSetChanged();
@@ -216,6 +228,7 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
         if (curProfile != null) {
             nlSwitch.setChecked(curProfile.isSettingEnabled());
             editText.setText(curProfile.getName());
+            modes.setSelection(curProfile.getSettingMode());
         }
     }
 
@@ -236,16 +249,53 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
             }
         } else {
             settingParam1.setEnabled(true);
+            settingParam1.setMax(1500);
             settingParam2.setEnabled(false);
             settingTitle1.setEnabled(true);
             settingTitle2.setEnabled(false);
             settingTitle1.setText(R.string.color_temperature_title);
             settingTitle2.setText(R.string.profile_nl_setting_unavailable);
             if (profile != null) {
-                settingParam1.setProgress(profile.getSettings()[0]);
+                settingParam1.setProgress(profile.getSettings()[0]-3000);
             } else {
                 settingParam1.setProgress(PreferenceHelper.getInt(this, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP));
             }
         }
+    }
+
+    private void getOptionsView() {
+        optionsView = View.inflate(this, R.layout.bottom_sheet_profile_options, null);
+
+        optionsView.findViewById(R.id.apply).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (curProfile != null) curProfile.apply(ProfilesActivity.this);
+                optionsDialog.dismiss();
+            }
+        });
+
+        optionsView.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                curMode = MODE_EDIT;
+                bottomSheetDialog = new BottomSheetDialog(ProfilesActivity.this, R.style.BottomSheetDialogDark);
+                initProfileCreatorViews();
+                bottomSheetDialog.setContentView(creatorView);
+                bottomSheetDialog.setCancelable(false);
+                bottomSheetDialog.show();
+                optionsDialog.dismiss();
+            }
+        });
+
+        optionsView.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                profilesManager.deleteProfile(curProfile.getName());
+                profiles.remove(curProfile);
+                curProfile = null;
+                profilesAdapter.notifyDataSetChanged();
+                optionsDialog.dismiss();
+            }
+        });
     }
 }

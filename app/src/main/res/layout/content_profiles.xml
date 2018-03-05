@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.corphish.nightlight.ProfilesActivity"
     tools:showIn="@layout/activity_profiles">
@@ -26,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             app:viewTint="#666666"
+            android:paddingTop="96dp"
             app:titleText="@string/profile_empty_title"
             app:descriptionText="@string/profile_empty_desc"
             app:srcCompat="@drawable/ic_error_large"/>

@@ -109,6 +109,14 @@ public class NightLightAppService {
     }
 
     /**
+     * Returns whether app init has been completed or not
+     * @return App init status
+     */
+    public boolean isInitDone() {
+        return isInitDone;
+    }
+
+    /**
      * Notifies that init has been done
      */
     public void notifyInitDone() {

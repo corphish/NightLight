@@ -209,14 +209,12 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
                     profilesManager.createProfile(nlSwitch.isChecked(),
                             editText.getEditableText().toString(),
                             modes.getSelectedItemPosition(),
-                            // TODO: Fix values
                             modes.getSelectedItemId() == Constants.NL_SETTING_MODE_TEMP ? new int[]{settingParam1.getProgress() + 3000} : new int[]{settingParam1.getProgress(), settingParam2.getProgress()});
                 } else {
                     profilesManager.updateProfile(curProfile.getName(),
                             nlSwitch.isChecked(),
                             editText.getEditableText().toString(),
                             modes.getSelectedItemPosition(),
-                            // TODO: Fix values
                             modes.getSelectedItemId() == Constants.NL_SETTING_MODE_TEMP ? new int[]{settingParam1.getProgress() + 3000} : new int[]{settingParam1.getProgress(), settingParam2.getProgress()});
                 }
                 profiles = profilesManager.getProfilesList();
@@ -235,7 +233,9 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
     private void updateProfileCreatorParams(int mode, ProfilesManager.Profile profile) {
         if (mode == Constants.NL_SETTING_MODE_FILTER) {
             settingParam1.setEnabled(true);
+            settingParam1.setMax(128);
             settingParam2.setEnabled(true);
+            settingParam2.setMax(48);
             settingTitle1.setEnabled(true);
             settingTitle2.setEnabled(true);
             settingTitle1.setText(R.string.blue_light);

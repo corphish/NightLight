@@ -13,7 +13,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,15 +28,15 @@ import java.util.List;
 
 public class ProfilesActivity extends AppCompatActivity implements ProfilesManager.DataChangeListener{
 
-    View creatorView;
-    AppCompatEditText editText;
-    TextView editTextError, settingTitle1, settingTitle2, cancel;
-    AppCompatSpinner modes;
-    AppCompatSeekBar settingParam1, settingParam2;
-    AppCompatButton ok;
-    SwitchCompat nlSwitch;
-    BottomSheetDialog bottomSheetDialog, optionsDialog;
-    View optionsView;
+    private View creatorView;
+    private AppCompatEditText editText;
+    private TextView editTextError, settingTitle1, settingTitle2, cancel;
+    private AppCompatSpinner modes;
+    private AppCompatSeekBar settingParam1, settingParam2;
+    private AppCompatButton ok;
+    private SwitchCompat nlSwitch;
+    private BottomSheetDialog bottomSheetDialog, optionsDialog;
+    private View optionsView;
 
     private int currentModeSelection = Constants.NL_SETTING_MODE_FILTER;
     private ProfilesManager.Profile curProfile = null;
@@ -46,14 +45,13 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
     private final int MODE_EDIT     =   1;
     private int curMode             =   MODE_CREATE;
 
-    ProfilesManager profilesManager;
+    private ProfilesManager profilesManager;
 
-    RecyclerView recyclerView;
-    ProfilesAdapter profilesAdapter;
+    private ProfilesAdapter profilesAdapter;
 
-    ArrayList<ProfilesManager.Profile> profiles;
+    private ArrayList<ProfilesManager.Profile> profiles;
 
-    View emptyView;
+    private View emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +76,22 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
                 bottomSheetDialog.show();
             }
         });
-        emptyView = findViewById(R.id.emptyView);
 
+        initProfilesManager();
+        initViews();
+    }
+
+    private void initProfilesManager() {
         profilesManager = new ProfilesManager(this);
         profilesManager.registerDataChangeListener(this);
         profilesManager.loadProfiles();
         profiles = profilesManager.getProfilesList();
+    }
 
-        recyclerView = findViewById(R.id.profiles_holder);
+    private void initViews() {
+        emptyView = findViewById(R.id.emptyView);
+
+        RecyclerView recyclerView = findViewById(R.id.profiles_holder);
         profilesAdapter = new ProfilesAdapter();
         profilesAdapter.setProfiles(profiles);
 
@@ -144,7 +150,6 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
 
         @Override
         public void onBindViewHolder(final CustomViewHolder holder, int position) {
-            Log.i("NL_Prof", profiles.size() + "");
             holder.name.setText(profiles.get(position).getName());
             holder.desc.setText(getDescription(profiles.get(position)));
         }

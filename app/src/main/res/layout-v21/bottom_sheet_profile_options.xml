@@ -11,7 +11,7 @@
     android:padding="8dp">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layout_padding"
         android:textAppearance="?android:textAppearance"
@@ -23,7 +23,7 @@
         android:text="@string/apply"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layout_padding"
         android:textAppearance="?android:textAppearance"
@@ -35,7 +35,7 @@
         android:text="@string/edit"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layout_padding"
         android:textAppearance="?android:textAppearance"

@@ -204,22 +204,24 @@ public class Core {
     /**
      * Driver method to enable/disable night light asynchronously.
      * @param b A boolean indicating whether night light should be turned on or off
+     * @param context Tough love for context eh?
      * @param mode Mode of night light setting
      * @param settings Settings for night light
      * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated
      */
-    public static void applyNightModeAsync(boolean b, int mode, int[] settings, boolean toUpdateGlobalState) {
-        new NightModeApplier(b, mode, settings, toUpdateGlobalState).execute();
+    public static void applyNightModeAsync(boolean b, Context context, int mode, int[] settings, boolean toUpdateGlobalState) {
+        new NightModeApplier(b, context, mode, settings, toUpdateGlobalState).execute();
     }
 
     /**
      * Driver method to enable/disable night light asynchronously.
      * @param b A boolean indicating whether night light should be turned on or off
+     * @param context Tough love for context eh?
      * @param mode Mode of night light setting
      * @param settings Settings for night light
      */
-    public static void applyNightModeAsync(boolean b, int mode, int[] settings) {
-        applyNightModeAsync(b, mode, settings, false);
+    public static void applyNightModeAsync(boolean b, Context context, int mode, int[] settings) {
+        applyNightModeAsync(b, context, mode, settings, false);
     }
 
     /**
@@ -249,9 +251,10 @@ public class Core {
             mode = Constants.NL_SETTING_MODE_TEMP;
         }
 
-        NightModeApplier(boolean enabled, int mode, int settings[], boolean toUpdateGlobalState) {
+        NightModeApplier(boolean enabled, Context context, int mode, int settings[], boolean toUpdateGlobalState) {
             this.enabled = enabled;
             this.mode = mode;
+            this.context = context;
             this.toUpdateGlobalState = toUpdateGlobalState;
 
             if (mode == Constants.NL_SETTING_MODE_FILTER) {

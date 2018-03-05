@@ -157,21 +157,6 @@ public class ProfilesManager {
         createProfile(enabled, newName, newMode, newSettings);
     }
 
-    /**
-     * Applies profile setting
-     * @param name Name of profile to be applied
-     */
-    public void applyProfile(String name) {
-        // Find the profile with name at first
-        for (String profile: profilesSet) {
-            Profile p = parseProfile(profile);
-            if (name.equals(p.getName())) {
-                p.apply();
-                break;
-            }
-        }
-    }
-
     public ArrayList<Profile> getProfilesList() {
         if (list == null) list = new ArrayList<> ();
         list.clear();
@@ -242,8 +227,8 @@ public class ProfilesManager {
             return name + ";" + settingEnabled + ";" + settingMode + ";" + Arrays.toString(settings);
         }
 
-        public void apply() {
-            Core.applyNightModeAsync(settingEnabled, settingMode, settings);
+        public void apply(Context context) {
+            Core.applyNightModeAsync(settingEnabled, context, settingMode, settings);
         }
     }
 

@@ -66,8 +66,8 @@ public class ProfilesManager {
      * Saves profiles to Shared Preferences
      */
     public void storeProfiles() {
-        if (profilesSet == null || profilesSet.size() < 1) {
-            Log.e(TAG, "Cannot store empty set");
+        if (profilesSet == null) {
+            Log.e(TAG, "Cannot store null set");
             return;
         }
 
@@ -78,6 +78,11 @@ public class ProfilesManager {
                 .edit()
                 .remove(PREF_PROFILES_STORE)
                 .apply();
+
+        if (profilesSet.size() < 1) {
+            Log.i(TAG, "Not storing empty set, db was deleted");
+            return;
+        }
 
         // Then save it
         PreferenceManager.getDefaultSharedPreferences(context)

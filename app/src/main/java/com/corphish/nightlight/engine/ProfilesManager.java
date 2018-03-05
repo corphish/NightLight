@@ -170,6 +170,25 @@ public class ProfilesManager {
         return list;
     }
 
+    /**
+     * Searches and returns the profile by given name
+     * @param name Name
+     * @return Required profile as raw string
+     */
+    public String getRawProfileByName(String name) {
+        for (String p: profilesSet) if (p.contains(name)) return p;
+        return null;
+    }
+
+    /**
+     * Searches and returns the profile by given name
+     * @param name Name
+     * @return Required profile as Profile object
+     */
+    public Profile getProfileByName(String name) {
+        return parseProfile(getRawProfileByName(name));
+    }
+
     // Profiles
 
     // Profile model

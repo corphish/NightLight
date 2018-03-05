@@ -151,10 +151,22 @@ public class ProfilesManager {
      * @param newName New name
      * @param newMode New mode
      * @param newSettings New settings
+     * @return Whether profile update was successful or not
      */
-    public void updateProfile(String oldName, boolean enabled, String newName, int newMode, int newSettings[]) {
+    public boolean updateProfile(String oldName, boolean enabled, String newName, int newMode, int newSettings[]) {
+        // Backup the original profile JIC
+        Profile profile = getProfileByName(oldName);
+
         deleteProfile(oldName);
-        createProfile(enabled, newName, newMode, newSettings);
+
+        boolean ret = createProfile(enabled, newName, newMode, newSettings);
+        if (!ret) {
+            // Add back the old profile
+            createProfile(profile.settingEnabled, profile.getName(), profile.getSettingMode(), profile.getSettings());
+            return false;
+        }
+
+        return true;
     }
 
     public ArrayList<Profile> getProfilesList() {

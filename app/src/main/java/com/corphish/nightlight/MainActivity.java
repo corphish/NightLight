@@ -52,6 +52,9 @@ public class MainActivity
             viewInit();
             setViews(masterSwitchEnabled);
         }
+
+        NightLightAppService.getInstance()
+                .notifyInitDone();
     }
 
     private void init() {

@@ -51,6 +51,12 @@ public class NightLightAppService {
     private NightLightSettingModeListener nightLightSettingModeListener;
 
     /**
+     * This variable indicates whether initial app startup has completed or not.
+     * Based on this, other units can perform certain tasks when on init, and other tasks when after init is done.
+     */
+    private boolean isInitDone = false;
+
+    /**
      * This sets the defined nl state listener in this service
      * @param nightLightStateListener Defined night light state listener
      * @return This instance to allow chaining of calls
@@ -100,6 +106,13 @@ public class NightLightAppService {
      */
     public void notifyNewSettingMode(int newMode) {
         if (nightLightSettingModeListener != null) nightLightSettingModeListener.onModeChanged(newMode);
+    }
+
+    /**
+     * Notifies that init has been done
+     */
+    public void notifyInitDone() {
+        isInitDone = true;
     }
 
     /**

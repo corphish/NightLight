@@ -74,4 +74,8 @@
     <string name="profile_create_name_error">A profile with same name already exists, please try another name.</string>
     <string name="profile_empty_title">No profiles created</string>
     <string name="profile_empty_desc">Tap the + button to start setting up a profile</string>
+
+    <string name="apply">Apply</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

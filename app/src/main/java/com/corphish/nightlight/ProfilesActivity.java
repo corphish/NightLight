@@ -1,6 +1,7 @@
 package com.corphish.nightlight;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.ActionBar;
@@ -14,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,11 +139,15 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
 
             @Override
             public void onClick(View v) {
-                curProfile = profiles.get(getAdapterPosition());
-                optionsDialog = new BottomSheetDialog(ProfilesActivity.this, R.style.BottomSheetDialogDark);
-                getOptionsView();
-                optionsDialog.setContentView(optionsView);
-                optionsDialog.show();
+                if (!getIntent().getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
+                    returnBack(profiles.get(getAdapterPosition()).getName());
+                } else {
+                    curProfile = profiles.get(getAdapterPosition());
+                    optionsDialog = new BottomSheetDialog(ProfilesActivity.this, R.style.BottomSheetDialogDark);
+                    getOptionsView();
+                    optionsDialog.setContentView(optionsView);
+                    optionsDialog.show();
+                }
             }
         }
 
@@ -319,5 +325,15 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
                 optionsDialog.dismiss();
             }
         });
+    }
+
+    public void returnBack(String name) {
+        if (!getIntent().getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
+            Log.i("NL_Profile",name);
+            Intent intent = new Intent();
+            intent.putExtra("com.twofortyfouram.locale.intent.extra.BLURB", name);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 }

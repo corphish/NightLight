@@ -1,5 +1,6 @@
 package com.corphish.nightlight;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.ActionBar;
@@ -24,6 +25,7 @@ import com.corphish.nightlight.engine.ProfilesManager;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProfilesActivity extends AppCompatActivity implements ProfilesManager.DataChangeListener{
@@ -53,6 +55,8 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
 
     private View emptyView;
 
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +67,8 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+
+        context = this;
 
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -279,7 +285,13 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
         optionsView.findViewById(R.id.apply).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (curProfile != null) curProfile.apply(ProfilesActivity.this);
+                if (curProfile != null) {
+                    curProfile.apply(ProfilesActivity.this);
+                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_PROFILE);
+                    PreferenceHelper.putBoolean(context, Constants.PREF_CUR_APPLY_EN, curProfile.isSettingEnabled());
+                    PreferenceHelper.putInt(context, Constants.PREF_CUR_PROF_MODE, curProfile.getSettingMode());
+                    PreferenceHelper.putString(context, Constants.PREF_CUR_PROF_VAL, Arrays.toString(curProfile.getSettings()));
+                }
                 optionsDialog.dismiss();
             }
         });

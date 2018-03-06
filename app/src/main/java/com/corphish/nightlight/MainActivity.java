@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -15,7 +16,9 @@ import android.widget.LinearLayout;
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.design.fragments.ColorTemperatureFragment;
 import com.corphish.nightlight.design.fragments.SetOnBootDelayFragment;
+import com.corphish.nightlight.engine.Core;
 import com.corphish.nightlight.helpers.PreferenceHelper;
+import com.corphish.nightlight.helpers.StringUtils;
 import com.corphish.nightlight.interfaces.NightLightSettingModeListener;
 import com.corphish.nightlight.interfaces.NightLightStateListener;
 import com.corphish.nightlight.services.NightLightAppService;
@@ -53,8 +56,12 @@ public class MainActivity
             setViews(masterSwitchEnabled);
         }
 
+        getSupportFragmentManager().executePendingTransactions();
         NightLightAppService.getInstance()
                 .notifyInitDone();
+
+
+        applyProfileIfNecessary();
     }
 
     private void init() {
@@ -166,5 +173,22 @@ public class MainActivity
     public void onDestroy() {
         super.onDestroy();
         NightLightAppService.getInstance().destroy();
+    }
+
+    /**
+     * Checks if the last user setting was a profile or not
+     * If it is, then it applies it
+     */
+    private void applyProfileIfNecessary() {
+        int lastApplyType = PreferenceHelper.getInt(this, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE);
+        if (lastApplyType == Constants.APPLY_TYPE_PROFILE) {
+            Log.d("NL_Main", "Apply profile");
+            Core.applyNightModeAsync(
+                    PreferenceHelper.getBoolean(this, Constants.PREF_CUR_APPLY_EN, false),
+                    this,
+                    PreferenceHelper.getInt(this, Constants.PREF_CUR_PROF_MODE, Constants.NL_SETTING_MODE_FILTER),
+                    StringUtils.stringToIntArray(PreferenceHelper.getString(this, Constants.PREF_CUR_PROF_VAL, null))
+            );
+        }
     }
 }

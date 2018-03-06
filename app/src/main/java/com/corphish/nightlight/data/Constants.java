@@ -36,6 +36,10 @@ public class Constants {
     public static final String PREF_BOOT_MODE       =   "boot_mode";
     public static final String PREF_LAST_BOOT_RES   =   "last_boot_result";
     public static final String PREF_BOOT_DELAY      =   "boot_delay";
+    public static final String PREF_CUR_APPLY_TYPE  =   "cur_apply_type";
+    public static final String PREF_CUR_APPLY_EN    =   "cur_apply_switch";
+    public static final String PREF_CUR_PROF_MODE   =   "cur_profile_mode";
+    public static final String PREF_CUR_PROF_VAL    =   "cur_profile_settings";
 
 
     /**
@@ -58,4 +62,10 @@ public class Constants {
      */
     public static final int NL_SETTING_MODE_FILTER  =   0;
     public static final int NL_SETTING_MODE_TEMP    =   1;
+
+    /**
+     * Apply types
+     */
+    public static final int APPLY_TYPE_PROFILE      =   1;
+    public static final int APPLY_TYPE_NON_PROFILE  =   0;
 }

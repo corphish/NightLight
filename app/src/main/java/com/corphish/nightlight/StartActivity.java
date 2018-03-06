@@ -28,6 +28,7 @@ public class StartActivity extends AppCompatActivity {
 
 
     private final String TASKER_PLUGIN_INTENT   = "com.twofortyfouram.locale.intent.action.EDIT_SETTING";
+    private final int TASKER_INTENT_RQC         = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         if (handleIntent()) finish();
+        else if(handleTaskerIntent()) {}
         else {
             if (getResources().getBoolean(R.bool.forced_compatibility_test_enabled) ||
                     (!BuildConfig.DEBUG && !PreferenceHelper.getBoolean(this, Constants.COMPATIBILITY_TEST)))
@@ -49,8 +51,6 @@ public class StartActivity extends AppCompatActivity {
      * Returns true if shortcut was handled, false otherwise
      */
     private boolean handleIntent() {
-        if (TASKER_PLUGIN_INTENT.equals(getIntent().getAction())) return handleTaskerIntent();
-
         String shortcutID;
 
         if (getIntent().getAction() != null && getIntent().getAction().equals(SHORTCUT_INTENT_STRING)) {
@@ -73,6 +73,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private boolean handleTaskerIntent() {
+        if (!TASKER_PLUGIN_INTENT.equals(getIntent().getAction())) return false;
         // Check if master switch is enabled
         // If enabled redirect to ProfilesActivity
         // Otherwise redirect to MainActivity with appropriate intent message
@@ -82,12 +83,13 @@ public class StartActivity extends AppCompatActivity {
 
         if (masterSwitchEnabled) {
             intent = new Intent(this, ProfilesActivity.class);
+            intent.putExtra(Constants.TASKER_ERROR_STATUS, false);
+            startActivityForResult(intent, TASKER_INTENT_RQC);
         } else {
             intent = new Intent(this, MainActivity.class);
             intent.putExtra(Constants.TASKER_ERROR_STATUS, true);
+            startActivity(intent);
         }
-
-        startActivity(intent);
 
         return true;
     }
@@ -159,6 +161,14 @@ public class StartActivity extends AppCompatActivity {
 
     private void switchToMain() {
         startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode != TASKER_INTENT_RQC) return;
+        setResult(RESULT_OK, data);
         finish();
     }
 }

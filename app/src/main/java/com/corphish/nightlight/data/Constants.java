@@ -73,4 +73,6 @@ public class Constants {
      * Tasker error in-app communication msg
      */
     public static final String TASKER_ERROR_STATUS  =   "tasker_error";
+
+    public static final String TASKER_SETTING       =   "tasker_setting";
 }

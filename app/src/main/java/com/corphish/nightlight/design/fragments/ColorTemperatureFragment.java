@@ -106,6 +106,9 @@ public class ColorTemperatureFragment extends Fragment {
         });
 
         seekBar.setProgress(colorTemperature);
+
+        NightLightAppService.getInstance()
+                .incrementViewInitCount();
     }
 
     public void onStateChanged(int newMode) {

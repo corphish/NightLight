@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.corphish.nightlight.R;
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.helpers.PreferenceHelper;
+import com.corphish.nightlight.services.NightLightAppService;
 
 /**
  * Created by avinabadalal on 13/02/18.
@@ -69,5 +70,8 @@ public class SetOnBootDelayFragment extends Fragment {
 
         TextView warn = getView().findViewById(R.id.set_on_boot_warn);
         warn.setVisibility(PreferenceHelper.getBoolean(context, Constants.PREF_LAST_BOOT_RES, true) ? View.GONE : View.VISIBLE);
+
+        NightLightAppService.getInstance()
+                .incrementViewInitCount();
     }
 }

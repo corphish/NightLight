@@ -13,6 +13,7 @@ import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.engine.Core;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.R;
+import com.corphish.nightlight.services.NightLightAppService;
 
 /**
  * Created by Avinaba on 10/24/2017.
@@ -43,6 +44,9 @@ public class ForceSwitchFragment extends Fragment {
                 Core.applyNightModeAsync(b, getContext(), false);
             }
         });
+
+        NightLightAppService.getInstance()
+                .incrementViewInitCount();
     }
 
     public void updateSwitch(boolean newState) {

@@ -128,6 +128,9 @@ public class FilterFragment extends Fragment {
 
         blueSlider.setProgress(blueIntensity);
         greenSlider.setProgress(greenIntensity);
+
+        NightLightAppService.getInstance()
+                .incrementViewInitCount();
     }
 
     public void onStateChanged(int newMode) {

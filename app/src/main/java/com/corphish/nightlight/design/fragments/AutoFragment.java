@@ -26,6 +26,7 @@ import com.corphish.nightlight.helpers.LocationUtils;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.helpers.TimeUtils;
 import com.corphish.nightlight.R;
+import com.corphish.nightlight.services.NightLightAppService;
 import com.corphish.widgets.KeyValueView;
 
 /**
@@ -130,6 +131,9 @@ public class AutoFragment extends Fragment implements LocationListener {
         addNextDayIfNecessary();
 
         enableOrDisableAutoSwitchViews(autoSwitchStatus);
+
+        NightLightAppService.getInstance()
+                .incrementViewInitCount();
     }
 
     /**

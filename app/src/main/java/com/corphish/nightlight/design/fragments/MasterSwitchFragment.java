@@ -18,6 +18,7 @@ import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.engine.Core;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 import com.corphish.nightlight.R;
+import com.corphish.nightlight.services.NightLightAppService;
 import com.gregacucnik.EditableSeekBar;
 
 /**
@@ -103,6 +104,8 @@ public class MasterSwitchFragment extends Fragment {
             }
         });
 
+        NightLightAppService.getInstance()
+                .incrementViewInitCount();
     }
 
     private void initKCALBackupView() {

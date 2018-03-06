@@ -83,13 +83,11 @@ public class StartActivity extends AppCompatActivity {
 
         if (masterSwitchEnabled) {
             intent = new Intent(this, ProfilesActivity.class);
-            intent.putExtra(Constants.TASKER_ERROR_STATUS, false);
-            startActivityForResult(intent, TASKER_INTENT_RQC);
         } else {
             intent = new Intent(this, MainActivity.class);
-            intent.putExtra(Constants.TASKER_ERROR_STATUS, true);
-            startActivity(intent);
         }
+        intent.putExtra(Constants.TASKER_ERROR_STATUS, !masterSwitchEnabled);
+        startActivityForResult(intent, TASKER_INTENT_RQC);
 
         return true;
     }

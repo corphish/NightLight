@@ -11,9 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.corphish.nightlight.data.Constants;
+import com.corphish.nightlight.design.alert.BottomSheetAlertDialog;
 import com.corphish.nightlight.design.fragments.ColorTemperatureFragment;
 import com.corphish.nightlight.design.fragments.SetOnBootDelayFragment;
 import com.corphish.nightlight.engine.Core;
@@ -38,6 +40,9 @@ public class MainActivity
 
     FragmentTransaction fragmentTransaction;
 
+    private boolean taskerError;
+    private final int REQ_CODE  =   100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +65,9 @@ public class MainActivity
         NightLightAppService.getInstance()
                 .notifyInitDone();
 
-
         applyProfileIfNecessary();
+
+        handleIntent();
     }
 
     private void init() {
@@ -81,6 +87,12 @@ public class MainActivity
 
     @Override
     public void onSwitchClicked(boolean status) {
+        if (taskerError && status) {
+            taskerError = false;
+            Intent intent = new Intent(this, ProfilesActivity.class);
+            intent.putExtra(Constants.TASKER_ERROR_STATUS, false);
+            startActivityForResult(intent, REQ_CODE);
+        }
         setViews(status);
     }
 
@@ -193,5 +205,33 @@ public class MainActivity
                     StringUtils.stringToIntArray(PreferenceHelper.getString(this, Constants.PREF_CUR_PROF_VAL, null))
             );
         }
+    }
+
+    private void handleIntent() {
+        if (getIntent().getBooleanExtra(Constants.TASKER_ERROR_STATUS, false)) {
+            taskerError = true;
+            showTaskerErrorMessage();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode != REQ_CODE) return;
+        setResult(RESULT_OK, data);
+        finish();
+    }
+
+    private void showTaskerErrorMessage() {
+        BottomSheetAlertDialog bottomSheetAlertDialog = new BottomSheetAlertDialog(this);
+        bottomSheetAlertDialog.setTitle(R.string.tasker_error_title);
+        bottomSheetAlertDialog.setMessage(R.string.tasker_error_desc);
+        bottomSheetAlertDialog.setPositiveButton(android.R.string.ok, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        bottomSheetAlertDialog.show();
     }
 }

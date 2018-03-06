@@ -104,6 +104,9 @@ public class MainActivity
     }
 
     private void setViews(boolean show) {
+        NightLightAppService.getInstance()
+                .resetViewCount();
+
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 

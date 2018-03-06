@@ -330,8 +330,11 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
     public void returnBack(String name) {
         if (!getIntent().getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
             Log.i("NL_Profile",name);
+            Bundle bundle = new Bundle();
+            bundle.putString(Constants.TASKER_SETTING, name);
             Intent intent = new Intent();
             intent.putExtra("com.twofortyfouram.locale.intent.extra.BLURB", name);
+            intent.putExtra("com.twofortyfouram.locale.intent.extra.BUNDLE", bundle);
             setResult(RESULT_OK, intent);
             finish();
         }

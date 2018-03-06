@@ -57,6 +57,17 @@ public class NightLightAppService {
     private boolean isInitDone = false;
 
     /**
+     * This variable denotes number of fragments which have been completely added in MainActivity
+     * This is a part of init process
+     */
+    private int viewInitCount       = 0;
+
+    /**
+     * Total number of fragments which would be added
+     */
+    private final int TOTAL_VIEWS   = 6;
+
+    /**
      * This sets the defined nl state listener in this service
      * @param nightLightStateListener Defined night light state listener
      * @return This instance to allow chaining of calls
@@ -113,7 +124,7 @@ public class NightLightAppService {
      * @return App init status
      */
     public boolean isInitDone() {
-        return isInitDone;
+        return isInitDone && viewInitCount == TOTAL_VIEWS;
     }
 
     /**
@@ -121,6 +132,22 @@ public class NightLightAppService {
      */
     public void notifyInitDone() {
         isInitDone = true;
+    }
+
+    /**
+     * Increments view init count
+     * This notifies that a fragment has completed adding its view
+     * Must be called at the end of every fragment's onActivityCreated
+     */
+    public void incrementViewInitCount() {
+        viewInitCount++;
+    }
+
+    /**
+     * Resets view init count
+     */
+    public void resetViewCount() {
+        viewInitCount = 0;
     }
 
     /**

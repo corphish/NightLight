@@ -26,6 +26,9 @@ public class StartActivity extends AppCompatActivity {
     private final String SHORTCUT_INTENT_STRING = "android.intent.action.TOGGLE";
     private final String SHORTCUT_ID            = "toggle";
 
+
+    private final String TASKER_PLUGIN_INTENT   = "com.twofortyfouram.locale.intent.action.EDIT_SETTING";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,7 @@ public class StartActivity extends AppCompatActivity {
      * Returns true if shortcut was handled, false otherwise
      */
     private boolean handleIntent() {
+        if (TASKER_PLUGIN_INTENT.equals(getIntent().getAction())) return handleTaskerIntent();
 
         String shortcutID;
 
@@ -66,6 +70,26 @@ public class StartActivity extends AppCompatActivity {
         shortcutManager.reportShortcutUsed(shortcutID);
 
         return true;
+    }
+
+    private boolean handleTaskerIntent() {
+        // Check if master switch is enabled
+        // If enabled redirect to ProfilesActivity
+        // Otherwise redirect to MainActivity with appropriate intent message
+        // MainActivity will then use this message to show a prompt to user to enable night light
+        boolean masterSwitchEnabled = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH);
+        Intent intent;
+
+        if (masterSwitchEnabled) {
+            intent = new Intent(this, ProfilesActivity.class);
+        } else {
+            intent = new Intent(this, MainActivity.class);
+            intent.putExtra(Constants.TASKER_ERROR_STATUS, true);
+        }
+
+        startActivity(intent);
+
+        return false;
     }
 
     /**

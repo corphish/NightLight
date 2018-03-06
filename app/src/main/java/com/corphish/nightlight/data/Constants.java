@@ -68,4 +68,9 @@ public class Constants {
      */
     public static final int APPLY_TYPE_PROFILE      =   1;
     public static final int APPLY_TYPE_NON_PROFILE  =   0;
+
+    /**
+     * Tasker error in-app communication msg
+     */
+    public static final String TASKER_ERROR_STATUS  =   "tasker_error";
 }

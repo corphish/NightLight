@@ -78,4 +78,7 @@
     <string name="apply">Apply</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+
+    <string name="tasker_error_title">Night Light disabled</string>
+    <string name="tasker_error_desc">To use tasker plugin, you must enable Master Switch first.</string>
 </resources>

@@ -59,7 +59,7 @@ public class ProfilesManager {
 
         Log.i(TAG, "Loaded from SP, size - " + (profilesSet == null ? 0: profilesSet.size()));
 
-        dataChangeListener.onDataChanged(profilesSet == null ? 0: profilesSet.size());
+        if (dataChangeListener != null) dataChangeListener.onDataChanged(profilesSet == null ? 0: profilesSet.size());
     }
 
     /**

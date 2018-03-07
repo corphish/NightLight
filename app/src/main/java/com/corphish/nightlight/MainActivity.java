@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -197,7 +196,6 @@ public class MainActivity
     private void applyProfileIfNecessary() {
         int lastApplyType = PreferenceHelper.getInt(this, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE);
         if (lastApplyType == Constants.APPLY_TYPE_PROFILE) {
-            Log.d("NL_Main", "Apply profile");
             Core.applyNightModeAsync(
                     PreferenceHelper.getBoolean(this, Constants.PREF_CUR_APPLY_EN, false),
                     this,

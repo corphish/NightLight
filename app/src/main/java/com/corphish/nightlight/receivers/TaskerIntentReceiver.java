@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.engine.ProfilesManager;
@@ -20,7 +19,6 @@ import java.util.Arrays;
 public class TaskerIntentReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("NL_Tasker","Plugin supported");
         boolean masterSwitchEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_MASTER_SWITCH);
         if (!masterSwitchEnabled) return;
         ProfilesManager profilesManager = new ProfilesManager(context);

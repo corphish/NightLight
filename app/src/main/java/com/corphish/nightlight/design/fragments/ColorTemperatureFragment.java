@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +70,6 @@ public class ColorTemperatureFragment extends Fragment {
                 seekBar.setEnabled(isChecked);
 
                 if (isChecked && NightLightAppService.getInstance().isInitDone()) {
-                    Log.d("NL_TempFragment", "Applying from switch listener");
                     Core.applyNightModeAsync(true, context, colorTemperature + 3000);
                 }
 
@@ -97,7 +95,6 @@ public class ColorTemperatureFragment extends Fragment {
                 colorTemperature = seekBar.getProgress();
                 colorTemperature = (colorTemperature/100) * 100;
                 if (NightLightAppService.getInstance().isInitDone()) {
-                    Log.d("NL_TempFragment", "Applying from seekbar listener");
                     PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, colorTemperature + 3000);
                     Core.applyNightModeAsync(true, context, colorTemperature + 3000);
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE);

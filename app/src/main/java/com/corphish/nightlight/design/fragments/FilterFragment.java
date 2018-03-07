@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +73,6 @@ public class FilterFragment extends Fragment {
                 greenSlider.setEnabled(isChecked);
 
                 if (isChecked && NightLightAppService.getInstance().isInitDone()) {
-                    Log.d("NL_FilterFragment", "Applying from switch listener");
                     Core.applyNightModeAsync(isChecked, context, blueIntensity, greenIntensity);
                 }
 
@@ -95,7 +93,6 @@ public class FilterFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 blueIntensity = seekBar.getProgress();
                 if (NightLightAppService.getInstance().isInitDone()) {
-                    Log.d("NL_FilterFragment", "Applying from blue seekbar listener");
                     PreferenceHelper.putInt(context, Constants.PREF_BLUE_INTENSITY ,blueIntensity);
                     Core.applyNightModeAsync(true, getContext(), blueIntensity, greenIntensity);
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE);
@@ -118,7 +115,6 @@ public class FilterFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 greenIntensity = seekBar.getProgress();
                 if (NightLightAppService.getInstance().isInitDone()) {
-                    Log.d("NL_FilterFragment", "Applying from green seekbar listener");
                     PreferenceHelper.putInt(context, Constants.PREF_GREEN_INTENSITY ,greenIntensity);
                     Core.applyNightModeAsync(true, getContext(), blueIntensity, greenIntensity);
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE);

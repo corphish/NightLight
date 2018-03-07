@@ -15,7 +15,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -329,7 +328,6 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
 
     public void returnBack(String name) {
         if (!getIntent().getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
-            Log.i("NL_Profile",name);
             Bundle bundle = new Bundle();
             bundle.putString(Constants.TASKER_SETTING, name);
             Intent intent = new Intent();

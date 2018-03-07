@@ -2,7 +2,6 @@ package com.corphish.nightlight.engine;
 
 import android.content.Context;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.corphish.nightlight.helpers.StringUtils;
 
@@ -20,7 +19,6 @@ public class ProfilesManager {
 
     // Profile storage shared preferences key
     private final String PREF_PROFILES_STORE    =   "pref_profiles_store";
-    private final String TAG                    =   "NL_ProfilesManager";
 
     private Context context;
 
@@ -57,8 +55,6 @@ public class ProfilesManager {
         profilesSet = PreferenceManager.getDefaultSharedPreferences(context)
                 .getStringSet(PREF_PROFILES_STORE, null);
 
-        Log.i(TAG, "Loaded from SP, size - " + (profilesSet == null ? 0: profilesSet.size()));
-
         if (dataChangeListener != null) dataChangeListener.onDataChanged(profilesSet == null ? 0: profilesSet.size());
     }
 
@@ -67,11 +63,8 @@ public class ProfilesManager {
      */
     public void storeProfiles() {
         if (profilesSet == null) {
-            Log.e(TAG, "Cannot store null set");
             return;
         }
-
-        Log.i(TAG, "Set size to be stored " + profilesSet.size());
 
         // First remove existing entries
         PreferenceManager.getDefaultSharedPreferences(context)
@@ -80,7 +73,6 @@ public class ProfilesManager {
                 .apply();
 
         if (profilesSet.size() < 1) {
-            Log.i(TAG, "Not storing empty set, db was deleted");
             return;
         }
 
@@ -182,8 +174,6 @@ public class ProfilesManager {
 
         for (String p:profilesSet) list.add(parseProfile(p));
 
-        Log.i(TAG, "List size " + list.size());
-
         return list;
     }
 
@@ -277,8 +267,7 @@ public class ProfilesManager {
             profile.setSettingEnabled(Boolean.parseBoolean(parts[1]));
             profile.setSettingMode(Integer.parseInt(parts[2]));
             profile.setSettings(StringUtils.stringToIntArray(parts[3]));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            Log.e(TAG, "Profile API mismatch, resultant -> " + profile.toProfileString());
+        } catch (ArrayIndexOutOfBoundsException ignored) {
         }
 
         return profile;

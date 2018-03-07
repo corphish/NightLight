@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 
 import com.corphish.nightlight.data.Constants;
 import com.corphish.nightlight.engine.Core;
@@ -25,7 +24,6 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i("NL_Boot", "BootComplete Signal received");
         if (!intent.getAction().equals(BOOT_COMPLETE_ANDROID_STRING)) return;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) BootCompleteJobService.schedule(context);

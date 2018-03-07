@@ -140,7 +140,12 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
             @Override
             public void onClick(View v) {
                 if (!getIntent().getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
-                    returnBack(profiles.get(getAdapterPosition()).getName());
+                    showAlert(R.string.confirm, getString(R.string.tasker_confirm_selection, profiles.get(getAdapterPosition()).getName()), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            returnBack(profiles.get(getAdapterPosition()).getName());
+                        }
+                    });
                 } else {
                     curProfile = profiles.get(getAdapterPosition());
                     optionsDialog = new BottomSheetDialog(ProfilesActivity.this, R.style.BottomSheetDialogDark);

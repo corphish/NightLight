@@ -143,7 +143,7 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
                 } else {
                     curProfile = profiles.get(getAdapterPosition());
                     optionsDialog = new BottomSheetDialog(ProfilesActivity.this, R.style.BottomSheetDialogDark);
-                    getOptionsView();
+                    getOptionsView(curProfile.getName());
                     optionsDialog.setContentView(optionsView);
                     optionsDialog.show();
                 }
@@ -284,8 +284,10 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
         }
     }
 
-    private void getOptionsView() {
+    private void getOptionsView(String profileName) {
         optionsView = View.inflate(this, R.layout.bottom_sheet_profile_options, null);
+
+        ((TextView) optionsView.findViewById(R.id.selected_profile_name)).setText(profileName);
 
         optionsView.findViewById(R.id.apply).setOnClickListener(new View.OnClickListener() {
             @Override

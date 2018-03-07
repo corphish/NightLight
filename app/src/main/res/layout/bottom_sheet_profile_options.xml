@@ -11,6 +11,18 @@
     android:padding="8dp">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:paddingBottom="12dp"
+        android:textAppearance="?android:textAppearance"
+        android:layout_margin="@dimen/layout_margin"
+        android:id="@+id/selected_profile_name"/>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layout_padding"

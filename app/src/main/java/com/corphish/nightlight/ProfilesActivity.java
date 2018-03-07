@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.corphish.nightlight.data.Constants;
+import com.corphish.nightlight.design.alert.BottomSheetAlertDialog;
 import com.corphish.nightlight.engine.ProfilesManager;
 import com.corphish.nightlight.helpers.PreferenceHelper;
 
@@ -319,10 +320,15 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
         optionsView.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                profilesManager.deleteProfile(curProfile.getName());
-                profiles.remove(curProfile);
-                curProfile = null;
-                profilesAdapter.notifyDataSetChanged();
+                showAlert(R.string.delete, getString(R.string.delete_details, curProfile.getName()), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        profilesManager.deleteProfile(curProfile.getName());
+                        profiles.remove(curProfile);
+                        curProfile = null;
+                        profilesAdapter.notifyDataSetChanged();
+                    }
+                });
                 optionsDialog.dismiss();
             }
         });
@@ -338,5 +344,17 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
             setResult(RESULT_OK, intent);
             finish();
         }
+    }
+
+    private void showAlert(int title, String message, View.OnClickListener positiveOnClickListener) {
+        BottomSheetAlertDialog bottomSheetAlertDialog = new BottomSheetAlertDialog(this);
+        bottomSheetAlertDialog.setTitle(title);
+        bottomSheetAlertDialog.setMessage(message);
+        bottomSheetAlertDialog.setPositiveButton(android.R.string.ok, positiveOnClickListener);
+        bottomSheetAlertDialog.setNegativeButton(android.R.string.cancel, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {}
+        });
+        bottomSheetAlertDialog.show();
     }
 }

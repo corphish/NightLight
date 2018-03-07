@@ -79,6 +79,8 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
 
+    <string name="delete_details">Are you sure want to delete the %1$s profile?</string>
+
     <string name="tasker_error_title">Night Light disabled</string>
     <string name="tasker_error_desc">To use tasker plugin, you must enable Master Switch first.</string>
 </resources>

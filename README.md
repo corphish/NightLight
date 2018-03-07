@@ -25,6 +25,9 @@ I flashed a LineageOS oreo build on my device, but there was no night light feat
 * Automatic switching on/off night light at user specified timings.
 * Supports sunset/sunrise timings.
 * Set on boot delay.
+* Support for user profiles, which are collections of settings that user can apply with one click.
+* And to fulfill your all kinds of automation needs, app is supported as a Tasker plugin. You can use it with Profiles.
+* Material design.
 
 ### Requirements
 * Kernel supporting KCAL.

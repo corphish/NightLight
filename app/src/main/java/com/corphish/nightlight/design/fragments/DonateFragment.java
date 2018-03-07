@@ -2,6 +2,7 @@ package com.corphish.nightlight.design.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,8 +31,32 @@ public class DonateFragment extends Fragment {
         getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ExternalLink.open(getContext(), "market://details?id=com.corphish.nightlight.donate");
+                showDonateActions();
             }
         });
+    }
+
+    private void showDonateActions() {
+        final BottomSheetDialog optionsDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialogDark);
+        View optionsView = View.inflate(getContext(), R.layout.bottom_sheet_donate_actions, null);
+
+        optionsView.findViewById(R.id.donate_action1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExternalLink.open(getContext(), "market://details?id=com.corphish.nightlight.donate");
+                optionsDialog.dismiss();
+            }
+        });
+
+        optionsView.findViewById(R.id.donate_action2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExternalLink.open(getContext(), "https://www.paypal.me/corphish");
+                optionsDialog.dismiss();
+            }
+        });
+
+        optionsDialog.setContentView(optionsView);
+        optionsDialog.show();
     }
 }

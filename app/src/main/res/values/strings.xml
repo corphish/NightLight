@@ -88,4 +88,8 @@
 
     <string name="tasker_error_title">Night Light disabled</string>
     <string name="tasker_error_desc">To use tasker plugin, you must enable Master Switch first.</string>
+
+    <string name="donate_title">Donate with&#8230;</string>
+    <string name="donate_with_app">Get the donate version of this app</string>
+    <string name="donate_with_paypal">Via PayPal</string>
 </resources>

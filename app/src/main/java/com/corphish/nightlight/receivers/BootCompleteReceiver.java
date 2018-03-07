@@ -5,13 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import com.corphish.nightlight.data.Constants;
-import com.corphish.nightlight.engine.Core;
-import com.corphish.nightlight.engine.TwilightManager;
-import com.corphish.nightlight.helpers.AlarmUtils;
 import com.corphish.nightlight.helpers.BootUtils;
-import com.corphish.nightlight.helpers.PreferenceHelper;
-import com.corphish.nightlight.helpers.TimeUtils;
 import com.corphish.nightlight.services.BootCompleteJobService;
 
 /**
@@ -24,7 +18,7 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (!intent.getAction().equals(BOOT_COMPLETE_ANDROID_STRING)) return;
+        if (BOOT_COMPLETE_ANDROID_STRING.equals(intent.getAction())) return;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) BootCompleteJobService.schedule(context);
         else BootUtils.applyOnBoot(context);

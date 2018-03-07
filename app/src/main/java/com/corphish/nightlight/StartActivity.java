@@ -1,17 +1,15 @@
 package com.corphish.nightlight;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ShortcutManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import com.corphish.nightlight.data.Constants;
+import com.corphish.nightlight.design.alert.BottomSheetAlertDialog;
 import com.corphish.nightlight.engine.Core;
 import com.corphish.nightlight.engine.KCALManager;
 import com.corphish.nightlight.helpers.PreferenceHelper;
@@ -110,12 +108,12 @@ public class StartActivity extends AppCompatActivity {
 
     private void showAlertDialog(int caption, int msg) {
         if (isFinishing()) return;
-        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
+        BottomSheetAlertDialog builder = new BottomSheetAlertDialog(this);
         builder.setTitle(caption);
         builder.setMessage(msg);
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(android.R.string.ok, new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(View v) {
                 finish();
             }
         });

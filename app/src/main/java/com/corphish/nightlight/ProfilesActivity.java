@@ -34,7 +34,7 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
 
     private View creatorView;
     private AppCompatEditText editText;
-    private TextView editTextError, settingTitle1, settingTitle2, cancel;
+    private TextView editTextError, settingTitle1, settingTitle2, cancel, profileAction, profileActionDesc;
     private AppCompatSpinner modes;
     private AppCompatSeekBar settingParam1, settingParam2;
     private AppCompatButton ok;
@@ -193,6 +193,8 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
     private void initProfileCreatorViews() {
         creatorView = View.inflate(this, R.layout.bottom_sheet_create_profile, null);
 
+        profileAction = creatorView.findViewById(R.id.profile_action_title);
+        profileActionDesc = creatorView.findViewById(R.id.profile_action_desc);
         editText = creatorView.findViewById(R.id.profile_name_set);
         editTextError = creatorView.findViewById(R.id.profile_name_error);
         nlSwitch = creatorView.findViewById(R.id.profile_night_light_switch);
@@ -253,6 +255,14 @@ public class ProfilesActivity extends AppCompatActivity implements ProfilesManag
             editText.setText(curProfile.getName());
             modes.setSelection(curProfile.getSettingMode());
         }
+
+        profileAction.setText(
+                curMode == MODE_CREATE ? R.string.profile_create_title : R.string.profile_edit_title
+        );
+
+        profileActionDesc.setText(
+                curMode == MODE_CREATE ? R.string.profile_create_desc : R.string.profile_edit_desc
+        );
 
         editTextError.setVisibility(View.GONE);
     }

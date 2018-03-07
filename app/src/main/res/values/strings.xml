@@ -67,6 +67,8 @@
     <string name="profile_title">Profiles</string>
     <string name="profile_create_title">Create profile</string>
     <string name="profile_create_desc">Create a profile (collection of settings), which you can then apply it easily with one click, or use apps like Tasker apply it for you,</string>
+    <string name="profile_edit_title">Edit profile</string>
+    <string name="profile_edit_desc">Edit an existing profile</string>
     <string name="profile_setting_mode">Setting mode</string>
     <string name="profile_nl_switch">Night Light switch</string>
     <string name="profile_nl_setting_unavailable">Setting unavailable</string>

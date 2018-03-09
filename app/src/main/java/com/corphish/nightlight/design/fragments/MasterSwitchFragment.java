@@ -103,9 +103,6 @@ public class MasterSwitchFragment extends Fragment {
                 bottomSheetDialog.show();
             }
         });
-
-        NightLightAppService.getInstance()
-                .incrementViewInitCount();
     }
 
     private void initKCALBackupView() {

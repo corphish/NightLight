@@ -65,7 +65,7 @@ public class NightLightAppService {
     /**
      * Total number of fragments which would be added
      */
-    private final int TOTAL_VIEWS   = 6;
+    private final int TOTAL_VIEWS   = 5;
 
     /**
      * This sets the defined nl state listener in this service

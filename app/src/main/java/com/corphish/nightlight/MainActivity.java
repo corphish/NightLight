@@ -51,7 +51,7 @@ public class MainActivity
 
         NightLightAppService.getInstance()
                 .registerNightLightStateListener(this)
-                .registerNightLightSettingModeChangeListener(this) // TODO: Define night light setting mode change listener
+                .registerNightLightSettingModeChangeListener(this)
                 .startService();
 
         if (savedInstanceState == null) {

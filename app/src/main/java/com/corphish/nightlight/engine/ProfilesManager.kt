@@ -24,13 +24,14 @@ class ProfilesManager(private val context: Context) {
 
     fun registerDataChangeListener(dataChangeListener: DataChangeListener) {
         this.dataChangeListener = dataChangeListener
+        dataChangeListener.onDataChanged(profilesList.size)
     }
 
     // Profiles set maybe null (when set is empty) but will not contain null values
-    val profilesSet: MutableSet<Profile> = sortedSetOf()
+    val profilesList: MutableList<Profile> = mutableListOf()
 
     fun loadProfiles() {
-        profilesSet.clear()
+        profilesList.clear()
 
         val savedSet = PreferenceManager.getDefaultSharedPreferences(context)
                 .getStringSet(_prefKey, null)
@@ -39,15 +40,18 @@ class ProfilesManager(private val context: Context) {
 
         for (entry in savedSet) {
             val profile = parseProfile(entry)
-            if (profile != null) profilesSet.add(profile)
+            if (profile != null) profilesList.add(profile)
         }
+
+        dataChangeListener?.onDataChanged(profilesList.size)
     }
 
     private fun storeProfiles() {
         // Need string set for shared pref
         val stringSet: MutableSet<String> = hashSetOf()
 
-        profilesSet.forEach { profile -> stringSet += profile.toProfileString() }
+        profilesList.forEach { profile -> stringSet += profile.toProfileString() }
+        dataChangeListener?.onDataChanged(profilesList.size)
 
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
@@ -64,12 +68,9 @@ class ProfilesManager(private val context: Context) {
      * @return A boolean indicating whether profile creation was successful or not
      */
     fun createProfile(enabled: Boolean, name: String, mode: Int, settings: IntArray): Boolean {
-        val ret = profilesSet.add(Profile(name, enabled, mode, settings))
+        val ret = profilesList.add(Profile(name, enabled, mode, settings))
 
-        if (ret) {
-            storeProfiles()
-            dataChangeListener?.onDataChanged(profilesSet.size)
-        }
+        if (ret) storeProfiles()
 
         return ret
     }
@@ -80,14 +81,16 @@ class ProfilesManager(private val context: Context) {
      */
     fun deleteProfile(name: String) : Boolean {
         var profileToBeRemoved: Profile? = null
-        for (profile in profilesSet) {
+        for (profile in profilesList) {
             if (profile.name == name) {
                 profileToBeRemoved = profile
                 break
             }
         }
+        val ret = profilesList.remove(profileToBeRemoved)
         storeProfiles()
-        return profilesSet.remove(profileToBeRemoved)
+
+        return ret
     }
 
     /**
@@ -110,7 +113,7 @@ class ProfilesManager(private val context: Context) {
 
     fun getProfileByName(name: String) : Profile? {
         var profile: Profile? = null
-        for (p in profilesSet)
+        for (p in profilesList)
             if (p.name == name) profile = p
 
         return profile

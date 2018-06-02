@@ -25,7 +25,6 @@ import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 
-import java.util.ArrayList
 import java.util.Arrays
 
 class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener {
@@ -58,7 +57,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
     private var profilesAdapter: ProfilesAdapter? = null
 
-    private var profiles: MutableSet<ProfilesManager.Profile>? = null
+    private var profiles: MutableList<ProfilesManager.Profile>? = null
 
     private var emptyView: View? = null
 
@@ -96,7 +95,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         profilesManager = ProfilesManager(this)
         profilesManager!!.registerDataChangeListener(this)
         profilesManager!!.loadProfiles()
-        profiles = profilesManager!!.profilesSet
+        profiles = profilesManager!!.profilesList
     }
 
     private fun initViews() {
@@ -124,8 +123,8 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
     private inner class ProfilesAdapter : RecyclerView.Adapter<ProfilesActivity.ProfilesAdapter.CustomViewHolder>() {
         private var profiles: List<ProfilesManager.Profile>? = null
 
-        internal fun setProfiles(profiles: MutableSet<ProfilesManager.Profile>?) {
-            this.profiles = profiles?.toList()
+        internal fun setProfiles(profiles: MutableList<ProfilesManager.Profile>?) {
+            this.profiles = profiles
         }
 
         inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
@@ -220,7 +219,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
                         modes!!.selectedItemPosition,
                         if (modes!!.selectedItemId == Constants.NL_SETTING_MODE_TEMP.toLong()) intArrayOf(settingParam1!!.progress + 3000) else intArrayOf(settingParam1!!.progress, settingParam2!!.progress))
             if (retVal) {
-                profiles = profilesManager!!.profilesSet
+                profiles = profilesManager!!.profilesList
                 profilesAdapter!!.notifyDataSetChanged()
                 bottomSheetDialog!!.dismiss()
             } else

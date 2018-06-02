@@ -120,7 +120,7 @@ class ProfilesManager(private val context: Context) {
     data class Profile(var name: String,
                        var isSettingEnabled: Boolean = false,
                        var settingMode: Int = 0,
-                       var settings: IntArray) {
+                       var settings: IntArray) : Comparable<Profile> {
         // This is how the profile will be stored as string in SP
         // For example -> Name - Profile, SettingMode - 1, settings - {100}
         // Will look like -> "Profile; 1; [100]"
@@ -147,8 +147,11 @@ class ProfilesManager(private val context: Context) {
         }
 
         override fun hashCode(): Int {
-            // Name should be unique
             return this.name.hashCode()
+        }
+
+        override fun compareTo(other: Profile): Int {
+            return this.name.compareTo(other.name)
         }
     }
 

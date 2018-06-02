@@ -263,7 +263,7 @@ object Core {
             return null
         }
 
-        override fun onPostExecute(bubble: Any) {
+        override fun onPostExecute(bubble: Any?) {
             // If this is run by set on boot units, set BOOT_MODE false
             if (PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false))
                 PreferenceHelper.putBoolean(context, Constants.PREF_BOOT_MODE, false)

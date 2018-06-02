@@ -86,7 +86,7 @@ class ProfilesManager(private val context: Context) {
                 break
             }
         }
-
+        storeProfiles()
         return profilesSet.remove(profileToBeRemoved)
     }
 

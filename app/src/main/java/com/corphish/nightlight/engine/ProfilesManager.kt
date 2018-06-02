@@ -35,6 +35,8 @@ class ProfilesManager(private val context: Context) {
         val savedSet = PreferenceManager.getDefaultSharedPreferences(context)
                 .getStringSet(_prefKey, null)
 
+        if (savedSet == null || savedSet.isEmpty()) return
+
         for (entry in savedSet) {
             val profile = parseProfile(entry)
             if (profile != null) profilesSet.add(profile)

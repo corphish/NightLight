@@ -2,12 +2,14 @@ def taskRequests = getGradle().getStartParameter().getTaskRequests().toString()
 def isPlaystore = taskRequests.contains("generic") || taskRequests.contains("Generic") || taskRequests.contains("donate") || taskRequests.contains("Donate")
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 if (isPlaystore) {
     apply plugin: 'io.fabric'
 }
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
+    mavenCentral()
 }
 
 
@@ -75,4 +77,5 @@ dependencies {
     donateImplementation('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
         transitive = true
     }
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

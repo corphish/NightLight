@@ -2,7 +2,7 @@ package com.corphish.nightlight.engine
 
 import android.content.Context
 import android.preference.PreferenceManager
-import com.corphish.nightlight.helpers.StringUtils
+import com.corphish.nightlight.extensions.toArrayOfInts
 import java.util.*
 
 class ProfilesManager(private val context: Context) {
@@ -162,7 +162,7 @@ class ProfilesManager(private val context: Context) {
         val parts = profileString.split(";".toRegex())
 
         return when (parts.size == 4) {
-            true -> Profile(parts[0], parts[1].toBoolean(), parts[2].toInt(), StringUtils.stringToIntArray(parts[3]))
+            true -> Profile(parts[0], parts[1].toBoolean(), parts[2].toInt(), parts[3].toArrayOfInts(","))
             false -> null
         }
     }

@@ -16,7 +16,6 @@ import com.corphish.nightlight.design.fragments.ColorTemperatureFragment
 import com.corphish.nightlight.design.fragments.SetOnBootDelayFragment
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
-import com.corphish.nightlight.helpers.StringUtils
 import com.corphish.nightlight.interfaces.NightLightSettingModeListener
 import com.corphish.nightlight.interfaces.NightLightStateListener
 import com.corphish.nightlight.services.NightLightAppService
@@ -24,6 +23,7 @@ import com.corphish.nightlight.design.fragments.AutoFragment
 import com.corphish.nightlight.design.fragments.FilterFragment
 import com.corphish.nightlight.design.fragments.ForceSwitchFragment
 import com.corphish.nightlight.design.fragments.MasterSwitchFragment
+import com.corphish.nightlight.extensions.toArrayOfInts
 
 class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener, NightLightSettingModeListener {
 
@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                     PreferenceHelper.getBoolean(this, Constants.PREF_CUR_APPLY_EN, false),
                     this,
                     PreferenceHelper.getInt(this, Constants.PREF_CUR_PROF_MODE, Constants.NL_SETTING_MODE_FILTER),
-                    StringUtils.stringToIntArray(PreferenceHelper.getString(this, Constants.PREF_CUR_PROF_VAL, null)!!)
+                    PreferenceHelper.getString(this, Constants.PREF_CUR_PROF_VAL, null)!!.toArrayOfInts(",")
             )
         }
     }

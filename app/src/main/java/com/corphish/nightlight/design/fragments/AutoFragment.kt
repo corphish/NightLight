@@ -238,13 +238,11 @@ class AutoFragment : Fragment(), LocationListener {
 
         TwilightManager.newInstance()
                 .atLocation(currentLocation.longitude, currentLocation.latitude)
-                .computeAndSaveTime(context!!, object: TwilightManager.OnComputeCompleteListener {
-                    override fun onComputeComplete() {
+                .computeAndSaveTime(context!!, {
                         doCurrentAutoFunctions(false)
 
                         startTimeKV!!.setValueText(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!)
                         endTimeKV!!.setValueText(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!)
-                    }
                 })
 
         addNextDayIfNecessary()

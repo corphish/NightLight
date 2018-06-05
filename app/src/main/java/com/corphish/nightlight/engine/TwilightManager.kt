@@ -29,13 +29,6 @@ class TwilightManager {
     private var latitude: Double = 0.toDouble()
 
     /**
-     * Interface to handle compute completion event
-     */
-    interface OnComputeCompleteListener {
-        fun onComputeComplete()
-    }
-
-    /**
      * Sets current location.
      * Only support setting of co-ordinates directly
      * Any error checks need to be done before calling this
@@ -67,10 +60,10 @@ class TwilightManager {
     /**
      * Computes sunset and sunrise time and saves in the preference
      * @param context Ok where was the shrug emoji again?
-     * @param onComputeCompleteListener OnComputeListener to invoke when compute is completed
+     * @param eventFinishCallback Callback for event finish
      * @return Current instance
      */
-    fun computeAndSaveTime(context: Context, onComputeCompleteListener: OnComputeCompleteListener? = null): TwilightManager {
+    fun computeAndSaveTime(context: Context, eventFinishCallback: (() -> Unit)? = null): TwilightManager {
         val mLocation = Location(latitude, longitude)
 
         val sunriseSunsetCalculator = SunriseSunsetCalculator(mLocation, TimeZone.getDefault())
@@ -84,7 +77,7 @@ class TwilightManager {
 
         AlarmUtils.setAlarms(context, sunsetTime, sunriseTime, false)
 
-        onComputeCompleteListener?.onComputeComplete()
+        eventFinishCallback?.invoke()
 
         return this
     }

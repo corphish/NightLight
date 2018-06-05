@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.AsyncTask
 
 import com.corphish.nightlight.data.Constants
-import com.corphish.nightlight.helpers.ColorTemperatureUtil
+import com.corphish.nightlight.extensions.fromColorTemperatureToRGBIntArray
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
 
@@ -69,7 +69,7 @@ object Core {
         // Assume that set on boot failed by default
         if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
 
-        val ret = KCALManager.updateKCALValues(ColorTemperatureUtil.colorTemperatureToIntRGB(temperature))
+        val ret = KCALManager.updateKCALValues(temperature.fromColorTemperatureToRGBIntArray())
         if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
 
         PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, true)

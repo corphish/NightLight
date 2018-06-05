@@ -1,8 +1,8 @@
 package com.corphish.nightlight.design.fragments
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.os.Bundle
-import android.support.v7.widget.SwitchCompat
+import androidx.appcompat.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ import com.corphish.nightlight.services.NightLightAppService
  * Filter fragment
  */
 
-class FilterFragment : Fragment() {
+class FilterFragment : androidx.fragment.app.Fragment() {
 
     private var blueIntensity: Int = 0
     private var greenIntensity: Int = 0

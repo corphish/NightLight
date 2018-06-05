@@ -3,17 +3,17 @@ package com.corphish.nightlight
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomSheetDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatButton
-import android.support.v7.widget.AppCompatEditText
-import android.support.v7.widget.AppCompatSeekBar
-import android.support.v7.widget.AppCompatSpinner
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SwitchCompat
-import android.support.v7.widget.Toolbar
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatSeekBar
+import androidx.appcompat.widget.AppCompatSpinner
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.SwitchCompat
+import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,8 +42,8 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
     private var settingParam2: AppCompatSeekBar? = null
     private var ok: AppCompatButton? = null
     private var nlSwitch: SwitchCompat? = null
-    private var bottomSheetDialog: BottomSheetDialog? = null
-    private var optionsDialog: BottomSheetDialog? = null
+    private var bottomSheetDialog: com.google.android.material.bottomsheet.BottomSheetDialog? = null
+    private var optionsDialog: com.google.android.material.bottomsheet.BottomSheetDialog? = null
     private var optionsView: View? = null
 
     private var currentModeSelection = Constants.NL_SETTING_MODE_FILTER
@@ -78,7 +78,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         findViewById<View>(R.id.fab).setOnClickListener {
             curProfile = null
             curMode = MODE_CREATE
-            bottomSheetDialog = BottomSheetDialog(this@ProfilesActivity, R.style.BottomSheetDialogDark)
+            bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(this@ProfilesActivity, R.style.BottomSheetDialogDark)
             initProfileCreatorViews()
             bottomSheetDialog!!.setContentView(creatorView)
             bottomSheetDialog!!.setCancelable(false)
@@ -99,14 +99,14 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
     }
 
     private fun initViews() {
-        val recyclerView = findViewById<RecyclerView>(R.id.profiles_holder)
+        val recyclerView = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.profiles_holder)
         profilesAdapter = ProfilesAdapter()
         profilesAdapter!!.setProfiles(profiles)
 
         recyclerView.invalidateItemDecorations()
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         recyclerView.adapter = profilesAdapter
-        recyclerView.itemAnimator = DefaultItemAnimator()
+        recyclerView.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         recyclerView.isNestedScrollingEnabled = false
         recyclerView.setHasFixedSize(false)
 
@@ -120,14 +120,14 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
             emptyView!!.visibility = View.GONE
     }
 
-    private inner class ProfilesAdapter : RecyclerView.Adapter<ProfilesActivity.ProfilesAdapter.CustomViewHolder>() {
+    private inner class ProfilesAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<ProfilesActivity.ProfilesAdapter.CustomViewHolder>() {
         private var profiles: List<ProfilesManager.Profile>? = null
 
         internal fun setProfiles(profiles: MutableList<ProfilesManager.Profile>?) {
             this.profiles = profiles
         }
 
-        inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+        inner class CustomViewHolder internal constructor(v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v), View.OnClickListener {
             internal val name: TextView
             internal val desc: TextView
 
@@ -144,7 +144,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
                     showAlert(R.string.confirm, getString(R.string.tasker_confirm_selection, profiles!![adapterPosition].name), View.OnClickListener { returnBack(profiles!![adapterPosition].name) })
                 } else {
                     curProfile = profiles!![adapterPosition]
-                    optionsDialog = BottomSheetDialog(this@ProfilesActivity, R.style.BottomSheetDialogDark)
+                    optionsDialog = com.google.android.material.bottomsheet.BottomSheetDialog(this@ProfilesActivity, R.style.BottomSheetDialogDark)
                     getOptionsView(curProfile!!.name)
                     optionsDialog!!.setContentView(optionsView)
                     optionsDialog!!.show()
@@ -294,7 +294,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
         optionsView!!.findViewById<View>(R.id.edit).setOnClickListener {
             curMode = MODE_EDIT
-            bottomSheetDialog = BottomSheetDialog(this@ProfilesActivity, R.style.BottomSheetDialogDark)
+            bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(this@ProfilesActivity, R.style.BottomSheetDialogDark)
             initProfileCreatorViews()
             bottomSheetDialog!!.setContentView(creatorView)
             bottomSheetDialog!!.setCancelable(false)

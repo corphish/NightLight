@@ -1,8 +1,8 @@
 package com.corphish.nightlight.design.fragments
 
 import android.os.Bundle
-import android.support.design.widget.BottomSheetDialog
-import android.support.v4.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ import com.corphish.nightlight.R
  * Donate fragment
  */
 
-class DonateFragment : Fragment() {
+class DonateFragment : androidx.fragment.app.Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -29,7 +29,7 @@ class DonateFragment : Fragment() {
     }
 
     private fun showDonateActions() {
-        val optionsDialog = BottomSheetDialog(context!!, R.style.BottomSheetDialogDark)
+        val optionsDialog = com.google.android.material.bottomsheet.BottomSheetDialog(context!!, R.style.BottomSheetDialogDark)
         val optionsView = View.inflate(context, R.layout.bottom_sheet_donate_actions, null)
 
         optionsView.findViewById<View>(R.id.donate_action1).setOnClickListener {

@@ -42,7 +42,7 @@
                 android:paddingBottom="12dp"
                 android:paddingStart="@dimen/group_padding"/>
 
-            <android.support.v7.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/group_padding"
@@ -61,7 +61,7 @@
                 android:textSize="@dimen/text_sub_desc"
                 android:id="@+id/profile_name_error"/>
 
-            <android.support.v7.widget.SwitchCompat
+            <androidx.appcompat.widget.SwitchCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/group_padding"
@@ -79,7 +79,7 @@
                 android:textAppearance="?android:textAppearance"
                 android:text="@string/profile_setting_mode"/>
 
-            <android.support.v7.widget.AppCompatSpinner
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/group_padding"
@@ -101,7 +101,7 @@
                 android:id="@+id/profile_night_light_setting_title1"
                 android:text="@string/profile_nl_setting_unavailable"/>
 
-            <android.support.v7.widget.AppCompatSeekBar
+            <androidx.appcompat.widget.AppCompatSeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
@@ -123,7 +123,7 @@
                 android:id="@+id/profile_night_light_setting_title2"
                 android:text="@string/profile_nl_setting_unavailable"/>
 
-            <android.support.v7.widget.AppCompatSeekBar
+            <androidx.appcompat.widget.AppCompatSeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
@@ -139,7 +139,7 @@
                 android:layout_margin="@dimen/layout_margin"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
                     android:padding="@dimen/group_padding"
                     android:text="@android:string/ok"

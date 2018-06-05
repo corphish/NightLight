@@ -1,7 +1,7 @@
 package com.corphish.nightlight.design.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +18,7 @@ import com.corphish.nightlight.services.NightLightAppService
  * Set on boot delay fragment
  */
 
-class SetOnBootDelayFragment : Fragment() {
+class SetOnBootDelayFragment : androidx.fragment.app.Fragment() {
     private var bootDelay: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {

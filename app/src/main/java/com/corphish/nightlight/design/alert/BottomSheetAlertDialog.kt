@@ -1,9 +1,9 @@
 package com.corphish.nightlight.design.alert
 
 import android.content.Context
-import android.support.annotation.StringRes
-import android.support.design.widget.BottomSheetDialog
-import android.support.v7.widget.AppCompatButton
+import androidx.annotation.StringRes
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import androidx.appcompat.widget.AppCompatButton
 import android.view.View
 import android.widget.TextView
 
@@ -23,7 +23,7 @@ class BottomSheetAlertDialog(private val context: Context) {
     private var positiveButton: AppCompatButton? = null
     private var neutralButton: AppCompatButton? = null
 
-    private var bottomSheetDialog: BottomSheetDialog? = null
+    private var bottomSheetDialog: com.google.android.material.bottomsheet.BottomSheetDialog? = null
 
     init {
 
@@ -39,7 +39,7 @@ class BottomSheetAlertDialog(private val context: Context) {
         positiveButton = contentView!!.findViewById(R.id.positiveButton)
         neutralButton = contentView!!.findViewById(R.id.neutralButton)
 
-        bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialogDark)
+        bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(context, R.style.BottomSheetDialogDark)
     }
 
     fun setTitle(@StringRes iTitle: Int): BottomSheetAlertDialog {

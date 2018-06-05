@@ -1,11 +1,11 @@
 package com.corphish.nightlight.design.fragments
 
 import android.app.Activity
-import android.support.design.widget.BottomSheetDialog
-import android.support.v4.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import androidx.fragment.app.Fragment
 import android.os.Bundle
-import android.support.v7.widget.AppCompatCheckBox
-import android.support.v7.widget.SwitchCompat
+import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.appcompat.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,13 +22,13 @@ import com.gregacucnik.EditableSeekBar
  * Master switch fragment
  */
 
-class MasterSwitchFragment : Fragment() {
+class MasterSwitchFragment : androidx.fragment.app.Fragment() {
 
     private var mCallback: MasterSwitchClickListener? = null
     internal var enabled: Boolean = false
 
     private var kcalBackupSettingsView: View? = null
-    private var bottomSheetDialog: BottomSheetDialog? = null
+    private var bottomSheetDialog: com.google.android.material.bottomsheet.BottomSheetDialog? = null
     private var r: Int = 0
     private var g: Int = 0
     private var b: Int = 0
@@ -80,7 +80,7 @@ class MasterSwitchFragment : Fragment() {
 
         view!!.findViewById<View>(R.id.configure_kcal_backup).setOnClickListener(View.OnClickListener {
             val context = context ?: return@OnClickListener
-            bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialogDark)
+            bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(context, R.style.BottomSheetDialogDark)
             initKCALBackupView()
             bottomSheetDialog!!.setContentView(kcalBackupSettingsView)
             bottomSheetDialog!!.show()

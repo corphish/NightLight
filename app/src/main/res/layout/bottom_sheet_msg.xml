@@ -40,7 +40,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="-6dp">
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:backgroundTint="@color/colorAccent"
@@ -61,7 +61,7 @@
                     android:id="@+id/negativeButton"
                     android:layout_toStartOf="@id/positiveButton"/>
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:backgroundTint="@color/colorPrimary"

@@ -1,8 +1,8 @@
 package com.corphish.nightlight.design.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.SwitchCompat
+import androidx.fragment.app.Fragment
+import androidx.appcompat.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ import com.corphish.nightlight.services.NightLightAppService
  * Color temperature fragment
  */
 
-class ColorTemperatureFragment : Fragment() {
+class ColorTemperatureFragment : androidx.fragment.app.Fragment() {
     private var colorTemperature: Int = 0
 
     private var mode: Boolean = false

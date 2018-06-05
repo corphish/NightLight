@@ -2,14 +2,14 @@ package com.corphish.nightlight.design.fragments
 
 import android.Manifest
 import android.location.LocationListener
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
 import android.app.TimePickerDialog
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v7.widget.SwitchCompat
+import androidx.core.app.ActivityCompat
+import androidx.appcompat.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +30,7 @@ import com.corphish.widgets.KeyValueView
  * Auto related fragment
  */
 
-class AutoFragment : Fragment(), LocationListener {
+class AutoFragment : androidx.fragment.app.Fragment(), LocationListener {
 
     private var autoSwitch: SwitchCompat? = null
     private var sunSwitch: SwitchCompat? = null
@@ -228,7 +228,7 @@ class AutoFragment : Fragment(), LocationListener {
      */
     private fun getAndSetSunriseSunsetTimings(currentLocation: Location?) {
         if (currentLocation == null) {
-            Snackbar.make(activity!!.findViewById(R.id.layout_container), getString(R.string.location_unavailable), Snackbar.LENGTH_LONG).show()
+            com.google.android.material.snackbar.Snackbar.make(activity!!.findViewById(R.id.layout_container), getString(R.string.location_unavailable), com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
             sunSwitch!!.isChecked = false
             return
         } else {

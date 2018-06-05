@@ -6,7 +6,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 
 /**
  * Created by Avinaba on 10/17/2017.

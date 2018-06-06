@@ -78,4 +78,6 @@ dependencies {
         transitive = true
     }
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'androidx.core:core-ktx:1.0.0-alpha1'
 }

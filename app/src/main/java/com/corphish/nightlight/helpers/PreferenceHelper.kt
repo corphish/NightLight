@@ -2,6 +2,7 @@ package com.corphish.nightlight.helpers
 
 import android.content.Context
 import android.preference.PreferenceManager
+import androidx.core.content.edit
 
 import com.corphish.nightlight.data.Constants
 
@@ -31,10 +32,9 @@ object PreferenceHelper {
      * @param value Value to be put
      */
     fun putBoolean(context: Context?, key: String, value: Boolean) {
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putBoolean(key, value)
-                .apply()
+        PreferenceManager.getDefaultSharedPreferences(context).edit {
+            putBoolean(key, value)
+        }
     }
 
     /**
@@ -75,10 +75,9 @@ object PreferenceHelper {
      * @param value Value to put
      */
     fun putInt(context: Context?, key: String, value: Int) {
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putInt(key, value)
-                .apply()
+        PreferenceManager.getDefaultSharedPreferences(context).edit {
+            putInt(key, value)
+        }
     }
 
     /**
@@ -100,10 +99,9 @@ object PreferenceHelper {
      * @param value Value to put
      */
     fun putString(context: Context?, key: String, value: String) {
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putString(key, value)
-                .apply()
+        PreferenceManager.getDefaultSharedPreferences(context).edit {
+            putString(key, value)
+        }
     }
 
     /**
@@ -114,7 +112,10 @@ object PreferenceHelper {
     fun getLocation(context: Context?): DoubleArray {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-        return doubleArrayOf(java.lang.Double.parseDouble(sharedPreferences.getString(Constants.LAST_LOC_LONGITUDE, Constants.DEFAULT_LONGITUDE)), java.lang.Double.parseDouble(sharedPreferences.getString(Constants.LAST_LOC_LATITUDE, Constants.DEFAULT_LATITUDE)))
+        return doubleArrayOf(
+                sharedPreferences.getString(Constants.LAST_LOC_LONGITUDE, Constants.DEFAULT_LONGITUDE).toDouble(),
+                sharedPreferences.getString(Constants.LAST_LOC_LATITUDE, Constants.DEFAULT_LATITUDE).toDouble()
+        )
     }
 
     /**
@@ -124,10 +125,9 @@ object PreferenceHelper {
      * @param latitude Latitude to be saved
      */
     fun putLocation(context: Context?, longitude: Double, latitude: Double) {
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putString(Constants.LAST_LOC_LONGITUDE, "" + longitude)
-                .putString(Constants.LAST_LOC_LATITUDE, "" + latitude)
-                .apply()
+        PreferenceManager.getDefaultSharedPreferences(context).edit {
+            putString(Constants.LAST_LOC_LONGITUDE, longitude.toString())
+            putString(Constants.LAST_LOC_LATITUDE, latitude.toString())
+        }
     }
 }

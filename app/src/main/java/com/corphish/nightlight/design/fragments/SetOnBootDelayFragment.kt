@@ -18,7 +18,7 @@ import com.corphish.nightlight.services.NightLightAppService
  * Set on boot delay fragment
  */
 
-class SetOnBootDelayFragment : androidx.fragment.app.Fragment() {
+class SetOnBootDelayFragment : Fragment() {
     private var bootDelay: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {

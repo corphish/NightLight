@@ -2,7 +2,6 @@ package com.corphish.nightlight.design.fragments
 
 import android.Manifest
 import android.location.LocationListener
-import com.google.android.material.snackbar.Snackbar
 import androidx.fragment.app.Fragment
 import android.app.TimePickerDialog
 import android.content.pm.PackageManager
@@ -30,8 +29,7 @@ import com.corphish.widgets.KeyValueView
  * Auto related fragment
  */
 
-class AutoFragment : androidx.fragment.app.Fragment(), LocationListener {
-
+class AutoFragment : Fragment(), LocationListener {
     private var autoSwitch: SwitchCompat? = null
     private var sunSwitch: SwitchCompat? = null
     private var startTimeKV: KeyValueView? = null

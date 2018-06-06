@@ -14,7 +14,7 @@ import com.corphish.nightlight.R
  * Contributors fragment
  */
 
-class ContributorsFragment : androidx.fragment.app.Fragment() {
+class ContributorsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment

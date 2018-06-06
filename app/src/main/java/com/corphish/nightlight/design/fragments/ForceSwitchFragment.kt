@@ -18,7 +18,7 @@ import com.corphish.nightlight.services.NightLightAppService
  * Force switch fragment
  */
 
-class ForceSwitchFragment : androidx.fragment.app.Fragment() {
+class ForceSwitchFragment : Fragment() {
 
     private var forceSwitch: SwitchCompat? = null
 

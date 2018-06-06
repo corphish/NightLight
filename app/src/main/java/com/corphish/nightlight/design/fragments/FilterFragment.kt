@@ -19,7 +19,7 @@ import com.corphish.nightlight.services.NightLightAppService
  * Filter fragment
  */
 
-class FilterFragment : androidx.fragment.app.Fragment() {
+class FilterFragment : Fragment() {
 
     private var blueIntensity: Int = 0
     private var greenIntensity: Int = 0

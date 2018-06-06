@@ -22,13 +22,13 @@ import com.gregacucnik.EditableSeekBar
  * Master switch fragment
  */
 
-class MasterSwitchFragment : androidx.fragment.app.Fragment() {
+class MasterSwitchFragment : Fragment() {
 
     private var mCallback: MasterSwitchClickListener? = null
     internal var enabled: Boolean = false
 
     private var kcalBackupSettingsView: View? = null
-    private var bottomSheetDialog: com.google.android.material.bottomsheet.BottomSheetDialog? = null
+    private var bottomSheetDialog: BottomSheetDialog? = null
     private var r: Int = 0
     private var g: Int = 0
     private var b: Int = 0
@@ -75,7 +75,7 @@ class MasterSwitchFragment : androidx.fragment.app.Fragment() {
 
         val preserveSwitch = view!!.findViewById<AppCompatCheckBox>(R.id.kcal_preserve_switch)
         preserveSwitch.isChecked = PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true)
-        preserveSwitch.setOnCheckedChangeListener { compoundButton, b -> PreferenceHelper.putBoolean(context, Constants.KCAL_PRESERVE_SWITCH, b) }
+        preserveSwitch.setOnCheckedChangeListener { _, b -> PreferenceHelper.putBoolean(context, Constants.KCAL_PRESERVE_SWITCH, b) }
 
 
         view!!.findViewById<View>(R.id.configure_kcal_backup).setOnClickListener(View.OnClickListener {

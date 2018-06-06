@@ -19,7 +19,7 @@ import com.corphish.nightlight.services.NightLightAppService
  * Color temperature fragment
  */
 
-class ColorTemperatureFragment : androidx.fragment.app.Fragment() {
+class ColorTemperatureFragment : Fragment() {
     private var colorTemperature: Int = 0
 
     private var mode: Boolean = false

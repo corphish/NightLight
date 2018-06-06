@@ -16,7 +16,7 @@ import com.corphish.nightlight.R
  * About fragment
  */
 
-class AboutFragment : androidx.fragment.app.Fragment() {
+class AboutFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -26,8 +26,8 @@ class AboutFragment : androidx.fragment.app.Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        view!!.setOnClickListener { ExternalLink.open(context, "market://details?id=" + context!!.packageName) }
+        view?.setOnClickListener { ExternalLink.open(context, "market://details?id=" + context!!.packageName) }
 
-        (view!!.findViewById<View>(R.id.app_version) as TextView).text = getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME
+        (view?.findViewById<View>(R.id.app_version) as TextView).text = getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME
     }
 }

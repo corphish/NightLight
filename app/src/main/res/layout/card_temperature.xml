@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/layout_margin"
     android:padding="@dimen/layout_padding"
-    card_view:elevation="@dimen/card_elevation"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_margin="@dimen/layout_margin"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:textSize="12sp"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/color_temperature_title"/>
+
+    <androidx.appcompat.widget.SwitchCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
-        android:orientation="vertical">
+        android:textSize="@dimen/text_caption"
+        android:id="@+id/mode_switch"
+        android:textColor="@android:color/white"
+        android:text="@string/color_temperature_title"/>
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            android:layout_margin="@dimen/layout_margin"
-            android:textSize="@dimen/text_caption"
-            android:id="@+id/mode_switch"
-            android:textColor="@android:color/white"
-            android:text="@string/color_temperature_title"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:textSize="@dimen/text_desc"
+        android:text="@string/color_temperature_desc"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            android:layout_margin="@dimen/layout_margin"
-            android:textSize="@dimen/text_desc"
-            android:text="@string/color_temperature_desc"/>
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/temperature_value"
-            android:padding="@dimen/layout_padding"
-            android:layout_margin="@dimen/layout_margin"
-            android:max="1500"
-            android:progress="0"/>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/temperature_value"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:max="1500"
+        android:progress="0"/>
+</LinearLayout>

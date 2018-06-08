@@ -24,6 +24,7 @@ import com.corphish.nightlight.design.fragments.FilterFragment
 import com.corphish.nightlight.design.fragments.ForceSwitchFragment
 import com.corphish.nightlight.design.fragments.MasterSwitchFragment
 import com.corphish.nightlight.extensions.toArrayOfInts
+import com.google.android.material.bottomappbar.BottomAppBar
 
 class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener, NightLightSettingModeListener {
 
@@ -36,8 +37,9 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+
+        val bottomAppBar = findViewById<BottomAppBar>(R.id.bottom_app_bar)
+        setSupportActionBar(bottomAppBar)
 
         NightLightAppService.instance
                 .registerNightLightStateListener(this)
@@ -195,7 +197,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode != REQ_CODE) return
         setResult(AppCompatActivity.RESULT_OK, data)

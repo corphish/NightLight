@@ -6,7 +6,7 @@ package com.corphish.nightlight.extensions
  * In case of error, NumberFormatException is thrown
  */
 fun String.toArrayOfInts(delimiter: String) : IntArray {
-    val parts = this.split(delimiter.toRegex())
+    val parts = this.replace("[", "").replace("]", "").split(delimiter.toRegex())
 
     var intArray = intArrayOf()
 

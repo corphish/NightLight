@@ -14,12 +14,12 @@ repositories {
 
 
 android {
-    compileSdkVersion 'android-P'
+    compileSdkVersion 28
     buildToolsVersion '28.0.0-rc2'
     defaultConfig {
         applicationId "com.corphish.nightlight"
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 17
         versionName "1.4.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

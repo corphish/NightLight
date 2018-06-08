@@ -19,6 +19,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.TextView
+import androidx.recyclerview.widget.DividerItemDecoration
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
@@ -67,12 +68,6 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profiles)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
-        val actionBar = supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-
         context = this
 
         findViewById<View>(R.id.fab).setOnClickListener {
@@ -84,6 +79,8 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
             bottomSheetDialog!!.setCancelable(false)
             bottomSheetDialog!!.show()
         }
+
+        findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
 
         emptyView = findViewById(R.id.emptyView)
 

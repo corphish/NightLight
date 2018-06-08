@@ -5,29 +5,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.corphish.nightlight.ProfilesActivity"
     tools:showIn="@layout/activity_profiles">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/profiles_holder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <include layout="@layout/layout_header" />
 
-        <com.corphish.widgets.PlaceholderView
-            android:id="@+id/emptyView"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            app:viewTint="#666666"
-            android:paddingTop="96dp"
-            app:titleText="@string/profile_empty_title"
-            app:descriptionText="@string/profile_empty_desc"
-            app:srcCompat="@drawable/ic_error_large"/>
-    </RelativeLayout>
+            android:textStyle="bold"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/profile_title"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_desc"
+            android:text="@string/app_desc"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/profile_title"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/layout_margin"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profiles_holder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.corphish.widgets.PlaceholderView
+                android:id="@+id/emptyView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:viewTint="#666666"
+                android:paddingTop="96dp"
+                app:titleText="@string/profile_empty_title"
+                app:descriptionText="@string/profile_empty_desc"
+                app:srcCompat="@drawable/ic_error_large"/>
+        </RelativeLayout>
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>

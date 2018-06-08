@@ -21,6 +21,7 @@ import com.corphish.nightlight.helpers.LocationUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
 import com.corphish.nightlight.R
+import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.services.NightLightAppService
 import com.corphish.widgets.KeyValueView
 
@@ -60,6 +61,8 @@ class AutoFragment : Fragment(), LocationListener {
 
         autoSwitch = view!!.findViewById(R.id.auto_enable)
         sunSwitch = view!!.findViewById(R.id.sun_enable)
+
+        FontUtils().setCustomFont(context!!, autoSwitch, sunSwitch)
 
         startTimeKV = view!!.findViewById(R.id.start_time)
         endTimeKV = view!!.findViewById(R.id.end_time)

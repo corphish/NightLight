@@ -12,6 +12,7 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
+import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.services.NightLightAppService
 
 /**
@@ -49,6 +50,8 @@ class FilterFragment : Fragment() {
         blueSlider = view!!.findViewById(R.id.blue_intensity) as SeekBar
         greenSlider = view!!.findViewById(R.id.green_intensity) as SeekBar
         switchCompat = view!!.findViewById(R.id.mode_switch) as SwitchCompat
+
+        FontUtils().setCustomFont(context!!, switchCompat)
 
         // Disable them by default
         blueSlider!!.isEnabled = false

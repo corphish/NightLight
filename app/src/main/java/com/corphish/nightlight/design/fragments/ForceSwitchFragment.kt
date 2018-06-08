@@ -11,6 +11,7 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
+import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.services.NightLightAppService
 
 /**
@@ -31,6 +32,8 @@ class ForceSwitchFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         forceSwitch = view!!.findViewById(R.id.force_switch)
+
+        FontUtils().setCustomFont(context!!, forceSwitch)
 
         forceSwitch!!.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH)
         forceSwitch!!.setOnCheckedChangeListener { _, b ->

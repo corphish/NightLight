@@ -10,6 +10,7 @@ import android.widget.SeekBar
 
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
@@ -46,6 +47,8 @@ class ColorTemperatureFragment : Fragment() {
 
         switchCompat = view!!.findViewById(R.id.mode_switch)
         seekBar = view!!.findViewById(R.id.temperature_value)
+
+        FontUtils().setCustomFont(context!!, switchCompat)
 
         // Disable them by default
         seekBar!!.isEnabled = false

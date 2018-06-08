@@ -15,6 +15,7 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
+import com.corphish.nightlight.design.utils.FontUtils
 import com.gregacucnik.EditableSeekBar
 
 /**
@@ -85,6 +86,8 @@ class MasterSwitchFragment : Fragment() {
             bottomSheetDialog!!.setContentView(kcalBackupSettingsView)
             bottomSheetDialog!!.show()
         })
+
+        FontUtils().setCustomFont(context!!, masterSwitch, preserveSwitch)
     }
 
     private fun initKCALBackupView() {

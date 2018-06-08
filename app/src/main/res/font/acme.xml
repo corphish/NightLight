@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:fontProviderAuthority="com.google.android.gms.fonts"
     app:fontProviderPackage="com.google.android.gms"
-    app:fontProviderQuery="name=Open Sans&amp;weight=400"
+    app:fontProviderQuery="name=Acme&amp;weight=400"
     app:fontProviderCerts="@array/com_google_android_gms_fonts_certs">
 </font-family>

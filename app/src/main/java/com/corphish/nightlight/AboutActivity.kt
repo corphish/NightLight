@@ -1,23 +1,26 @@
 package com.corphish.nightlight
 
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 
 import com.corphish.nightlight.design.fragments.AboutFragment
-import com.corphish.nightlight.design.fragments.ContributorsFragment
-import com.corphish.nightlight.design.fragments.DonateFragment
+import com.corphish.nightlight.helpers.ExternalLink
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
 
-        val actionBar = supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
+            showActions()
+        }
+
+        findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
 
         if (savedInstanceState == null) viewInit()
     }
@@ -29,9 +32,25 @@ class AboutActivity : AppCompatActivity() {
         val containerId = R.id.layout_container
 
         fragmentTransaction.add(containerId, AboutFragment())
-        if (resources.getBoolean(R.bool.contributors_card_enabled)) fragmentTransaction.add(containerId, ContributorsFragment())
-        fragmentTransaction.add(containerId, DonateFragment())
 
         fragmentTransaction.commit()
+    }
+
+    private fun showActions() {
+        val optionsDialog = BottomSheetDialog(this, R.style.BottomSheetDialogDark)
+        val optionsView = View.inflate(this, R.layout.bottom_sheet_donate_actions, null)
+
+        optionsView.findViewById<View>(R.id.donate_action1).setOnClickListener {
+            ExternalLink.open(this, "market://details?id=com.corphish.nightlight.donate")
+            optionsDialog.dismiss()
+        }
+
+        optionsView.findViewById<View>(R.id.donate_action2).setOnClickListener {
+            ExternalLink.open(this, "https://www.paypal.me/corphish")
+            optionsDialog.dismiss()
+        }
+
+        optionsDialog.setContentView(optionsView)
+        optionsDialog.show()
     }
 }

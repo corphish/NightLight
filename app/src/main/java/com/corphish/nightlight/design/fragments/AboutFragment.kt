@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.nightlight.R
 
@@ -27,7 +26,6 @@ class AboutFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         view?.setOnClickListener { ExternalLink.open(context, "market://details?id=" + context!!.packageName) }
-
-        (view?.findViewById<View>(R.id.app_version) as TextView).text = getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME
+        view?.findViewById<TextView>(R.id.contributors_link)?.setOnClickListener { ExternalLink.open(context, "https://github.com/corphish/NightLight/graphs/contributors") }
     }
 }

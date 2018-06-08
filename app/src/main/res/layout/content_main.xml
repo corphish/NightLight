@@ -20,5 +20,4 @@
             android:id="@+id/layout_container"
             android:orientation="vertical"/>
     </LinearLayout>
-
 </androidx.core.widget.NestedScrollView>

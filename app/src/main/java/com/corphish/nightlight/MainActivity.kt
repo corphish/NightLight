@@ -4,11 +4,11 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
@@ -74,6 +74,8 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
         fragmentTransaction.add(containerId, MasterSwitchFragment()).commit()
+
+        findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
     }
 
     override fun onSwitchClicked(checkStatus: Boolean) {

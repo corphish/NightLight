@@ -10,6 +10,7 @@
         android:textStyle="bold"
         android:layout_margin="4dp"
         android:textSize="20sp"
+        android:id="@+id/banner_title"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorPrimary"
         android:text="@string/app_name"/>

@@ -16,15 +16,11 @@ import com.corphish.nightlight.services.BootCompleteJobService
 class BootCompleteReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        if (BOOT_COMPLETE_ANDROID_STRING == intent.action) return
+        if (Intent.ACTION_BOOT_COMPLETED != intent.action) return
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             BootCompleteJobService.schedule(context)
         else
             BootUtils.applyOnBoot(context)
-    }
-
-    companion object {
-        private val BOOT_COMPLETE_ANDROID_STRING = "android.intent.action.BOOT_COMPLETED"
     }
 }

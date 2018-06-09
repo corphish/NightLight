@@ -7,7 +7,6 @@ import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.View
 
@@ -16,7 +15,8 @@ import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.engine.KCALManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.RootUtils
-import com.corphish.nightlight.helpers.CrashlyticsHelper
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
 
 class StartActivity : AppCompatActivity() {
 
@@ -32,7 +32,10 @@ class StartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        CrashlyticsHelper.start(this)
+
+        if (BuildConfig.FLAVOR != "foss")
+            Fabric.with(this, Crashlytics())
+
         setContentView(R.layout.activity_splash)
 
         if (handleIntent())

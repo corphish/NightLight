@@ -7,6 +7,7 @@ import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.View
 
@@ -93,7 +94,7 @@ class StartActivity : AppCompatActivity() {
      * Actual night light toggling happens here
      */
     private fun doToggle() {
-        val state = PreferenceHelper.getToggledBoolean(this, Constants.PREF_FORCE_SWITCH)
+        val state = !PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH)
         val masterSwitch = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH)
 
         /*

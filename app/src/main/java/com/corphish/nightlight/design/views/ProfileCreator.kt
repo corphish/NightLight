@@ -106,7 +106,7 @@ class ProfileCreator(val context: Context,
 
     private fun updateProfileWithCurrentSelections(): Boolean {
         return  profilesManager.updateProfile(
-                profile!!.name,
+                profile!!,
                 nlSwitch.isChecked,
                 editText.editableText.toString(),
                 modes.selectedItemPosition,

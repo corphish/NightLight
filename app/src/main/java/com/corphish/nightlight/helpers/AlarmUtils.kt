@@ -17,8 +17,8 @@ import java.util.Calendar
 
 object AlarmUtils {
 
-    val REQUEST_CODE_START = 0
-    val REQUEST_CODE_STOP = 0
+    private const val REQUEST_CODE_START = 0
+    private const val REQUEST_CODE_STOP = 0
 
     /**
      * Sets the start and end alarms on user specified time

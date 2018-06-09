@@ -40,14 +40,27 @@ class AboutActivity : AppCompatActivity() {
         val optionsDialog = BottomSheetDialog(this, R.style.BottomSheetDialogDark)
         val optionsView = View.inflate(this, R.layout.bottom_sheet_donate_actions, null)
 
-        optionsView.findViewById<View>(R.id.donate_action1).setOnClickListener {
-            ExternalLink.open(this, "market://details?id=com.corphish.nightlight.donate")
-            optionsDialog.dismiss()
-        }
+        if (BuildConfig.FLAVOR == "generic" || BuildConfig.FLAVOR == "foss") {
+            optionsView.findViewById<View>(R.id.donate_action1).setOnClickListener {
+                ExternalLink.open(this, "market://details?id=com.corphish.nightlight.generic")
+                optionsDialog.dismiss()
+            }
 
-        optionsView.findViewById<View>(R.id.donate_action2).setOnClickListener {
-            ExternalLink.open(this, "https://www.paypal.me/corphish")
-            optionsDialog.dismiss()
+            optionsView.findViewById<View>(R.id.donate_action2).setOnClickListener {
+                ExternalLink.open(this, "market://details?id=com.corphish.nightlight.donate")
+                optionsDialog.dismiss()
+            }
+        } else {
+
+            optionsView.findViewById<View>(R.id.donate_action1).setOnClickListener {
+                ExternalLink.open(this, "market://details?id=com.corphish.nightlight.donate")
+                optionsDialog.dismiss()
+            }
+
+            optionsView.findViewById<View>(R.id.donate_action2).setOnClickListener {
+                ExternalLink.open(this, "https://www.paypal.me/corphish")
+                optionsDialog.dismiss()
+            }
         }
 
         optionsDialog.setContentView(optionsView)

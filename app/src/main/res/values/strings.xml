@@ -91,8 +91,8 @@
     <string name="tasker_error_desc">To use tasker plugin, you must enable Master Switch first.</string>
 
     <string name="donate_title">Actions</string>
-    <string name="donate_with_app">Get the donate version of this app</string>
-    <string name="donate_with_paypal">Donate further via PayPal :)</string>
+    <string name="donate_with_app">Rate this app in Play Store</string>
+    <string name="donate_with_paypal">Get the donate version of this app</string>
 
     <string name="section_main">Master controls</string>
     <string name="section_color">Color controls</string>

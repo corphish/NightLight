@@ -46,6 +46,10 @@ class ProfileCreator(val context: Context,
 
     private val profilesManager = ProfilesManager(context)
 
+    init {
+        profilesManager.loadProfiles()
+    }
+
     private fun initViewEventListeners() {
         modes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -71,6 +75,8 @@ class ProfileCreator(val context: Context,
                 onFinishListener(STATUS_SUCCESS)
             else
                 editTextLayout.error = context.getString(R.string.profile_create_name_error)
+
+            bottomSheetDialog.dismiss()
         }
     }
 

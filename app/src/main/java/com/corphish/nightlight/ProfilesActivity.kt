@@ -43,10 +43,14 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         context = this
 
         findViewById<View>(R.id.fab).setOnClickListener {
-            ProfileCreator(this@ProfilesActivity, ProfileCreator.MODE_CREATE, null, {
-                profiles = profilesManager?.profilesList
-                profilesAdapter?.notifyDataSetChanged()
-            }).show()
+            ProfileCreator(this@ProfilesActivity, ProfileCreator.MODE_CREATE,
+                    onFinishListener =  fun(status: Int) {
+                        if (status == ProfileCreator.STATUS_SUCCESS) {
+                            profilesManager?.loadProfiles()
+                            profiles = profilesManager?.profilesList
+                            profilesAdapter?.notifyDataSetChanged()
+                        }
+                    }).show()
         }
 
         findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
@@ -160,13 +164,19 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         }
 
         optionsView!!.findViewById<View>(R.id.edit).setOnClickListener {
-            ProfileCreator(this@ProfilesActivity, ProfileCreator.MODE_EDIT, profile, {}).show()
+            ProfileCreator(this@ProfilesActivity, ProfileCreator.MODE_EDIT, profile,
+                    onFinishListener =  fun(status: Int) {
+                        if (status == ProfileCreator.STATUS_SUCCESS) {
+                            profiles = profilesManager?.profilesList
+                            profilesAdapter?.notifyDataSetChanged()
+                        }
+                    }).show()
             optionsDialog!!.dismiss()
         }
 
         optionsView!!.findViewById<View>(R.id.delete).setOnClickListener {
             showAlert(R.string.delete, getString(R.string.delete_details, curProfile!!.name), View.OnClickListener {
-                profilesManager!!.deleteProfile(curProfile!!.name)
+                profilesManager!!.deleteProfile(curProfile!!)
                 val prof = curProfile
                 profiles!!.remove(prof)
                 curProfile = null

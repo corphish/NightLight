@@ -23,8 +23,11 @@ import com.corphish.nightlight.design.fragments.AutoFragment
 import com.corphish.nightlight.design.fragments.FilterFragment
 import com.corphish.nightlight.design.fragments.ForceSwitchFragment
 import com.corphish.nightlight.design.fragments.MasterSwitchFragment
+import com.corphish.nightlight.design.views.ProfileCreator
+import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.extensions.toArrayOfInts
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener, NightLightSettingModeListener {
 
@@ -76,6 +79,10 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         fragmentTransaction.add(containerId, MasterSwitchFragment()).commit()
 
         findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
+
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
+            ProfileCreator(this@MainActivity, ProfileCreator.MODE_CREATE, getProfileForCurrentSettings(), {}).show()
+        }
     }
 
     override fun onSwitchClicked(checkStatus: Boolean) {
@@ -212,5 +219,30 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         bottomSheetAlertDialog.setMessage(R.string.tasker_error_desc)
         bottomSheetAlertDialog.setPositiveButton(android.R.string.ok, View.OnClickListener { })
         bottomSheetAlertDialog.show()
+    }
+
+    private fun getProfileForCurrentSettings(): ProfilesManager.Profile {
+        // Setting mode
+        val mode = PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER)
+
+        val settings =
+                if (mode == Constants.NL_SETTING_MODE_FILTER)
+                    intArrayOf(
+                            PreferenceHelper.getInt(this, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY),
+                            PreferenceHelper.getInt(this, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY)
+                    )
+                else
+                    intArrayOf(
+                            PreferenceHelper.getInt(this, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
+                    )
+
+        val status = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH, false)
+
+        return ProfilesManager.Profile(
+                name = "",
+                isSettingEnabled = status,
+                settingMode = mode,
+                settings = settings
+        )
     }
 }

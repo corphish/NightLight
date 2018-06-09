@@ -135,7 +135,7 @@ class StartActivity : AppCompatActivity() {
             return null
         }
 
-        override fun onPostExecute(boom: String) {
+        override fun onPostExecute(boom: String?) {
             progressBar?.visibility = View.GONE
             if (!rootAccessAvailable) {
                 showAlertDialog(R.string.no_root_access, R.string.no_root_desc)

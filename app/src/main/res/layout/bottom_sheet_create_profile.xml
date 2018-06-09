@@ -42,24 +42,20 @@
                 android:paddingBottom="12dp"
                 android:paddingStart="@dimen/group_padding"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/profile_name_set_layout"
                 android:padding="@dimen/group_padding"
-                android:id="@+id/profile_name_set"
-                android:hint="@string/profile_create_name" />
+                app:errorEnabled="true">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:visibility="gone"
-                android:paddingStart="@dimen/group_padding"
-                android:paddingEnd="@dimen/group_padding"
-                android:paddingBottom="@dimen/group_padding"
-                android:text="@string/profile_create_name_error"
-                android:textSize="@dimen/text_sub_desc"
-                android:id="@+id/profile_name_error"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profile_name_set"
+                    android:hint="@string/profile_create_name" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.SwitchCompat
                 android:layout_width="match_parent"

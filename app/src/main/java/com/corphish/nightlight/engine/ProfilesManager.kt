@@ -77,17 +77,10 @@ class ProfilesManager(private val context: Context) {
 
     /**
      * Deletes a profile with given name, and then updates the changes in SP
-     * @param name Name of profile to be removed
+     * @param profile Profile to be deleted
      */
-    fun deleteProfile(name: String) : Boolean {
-        var profileToBeRemoved: Profile? = null
-        for (profile in profilesList) {
-            if (profile.name == name) {
-                profileToBeRemoved = profile
-                break
-            }
-        }
-        val ret = profilesList.remove(profileToBeRemoved)
+    fun deleteProfile(profile: Profile) : Boolean {
+        val ret = profilesList.remove(profile)
         storeProfiles()
 
         return ret
@@ -102,8 +95,8 @@ class ProfilesManager(private val context: Context) {
      * @param newSettings New settings
      * @return Whether profile update was successful or not
      */
-    fun updateProfile(oldName: String, enabled: Boolean, newName: String, newMode: Int, newSettings: IntArray): Boolean {
-        val ret = deleteProfile(oldName)
+    fun updateProfile(oldProfile: Profile, enabled: Boolean, newName: String, newMode: Int, newSettings: IntArray): Boolean {
+        val ret = deleteProfile(oldProfile)
         if (!ret) return false
 
         createProfile(enabled, newName, newMode, newSettings)

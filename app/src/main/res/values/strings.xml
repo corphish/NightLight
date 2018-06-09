@@ -93,4 +93,13 @@
     <string name="donate_title">Actions</string>
     <string name="donate_with_app">Get the donate version of this app</string>
     <string name="donate_with_paypal">Donate further via PayPal :)</string>
+
+    <string name="section_main">Master controls</string>
+    <string name="section_color">Color controls</string>
+    <string name="section_sob">Set on boot</string>
+    <string name="section_auto">Automation</string>
+    <string name="section_misc">misc</string>
+    <string name="section_profiles_list">List of profiles created</string>
+
+    <string name="profiles_desc">Profiles are collection of settings which can be applied with one click, or let apps like Tasker apply it for you using the automation capabilities that they provide.</string>
 </resources>

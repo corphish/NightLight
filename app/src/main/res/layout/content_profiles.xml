@@ -33,7 +33,7 @@
             android:padding="@dimen/layout_padding"
             android:layout_margin="@dimen/layout_margin"
             android:textSize="@dimen/text_desc"
-            android:text="@string/app_desc"/>
+            android:text="@string/profiles_desc"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
             android:layout_margin="@dimen/layout_margin"
             android:textSize="12sp"
             android:textColor="@color/colorPrimary"
-            android:text="@string/profile_title"/>
+            android:text="@string/section_profiles_list"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

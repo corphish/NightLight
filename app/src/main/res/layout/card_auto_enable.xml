@@ -16,7 +16,7 @@
         android:layout_margin="@dimen/layout_margin"
         android:textSize="12sp"
         android:textColor="@color/colorPrimary"
-        android:text="@string/auto_enable"/>
+        android:text="@string/section_auto"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:layout_width="match_parent"

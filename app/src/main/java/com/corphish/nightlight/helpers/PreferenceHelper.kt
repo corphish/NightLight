@@ -38,25 +38,6 @@ object PreferenceHelper {
     }
 
     /**
-     * Gets toggled boolean value of shared preference of given key
-     * It also saves the toggled value
-     * @param context Context is needed for accessing SharedPreferences
-     * @param key Shared Preference key
-     * @return Toggled value
-     */
-    fun getToggledBoolean(context: Context?, key: String): Boolean {
-        var currentStatus = getBoolean(context, key, false)
-
-        // Toggle it
-        currentStatus = !currentStatus
-
-        // Save it
-        putBoolean(context, key, currentStatus)
-
-        return currentStatus
-    }
-
-    /**
      * Gets int value of Shared Preference of given key
      * @param context Context is needed for accessing SharedPreferences
      * @param key Shared Preference key

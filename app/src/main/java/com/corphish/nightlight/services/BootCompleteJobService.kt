@@ -26,11 +26,8 @@ class BootCompleteJobService : JobService() {
     }
 
     override fun onStartJob(params: JobParameters): Boolean {
-        BootUtils.applyOnBoot(this, object: BootUtils.OnApplyCompleteListener {
-            override fun onComplete() {
-                stopSelf()
-            }
-        })
+        BootUtils.applyOnBoot(this, { stopSelf() })
+
         return false
     }
 

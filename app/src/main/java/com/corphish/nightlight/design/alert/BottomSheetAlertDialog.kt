@@ -40,12 +40,6 @@ class BottomSheetAlertDialog(val context: Context) {
         return this
     }
 
-    fun setTitle(sTitle: String): BottomSheetAlertDialog {
-        title.text = sTitle
-
-        return this
-    }
-
     fun setMessage(@StringRes iTitle: Int): BottomSheetAlertDialog {
         content.setText(iTitle)
 
@@ -87,12 +81,6 @@ class BottomSheetAlertDialog(val context: Context) {
             onClickListener.onClick(view)
             bottomSheetDialog.dismiss()
         }
-
-        return this
-    }
-
-    fun setCancelable(b: Boolean): BottomSheetAlertDialog {
-        bottomSheetDialog.setCancelable(b)
 
         return this
     }

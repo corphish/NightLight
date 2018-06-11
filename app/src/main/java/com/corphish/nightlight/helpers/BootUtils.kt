@@ -13,16 +13,12 @@ import com.corphish.nightlight.engine.TwilightManager
 
 object BootUtils {
 
-    interface OnApplyCompleteListener {
-        fun onComplete()
-    }
-
     /**
      * Necessary things to be performed on boot
      * @param context Context received by the receiver
-     * @param onApplyCompleteListener What needs to be done after this is finished
+     * @param onApplyCompleteListener Callback fired when apply on boot is complete
      */
-    fun applyOnBoot(context: Context, onApplyCompleteListener: OnApplyCompleteListener? = null) {
+    fun applyOnBoot(context: Context, onApplyCompleteListener: (() -> Unit)? = null) {
         PreferenceHelper.putBoolean(context, Constants.COMPATIBILITY_TEST, false)
 
         val masterSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_MASTER_SWITCH)
@@ -50,6 +46,6 @@ object BootUtils {
                     .atLocation(PreferenceHelper.getLocation(context))
                     .computeAndSaveTime(context)
 
-        onApplyCompleteListener?.onComplete()
+        onApplyCompleteListener?.invoke()
     }
 }

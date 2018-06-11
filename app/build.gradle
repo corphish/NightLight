@@ -63,7 +63,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.material:material:1.0.0-alpha1'
 
-    implementation 'androidx.cardview:cardview:1.0.0-alpha1'
     implementation 'eu.chainfire:libsuperuser:1.0.0.201704021214'
 
     implementation 'com.luckycatlabs:SunriseSunsetCalculator:1.2'

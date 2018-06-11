@@ -20,7 +20,6 @@ class BottomSheetAlertDialog(val context: Context) {
     private var content: TextView
     private var negativeButton: TextView
     private var positiveButton: AppCompatButton
-    private var neutralButton: AppCompatButton
 
     private var bottomSheetDialog: BottomSheetDialog
 
@@ -29,7 +28,6 @@ class BottomSheetAlertDialog(val context: Context) {
         content = contentView.findViewById(R.id.content)
         negativeButton = contentView.findViewById(R.id.negativeButton)
         positiveButton = contentView.findViewById(R.id.positiveButton)
-        neutralButton = contentView.findViewById(R.id.neutralButton)
 
         bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialogDark)
     }
@@ -67,17 +65,6 @@ class BottomSheetAlertDialog(val context: Context) {
         negativeButton.visibility = View.VISIBLE
         negativeButton.setText(iTitle)
         negativeButton.setOnClickListener { view ->
-            onClickListener.onClick(view)
-            bottomSheetDialog.dismiss()
-        }
-
-        return this
-    }
-
-    fun setNeutralButton(@StringRes iTitle: Int, onClickListener: View.OnClickListener): BottomSheetAlertDialog {
-        neutralButton.visibility = View.VISIBLE
-        neutralButton.setText(iTitle)
-        neutralButton.setOnClickListener { view ->
             onClickListener.onClick(view)
             bottomSheetDialog.dismiss()
         }

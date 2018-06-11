@@ -18,7 +18,7 @@ object ExternalLink {
      */
     private fun open(context: Context?, intent: Intent) {
         try {
-            context!!.startActivity(intent)
+            context?.startActivity(intent)
         } catch (ignored: ActivityNotFoundException) {}
 
     }

@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SwitchCompat
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -96,6 +97,8 @@ class ProfileCreator(val context: Context,
         )
 
         editTextLayout.error = null
+
+        FontUtils().setCustomFont(context, nlSwitch)
     }
 
     private fun createProfileWithCurrentSelections(): Boolean {

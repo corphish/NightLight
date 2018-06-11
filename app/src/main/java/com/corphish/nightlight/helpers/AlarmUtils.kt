@@ -27,40 +27,38 @@ object AlarmUtils {
      * @param endTime Ending time for alarm
      */
     fun setAlarms(context: Context, startTime: String, endTime: String, repeating: Boolean) {
+        // Set start alarm
+        setAlarm(context, startTime, repeating, StartNLReceiver::class.java, REQUEST_CODE_START)
+
+        // Set end alarm
+        setAlarm(context, endTime, repeating, StopNLReceiver::class.java, REQUEST_CODE_STOP)
+    }
+
+    /**
+     * Sets alarm based on given arguments
+     */
+    private fun setAlarm(context: Context,
+                 time: String,
+                 repeating: Boolean,
+                 receiverClass: Class<*>,
+                 requestCode: Int) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         var timeInMillis: Long
 
-        val startIntent = Intent(context, StartNLReceiver::class.java)
-        val startAlarmIntent = PendingIntent.getBroadcast(context, REQUEST_CODE_START, startIntent, 0)
-
-        val endIntent = Intent(context, StopNLReceiver::class.java)
-        val endAlarmIntent = PendingIntent.getBroadcast(context, REQUEST_CODE_STOP, endIntent, 0)
+        val intent = Intent(context, receiverClass)
+        val alarmIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
 
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = System.currentTimeMillis()
-        calendar.set(Calendar.HOUR_OF_DAY, TimeUtils.getTimeAsHourAndMinutes(startTime)[0])
-        calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(startTime)[1])
+        calendar.set(Calendar.HOUR_OF_DAY, TimeUtils.getTimeAsHourAndMinutes(time)[0])
+        calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(time)[1])
 
         timeInMillis = calendar.timeInMillis
-        if (TimeUtils.currentTimeAsMinutes > TimeUtils.getTimeInMinutes(startTime)) timeInMillis += 86400000L
+        if (TimeUtils.currentTimeAsMinutes > TimeUtils.getTimeInMinutes(time)) timeInMillis += 86400000L
 
         if (repeating)
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, startAlarmIntent)
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, alarmIntent)
         else
-            alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, startAlarmIntent)
-
-        calendar.timeInMillis = System.currentTimeMillis()
-        calendar.set(Calendar.HOUR_OF_DAY, TimeUtils.getTimeAsHourAndMinutes(endTime)[0])
-        calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(endTime)[1])
-
-        timeInMillis = calendar.timeInMillis
-        if (TimeUtils.currentTimeAsMinutes > TimeUtils.getTimeInMinutes(endTime)) timeInMillis += 86400000L
-
-        if (repeating)
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, endAlarmIntent)
-        else
-            alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, endAlarmIntent)
-
-
+            alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent)
     }
 }

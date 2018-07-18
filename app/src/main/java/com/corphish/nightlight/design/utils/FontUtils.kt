@@ -1,7 +1,6 @@
 package com.corphish.nightlight.design.utils
 
 import android.content.Context
-import android.content.res.Resources
 import android.view.View
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.SwitchCompat
@@ -17,6 +16,9 @@ class FontUtils {
                     is AppCompatCheckBox? -> view?.typeface = ResourcesCompat.getFont(context, R.font.cust_font)
                 }
             }
-        } catch (e: Resources.NotFoundException) {}
+        } catch (e: Exception) {
+            // For some reason, exceptions apart from Resources.NotFoundException are being reported.
+            // Either way, make such situation not crash.
+        }
     }
 }

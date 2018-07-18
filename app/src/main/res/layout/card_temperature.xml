@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/layout_padding"
@@ -25,12 +26,13 @@
         android:textSize="@dimen/text_desc"
         android:text="@string/color_temperature_desc"/>
 
-    <SeekBar
+    <com.gregacucnik.EditableSeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/temperature_value"
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
-        android:max="1500"
-        android:progress="0"/>
+        app:esbMin="3000"
+        app:esbMax="4500"
+        app:esbValue="4000"/>
 </LinearLayout>

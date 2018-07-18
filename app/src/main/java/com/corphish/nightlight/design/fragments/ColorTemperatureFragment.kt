@@ -14,6 +14,7 @@ import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
+import com.gregacucnik.EditableSeekBar
 
 /**
  * Created by avinabadalal on 12/02/18.
@@ -27,7 +28,7 @@ class ColorTemperatureFragment : Fragment() {
 
     // Views
     private var switchCompat: SwitchCompat? = null
-    private var seekBar: SeekBar? = null
+    private var seekBar: EditableSeekBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,8 +72,8 @@ class ColorTemperatureFragment : Fragment() {
 
         switchCompat!!.isChecked = mode
 
-        seekBar!!.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+        seekBar!!.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
+            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
 
             }
 
@@ -82,16 +83,32 @@ class ColorTemperatureFragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 colorTemperature = seekBar.progress
-                colorTemperature = colorTemperature / 100 * 100
                 if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, colorTemperature + 3000)
-                    Core.applyNightModeAsync(true, context, colorTemperature + 3000)
+                    PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, colorTemperature)
+                    Core.applyNightModeAsync(true, context, colorTemperature)
+                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+                }
+            }
+
+            override fun onEnteredValueTooHigh() {
+                seekBar!!.value = 4500
+            }
+
+            override fun onEnteredValueTooLow() {
+                seekBar!!.value = 3000
+            }
+
+            override fun onEditableSeekBarValueChanged(value: Int) {
+                colorTemperature = value
+                if (NightLightAppService.instance.isInitDone()) {
+                    PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, colorTemperature)
+                    Core.applyNightModeAsync(true, context, colorTemperature)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 }
             }
         })
 
-        seekBar!!.progress = colorTemperature
+        seekBar!!.value = colorTemperature
 
         NightLightAppService.instance
                 .incrementViewInitCount()
@@ -102,6 +119,6 @@ class ColorTemperatureFragment : Fragment() {
     }
 
     private fun getValues() {
-        colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP) - 3000
+        colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
     }
 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:layout_margin="8dp">
 
     <TextView
@@ -10,8 +12,14 @@
         android:textStyle="bold"
         android:layout_margin="4dp"
         android:textSize="20sp"
-        android:id="@+id/banner_title"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:textColor="@color/colorPrimary"
         android:text="@string/app_name"/>
-</RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/banner_title"
+        android:textSize="12sp"/>
+</LinearLayout>

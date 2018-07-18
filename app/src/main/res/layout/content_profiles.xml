@@ -66,5 +66,7 @@
                 app:descriptionText="@string/profile_empty_desc"
                 app:srcCompat="@drawable/ic_error_large"/>
         </RelativeLayout>
+
+        <include layout="@layout/fab_placeholder" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

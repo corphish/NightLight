@@ -19,5 +19,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/layout_container"
             android:orientation="vertical"/>
+
+        <include layout="@layout/fab_placeholder" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -3,6 +3,8 @@ def isPlaystore = taskRequests.contains("generic") || taskRequests.contains("Gen
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 if (isPlaystore) {
     apply plugin: 'io.fabric'
 }

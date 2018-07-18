@@ -16,25 +16,26 @@ import com.corphish.nightlight.design.views.ProfileCreator
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.android.synthetic.main.activity_profiles.*
+import kotlinx.android.synthetic.main.bottom_sheet_profile_options.*
+import kotlinx.android.synthetic.main.content_profiles.*
 
 import java.util.Arrays
 
 class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener {
 
-    private var optionsDialog: BottomSheetDialog? = null
-    private var optionsView: View? = null
+    private lateinit var optionsDialog: BottomSheetDialog
+    private lateinit var optionsView: View
 
     private var curProfile: ProfilesManager.Profile? = null
 
-    private var profilesManager: ProfilesManager? = null
+    private lateinit var profilesManager: ProfilesManager
 
-    private var profilesAdapter: ProfilesAdapter? = null
+    private lateinit var profilesAdapter: ProfilesAdapter
 
     private var profiles: MutableList<ProfilesManager.Profile>? = null
 
-    private var emptyView: View? = null
-
-    private var context: Context? = null
+    private lateinit var context: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,20 +43,18 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
         context = this
 
-        findViewById<View>(R.id.fab).setOnClickListener {
+        fab.setOnClickListener {
             ProfileCreator(this@ProfilesActivity, ProfileCreator.MODE_CREATE,
                     onFinishListener =  fun(status: Int) {
                         if (status == ProfileCreator.STATUS_SUCCESS) {
-                            profilesManager?.loadProfiles()
-                            profiles = profilesManager?.profilesList
-                            profilesAdapter?.notifyDataSetChanged()
+                            profilesManager.loadProfiles()
+                            profiles = profilesManager.profilesList
+                            profilesAdapter.notifyDataSetChanged()
                         }
                     }).show()
         }
 
         findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
-
-        emptyView = findViewById(R.id.emptyView)
 
         initProfilesManager()
         initViews()
@@ -63,15 +62,14 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
     private fun initProfilesManager() {
         profilesManager = ProfilesManager(this)
-        profilesManager!!.registerDataChangeListener(this)
-        profilesManager!!.loadProfiles()
-        profiles = profilesManager!!.profilesList
+        profilesManager.registerDataChangeListener(this)
+        profilesManager.loadProfiles()
+        profiles = profilesManager.profilesList
     }
 
     private fun initViews() {
-        val recyclerView = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.profiles_holder)
         profilesAdapter = ProfilesAdapter()
-        profilesAdapter!!.setProfiles(profiles)
+        profilesAdapter.setProfiles(profiles)
 
         recyclerView.invalidateItemDecorations()
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
@@ -80,14 +78,14 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         recyclerView.isNestedScrollingEnabled = false
         recyclerView.setHasFixedSize(false)
 
-        profilesAdapter!!.notifyDataSetChanged()
+        profilesAdapter.notifyDataSetChanged()
     }
 
     override fun onDataChanged(newDataSize: Int) {
         if (newDataSize < 1)
-            emptyView!!.visibility = View.VISIBLE
+            emptyView.visibility = View.VISIBLE
         else
-            emptyView!!.visibility = View.GONE
+            emptyView.visibility = View.GONE
     }
 
     private inner class ProfilesAdapter : RecyclerView.Adapter<ProfilesActivity.ProfilesAdapter.CustomViewHolder>() {
@@ -97,7 +95,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
             this.profiles = profiles
         }
 
-        inner class CustomViewHolder internal constructor(v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v), View.OnClickListener {
+        inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
             internal val name: TextView = v.findViewById(R.id.profile_name)
             internal val desc: TextView = v.findViewById(R.id.profile_desc)
 
@@ -110,10 +108,10 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
                     showAlert(R.string.confirm, getString(R.string.tasker_confirm_selection, profiles!![adapterPosition].name), View.OnClickListener { returnBack(profiles!![adapterPosition].name) })
                 } else {
                     curProfile = profiles!![adapterPosition]
-                    optionsDialog = com.google.android.material.bottomsheet.BottomSheetDialog(this@ProfilesActivity, R.style.BottomSheetDialogDark)
+                    optionsDialog = BottomSheetDialog(this@ProfilesActivity, R.style.BottomSheetDialogDark)
                     getOptionsView(curProfile!!)
-                    optionsDialog!!.setContentView(optionsView)
-                    optionsDialog!!.show()
+                    optionsDialog.setContentView(optionsView)
+                    optionsDialog.show()
                 }
             }
         }
@@ -122,6 +120,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
             val itemView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.card_profile_item, parent, false)
+
             return CustomViewHolder(itemView)
         }
 
@@ -150,9 +149,9 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
     private fun getOptionsView(profile: ProfilesManager.Profile?) {
         optionsView = View.inflate(this, R.layout.bottom_sheet_profile_options, null)
 
-        (optionsView!!.findViewById<View>(R.id.selected_profile_name) as TextView).text = profile?.name
+        selectedProfileName.text = profile?.name
 
-        optionsView!!.findViewById<View>(R.id.apply).setOnClickListener {
+        apply.setOnClickListener {
             if (curProfile != null) {
                 curProfile!!.apply(this@ProfilesActivity)
                 PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_PROFILE)
@@ -160,29 +159,29 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
                 PreferenceHelper.putInt(context, Constants.PREF_CUR_PROF_MODE, curProfile!!.settingMode)
                 PreferenceHelper.putString(context, Constants.PREF_CUR_PROF_VAL, Arrays.toString(curProfile!!.settings))
             }
-            optionsDialog!!.dismiss()
+            optionsDialog.dismiss()
         }
 
-        optionsView!!.findViewById<View>(R.id.edit).setOnClickListener {
+        edit.setOnClickListener {
             ProfileCreator(this@ProfilesActivity, ProfileCreator.MODE_EDIT, profile,
                     onFinishListener =  fun(status: Int) {
                         if (status == ProfileCreator.STATUS_SUCCESS) {
-                            profiles = profilesManager?.profilesList
-                            profilesAdapter?.notifyDataSetChanged()
+                            profiles = profilesManager.profilesList
+                            profilesAdapter.notifyDataSetChanged()
                         }
                     }).show()
-            optionsDialog!!.dismiss()
+            optionsDialog.dismiss()
         }
 
-        optionsView!!.findViewById<View>(R.id.delete).setOnClickListener {
+        delete.setOnClickListener {
             showAlert(R.string.delete, getString(R.string.delete_details, curProfile!!.name), View.OnClickListener {
-                profilesManager!!.deleteProfile(curProfile!!)
+                profilesManager.deleteProfile(curProfile!!)
                 val prof = curProfile
                 profiles!!.remove(prof)
                 curProfile = null
-                profilesAdapter!!.notifyDataSetChanged()
+                profilesAdapter.notifyDataSetChanged()
             })
-            optionsDialog!!.dismiss()
+            optionsDialog.dismiss()
         }
     }
 

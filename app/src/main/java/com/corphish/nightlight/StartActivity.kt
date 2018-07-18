@@ -16,6 +16,7 @@ import com.corphish.nightlight.engine.KCALManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.RootUtils
 import com.corphish.nightlight.helpers.CrashlyticsHelper
+import kotlinx.android.synthetic.main.activity_splash.*
 
 class StartActivity : AppCompatActivity() {
 
@@ -117,13 +118,6 @@ class StartActivity : AppCompatActivity() {
     private inner class CompatibilityChecker : AsyncTask<String, String, String>() {
         internal var rootAccessAvailable = false
         internal var kcalSupported = false
-        internal var progressBar: View? = null
-        internal var alertImage: View? = null
-
-        override fun onPreExecute() {
-            progressBar = findViewById(R.id.progressBar)
-            alertImage = findViewById(R.id.alertPlaceholder)
-        }
 
         override fun doInBackground(vararg booms: String): String? {
             rootAccessAvailable = RootUtils.rootAccess
@@ -132,13 +126,13 @@ class StartActivity : AppCompatActivity() {
         }
 
         override fun onPostExecute(boom: String?) {
-            progressBar?.visibility = View.GONE
+            progressBar.visibility = View.GONE
             if (!rootAccessAvailable) {
                 showAlertDialog(R.string.no_root_access, R.string.no_root_desc)
-                alertImage?.visibility = View.VISIBLE
+                alertPlaceholder.visibility = View.VISIBLE
             } else if (!kcalSupported) {
                 showAlertDialog(R.string.no_kcal, R.string.no_kcal_desc)
-                alertImage?.visibility = View.VISIBLE
+                alertPlaceholder.visibility = View.VISIBLE
             } else {
                 PreferenceHelper.putBoolean(applicationContext, Constants.COMPATIBILITY_TEST, true)
                 switchToMain()

@@ -32,11 +32,11 @@
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_desc"
-        android:id="@+id/set_on_boot_desc_tv"
+        android:id="@+id/setOnBootDesc"
         android:text="@string/set_on_boot_delay_desc"/>
 
     <com.gregacucnik.EditableSeekBar
-        android:id="@+id/set_on_boot_delay"
+        android:id="@+id/setOnBootDelay"
         android:layout_margin="@dimen/layout_margin"
         android:padding="@dimen/layout_padding"
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_sub_desc"
-        android:id="@+id/set_on_boot_warn"
+        android:id="@+id/setOnBootWarn"
         android:drawableStart="@drawable/ic_error"
         android:drawablePadding="12dp"
         android:visibility="gone"

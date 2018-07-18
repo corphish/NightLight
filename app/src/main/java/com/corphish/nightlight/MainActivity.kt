@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 
 import com.corphish.nightlight.data.Constants
@@ -26,13 +25,13 @@ import com.corphish.nightlight.design.fragments.MasterSwitchFragment
 import com.corphish.nightlight.design.views.ProfileCreator
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.extensions.toArrayOfInts
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener, NightLightSettingModeListener {
 
     private var masterSwitchEnabled: Boolean = false
-    private val containerId = R.id.layout_container
+    private val containerId = R.id.container
 
     private var taskerError: Boolean = false
     private val REQ_CODE = 100
@@ -41,8 +40,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bottomAppBar = findViewById<BottomAppBar>(R.id.bottom_app_bar)
-        setSupportActionBar(bottomAppBar)
+        setSupportActionBar(bottom_app_bar)
 
         NightLightAppService.instance
                 .registerNightLightStateListener(this)
@@ -70,7 +68,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
     private fun viewInit() {
         // Clear container
-        val container = findViewById<LinearLayout>(containerId)
         container.removeAllViews()
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -80,8 +77,8 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
         findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
-            ProfileCreator(this@MainActivity, ProfileCreator.MODE_CREATE, getProfileForCurrentSettings(), {}).show()
+        fab.setOnClickListener {
+            ProfileCreator(this@MainActivity, ProfileCreator.MODE_CREATE, getProfileForCurrentSettings()) {}.show()
         }
     }
 

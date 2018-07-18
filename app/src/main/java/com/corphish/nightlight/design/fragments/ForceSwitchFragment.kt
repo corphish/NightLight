@@ -2,7 +2,6 @@ package com.corphish.nightlight.design.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.appcompat.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
 import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.services.NightLightAppService
+import kotlinx.android.synthetic.main.card_force_switch.*
 
 /**
  * Created by Avinaba on 10/24/2017.
@@ -20,9 +20,6 @@ import com.corphish.nightlight.services.NightLightAppService
  */
 
 class ForceSwitchFragment : Fragment() {
-
-    private var forceSwitch: SwitchCompat? = null
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -31,12 +28,11 @@ class ForceSwitchFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        forceSwitch = view!!.findViewById(R.id.force_switch)
 
         FontUtils().setCustomFont(context!!, forceSwitch)
 
-        forceSwitch!!.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH)
-        forceSwitch!!.setOnCheckedChangeListener { _, b ->
+        forceSwitch.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH)
+        forceSwitch.setOnCheckedChangeListener { _, b ->
             // Preference for this is handled in Core now
             Core.applyNightModeAsync(b, context, false)
         }
@@ -46,6 +42,6 @@ class ForceSwitchFragment : Fragment() {
     }
 
     fun updateSwitch(newState: Boolean) {
-        if (forceSwitch != null) forceSwitch!!.isChecked = newState
+        if (forceSwitch != null) forceSwitch.isChecked = newState
     }
 }

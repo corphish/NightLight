@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_desc"
-        android:id="@+id/contributors_link"
+        android:id="@+id/contributorsLink"
         android:textColor="@color/colorAccent"
         android:layout_margin="@dimen/layout_margin"
         android:padding="@dimen/layout_padding"

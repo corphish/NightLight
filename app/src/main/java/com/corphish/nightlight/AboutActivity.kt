@@ -8,7 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.corphish.nightlight.design.fragments.AboutFragment
 import com.corphish.nightlight.helpers.ExternalLink
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.bottom_sheet_donate_actions.*
 
 class AboutActivity : AppCompatActivity() {
 
@@ -16,7 +17,7 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
+        fab.setOnClickListener {
             showActions()
         }
 
@@ -41,23 +42,22 @@ class AboutActivity : AppCompatActivity() {
         val optionsView = View.inflate(this, R.layout.bottom_sheet_donate_actions, null)
 
         if (BuildConfig.FLAVOR == "generic" || BuildConfig.FLAVOR == "foss") {
-            optionsView.findViewById<View>(R.id.donate_action1).setOnClickListener {
+            donateAction1.setOnClickListener {
                 ExternalLink.open(this, "market://details?id=com.corphish.nightlight.generic")
                 optionsDialog.dismiss()
             }
 
-            optionsView.findViewById<View>(R.id.donate_action2).setOnClickListener {
+            donateAction2.setOnClickListener {
                 ExternalLink.open(this, "market://details?id=com.corphish.nightlight.donate")
                 optionsDialog.dismiss()
             }
         } else {
-
-            optionsView.findViewById<View>(R.id.donate_action1).setOnClickListener {
+            donateAction1.setOnClickListener {
                 ExternalLink.open(this, "market://details?id=com.corphish.nightlight.donate")
                 optionsDialog.dismiss()
             }
 
-            optionsView.findViewById<View>(R.id.donate_action2).setOnClickListener {
+            donateAction2.setOnClickListener {
                 ExternalLink.open(this, "https://www.paypal.me/corphish")
                 optionsDialog.dismiss()
             }

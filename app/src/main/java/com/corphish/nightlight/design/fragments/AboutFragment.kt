@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 
 import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.nightlight.R
+import kotlinx.android.synthetic.main.card_info.*
 
 /**
  * Created by Avinaba on 10/24/2017.
@@ -26,6 +26,6 @@ class AboutFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         view?.setOnClickListener { ExternalLink.open(context, "market://details?id=" + context!!.packageName) }
-        view?.findViewById<TextView>(R.id.contributors_link)?.setOnClickListener { ExternalLink.open(context, "https://github.com/corphish/NightLight/graphs/contributors") }
+        contributorsLink.setOnClickListener { ExternalLink.open(context, "https://github.com/corphish/NightLight/graphs/contributors") }
     }
 }

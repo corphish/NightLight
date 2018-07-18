@@ -30,7 +30,7 @@
         android:paddingStart="@dimen/layout_padding"/>
 
     <com.gregacucnik.EditableSeekBar
-        android:id="@+id/kcal_red"
+        android:id="@+id/red"
         android:layout_margin="@dimen/layout_margin"
         android:padding="@dimen/layout_padding"
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
         app:esbMax="256" />
 
     <com.gregacucnik.EditableSeekBar
-        android:id="@+id/kcal_green"
+        android:id="@+id/green"
         android:layout_margin="@dimen/layout_margin"
         android:padding="@dimen/layout_padding"
         android:layout_width="match_parent"
@@ -48,7 +48,7 @@
         app:esbMax="256" />
 
     <com.gregacucnik.EditableSeekBar
-        android:id="@+id/kcal_blue"
+        android:id="@+id/blue"
         android:layout_margin="@dimen/layout_margin"
         android:padding="@dimen/layout_padding"
         android:layout_width="match_parent"

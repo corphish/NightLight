@@ -20,7 +20,7 @@
         android:paddingBottom="12dp"
         android:textAppearance="?android:textAppearance"
         android:layout_margin="@dimen/layout_margin"
-        android:id="@+id/selected_profile_name"/>
+        android:id="@+id/selectedProfileName"/>
 
     <TextView
         android:layout_width="match_parent"

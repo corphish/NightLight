@@ -20,7 +20,7 @@
     <androidx.appcompat.widget.SwitchCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/master_switch"
+        android:id="@+id/masterSwitch"
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_caption"
@@ -37,7 +37,7 @@
     <androidx.appcompat.widget.AppCompatCheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/kcal_preserve_switch"
+        android:id="@+id/preserveSwitch"
         android:text="@string/kcal_preservce_value_msg"
         android:checked="true"/>
 
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_desc"
-        android:id="@+id/configure_kcal_backup"
+        android:id="@+id/configureKcalBackup"
         android:textColor="@color/colorAccent"
         android:layout_margin="@dimen/layout_margin"
         android:padding="@dimen/layout_padding"

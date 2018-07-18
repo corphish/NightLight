@@ -34,7 +34,7 @@
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
         android:drawableStart="@drawable/ic_store_24dp"
-        android:id="@+id/donate_action1"
+        android:id="@+id/donateAction1"
         android:text="@string/donate_with_app"/>
 
     <TextView
@@ -49,6 +49,6 @@
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
         android:drawableStart="@drawable/ic_money_24dp"
-        android:id="@+id/donate_action2"
+        android:id="@+id/donateAction2"
         android:text="@string/donate_with_paypal"/>
 </LinearLayout>

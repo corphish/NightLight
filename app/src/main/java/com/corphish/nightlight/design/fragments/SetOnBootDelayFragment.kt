@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import android.widget.TextView
 
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
 import com.gregacucnik.EditableSeekBar
+import kotlinx.android.synthetic.main.card_set_on_boot_delay.*
 
 /**
  * Created by avinabadalal on 13/02/18.
@@ -37,11 +37,9 @@ class SetOnBootDelayFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val textView = view!!.findViewById<TextView>(R.id.set_on_boot_desc_tv)
-        textView.text = getString(R.string.set_on_boot_delay_desc, bootDelay.toString() + "s")
+        setOnBootDesc.text = getString(R.string.set_on_boot_delay_desc, bootDelay.toString() + "s")
 
-        val seekBar = view!!.findViewById<EditableSeekBar>(R.id.set_on_boot_delay)
-        seekBar.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
+        setOnBootDelay.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
             override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
 
             }
@@ -52,29 +50,28 @@ class SetOnBootDelayFragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 bootDelay = seekBar.progress
-                textView.text = getString(R.string.set_on_boot_delay_desc, bootDelay.toString() + "s")
+                setOnBootDesc.text = getString(R.string.set_on_boot_delay_desc, bootDelay.toString() + "s")
                 PreferenceHelper.putInt(context, Constants.PREF_BOOT_DELAY, bootDelay)
             }
 
             override fun onEnteredValueTooHigh() {
-                seekBar.value = 60
+                setOnBootDelay.value = 60
             }
 
             override fun onEnteredValueTooLow() {
-                seekBar.value = 0
+                setOnBootDelay.value = 0
             }
 
             override fun onEditableSeekBarValueChanged(value: Int) {
                 bootDelay = value
-                textView.text = getString(R.string.set_on_boot_delay_desc, bootDelay.toString() + "s")
+                setOnBootDesc.text = getString(R.string.set_on_boot_delay_desc, bootDelay.toString() + "s")
                 PreferenceHelper.putInt(context, Constants.PREF_BOOT_DELAY, bootDelay)
             }
         })
 
-        seekBar.value = bootDelay
+        setOnBootDelay.value = bootDelay
 
-        val warn = view!!.findViewById<TextView>(R.id.set_on_boot_warn)
-        warn.visibility = if (PreferenceHelper.getBoolean(context, Constants.PREF_LAST_BOOT_RES, true)) View.GONE else View.VISIBLE
+        setOnBootWarn.visibility = if (PreferenceHelper.getBoolean(context, Constants.PREF_LAST_BOOT_RES, true)) View.GONE else View.VISIBLE
 
         NightLightAppService.instance
                 .incrementViewInitCount()

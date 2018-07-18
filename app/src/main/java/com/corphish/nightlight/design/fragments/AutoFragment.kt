@@ -8,10 +8,11 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
-import androidx.appcompat.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
+import kotlinx.android.synthetic.main.card_auto_enable.*
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
@@ -31,10 +32,6 @@ import com.corphish.widgets.KeyValueView
  */
 
 class AutoFragment : Fragment(), LocationListener {
-    private var autoSwitch: SwitchCompat? = null
-    private var sunSwitch: SwitchCompat? = null
-    private var startTimeKV: KeyValueView? = null
-    private var endTimeKV: KeyValueView? = null
     private var sunSwitchStatus: Boolean = false
     private var autoSwitchStatus: Boolean = false
 
@@ -59,15 +56,9 @@ class AutoFragment : Fragment(), LocationListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        autoSwitch = view!!.findViewById(R.id.auto_enable)
-        sunSwitch = view!!.findViewById(R.id.sun_enable)
+        FontUtils().setCustomFont(context!!, autoEnable, sunEnable)
 
-        FontUtils().setCustomFont(context!!, autoSwitch, sunSwitch)
-
-        startTimeKV = view!!.findViewById(R.id.start_time)
-        endTimeKV = view!!.findViewById(R.id.end_time)
-
-        autoSwitch!!.setOnCheckedChangeListener { _, b ->
+        autoEnable.setOnCheckedChangeListener { _, b ->
             if (b)
                 doCurrentAutoFunctions(true)
             else {
@@ -79,7 +70,7 @@ class AutoFragment : Fragment(), LocationListener {
             enableOrDisableAutoSwitchViews(b)
         }
 
-        sunSwitch!!.setOnCheckedChangeListener { _, b ->
+        sunEnable.setOnCheckedChangeListener { _, b ->
             PreferenceHelper.putBoolean(context, Constants.PREF_SUN_SWITCH, b)
             if (b) {
                 doLocationStuff()
@@ -87,8 +78,8 @@ class AutoFragment : Fragment(), LocationListener {
                 val prevStartTime = PreferenceHelper.getString(context, Constants.PREF_LAST_START_TIME, Constants.DEFAULT_START_TIME)
                 val prevEndTime = PreferenceHelper.getString(context, Constants.PREF_LAST_END_TIME, Constants.DEFAULT_END_TIME)
 
-                startTimeKV!!.setValueText(prevStartTime!!)
-                endTimeKV!!.setValueText(prevEndTime!!)
+                startTime.setValueText(prevStartTime!!)
+                endTime.setValueText(prevEndTime!!)
 
                 PreferenceHelper.putString(context, Constants.PREF_START_TIME, prevStartTime)
                 PreferenceHelper.putString(context, Constants.PREF_END_TIME, prevEndTime)
@@ -96,16 +87,16 @@ class AutoFragment : Fragment(), LocationListener {
                 addNextDayIfNecessary()
                 doCurrentAutoFunctions(true)
             }
-            enableOrDisableAutoSwitchViews(autoSwitch!!.isChecked)
+            enableOrDisableAutoSwitchViews(autoEnable.isChecked)
         }
-        autoSwitch!!.isChecked = autoSwitchStatus
-        sunSwitch!!.isChecked = sunSwitchStatus
+        autoEnable.isChecked = autoSwitchStatus
+        sunEnable.isChecked = sunSwitchStatus
 
-        startTimeKV!!.setOnClickListener { showTimePickerDialog(startTimeKV, Constants.PREF_START_TIME) }
-        endTimeKV!!.setOnClickListener { showTimePickerDialog(endTimeKV, Constants.PREF_END_TIME) }
+        startTime.setOnClickListener { showTimePickerDialog(startTime, Constants.PREF_START_TIME) }
+        endTime.setOnClickListener { showTimePickerDialog(endTime, Constants.PREF_END_TIME) }
 
-        startTimeKV!!.setValueText(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!)
-        endTimeKV!!.setValueText(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!)
+        startTime.setValueText(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!)
+        endTime.setValueText(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!)
 
         addNextDayIfNecessary()
 
@@ -121,20 +112,20 @@ class AutoFragment : Fragment(), LocationListener {
      */
     private fun enableOrDisableAutoSwitchViews(enabled: Boolean) {
         // Enabled = Status of autoSwitch if masterSwitch is on, otherwise status of masterSwitch
-        val sunSwitchEnabled = sunSwitch!!.isChecked
+        val sunSwitchEnabled = sunEnable.isChecked
 
         // If auto switch is off, or master switch off, turn them off all
         if (!enabled) {
-            startTimeKV!!.isEnabled = false
-            endTimeKV!!.isEnabled = false
-            sunSwitch!!.isEnabled = false
+            startTime.isEnabled = false
+            endTime.isEnabled = false
+            sunEnable.isEnabled = false
         } else {
             // autoSwitch is enabled, enable sunSwitch
-            sunSwitch!!.isEnabled = true
+            sunEnable.isEnabled = true
 
             // if sunSwitch is enabled, disable kvviews
-            startTimeKV!!.isEnabled = !sunSwitchEnabled
-            endTimeKV!!.isEnabled = !sunSwitchEnabled
+            startTime.isEnabled = !sunSwitchEnabled
+            endTime.isEnabled = !sunSwitchEnabled
         }
     }
 
@@ -172,7 +163,7 @@ class AutoFragment : Fragment(), LocationListener {
         val sStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
         val sEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
         if (TimeUtils.getTimeInMinutes(sEndTime!!) < TimeUtils.getTimeInMinutes(sStartTime!!))
-            endTimeKV!!.setValueText(sEndTime + getString(R.string.next_day))
+            endTime.setValueText(sEndTime + getString(R.string.next_day))
     }
 
     /**
@@ -230,7 +221,7 @@ class AutoFragment : Fragment(), LocationListener {
     private fun getAndSetSunriseSunsetTimings(currentLocation: Location?) {
         if (currentLocation == null) {
             com.google.android.material.snackbar.Snackbar.make(activity!!.findViewById(R.id.layout_container), getString(R.string.location_unavailable), com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
-            sunSwitch!!.isChecked = false
+            sunEnable.isChecked = false
             return
         } else {
             // Save location
@@ -239,12 +230,12 @@ class AutoFragment : Fragment(), LocationListener {
 
         TwilightManager.newInstance()
                 .atLocation(currentLocation.longitude, currentLocation.latitude)
-                .computeAndSaveTime(context!!, {
+                .computeAndSaveTime(context!!) {
                         doCurrentAutoFunctions(false)
 
-                        startTimeKV!!.setValueText(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!)
-                        endTimeKV!!.setValueText(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!)
-                })
+                        startTime.setValueText(PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!)
+                        endTime.setValueText(PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!)
+                }
 
         addNextDayIfNecessary()
     }

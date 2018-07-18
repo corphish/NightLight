@@ -31,7 +31,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:textAppearance="?android:textAppearance"
         android:layout_margin="@dimen/layout_margin"
-        android:id="@+id/donate_action1"
+        android:id="@+id/donateAction1"
         android:text="@string/donate_with_app"/>
 
     <TextView
@@ -43,6 +43,6 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:textAppearance="?android:textAppearance"
         android:layout_margin="@dimen/layout_margin"
-        android:id="@+id/donate_action2"
+        android:id="@+id/donateAction2"
         android:text="@string/donate_with_paypal"/>
 </LinearLayout>

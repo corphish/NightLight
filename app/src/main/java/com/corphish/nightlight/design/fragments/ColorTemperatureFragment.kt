@@ -2,11 +2,12 @@ package com.corphish.nightlight.design.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.appcompat.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+
+import kotlinx.android.synthetic.main.card_temperature.*
 
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
@@ -26,10 +27,6 @@ class ColorTemperatureFragment : Fragment() {
 
     private var mode: Boolean = false
 
-    // Views
-    private var switchCompat: SwitchCompat? = null
-    private var seekBar: EditableSeekBar? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,22 +43,19 @@ class ColorTemperatureFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        switchCompat = view!!.findViewById(R.id.mode_switch)
-        seekBar = view!!.findViewById(R.id.temperature_value)
-
-        FontUtils().setCustomFont(context!!, switchCompat)
+        FontUtils().setCustomFont(context!!, modeSwitch)
 
         // Disable them by default
-        seekBar!!.isEnabled = false
+        temperatureValue.isEnabled = false
 
-        switchCompat!!.setOnCheckedChangeListener { _, isChecked ->
+        modeSwitch.setOnCheckedChangeListener { _, isChecked ->
             mode = isChecked
 
             val settingMode = if (isChecked) Constants.NL_SETTING_MODE_TEMP else Constants.NL_SETTING_MODE_FILTER
 
             PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, settingMode)
 
-            seekBar!!.isEnabled = isChecked
+            temperatureValue.isEnabled = isChecked
 
             if (isChecked && NightLightAppService.instance.isInitDone()) {
                 Core.applyNightModeAsync(true, context, colorTemperature + 3000)
@@ -70,9 +64,9 @@ class ColorTemperatureFragment : Fragment() {
             NightLightAppService.instance.notifyNewSettingMode(settingMode)
         }
 
-        switchCompat!!.isChecked = mode
+        modeSwitch.isChecked = mode
 
-        seekBar!!.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
+        temperatureValue.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
             override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
 
             }
@@ -91,11 +85,11 @@ class ColorTemperatureFragment : Fragment() {
             }
 
             override fun onEnteredValueTooHigh() {
-                seekBar!!.value = 4500
+                temperatureValue.value = 4500
             }
 
             override fun onEnteredValueTooLow() {
-                seekBar!!.value = 3000
+                temperatureValue.value = 3000
             }
 
             override fun onEditableSeekBarValueChanged(value: Int) {
@@ -108,14 +102,14 @@ class ColorTemperatureFragment : Fragment() {
             }
         })
 
-        seekBar!!.value = colorTemperature
+        temperatureValue.value = colorTemperature
 
         NightLightAppService.instance
                 .incrementViewInitCount()
     }
 
     fun onStateChanged(newMode: Int) {
-        if (switchCompat != null) switchCompat!!.isChecked = newMode == Constants.NL_SETTING_MODE_TEMP
+        if (modeSwitch != null) modeSwitch.isChecked = newMode == Constants.NL_SETTING_MODE_TEMP
     }
 
     private fun getValues() {

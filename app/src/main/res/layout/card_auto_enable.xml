@@ -21,7 +21,7 @@
     <androidx.appcompat.widget.SwitchCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/auto_enable"
+        android:id="@+id/autoEnable"
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_caption"
@@ -38,7 +38,7 @@
     <androidx.appcompat.widget.SwitchCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sun_enable"
+        android:id="@+id/sunEnable"
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_caption"
@@ -47,7 +47,7 @@
     <com.corphish.widgets.KeyValueView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/start_time"
+        android:id="@+id/startTime"
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         custom:keyText="@string/start_time"
@@ -58,7 +58,7 @@
     <com.corphish.widgets.KeyValueView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/end_time"
+        android:id="@+id/endTime"
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         custom:keyText="@string/end_time"

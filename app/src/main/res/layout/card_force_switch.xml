@@ -20,7 +20,7 @@
     <androidx.appcompat.widget.SwitchCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/force_switch"
+        android:id="@+id/forceSwitch"
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_caption"

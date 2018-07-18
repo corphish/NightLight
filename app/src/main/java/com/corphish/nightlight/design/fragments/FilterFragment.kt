@@ -2,11 +2,12 @@ package com.corphish.nightlight.design.fragments
 
 import androidx.fragment.app.Fragment
 import android.os.Bundle
-import androidx.appcompat.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+
+import kotlinx.android.synthetic.main.card_slider.*
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
@@ -26,11 +27,6 @@ class FilterFragment : Fragment() {
     private var greenIntensity: Int = 0
     private var mode: Boolean = false
 
-    // Views
-    private var blueSlider: SeekBar? = null
-    private var greenSlider: SeekBar? = null
-    private var switchCompat: SwitchCompat? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,25 +43,21 @@ class FilterFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        blueSlider = view!!.findViewById(R.id.blue_intensity) as SeekBar
-        greenSlider = view!!.findViewById(R.id.green_intensity) as SeekBar
-        switchCompat = view!!.findViewById(R.id.mode_switch) as SwitchCompat
-
-        FontUtils().setCustomFont(context!!, switchCompat)
+        FontUtils().setCustomFont(context!!, modeSwitch)
 
         // Disable them by default
-        blueSlider!!.isEnabled = false
-        greenSlider!!.isEnabled = false
+        blueSlider.isEnabled = false
+        greenSlider.isEnabled = false
 
-        switchCompat!!.setOnCheckedChangeListener { _, isChecked ->
+        modeSwitch.setOnCheckedChangeListener { _, isChecked ->
             mode = isChecked
 
             val settingMode = if (isChecked) Constants.NL_SETTING_MODE_FILTER else Constants.NL_SETTING_MODE_TEMP
 
             PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, settingMode)
 
-            blueSlider?.isEnabled = isChecked
-            greenSlider?.isEnabled = isChecked
+            blueSlider.isEnabled = isChecked
+            greenSlider.isEnabled = isChecked
 
             if (isChecked && NightLightAppService.instance.isInitDone()) {
                 Core.applyNightModeAsync(isChecked, context, blueIntensity, greenIntensity)
@@ -74,9 +66,9 @@ class FilterFragment : Fragment() {
             NightLightAppService.instance.notifyNewSettingMode(settingMode)
         }
 
-        switchCompat!!.isChecked = mode
+        modeSwitch.isChecked = mode
 
-        blueSlider?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        blueSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {}
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
@@ -91,7 +83,7 @@ class FilterFragment : Fragment() {
             }
         })
 
-        greenSlider?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        greenSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
 
             }
@@ -110,15 +102,15 @@ class FilterFragment : Fragment() {
             }
         })
 
-        blueSlider?.progress = blueIntensity
-        greenSlider?.progress = greenIntensity
+        blueSlider.progress = blueIntensity
+        greenSlider.progress = greenIntensity
 
         NightLightAppService.instance
                 .incrementViewInitCount()
     }
 
     fun onStateChanged(newMode: Int) {
-        if (switchCompat != null) switchCompat!!.isChecked = newMode == Constants.NL_SETTING_MODE_FILTER
+        if (modeSwitch != null) modeSwitch.isChecked = newMode == Constants.NL_SETTING_MODE_FILTER
     }
 
     private fun getValues() {

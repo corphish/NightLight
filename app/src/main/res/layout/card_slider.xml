@@ -23,7 +23,7 @@
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_caption"
-        android:id="@+id/mode_switch"
+        android:id="@+id/modeSwitch"
         android:textColor="@android:color/white"
         android:text="@string/color_intensity"/>
 
@@ -47,7 +47,7 @@
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/blue_intensity"
+        android:id="@+id/blueSlider"
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:max="128"
@@ -73,7 +73,7 @@
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/green_intensity"
+        android:id="@+id/greenSlider"
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:max="48"

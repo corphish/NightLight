@@ -58,7 +58,7 @@ class ColorTemperatureFragment : Fragment() {
             temperatureValue.isEnabled = isChecked
 
             if (isChecked && NightLightAppService.instance.isInitDone()) {
-                Core.applyNightModeAsync(true, context, colorTemperature + 3000)
+                Core.applyNightModeAsync(true, context, colorTemperature)
             }
 
             NightLightAppService.instance.notifyNewSettingMode(settingMode)

@@ -16,7 +16,6 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
 import com.corphish.nightlight.design.utils.FontUtils
 import com.gregacucnik.EditableSeekBar
-import kotlinx.android.synthetic.main.bottom_sheet_kcal_backup_set.*
 import kotlinx.android.synthetic.main.card_master_switch.*
 
 /**
@@ -93,6 +92,10 @@ class MasterSwitchFragment : Fragment() {
         kcalBackupSettingsView = View.inflate(context, R.layout.bottom_sheet_kcal_backup_set, null)
 
         val backedUpValues = PreferenceHelper.getString(context, Constants.KCAL_PRESERVE_VAL)
+
+        val red = kcalBackupSettingsView.findViewById<EditableSeekBar>(R.id.red)
+        val green = kcalBackupSettingsView.findViewById<EditableSeekBar>(R.id.green)
+        val blue = kcalBackupSettingsView.findViewById<EditableSeekBar>(R.id.blue)
 
         if (backedUpValues == null) {
             b = 256

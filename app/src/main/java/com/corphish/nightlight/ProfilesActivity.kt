@@ -17,7 +17,6 @@ import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_profiles.*
-import kotlinx.android.synthetic.main.bottom_sheet_profile_options.*
 import kotlinx.android.synthetic.main.content_profiles.*
 
 import java.util.Arrays
@@ -148,6 +147,11 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
     private fun getOptionsView(profile: ProfilesManager.Profile?) {
         optionsView = View.inflate(this, R.layout.bottom_sheet_profile_options, null)
+
+        val selectedProfileName = optionsView.findViewById<TextView>(R.id.selectedProfileName)
+        val apply = optionsView.findViewById<View>(R.id.apply)
+        val edit = optionsView.findViewById<View>(R.id.edit)
+        val delete = optionsView.findViewById<View>(R.id.delete)
 
         selectedProfileName.text = profile?.name
 

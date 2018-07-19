@@ -41,6 +41,13 @@
         android:text="@string/kcal_preservce_value_msg"
         android:checked="true"/>
 
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/backupEveryTimeSwitch"
+        android:text="@string/kcal_backup_every_time_before_enabling"
+        android:checked="true"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

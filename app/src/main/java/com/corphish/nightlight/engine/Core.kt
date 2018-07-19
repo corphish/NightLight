@@ -29,7 +29,8 @@ object Core {
         if (PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true)) {
             // Check if FORCE_SWITCH is off or not
             // If off then only backup
-            if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH))
+            // Also backup only if "Backup every time option" is enabled
+            if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH) && PreferenceHelper.getBoolean(context, Constants.PREF_KCAL_BACKUP_EVERY_TIME, true))
                 KCALManager.backupCurrentKCALValues(context)
         }
 
@@ -60,7 +61,7 @@ object Core {
         if (PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true)) {
             // Check if FORCE_SWITCH is off or not
             // If off then only backup
-            if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH))
+            if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH) && PreferenceHelper.getBoolean(context, Constants.PREF_KCAL_BACKUP_EVERY_TIME, true))
                 KCALManager.backupCurrentKCALValues(context)
         }
 

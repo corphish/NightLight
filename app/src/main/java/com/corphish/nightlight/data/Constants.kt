@@ -40,6 +40,7 @@ object Constants {
     const val PREF_CUR_APPLY_EN = "cur_apply_switch"
     const val PREF_CUR_PROF_MODE = "cur_profile_mode"
     const val PREF_CUR_PROF_VAL = "cur_profile_settings"
+    const val PREF_KCAL_BACKUP_EVERY_TIME = "kcal_backup_everytime"
 
 
     /**

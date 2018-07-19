@@ -74,12 +74,20 @@ class MasterSwitchFragment : Fragment() {
         }
 
         preserveSwitch.isChecked = PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true)
-        preserveSwitch.setOnCheckedChangeListener { _, b -> PreferenceHelper.putBoolean(context, Constants.KCAL_PRESERVE_SWITCH, b) }
+        preserveSwitch.setOnCheckedChangeListener { _, b ->
+            PreferenceHelper.putBoolean(context, Constants.KCAL_PRESERVE_SWITCH, b)
+            backupEveryTimeSwitch.isEnabled = b
+        }
+
+        backupEveryTimeSwitch.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_KCAL_BACKUP_EVERY_TIME, true)
+        backupEveryTimeSwitch.setOnCheckedChangeListener {_, b ->
+            PreferenceHelper.putBoolean(context, Constants.PREF_KCAL_BACKUP_EVERY_TIME, b)
+        }
 
 
         configureKcalBackup.setOnClickListener(View.OnClickListener {
             val context = context ?: return@OnClickListener
-            bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(context, R.style.BottomSheetDialogDark)
+            bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialogDark)
             initKCALBackupView()
             bottomSheetDialog.setContentView(kcalBackupSettingsView)
             bottomSheetDialog.show()

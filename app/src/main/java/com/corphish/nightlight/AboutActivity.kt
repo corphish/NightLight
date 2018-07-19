@@ -9,7 +9,6 @@ import com.corphish.nightlight.design.fragments.AboutFragment
 import com.corphish.nightlight.helpers.ExternalLink
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.bottom_sheet_donate_actions.*
 
 class AboutActivity : AppCompatActivity() {
 
@@ -40,6 +39,9 @@ class AboutActivity : AppCompatActivity() {
     private fun showActions() {
         val optionsDialog = BottomSheetDialog(this, R.style.BottomSheetDialogDark)
         val optionsView = View.inflate(this, R.layout.bottom_sheet_donate_actions, null)
+
+        val donateAction1 = optionsView.findViewById<View>(R.id.donateAction1)
+        val donateAction2 = optionsView.findViewById<View>(R.id.donateAction2)
 
         if (BuildConfig.FLAVOR == "generic" || BuildConfig.FLAVOR == "foss") {
             donateAction1.setOnClickListener {

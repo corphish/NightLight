@@ -26,7 +26,7 @@ object KCALManager {
      * @return A boolean indicating whether KCAL support is available or not
      */
     val isKCALAvailable: Boolean
-        get() = File(Constants.KCAL_SWITCH).exists()
+        get() = RootUtils.doesFileExist(Constants.KCAL_SWITCH)
 
     /**
      * Checks whether KCAL is enabled or not

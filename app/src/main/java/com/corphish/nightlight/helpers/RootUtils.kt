@@ -36,6 +36,10 @@ object RootUtils {
         return Shell.SU.run("cat $file")
     }
 
+    fun doesFileExist(file: String): Boolean {
+        return Shell.SU.run("ls $file")[0] == file
+    }
+
     /**
      * Reads one line for given file (path)
      * @param file Path of file to read

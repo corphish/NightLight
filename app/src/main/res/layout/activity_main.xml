@@ -18,8 +18,7 @@
         app:backgroundTint="@color/colorPrimary"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         app:fabAlignmentMode="center"
-        app:hideOnScroll="true"
-        app:fabAttached="true"/>
+        app:hideOnScroll="true"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -63,7 +63,7 @@ dependencies {
     })
     implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
     testImplementation 'junit:junit:4.12'
-    implementation 'com.google.android.material:material:1.0.0-alpha1'
+    implementation 'com.google.android.material:material:1.0.0-beta01'
 
     implementation 'eu.chainfire:libsuperuser:1.0.0.201704021214'
 

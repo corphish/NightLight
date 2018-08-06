@@ -37,7 +37,8 @@ object RootUtils {
     }
 
     fun doesFileExist(file: String): Boolean {
-        return Shell.SU.run("ls $file")[0] == file
+        val output = Shell.SU.run("ls $file")
+        return !output.isEmpty() && output[0] == file
     }
 
     /**

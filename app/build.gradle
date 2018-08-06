@@ -68,7 +68,7 @@ dependencies {
     implementation 'eu.chainfire:libsuperuser:1.0.0.201704021214'
 
     implementation 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
-    implementation 'com.gregacucnik:editableseekbar:1.2'
+    implementation 'com.github.mc0239:EditableSeekBar:v1.3.0'
 
     implementation 'com.github.corphish:widgets:1.2.1'
 

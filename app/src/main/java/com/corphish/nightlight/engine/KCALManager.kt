@@ -3,10 +3,11 @@ package com.corphish.nightlight.engine
 import android.content.Context
 
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.engine.kcal.DummyKCALManager
+import com.corphish.nightlight.engine.kcal.GenericKCALManager
+import com.corphish.nightlight.engine.kcal.KCALAbstraction
+import com.corphish.nightlight.engine.kcal.SDM845KCALManager
 import com.corphish.nightlight.helpers.PreferenceHelper
-import com.corphish.nightlight.helpers.RootUtils
-
-import java.io.File
 
 /**
  * Created by avinabadalal on 30/12/17.
@@ -15,59 +16,40 @@ import java.io.File
 
 object KCALManager {
 
-    /*
-     * For quick reference, sysfs nodes for KCAL are -
-     * KCAL_SWITCH -> /sys/devices/platform/kcal_ctrl.0/kcal_enable
-     * KCAL_ADJUST -> /sys/devices/platform/kcal_ctrl.0/kcal
-     */
+    private var kcalImplementation: KCALAbstraction
+
+    init {
+        kcalImplementation = GenericKCALManager()
+        if (!kcalImplementation.isSupported()) kcalImplementation = SDM845KCALManager()
+        if (!kcalImplementation.isSupported()) kcalImplementation = DummyKCALManager()
+    }
 
     /**
      * Checks whether KCAL is supported by the kernel
      * @return A boolean indicating whether KCAL support is available or not
      */
     val isKCALAvailable: Boolean
-        get() = File(Constants.KCAL_SWITCH).exists() || RootUtils.doesFileExist(Constants.KCAL_SWITCH)
+        get() = kcalImplementation.isSupported()
 
-    /**
-     * Checks whether KCAL is enabled or not
-     * @return A boolean indicating whether KCAL is enabled or not
-     */
-    val isKCALEnabled: Boolean
-        get() = RootUtils.readOneLine(Constants.KCAL_SWITCH) == "1"
+    private val isKCALEnabled: Boolean
+        get() = kcalImplementation.isEnabled()
 
     /**
      * Gets current KCAL RGB values irrespective of whether it is enabled or not
      * @return Current KCAL RGB values as written by driver
      */
-    val kcalValuesAsRawString: String
-        get() = RootUtils.readOneLine(Constants.KCAL_ADJUST)
-
-    /**
-     * Gets current KCAL RGB values irrespective of whether it is enabled or not
-     * @return Current KCAL RGB values as int array in form of [red, green, blue]
-     */
-    // Red
-    // Green
-    // Blue
-    val kcalValuesAsIntRGB: IntArray
+    private val kcalValuesAsRawString: String
         get() {
-            val values = kcalValuesAsRawString.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            val reading = kcalImplementation.getColorReadings()
 
-            return intArrayOf(Integer.parseInt(values[0]), Integer.parseInt(values[1]), Integer.parseInt(values[2]))
+            return "${reading[0]} ${reading[1]} ${reading[2]}"
         }
 
     /**
      * Enables KCAL
      */
     fun enableKCAL() {
-        RootUtils.writeToFile("1", Constants.KCAL_SWITCH)
-    }
-
-    /**
-     * Disables KCAL
-     */
-    fun disableKCAL() {
-        RootUtils.writeToFile("0", Constants.KCAL_SWITCH)
+        kcalImplementation.turnOn()
     }
 
     /**
@@ -80,7 +62,11 @@ object KCALManager {
     fun updateKCALValues(rawValue: String?): Boolean {
         // If operation is successful, there should be no output
         // Otherwise we would get output like "Permission denied"
-        return RootUtils.writeToFile(rawValue!!, Constants.KCAL_ADJUST)
+        if (rawValue == null) return false
+
+        val colors = rawValue.split(" ".toRegex())
+
+        return updateKCALValues(colors[0].toInt(), colors[1].toInt(), colors[2].toInt())
     }
 
     /**
@@ -93,7 +79,7 @@ object KCALManager {
      * @return Whether setting KCAL values was success or not
      */
     fun updateKCALValues(red: Int, green: Int, blue: Int): Boolean {
-        return updateKCALValues(red.toString() + " " + green + " " + blue)
+        return kcalImplementation.setColors(red, green, blue)
     }
 
     /**
@@ -128,9 +114,7 @@ object KCALManager {
 
         val currentReading = kcalValuesAsRawString
         val nightLightSettingReading = "256 " +  // Red
-
                 PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY) + " " + // Green
-
                 PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY)  // Blue
 
         // Bail out if currentReading is same as nightlight setting reading

@@ -19,6 +19,12 @@ class SDM845KCALManager : KCALAbstraction {
      */
     override fun isSupported(): Boolean =
             (File(KCAL_RED).exists() || RootUtils.doesFileExist(KCAL_RED)) && (File(KCAL_GREEN).exists() || RootUtils.doesFileExist(KCAL_GREEN)) && (File(KCAL_BLUE).exists() || RootUtils.doesFileExist(KCAL_BLUE))
+
+    /**
+     * A function to determine whether KCAL is enabled or not
+     */
+    override fun isEnabled() : Boolean = true
+
     /**
      * A function to turn on KCAL
      */

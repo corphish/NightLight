@@ -10,6 +10,11 @@ class DummyKCALManager : KCALAbstraction {
     override fun isSupported(): Boolean = false
 
     /**
+     * A function to determine whether KCAL is enabled or not
+     */
+    override fun isEnabled() : Boolean = false
+
+    /**
      * A function to turn on KCAL
      */
     override fun turnOn() {

@@ -11,6 +11,11 @@ interface KCALAbstraction {
     fun isSupported() : Boolean
 
     /**
+     * A function to determine whether KCAL is enabled or not
+     */
+    fun isEnabled() : Boolean
+
+    /**
      * A function to turn on KCAL
      */
     fun turnOn()

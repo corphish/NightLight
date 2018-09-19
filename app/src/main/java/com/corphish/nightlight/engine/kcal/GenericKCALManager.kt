@@ -19,6 +19,11 @@ class GenericKCALManager : KCALAbstraction {
     override fun isSupported(): Boolean = File(KCAL_SWITCH).exists() || RootUtils.doesFileExist(KCAL_SWITCH)
 
     /**
+     * A function to determine whether KCAL is enabled or not
+     */
+    override fun isEnabled() : Boolean = RootUtils.readOneLine(KCAL_SWITCH) == "1"
+
+    /**
      * A function to turn on KCAL
      */
     override fun turnOn() {

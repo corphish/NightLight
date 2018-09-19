@@ -24,9 +24,7 @@ class DummyKCALManager : KCALAbstraction {
     /**
      * A function to adjust KCAL colors
      */
-    override fun setColors(red: Int, green: Int, blue: Int) {
-        // Not supported
-    }
+    override fun setColors(red: Int, green: Int, blue: Int) : Boolean = false
 
     /**
      * A function get current KCAL color readings

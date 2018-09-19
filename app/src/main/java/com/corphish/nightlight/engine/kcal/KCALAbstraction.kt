@@ -23,7 +23,7 @@ interface KCALAbstraction {
     /**
      * A function to adjust KCAL colors
      */
-    fun setColors(red: Int, green: Int, blue: Int)
+    fun setColors(red: Int, green: Int, blue: Int) : Boolean
 
     /**
      * A function get current KCAL color readings

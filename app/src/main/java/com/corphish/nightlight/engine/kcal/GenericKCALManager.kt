@@ -33,8 +33,8 @@ class GenericKCALManager : KCALAbstraction {
     /**
      * A function to adjust KCAL colors
      */
-    override fun setColors(red: Int, green: Int, blue: Int) {
-        RootUtils.writeToFile("$red $green $blue", KCAL_COLOR)
+    override fun setColors(red: Int, green: Int, blue: Int) : Boolean {
+        return RootUtils.writeToFile("$red $green $blue", KCAL_COLOR)
     }
 
     /**

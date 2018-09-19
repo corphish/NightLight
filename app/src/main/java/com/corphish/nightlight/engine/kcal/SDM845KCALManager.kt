@@ -35,8 +35,8 @@ class SDM845KCALManager : KCALAbstraction {
     /**
      * A function to adjust KCAL colors
      */
-    override fun setColors(red: Int, green: Int, blue: Int) {
-        RootUtils.writeToMultipleFilesAtOnce(
+    override fun setColors(red: Int, green: Int, blue: Int) : Boolean {
+        return RootUtils.writeToMultipleFilesAtOnce(
                 listOf(red.toString(), green.toString(), blue.toString()),
                 listOf(KCAL_RED, KCAL_GREEN, KCAL_BLUE)
         )

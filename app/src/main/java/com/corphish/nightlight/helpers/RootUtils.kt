@@ -24,7 +24,8 @@ object RootUtils {
     fun writeToFile(textToBeWritten: String, file: String): Boolean {
         val command = "echo \"$textToBeWritten\" > $file"
         Shell.SU.run(command)
-        return Shell.SU.available()
+
+        return rootAccess
     }
 
     /**
@@ -46,7 +47,7 @@ object RootUtils {
         command = command.substring(0, command.lastIndexOf(" &&"))
         Shell.SU.run(command)
 
-        return Shell.SU.available()
+        return rootAccess
     }
 
     /**

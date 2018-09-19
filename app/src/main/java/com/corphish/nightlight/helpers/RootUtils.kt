@@ -28,6 +28,28 @@ object RootUtils {
     }
 
     /**
+     * Writes text to a file as root.
+     * It overwrites the contents of file, it does not append it.
+     * @param textsToBeWritten The texts that are to be written in each file.
+     * @param files The files in which the corresponding texts would be written.
+     */
+    fun writeToMultipleFilesAtOnce(textsToBeWritten: List<String>, files: List<String>): Boolean {
+        // Don't accept malformed lists
+        if (textsToBeWritten.size != files.size) return Shell.SU.available()
+
+        var command = ""
+
+        for (i in textsToBeWritten.indices) {
+            command += "echo \"${textsToBeWritten[i]}\" > ${files[i]} &&"
+        }
+
+        command = command.substring(0, command.lastIndexOf(" &&"))
+        Shell.SU.run(command)
+
+        return Shell.SU.available()
+    }
+
+    /**
      * Reads contents of file
      * @param file File whose contents is to be read
      * @return Contents of file

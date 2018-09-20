@@ -4,8 +4,8 @@
     <dimen name="text_margin">16dp</dimen>
 
     <dimen name="text_caption">16sp</dimen>
-    <dimen name="text_desc">12sp</dimen>
-    <dimen name="text_sub_desc">11sp</dimen>
+    <dimen name="text_desc">13sp</dimen>
+    <dimen name="text_sub_desc">12sp</dimen>
     <dimen name="text_normal">14sp</dimen>
 
     <dimen name="layout_margin">4dp</dimen>

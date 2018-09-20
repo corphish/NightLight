@@ -75,14 +75,7 @@ class ColorTemperatureFragment : Fragment() {
 
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-                colorTemperature = seekBar.progress
-                if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, colorTemperature)
-                    Core.applyNightModeAsync(true, context, colorTemperature)
-                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
-                }
-            }
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
 
             override fun onEnteredValueTooHigh() {
                 temperatureValue.value = 4500

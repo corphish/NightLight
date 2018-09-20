@@ -61,7 +61,7 @@ object RootUtils {
 
     fun doesFileExist(file: String): Boolean {
         val output = Shell.SU.run("ls $file")
-        return !output.isEmpty() && output[0] == file
+        return output != null && !output.isEmpty() && output[0] == file
     }
 
     /**

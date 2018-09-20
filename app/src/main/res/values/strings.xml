@@ -106,10 +106,10 @@
     <string name="kcal_backup_every_time_before_enabling">Backup current KCAL values every time before Night Light is enabled</string>
 
     <string name="faq">F.A.Q</string>
-    <string name="master_switch_function_question">What does the master switch do?</string>
+    <string name="master_switch_function_question">Q. What does the master switch do?</string>
     <string name="master_switch_function_answer">It basically controls all the functions of the app. If master switch is off, none of the functions will be enabled, and vice versa.</string>
-    <string name="master_switch_exist_question">OK then why does master switch exist? We would have to enable master switch anyway to use the app.</string>
+    <string name="master_switch_exist_question">Q. OK then why does master switch exist? We would have to enable master switch anyway to use the app.</string>
     <string name="master_switch_exist_answer">Since Night Light supports features like automation and set on boot, it is necessary for such switch to exist, so that such external requests can be dealt with accordingly. Imagine you have this app installed, but for some reason you don\'t use the app, if master switch was not present at all, a previously set automation schedule could still turn on Night Light.</string>
-    <string name="kcal_backup_question">What does the KCAL backup options do?</string>
+    <string name="kcal_backup_question">Q. What does the KCAL backup options do?</string>
     <string name="kcal_backup_answer">This option takes account of the user\'s custom KCAL settings. So that while turning off Night Light, the app is able to restore user\'s settings.</string>
 </resources>

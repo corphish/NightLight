@@ -106,10 +106,26 @@
     <string name="kcal_backup_every_time_before_enabling">Backup current KCAL values every time before Night Light is enabled</string>
 
     <string name="faq">F.A.Q</string>
+    <string name="root_question">Q. Why does the app require root access?</string>
+    <string name="root_answer">Root access is required to modify KCAL values. This is impossible without root access.</string>
     <string name="master_switch_function_question">Q. What does the master switch do?</string>
     <string name="master_switch_function_answer">It basically controls all the functions of the app. If master switch is off, none of the functions will be enabled, and vice versa.</string>
     <string name="master_switch_exist_question">Q. OK then why does master switch exist? We would have to enable master switch anyway to use the app.</string>
     <string name="master_switch_exist_answer">Since Night Light supports features like automation and set on boot, it is necessary for such switch to exist, so that such external requests can be dealt with accordingly. Imagine you have this app installed, but for some reason you don\'t use the app, if master switch was not present at all, a previously set automation schedule could still turn on Night Light.</string>
     <string name="kcal_backup_question">Q. What does the KCAL backup options do?</string>
     <string name="kcal_backup_answer">This option takes account of the user\'s custom KCAL settings. So that while turning off Night Light, the app is able to restore user\'s settings.</string>
+    <string name="sob_question">Q. Since KCAL values are reset after boot, will the app will still be able function after that?</string>
+    <string name="sob_answer">Yes. After a reboot, app will re-apply night light values to KCAL, and re-set all the automation schedules. If for some reason, things were not applied properly after boot, consider increasing Set On boot delay. If the problem persists, please open an issue in github, or mention about the same in XDA thread. Links for them can be found in About section.</string>
+    <string name="filter_modes_question">Q. What\'s with the various filtering modes?</string>
+    <string name="filter_modes_answer">There are 2 filtering modes available. The blue and green light filter provides better control to user for filtering blue and green light. Color temperature provides a simple yet effective control for filtering out blue light. Range of color temperature supported is from 3000K to 4500K.</string>
+    <string name="location_question">Q. Why does the app require Location permission?</string>
+    <string name="location_answer">Location permission is required to determine sunset and sunrise timing for your location. Location permission is only asked when you enable automation and use sunset/sunrise timings. Your location is not shared or misused in anyway.</string>
+    <string name="force_switch_question">Q. What does the force switch to do?</string>
+    <string name="force_switch_answer">Force switch acts as an override switch, and provides user an option to toggle on/off night light irrespective of schedule. Force switch needs master switch enabled to work of course. Simply put, if you enable force switch, night light will be on, if you turn force switch off, night light will be off. This does not affect the on-going schedule at all.</string>
+    <string name="external_switch_question">Q. Is there any way for the user to toggle Night Light on/off without opening the app?</string>
+    <string name="external_switch_answer">Yes. Night Light supports toggling itself on/off from launcher shortcuts and through a tile in quick toggles. You need to add the tile in the quick toggles manually though.</string>
+    <string name="external_switch_fn_question">Q. How does the quick toggles work?</string>
+    <string name="external_switch_fn_answer">Quick toggle can turn on/off Night Light irrespective of automation schedule. This means it essentially toggles the force switch. If however, the master switch is disabled, toggling on will turn on the master switch as well, so that Night Light can be turned on. Toggling off does not turn off the master switch though. It may seem complicated, but the way it works should provide a good user experience.</string>
+    <string name="donate_question">Q. Do I get any extra feature in the donate version?</string>
+    <string name="donate_answer">No. Two versions are basically the same functionality wise. Donate version is there if you really love my work and want to show support to it and motivate me to keep on doing the work. It is absolutely fine if you choose not to donate and keep using the generic version.</string>
 </resources>

@@ -24,9 +24,17 @@ class UsageActivity : AppCompatActivity() {
         val usageAdapter = UsageAdapter()
         usageAdapter.setQuestionsAndAnswers(
                 listOf(
+                        R.string.root_question to R.string.root_answer,
                         R.string.master_switch_function_question to R.string.master_switch_function_answer,
                         R.string.master_switch_exist_question to R.string.master_switch_exist_answer,
-                        R.string.kcal_backup_question to R.string.kcal_backup_answer
+                        R.string.kcal_backup_question to R.string.kcal_backup_answer,
+                        R.string.sob_question to R.string.sob_answer,
+                        R.string.filter_modes_question to R.string.filter_modes_answer,
+                        R.string.location_question to R.string.location_answer,
+                        R.string.force_switch_question to R.string.force_switch_answer,
+                        R.string.external_switch_question to R.string.external_switch_answer,
+                        R.string.external_switch_fn_question to R.string.external_switch_fn_answer,
+                        R.string.donate_question to R.string.donate_answer
                 )
         )
 

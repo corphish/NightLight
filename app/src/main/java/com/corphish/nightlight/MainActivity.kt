@@ -154,6 +154,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
         if (id == R.id.about_menu) showAbout()
         if (id == R.id.about_profiles) showProfiles()
+        if (id == R.id.about_faq) showFAQ()
 
         return super.onOptionsItemSelected(item)
     }
@@ -164,6 +165,10 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
     private fun showProfiles() {
         startActivity(Intent(this, ProfilesActivity::class.java))
+    }
+
+    private fun showFAQ() {
+        startActivity(Intent(this, UsageActivity::class.java))
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,

@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.content_usage.*
+import kotlinx.android.synthetic.main.layout_header.*
 
 class UsageActivity : AppCompatActivity() {
 
@@ -15,6 +16,7 @@ class UsageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_usage)
 
+        banner_title.text = getString(R.string.faq)
         init()
     }
 
@@ -29,6 +31,11 @@ class UsageActivity : AppCompatActivity() {
         )
 
         recyclerView.adapter = usageAdapter
+        recyclerView.invalidateItemDecorations()
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        recyclerView.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        recyclerView.isNestedScrollingEnabled = false
+        recyclerView.setHasFixedSize(false)
 
         usageAdapter.notifyDataSetChanged()
     }

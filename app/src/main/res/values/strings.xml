@@ -128,4 +128,7 @@
     <string name="external_switch_fn_answer">Quick toggle can turn on/off Night Light irrespective of automation schedule. This means it essentially toggles the force switch. If however, the master switch is disabled, toggling on will turn on the master switch as well, so that Night Light can be turned on. Toggling off does not turn off the master switch though. It may seem complicated, but the way it works should provide a good user experience.</string>
     <string name="donate_question">Q. Do I get any extra feature in the donate version?</string>
     <string name="donate_answer">No. Two versions are basically the same functionality wise. Donate version is there if you really love my work and want to show support to it and motivate me to keep on doing the work. It is absolutely fine if you choose not to donate and keep using the generic version.</string>
+
+    <string name="github" translatable="false"><u>Github</u></string>
+    <string name="xda" translatable="false"><u>XDA Developers</u></string>
 </resources>

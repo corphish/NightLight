@@ -32,13 +32,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_desc"
+        android:id="@+id/githubLink"
+        android:textColor="@color/colorAccent"
+        android:layout_margin="@dimen/layout_margin"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:text="@string/github"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_desc"
         android:id="@+id/contributorsLink"
         android:textColor="@color/colorAccent"
         android:layout_margin="@dimen/layout_margin"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
-        android:paddingBottom="@dimen/layout_padding"
         android:text="@string/contributors"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_desc"
+        android:id="@+id/xdaLink"
+        android:textColor="@color/colorAccent"
+        android:layout_margin="@dimen/layout_margin"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingBottom="@dimen/layout_padding"
+        android:text="@string/xda"/>
 
     <TextView
         android:layout_width="wrap_content"

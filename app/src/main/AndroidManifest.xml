@@ -76,6 +76,15 @@
                 android:value="com.corphish.nightlight.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".UsageActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.corphish.nightlight.MainActivity" />
+        </activity>
+
         <service
             android:name=".services.BootCompleteJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"

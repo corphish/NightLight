@@ -94,4 +94,30 @@ object TimeUtils {
         // Otherwise return true (for example: startTime - 0400, endTime - 0300, currentTime - 0230)
         return if (iCurrentTime > iStartTime) true else iCurrentTime < iStartTime && iCurrentTime < iEndTime
     }
+
+    /**
+     * Returns time remaining in the auto schedule
+     */
+    fun getRemainingTimeInSchedule(endTime: String):Int {
+        val curTime = currentTimeAsMinutes
+        var endTimeMinutes = getTimeInMinutes(endTime)
+
+        // Means endTime is next day and curTime is today
+        if (endTimeMinutes < curTime) endTimeMinutes += 24 * 60
+
+        return Math.round((endTimeMinutes - curTime).toDouble()/60).toInt()
+    }
+
+    /**
+     * Returns time remaining to the auto schedule
+     */
+    fun getRemainingTimeToSchedule(startTime: String):Int {
+        val curTime = currentTimeAsMinutes
+        var startTimeMinutes = getTimeInMinutes(startTime)
+
+        // Means endTime is next day and curTime is today
+        if (startTimeMinutes < curTime) startTimeMinutes += 24 * 60
+
+        return Math.round((startTimeMinutes - curTime).toDouble()/60).toInt()
+    }
 }

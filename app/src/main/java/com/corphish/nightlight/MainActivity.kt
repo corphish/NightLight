@@ -118,6 +118,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
         if (show) {
             // Add all others conditionally
+            if (isSupported(R.bool.setting_fragment_enabled)) fragmentTransaction.add(containerId, SettingFragment())
             if (isSupported(R.bool.filters_enabled)) fragmentTransaction.add(containerId, FilterFragment())
             if (isSupported(R.bool.color_temperature_enabled)) fragmentTransaction.add(containerId, ColorTemperatureFragment())
             if (isSupported(R.bool.set_on_boot_delay_enabled) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) fragmentTransaction.add(containerId, SetOnBootDelayFragment())

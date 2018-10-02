@@ -8,4 +8,5 @@
     <bool name="contributors_card_enabled">true</bool>
     <bool name="color_temperature_enabled">true</bool>
     <bool name="set_on_boot_delay_enabled">true</bool>
+    <bool name="setting_fragment_enabled">false</bool>
 </resources>

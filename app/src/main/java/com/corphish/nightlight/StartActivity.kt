@@ -107,7 +107,7 @@ class StartActivity : AppCompatActivity() {
     }
 
     private fun showAlertDialog(caption: Int, msg: Int) {
-        if (isFinishing) return
+        if (isFinishing || isDestroyed) return
         val builder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AppTheme))
         builder.setTitle(caption)
         builder.setMessage(msg)

@@ -81,22 +81,17 @@ class QuickSettingsService : TileService() {
         val newIcon: Icon
         val newState: Int
 
-        val title: String
-
         // Change the tile to match the service status.
         if (state) {
             newIcon = Icon.createWithResource(applicationContext, ic_lightbulb_outline)
             newState = Tile.STATE_ACTIVE
-            title = getString(R.string.on)
         } else {
             newIcon = Icon.createWithResource(applicationContext, ic_lightbulb_outline_disabled)
             newState = Tile.STATE_INACTIVE
-
-            title = getString(R.string.off)
         }
 
         // Change the UI of the tile.
-        tile.label = title
+        tile.label = getString(R.string.app_name_full)
         tile.icon = newIcon
         tile.state = newState
 

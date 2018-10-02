@@ -11,17 +11,12 @@ import android.widget.TextView
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
-import com.corphish.nightlight.design.fragments.ColorTemperatureFragment
-import com.corphish.nightlight.design.fragments.SetOnBootDelayFragment
+import com.corphish.nightlight.design.fragments.*
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.interfaces.NightLightSettingModeListener
 import com.corphish.nightlight.interfaces.NightLightStateListener
 import com.corphish.nightlight.services.NightLightAppService
-import com.corphish.nightlight.design.fragments.AutoFragment
-import com.corphish.nightlight.design.fragments.FilterFragment
-import com.corphish.nightlight.design.fragments.ForceSwitchFragment
-import com.corphish.nightlight.design.fragments.MasterSwitchFragment
 import com.corphish.nightlight.design.views.ProfileCreator
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.extensions.toArrayOfInts
@@ -73,7 +68,10 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
-        fragmentTransaction.add(containerId, MasterSwitchFragment()).commit()
+        fragmentTransaction
+                .add(containerId, DashboardFragment())
+                .add(containerId, MasterSwitchFragment())
+                .commit()
 
         findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
 
@@ -97,7 +95,9 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         for (fragment in supportFragmentManager.fragments) {
             if (fragment is ForceSwitchFragment) {
                 fragment.updateSwitch(newState)
-                break
+            }
+            if (fragment is DashboardFragment) {
+                fragment.updateDashboard()
             }
         }
     }
@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         } else {
             val fragmentList = supportFragmentManager.fragments
             for (fragment in fragmentList) {
-                if (fragment !is MasterSwitchFragment) fragmentTransaction.remove(fragment)
+                if (fragment !is DashboardFragment && fragment !is MasterSwitchFragment) fragmentTransaction.remove(fragment)
             }
         }
 

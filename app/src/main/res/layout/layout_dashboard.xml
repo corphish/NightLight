@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dashboard"
+        android:layout_margin="@dimen/defaultMargin"
+        android:padding="@dimen/defaultPadding"
+        android:textColor="@color/colorPrimary"
+        style="?attr/textAppearanceButton"
+        android:textSize="@dimen/text_sub_desc"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/defaultMargin"
+        android:layout_marginEnd="@dimen/defaultMargin"
+        android:padding="@dimen/defaultPadding">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/defaultMargin"
+            android:layout_marginEnd="@dimen/defaultMargin"
+            app:srcCompat="@drawable/ic_lightbulb_splash_vector"
+            android:id="@+id/nlBulb"
+            android:tint="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/nlBulb"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/defaultMargin"
+            android:layout_marginEnd="@dimen/defaultMargin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Night Light is off"
+                android:padding="@dimen/defaultPadding"
+                android:textSize="@dimen/text_caption"
+                style="?android:attr/textAppearance"
+                android:id="@+id/nlMainStatus"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Outside automatic schedule. Schedule starts in 2hr."
+                android:padding="@dimen/defaultPadding"
+                android:id="@+id/nlSubStatus"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cornerRadius="4dp"
+                android:padding="@dimen/defaultPadding"
+                android:layout_marginStart="@dimen/defaultPadding"
+                android:id="@+id/nlDashboardAction"
+                android:text="ACTION"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

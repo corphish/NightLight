@@ -23,13 +23,15 @@
         android:padding="@dimen/defaultPadding">
 
         <ImageView
+            android:id="@+id/nlBulb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:adjustViewBounds="false"
+            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/defaultMargin"
             android:layout_marginEnd="@dimen/defaultMargin"
-            app:srcCompat="@drawable/ic_lightbulb_splash_vector"
-            android:id="@+id/nlBulb"
-            android:tint="@android:color/darker_gray"/>
+            android:tint="@android:color/darker_gray"
+            app:srcCompat="@drawable/ic_lightbulb_splash_vector" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -62,6 +64,7 @@
                 app:cornerRadius="4dp"
                 android:padding="@dimen/defaultPadding"
                 android:layout_marginStart="@dimen/defaultPadding"
+                android:layout_marginTop="@dimen/defaultPadding"
                 android:id="@+id/nlDashboardAction"
                 android:text="ACTION"/>
         </LinearLayout>

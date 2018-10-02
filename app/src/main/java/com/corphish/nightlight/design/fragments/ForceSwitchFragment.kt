@@ -34,7 +34,7 @@ class ForceSwitchFragment : Fragment() {
         forceSwitch.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH)
         forceSwitch.setOnCheckedChangeListener { _, b ->
             // Preference for this is handled in Core now
-            Core.applyNightModeAsync(b, context, false)
+            Core.applyNightModeAsync(b, context)
         }
 
         NightLightAppService.instance

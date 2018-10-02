@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:fontFamily">@font/cust_font</item>
     </style>
 
@@ -23,10 +24,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkSplash</item>
         <item name="colorAccent">@android:color/white</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
-
-    <style name="BottomSheetDialogDark" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="android:colorBackground">#333333</item>
-    </style>
-
 </resources>

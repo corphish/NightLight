@@ -58,7 +58,7 @@ class SettingFragment: Fragment() {
     }
 
     private inner class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.CustomViewHolder>() {
-        private var list: List<Int> = listOf(1, 2, 3, 4)
+        lateinit var list: List<SettingOption>
 
         inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
@@ -85,4 +85,11 @@ class SettingFragment: Fragment() {
 
         override fun getItemCount() = list.size
     }
+
+    private data class SettingOption(
+            val name: Int,
+            val iconId: Int,
+            val fragments: List<Fragment>,
+            val descriptionComputer: (() -> String)
+    )
 }

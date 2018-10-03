@@ -16,7 +16,7 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
 import com.corphish.nightlight.design.utils.FontUtils
 import com.gregacucnik.EditableSeekBar
-import kotlinx.android.synthetic.main.card_master_switch.*
+import kotlinx.android.synthetic.main.layout_master_switch.*
 
 /**
  * Created by Avinaba on 10/23/2017.
@@ -60,7 +60,7 @@ class MasterSwitchFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.card_master_switch, container, false)
+        return inflater.inflate(R.layout.layout_master_switch, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

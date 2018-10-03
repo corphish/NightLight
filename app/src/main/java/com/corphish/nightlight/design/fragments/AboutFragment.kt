@@ -8,7 +8,7 @@ import android.view.ViewGroup
 
 import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.nightlight.R
-import kotlinx.android.synthetic.main.card_info.*
+import kotlinx.android.synthetic.main.layout_info.*
 
 /**
  * Created by Avinaba on 10/24/2017.
@@ -19,7 +19,7 @@ class AboutFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.card_info, container, false)
+        return inflater.inflate(R.layout.layout_info, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -11,7 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import kotlinx.android.synthetic.main.card_auto_enable.*
+import kotlinx.android.synthetic.main.layout_automation.*
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
@@ -49,7 +49,7 @@ class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.card_auto_enable, container, false)
+        return inflater.inflate(R.layout.layout_automation, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

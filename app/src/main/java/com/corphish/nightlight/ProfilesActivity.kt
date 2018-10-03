@@ -118,7 +118,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
             val itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.card_profile_item, parent, false)
+                    .inflate(R.layout.layout_profile_item, parent, false)
 
             return CustomViewHolder(itemView)
         }

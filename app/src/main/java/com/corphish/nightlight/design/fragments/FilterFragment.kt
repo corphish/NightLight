@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 
-import kotlinx.android.synthetic.main.card_slider.*
+import kotlinx.android.synthetic.main.layout_filter_intensity.*
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
@@ -36,7 +36,7 @@ class FilterFragment : BaseBottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.card_slider, container, false)
+        return inflater.inflate(R.layout.layout_filter_intensity, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

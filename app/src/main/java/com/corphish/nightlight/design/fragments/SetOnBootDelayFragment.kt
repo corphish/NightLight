@@ -11,7 +11,7 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
 import com.gregacucnik.EditableSeekBar
-import kotlinx.android.synthetic.main.card_set_on_boot_delay.*
+import kotlinx.android.synthetic.main.layout_set_on_boot_delay.*
 
 /**
  * Created by avinabadalal on 13/02/18.
@@ -30,7 +30,7 @@ class SetOnBootDelayFragment : BaseBottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.card_set_on_boot_delay, container, false)
+        return inflater.inflate(R.layout.layout_set_on_boot_delay, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

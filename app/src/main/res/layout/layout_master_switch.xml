@@ -38,28 +38,4 @@
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_desc"
         android:text="@string/master_switch_desc"/>
-
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/preserveSwitch"
-        android:text="@string/kcal_preservce_value_msg"
-        android:checked="true"/>
-
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/backupEveryTimeSwitch"
-        android:text="@string/kcal_backup_every_time_before_enabling"
-        android:checked="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_desc"
-        android:id="@+id/configureKcalBackup"
-        android:textColor="@color/colorAccent"
-        android:layout_margin="@dimen/layout_margin"
-        android:padding="@dimen/layout_padding"
-        android:text="@string/kcal_backup_set"/>
 </LinearLayout>

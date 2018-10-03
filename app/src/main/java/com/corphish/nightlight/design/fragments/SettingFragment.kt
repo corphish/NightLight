@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.R
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.layout_settings.*
 
 class SettingFragment: Fragment() {
@@ -61,13 +64,32 @@ class SettingFragment: Fragment() {
         lateinit var list: List<SettingOption>
 
         inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-
+            internal var icon = v.findViewById<ImageButton>(R.id.settingOptionIcon)
+            internal var caption = v.findViewById<TextView>(R.id.settingOptionCaption)
+            internal var description = v.findViewById<TextView>(R.id.settingOptionDescription)
 
             init {
                 v.setOnClickListener(this)
             }
 
             override fun onClick(v: View) {
+                val bottomSheet = BottomSheetDialog(context!!)
+                val settingView = View.inflate(context, R.layout.bottom_sheet_setting, null)
+
+                val title = settingView.findViewById<TextView>(R.id.title)
+                title.setText(list[adapterPosition].name)
+
+                val containerId = R.id.settingFragmentContainer
+
+                val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+                for (f in list[adapterPosition].fragments)
+                    fragmentTransaction.add(containerId, f)
+
+                fragmentTransaction.commit()
+
+                bottomSheet.setContentView(settingView)
+                bottomSheet.show()
             }
         }
 
@@ -80,7 +102,10 @@ class SettingFragment: Fragment() {
         }
 
         override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+            holder.icon.setImageResource(list[position].iconId)
+            holder.caption.setText(list[position].name)
 
+            holder.description.text = list[position].descriptionComputer?.invoke()
         }
 
         override fun getItemCount() = list.size
@@ -90,6 +115,6 @@ class SettingFragment: Fragment() {
             val name: Int,
             val iconId: Int,
             val fragments: List<Fragment>,
-            val descriptionComputer: (() -> String)
+            val descriptionComputer: (() -> String)?
     )
 }

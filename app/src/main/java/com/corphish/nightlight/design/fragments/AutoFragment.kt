@@ -2,7 +2,6 @@ package com.corphish.nightlight.design.fragments
 
 import android.Manifest
 import android.location.LocationListener
-import androidx.fragment.app.Fragment
 import android.app.TimePickerDialog
 import android.content.pm.PackageManager
 import android.location.Location
@@ -31,7 +30,7 @@ import com.corphish.widgets.KeyValueView
  * Auto related fragment
  */
 
-class AutoFragment : Fragment(), LocationListener {
+class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
     private var sunSwitchStatus: Boolean = false
     private var autoSwitchStatus: Boolean = false
 

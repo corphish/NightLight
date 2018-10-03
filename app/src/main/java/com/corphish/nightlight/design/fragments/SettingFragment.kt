@@ -50,7 +50,9 @@ class SettingFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val settingsAdapter = SettingsAdapter()
         settingsAdapter.list = listOf(
-                SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, FilterFragment())
+                SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, FilterFragment()),
+                SettingOption(R.string.section_auto, R.drawable.ic_alarm_white_24dp, AutoFragment()),
+                SettingOption(R.string.section_sob, R.drawable.ic_timer_white_24dp, SetOnBootDelayFragment())
         )
 
         recyclerView.invalidateItemDecorations()

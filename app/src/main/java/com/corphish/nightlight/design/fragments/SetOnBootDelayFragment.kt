@@ -1,7 +1,6 @@
 package com.corphish.nightlight.design.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.card_set_on_boot_delay.*
  * Set on boot delay fragment
  */
 
-class SetOnBootDelayFragment : Fragment() {
+class SetOnBootDelayFragment : BaseBottomSheetDialogFragment() {
     private var bootDelay: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {

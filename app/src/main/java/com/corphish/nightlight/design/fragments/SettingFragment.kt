@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.R
+import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.helpers.PreferenceHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.layout_settings.*
 
@@ -50,7 +52,7 @@ class SettingFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val settingsAdapter = SettingsAdapter()
         settingsAdapter.list = listOf(
-                SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, FilterFragment(), null)
+                SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, FilterFragment()) { colorDescription() }
         )
 
         recyclerView.invalidateItemDecorations()
@@ -105,4 +107,10 @@ class SettingFragment: Fragment() {
             val fragment: BottomSheetDialogFragment,
             val descriptionComputer: (() -> String)?
     )
+
+    private fun colorDescription() : String {
+        val type = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER)
+
+        return if (type == Constants.NL_SETTING_MODE_FILTER) getString(R.string.color_intensity) else getString(R.string.color_temperature_title)
+    }
 }

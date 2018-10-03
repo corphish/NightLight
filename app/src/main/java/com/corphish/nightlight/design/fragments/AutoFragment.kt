@@ -100,9 +100,6 @@ class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
         addNextDayIfNecessary()
 
         enableOrDisableAutoSwitchViews(autoSwitchStatus)
-
-        NightLightAppService.instance
-                .incrementViewInitCount()
     }
 
     /**

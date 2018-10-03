@@ -59,7 +59,7 @@ private constructor() {
     /**
      * Total number of fragments which would be added
      */
-    private val TOTAL_VIEWS = 5
+    private val TOTAL_VIEWS = 1
 
     /**
      * Starts this service

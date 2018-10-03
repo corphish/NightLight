@@ -36,9 +36,6 @@ class ForceSwitchFragment : Fragment() {
             // Preference for this is handled in Core now
             Core.applyNightModeAsync(b, context)
         }
-
-        NightLightAppService.instance
-                .incrementViewInitCount()
     }
 
     fun updateSwitch(newState: Boolean) {

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.R
+import com.corphish.nightlight.services.NightLightAppService
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.layout_settings.*
 
@@ -50,7 +51,7 @@ class SettingFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val settingsAdapter = SettingsAdapter()
         settingsAdapter.list = listOf(
-                SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, FilterFragment()),
+                SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, ColorControlFragment()),
                 SettingOption(R.string.section_auto, R.drawable.ic_alarm_white_24dp, AutoFragment()),
                 SettingOption(R.string.section_kcal_backup, R.drawable.ic_settings_backup_restore_white_24dp, KCALBackupSettingsFragment()),
                 SettingOption(R.string.section_sob, R.drawable.ic_timer_white_24dp, SetOnBootDelayFragment())
@@ -64,6 +65,8 @@ class SettingFragment: Fragment() {
         recyclerView.setHasFixedSize(false)
 
         settingsAdapter.notifyDataSetChanged()
+
+        NightLightAppService.instance.incrementViewInitCount()
     }
 
     private inner class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.CustomViewHolder>() {

@@ -103,8 +103,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
     override fun onModeChanged(newMode: Int) {
         for (fragment in supportFragmentManager.fragments) {
-            (fragment as? FilterFragment)?.onStateChanged(newMode)
-            (fragment as? ColorTemperatureFragment)?.onStateChanged(newMode)
+            (fragment as? ColorControlFragment)?.onStateChanged(newMode)
         }
     }
 

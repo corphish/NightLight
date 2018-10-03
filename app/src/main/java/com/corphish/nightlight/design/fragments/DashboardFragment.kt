@@ -10,6 +10,7 @@ import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
+import com.corphish.nightlight.services.NightLightAppService
 import kotlinx.android.synthetic.main.layout_dashboard.*
 
 class DashboardFragment: Fragment() {
@@ -51,7 +52,7 @@ class DashboardFragment: Fragment() {
         updateDashboard()
     }
 
-    public fun updateDashboard() {
+    fun updateDashboard() {
         val masterSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_MASTER_SWITCH, false)
         val nlState = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
 

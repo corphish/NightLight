@@ -26,7 +26,7 @@
         <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
 
-    <style name="BottomSheetDialogDark" parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="BottomSheetDialogDark" parent="Theme.Design.BottomSheetDialog">
         <item name="android:colorBackground">#333333</item>
     </style>
 </resources>

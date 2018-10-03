@@ -1,6 +1,7 @@
 package com.corphish.nightlight.design.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.layout_settings.*
 
 class SettingFragment: Fragment() {
@@ -49,6 +51,9 @@ class SettingFragment: Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val settingsAdapter = SettingsAdapter()
+        settingsAdapter.list = listOf(
+                SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, FilterFragment(), null)
+        )
 
         recyclerView.invalidateItemDecorations()
         recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, 4)
@@ -70,26 +75,12 @@ class SettingFragment: Fragment() {
 
             init {
                 v.setOnClickListener(this)
+                icon.setOnClickListener(this)
             }
 
             override fun onClick(v: View) {
-                val bottomSheet = BottomSheetDialog(context!!)
-                val settingView = View.inflate(context, R.layout.bottom_sheet_setting, null)
-
-                val title = settingView.findViewById<TextView>(R.id.title)
-                title.setText(list[adapterPosition].name)
-
-                val containerId = R.id.settingFragmentContainer
-
-                val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
-
-                for (f in list[adapterPosition].fragments)
-                    fragmentTransaction.add(containerId, f)
-
-                fragmentTransaction.commit()
-
-                bottomSheet.setContentView(settingView)
-                bottomSheet.show()
+                Log.d("NL_SettingAdapter", "Item on click")
+                list[adapterPosition].fragment.show(childFragmentManager, "")
             }
         }
 
@@ -114,7 +105,7 @@ class SettingFragment: Fragment() {
     private data class SettingOption(
             val name: Int,
             val iconId: Int,
-            val fragments: List<Fragment>,
+            val fragment: BottomSheetDialogFragment,
             val descriptionComputer: (() -> String)?
     )
 }

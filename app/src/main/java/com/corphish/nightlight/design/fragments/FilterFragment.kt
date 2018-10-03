@@ -1,6 +1,5 @@
 package com.corphish.nightlight.design.fragments
 
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +14,14 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
 import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.services.NightLightAppService
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 /**
  * Created by Avinaba on 10/23/2017.
  * Filter fragment
  */
 
-class FilterFragment : Fragment() {
+class FilterFragment : BottomSheetDialogFragment() {
 
     private var blueIntensity: Int = 0
     private var greenIntensity: Int = 0
@@ -32,6 +32,8 @@ class FilterFragment : Fragment() {
 
         getValues()
         mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER) == Constants.NL_SETTING_MODE_FILTER
+
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.BottomSheetDialogDark)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

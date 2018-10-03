@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/settingOptionCaption"
         android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
         android:text="Caption"
         style="?android:attr/textAppearance"/>
 
@@ -28,6 +29,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/settingOptionDescription"
         android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
         android:text="Description"
         android:textSize="@dimen/text_desc"/>
 </LinearLayout>

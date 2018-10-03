@@ -39,7 +39,7 @@ class StartActivity : AppCompatActivity() {
             finish()
         else if (handleTaskerIntent()) {
         } else {
-            if (resources.getBoolean(R.bool.forced_compatibility_test_enabled) || !PreferenceHelper.getBoolean(this, Constants.COMPATIBILITY_TEST))
+            if (!PreferenceHelper.getBoolean(this, Constants.COMPATIBILITY_TEST))
                 CompatibilityChecker().execute()
             else
                 switchToMain()

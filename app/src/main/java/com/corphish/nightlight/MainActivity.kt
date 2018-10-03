@@ -1,7 +1,6 @@
 package com.corphish.nightlight
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
@@ -75,7 +74,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
         findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
 
-        fab.setOnClickListener {
+        fab.setOnClickListener { _ ->
             ProfileCreator(this@MainActivity, ProfileCreator.MODE_CREATE, getProfileForCurrentSettings()) {}.show()
         }
     }
@@ -119,11 +118,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         if (show) {
             // Add all others conditionally
             if (isSupported(R.bool.setting_fragment_enabled)) fragmentTransaction.add(containerId, SettingFragment())
-            if (isSupported(R.bool.filters_enabled)) fragmentTransaction.add(containerId, FilterFragment())
-            if (isSupported(R.bool.color_temperature_enabled)) fragmentTransaction.add(containerId, ColorTemperatureFragment())
-            if (isSupported(R.bool.set_on_boot_delay_enabled) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) fragmentTransaction.add(containerId, SetOnBootDelayFragment())
-            if (isSupported(R.bool.automation_enabled)) fragmentTransaction.add(containerId, AutoFragment())
-            if (isSupported(R.bool.force_switch_enabled)) fragmentTransaction.add(containerId, ForceSwitchFragment())
         } else {
             val fragmentList = supportFragmentManager.fragments
             for (fragment in fragmentList) {
@@ -176,8 +170,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                                             permissions: Array<String>, grantResults: IntArray) {
         val fragments = supportFragmentManager.fragments
         for (fragment in fragments) {
-            if (fragment is AutoFragment)
-                fragment.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            (fragment as? AutoFragment)?.onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
     }
 

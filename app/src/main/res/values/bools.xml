@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="filters_enabled">true</bool>
-    <bool name="automation_enabled">true</bool>
-    <bool name="force_switch_enabled">true</bool>
-    <bool name="donation_enabled">true</bool>
-    <bool name="forced_compatibility_test_enabled">false</bool>
-    <bool name="contributors_card_enabled">true</bool>
-    <bool name="color_temperature_enabled">true</bool>
-    <bool name="set_on_boot_delay_enabled">true</bool>
     <bool name="setting_fragment_enabled">false</bool>
 </resources>

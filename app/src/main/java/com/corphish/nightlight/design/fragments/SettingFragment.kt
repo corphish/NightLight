@@ -50,7 +50,7 @@ class SettingFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val settingsAdapter = SettingsAdapter()
         settingsAdapter.list = listOf(
-                SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, FilterFragment(), null)
+                SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, FilterFragment())
         )
 
         recyclerView.invalidateItemDecorations()
@@ -69,7 +69,6 @@ class SettingFragment: Fragment() {
         inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
             internal var icon = v.findViewById<ImageButton>(R.id.settingOptionIcon)
             internal var caption = v.findViewById<TextView>(R.id.settingOptionCaption)
-            internal var description = v.findViewById<TextView>(R.id.settingOptionDescription)
 
             init {
                 v.setOnClickListener(this)
@@ -92,8 +91,6 @@ class SettingFragment: Fragment() {
         override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
             holder.icon.setImageResource(list[position].iconId)
             holder.caption.setText(list[position].name)
-
-            holder.description.text = list[position].descriptionComputer?.invoke()
         }
 
         override fun getItemCount() = list.size
@@ -102,7 +99,6 @@ class SettingFragment: Fragment() {
     private data class SettingOption(
             val name: Int,
             val iconId: Int,
-            val fragment: BottomSheetDialogFragment,
-            val descriptionComputer: (() -> String)?
+            val fragment: BottomSheetDialogFragment
     )
 }

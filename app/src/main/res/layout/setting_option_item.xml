@@ -23,13 +23,4 @@
         android:gravity="center_horizontal"
         android:text="Caption"
         style="?android:attr/textAppearance"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/settingOptionDescription"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:text="Description"
-        android:textSize="@dimen/text_desc"/>
 </LinearLayout>

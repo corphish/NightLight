@@ -96,6 +96,14 @@ class SettingFragment: Fragment() {
         override fun getItemCount() = list.size
     }
 
+    /**
+     * This data class holds information about a setting option item
+     * Each setting icon is represented as a circular icon followed by a label.
+     * Tapping on it brings up a bottom sheet for the corresponding option
+     * name - Name of the option
+     * iconId - Icon res id
+     * fragment - Fragment for the corresponding setting
+     */
     private data class SettingOption(
             val name: Int,
             val iconId: Int,

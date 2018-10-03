@@ -14,42 +14,50 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
 import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.services.NightLightAppService
+import kotlinx.android.synthetic.main.layout_temperature.*
+import com.gregacucnik.EditableSeekBar
 
 /**
  * Created by Avinaba on 10/23/2017.
  * Filter fragment
  */
 
-class FilterFragment : BaseBottomSheetDialogFragment() {
+class ColorControlFragment : BaseBottomSheetDialogFragment() {
 
     private var blueIntensity: Int = 0
     private var greenIntensity: Int = 0
-    private var mode: Boolean = false
+    private var colorTemperature: Int = 0
+    private var mode: Int = Constants.NL_SETTING_MODE_FILTER
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         getValues()
-        mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER) == Constants.NL_SETTING_MODE_FILTER
+        mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.layout_filter_intensity, container, false)
+        return inflater.inflate(R.layout.layout_color_control, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        FontUtils().setCustomFont(context!!, modeSwitch)
+        initIntensityViews()
+        initTemperatureViews()
+    }
+
+    private fun initIntensityViews() {
+        FontUtils().setCustomFont(context!!, intensityModeSwitch)
 
         // Disable them by default
         blueSlider.isEnabled = false
         greenSlider.isEnabled = false
 
-        modeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            mode = isChecked
+        intensityModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            mode = Constants.NL_SETTING_MODE_FILTER
 
             val settingMode = if (isChecked) Constants.NL_SETTING_MODE_FILTER else Constants.NL_SETTING_MODE_TEMP
 
@@ -62,10 +70,10 @@ class FilterFragment : BaseBottomSheetDialogFragment() {
                 Core.applyNightModeAsync(isChecked, context, blueIntensity, greenIntensity)
             }
 
-            NightLightAppService.instance.notifyNewSettingMode(settingMode)
+            temperatureModeSwitch.isChecked = !isChecked
         }
 
-        modeSwitch.isChecked = mode
+        intensityModeSwitch.isChecked = mode == Constants.NL_SETTING_MODE_FILTER
 
         blueSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {}
@@ -103,17 +111,72 @@ class FilterFragment : BaseBottomSheetDialogFragment() {
 
         blueSlider.progress = blueIntensity
         greenSlider.progress = greenIntensity
+    }
 
-        NightLightAppService.instance
-                .incrementViewInitCount()
+    private fun initTemperatureViews() {
+        FontUtils().setCustomFont(context!!, temperatureModeSwitch)
+
+        // Disable them by default
+        temperatureValue.isEnabled = false
+
+        temperatureModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            mode = Constants.NL_SETTING_MODE_TEMP
+
+            val settingMode = if (isChecked) Constants.NL_SETTING_MODE_TEMP else Constants.NL_SETTING_MODE_FILTER
+
+            PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, settingMode)
+
+            temperatureValue.isEnabled = isChecked
+
+            if (isChecked && NightLightAppService.instance.isInitDone()) {
+                Core.applyNightModeAsync(true, context, colorTemperature)
+            }
+
+            intensityModeSwitch.isChecked = !isChecked
+        }
+
+        temperatureModeSwitch.isChecked = mode == Constants.NL_SETTING_MODE_TEMP
+
+        temperatureValue.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
+            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+
+            override fun onEnteredValueTooHigh() {
+                temperatureValue.value = 4500
+            }
+
+            override fun onEnteredValueTooLow() {
+                temperatureValue.value = 3000
+            }
+
+            override fun onEditableSeekBarValueChanged(value: Int) {
+                colorTemperature = value
+                if (NightLightAppService.instance.isInitDone()) {
+                    PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, colorTemperature)
+                    Core.applyNightModeAsync(true, context, colorTemperature)
+                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+                }
+            }
+        })
+
+        temperatureValue.value = colorTemperature
     }
 
     fun onStateChanged(newMode: Int) {
-        if (modeSwitch != null) modeSwitch.isChecked = newMode == Constants.NL_SETTING_MODE_FILTER
+        if (intensityModeSwitch != null) intensityModeSwitch.isChecked = newMode == Constants.NL_SETTING_MODE_FILTER
+        if (temperatureModeSwitch != null) temperatureModeSwitch.isChecked = newMode == Constants.NL_SETTING_MODE_TEMP
     }
 
     private fun getValues() {
         blueIntensity = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY)
         greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY)
+        colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
     }
 }

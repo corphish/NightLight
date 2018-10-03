@@ -4,8 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/layout_padding"
-    android:layout_margin="@dimen/layout_margin"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.SwitchCompat
@@ -16,7 +14,7 @@
         android:paddingTop="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_caption"
-        android:id="@+id/modeSwitch"
+        android:id="@+id/temperatureModeSwitch"
         android:textColor="@android:color/white"
         android:text="@string/color_temperature_title"/>
 

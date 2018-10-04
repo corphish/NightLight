@@ -13,6 +13,7 @@ import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
 import com.corphish.nightlight.design.utils.FontUtils
+import com.corphish.nightlight.helpers.TimeUtils
 import com.corphish.nightlight.services.NightLightAppService
 import kotlinx.android.synthetic.main.layout_temperature.*
 import com.gregacucnik.EditableSeekBar
@@ -23,6 +24,22 @@ import com.gregacucnik.EditableSeekBar
  */
 
 class ColorControlFragment : BaseBottomSheetDialogFragment() {
+    /**
+     * Called when the fragment is no longer in use.  This is called
+     * after [.onStop] and before [.onDetach].
+     */
+    override fun onDestroy() {
+        super.onDestroy()
+
+        val autoEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH, false)
+        val startTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
+        val endTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
+
+        Core.applyNightModeAsync(
+                autoEnabled && startTime != null && endTime != null && TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, endTime),
+                context
+        )
+    }
 
     private var blueIntensity: Int = 0
     private var greenIntensity: Int = 0

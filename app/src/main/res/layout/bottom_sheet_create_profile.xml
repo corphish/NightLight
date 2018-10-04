@@ -24,11 +24,13 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/profile_action_title"
                 android:text="@string/profile_create_title"
-                android:textSize="18sp"
-                android:textAppearance="?android:textAppearance"
-                android:paddingEnd="@dimen/group_padding"
-                android:paddingTop="@dimen/group_padding"
-                android:paddingStart="@dimen/group_padding"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceButton"
+                android:textColor="@color/colorPrimary"
+                android:paddingEnd="@dimen/layout_padding"
+                android:paddingTop="@dimen/layout_padding"
+                android:paddingStart="@dimen/layout_padding"
                 android:paddingBottom="2dp"/>
 
             <TextView
@@ -38,15 +40,15 @@
                 android:text="@string/profile_create_desc"
                 android:textSize="@dimen/text_desc"
                 android:paddingTop="2dp"
-                android:paddingEnd="@dimen/group_padding"
+                android:paddingEnd="@dimen/layout_padding"
                 android:paddingBottom="12dp"
-                android:paddingStart="@dimen/group_padding"/>
+                android:paddingStart="@dimen/layout_padding"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/profile_name_set_layout"
-                android:padding="@dimen/group_padding"
+                android:padding="@dimen/layout_padding"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -60,7 +62,10 @@
             <androidx.appcompat.widget.SwitchCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/group_padding"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
+                android:paddingTop="@dimen/group_padding"
+                android:paddingBottom="@dimen/group_padding"
                 android:textSize="@dimen/text_caption"
                 android:text="@string/profile_nl_switch"
                 android:id="@+id/profile_night_light_switch"/>
@@ -68,8 +73,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/group_padding"
-                android:paddingEnd="@dimen/group_padding"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
                 android:paddingTop="@dimen/group_padding"
                 android:textSize="@dimen/text_caption"
                 android:textAppearance="?android:textAppearance"
@@ -78,8 +83,9 @@
             <androidx.appcompat.widget.AppCompatSpinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/group_padding"
-                android:paddingEnd="@dimen/group_padding"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
+                android:paddingTop="2dp"
                 android:paddingBottom="@dimen/group_padding"
                 android:prompt="@string/color_intensity"
                 android:entries="@array/settingModes"
@@ -88,8 +94,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/group_padding"
-                android:paddingEnd="@dimen/group_padding"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
                 android:paddingTop="@dimen/group_padding"
                 android:enabled="false"
                 android:textSize="@dimen/text_caption"
@@ -101,8 +107,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
-                android:paddingStart="@dimen/group_padding"
-                android:paddingEnd="@dimen/group_padding"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
                 android:paddingBottom="@dimen/group_padding"
                 android:enabled="false"
                 android:id="@+id/profile_night_light_setting_param1"/>
@@ -110,8 +116,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/group_padding"
-                android:paddingEnd="@dimen/group_padding"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
                 android:paddingTop="@dimen/group_padding"
                 android:enabled="false"
                 android:textSize="@dimen/text_caption"
@@ -123,21 +129,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
-                android:paddingStart="@dimen/group_padding"
-                android:paddingEnd="@dimen/group_padding"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
                 android:paddingBottom="@dimen/group_padding"
                 android:enabled="false"
                 android:id="@+id/profile_night_light_setting_param2"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:padding="@dimen/group_padding"
+                android:padding="@dimen/layout_padding"
                 android:layout_margin="@dimen/layout_margin"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
-                    android:padding="@dimen/group_padding"
+                    android:padding="@dimen/layout_padding"
                     android:text="@android:string/ok"
                     android:id="@+id/button_ok"
                     app:backgroundTint="@color/colorPrimary"
@@ -147,10 +153,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/group_padding"
-                    android:paddingStart="@dimen/group_padding"
+                    android:paddingTop="@dimen/layout_padding"
+                    android:paddingStart="@dimen/layout_padding"
                     android:paddingEnd="8dp"
-                    android:paddingBottom="@dimen/group_padding"
+                    android:paddingBottom="@dimen/layout_padding"
                     android:id="@+id/button_cancel"
                     android:textAppearance="?android:textAppearanceButton"
                     android:layout_centerVertical="true"

@@ -38,9 +38,6 @@
     <string name="blue_light">Blue light</string>
     <string name="green_light">Green light</string>
 
-    <string name="force_switch">Force Night Light</string>
-    <string name="force_switch_desc">This will force enable/disable Night Light, disregarding the automatic schedule.</string>
-
     <string name="sun_switch">Use sunset/sunrise timings</string>
 
     <string name="location_unavailable">Unable to get your last known location.</string>

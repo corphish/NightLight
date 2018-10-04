@@ -92,11 +92,9 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
     override fun onStateChanged(newState: Boolean) {
         // Sync the force switch in ForceSwitch fragment
         for (fragment in supportFragmentManager.fragments) {
-            if (fragment is ForceSwitchFragment) {
-                fragment.updateSwitch(newState)
-            }
             if (fragment is DashboardFragment) {
                 fragment.updateDashboard()
+                break
             }
         }
     }

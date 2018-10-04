@@ -36,7 +36,7 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
         val endTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
 
         Core.applyNightModeAsync(
-                autoEnabled && startTime != null && endTime != null && TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, endTime),
+                !autoEnabled || (autoEnabled && startTime != null && endTime != null && TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, endTime)),
                 context
         )
     }

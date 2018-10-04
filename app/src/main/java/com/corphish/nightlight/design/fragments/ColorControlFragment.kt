@@ -31,14 +31,7 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
     override fun onDestroy() {
         super.onDestroy()
 
-        val autoEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH, false)
-        val startTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
-        val endTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
-
-        Core.applyNightModeAsync(
-                !autoEnabled || (autoEnabled && startTime != null && endTime != null && TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, endTime)),
-                context
-        )
+        Core.fixNightMode(context)
     }
 
     private var blueIntensity: Int = 0

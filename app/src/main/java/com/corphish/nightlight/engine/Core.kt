@@ -6,6 +6,7 @@ import android.os.AsyncTask
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.extensions.fromColorTemperatureToRGBIntArray
 import com.corphish.nightlight.helpers.PreferenceHelper
+import com.corphish.nightlight.helpers.TimeUtils
 import com.corphish.nightlight.services.NightLightAppService
 
 /**
@@ -97,6 +98,22 @@ object Core {
         }
 
         PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, false)
+    }
+
+    /**
+     * Fixes Night Mode setting depending on user preferences
+     * @param context Context is needed to fetch user preferences and automation schedules
+     * @param prevState Previous state of night light. Will be used in case automation isn't used
+     */
+    fun fixNightMode(context: Context?, prevState: Boolean = false) {
+        val autoEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH, false)
+        val startTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
+        val endTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
+
+        applyNightModeAsync(
+                (!autoEnabled && prevState) || (autoEnabled && startTime != null && endTime != null && TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, endTime)),
+                context
+        )
     }
 
     /**

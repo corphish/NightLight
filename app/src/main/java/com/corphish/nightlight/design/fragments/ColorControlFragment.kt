@@ -13,7 +13,6 @@ import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
 import com.corphish.nightlight.design.utils.FontUtils
-import com.corphish.nightlight.helpers.TimeUtils
 import com.corphish.nightlight.services.NightLightAppService
 import kotlinx.android.synthetic.main.layout_temperature.*
 import com.gregacucnik.EditableSeekBar
@@ -24,26 +23,18 @@ import com.gregacucnik.EditableSeekBar
  */
 
 class ColorControlFragment : BaseBottomSheetDialogFragment() {
-    /**
-     * Called when the fragment is no longer in use.  This is called
-     * after [.onStop] and before [.onDetach].
-     */
-    override fun onDestroy() {
-        super.onDestroy()
-
-        Core.fixNightMode(context)
-    }
-
     private var blueIntensity: Int = 0
     private var greenIntensity: Int = 0
     private var colorTemperature: Int = 0
     private var mode: Int = Constants.NL_SETTING_MODE_FILTER
+    private var state: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         getValues()
         mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER)
+        state = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -188,5 +179,15 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
         blueIntensity = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY)
         greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY)
         colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
+    }
+
+    /**
+     * Called when the fragment is no longer in use.  This is called
+     * after [.onStop] and before [.onDetach].
+     */
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Core.fixNightMode(context, state)
     }
 }

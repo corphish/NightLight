@@ -171,7 +171,6 @@ class ProfileCreator(val context: Context,
         initViewEventListeners()
 
         bottomSheetDialog.setContentView(creatorView)
-        bottomSheetDialog.setCancelable(false)
         bottomSheetDialog.show()
     }
 

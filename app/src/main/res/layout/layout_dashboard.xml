@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dashboard"
+        android:text="@string/dashboard"
         android:layout_margin="@dimen/defaultMargin"
         android:padding="@dimen/defaultPadding"
         android:textColor="@color/colorPrimary"
@@ -45,7 +45,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Night Light is off"
                 android:padding="@dimen/defaultPadding"
                 android:textSize="@dimen/text_caption"
                 style="?android:attr/textAppearance"
@@ -54,7 +53,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Outside automatic schedule. Schedule starts in 2hr."
                 android:padding="@dimen/defaultPadding"
                 android:id="@+id/nlSubStatus"/>
 
@@ -66,7 +64,7 @@
                 android:layout_marginStart="@dimen/defaultPadding"
                 android:layout_marginTop="@dimen/defaultPadding"
                 android:id="@+id/nlDashboardAction"
-                android:text="ACTION"/>
+                android:text="@string/shortcut_toggle"/>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
 import kotlinx.android.synthetic.main.layout_dashboard.*
@@ -49,6 +50,12 @@ class DashboardFragment: Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         updateDashboard()
+
+        nlDashboardAction.setOnClickListener {
+            val curState = !PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
+
+            Core.applyNightModeAsync(curState, context)
+        }
     }
 
     fun updateDashboard() {

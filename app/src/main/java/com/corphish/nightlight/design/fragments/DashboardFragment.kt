@@ -10,7 +10,6 @@ import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
-import com.corphish.nightlight.services.NightLightAppService
 import kotlinx.android.synthetic.main.layout_dashboard.*
 
 class DashboardFragment: Fragment() {
@@ -65,21 +64,21 @@ class DashboardFragment: Fragment() {
         val color = context?.resources?.getColor(R.color.colorPrimary)
         nlBulb.setColorFilter(if (nlState) color!! else Color.GRAY)
 
-        nlMainStatus.text = if (nlState) "Night Light is on" else "Night Light is off"
+        nlMainStatus.text = getString(if (nlState) R.string.dashboard_nl_on else R.string.dashboard_nl_off)
 
         val autoStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, null)
         val autoEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, null)
 
         if (autoStartTime == null || autoEndTime == null) {
-            nlSubStatus.text = "Automatic schedule is not configured"
+            nlSubStatus.setText(R.string.dashboard_auto_not_configured)
         } else {
             val autoStatus = TimeUtils.determineWhetherNLShouldBeOnOrNot(autoStartTime, autoEndTime)
             val remainingHours = if (autoStatus) TimeUtils.getRemainingTimeInSchedule(autoEndTime) else TimeUtils.getRemainingTimeToSchedule(autoStartTime)
 
             if (autoStatus) {
-                nlSubStatus.text = "Inside of automatic schedule time period. Night Light will be automatically turned off in about $remainingHours hour(s)."
+                nlSubStatus.text = getString(R.string.dashboard_inside_auto, remainingHours)
             } else {
-                nlSubStatus.text = "Outside of automatic schedule time period. Night Light will be automatically turned on in about $remainingHours hour(s)."
+                nlSubStatus.text = getString(R.string.dashboard_outside_auto, remainingHours)
             }
         }
 
@@ -88,8 +87,8 @@ class DashboardFragment: Fragment() {
 
     private fun onMasterSwitchDisabled() {
         nlBulb.setColorFilter(Color.GRAY)
-        nlMainStatus.text = "Night Light is disabled"
-        nlSubStatus.text = "Turn on master switch to enable Night Light"
+        nlMainStatus.text = getString(R.string.dashboard_nl_disabled)
+        nlSubStatus.text = getString(R.string.dashboard_enable_master)
         nlDashboardAction.visibility = View.GONE
     }
 }

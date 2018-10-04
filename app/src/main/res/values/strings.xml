@@ -133,4 +133,12 @@
 
     <string name="github" translatable="false"><u>Github</u></string>
     <string name="xda" translatable="false"><u>XDA Developers</u></string>
+
+    <string name="dashboard_nl_on">Night Light is on</string>
+    <string name="dashboard_nl_off">Night Light is off</string>
+    <string name="dashboard_nl_disabled">Night Light is disabled</string>
+    <string name="dashboard_enable_master">Turn on master switch to enable Night Light.</string>
+    <string name="dashboard_auto_not_configured">Automatic schedule is not configured.</string>
+    <string name="dashboard_inside_auto">Inside of automatic schedule time period. Night Light will be automatically turned off in about %1$d hour(s).</string>
+    <string name="dashboard_outside_auto">Outside of automatic schedule time period. Night Light will be automatically turned on in about %1$d hour(s).</string>
 </resources>

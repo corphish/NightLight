@@ -54,8 +54,8 @@ object Constants {
     /**
      * Night light setting modes
      */
-    const val NL_SETTING_MODE_FILTER = 0
-    const val NL_SETTING_MODE_TEMP = 1
+    const val NL_SETTING_MODE_TEMP = 0
+    const val NL_SETTING_MODE_FILTER = 1
 
     /**
      * Apply types

@@ -7,13 +7,6 @@ package com.corphish.nightlight.data
 
 object Constants {
     /**
-     * KCAL sysfs nodes
-     */
-    private const val KCAL_DIR = "/sys/devices/platform/kcal_ctrl.0/"
-    const val KCAL_ADJUST = KCAL_DIR + "kcal"
-    const val KCAL_SWITCH = KCAL_DIR + "kcal_enable"
-
-    /**
      * SharedPreference keys
      */
     const val PREF_MASTER_SWITCH = "switch"

@@ -30,6 +30,12 @@ fun Int.fromColorTemperatureToRGBIntArray(): IntArray {
     return intArrayOf(red.fixColorBounds(), green.fixColorBounds(), blue.fixColorBounds())
 }
 
+fun Int.fromColorTemperatureToRGBString(): String {
+    val rgb = this.fromColorTemperatureToRGBIntArray()
+
+    return "${rgb[0]} ${rgb[1]} ${rgb[2]}"
+}
+
 /**
  * Fixes range of int to [0, 255]
  */

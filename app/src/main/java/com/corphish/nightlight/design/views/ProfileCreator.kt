@@ -34,6 +34,7 @@ class ProfileCreator(val context: Context,
 
     private val settingTitle1 = creatorView.findViewById<TextView>(R.id.profile_night_light_setting_title1)
     private val settingTitle2 = creatorView.findViewById<TextView>(R.id.profile_night_light_setting_title2)
+    private val settingTitle3 = creatorView.findViewById<TextView>(R.id.profile_night_light_setting_title3)
 
     private val cancel = creatorView.findViewById<TextView>(R.id.button_cancel)
     private val ok = creatorView.findViewById<AppCompatButton>(R.id.button_ok)
@@ -42,6 +43,7 @@ class ProfileCreator(val context: Context,
 
     private val settingParam1 = creatorView.findViewById<AppCompatSeekBar>(R.id.profile_night_light_setting_param1)
     private val settingParam2 = creatorView.findViewById<AppCompatSeekBar>(R.id.profile_night_light_setting_param2)
+    private val settingParam3 = creatorView.findViewById<AppCompatSeekBar>(R.id.profile_night_light_setting_param3)
 
     private val bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialogDark)
 
@@ -109,7 +111,7 @@ class ProfileCreator(val context: Context,
                 if (modes.selectedItemId == Constants.NL_SETTING_MODE_TEMP.toLong())
                     intArrayOf(settingParam1.progress + 3000)
                 else
-                    intArrayOf(settingParam1.progress, settingParam2.progress)
+                    intArrayOf(settingParam1.progress, settingParam2.progress, settingParam3.progress)
         )
     }
 
@@ -122,38 +124,48 @@ class ProfileCreator(val context: Context,
                 if (modes.selectedItemId == Constants.NL_SETTING_MODE_TEMP.toLong())
                     intArrayOf(settingParam1.progress + 3000)
                 else
-                    intArrayOf(settingParam1.progress, settingParam2.progress))
+                    intArrayOf(settingParam1.progress, settingParam2.progress, settingParam3.progress)
+        )
     }
 
     private fun updateProfileCreatorParams(mode: Int) {
-        if (mode == Constants.NL_SETTING_MODE_FILTER) {
+        if (mode == Constants.NL_SETTING_MODE_MANUAL) {
             settingParam1.isEnabled = true
-            settingParam1.max = 128
+            settingParam1.max = 256
 
             settingParam2.isEnabled = true
-            settingParam2.max = 48
+            settingParam2.max = 256
+
+            settingParam3.isEnabled = true
+            settingParam3.max = 256
 
             settingTitle1.isEnabled = true
             settingTitle2.isEnabled = true
+            settingTitle3.isEnabled = true
 
-            settingTitle1.setText(R.string.blue_light)
-            settingTitle2.setText(R.string.green_light)
+            settingTitle1.setText(R.string.red)
+            settingTitle2.setText(R.string.green)
+            settingTitle3.setText(R.string.blue)
 
             if (profile != null) {
                 settingParam1.progress = profile.settings[0]
                 settingParam2.progress = profile.settings[1]
+                settingParam3.progress = profile.settings[2]
             } else {
-                settingParam1.progress = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY)
-                settingParam2.progress = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY)
+                settingParam1.progress = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)
+                settingParam2.progress = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)
+                settingParam3.progress = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
             }
         } else {
             settingParam1.isEnabled = true
             settingParam1.max = 1500
 
             settingParam2.isEnabled = false
+            settingParam3.isEnabled = false
 
             settingTitle1.isEnabled = true
             settingTitle2.isEnabled = false
+            settingTitle3.isEnabled = false
 
             settingTitle1.setText(R.string.color_temperature_title)
             settingTitle2.setText(R.string.profile_nl_setting_unavailable)

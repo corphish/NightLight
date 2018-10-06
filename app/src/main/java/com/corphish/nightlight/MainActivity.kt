@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
         fragmentTransaction.commit()
 
-        NightLightAppService.instance.notifyNewSettingMode(PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER))
+        NightLightAppService.instance.notifyNewSettingMode(PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP))
     }
 
     private fun isSupported(id: Int): Boolean {
@@ -186,7 +186,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
             Core.applyNightModeAsync(
                     PreferenceHelper.getBoolean(this, Constants.PREF_CUR_APPLY_EN, false),
                     this,
-                    PreferenceHelper.getInt(this, Constants.PREF_CUR_PROF_MODE, Constants.NL_SETTING_MODE_FILTER),
+                    PreferenceHelper.getInt(this, Constants.PREF_CUR_PROF_MODE, Constants.NL_SETTING_MODE_TEMP),
                     PreferenceHelper.getString(this, Constants.PREF_CUR_PROF_VAL, null)!!.toArrayOfInts(",")
             )
         }
@@ -216,13 +216,14 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
     private fun getProfileForCurrentSettings(): ProfilesManager.Profile {
         // Setting mode
-        val mode = PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER)
+        val mode = PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
 
         val settings =
-                if (mode == Constants.NL_SETTING_MODE_FILTER)
+                if (mode == Constants.NL_SETTING_MODE_MANUAL)
                     intArrayOf(
-                            PreferenceHelper.getInt(this, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY),
-                            PreferenceHelper.getInt(this, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY)
+                            PreferenceHelper.getInt(this, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR),
+                            PreferenceHelper.getInt(this, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR),
+                            PreferenceHelper.getInt(this, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
                     )
                 else
                     intArrayOf(

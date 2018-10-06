@@ -7,6 +7,7 @@ import com.corphish.nightlight.engine.kcal.DummyKCALManager
 import com.corphish.nightlight.engine.kcal.GenericKCALManager
 import com.corphish.nightlight.engine.kcal.KCALAbstraction
 import com.corphish.nightlight.engine.kcal.SDM845KCALManager
+import com.corphish.nightlight.extensions.fromColorTemperatureToRGBString
 import com.corphish.nightlight.helpers.PreferenceHelper
 
 /**
@@ -113,15 +114,18 @@ object KCALManager {
         if (!PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true)) return
 
         val currentReading = kcalValuesAsRawString
-        val nightLightSettingReading = "256 " +  // Red
-                PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY) + " " + // Green
-                PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY)  // Blue
 
         // Bail out if currentReading is same as nightlight setting reading
         // That is night light values are being backed up
-        if (currentReading == nightLightSettingReading) return
+        if (currentReading == getCurrentNightLightSettingReading(context)) return
 
         // Else backup the values
         PreferenceHelper.putString(context, Constants.KCAL_PRESERVE_VAL, currentReading)
     }
+
+    private fun getCurrentNightLightSettingReading(context: Context?) =
+            if (PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP) == Constants.NL_SETTING_MODE_TEMP)
+                PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP).fromColorTemperatureToRGBString()
+            else
+                "${PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)} ${PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)} ${PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)}"
 }

@@ -19,6 +19,6 @@
         android:textColor="@color/colorPrimary"
         android:text="@string/section_color"/>
 
-    <include layout="@layout/layout_filter_intensity" />
     <include layout="@layout/layout_temperature" />
+    <include layout="@layout/layout_manual_colors" />
 </LinearLayout>

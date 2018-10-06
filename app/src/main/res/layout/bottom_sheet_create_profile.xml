@@ -131,9 +131,30 @@
                 android:layout_margin="@dimen/text_margin"
                 android:paddingStart="@dimen/layout_padding"
                 android:paddingEnd="@dimen/layout_padding"
-                android:paddingBottom="@dimen/group_padding"
                 android:enabled="false"
                 android:id="@+id/profile_night_light_setting_param2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
+                android:paddingTop="@dimen/group_padding"
+                android:enabled="false"
+                android:textSize="@dimen/text_caption"
+                android:textAppearance="?android:textAppearance"
+                android:id="@+id/profile_night_light_setting_title3"
+                android:text="@string/profile_nl_setting_unavailable"/>
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
+                android:paddingBottom="@dimen/group_padding"
+                android:enabled="false"
+                android:id="@+id/profile_night_light_setting_param3"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"

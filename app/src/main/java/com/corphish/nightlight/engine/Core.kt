@@ -21,10 +21,11 @@ object Core {
      * Conditionally backup KCAL values if FORCE_SWITCH is off before turning it on
      * Also enable force switch when Night Light is enabled
      * @param context Context is needed for PreferenceHelper
-     * @param blueIntensity Intensity of blue light to be filtered out.
-     * @param greenIntensity Intensity of green light to be filtered out.
+     * @param redValue Value of red light to be set.
+     * @param greenValue Value of green light to be set.
+     * @param blueValue Value of blue light to be set.
      */
-    private fun enableNightMode(context: Context?, blueIntensity: Int, greenIntensity: Int) {
+    private fun enableNightMode(context: Context?, redValue: Int, greenValue: Int, blueValue: Int) {
         KCALManager.enableKCAL()
 
         if (PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true)) {
@@ -40,7 +41,7 @@ object Core {
         // Assume that set on boot failed by default
         if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
 
-        val ret = KCALManager.updateKCALValues(256, Constants.MAX_GREEN_LIGHT - greenIntensity, Constants.MAX_BLUE_LIGHT - blueIntensity)
+        val ret = KCALManager.updateKCALValues(redValue, greenValue, blueValue)
         if (isModeBooting) {
             PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
         }
@@ -120,12 +121,13 @@ object Core {
      * Driver method to enable/disable night light
      * @param e A boolean indicating whether night light should be turned on or off
      * @param context Context is needed to read Preference values
-     * @param blueIntensity Intensity of blue light to be filtered out.
-     * @param greenIntensity Intensity of green light to be filtered out.
+     * @param redValue Value of red light to be set.
+     * @param greenValue Value of green light to be set.
+     * @param blueValue Value of blue light to be set.
      */
-    fun applyNightMode(e: Boolean, context: Context?, blueIntensity: Int, greenIntensity: Int) {
+    fun applyNightMode(e: Boolean, context: Context?, redValue: Int, greenValue: Int, blueValue: Int) {
         if (e)
-            enableNightMode(context, blueIntensity, greenIntensity)
+            enableNightMode(context, redValue, greenValue, blueValue)
         else
             disableNightMode(context)
     }
@@ -148,11 +150,12 @@ object Core {
      * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background
      * @param b A boolean indicating whether night light should be turned on or off
      * @param context Context is needed to read Preference values
-     * @param blueIntensity Intensity of blue light to be filtered out
-     * @param greenIntensity Intensity of green light to be filtered out.
+     * @param redValue Value of red light to be set.
+     * @param greenValue Value of green light to be set.
+     * @param blueValue Value of blue light to be set.
      */
-    fun applyNightModeAsync(b: Boolean, context: Context?, blueIntensity: Int, greenIntensity: Int) {
-        NightModeApplier(b, context, blueIntensity, greenIntensity, true).execute()
+    fun applyNightModeAsync(b: Boolean, context: Context?, redValue: Int, greenValue: Int, blueValue: Int) {
+        NightModeApplier(b, context, redValue, greenValue, blueValue, true).execute()
     }
 
     /**
@@ -160,12 +163,13 @@ object Core {
      * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background
      * @param b A boolean indicating whether night light should be turned on or off
      * @param context Context is needed to read Preference values
-     * @param blueIntensity Intensity of blue light to be filtered out
-     * @param greenIntensity Intensity of green light to be filtered out.
+     * @param redValue Value of red light to be set.
+     * @param blueValue Value of blue light to be set.
+     * @param greenValue Value of green light to be set.
      * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated
      */
-    fun applyNightModeAsync(b: Boolean, context: Context?, blueIntensity: Int, greenIntensity: Int, toUpdateGlobalState: Boolean) {
-        NightModeApplier(b, context, blueIntensity, greenIntensity, toUpdateGlobalState).execute()
+    fun applyNightModeAsync(b: Boolean, context: Context?, redValue: Int, greenValue: Int, blueValue: Int, toUpdateGlobalState: Boolean) {
+        NightModeApplier(b, context, redValue, greenValue, blueValue, toUpdateGlobalState).execute()
     }
 
     /**
@@ -199,12 +203,13 @@ object Core {
      */
     @JvmOverloads
     fun applyNightModeAsync(b: Boolean, context: Context?, toUpdateGlobalState: Boolean = true) {
-        val mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER)
-        if (mode == Constants.NL_SETTING_MODE_FILTER) {
+        val mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
+        if (mode == Constants.NL_SETTING_MODE_MANUAL) {
             applyNightModeAsync(b,
                     context,
-                    PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY),
-                    PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY),
+                    PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR),
+                    PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR),
+                    PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR),
                     toUpdateGlobalState)
         } else {
             applyNightModeAsync(b,
@@ -234,19 +239,21 @@ object Core {
         internal var enabled: Boolean = false
         internal var toUpdateGlobalState: Boolean = false
         internal var mode: Int = 0
-        internal var blueIntensity: Int = 0
-        internal var greenIntensity: Int = 0
+        internal var redColor: Int = 0
+        internal var greenColor: Int = 0
+        internal var blueColor: Int = 0
         internal var temperature: Int = 0
         internal var context: Context?
 
-        internal constructor(enabled: Boolean, context: Context?, blueIntensity: Int, greenIntensity: Int, toUpdateGlobalState: Boolean) {
+        internal constructor(enabled: Boolean, context: Context?, redValue: Int, greenValue: Int, blueValue: Int, toUpdateGlobalState: Boolean) {
             this.enabled = enabled
             this.context = context
-            this.blueIntensity = blueIntensity
-            this.greenIntensity = greenIntensity
+            this.redColor = redValue
+            this.greenColor = greenValue
+            this.blueColor = blueValue
             this.toUpdateGlobalState = toUpdateGlobalState
 
-            mode = Constants.NL_SETTING_MODE_FILTER
+            mode = Constants.NL_SETTING_MODE_MANUAL
         }
 
         internal constructor(enabled: Boolean, context: Context?, temperature: Int, toUpdateGlobalState: Boolean) {
@@ -264,9 +271,10 @@ object Core {
             this.context = context
             this.toUpdateGlobalState = toUpdateGlobalState
 
-            if (mode == Constants.NL_SETTING_MODE_FILTER) {
-                blueIntensity = settings[0]
-                greenIntensity = settings[1]
+            if (mode == Constants.NL_SETTING_MODE_MANUAL) {
+                redColor = settings[0]
+                greenColor = settings[1]
+                blueColor = settings[2]
             } else if (mode == Constants.NL_SETTING_MODE_TEMP) {
                 temperature = settings[0]
             } else {/* There to filter out invalid modes if any */
@@ -274,8 +282,8 @@ object Core {
         }
 
         override fun doInBackground(vararg bubbles: Any): Any? {
-            if (mode == Constants.NL_SETTING_MODE_FILTER)
-                applyNightMode(enabled, context, blueIntensity, greenIntensity)
+            if (mode == Constants.NL_SETTING_MODE_MANUAL)
+                applyNightMode(enabled, context, redColor, greenColor, blueColor)
             else
                 applyNightMode(enabled, context, temperature)
             return null

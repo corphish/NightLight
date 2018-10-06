@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 
-import kotlinx.android.synthetic.main.layout_filter_intensity.*
+import kotlinx.android.synthetic.main.layout_manual_colors.*
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
@@ -23,17 +23,18 @@ import com.gregacucnik.EditableSeekBar
  */
 
 class ColorControlFragment : BaseBottomSheetDialogFragment() {
-    private var blueIntensity: Int = 0
-    private var greenIntensity: Int = 0
+    private var redColor: Int = 0
+    private var greenColor: Int = 0
+    private var blueColor: Int = 0
     private var colorTemperature: Int = 0
-    private var mode: Int = Constants.NL_SETTING_MODE_FILTER
+    private var mode: Int = Constants.NL_SETTING_MODE_TEMP
     private var state: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         getValues()
-        mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_FILTER)
+        mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
         state = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
     }
 
@@ -46,53 +47,38 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        initIntensityViews()
+        initManualViews()
         initTemperatureViews()
     }
 
-    private fun initIntensityViews() {
-        FontUtils().setCustomFont(context!!, intensityModeSwitch)
+    private fun initManualViews() {
+        FontUtils().setCustomFont(context!!, manualModeSwitch)
 
         // Disable them by default
-        blueSlider.isEnabled = false
-        greenSlider.isEnabled = false
+        red.isEnabled = false
+        green.isEnabled = false
+        blue.isEnabled = false
 
-        intensityModeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            mode = Constants.NL_SETTING_MODE_FILTER
+        manualModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            mode = Constants.NL_SETTING_MODE_MANUAL
 
-            val settingMode = if (isChecked) Constants.NL_SETTING_MODE_FILTER else Constants.NL_SETTING_MODE_TEMP
+            val settingMode = if (isChecked) Constants.NL_SETTING_MODE_MANUAL else Constants.NL_SETTING_MODE_TEMP
 
             PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, settingMode)
 
-            blueSlider.isEnabled = isChecked
-            greenSlider.isEnabled = isChecked
+            red.isEnabled = isChecked
+            green.isEnabled = isChecked
+            blue.isEnabled = isChecked
 
             if (isChecked && NightLightAppService.instance.isInitDone()) {
-                Core.applyNightModeAsync(isChecked, context, blueIntensity, greenIntensity)
+                Core.applyNightModeAsync(isChecked, context, redColor, greenColor, blueColor)
             }
 
             temperatureModeSwitch.isChecked = !isChecked
         }
 
-        intensityModeSwitch.isChecked = mode == Constants.NL_SETTING_MODE_FILTER
-
-        blueSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {}
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {}
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-                blueIntensity = seekBar.progress
-                if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_BLUE_INTENSITY, blueIntensity)
-                    Core.applyNightModeAsync(true, context, blueIntensity, greenIntensity)
-                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
-                }
-            }
-        })
-
-        greenSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
+        red.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
+            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
 
             }
 
@@ -100,18 +86,85 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
 
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-                greenIntensity = seekBar.progress
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+
+            override fun onEnteredValueTooHigh() {
+                red.value = 256
+            }
+
+            override fun onEnteredValueTooLow() {
+                red.value = 0
+            }
+
+            override fun onEditableSeekBarValueChanged(value: Int) {
+                redColor = value
                 if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_GREEN_INTENSITY, greenIntensity)
-                    Core.applyNightModeAsync(true, context, blueIntensity, greenIntensity)
+                    PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR, redColor)
+                    Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 }
             }
         })
 
-        blueSlider.progress = blueIntensity
-        greenSlider.progress = greenIntensity
+        green.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
+            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+
+            override fun onEnteredValueTooHigh() {
+                green.value = 256
+            }
+
+            override fun onEnteredValueTooLow() {
+                green.value = 0
+            }
+
+            override fun onEditableSeekBarValueChanged(value: Int) {
+                greenColor = value
+                if (NightLightAppService.instance.isInitDone()) {
+                    PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR, greenColor)
+                    Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
+                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+                }
+            }
+        })
+
+        blue.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
+            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+
+            override fun onEnteredValueTooHigh() {
+                blue.value = 256
+            }
+
+            override fun onEnteredValueTooLow() {
+                blue.value = 0
+            }
+
+            override fun onEditableSeekBarValueChanged(value: Int) {
+                blueColor = value
+                if (NightLightAppService.instance.isInitDone()) {
+                    PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR, blueColor)
+                    Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
+                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+                }
+            }
+        })
+
+        manualModeSwitch.isChecked = mode == Constants.NL_SETTING_MODE_MANUAL
     }
 
     private fun initTemperatureViews() {
@@ -123,7 +176,7 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
         temperatureModeSwitch.setOnCheckedChangeListener { _, isChecked ->
             mode = Constants.NL_SETTING_MODE_TEMP
 
-            val settingMode = if (isChecked) Constants.NL_SETTING_MODE_TEMP else Constants.NL_SETTING_MODE_FILTER
+            val settingMode = if (isChecked) Constants.NL_SETTING_MODE_TEMP else Constants.NL_SETTING_MODE_MANUAL
 
             PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, settingMode)
 
@@ -133,7 +186,7 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
                 Core.applyNightModeAsync(true, context, colorTemperature)
             }
 
-            intensityModeSwitch.isChecked = !isChecked
+            manualModeSwitch.isChecked = !isChecked
         }
 
         temperatureModeSwitch.isChecked = mode == Constants.NL_SETTING_MODE_TEMP
@@ -171,13 +224,14 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
     }
 
     fun onStateChanged(newMode: Int) {
-        if (intensityModeSwitch != null) intensityModeSwitch.isChecked = newMode == Constants.NL_SETTING_MODE_FILTER
+        if (manualModeSwitch != null) manualModeSwitch.isChecked = newMode == Constants.NL_SETTING_MODE_MANUAL
         if (temperatureModeSwitch != null) temperatureModeSwitch.isChecked = newMode == Constants.NL_SETTING_MODE_TEMP
     }
 
     private fun getValues() {
-        blueIntensity = PreferenceHelper.getInt(context, Constants.PREF_BLUE_INTENSITY, Constants.DEFAULT_BLUE_INTENSITY)
-        greenIntensity = PreferenceHelper.getInt(context, Constants.PREF_GREEN_INTENSITY, Constants.DEFAULT_GREEN_INTENSITY)
+        redColor = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)
+        greenColor = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)
+        blueColor = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
         colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
     }
 

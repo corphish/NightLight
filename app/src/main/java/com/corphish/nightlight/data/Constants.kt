@@ -11,8 +11,9 @@ object Constants {
      */
     const val PREF_MASTER_SWITCH = "switch"
     const val PREF_FORCE_SWITCH = "force_switch"
-    const val PREF_BLUE_INTENSITY = "custom_const val"
-    const val PREF_GREEN_INTENSITY = "green_intensity"
+    const val PREF_BLUE_COLOR = "blue_color"
+    const val PREF_GREEN_COLOR = "green_color"
+    const val PREF_RED_COLOR = "red_color"
     const val PREF_AUTO_SWITCH = "auto_switch"
     const val PREF_SUN_SWITCH = "sun_switch"
     const val PREF_START_TIME = "start_time"
@@ -41,10 +42,9 @@ object Constants {
      */
     const val DEFAULT_START_TIME = "00:00"
     const val DEFAULT_END_TIME = "06:00"
-    const val MAX_BLUE_LIGHT = 224
-    const val DEFAULT_BLUE_INTENSITY = 64
-    const val MAX_GREEN_LIGHT = 256
-    const val DEFAULT_GREEN_INTENSITY = 0
+    const val DEFAULT_BLUE_COLOR = 256 // TODO
+    const val DEFAULT_GREEN_COLOR = 256 // TODO
+    const val DEFAULT_RED_COLOR = 256 // TODO
     const val DEFAULT_LONGITUDE = "0.00"
     const val DEFAULT_LATITUDE = "0.00"
     const val DEFAULT_KCAL_VALUES = "256 256 256"
@@ -55,7 +55,7 @@ object Constants {
      * Night light setting modes
      */
     const val NL_SETTING_MODE_TEMP = 0
-    const val NL_SETTING_MODE_FILTER = 1
+    const val NL_SETTING_MODE_MANUAL = 1
 
     /**
      * Apply types

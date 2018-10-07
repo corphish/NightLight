@@ -87,7 +87,7 @@
                 android:paddingEnd="@dimen/layout_padding"
                 android:paddingTop="2dp"
                 android:paddingBottom="@dimen/group_padding"
-                android:prompt="@string/color_intensity"
+                android:prompt="@string/color_temperature_title"
                 android:entries="@array/settingModes"
                 android:id="@+id/profile_night_light_setting_mode"/>
 
@@ -109,7 +109,6 @@
                 android:layout_margin="@dimen/text_margin"
                 android:paddingStart="@dimen/layout_padding"
                 android:paddingEnd="@dimen/layout_padding"
-                android:paddingBottom="@dimen/group_padding"
                 android:enabled="false"
                 android:id="@+id/profile_night_light_setting_param1"/>
 

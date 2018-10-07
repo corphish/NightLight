@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="settingModes">
-        <item>@string/color_intensity</item>
         <item>@string/color_temperature_title</item>
+        <item>@string/manual_mode_title</item>
     </string-array>
 </resources>

@@ -11,8 +11,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
         android:orientation="vertical">
 
         <include layout="@layout/layout_header" />
@@ -24,7 +22,7 @@
             android:paddingStart="@dimen/layout_padding"
             android:paddingEnd="@dimen/layout_padding"
             android:paddingTop="@dimen/layout_padding"
-            android:layout_margin="@dimen/layout_margin"
+            android:layout_margin="8dp"
             android:textSize="12sp"
             android:textColor="@color/colorPrimary"
             android:text="@string/profile_title"/>
@@ -35,7 +33,7 @@
             android:paddingStart="@dimen/layout_padding"
             android:paddingEnd="@dimen/layout_padding"
             android:paddingBottom="@dimen/layout_padding"
-            android:layout_margin="@dimen/layout_margin"
+            android:layout_margin="8dp"
             android:textSize="@dimen/text_desc"
             android:text="@string/profiles_desc"/>
 
@@ -44,14 +42,14 @@
             android:layout_height="wrap_content"
             style="?attr/textAppearanceButton"
             android:padding="@dimen/layout_padding"
-            android:layout_margin="@dimen/layout_margin"
+            android:layout_margin="8dp"
             android:textSize="12sp"
             android:textColor="@color/colorPrimary"
             android:text="@string/section_profiles_list"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_margin="@dimen/layout_margin"
+            android:layout_margin="8dp"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView

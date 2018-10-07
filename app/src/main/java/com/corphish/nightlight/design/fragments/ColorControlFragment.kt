@@ -164,6 +164,10 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
             }
         })
 
+        red.value = redColor
+        green.value = greenColor
+        blue.value = blueColor
+
         manualModeSwitch.isChecked = mode == Constants.NL_SETTING_MODE_MANUAL
     }
 

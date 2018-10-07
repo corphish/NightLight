@@ -13,6 +13,7 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -183,6 +184,11 @@ class ProfileCreator(val context: Context,
         initViewEventListeners()
 
         bottomSheetDialog.setContentView(creatorView)
+        bottomSheetDialog.setOnShowListener {
+            val d = it as BottomSheetDialog
+            val bottomSheetInternal = d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            BottomSheetBehavior.from(bottomSheetInternal!!).setState(BottomSheetBehavior.STATE_EXPANDED)
+        }
         bottomSheetDialog.show()
     }
 

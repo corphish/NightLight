@@ -13,6 +13,7 @@ import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
 import com.corphish.nightlight.design.utils.FontUtils
+import com.corphish.nightlight.engine.KCALManager
 import kotlinx.android.synthetic.main.layout_master_switch.*
 
 /**
@@ -59,6 +60,13 @@ class MasterSwitchFragment : Fragment() {
 
         masterSwitch.isChecked = enabled
         masterSwitch.setOnCheckedChangeListener { _, b ->
+            // Backup KCAL values here too, irrespective of whether any backup switches are enabled or not
+            // Only backup if b is true though, before applying night light
+            // Coz if b is on now, b was off previously, which means night light was off
+            // Whether or not to use the backed up values depends on user
+            // And this actually gives "Preserve everytime before enabling NL" switch its purpose
+            if (b) KCALManager.backupCurrentKCALValues(context)
+
             Core.applyNightModeAsync(b, context)
             PreferenceHelper.putBoolean(context, Constants.PREF_MASTER_SWITCH, b)
             if (mCallback != null) mCallback!!.onSwitchClicked(b)

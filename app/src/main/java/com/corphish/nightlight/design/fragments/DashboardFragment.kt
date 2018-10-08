@@ -68,7 +68,7 @@ class DashboardFragment: Fragment() {
             return
         }
 
-        val color = context?.resources?.getColor(R.color.colorPrimary)
+        val color = context?.resources?.getColor(R.color.colorAccent)
         nlBulb.setColorFilter(if (nlState) color!! else Color.GRAY)
 
         nlMainStatus.text = getString(if (nlState) R.string.dashboard_nl_on else R.string.dashboard_nl_off)

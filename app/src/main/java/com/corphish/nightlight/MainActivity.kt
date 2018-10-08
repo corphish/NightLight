@@ -2,6 +2,7 @@ package com.corphish.nightlight
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -167,7 +168,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                                             permissions: Array<String>, grantResults: IntArray) {
         val fragments = supportFragmentManager.fragments
         for (fragment in fragments) {
-            (fragment as? AutoFragment)?.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
     }
 

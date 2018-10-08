@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.layout_settings.*
 
 class SettingFragment: Fragment() {
+    private lateinit var settingsOptions: List<SettingOption>
     /**
      * Called to have the fragment instantiate its user interface view.
      * This is optional, and non-graphical fragments can return null (which
@@ -50,12 +51,14 @@ class SettingFragment: Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val settingsAdapter = SettingsAdapter()
-        settingsAdapter.list = listOf(
+        settingsOptions = listOf(
                 SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, ColorControlFragment()),
                 SettingOption(R.string.section_auto, R.drawable.ic_alarm_white_24dp, AutoFragment()),
                 SettingOption(R.string.section_kcal_backup, R.drawable.ic_settings_backup_restore_white_24dp, KCALBackupSettingsFragment()),
                 SettingOption(R.string.section_sob, R.drawable.ic_timer_white_24dp, SetOnBootDelayFragment())
         )
+
+        settingsAdapter.list = settingsOptions
 
         recyclerView.invalidateItemDecorations()
         recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, 4)
@@ -115,4 +118,9 @@ class SettingFragment: Fragment() {
             val iconId: Int,
             val fragment: BottomSheetDialogFragment
     )
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        settingsOptions[1].fragment.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
 }

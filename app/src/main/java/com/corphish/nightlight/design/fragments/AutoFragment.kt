@@ -22,8 +22,8 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
 import com.corphish.nightlight.R
 import com.corphish.nightlight.design.utils.FontUtils
-import com.corphish.nightlight.services.NightLightAppService
 import com.corphish.widgets.KeyValueView
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Created by Avinaba on 10/24/2017.
@@ -216,7 +216,7 @@ class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
      */
     private fun getAndSetSunriseSunsetTimings(currentLocation: Location?) {
         if (currentLocation == null) {
-            com.google.android.material.snackbar.Snackbar.make(activity!!.findViewById(R.id.layout_container), getString(R.string.location_unavailable), com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
+            Snackbar.make(activity!!.findViewById(R.id.layout_container), getString(R.string.location_unavailable), Snackbar.LENGTH_LONG).show()
             sunEnable.isChecked = false
             return
         } else {

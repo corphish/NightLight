@@ -73,10 +73,11 @@ class DashboardFragment: Fragment() {
 
         nlMainStatus.text = getString(if (nlState) R.string.dashboard_nl_on else R.string.dashboard_nl_off)
 
+        val autoSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH, false)
         val autoStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, null)
         val autoEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, null)
 
-        if (autoStartTime == null || autoEndTime == null) {
+        if (autoStartTime == null || autoEndTime == null || !autoSwitch) {
             nlSubStatus.setText(R.string.dashboard_auto_not_configured)
         } else {
             val autoStatus = TimeUtils.determineWhetherNLShouldBeOnOrNot(autoStartTime, autoEndTime)

@@ -50,6 +50,8 @@ class ProfileCreator(val context: Context,
 
     private val profilesManager = ProfilesManager(context)
 
+    private val type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
+
     init {
         profilesManager.loadProfiles()
     }
@@ -153,9 +155,9 @@ class ProfileCreator(val context: Context,
                 settingParam2.progress = profile.settings[1]
                 settingParam3.progress = profile.settings[2]
             } else {
-                settingParam1.progress = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)
-                settingParam2.progress = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)
-                settingParam3.progress = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
+                settingParam1.progress = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR[type], Constants.DEFAULT_RED_COLOR[type])
+                settingParam2.progress = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR[type], Constants.DEFAULT_GREEN_COLOR[type])
+                settingParam3.progress = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR[type], Constants.DEFAULT_BLUE_COLOR[type])
             }
         } else {
             settingParam1.isEnabled = true
@@ -174,7 +176,7 @@ class ProfileCreator(val context: Context,
             if (profile != null) {
                 settingParam1.progress = profile.settings[0] - 3000
             } else {
-                settingParam1.progress = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
+                settingParam1.progress = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP[type], Constants.DEFAULT_COLOR_TEMP[type])
             }
         }
     }

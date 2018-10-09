@@ -2,7 +2,6 @@ package com.corphish.nightlight
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -219,16 +218,18 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         // Setting mode
         val mode = PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
 
+        val type = PreferenceHelper.getInt(this, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
+
         val settings =
                 if (mode == Constants.NL_SETTING_MODE_MANUAL)
                     intArrayOf(
-                            PreferenceHelper.getInt(this, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR),
-                            PreferenceHelper.getInt(this, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR),
-                            PreferenceHelper.getInt(this, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
+                            PreferenceHelper.getInt(this, Constants.PREF_RED_COLOR[type], Constants.DEFAULT_RED_COLOR[type]),
+                            PreferenceHelper.getInt(this, Constants.PREF_GREEN_COLOR[type], Constants.DEFAULT_GREEN_COLOR[type]),
+                            PreferenceHelper.getInt(this, Constants.PREF_BLUE_COLOR[type], Constants.DEFAULT_BLUE_COLOR[type])
                     )
                 else
                     intArrayOf(
-                            PreferenceHelper.getInt(this, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
+                            PreferenceHelper.getInt(this, Constants.PREF_COLOR_TEMP[type], Constants.DEFAULT_COLOR_TEMP[type])
                     )
 
         val status = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH, false)

@@ -253,6 +253,7 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
         intensityTypeChooser.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 type = position
+                PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, position)
 
                 getValues()
                 setSliderValues()

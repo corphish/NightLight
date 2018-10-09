@@ -117,15 +117,16 @@ object KCALManager {
 
         // Bail out if currentReading is same as nightlight setting reading
         // That is night light values are being backed up
-        if (currentReading == getCurrentNightLightSettingReading(context)) return
+        val type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
+        if (currentReading == getCurrentNightLightSettingReading(context, type)) return
 
         // Else backup the values
         PreferenceHelper.putString(context, Constants.KCAL_PRESERVE_VAL, currentReading)
     }
 
-    private fun getCurrentNightLightSettingReading(context: Context?) =
+    private fun getCurrentNightLightSettingReading(context: Context?, type: Int) =
             if (PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP) == Constants.NL_SETTING_MODE_TEMP)
-                PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP).fromColorTemperatureToRGBString()
+                PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP[type], Constants.DEFAULT_COLOR_TEMP[type]).fromColorTemperatureToRGBString()
             else
-                "${PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)} ${PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)} ${PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)}"
+                "${PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR[type], Constants.DEFAULT_RED_COLOR[type])} ${PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR[type], Constants.DEFAULT_GREEN_COLOR[type])} ${PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR[type], Constants.DEFAULT_BLUE_COLOR[type])}"
 }

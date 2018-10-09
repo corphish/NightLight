@@ -77,4 +77,23 @@ object Constants {
      */
     const val TASKER_ERROR_STATUS = "tasker_error"
     const val TASKER_SETTING = "tasker_setting"
+
+    /**
+     * Intensity types
+     */
+    const val INTENSITY_TYPE_MAXIMUM = 0
+    const val INTENSITY_TYPE_MINIMUM = 1
+
+    /**
+     * Color control arrays
+     */
+    val PREF_RED_COLOR = arrayOf(PREF_MAX_RED_COLOR, PREF_MIN_RED_COLOR)
+    val PREF_GREEN_COLOR = arrayOf(PREF_MAX_GREEN_COLOR, PREF_MIN_GREEN_COLOR)
+    val PREF_BLUE_COLOR = arrayOf(PREF_MAX_BLUE_COLOR, PREF_MIN_BLUE_COLOR)
+    val PREF_COLOR_TEMP = arrayOf(PREF_MAX_COLOR_TEMP, PREF_MIN_COLOR_TEMP)
+
+    val DEFAULT_RED_COLOR = arrayOf(DEFAULT_MAX_RED_COLOR, DEFAULT_MIN_RED_COLOR)
+    val DEFAULT_GREEN_COLOR = arrayOf(DEFAULT_MAX_GREEN_COLOR, DEFAULT_MIN_GREEN_COLOR)
+    val DEFAULT_BLUE_COLOR = arrayOf(DEFAULT_MAX_BLUE_COLOR, DEFAULT_MIN_BLUE_COLOR)
+    val DEFAULT_COLOR_TEMP = arrayOf(DEFAULT_MAX_COLOR_TEMP, DEFAULT_MIN_COLOR_TEMP)
 }

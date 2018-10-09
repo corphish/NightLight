@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.SeekBar
 
 import kotlinx.android.synthetic.main.layout_manual_colors.*
@@ -18,7 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.layout_temperature.*
 import com.gregacucnik.EditableSeekBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
-
+import kotlinx.android.synthetic.main.layout_color_control.*
 
 
 /**
@@ -33,6 +34,7 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
     private var colorTemperature: Int = 0
     private var mode: Int = Constants.NL_SETTING_MODE_TEMP
     private var state: Boolean = false
+    private var type = Constants.INTENSITY_TYPE_MAXIMUM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +60,10 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        initIntensityTypeView()
         initManualViews()
         initTemperatureViews()
+        setSliderValues()
     }
 
     private fun initManualViews() {
@@ -110,7 +114,7 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
             override fun onEditableSeekBarValueChanged(value: Int) {
                 redColor = value
                 if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR, redColor)
+                    PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR[type], redColor)
                     Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 }
@@ -139,7 +143,7 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
             override fun onEditableSeekBarValueChanged(value: Int) {
                 greenColor = value
                 if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR, greenColor)
+                    PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR[type], greenColor)
                     Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 }
@@ -168,16 +172,12 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
             override fun onEditableSeekBarValueChanged(value: Int) {
                 blueColor = value
                 if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR, blueColor)
+                    PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR[type], blueColor)
                     Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 }
             }
         })
-
-        red.value = redColor
-        green.value = greenColor
-        blue.value = blueColor
 
         manualModeSwitch.isChecked = mode == Constants.NL_SETTING_MODE_MANUAL
     }
@@ -228,14 +228,12 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
             override fun onEditableSeekBarValueChanged(value: Int) {
                 colorTemperature = value
                 if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, colorTemperature)
+                    PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP[type], colorTemperature)
                     Core.applyNightModeAsync(true, context, colorTemperature)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 }
             }
         })
-
-        temperatureValue.value = colorTemperature
     }
 
     fun onStateChanged(newMode: Int) {
@@ -244,10 +242,30 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
     }
 
     private fun getValues() {
-        redColor = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)
-        greenColor = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)
-        blueColor = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
-        colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
+        redColor = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR[type], Constants.DEFAULT_RED_COLOR[type])
+        greenColor = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR[type], Constants.DEFAULT_GREEN_COLOR[type])
+        blueColor = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR[type], Constants.DEFAULT_BLUE_COLOR[type])
+        colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP[type], Constants.DEFAULT_COLOR_TEMP[type])
+    }
+
+    private fun initIntensityTypeView() {
+        intensityTypeChooser.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                type = position
+
+                getValues()
+                setSliderValues()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+    }
+
+    private fun setSliderValues() {
+        red.value = redColor
+        green.value = greenColor
+        blue.value = blueColor
+        temperatureValue.value = colorTemperature
     }
 
     /**

@@ -114,6 +114,9 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
 
             override fun onEditableSeekBarValueChanged(value: Int) {
                 redColor = value
+
+                if (mode != Constants.NL_SETTING_MODE_MANUAL) return
+
                 if (NightLightAppService.instance.isInitDone()) {
                     PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR[type], redColor)
                     Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
@@ -143,6 +146,9 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
 
             override fun onEditableSeekBarValueChanged(value: Int) {
                 greenColor = value
+
+                if (mode != Constants.NL_SETTING_MODE_MANUAL) return
+
                 if (NightLightAppService.instance.isInitDone()) {
                     PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR[type], greenColor)
                     Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
@@ -172,6 +178,9 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
 
             override fun onEditableSeekBarValueChanged(value: Int) {
                 blueColor = value
+
+                if (mode != Constants.NL_SETTING_MODE_MANUAL) return
+
                 if (NightLightAppService.instance.isInitDone()) {
                     PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR[type], blueColor)
                     Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
@@ -228,6 +237,9 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
 
             override fun onEditableSeekBarValueChanged(value: Int) {
                 colorTemperature = value
+
+                if (mode != Constants.NL_SETTING_MODE_TEMP) return
+
                 if (NightLightAppService.instance.isInitDone()) {
                     PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP[type], colorTemperature)
                     Core.applyNightModeAsync(true, context, colorTemperature)

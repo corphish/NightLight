@@ -16,6 +16,10 @@
     <string name="auto_enable_desc">Automatically enable Night Light between the specified time. Night Light will be automatically disabled outside this time range.</string>
     <string name="start_time">Start time</string>
     <string name="end_time">End time</string>
+    <string name="dark_hours_title">Enable dark hours</string>
+    <string name="dark_hours_desc">This enables the use of minimum and maximum intensities as a part of automated time schedule. If enabled, the minimum intensity will be applied from start time to dark hours start time, and maximum intensity will be used then on until the schedule ends.</string>
+    <string name="dark_hours_start_time">Dark hours start time</string>
+    <string name="dark_hours_set_error">Time must be in between schedule start time and end time</string>
 
     <string name="start_time_default" translatable="false">00:00</string>
     <string name="end_time_default" translatable="false">06:00</string>

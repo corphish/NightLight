@@ -68,6 +68,8 @@ class StartActivity : AppCompatActivity() {
         } else
             return false
 
+        if (shortcutID.isEmpty()) return false
+
 
         /*
          * On Android 7.0 or below, bail out from now
@@ -117,7 +119,7 @@ class StartActivity : AppCompatActivity() {
     }
 
     private fun doIntensityToggle() {
-        val state = !PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH)
+        val state = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH)
         val masterSwitch = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH)
 
         // Toggle only if both are on

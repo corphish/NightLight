@@ -23,8 +23,10 @@ class StartActivity : AppCompatActivity() {
     /**
      * Declare the shortcut intent strings and id
      */
-    private val SHORTCUT_INTENT_STRING = "android.intent.action.TOGGLE"
-    private val SHORTCUT_ID = "toggle"
+    private val SHORTCUT_INTENT_STRING_NL_TOGGLE = "android.intent.action.NL_TOGGLE"
+    private val SHORTCUT_INTENT_STRING_INTENSITY_TOGGLE = "android.intent.action.INTENSITY_TOGGLE"
+    private val SHORTCUT_ID_TOGGLE = "toggle"
+    private val SHORTCUT_ID_INTENSITY = "intensity"
 
 
     private val TASKER_PLUGIN_INTENT = "com.twofortyfouram.locale.intent.action.EDIT_SETTING"
@@ -53,11 +55,19 @@ class StartActivity : AppCompatActivity() {
     private fun handleIntent(): Boolean {
         val shortcutID: String
 
-        if (intent.action != null && intent.action == SHORTCUT_INTENT_STRING) {
-            shortcutID = SHORTCUT_ID
-            doToggle()
+        if (intent.action != null) {
+            if (intent.action == SHORTCUT_INTENT_STRING_NL_TOGGLE) {
+                shortcutID = SHORTCUT_ID_TOGGLE
+                doToggle()
+            } else if (intent.action == SHORTCUT_INTENT_STRING_INTENSITY_TOGGLE) {
+                shortcutID = SHORTCUT_ID_INTENSITY
+                doIntensityToggle()
+            } else {
+                shortcutID = ""
+            }
         } else
             return false
+
 
         /*
          * On Android 7.0 or below, bail out from now
@@ -104,6 +114,15 @@ class StartActivity : AppCompatActivity() {
             PreferenceHelper.putBoolean(this, Constants.PREF_MASTER_SWITCH, true)
 
         Core.applyNightModeAsync(state, this)
+    }
+
+    private fun doIntensityToggle() {
+        val state = !PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH)
+        val masterSwitch = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH)
+
+        // Toggle only if both are on
+        if (state && masterSwitch)
+            Core.toggleIntensities(this)
     }
 
     private fun showAlertDialog(caption: Int, msg: Int) {

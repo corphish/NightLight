@@ -138,4 +138,5 @@
     <string name="intensity_type_desc">Type of color intensity to be applied. There are 2 intensity types available: Maximum and Minimum. You may want to use the maximum intensity in dark environments, and the minimum intensity in lighted environments at evening. Tap the bulb in dashboard to switch between intensity types when Night Light is on.</string>
     <string name="maximum">Maximum</string>
     <string name="minimum">Minimum</string>
+    <string name="intensity_toggle">Toggle intensity</string>
 </resources>

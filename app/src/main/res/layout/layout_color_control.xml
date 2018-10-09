@@ -1,54 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/layout_padding"
-    android:layout_margin="@dimen/layout_margin">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="?attr/textAppearanceButton"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingTop="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
-        android:textSize="12sp"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/section_color"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingTop="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
-        android:textSize="@dimen/text_caption"
-        android:textColor="@android:color/white"
-        android:text="@string/intensity_type_title"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingBottom="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
-        android:textSize="@dimen/text_desc"
-        android:text="@string/intensity_type_desc"/>
-
-    <androidx.appcompat.widget.AppCompatSpinner
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
-        android:prompt="@string/maximum"
-        android:entries="@array/intensityTypes"
-        android:id="@+id/intensityTypeChooser"/>
+        android:layout_margin="@dimen/layout_margin">
 
-    <include layout="@layout/layout_temperature" />
-    <include layout="@layout/layout_manual_colors" />
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/textAppearanceButton"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/section_color"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_caption"
+            android:textColor="@android:color/white"
+            android:text="@string/intensity_type_title"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingBottom="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_desc"
+            android:text="@string/intensity_type_desc"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:prompt="@string/maximum"
+            android:entries="@array/intensityTypes"
+            android:id="@+id/intensityTypeChooser"/>
+
+        <include layout="@layout/layout_temperature" />
+        <include layout="@layout/layout_manual_colors" />
+    </LinearLayout>
+</ScrollView>

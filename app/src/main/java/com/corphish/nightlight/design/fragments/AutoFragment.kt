@@ -210,8 +210,13 @@ class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
 
         var intensity: Int? = null
 
-        if (isMinIntensity) intensity = Constants.INTENSITY_TYPE_MINIMUM
-        else if (isMaxIntensity) intensity = Constants.INTENSITY_TYPE_MAXIMUM
+        if (isMinIntensity) {
+            intensity = Constants.INTENSITY_TYPE_MINIMUM
+            PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
+        } else if (isMaxIntensity) {
+            intensity = Constants.INTENSITY_TYPE_MAXIMUM
+            PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
+        }
 
         Core.applyNightModeAsync(toEnable, context, true, if (darkHoursEnabled) intensity else null)
 

@@ -272,6 +272,8 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+
+        intensityTypeChooser.setSelection(type)
     }
 
     private fun setSliderValues() {

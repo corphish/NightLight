@@ -74,10 +74,11 @@ object TimeUtils {
      * We need not worry about that.
      * @param startTime Start time for automatic scheduling selected by user
      * @param endTime End time selected by user
+     * @param targetTime Target time to test. Null if current time is to be tested
      * @return boolean indicating whether or not night light should be on
      */
-    fun determineWhetherNLShouldBeOnOrNot(startTime: String, endTime: String): Boolean {
-        val iCurrentTime = currentTimeAsMinutes
+    fun determineWhetherNLShouldBeOnOrNot(startTime: String, endTime: String, targetTime: String? = null): Boolean {
+        val iCurrentTime = if (targetTime == null) currentTimeAsMinutes else getTimeInMinutes(targetTime)
         val iStartTime = getTimeInMinutes(startTime)
         val iEndTime = getTimeInMinutes(endTime)
 

@@ -78,14 +78,7 @@ class DashboardFragment: Fragment() {
         nlBulb.setOnClickListener {
             if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)) return@setOnClickListener
 
-            type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
-            type = (type + 1) % 2
-
-            PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, type)
-
-            nlBulb.setColorFilter(if (nlState) colors[type]!! else Color.GRAY)
-
-            Core.applyNightModeAsync(true, context)
+            Core.toggleIntensities(context)
         }
 
         nlMainStatus.text = getString(if (nlState) R.string.dashboard_nl_on else R.string.dashboard_nl_off)

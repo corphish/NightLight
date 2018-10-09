@@ -234,6 +234,20 @@ object Core {
     }
 
     /**
+     * Toggles intensities, and then applies it
+     * @param context Tough love for context eh?
+     */
+    fun toggleIntensities(context: Context?) {
+        var type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
+
+        type = (type + 1) % 2
+
+        PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, type)
+
+        applyNightModeAsync(true, context)
+    }
+
+    /**
      * AsyncTask to enable/disable night light
      */
     private class NightModeApplier : AsyncTask<Any, Any, Any> {

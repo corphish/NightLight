@@ -218,7 +218,6 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
 
         temperatureValue.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
             override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -263,7 +262,7 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
 
     private fun initIntensityTypeView() {
         intensityTypeChooser.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 type = position
                 PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, position)
 
@@ -280,6 +279,9 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
         green.value = greenColor
         blue.value = blueColor
         temperatureValue.value = colorTemperature
+
+        if (NightLightAppService.instance.isInitDone())
+            Core.applyNightModeAsync(true, context)
     }
 
     /**

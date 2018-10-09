@@ -14,6 +14,8 @@ import com.corphish.nightlight.helpers.TimeUtils
 import kotlinx.android.synthetic.main.layout_dashboard.*
 
 class DashboardFragment: Fragment() {
+    var type = Constants.INTENSITY_TYPE_MAXIMUM
+
     /**
      * Called to have the fragment instantiate its user interface view.
      * This is optional, and non-graphical fragments can return null (which
@@ -68,8 +70,23 @@ class DashboardFragment: Fragment() {
             return
         }
 
-        val color = context?.resources?.getColor(R.color.colorAccent)
-        nlBulb.setColorFilter(if (nlState) color!! else Color.GRAY)
+        type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
+
+        val colors = arrayOf(context?.resources?.getColor(R.color.colorAccent), context?.resources?.getColor(R.color.colorPrimary))
+        nlBulb.setColorFilter(if (nlState) colors[type]!! else Color.GRAY)
+
+        nlBulb.setOnClickListener {
+            if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)) return@setOnClickListener
+
+            type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
+            type = (type + 1) % 2
+
+            PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, type)
+
+            nlBulb.setColorFilter(if (nlState) colors[type]!! else Color.GRAY)
+
+            Core.applyNightModeAsync(true, context)
+        }
 
         nlMainStatus.text = getString(if (nlState) R.string.dashboard_nl_on else R.string.dashboard_nl_off)
 

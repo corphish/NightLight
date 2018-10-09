@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.corphish.nightlight.data.Constants
@@ -71,7 +72,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         profilesAdapter.setProfiles(profiles)
 
         recyclerView.invalidateItemDecorations()
-        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = profilesAdapter
         recyclerView.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         recyclerView.isNestedScrollingEnabled = false
@@ -137,8 +138,9 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
             desc += getString(R.string.app_name) + " : " +
                     (if (profile.isSettingEnabled) getString(R.string.on).toLowerCase() else getString(R.string.off).toLowerCase()) + ", "
             desc += if (profile.settingMode == Constants.NL_SETTING_MODE_TEMP) getString(R.string.color_temperature_title) + " : " + profile.settings[0] + "K"
-            else getString(R.string.blue_light) + " : " + profile.settings[0] + ", " +
-                        getString(R.string.green_light) + " : " + profile.settings[1]
+            else getString(R.string.red) + " : " + profile.settings[0] + ", " +
+                    getString(R.string.green) + " : " + profile.settings[1] + ", " +
+                    getString(R.string.blue) + " : " + profile.settings[2]
             return desc
         }
     }

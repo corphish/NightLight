@@ -3,11 +3,6 @@
     <string name="app_name_full" translatable="false">Night Light (KCAL)</string>
     <string name="banner_app_name" translatable="false">v%1$s</string>
 
-    <string name="color_intensity">Filter Intensity</string>
-
-    <string name="blue_color_intensity_desc">Intensity of the blue light to be filtered out. Higher value means higher intensity of blue light will be filtered out, lower value means lower intensity of blue light will be filtered out.</string>
-    <string name="green_color_intensity_desc">Intensity of the green light to be filtered out. Here the range of control is limited. Filtering out green light will give a reddish tint to the screen.</string>
-
     <string name="master_switch">Enable Night Light</string>
     <string name="master_switch_desc">Master switch to enable/disable Night Light.</string>
 
@@ -35,9 +30,6 @@
 
     <string name="next_day">&#160;(Next day)</string>
 
-    <string name="blue_light">Blue light</string>
-    <string name="green_light">Green light</string>
-
     <string name="sun_switch">Use sunset/sunrise timings</string>
 
     <string name="location_unavailable">Unable to get your last known location.</string>
@@ -47,7 +39,6 @@
     <string name="kcal_preservce_value_msg">Preserve current KCAL values</string>
     <string name="title_activity_about">About</string>
     <string name="contributors"><u>Contributors</u></string>
-    <string name="contributors_desc">Tap to see who else contributed to this project.</string>
 
     <string name="color_temperature_title">Color Temperature</string>
     <string name="color_temperature_desc">Value of the color temperature to be set. Lower temperatures are better suitable for low light viewing.</string>
@@ -100,7 +91,7 @@
     <string name="section_misc">Misc</string>
     <string name="section_profiles_list">List of profiles created</string>
 
-    <string name="profiles_desc">Profiles are collection of settings which can be applied with one click, or let apps like Tasker apply it for you using the automation capabilities that they provide.</string>
+    <string name="profiles_desc">Profiles are collection of settings which can be applied with one click, or let apps like Tasker to apply it for you using the automation capabilities that they provide.</string>
 
     <string name="kcal_backup_every_time_before_enabling">Backup current KCAL values every time before Night Light is enabled</string>
 

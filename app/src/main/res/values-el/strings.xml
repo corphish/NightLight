@@ -1,10 +1,5 @@
 <resources>
 
-    <string name="color_intensity">Ένταση φίλτρου</string>
-
-    <string name="blue_color_intensity_desc">Ένταση μπλε φωτός που θα φιλτραριστεί. Μεγαλύτερη τιμή σημαίνει περισσότερη ένταση μπλε φωτός που θα φιλτραριστεί, χαμηλότερη τιμή σημαίνει λιγότερη ένταση μπλε φωτός που θα φιλτραριστεί.</string>
-    <string name="green_color_intensity_desc">Ένταση πράσινου φωτός που θα φιλτραριστεί. Εδώ, το εύρος ελέγχου είναι περιορισμένο. Φιλτράροντας το πράσινο φως θα δοθεί μια ερυθρόχρωμη απόχρωση στην οθόνη.</string>
-
     <string name="master_switch">Ενεργοποίηση Night Light</string>
     <string name="master_switch_desc">Γενικός διακόπτης για ενεργοποίηση/απενεργοποίηση του Night Light.</string>
 
@@ -28,12 +23,6 @@
     <string name="shortcut_toggle">Ενεργοποίηση/Απενεργοποίηση</string>
 
     <string name="next_day">&#160;(Επόμενη ημέρα)</string>
-
-    <string name="blue_light">Μπλε φως</string>
-    <string name="green_light">Πράσινο φως</string>
-
-    <string name="force_switch">Επιβολή Night Light</string>
-    <string name="force_switch_desc">Θα επιβάλλει την ενεργοποίηση/απενεργοποίηση του Night Light, αγνοώντας το αυτόματο πρόγραμμα.</string>
 
     <string name="sun_switch">Χρήση ωρών Ανατολής/Δύσης Ηλίου</string>
 

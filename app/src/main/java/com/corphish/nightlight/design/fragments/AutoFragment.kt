@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.layout_automation.*
 
@@ -33,6 +34,7 @@ import com.google.android.material.snackbar.Snackbar
 class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
     private var sunSwitchStatus: Boolean = false
     private var autoSwitchStatus: Boolean = false
+    private var darkHoursEnabled = false
 
     private val locationRequestCode = 69
     private var locationPermissionAvailable = false
@@ -44,6 +46,7 @@ class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
 
         autoSwitchStatus = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH)
         sunSwitchStatus = PreferenceHelper.getBoolean(context, Constants.PREF_SUN_SWITCH)
+        darkHoursEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_DARK_HOURS_ENABLE)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -99,6 +102,17 @@ class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
 
         addNextDayIfNecessary()
 
+        darkHoursEnable.setOnCheckedChangeListener { _, b ->
+            darkHoursEnabled = b
+            PreferenceHelper.putBoolean(context, Constants.PREF_DARK_HOURS_ENABLE, b)
+            enableOrDisableAutoSwitchViews(autoSwitchStatus)
+        }
+
+        darkHoursEnable.isChecked = darkHoursEnabled
+
+        darkStartTime.setOnClickListener { showTimePickerDialog(darkStartTime, Constants.PREF_DARK_HOURS_START) }
+        darkStartTime.setValueText(PreferenceHelper.getString(context, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)!!)
+
         enableOrDisableAutoSwitchViews(autoSwitchStatus)
     }
 
@@ -115,13 +129,17 @@ class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
             startTime.isEnabled = false
             endTime.isEnabled = false
             sunEnable.isEnabled = false
+            darkHoursEnable.isEnabled = false
+            darkStartTime.isEnabled = false
         } else {
             // autoSwitch is enabled, enable sunSwitch
             sunEnable.isEnabled = true
+            darkHoursEnable.isEnabled = true
 
             // if sunSwitch is enabled, disable kvviews
             startTime.isEnabled = !sunSwitchEnabled
             endTime.isEnabled = !sunSwitchEnabled
+            darkStartTime.isEnabled = darkHoursEnabled
         }
     }
 
@@ -145,10 +163,24 @@ class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
             viewWhoIsCallingIt!!.setValueText(timeString)
 
             addNextDayIfNecessary()
+            fixDarkHoursStartTime()
 
             doCurrentAutoFunctions(true)
         }, time[0], time[1], false)
         timePickerDialog.show()
+    }
+
+    private fun fixDarkHoursStartTime() {
+        val nextDayString = getString(R.string.next_day)
+        val start = startTime.valueTextView.text.toString().replace(nextDayString, "")
+        val end = endTime.valueTextView.text.toString().replace(nextDayString, "")
+        val test = darkStartTime.valueTextView.text.toString().replace(nextDayString, "")
+        val b = TimeUtils.determineWhetherNLShouldBeOnOrNot(start, end, test)
+        if (!b) {
+            darkStartTime.setValueText(start)
+            PreferenceHelper.putString(context, Constants.PREF_DARK_HOURS_START, start)
+            Toast.makeText(context, R.string.dark_hours_set_error, Toast.LENGTH_SHORT).show()
+        }
     }
 
     /**
@@ -169,10 +201,19 @@ class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
     private fun doCurrentAutoFunctions(setAlarms: Boolean) {
         val prefStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
         val prefEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
+        val prefDarkStartTime = PreferenceHelper.getString(context, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)
 
         val toEnable = TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime!!, prefEndTime!!)
 
-        Core.applyNightModeAsync(toEnable, context)
+        val isMinIntensity = TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefDarkStartTime!!)
+        val isMaxIntensity = TimeUtils.determineWhetherNLShouldBeOnOrNot(prefDarkStartTime, prefEndTime)
+
+        var intensity: Int? = null
+
+        if (isMinIntensity) intensity = Constants.INTENSITY_TYPE_MINIMUM
+        else if (isMaxIntensity) intensity = Constants.INTENSITY_TYPE_MAXIMUM
+
+        Core.applyNightModeAsync(toEnable, context, true, if (darkHoursEnabled) intensity else null)
 
         if (setAlarms) AlarmUtils.setAlarms(context!!, prefStartTime, prefEndTime, true)
     }

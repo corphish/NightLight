@@ -200,11 +200,12 @@ object Core {
      * @param b A boolean indicating whether night light should be turned on or off
      * @param context A context parameter to read the intensity values from preferences
      * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated
+     * @param intensityType Intensity type. Null if type is to be fetched
      */
     @JvmOverloads
-    fun applyNightModeAsync(b: Boolean, context: Context?, toUpdateGlobalState: Boolean = true) {
+    fun applyNightModeAsync(b: Boolean, context: Context?, toUpdateGlobalState: Boolean = true, intensityType: Int? = null) {
         val mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
-        val type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
+        val type = intensityType ?: PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
         if (mode == Constants.NL_SETTING_MODE_MANUAL) {
             applyNightModeAsync(b,
                     context,

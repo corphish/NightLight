@@ -8,8 +8,8 @@ import android.widget.SeekBar
 
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment
 import com.corphish.nightlight.helpers.PreferenceHelper
-import com.corphish.nightlight.services.NightLightAppService
 import com.gregacucnik.EditableSeekBar
 import kotlinx.android.synthetic.main.layout_set_on_boot_delay.*
 

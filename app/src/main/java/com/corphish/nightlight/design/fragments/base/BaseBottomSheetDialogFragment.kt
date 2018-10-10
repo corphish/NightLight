@@ -1,4 +1,4 @@
-package com.corphish.nightlight.design.fragments
+package com.corphish.nightlight.design.fragments.base
 
 import android.os.Bundle
 import com.corphish.nightlight.R

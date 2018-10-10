@@ -13,12 +13,12 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.R
+import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment
+import com.corphish.nightlight.design.fragments.base.FullyExpandedBottomSheetDialogFragment
 import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.services.NightLightAppService
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.layout_temperature.*
 import com.gregacucnik.EditableSeekBar
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.layout_color_control.*
 
 
@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.layout_color_control.*
  * Filter fragment
  */
 
-class ColorControlFragment : BaseBottomSheetDialogFragment() {
+class ColorControlFragment : FullyExpandedBottomSheetDialogFragment() {
     private var redColor: Int = 0
     private var greenColor: Int = 0
     private var blueColor: Int = 0
@@ -47,13 +47,6 @@ class ColorControlFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // From https://stackoverflow.com/questions/35937453/set-state-of-bottomsheetdialogfragment-to-expanded
-        dialog.setOnShowListener {
-            val d = it as BottomSheetDialog
-            val bottomSheetInternal = d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            BottomSheetBehavior.from(bottomSheetInternal!!).setState(BottomSheetBehavior.STATE_EXPANDED)
-        }
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.layout_color_control, container, false)
     }

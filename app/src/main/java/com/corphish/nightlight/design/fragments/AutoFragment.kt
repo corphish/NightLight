@@ -22,6 +22,8 @@ import com.corphish.nightlight.helpers.LocationUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
 import com.corphish.nightlight.R
+import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment
+import com.corphish.nightlight.design.fragments.base.FullyExpandedBottomSheetDialogFragment
 import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.widgets.KeyValueView
 import com.google.android.material.snackbar.Snackbar
@@ -31,7 +33,7 @@ import com.google.android.material.snackbar.Snackbar
  * Auto related fragment
  */
 
-class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
+class AutoFragment : FullyExpandedBottomSheetDialogFragment(), LocationListener {
     private var sunSwitchStatus: Boolean = false
     private var autoSwitchStatus: Boolean = false
     private var darkHoursEnabled = false

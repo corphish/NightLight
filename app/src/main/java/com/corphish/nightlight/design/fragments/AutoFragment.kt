@@ -92,6 +92,7 @@ class AutoFragment : FullyExpandedBottomSheetDialogFragment(), LocationListener 
                 addNextDayIfNecessary()
                 doCurrentAutoFunctions(true)
             }
+            fixDarkHoursStartTime()
             enableOrDisableAutoSwitchViews(autoEnable.isChecked)
         }
         autoEnable.isChecked = autoSwitchStatus

@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import com.corphish.nightlight.receivers.DarkStartNLReceiver
 
 import com.corphish.nightlight.receivers.StartNLReceiver
 import com.corphish.nightlight.receivers.StopNLReceiver
@@ -26,9 +27,12 @@ object AlarmUtils {
      * @param startTime Starting time for alarm
      * @param endTime Ending time for alarm
      */
-    fun setAlarms(context: Context, startTime: String, endTime: String, repeating: Boolean) {
+    fun setAlarms(context: Context, startTime: String, endTime: String, darkHoursEnabled: Boolean = false, darkStartTime: String? = null, repeating: Boolean) {
         // Set start alarm
         setAlarm(context, startTime, repeating, StartNLReceiver::class.java, REQUEST_CODE_START)
+
+        if (darkHoursEnabled && darkStartTime != null) // Set start alarm
+            setAlarm(context, darkStartTime, repeating, DarkStartNLReceiver::class.java, REQUEST_CODE_START)
 
         // Set end alarm
         setAlarm(context, endTime, repeating, StopNLReceiver::class.java, REQUEST_CODE_STOP)

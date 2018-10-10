@@ -24,9 +24,11 @@ object BootUtils {
         val masterSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_MASTER_SWITCH)
         val autoSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH)
         val sunSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_SUN_SWITCH)
+        val darkHoursEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_DARK_HOURS_ENABLE, false)
 
         val sStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
         val sEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
+        val darkStartTime = PreferenceHelper.getString(context, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)
 
         if (!masterSwitch) return
         if (sStartTime == null || sEndTime == null) return
@@ -40,7 +42,7 @@ object BootUtils {
         Core.applyNightModeAsync(state, context)
 
         if (!sunSwitch)
-            AlarmUtils.setAlarms(context, sStartTime, sEndTime, true)
+            AlarmUtils.setAlarms(context, sStartTime, sEndTime, darkHoursEnabled, darkStartTime, true)
         else
             TwilightManager.newInstance()
                     .atLocation(PreferenceHelper.getLocation(context))

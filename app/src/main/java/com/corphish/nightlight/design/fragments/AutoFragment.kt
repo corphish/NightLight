@@ -220,7 +220,7 @@ class AutoFragment : BaseBottomSheetDialogFragment(), LocationListener {
 
         Core.applyNightModeAsync(toEnable, context, true, if (darkHoursEnabled) intensity else null)
 
-        if (setAlarms) AlarmUtils.setAlarms(context!!, prefStartTime, prefEndTime, true)
+        if (setAlarms) AlarmUtils.setAlarms(context!!, prefStartTime, prefEndTime, darkHoursEnabled, prefDarkStartTime, true)
     }
 
     /**

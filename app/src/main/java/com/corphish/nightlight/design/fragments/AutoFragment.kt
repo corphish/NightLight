@@ -64,6 +64,7 @@ class AutoFragment : FullyExpandedBottomSheetDialogFragment(), LocationListener 
         FontUtils().setCustomFont(context!!, autoEnable, sunEnable)
 
         autoEnable.setOnCheckedChangeListener { _, b ->
+            autoSwitchStatus = b
             if (b)
                 doCurrentAutoFunctions(true)
             else {
@@ -77,6 +78,7 @@ class AutoFragment : FullyExpandedBottomSheetDialogFragment(), LocationListener 
 
         sunEnable.setOnCheckedChangeListener { _, b ->
             PreferenceHelper.putBoolean(context, Constants.PREF_SUN_SWITCH, b)
+            sunSwitchStatus = b
             if (b) {
                 doLocationStuff()
             } else {

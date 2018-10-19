@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="setting_fragment_enabled">false</bool>
+    <bool name="setting_fragment_enabled">true</bool>
 </resources>

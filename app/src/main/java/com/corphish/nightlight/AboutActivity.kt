@@ -2,6 +2,7 @@ package com.corphish.nightlight
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -9,6 +10,7 @@ import com.corphish.nightlight.design.fragments.AboutFragment
 import com.corphish.nightlight.helpers.ExternalLink
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.layout_header.*
 
 class AboutActivity : AppCompatActivity() {
 
@@ -20,7 +22,8 @@ class AboutActivity : AppCompatActivity() {
             showActions()
         }
 
-        findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
+        banner_title.text = getString(R.string.about)
+        banner_icon.setImageResource(R.drawable.ic_info_24dp)
 
         if (savedInstanceState == null) viewInit()
     }

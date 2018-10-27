@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
@@ -21,6 +20,7 @@ import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.extensions.toArrayOfInts
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.layout_header.*
 
 class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener, NightLightSettingModeListener {
 
@@ -72,7 +72,8 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                 .add(containerId, MasterSwitchFragment())
                 .commit()
 
-        findViewById<TextView>(R.id.banner_title).text = getString(R.string.overview)
+        banner_title.text = getString(R.string.overview)
+        banner_icon.setImageResource(R.drawable.ic_home_24dp)
 
         fab.setOnClickListener { _ ->
             ProfileCreator(this@MainActivity, ProfileCreator.MODE_CREATE, getProfileForCurrentSettings()) {}.show()

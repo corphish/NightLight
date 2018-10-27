@@ -19,6 +19,7 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_profiles.*
 import kotlinx.android.synthetic.main.content_profiles.*
+import kotlinx.android.synthetic.main.layout_header.*
 
 import java.util.Arrays
 
@@ -54,7 +55,8 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
                     }).show()
         }
 
-        findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
+        banner_title.text = getString(R.string.profile_title)
+        banner_icon.setImageResource(R.drawable.ic_profiles_24dp)
 
         initProfilesManager()
         initViews()

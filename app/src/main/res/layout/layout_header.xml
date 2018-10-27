@@ -1,25 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="8dp">
+    android:padding="@dimen/defaultMargin"
+    android:layout_margin="@dimen/defaultMargin">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_margin="4dp"
-        android:textSize="20sp"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/app_name"/>
+    <ImageButton
+        android:contentDescription="@null"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="@dimen/defaultPadding"
+        android:layout_marginStart="@dimen/defaultMargin"
+        android:layout_marginEnd="@dimen/defaultMargin"
+        android:id="@+id/banner_icon"
+        android:layout_centerVertical="true"
+        android:background="@drawable/circle"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/banner_title"
-        android:textSize="12sp"/>
-</LinearLayout>
+        android:layout_marginStart="@dimen/defaultMargin"
+        android:layout_marginEnd="@dimen/defaultMargin"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_toEndOf="@id/banner_icon">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:id="@+id/banner_heading"
+            android:textAppearance="?android:attr/textAppearance"
+            android:text="@string/app_name"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/banner_title"
+            android:textSize="13sp"/>
+    </LinearLayout>
+</RelativeLayout>

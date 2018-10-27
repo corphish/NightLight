@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/layout_padding"
+    android:layout_margin="@dimen/layout_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?attr/textAppearanceButton"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:textSize="12sp"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/kcal_driver_information_full"/>
+
+    <com.corphish.widgets.KeyValueView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/implName"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        custom:keyText="@string/impl_name"
+        custom:keySize="@dimen/text_normal"
+        custom:valueSize="@dimen/text_desc"/>
+
+    <com.corphish.widgets.KeyValueView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/implSwitchPath"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        custom:keyText="@string/impl_switch_path"
+        custom:keySize="@dimen/text_normal"
+        custom:valueSize="@dimen/text_desc"/>
+
+    <com.corphish.widgets.KeyValueView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/implFilePaths"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        custom:keyText="@string/impl_rgb_file_paths"
+        custom:keySize="@dimen/text_normal"
+        custom:valueSize="@dimen/text_desc"/>
+
+    <com.corphish.widgets.KeyValueView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/implFormat"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        custom:keyText="@string/impl_format"
+        custom:keySize="@dimen/text_normal"
+        custom:valueSize="@dimen/text_desc"/>
+</LinearLayout>

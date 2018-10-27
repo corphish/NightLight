@@ -58,7 +58,8 @@ class SettingFragment: Fragment() {
                 SettingOption(R.string.section_auto, R.drawable.ic_alarm_white_24dp, AutoFragment()),
                 SettingOption(R.string.section_kcal_backup, R.drawable.ic_settings_backup_restore_white_24dp, KCALBackupSettingsFragment()),
                 SettingOption(R.string.section_sob, R.drawable.ic_timer_white_24dp, SetOnBootDelayFragment()),
-                SettingOption(R.string.profile_title, R.drawable.ic_profiles_24dp, activityClass =  ProfilesActivity::class.java)
+                SettingOption(R.string.profile_title, R.drawable.ic_profiles_24dp, activityClass =  ProfilesActivity::class.java),
+                SettingOption(R.string.kcal_driver_information_short, R.drawable.ic_driver_24dp, KCALDriverInfoFragment())
         )
 
         settingsAdapter.list = settingsOptions

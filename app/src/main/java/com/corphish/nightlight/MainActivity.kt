@@ -145,7 +145,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         val id = item.itemId
 
         if (id == R.id.about_menu) showAbout()
-        if (id == R.id.about_profiles) showProfiles()
         if (id == R.id.about_faq) showFAQ()
 
         return super.onOptionsItemSelected(item)
@@ -153,10 +152,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
     private fun showAbout() {
         startActivity(Intent(this, AboutActivity::class.java))
-    }
-
-    private fun showProfiles() {
-        startActivity(Intent(this, ProfilesActivity::class.java))
     }
 
     private fun showFAQ() {

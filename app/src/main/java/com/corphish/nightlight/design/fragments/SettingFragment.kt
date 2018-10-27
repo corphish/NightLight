@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.corphish.nightlight.ProfilesActivity
 import com.corphish.nightlight.R
 import com.corphish.nightlight.services.NightLightAppService
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -56,7 +57,8 @@ class SettingFragment: Fragment() {
                 SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, ColorControlFragment()),
                 SettingOption(R.string.section_auto, R.drawable.ic_alarm_white_24dp, AutoFragment()),
                 SettingOption(R.string.section_kcal_backup, R.drawable.ic_settings_backup_restore_white_24dp, KCALBackupSettingsFragment()),
-                SettingOption(R.string.section_sob, R.drawable.ic_timer_white_24dp, SetOnBootDelayFragment())
+                SettingOption(R.string.section_sob, R.drawable.ic_timer_white_24dp, SetOnBootDelayFragment()),
+                SettingOption(R.string.profile_title, R.drawable.ic_profiles_24dp, activityClass =  ProfilesActivity::class.java)
         )
 
         settingsAdapter.list = settingsOptions

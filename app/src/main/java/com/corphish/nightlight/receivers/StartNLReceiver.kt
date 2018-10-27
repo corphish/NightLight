@@ -25,7 +25,7 @@ class StartNLReceiver : BroadcastReceiver() {
         // If dark hours is enabled, use min intensity
         val intensity: Int? = if (darkHoursEnabled) Constants.INTENSITY_TYPE_MINIMUM else null
         if (darkHoursEnabled) {
-            PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE,Constants.INTENSITY_TYPE_MINIMUM)
+            PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
         }
 
         // Both of the switches must be on to proceed

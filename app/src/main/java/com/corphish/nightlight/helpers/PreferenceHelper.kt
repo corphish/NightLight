@@ -20,10 +20,9 @@ object PreferenceHelper {
      * @param defaultValue Default value to return if preference for given key is not found
      * @return The boolean value of shared preference for given key
      */
-    fun getBoolean(context: Context?, key: String, defaultValue: Boolean = false): Boolean {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(key, defaultValue)
-    }
+    fun getBoolean(context: Context?, key: String, defaultValue: Boolean = false)
+        = PreferenceManager.getDefaultSharedPreferences(context)
+            .getBoolean(key, defaultValue)
 
     /**
      * Puts boolean value for key as shared preference
@@ -44,10 +43,9 @@ object PreferenceHelper {
      * @param defaultValue Default value to return if shared preference for given key is not found
      * @return Value as int of required shared preference
      */
-    fun getInt(context: Context?, key: String, defaultValue: Int): Int {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getInt(key, defaultValue)
-    }
+    fun getInt(context: Context?, key: String, defaultValue: Int)
+        = PreferenceManager.getDefaultSharedPreferences(context)
+            .getInt(key, defaultValue)
 
     /**
      * Puts int in required shared preference
@@ -68,10 +66,9 @@ object PreferenceHelper {
      * @param defaultValue Default value to return if shared preference for given key is not found
      * @return Value as String of required shared preference
      */
-    fun getString(context: Context?, key: String, defaultValue: String? = null): String? {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(key, defaultValue)
-    }
+    fun getString(context: Context?, key: String, defaultValue: String? = null): String? =
+            PreferenceManager.getDefaultSharedPreferences(context)
+                    .getString(key, defaultValue)
 
     /**
      * Puts String in required shared preference

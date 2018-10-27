@@ -1,5 +1,6 @@
 package com.corphish.nightlight.design.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -85,7 +86,15 @@ class SettingFragment: Fragment() {
             }
 
             override fun onClick(v: View) {
-                list[adapterPosition].fragment.show(childFragmentManager, "")
+                val fragment = list[adapterPosition].fragment
+                val activityClass = list[adapterPosition].activityClass
+                if (fragment != null)
+                    fragment.show(childFragmentManager, "")
+                else {
+                    if (activityClass != null) {
+                        context?.startActivity(Intent(context, activityClass))
+                    } // else case should never happen
+                }
             }
         }
 
@@ -116,11 +125,12 @@ class SettingFragment: Fragment() {
     private data class SettingOption(
             val name: Int,
             val iconId: Int,
-            val fragment: BottomSheetDialogFragment
+            val fragment: BottomSheetDialogFragment? = null,
+            val activityClass: Class<*>? = null
     )
 
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {
-        settingsOptions[1].fragment.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        settingsOptions[1].fragment?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }

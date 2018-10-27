@@ -135,6 +135,8 @@
     <string name="dashboard_inside_auto">Inside of automatic schedule time period. Night Light will be automatically turned off in about %1$d hour(s).</string>
     <string name="dashboard_outside_auto">Outside of automatic schedule time period. Night Light will be automatically turned on in about %1$d hour(s).</string>
 
+    <string name="settings">Settings</string>
+
     <string name="manual_mode_title">Manual Mode</string>
     <string name="manual_mode_desc">Manual KCAL color controls gives you full freedom on how you would like to tune display colors so that your needs are met.</string>
 

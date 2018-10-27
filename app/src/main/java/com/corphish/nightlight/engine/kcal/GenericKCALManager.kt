@@ -50,4 +50,12 @@ class GenericKCALManager : KCALAbstraction {
                 colorReadings[2].toInt()
         )
     }
+
+    override fun getImplementationName() = "Generic KCAL"
+
+    override fun getImplementationSwitchPath() = KCAL_SWITCH
+
+    override fun getImplementationFilePaths() = KCAL_COLOR
+
+    override fun getImplementationFormat() = "%d %d %d"
 }

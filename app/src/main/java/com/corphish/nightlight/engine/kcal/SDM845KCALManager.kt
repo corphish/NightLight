@@ -52,4 +52,12 @@ class SDM845KCALManager : KCALAbstraction {
                 RootUtils.readOneLine(KCAL_BLUE).toInt()
         )
     }
+
+    override fun getImplementationName() = "KCAL for v4.4 kernels"
+
+    override fun getImplementationSwitchPath() = "Not Available"
+
+    override fun getImplementationFilePaths() = "$KCAL_RED\n$KCAL_GREEN\n$KCAL_BLUE"
+
+    override fun getImplementationFormat() = "%d"
 }

@@ -32,4 +32,12 @@ class DummyKCALManager : KCALAbstraction {
     override fun getColorReadings(): IntArray {
         return intArrayOf(0, 0, 0)
     }
+
+    override fun getImplementationName() = ""
+
+    override fun getImplementationSwitchPath() = ""
+
+    override fun getImplementationFilePaths() = ""
+
+    override fun getImplementationFormat() = ""
 }

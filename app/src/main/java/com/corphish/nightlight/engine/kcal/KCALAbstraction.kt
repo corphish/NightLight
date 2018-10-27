@@ -29,4 +29,12 @@ interface KCALAbstraction {
      * A function get current KCAL color readings
      */
     fun getColorReadings() : IntArray
+
+    /**
+     * Driver information
+     */
+    fun getImplementationName(): String
+    fun getImplementationSwitchPath(): String
+    fun getImplementationFilePaths(): String
+    fun getImplementationFormat(): String
 }

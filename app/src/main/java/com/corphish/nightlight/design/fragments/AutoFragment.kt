@@ -22,7 +22,6 @@ import com.corphish.nightlight.helpers.LocationUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
 import com.corphish.nightlight.R
-import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment
 import com.corphish.nightlight.design.fragments.base.FullyExpandedBottomSheetDialogFragment
 import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.widgets.KeyValueView
@@ -112,6 +111,7 @@ class AutoFragment : FullyExpandedBottomSheetDialogFragment(), LocationListener 
             darkHoursEnabled = b
             PreferenceHelper.putBoolean(context, Constants.PREF_DARK_HOURS_ENABLE, b)
             enableOrDisableAutoSwitchViews(autoSwitchStatus)
+            fixDarkHoursStartTime()
         }
 
         darkHoursEnable.isChecked = darkHoursEnabled
@@ -176,11 +176,14 @@ class AutoFragment : FullyExpandedBottomSheetDialogFragment(), LocationListener 
         timePickerDialog.show()
     }
 
-    private fun fixDarkHoursStartTime() {
-        val nextDayString = getString(R.string.next_day)
-        val start = startTime.valueTextView.text.toString().replace(nextDayString, "")
-        val end = endTime.valueTextView.text.toString().replace(nextDayString, "")
-        val test = darkStartTime.valueTextView.text.toString().replace(nextDayString, "")
+    private fun fixDarkHoursStartTime(darkTime: String? = null) {
+        val start = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
+        val end = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
+        val test = darkTime ?: PreferenceHelper.getString(context, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)
+
+        // Unnecessary null checks but enables smart casting
+        if (start == null || end == null) return
+
         val b = TimeUtils.determineWhetherNLShouldBeOnOrNot(start, end, test)
         if (!b) {
             darkStartTime.setValueText(start)

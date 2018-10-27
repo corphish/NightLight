@@ -17,7 +17,7 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 
 object KCALManager {
 
-    private var kcalImplementation: KCALAbstraction
+    var kcalImplementation: KCALAbstraction
 
     init {
         kcalImplementation = GenericKCALManager()

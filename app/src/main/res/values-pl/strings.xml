@@ -49,7 +49,6 @@
     <string name="section_color">Kontrola kolorów</string>
     <string name="section_sob">Ustaw podczas uruchaminia telefonu</string>
     <string name="section_auto">Automatyzacja</string>
-    <string name="section_misc">Różne</string>
     <string name="section_profiles_list">Lista stworzonych profili</string>
     <string name="profiles_desc">Profile to kolekcja ustawień które możesz ustawić za pomocą jednego kliknięcie, albo pozwlić by aplikacji taka jak Tasker używajac swoich automatycznch profili zrobiła to za ciebie.</string>
     <string name="contributors"><u>Współtwórcy</u></string>

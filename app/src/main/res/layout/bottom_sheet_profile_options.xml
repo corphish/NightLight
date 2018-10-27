@@ -17,8 +17,8 @@
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:paddingTop="@dimen/layout_padding"
-        android:paddingBottom="12dp"
         android:textAppearance="?android:textAppearance"
+        android:paddingBottom="12dp"
         android:layout_margin="@dimen/layout_margin"
         android:id="@+id/selectedProfileName"/>
 
@@ -26,36 +26,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layout_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
         android:textAppearance="?android:textAppearance"
         android:layout_margin="@dimen/layout_margin"
         android:id="@+id/apply"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:drawableStart="@drawable/ic_apply_24dp"
         android:text="@string/apply"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layout_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
         android:textAppearance="?android:textAppearance"
         android:layout_margin="@dimen/layout_margin"
         android:id="@+id/edit"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:drawableStart="@drawable/ic_edit_24dp"
         android:text="@string/edit"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layout_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
         android:textAppearance="?android:textAppearance"
         android:layout_margin="@dimen/layout_margin"
         android:id="@+id/delete"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:drawableStart="@drawable/ic_delete_24dp"
         android:text="@string/delete"/>
 
 </LinearLayout>

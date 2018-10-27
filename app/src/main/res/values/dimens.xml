@@ -1,6 +1,4 @@
 <resources>
-    <dimen name="app_bar_height">200dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
     <dimen name="text_caption">16sp</dimen>
@@ -12,6 +10,4 @@
     <dimen name="layout_padding">4dp</dimen>
 
     <dimen name="group_padding">12dp</dimen>
-
-    <dimen name="card_elevation">8dp</dimen>
 </resources>

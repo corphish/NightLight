@@ -31,6 +31,9 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:textAppearance="?android:textAppearance"
         android:layout_margin="@dimen/layout_margin"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:drawableStart="@drawable/ic_store_24dp"
         android:id="@+id/donateAction1"
         android:text="@string/donate_with_app"/>
 
@@ -43,6 +46,9 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:textAppearance="?android:textAppearance"
         android:layout_margin="@dimen/layout_margin"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:drawableStart="@drawable/ic_money_24dp"
         android:id="@+id/donateAction2"
         android:text="@string/donate_with_paypal"/>
 </LinearLayout>

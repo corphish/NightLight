@@ -23,6 +23,5 @@
         android:id="@+id/settingOptionCaption"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
-        android:text="Caption"
         style="?android:attr/textAppearance"/>
 </LinearLayout>

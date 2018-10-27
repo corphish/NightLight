@@ -91,7 +91,8 @@
             android:permission="android.permission.BIND_JOB_SERVICE"
             android:process=":booting" />
 
-        <receiver android:name=".receivers.TaskerIntentReceiver">
+        <receiver android:name=".receivers.TaskerIntentReceiver"
+            android:permission="">
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
             </intent-filter>

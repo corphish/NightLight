@@ -3,7 +3,6 @@ package com.corphish.nightlight.receivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.ProfilesManager

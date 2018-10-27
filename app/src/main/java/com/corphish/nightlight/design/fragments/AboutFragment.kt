@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.corphish.nightlight.BuildConfig
 
 import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.nightlight.R
@@ -29,5 +30,8 @@ class AboutFragment : Fragment() {
         contributorsLink.setOnClickListener { ExternalLink.open(context, "https://github.com/corphish/NightLight/graphs/contributors") }
         githubLink.setOnClickListener { ExternalLink.open(context, "https://github.com/corphish/NightLight/") }
         xdaLink.setOnClickListener { ExternalLink.open(context, "https://forum.xda-developers.com/android/apps-games/app-night-light-kcal-t3689090") }
+
+        val versionText = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+        version.text = versionText
     }
 }

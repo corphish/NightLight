@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                 .add(containerId, MasterSwitchFragment())
                 .commit()
 
-        findViewById<TextView>(R.id.banner_title).text = getString(R.string.banner_app_name, BuildConfig.VERSION_NAME)
+        findViewById<TextView>(R.id.banner_title).text = getString(R.string.overview)
 
         fab.setOnClickListener { _ ->
             ProfileCreator(this@MainActivity, ProfileCreator.MODE_CREATE, getProfileForCurrentSettings()) {}.show()

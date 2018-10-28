@@ -16,18 +16,28 @@ KCAL is a display driver tuning feature for Qualcomm devices, written by `savoca
 ### Why on earth did I make it?
 I flashed a LineageOS oreo build on my device, but there was no night light feature available on the ROM. The build itself was early so there was no LiveDisplay, and the Android Oreo night light feature was not their as it is Pixel specific. Luckily, the kernel shipped with the build had KCAL, so I decided to harness this feature. But I had to everytime use a kernel manager app, and had to adjust the intensity, hence I decided to make an app that would make this easier for me.
 
+
 ### Features
-* Control blue light filter intensity to your liking.
-* Control green light filter to add reddish tint.
-* Or, use color temperature setting to tune Night Light.
-* Easy one touch toggles, with a single slider to tweak blue light intensity.
-* Quick Setting tile for easy toggling on/off night light anywhere.
+* Easy to use user interface. Settings are easier to find.
+* Uses KCAL to adjust screen RGB colors, hence its efficient and changes are seen everywhere on screen.
+* Supports older KCAL implementations as well as newer KCAL implementation for v4.4 kernels.
+* Simple color controls for normal users through color temperature control.
+* Manual KCAL controls for advanced users.
+* Maximum and minimum color intensities. Use minimum intensity at evenings under lighted conditions, and maximum intensity at nights under pitch dark conditions.
+* Support for user profiles, which are collections of settings that user can apply with one click.
 * Automatic switching on/off night light at user specified timings.
 * Supports sunset/sunrise timings.
-* Set on boot delay.
-* Support for user profiles, which are collections of settings that user can apply with one click.
+* Additionally, dark hours start time is supported to make use of minimum and maximum intensities.
 * And to fulfill your all kinds of automation needs, app is supported as a Tasker plugin. You can use it with Profiles.
-* Material design.
+* Set on boot delay.
+* Original KCAL settings of user is backed up and applied when night light is turned off. And it can be configured as well.
+* Quick Setting tile for easy toggling on/off night light anywhere.
+* Launcher icon shortcut for toggling Night Light on/off and toggling intensities.
+
+### Advantages
+* __No overlays__ - As it uses KCAL to adjust screen colors.
+* __No background service__ -  Once again, as it uses KCAL to adjust KCAL screen colors, it does not need to keep a background service running. It simply makes changes by updating KCAL values, which, once changed, will persist until a reboot is made (unless the values are changed). For automation, alarms are used.
+* __Battery friendly alarm implementation__ - Alarms implemented (for automation) does not necessarily trigger at the exact specified time as they are needed to. They are only triggered at a given time when the screen is on at that time. Otherwise, they are triggered as soon as the user turns on the screen after the given time.
 
 ### Requirements
 * Kernel supporting KCAL.

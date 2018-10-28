@@ -15,7 +15,6 @@
         android:layout_marginStart="@dimen/defaultMargin"
         android:layout_marginEnd="@dimen/defaultMargin"
         android:id="@+id/banner_icon"
-        android:tint="#333333"
         android:layout_centerVertical="true"
         android:background="@drawable/circle"/>
 

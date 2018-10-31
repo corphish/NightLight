@@ -3,5 +3,6 @@
     <declare-styleable name="ThemeColors">
         <attr name="themeCircleBackground" format="color" />
         <attr name="themeCircleForeground" format="color" />
+        <attr name="themeStroke" format="color" />
     </declare-styleable>
 </resources>

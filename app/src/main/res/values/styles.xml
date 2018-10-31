@@ -9,6 +9,7 @@
         <item name="android:fontFamily">@font/cust_font</item>
         <item name="themeCircleBackground">@color/circleBackgroundDark</item>
         <item name="themeCircleForeground">@color/circleForegroundDark</item>
+        <item name="themeStroke">@color/strokeDark</item>
     </style>
 
     <style name="AppThemeLight" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -21,6 +22,7 @@
         <item name="themeCircleBackground">@color/circleBackgroundLight</item>
         <item name="themeCircleForeground">@color/circleForegroundLight</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="themeStroke">@color/strokeLight</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">

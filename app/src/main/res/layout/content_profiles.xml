@@ -62,8 +62,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                app:viewTint="#666666"
-                android:paddingTop="96dp"
+                app:viewTint="?themeStroke"
+                android:paddingTop="32dp"
                 app:titleText="@string/profile_empty_title"
                 app:descriptionText="@string/profile_empty_desc"
                 app:srcCompat="@drawable/ic_error_large"/>

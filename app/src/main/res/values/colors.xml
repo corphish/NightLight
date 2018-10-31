@@ -9,4 +9,7 @@
     <color name="circleForegroundDark">#333333</color>
     <color name="circleBackgroundLight">#ffe0b3</color>
     <color name="circleForegroundLight">#cc7a00</color>
+
+    <color name="strokeDark">#505050</color>
+    <color name="strokeLight">#b0b0b0</color>
 </resources>

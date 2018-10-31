@@ -25,7 +25,6 @@
                 android:id="@+id/profile_action_title"
                 android:text="@string/profile_create_title"
                 android:textSize="12sp"
-                android:textStyle="bold"
                 android:textAppearance="?attr/textAppearanceButton"
                 android:textColor="@color/colorPrimary"
                 android:paddingEnd="@dimen/layout_padding"
@@ -161,16 +160,18 @@
                 android:layout_margin="@dimen/layout_margin"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="wrap_content"
-                    android:padding="@dimen/layout_padding"
+                    app:cornerRadius="4dp"
+                    android:padding="8dp"
+                    android:textAppearance="?android:attr/textAppearance"
                     android:text="@android:string/ok"
                     android:id="@+id/button_ok"
                     app:backgroundTint="@color/colorPrimary"
                     android:layout_alignParentEnd="true"
                     android:layout_height="wrap_content" />
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/layout_padding"
@@ -178,9 +179,10 @@
                     android:paddingEnd="8dp"
                     android:paddingBottom="@dimen/layout_padding"
                     android:id="@+id/button_cancel"
-                    android:textAppearance="?android:textAppearanceButton"
+                    android:textAppearance="?android:textAppearance"
                     android:layout_centerVertical="true"
                     android:textColor="@color/colorAccent"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:text="@android:string/cancel"
                     android:layout_toStartOf="@id/button_ok"/>
             </RelativeLayout>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/layout_padding"
     android:layout_margin="@dimen/layout_margin"
     android:layout_height="match_parent">
@@ -40,10 +43,11 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_desc"
         android:id="@+id/configureKcalBackup"
         android:layout_gravity="end"
         android:layout_margin="@dimen/layout_margin"
-        android:padding="@dimen/layout_padding"
+        app:cornerRadius="4dp"
+        android:padding="8dp"
+        android:textAppearance="?android:attr/textAppearance"
         android:text="@string/kcal_backup_set"/>
 </LinearLayout>

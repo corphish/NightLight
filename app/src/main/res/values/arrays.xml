@@ -8,4 +8,7 @@
         <item>@string/maximum</item>
         <item>@string/minimum</item>
     </string-array>
+    <array name="preloaded_fonts">
+        <item>@font/cust_font</item>
+    </array>
 </resources>

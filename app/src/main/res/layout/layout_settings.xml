@@ -12,7 +12,7 @@
         android:layout_marginEnd="@dimen/defaultMargin"
         android:padding="@dimen/defaultPadding"
         android:textColor="@color/colorPrimary"
-        style="?attr/textAppearanceButton"
+        android:textAppearance="?attr/textAppearanceButton"
         android:textSize="@dimen/text_sub_desc"/>
 
     <androidx.recyclerview.widget.RecyclerView

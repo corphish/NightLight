@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.TextView
 
 import com.corphish.nightlight.R
+import com.corphish.nightlight.design.ThemeUtils
 
 /**
  * Created by avinabadalal on 06/03/18.
@@ -29,7 +30,7 @@ class BottomSheetAlertDialog(val context: Context) {
         negativeButton = contentView.findViewById(R.id.negativeButton)
         positiveButton = contentView.findViewById(R.id.positiveButton)
 
-        bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialogDark)
+        bottomSheetDialog = BottomSheetDialog(context, ThemeUtils.getBottomSheetTheme(context))
     }
 
     fun setTitle(@StringRes iTitle: Int): BottomSheetAlertDialog {

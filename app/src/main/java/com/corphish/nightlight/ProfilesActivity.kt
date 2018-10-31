@@ -112,7 +112,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
                     showAlert(R.string.confirm, getString(R.string.tasker_confirm_selection, profiles!![adapterPosition].name), View.OnClickListener { returnBack(profiles!![adapterPosition].name) })
                 } else {
                     curProfile = profiles!![adapterPosition]
-                    optionsDialog = BottomSheetDialog(this@ProfilesActivity, R.style.BottomSheetDialogDark)
+                    optionsDialog = BottomSheetDialog(this@ProfilesActivity, ThemeUtils.getBottomSheetTheme(context))
                     getOptionsView(curProfile!!)
                     optionsDialog.setContentView(optionsView)
                     optionsDialog.show()

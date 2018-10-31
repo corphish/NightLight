@@ -15,11 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorPrimary"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         app:fabAlignmentMode="center"
         app:hideOnScroll="true"/>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

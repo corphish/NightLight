@@ -42,7 +42,7 @@ object Constants {
     const val PREF_INTENSITY_TYPE = "intensity_type"
     const val PREF_DARK_HOURS_ENABLE = "dark_hours_enable"
     const val PREF_DARK_HOURS_START = "dark_hours_start"
-
+    const val PREF_LIGHT_THEME = "light_theme"
 
     /**
      * Fixed const values (default, max const values)
@@ -62,6 +62,7 @@ object Constants {
     const val DEFAULT_MAX_COLOR_TEMP = 4000
     const val DEFAULT_MIN_COLOR_TEMP = 4500
     const val DEFAULT_BOOT_DELAY = 20
+    const val DEFAULT_LIGHT_THEME = false
 
     /**
      * Night light setting modes

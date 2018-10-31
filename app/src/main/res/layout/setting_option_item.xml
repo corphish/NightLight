@@ -12,6 +12,7 @@
         android:layout_height="48dp"
         android:id="@+id/settingOptionIcon"
         app:srcCompat="@drawable/ic_error"
+        android:tint="?themeCircleForeground"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/defaultMargin"
         android:background="@drawable/circle"/>

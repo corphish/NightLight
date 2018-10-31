@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#282828</color>
     <color name="colorPrimaryDarkSplash">#b36b00</color>
     <color name="colorAccent">#ff531a</color>
+
+    <color name="circleBackgroundDark">#cc7a00</color>
+    <color name="circleForegroundDark">#333333</color>
+    <color name="circleBackgroundLight">#ffe0b3</color>
+    <color name="circleForegroundLight">#cc7a00</color>
 </resources>

@@ -31,7 +31,7 @@
             android:paddingTop="@dimen/layout_padding"
             android:layout_margin="@dimen/layout_margin"
             android:textSize="@dimen/text_caption"
-            android:textColor="@android:color/white"
+            android:textAppearance="?android:attr/textAppearance"
             android:text="@string/intensity_type_title"/>
 
         <TextView

@@ -15,7 +15,7 @@
         android:paddingBottom="@dimen/layout_padding"
         android:textSize="@dimen/text_caption"
         android:id="@+id/manualModeSwitch"
-        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearance"
         android:text="@string/manual_mode_title"/>
 
     <TextView

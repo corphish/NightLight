@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(bottom_app_bar)
+        bottom_app_bar.overflowIcon = getDrawable(R.drawable.ic_more_vert)
 
         NightLightAppService.instance
                 .registerNightLightStateListener(this)

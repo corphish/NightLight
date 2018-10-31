@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SwitchCompat
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
@@ -46,7 +47,7 @@ class ProfileCreator(val context: Context,
     private val settingParam2 = creatorView.findViewById<AppCompatSeekBar>(R.id.profile_night_light_setting_param2)
     private val settingParam3 = creatorView.findViewById<AppCompatSeekBar>(R.id.profile_night_light_setting_param3)
 
-    private val bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialogDark)
+    private val bottomSheetDialog = BottomSheetDialog(context, ThemeUtils.getBottomSheetTheme(context))
 
     private val profilesManager = ProfilesManager(context)
 

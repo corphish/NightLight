@@ -3,7 +3,7 @@
     android:shape="oval">
 
     <solid
-        android:color="@color/colorPrimary"/>
+        android:color="?themeCircleBackground"/>
 
     <size
         android:width="48dp"

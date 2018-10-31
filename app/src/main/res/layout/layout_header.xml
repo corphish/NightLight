@@ -13,6 +13,7 @@
         android:layout_height="48dp"
         android:padding="@dimen/defaultPadding"
         android:id="@+id/banner_icon"
+        android:tint="?themeCircleForeground"
         android:layout_centerVertical="true"
         android:background="@drawable/circle"/>
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment
 import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
@@ -45,13 +46,13 @@ class KCALBackupSettingsFragment: BaseBottomSheetDialogFragment() {
 
         configureKcalBackup.setOnClickListener(View.OnClickListener {
             val context = context ?: return@OnClickListener
-            bottomSheetDialog = BottomSheetDialog(context, R.style.BottomSheetDialogDark)
+            bottomSheetDialog = BottomSheetDialog(context, ThemeUtils.getBottomSheetTheme(context))
             initKCALBackupView()
             bottomSheetDialog.setContentView(kcalBackupSettingsView)
             bottomSheetDialog.show()
         })
 
-        FontUtils().setCustomFont(context!!, preserveSwitch)
+        FontUtils().setCustomFont(context!!, preserveSwitch, backupEveryTimeSwitch)
     }
 
     private fun initKCALBackupView() {

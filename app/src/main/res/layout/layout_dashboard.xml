@@ -55,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/defaultPadding"
+                android:textSize="@dimen/text_desc"
                 android:id="@+id/nlSubStatus"/>
 
             <com.google.android.material.button.MaterialButton

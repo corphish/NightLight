@@ -51,12 +51,12 @@ object Constants {
      */
     const val DEFAULT_START_TIME = "00:00"
     const val DEFAULT_END_TIME = "06:00"
-    const val DEFAULT_MAX_BLUE_COLOR = 256 // TODO
-    const val DEFAULT_MAX_GREEN_COLOR = 256 // TODO
-    const val DEFAULT_MAX_RED_COLOR = 256 // TODO
-    const val DEFAULT_MIN_BLUE_COLOR = 256 // TODO
-    const val DEFAULT_MIN_GREEN_COLOR = 256 // TODO
-    const val DEFAULT_MIN_RED_COLOR = 256 // TODO
+    const val DEFAULT_MAX_BLUE_COLOR = 166
+    const val DEFAULT_MAX_GREEN_COLOR = 205
+    const val DEFAULT_MAX_RED_COLOR = 255
+    const val DEFAULT_MIN_BLUE_COLOR = 187
+    const val DEFAULT_MIN_GREEN_COLOR = 217
+    const val DEFAULT_MIN_RED_COLOR = 255
     const val DEFAULT_LONGITUDE = "0.00"
     const val DEFAULT_LATITUDE = "0.00"
     const val DEFAULT_KCAL_VALUES = "256 256 256"

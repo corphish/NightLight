@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.design.views.ProfileCreator
 import com.corphish.nightlight.engine.ProfilesManager
@@ -40,6 +41,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_profiles)
 
         context = this

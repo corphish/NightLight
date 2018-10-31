@@ -43,6 +43,7 @@ object Constants {
     const val PREF_DARK_HOURS_ENABLE = "dark_hours_enable"
     const val PREF_DARK_HOURS_START = "dark_hours_start"
     const val PREF_LIGHT_THEME = "light_theme"
+    const val PREF_THEME_CHANGE_EVENT = "theme_change_temp"
 
     /**
      * Fixed const values (default, max const values)

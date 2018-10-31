@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.corphish.nightlight.design.ThemeUtils
 import kotlinx.android.synthetic.main.content_usage.*
 import kotlinx.android.synthetic.main.layout_header.*
 
@@ -14,6 +15,7 @@ class UsageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_usage)
 
         banner_title.text = getString(R.string.faq)

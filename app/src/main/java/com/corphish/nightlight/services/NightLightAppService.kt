@@ -2,6 +2,7 @@ package com.corphish.nightlight.services
 
 import com.corphish.nightlight.interfaces.NightLightSettingModeListener
 import com.corphish.nightlight.interfaces.NightLightStateListener
+import com.corphish.nightlight.interfaces.ThemeChangeListener
 
 /**
  * Created by avinabadalal on 30/12/17.
@@ -43,6 +44,11 @@ private constructor() {
      * This night light setting mode change listener listens to setting mode changes and requests to make proper changes
      */
     private var nightLightSettingModeListener: NightLightSettingModeListener? = null
+
+    /**
+     * A listener for theme change event
+     */
+    private var themeChangeListener: ThemeChangeListener? = null
 
     /**
      * This variable indicates whether initial app startup has completed or not.
@@ -91,6 +97,17 @@ private constructor() {
     }
 
     /**
+     * This sets the defined theme change listener in this service
+     * @param themeChangeListener Defined theme change listener
+     * @return This instance to allow chaining of calls
+     */
+    fun registerThemeChangeListener(themeChangeListener: ThemeChangeListener): NightLightAppService {
+        this.themeChangeListener = themeChangeListener
+
+        return this
+    }
+
+    /**
      * External units can notify updated night light state through this
      * @param newState New state of night light
      */
@@ -104,6 +121,14 @@ private constructor() {
      */
     fun notifyNewSettingMode(newMode: Int) {
         if (nightLightSettingModeListener != null) nightLightSettingModeListener!!.onModeChanged(newMode)
+    }
+
+    /**
+     * Global notification for new theme
+     * @param isLightTheme A boolean indicating whether the new theme is light or not
+     */
+    fun notifyThemeChanged(isLightTheme: Boolean) {
+        if (themeChangeListener != null) themeChangeListener!!.onThemeChanged(isLightTheme)
     }
 
     /**

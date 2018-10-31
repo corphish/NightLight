@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.design.fragments.*
 import com.corphish.nightlight.engine.Core
@@ -18,11 +19,12 @@ import com.corphish.nightlight.services.NightLightAppService
 import com.corphish.nightlight.design.views.ProfileCreator
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.extensions.toArrayOfInts
+import com.corphish.nightlight.interfaces.ThemeChangeListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.layout_header.*
 
-class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener, NightLightSettingModeListener {
+class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener, NightLightSettingModeListener, ThemeChangeListener {
 
     private var masterSwitchEnabled: Boolean = false
     private val containerId = R.id.container
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(bottom_app_bar)
@@ -40,6 +43,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         NightLightAppService.instance
                 .registerNightLightStateListener(this)
                 .registerNightLightSettingModeChangeListener(this)
+                .registerThemeChangeListener(this)
                 .startService()
 
         if (savedInstanceState == null) {
@@ -49,6 +53,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         }
 
         supportFragmentManager.executePendingTransactions()
+
         NightLightAppService.instance
                 .notifyInitDone()
 
@@ -72,9 +77,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                 .add(containerId, DashboardFragment())
                 .add(containerId, MasterSwitchFragment())
                 .commit()
-
-        banner_title.text = getString(R.string.overview)
-        banner_icon.setImageResource(R.drawable.ic_home_24dp)
 
         fab.setOnClickListener { _ ->
             ProfileCreator(this@MainActivity, ProfileCreator.MODE_CREATE, getProfileForCurrentSettings()) {}.show()
@@ -154,6 +156,13 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
     private fun showAbout() {
         startActivity(Intent(this, AboutActivity::class.java))
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        banner_title.text = getString(R.string.overview)
+        banner_icon.setImageResource(R.drawable.ic_home_24dp)
     }
 
     private fun showFAQ() {
@@ -237,5 +246,10 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                 settingMode = mode,
                 settings = settings
         )
+    }
+
+    override fun onThemeChanged(isLightTheme: Boolean) {
+        PreferenceHelper.putBoolean(this, Constants.PREF_THEME_CHANGE_EVENT, true)
+        recreate()
     }
 }

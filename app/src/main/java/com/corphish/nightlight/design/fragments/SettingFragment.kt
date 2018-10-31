@@ -11,12 +11,19 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.ProfilesActivity
 import com.corphish.nightlight.R
+import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.layout_settings.*
 
 class SettingFragment: Fragment() {
     private lateinit var settingsOptions: List<SettingOption>
+
+    private val THEME_FRAGMENT_INDEX = 6
+
+    private var toResumeThemeChangeAction = false
+
     /**
      * Called to have the fragment instantiate its user interface view.
      * This is optional, and non-graphical fragments can return null (which
@@ -59,7 +66,8 @@ class SettingFragment: Fragment() {
                 SettingOption(R.string.section_kcal_backup, R.drawable.ic_settings_backup_restore_white_24dp, KCALBackupSettingsFragment()),
                 SettingOption(R.string.section_sob, R.drawable.ic_timer_white_24dp, SetOnBootDelayFragment()),
                 SettingOption(R.string.profile_title, R.drawable.ic_profiles_24dp, activityClass =  ProfilesActivity::class.java),
-                SettingOption(R.string.kcal_driver_information_short, R.drawable.ic_driver_24dp, KCALDriverInfoFragment())
+                SettingOption(R.string.kcal_driver_information_short, R.drawable.ic_driver_24dp, KCALDriverInfoFragment()),
+                SettingOption(R.string.theme, R.drawable.ic_format_paint, ThemeFragment())
         )
 
         settingsAdapter.list = settingsOptions
@@ -74,6 +82,14 @@ class SettingFragment: Fragment() {
         settingsAdapter.notifyDataSetChanged()
 
         NightLightAppService.instance.incrementViewInitCount()
+
+        if (toResumeThemeChangeAction) resumeThemeChangeAction()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        toResumeThemeChangeAction = savedInstanceState != null
     }
 
     private inner class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.CustomViewHolder>() {
@@ -135,5 +151,13 @@ class SettingFragment: Fragment() {
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {
         settingsOptions[1].fragment?.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun resumeThemeChangeAction() {
+        if (PreferenceHelper.getBoolean(context, Constants.PREF_THEME_CHANGE_EVENT, false)) {
+            settingsOptions[THEME_FRAGMENT_INDEX].fragment?.show(childFragmentManager, "")
+            PreferenceHelper.putBoolean(context, Constants.PREF_THEME_CHANGE_EVENT, false)
+        }
+
     }
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/layout_padding"
+    android:layout_margin="@dimen/layout_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceButton"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:textSize="12sp"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/theme"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:textSize="@dimen/text_caption"
+        android:textAppearance="?android:textAppearance"
+        android:id="@+id/lightTheme"
+        android:text="@string/light_theme_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingBottom="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:textSize="@dimen/text_desc"
+        android:text="@string/light_theme_desc"/>
+</LinearLayout>

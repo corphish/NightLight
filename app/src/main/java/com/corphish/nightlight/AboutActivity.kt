@@ -3,6 +3,7 @@ package com.corphish.nightlight
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.corphish.nightlight.design.ThemeUtils
 
 import com.corphish.nightlight.design.fragments.AboutFragment
 import com.corphish.nightlight.helpers.ExternalLink
@@ -14,6 +15,7 @@ class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_about)
 
         fab.setOnClickListener {

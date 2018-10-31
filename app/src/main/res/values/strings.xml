@@ -154,4 +154,8 @@
     <string name="version">Version</string>
 
     <string name="overview">Overview</string>
+
+    <string name="theme">Theme</string>
+    <string name="light_theme_title">Enable light theme</string>
+    <string name="light_theme_desc">Enables light theme with light background and slightly different looks.</string>
 </resources>

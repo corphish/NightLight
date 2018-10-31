@@ -60,7 +60,7 @@ class AutoFragment : FullyExpandedBottomSheetDialogFragment(), LocationListener 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        FontUtils().setCustomFont(context!!, autoEnable, sunEnable)
+        FontUtils().setCustomFont(context!!, autoEnable, sunEnable, darkHoursEnable)
 
         autoEnable.setOnCheckedChangeListener { _, b ->
             autoSwitchStatus = b

@@ -33,6 +33,7 @@ I flashed a LineageOS oreo build on my device, but there was no night light feat
 * Original KCAL settings of user is backed up and applied when night light is turned off. And it can be configured as well.
 * Quick Setting tile for easy toggling on/off night light anywhere.
 * Launcher icon shortcut for toggling Night Light on/off and toggling intensities.
+* Dark and Light theme.
 
 ### Advantages
 * __No overlays__ - As it uses KCAL to adjust screen colors.

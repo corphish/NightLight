@@ -40,26 +40,32 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="-6dp">
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:textAppearance="?android:textAppearanceButton"
+                    android:padding="8dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:textAppearance="?android:attr/textAppearance"
                     android:textColor="@color/colorAccent"
                     android:layout_centerVertical="true"
                     android:visibility="gone"
                     android:id="@+id/negativeButton"
                     android:layout_toStartOf="@id/positiveButton"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:backgroundTint="@color/colorPrimary"
-                    android:textColor="@android:color/white"
+                    app:cornerRadius="4dp"
+                    android:layout_marginStart="4dp"
+                    android:textAppearance="?android:attr/textAppearance"
+                    android:layout_marginEnd="4dp"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/positiveButton"
                     android:visibility="gone"
-                    android:padding="12dp" />
+                    android:padding="8dp" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

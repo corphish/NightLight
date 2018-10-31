@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/layout_padding"
@@ -28,44 +29,54 @@
         android:layout_margin="@dimen/layout_margin"
         android:text="@string/app_desc"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_desc"
-        android:id="@+id/githubLink"
-        android:textColor="@color/colorAccent"
-        android:layout_margin="@dimen/layout_margin"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:text="@string/github"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_desc"
+            android:id="@+id/githubLink"
+            app:cornerRadius="4dp"
+            android:textAppearance="?android:attr/textAppearance"
+            android:layout_margin="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:text="@string/github"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_desc"
+            android:layout_toEndOf="@id/githubLink"
+            android:id="@+id/contributorsLink"
+            app:cornerRadius="4dp"
+            android:textAppearance="?android:attr/textAppearance"
+            android:layout_margin="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:text="@string/contributors"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_desc"
+            android:layout_toEndOf="@id/contributorsLink"
+            android:id="@+id/xdaLink"
+            app:cornerRadius="4dp"
+            android:textAppearance="?android:attr/textAppearance"
+            android:layout_margin="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingBottom="@dimen/layout_padding"
+            android:text="@string/xda"/>
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_desc"
-        android:id="@+id/contributorsLink"
-        android:textColor="@color/colorAccent"
-        android:layout_margin="@dimen/layout_margin"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:text="@string/contributors"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_desc"
-        android:id="@+id/xdaLink"
-        android:textColor="@color/colorAccent"
-        android:layout_margin="@dimen/layout_margin"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingBottom="@dimen/layout_padding"
-        android:text="@string/xda"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="?attr/textAppearanceButton"
+        android:textAppearance="?attr/textAppearanceButton"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:paddingTop="@dimen/layout_padding"
@@ -87,7 +98,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?attr/textAppearanceButton"
+        android:textAppearance="?attr/textAppearanceButton"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:paddingTop="8dp"

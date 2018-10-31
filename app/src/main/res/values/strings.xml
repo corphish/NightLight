@@ -41,7 +41,7 @@
     <string name="get_donation">If you like this app, you can consider getting the donation version of the app. Although it comes with no extra features than this version, it shows your support and appreciation to the app, and it will motivate the developer and support the development of the app :)</string>
     <string name="kcal_preservce_value_msg">Preserve current KCAL values</string>
     <string name="title_activity_about">About</string>
-    <string name="contributors"><u>Contributors</u></string>
+    <string name="contributors">Contributors</string>
 
     <string name="color_temperature_title">Color Temperature</string>
     <string name="color_temperature_desc">Value of the color temperature to be set. Lower temperatures are better suitable for low light viewing.</string>
@@ -121,8 +121,8 @@
     <string name="donate_question">Q. Do I get any extra feature in the donate version?</string>
     <string name="donate_answer">No. Two versions are basically the same functionality wise. Donate version is there if you really love my work and want to show support to it and motivate me to keep on doing the work. It is absolutely fine if you choose not to donate and keep using the generic version.</string>
 
-    <string name="github" translatable="false"><u>Github</u></string>
-    <string name="xda" translatable="false"><u>XDA Developers</u></string>
+    <string name="github" translatable="false">Github</string>
+    <string name="xda" translatable="false">XDA Developers</string>
 
     <string name="dashboard">Dashboard</string>
     <string name="dashboard_nl_on">Night Light is on</string>

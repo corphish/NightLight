@@ -12,6 +12,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:padding="@dimen/defaultPadding"
+        android:layout_marginEnd="@dimen/defaultMargin"
         android:id="@+id/banner_icon"
         android:tint="?themeCircleForeground"
         android:layout_centerVertical="true"

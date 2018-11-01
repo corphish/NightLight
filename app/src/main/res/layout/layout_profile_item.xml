@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="@dimen/layout_padding"
     android:layout_margin="@dimen/layout_margin"
@@ -8,17 +8,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_caption"
-        android:id="@+id/profile_name"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:textSize="24sp"
+        android:id="@+id/profileIcon"
         android:layout_margin="@dimen/layout_margin"
-        android:textAppearance="?android:textAppearance"/>
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:background="@drawable/circle" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_margin"
-        android:textSize="@dimen/text_desc"
-        android:id="@+id/profile_desc"/>
+        android:id="@+id/profileTitle"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textAppearance="?android:textAppearance" />
 </LinearLayout>

@@ -2,13 +2,14 @@ package com.corphish.nightlight
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.corphish.nightlight.data.Constants
@@ -39,6 +40,9 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
     private lateinit var context: Context
 
+    private var midTemp = 0
+    private var midKCALSum = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
@@ -62,6 +66,21 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
         initProfilesManager()
         initViews()
+        initMidValues()
+    }
+
+    private fun initMidValues() {
+        midTemp = (PreferenceHelper.getInt(context, Constants.PREF_MAX_COLOR_TEMP, Constants.DEFAULT_MAX_COLOR_TEMP) +
+                PreferenceHelper.getInt(context, Constants.PREF_MIN_COLOR_TEMP, Constants.DEFAULT_MIN_COLOR_TEMP))/2
+
+        midKCALSum = (PreferenceHelper.getInt(context, Constants.PREF_MAX_RED_COLOR, Constants.DEFAULT_MAX_RED_COLOR) +
+                PreferenceHelper.getInt(context, Constants.PREF_MIN_RED_COLOR, Constants.DEFAULT_MIN_RED_COLOR))/2
+                +
+                (PreferenceHelper.getInt(context, Constants.PREF_MAX_GREEN_COLOR, Constants.DEFAULT_MAX_GREEN_COLOR) +
+                        PreferenceHelper.getInt(context, Constants.PREF_MIN_GREEN_COLOR, Constants.DEFAULT_MIN_GREEN_COLOR))/2
+                +
+                (PreferenceHelper.getInt(context, Constants.PREF_MAX_BLUE_COLOR, Constants.DEFAULT_MAX_BLUE_COLOR) +
+                        PreferenceHelper.getInt(context, Constants.PREF_MIN_BLUE_COLOR, Constants.DEFAULT_MIN_BLUE_COLOR))/2
     }
 
     private fun initProfilesManager() {
@@ -76,7 +95,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         profilesAdapter.setProfiles(profiles)
 
         recyclerView.invalidateItemDecorations()
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = GridLayoutManager(this, 4)
         recyclerView.adapter = profilesAdapter
         recyclerView.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         recyclerView.isNestedScrollingEnabled = false
@@ -100,8 +119,8 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         }
 
         inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-            internal val name: TextView = v.findViewById(R.id.profile_name)
-            internal val desc: TextView = v.findViewById(R.id.profile_desc)
+            internal val icon: TextView = v.findViewById(R.id.profileIcon)
+            internal val title: TextView = v.findViewById(R.id.profileTitle)
 
             init {
                 v.setOnClickListener(this)
@@ -129,8 +148,26 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         }
 
         override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-            holder.name.text = profiles!![position].name
-            holder.desc.text = getDescription(profiles!![position])
+            val profile = profiles!![position]
+            val profileValue = profile.settings.sum()
+            val profileIntensity =
+                    if (profile.settingMode == Constants.NL_SETTING_MODE_TEMP)
+                        if (profileValue > midTemp) Constants.INTENSITY_TYPE_MINIMUM else Constants.INTENSITY_TYPE_MAXIMUM
+                    else
+                        if (profileValue > midKCALSum) Constants.INTENSITY_TYPE_MINIMUM else Constants.INTENSITY_TYPE_MAXIMUM
+
+            holder.icon.text = "${profile.name.toUpperCase()[0]}"
+            setIconBackground(holder.icon, ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled, profileIntensity))
+            holder.icon.setTextColor(ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled, profileIntensity))
+
+            holder.title.text = profile.name
+        }
+
+        private fun setIconBackground(textView: TextView, color: Int) {
+            val drawable = resources.getDrawable(R.drawable.circle)
+            drawable.setColorFilter(color, PorterDuff.Mode.SRC)
+
+            textView.background = drawable
         }
 
         override fun getItemCount(): Int {
@@ -155,11 +192,13 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         optionsView = View.inflate(this, R.layout.bottom_sheet_profile_options, null)
 
         val selectedProfileName = optionsView.findViewById<TextView>(R.id.selectedProfileName)
+        val selectedProfileInfo = optionsView.findViewById<TextView>(R.id.selectedProfileInfo)
         val apply = optionsView.findViewById<View>(R.id.apply)
         val edit = optionsView.findViewById<View>(R.id.edit)
         val delete = optionsView.findViewById<View>(R.id.delete)
 
         selectedProfileName.text = profile?.name
+        selectedProfileInfo.text = "${arrayOf(getString(R.string.color_temperature_title), "RGB")[profile?.settingMode!!]}: ${Arrays.toString(profile?.settings!!)}"
 
         apply.setOnClickListener {
             if (curProfile != null) {

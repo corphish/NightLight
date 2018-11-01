@@ -88,7 +88,7 @@ class ProfilesManager(private val context: Context) {
 
     /**
      * Updates an existing profile with new params
-     * @param oldName Old name of profile to be update
+     * @param oldProfile Old  profile to be updated
      * @param enabled Whether setting should be enabled or not
      * @param newName New name
      * @param newMode New mode

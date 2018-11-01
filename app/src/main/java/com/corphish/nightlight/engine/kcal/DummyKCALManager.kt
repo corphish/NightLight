@@ -33,11 +33,11 @@ class DummyKCALManager : KCALAbstraction {
         return intArrayOf(0, 0, 0)
     }
 
-    override fun getImplementationName() = ""
+    override fun getImplementationName() = "Dummy KCAL Manager"
 
-    override fun getImplementationSwitchPath() = ""
+    override fun getImplementationSwitchPath() = "Not available"
 
-    override fun getImplementationFilePaths() = ""
+    override fun getImplementationFilePaths() = "Not available"
 
-    override fun getImplementationFormat() = ""
+    override fun getImplementationFormat() = "Not applicable"
 }

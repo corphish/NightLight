@@ -40,7 +40,7 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun showActions() {
-        val optionsDialog = BottomSheetDialog(this, R.style.BottomSheetDialogDark)
+        val optionsDialog = BottomSheetDialog(this, ThemeUtils.getBottomSheetTheme(this))
         val optionsView = View.inflate(this, R.layout.bottom_sheet_donate_actions, null)
 
         val donateAction1 = optionsView.findViewById<View>(R.id.donateAction1)

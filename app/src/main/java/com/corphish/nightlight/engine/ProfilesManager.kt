@@ -2,12 +2,25 @@ package com.corphish.nightlight.engine
 
 import android.content.Context
 import android.preference.PreferenceManager
+import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.extensions.toArrayOfInts
 import java.util.*
 
 class ProfilesManager(private val context: Context) {
 
     private val _prefKey = "pref_profiles_store"
+
+    // Migration Data
+    // This can only migrate apply type, any mismatch in param format will be discarded
+    // Also, migration can only take place between consecutive API version (example, from 0 - 1. Direct 0 - 2 should not be possible, this could be done by 0 - 1 and then 1 - 2)
+    // A null pair indicates migration is not possible
+    // The 'from API version' value is the index of the lis, and 'to API version' value is value (nullable) at that index
+    private val migrationData = listOf(
+            // Migration data of API version 0 to 1
+            // Migration of apply type 0 (formerly Filter Intensity) is not possible
+            // Migration of apply type 1 (formerly Color Temperature) is possible to value 0
+            listOf(null, 0)
+    )
 
     /**
      * Listens to changes in data
@@ -40,10 +53,42 @@ class ProfilesManager(private val context: Context) {
 
         for (entry in savedSet) {
             val profile = parseProfile(entry)
-            if (profile != null) profilesList.add(profile)
+            if (profile != null) {
+                if (profile.apiVersion == Constants.PROFILE_API_VERSION) {
+                    profilesList.add(profile)
+                } else {
+                    val migratedProfile = migrateProfile(profile, profile.apiVersion)
+
+                    if (migratedProfile != null)
+                        profilesList.add(migratedProfile)
+                }
+            }
         }
 
         dataChangeListener?.onDataChanged(profilesList.size)
+    }
+
+    private fun migrateProfile(profile: Profile, fromVersion: Int): Profile? {
+        // Avoid erroneous API version
+        if (fromVersion >= migrationData.size)
+            return null
+
+        for (i in fromVersion until Constants.PROFILE_API_VERSION) {
+            val data = migrationData[i]
+
+            val prevType = profile.settingMode
+            if (prevType >= data.size) return null
+
+            val newType = data[prevType]
+
+            if (newType == null)
+                return null
+
+            profile.settingMode = newType
+            profile.apiVersion = i + 1
+        }
+
+        return profile
     }
 
     private fun storeProfiles() {
@@ -116,15 +161,14 @@ class ProfilesManager(private val context: Context) {
     data class Profile(var name: String,
                        var isSettingEnabled: Boolean = false,
                        var settingMode: Int = 0,
-                       var settings: IntArray) : Comparable<Profile> {
+                       var settings: IntArray,
+                       var apiVersion: Int = Constants.PROFILE_API_VERSION) : Comparable<Profile> {
         // This is how the profile will be stored as string in SP
         // For example -> Name - Profile, SettingMode - 1, settings - {100}
         // Will look like -> "Profile; 1; [100]"
         // DO NOT alter the sequence of data
         // In future if other fields are added, simply append at the end
-        fun toProfileString(): String {
-            return name + ";" + isSettingEnabled + ";" + settingMode + ";" + Arrays.toString(settings)
-        }
+        fun toProfileString() = "$name;$isSettingEnabled;$settingMode;${Arrays.toString(settings)};$apiVersion"
 
         fun apply(context: Context) {
             Core.applyNightModeAsync(isSettingEnabled, context, settingMode, settings)
@@ -139,7 +183,8 @@ class ProfilesManager(private val context: Context) {
             return other.name == this.name &&
                     other.isSettingEnabled == this.isSettingEnabled &&
                     other.settingMode == settingMode &&
-                    Arrays.equals(other.settings, this.settings)
+                    Arrays.equals(other.settings, this.settings) &&
+                    other.apiVersion == this.apiVersion
         }
 
         override fun hashCode(): Int {
@@ -154,9 +199,10 @@ class ProfilesManager(private val context: Context) {
     private fun parseProfile(profileString: String): Profile? {
         val parts = profileString.split(";".toRegex())
 
-        return when (parts.size == 4) {
-            true -> Profile(parts[0], parts[1].toBoolean(), parts[2].toInt(), parts[3].toArrayOfInts(","))
-            false -> null
+        return when (parts.size) {
+            4 -> Profile(parts[0], parts[1].toBoolean(), parts[2].toInt(), parts[3].toArrayOfInts(","), 0)
+            5 -> Profile(parts[0], parts[1].toBoolean(), parts[2].toInt(), parts[3].toArrayOfInts(","), parts[4].toInt())
+            else -> null
         }
     }
 }

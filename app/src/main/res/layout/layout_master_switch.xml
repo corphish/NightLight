@@ -19,7 +19,7 @@
         android:textColor="@color/colorPrimary"
         android:text="@string/section_main"/>
 
-    <androidx.appcompat.widget.SwitchCompat
+    <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/masterSwitch"

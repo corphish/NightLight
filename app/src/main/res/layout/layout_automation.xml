@@ -19,7 +19,7 @@
         android:textColor="@color/colorPrimary"
         android:text="@string/section_auto"/>
 
-    <androidx.appcompat.widget.SwitchCompat
+    <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/autoEnable"
@@ -39,7 +39,7 @@
         android:textSize="@dimen/text_desc"
         android:text="@string/auto_enable_desc"/>
 
-    <androidx.appcompat.widget.SwitchCompat
+    <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sunEnable"
@@ -70,7 +70,7 @@
         custom:valueText="@string/end_time_default"
         custom:valueSize="@dimen/text_desc"/>
 
-    <androidx.appcompat.widget.SwitchCompat
+    <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/darkHoursEnable"

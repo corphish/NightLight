@@ -3,11 +3,11 @@ package com.corphish.nightlight.design.views
 import android.content.Context
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.appcompat.widget.AppCompatSpinner
-import androidx.appcompat.widget.SwitchCompat
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
@@ -32,7 +32,7 @@ class ProfileCreator(val context: Context,
     private val editText = creatorView.findViewById<TextInputEditText>(R.id.profile_name_set)
     private val editTextLayout = creatorView.findViewById<TextInputLayout>(R.id.profile_name_set_layout)
 
-    private val nlSwitch = creatorView.findViewById<SwitchCompat>(R.id.profile_night_light_switch)
+    private val nlSwitch = creatorView.findViewById<Switch>(R.id.profile_night_light_switch)
 
     private val settingTitle1 = creatorView.findViewById<TextView>(R.id.profile_night_light_setting_title1)
     private val settingTitle2 = creatorView.findViewById<TextView>(R.id.profile_night_light_setting_title2)

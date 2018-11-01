@@ -2,8 +2,8 @@ package com.corphish.nightlight.design.utils
 
 import android.content.Context
 import android.view.View
+import android.widget.Switch
 import androidx.appcompat.widget.AppCompatCheckBox
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.res.ResourcesCompat
 import com.corphish.nightlight.R
 
@@ -12,7 +12,7 @@ class FontUtils {
         try {
             for (view in views) {
                 when (view) {
-                    is SwitchCompat? -> view?.typeface = ResourcesCompat.getFont(context, R.font.cust_font)
+                    is Switch? -> view?.typeface = ResourcesCompat.getFont(context, R.font.cust_font)
                     is AppCompatCheckBox? -> view?.typeface = ResourcesCompat.getFont(context, R.font.cust_font)
                 }
             }

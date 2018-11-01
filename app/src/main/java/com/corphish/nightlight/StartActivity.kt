@@ -32,6 +32,8 @@ class StartActivity : AppCompatActivity() {
     private val TASKER_PLUGIN_INTENT = "com.twofortyfouram.locale.intent.action.EDIT_SETTING"
     private val TASKER_INTENT_RQC = 100
 
+    private var checkBypass = 7
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CrashlyticsHelper.start(this)
@@ -45,6 +47,11 @@ class StartActivity : AppCompatActivity() {
                 CompatibilityChecker().execute()
             else
                 switchToMain()
+        }
+
+        splashContainer.setOnClickListener {
+            checkBypass--
+            if (checkBypass == 0) switchToMain()
         }
     }
 

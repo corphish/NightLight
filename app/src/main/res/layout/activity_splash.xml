@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/splashContainer"
     android:layout_height="match_parent">
 
     <ProgressBar
@@ -24,5 +25,4 @@
         android:layout_centerHorizontal="true"
         android:visibility="gone"
         android:id="@+id/alertPlaceholder"/>
-
 </RelativeLayout>

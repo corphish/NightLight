@@ -187,6 +187,8 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
      * If it is, then it applies it
      */
     private fun applyProfileIfNecessary() {
+        if (!PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH, false)) return
+
         val lastApplyType = PreferenceHelper.getInt(this, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
         if (lastApplyType == Constants.APPLY_TYPE_PROFILE) {
             Core.applyNightModeAsync(

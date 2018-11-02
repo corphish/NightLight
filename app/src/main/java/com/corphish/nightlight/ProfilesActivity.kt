@@ -156,7 +156,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
                     else
                         if (profileValue > midKCALSum) Constants.INTENSITY_TYPE_MINIMUM else Constants.INTENSITY_TYPE_MAXIMUM
 
-            holder.icon.text = "${profile.name.toUpperCase()[0]}"
+            holder.icon.text = if (profile.name.isNotEmpty()) "${profile.name.toUpperCase()[0]}" else ""
             setIconBackground(holder.icon, ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled, profileIntensity))
             holder.icon.setTextColor(ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled, profileIntensity))
 
@@ -172,17 +172,6 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
         override fun getItemCount(): Int {
             return profiles!!.size
-        }
-
-        private fun getDescription(profile: ProfilesManager.Profile): String {
-            var desc = ""
-            desc += getString(R.string.app_name) + " : " +
-                    (if (profile.isSettingEnabled) getString(R.string.on).toLowerCase() else getString(R.string.off).toLowerCase()) + ", "
-            desc += if (profile.settingMode == Constants.NL_SETTING_MODE_TEMP) getString(R.string.color_temperature_title) + " : " + profile.settings[0] + "K"
-            else getString(R.string.red) + " : " + profile.settings[0] + ", " +
-                    getString(R.string.green) + " : " + profile.settings[1] + ", " +
-                    getString(R.string.blue) + " : " + profile.settings[2]
-            return desc
         }
     }
 

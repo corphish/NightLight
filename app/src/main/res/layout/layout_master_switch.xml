@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/layout_padding"
-    android:layout_margin="@dimen/layout_margin"
+    android:layout_marginTop="@dimen/defaultMargin"
+    android:layout_marginBottom="@dimen/defaultMargin"
     android:orientation="vertical">
 
     <TextView
@@ -14,7 +14,10 @@
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:paddingTop="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
+        android:layout_marginStart="@dimen/defaultMargin"
+        android:layout_marginEnd="@dimen/defaultMargin"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:layout_marginBottom="@dimen/layout_margin"
         android:textSize="12sp"
         android:textColor="@color/colorPrimary"
         android:text="@string/section_main"/>
@@ -25,7 +28,8 @@
         android:id="@+id/masterSwitch"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
+        android:layout_marginStart="@dimen/defaultMargin"
+        android:layout_marginEnd="@dimen/defaultMargin"
         android:textSize="@dimen/text_caption"
         android:text="@string/master_switch"/>
 
@@ -35,7 +39,8 @@
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:paddingBottom="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
+        android:layout_marginStart="@dimen/defaultMargin"
+        android:layout_marginEnd="@dimen/defaultMargin"
         android:textSize="@dimen/text_desc"
         android:text="@string/master_switch_desc"/>
 </LinearLayout>

@@ -95,7 +95,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         profilesAdapter.setProfiles(profiles)
 
         recyclerView.invalidateItemDecorations()
-        recyclerView.layoutManager = GridLayoutManager(this, 4)
+        recyclerView.layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.gridSpanCount))
         recyclerView.adapter = profilesAdapter
         recyclerView.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         recyclerView.isNestedScrollingEnabled = false

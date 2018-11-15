@@ -162,7 +162,7 @@ class ProfileCreator(val context: Context,
             }
         } else {
             settingParam1.isEnabled = true
-            settingParam1.max = 1500
+            settingParam1.max = context.resources.getInteger(R.integer.maxTemp) - context.resources.getInteger(R.integer.minTemp)
 
             settingParam2.isEnabled = false
             settingParam3.isEnabled = false
@@ -175,7 +175,7 @@ class ProfileCreator(val context: Context,
             settingTitle2.setText(R.string.profile_nl_setting_unavailable)
 
             if (profile != null) {
-                settingParam1.progress = profile.settings[0] - 3000
+                settingParam1.progress = profile.settings[0] - context.resources.getInteger(R.integer.minTemp)
             } else {
                 settingParam1.progress = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP[type], Constants.DEFAULT_COLOR_TEMP[type])
             }

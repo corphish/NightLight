@@ -34,7 +34,7 @@
         android:id="@+id/temperatureValue"
         android:padding="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
-        app:esbMin="3000"
-        app:esbMax="4500"
-        app:esbValue="4000"/>
+        app:esbMin="@integer/minTemp"
+        app:esbMax="@integer/maxTemp"
+        app:esbValue="@integer/defaultTemp"/>
 </LinearLayout>

@@ -220,11 +220,11 @@ class ColorControlFragment : FullyExpandedBottomSheetDialogFragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
 
             override fun onEnteredValueTooHigh() {
-                temperatureValue.value = 4500
+                temperatureValue.value = resources.getInteger(R.integer.maxTemp)
             }
 
             override fun onEnteredValueTooLow() {
-                temperatureValue.value = 3000
+                temperatureValue.value = resources.getInteger(R.integer.minTemp)
             }
 
             override fun onEditableSeekBarValueChanged(value: Int) {

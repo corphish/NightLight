@@ -73,7 +73,7 @@ class SettingFragment: Fragment() {
         settingsAdapter.list = settingsOptions
 
         recyclerView.invalidateItemDecorations()
-        recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, 4)
+        recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, resources.getInteger(R.integer.gridSpanCount))
         recyclerView.adapter = settingsAdapter
         recyclerView.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         recyclerView.isNestedScrollingEnabled = false

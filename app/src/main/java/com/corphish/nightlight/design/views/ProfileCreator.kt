@@ -135,21 +135,21 @@ class ProfileCreator(val context: Context,
 
     private fun updateProfileCreatorParams(mode: Int) {
         if (mode == Constants.NL_SETTING_MODE_MANUAL) {
-            settingParam1.isEnabled = true
+            settingParam1.visibility = View.VISIBLE
             settingParam1.setMinValue(0)
             settingParam1.setMaxValue(256)
 
-            settingParam2.isEnabled = true
+            settingParam2.visibility = View.VISIBLE
             settingParam1.setMinValue(0)
             settingParam2.setMaxValue(256)
 
-            settingParam3.isEnabled = true
+            settingParam3.visibility = View.VISIBLE
             settingParam1.setMinValue(0)
             settingParam3.setMaxValue(256)
 
-            settingTitle1.isEnabled = true
-            settingTitle2.isEnabled = true
-            settingTitle3.isEnabled = true
+            settingTitle1.visibility = View.VISIBLE
+            settingTitle2.visibility = View.VISIBLE
+            settingTitle3.visibility = View.VISIBLE
 
             settingTitle1.setText(R.string.red)
             settingTitle2.setText(R.string.green)
@@ -220,16 +220,16 @@ class ProfileCreator(val context: Context,
             })
 
         } else {
-            settingParam1.isEnabled = true
+            settingParam1.visibility = View.VISIBLE
             settingParam1.setMinValue(context.resources.getInteger(R.integer.minTemp))
             settingParam1.setMaxValue(context.resources.getInteger(R.integer.maxTemp))
 
-            settingParam2.isEnabled = false
-            settingParam3.isEnabled = false
+            settingParam2.visibility = View.GONE
+            settingParam3.visibility = View.GONE
 
-            settingTitle1.isEnabled = true
-            settingTitle2.isEnabled = false
-            settingTitle3.isEnabled = false
+            settingTitle1.visibility = View.VISIBLE
+            settingTitle2.visibility = View.GONE
+            settingTitle3.visibility = View.GONE
 
             settingTitle1.setText(R.string.color_temperature_title)
             settingTitle2.setText(R.string.profile_nl_setting_unavailable)

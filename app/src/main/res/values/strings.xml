@@ -83,10 +83,6 @@
     <string name="tasker_error_title">Night Light disabled</string>
     <string name="tasker_error_desc">To use tasker plugin, you must enable Master Switch first.</string>
 
-    <string name="donate_title">Actions</string>
-    <string name="donate_with_app">Rate this app in Play Store</string>
-    <string name="donate_with_paypal">Get the donate version of this app</string>
-
     <string name="section_main">Master controls</string>
     <string name="section_color">Color controls</string>
     <string name="section_sob">Set on boot</string>
@@ -158,4 +154,9 @@
     <string name="theme">Theme</string>
     <string name="light_theme_title">Enable light theme</string>
     <string name="light_theme_desc">Enables light theme with light background and slightly different looks.</string>
+
+    <string name="show_support">Show support</string>
+    <string name="rate">Rate this app</string>
+    <string name="paypal">Donate using PayPal</string>
+    <string name="get_donate">Get donate version</string>
 </resources>

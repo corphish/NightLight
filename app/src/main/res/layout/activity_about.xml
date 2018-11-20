@@ -8,23 +8,4 @@
     tools:context="com.corphish.nightlight.AboutActivity">
 
     <include layout="@layout/content_about" />
-
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorPrimary"
-        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
-        app:fabAlignmentMode="center"
-        app:hideOnScroll="true" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/ic_star_48dp"
-        app:layout_anchor="@id/bottom_app_bar" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

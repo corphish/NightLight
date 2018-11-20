@@ -2,7 +2,4 @@
 <resources>
     <string name="like_this_app">Dziękuje</string>
     <string name="get_donation">Za używanie płatnej wersji aplikacji :)</string>
-    <string name="donate_title">Akcje</string>
-    <string name="donate_with_app">Oceń tą aplikację</string>
-    <string name="donate_with_paypal">Wesprzyj używająć PayPal :)</string>
 </resources>

@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
     private fun init() {
         masterSwitchEnabled = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH)
+        adjustFABVisibility(masterSwitchEnabled)
     }
 
     private fun viewInit() {
@@ -91,6 +92,11 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
             startActivityForResult(intent, REQ_CODE)
         }
         setViews(checkStatus)
+        adjustFABVisibility(checkStatus)
+    }
+
+    private fun adjustFABVisibility(masterStatus: Boolean) {
+        if (masterStatus) fab.show() else fab.hide()
     }
 
     override fun onStateChanged(newState: Boolean) {

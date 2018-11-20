@@ -3,10 +3,10 @@ package com.corphish.nightlight.design.views
 import android.content.Context
 import android.view.View
 import android.widget.AdapterView
+import android.widget.SeekBar
 import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.appcompat.widget.AppCompatSpinner
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
@@ -18,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.gregacucnik.EditableSeekBar
 
 class ProfileCreator(val context: Context,
                      private val operationMode: Int,
@@ -43,9 +44,9 @@ class ProfileCreator(val context: Context,
 
     private val modes = creatorView.findViewById<AppCompatSpinner>(R.id.profile_night_light_setting_mode)
 
-    private val settingParam1 = creatorView.findViewById<AppCompatSeekBar>(R.id.profile_night_light_setting_param1)
-    private val settingParam2 = creatorView.findViewById<AppCompatSeekBar>(R.id.profile_night_light_setting_param2)
-    private val settingParam3 = creatorView.findViewById<AppCompatSeekBar>(R.id.profile_night_light_setting_param3)
+    private val settingParam1 = creatorView.findViewById<EditableSeekBar>(R.id.profile_night_light_setting_param1)
+    private val settingParam2 = creatorView.findViewById<EditableSeekBar>(R.id.profile_night_light_setting_param2)
+    private val settingParam3 = creatorView.findViewById<EditableSeekBar>(R.id.profile_night_light_setting_param3)
 
     private val bottomSheetDialog = BottomSheetDialog(context, ThemeUtils.getBottomSheetTheme(context))
 
@@ -113,9 +114,9 @@ class ProfileCreator(val context: Context,
                 editText.editableText.toString(),
                 modes.selectedItemPosition,
                 if (modes.selectedItemId == Constants.NL_SETTING_MODE_TEMP.toLong())
-                    intArrayOf(settingParam1.progress + 3000)
+                    intArrayOf(settingParam1.value)
                 else
-                    intArrayOf(settingParam1.progress, settingParam2.progress, settingParam3.progress)
+                    intArrayOf(settingParam1.value, settingParam2.value, settingParam3.value)
         )
     }
 
@@ -126,22 +127,25 @@ class ProfileCreator(val context: Context,
                 editText.editableText.toString(),
                 modes.selectedItemPosition,
                 if (modes.selectedItemId == Constants.NL_SETTING_MODE_TEMP.toLong())
-                    intArrayOf(settingParam1.progress + 3000)
+                    intArrayOf(settingParam1.value)
                 else
-                    intArrayOf(settingParam1.progress, settingParam2.progress, settingParam3.progress)
+                    intArrayOf(settingParam1.value, settingParam2.value, settingParam3.value)
         )
     }
 
     private fun updateProfileCreatorParams(mode: Int) {
         if (mode == Constants.NL_SETTING_MODE_MANUAL) {
             settingParam1.isEnabled = true
-            settingParam1.max = 256
+            settingParam1.setMinValue(0)
+            settingParam1.setMaxValue(256)
 
             settingParam2.isEnabled = true
-            settingParam2.max = 256
+            settingParam1.setMinValue(0)
+            settingParam2.setMaxValue(256)
 
             settingParam3.isEnabled = true
-            settingParam3.max = 256
+            settingParam1.setMinValue(0)
+            settingParam3.setMaxValue(256)
 
             settingTitle1.isEnabled = true
             settingTitle2.isEnabled = true
@@ -152,17 +156,73 @@ class ProfileCreator(val context: Context,
             settingTitle3.setText(R.string.blue)
 
             if (profile != null) {
-                settingParam1.progress = profile.settings[0]
-                settingParam2.progress = profile.settings[1]
-                settingParam3.progress = profile.settings[2]
+                settingParam1.value = profile.settings[0]
+                settingParam2.value = profile.settings[1]
+                settingParam3.value = profile.settings[2]
             } else {
-                settingParam1.progress = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR[type], Constants.DEFAULT_RED_COLOR[type])
-                settingParam2.progress = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR[type], Constants.DEFAULT_GREEN_COLOR[type])
-                settingParam3.progress = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR[type], Constants.DEFAULT_BLUE_COLOR[type])
+                settingParam1.value = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR[type], Constants.DEFAULT_RED_COLOR[type])
+                settingParam2.value = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR[type], Constants.DEFAULT_GREEN_COLOR[type])
+                settingParam3.value = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR[type], Constants.DEFAULT_BLUE_COLOR[type])
             }
+
+            settingParam1.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener{
+                override fun onEditableSeekBarProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {}
+
+                override fun onEnteredValueTooLow() {
+                    settingParam1.value = 0
+                }
+
+                override fun onStartTrackingTouch(p0: SeekBar?) {}
+
+                override fun onEditableSeekBarValueChanged(p0: Int) {}
+
+                override fun onEnteredValueTooHigh() {
+                    settingParam1.value = 256
+                }
+
+                override fun onStopTrackingTouch(p0: SeekBar?) {}
+            })
+
+            settingParam2.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener{
+                override fun onEditableSeekBarProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {}
+
+                override fun onEnteredValueTooLow() {
+                    settingParam1.value = 0
+                }
+
+                override fun onStartTrackingTouch(p0: SeekBar?) {}
+
+                override fun onEditableSeekBarValueChanged(p0: Int) {}
+
+                override fun onEnteredValueTooHigh() {
+                    settingParam1.value = 256
+                }
+
+                override fun onStopTrackingTouch(p0: SeekBar?) {}
+            })
+
+            settingParam3.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener{
+                override fun onEditableSeekBarProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {}
+
+                override fun onEnteredValueTooLow() {
+                    settingParam1.value = 0
+                }
+
+                override fun onStartTrackingTouch(p0: SeekBar?) {}
+
+                override fun onEditableSeekBarValueChanged(p0: Int) {}
+
+                override fun onEnteredValueTooHigh() {
+                    settingParam1.value = 256
+                }
+
+                override fun onStopTrackingTouch(p0: SeekBar?) {}
+            })
+
         } else {
             settingParam1.isEnabled = true
-            settingParam1.max = context.resources.getInteger(R.integer.maxTemp) - context.resources.getInteger(R.integer.minTemp)
+            settingParam1.setMinValue(context.resources.getInteger(R.integer.minTemp))
+            settingParam1.setMaxValue(context.resources.getInteger(R.integer.maxTemp))
 
             settingParam2.isEnabled = false
             settingParam3.isEnabled = false
@@ -175,10 +235,28 @@ class ProfileCreator(val context: Context,
             settingTitle2.setText(R.string.profile_nl_setting_unavailable)
 
             if (profile != null) {
-                settingParam1.progress = profile.settings[0] - context.resources.getInteger(R.integer.minTemp)
+                settingParam1.value = profile.settings[0]
             } else {
-                settingParam1.progress = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP[type], Constants.DEFAULT_COLOR_TEMP[type])
+                settingParam1.value = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP[type], Constants.DEFAULT_COLOR_TEMP[type])
             }
+
+            settingParam1.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener{
+                override fun onEditableSeekBarProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {}
+
+                override fun onStartTrackingTouch(p0: SeekBar?) {}
+
+                override fun onEditableSeekBarValueChanged(p0: Int) {}
+
+                override fun onEnteredValueTooHigh() {
+                    settingParam1.value = context.resources.getInteger(R.integer.maxTemp)
+                }
+
+                override fun onEnteredValueTooLow() {
+                    settingParam1.value = context.resources.getInteger(R.integer.minTemp)
+                }
+
+                override fun onStopTrackingTouch(p0: SeekBar?) {}
+            })
         }
     }
 

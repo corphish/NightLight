@@ -102,7 +102,7 @@
                 android:id="@+id/profile_night_light_setting_title1"
                 android:text="@string/profile_nl_setting_unavailable"/>
 
-            <androidx.appcompat.widget.AppCompatSeekBar
+            <com.gregacucnik.EditableSeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
@@ -123,7 +123,7 @@
                 android:id="@+id/profile_night_light_setting_title2"
                 android:text="@string/profile_nl_setting_unavailable"/>
 
-            <androidx.appcompat.widget.AppCompatSeekBar
+            <com.gregacucnik.EditableSeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
@@ -144,7 +144,7 @@
                 android:id="@+id/profile_night_light_setting_title3"
                 android:text="@string/profile_nl_setting_unavailable"/>
 
-            <androidx.appcompat.widget.AppCompatSeekBar
+            <com.gregacucnik.EditableSeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"

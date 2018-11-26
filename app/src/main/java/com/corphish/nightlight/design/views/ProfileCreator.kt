@@ -93,6 +93,9 @@ class ProfileCreator(val context: Context,
             nlSwitch.isChecked = profile.isSettingEnabled
             editText.setText(profile.name)
             modes.setSelection(profile.settingMode)
+            modes.isEnabled = false
+        } else  {
+            modes.isEnabled = true
         }
 
         profileAction.setText(

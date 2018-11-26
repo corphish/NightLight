@@ -163,4 +163,6 @@
     <string name="rate">Rate this app</string>
     <string name="paypal">Donate using PayPal</string>
     <string name="get_donate">Get donate version</string>
+
+    <string name="translate">Translate this app</string>
 </resources>

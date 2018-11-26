@@ -26,16 +26,19 @@ class AppreciationFragment: BaseBottomSheetDialogFragment() {
 
         var captionList = listOf(
                 R.string.rate,
+                R.string.translate,
                 R.string.paypal
         )
 
         var imageList = listOf(
                 R.drawable.ic_star_24dp,
+                R.drawable.ic_translate_24dp,
                 R.drawable.ic_money_24dp
         )
 
         var links = listOf(
                 "market://details?id=com.corphish.nightlight." + (if (BuildConfig.FLAVOR.equals("donate")) "donate" else "generic"),
+                "https://github.com/corphish/NightLight/blob/master/notes/translate.md",
                 "https://www.paypal.me/corphish"
         )
 

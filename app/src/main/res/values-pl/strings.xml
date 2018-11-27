@@ -110,20 +110,20 @@
     <string name="maximum">Maximum</string>
     <string name="minimum">Minimum</string>
     <string name="intensity_toggle">Toggle intensity</string>
-    <string name="kcal_driver_information_short">KCAL Driver</string>
+    <string name="kcal_driver_information_short">Sterownik KCAL</string>
     <string name="kcal_driver_information_full">KCAL Driver Information</string>
     <string name="impl_name">Implementation name</string>
     <string name="impl_switch_path">Switch path</string>
     <string name="impl_rgb_file_paths">RGB file path(s)</string>
     <string name="impl_format">Format specification</string>
-    <string name="version">Version</string>
+    <string name="version">Wersja</string>
     <string name="overview">Overview</string>
-    <string name="theme">Theme</string>
+    <string name="theme">Motyw</string>
     <string name="light_theme_title">Enable light theme</string>
     <string name="light_theme_desc">Enables light theme with light background and slightly different looks.</string>
     <string name="show_support">Show support</string>
     <string name="rate">Rate this app</string>
-    <string name="paypal">Donate using PayPal</string>
-    <string name="get_donate">Get donate version</string>
-    <string name="translate">Translate this app</string>
+    <string name="paypal">Wesprzyj przez PayPal</string>
+    <string name="get_donate">Uzyskaj wersję dotacyjną aplikacji</string>
+    <string name="translate">Przetłumacz aplikację</string>
 </resources>

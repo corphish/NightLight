@@ -42,7 +42,7 @@ class GenericKCALManager : KCALAbstraction {
      */
     override fun getColorReadings(): IntArray {
         val reading = RootUtils.readOneLine(KCAL_COLOR)
-        val colorReadings = reading.split(" ".toRegex())
+        val colorReadings = reading.trim().split(" ".toRegex())
 
         return intArrayOf(
                 colorReadings[0].toInt(),

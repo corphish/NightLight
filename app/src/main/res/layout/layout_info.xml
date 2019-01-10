@@ -92,28 +92,5 @@
         android:layout_margin="@dimen/layout_margin"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
-        android:paddingBottom="@dimen/layout_padding"
-        android:text="@string/xda"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceButton"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingTop="8dp"
-        android:layout_margin="@dimen/layout_margin"
-        android:textSize="12sp"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/like_this_app"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingBottom="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
-        android:textSize="@dimen/text_desc"
-        android:text="@string/get_donation"/>
+        android:paddingBottom="@dimen/layout_padding"/>
 </LinearLayout>

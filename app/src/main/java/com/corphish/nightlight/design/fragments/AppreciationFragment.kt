@@ -24,29 +24,23 @@ class AppreciationFragment: BaseBottomSheetDialogFragment() {
 
         val optionsAdapter = OptionsAdapter()
 
-        var captionList = listOf(
+        val captionList = listOf(
                 R.string.rate,
                 R.string.translate,
-                R.string.paypal
+                R.string.get_donate
         )
 
-        var imageList = listOf(
+        val imageList = listOf(
                 R.drawable.ic_star_24dp,
                 R.drawable.ic_translate_24dp,
                 R.drawable.ic_money_24dp
         )
 
-        var links = listOf(
+        val links = listOf(
                 "market://details?id=com.corphish.nightlight." + (if (BuildConfig.FLAVOR.equals("donate")) "donate" else "generic"),
                 "https://github.com/corphish/NightLight/blob/master/notes/translate.md",
-                "https://www.paypal.me/corphish"
+                "market://details?id=com.corphish.donationpackage"
         )
-
-        if (!BuildConfig.FLAVOR.equals("donate")) {
-            captionList += R.string.get_donate
-            imageList += R.drawable.ic_store_24dp
-            links += "market://details?id=com.corphish.nightlight.donate"
-        }
 
         optionsAdapter.captionRes = captionList
         optionsAdapter.imageRes = imageList

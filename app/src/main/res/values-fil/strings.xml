@@ -23,8 +23,6 @@
     <string name="next_day">&#160;(Susunod na araw)</string>
     <string name="sun_switch">Gumamit ng mga oras ng paglubog ng araw / pagsikat ng araw</string>
     <string name="location_unavailable">Hindi makuha ang iyong huling kilalang lokasyon.</string>
-    <string name="like_this_app">Gusto ang app na ito?</string>
-    <string name="get_donation">Kung gusto mo ang app na ito, maaari mong isaalang-alang ang pagkuha ng bersyon ng donasyon ng app. Kahit na wala itong dagdag na tampok kaysa sa bersyon na ito, ipinapakita nito ang iyong suporta at pagpapahalaga sa app, at ito ay ganyakin ang developer at suportahan ang pagbuo ng app :)</string>
     <string name="kcal_preservce_value_msg">Panatilihin ang mga kasalukuyang halaga ng KCAL</string>
     <string name="title_activity_about">Tungkol Dito</string>
     <string name="contributors">Mga Kontribyutor</string>
@@ -123,7 +121,6 @@
     <string name="light_theme_desc">Enables light theme with light background and slightly different looks.</string>
     <string name="show_support">Show support</string>
     <string name="rate">Rate this app</string>
-    <string name="paypal">Donate using PayPal</string>
-    <string name="get_donate">Get donate version</string>
+    <string name="get_donate">Donate</string>
     <string name="translate">Translate this app</string>
 </resources>

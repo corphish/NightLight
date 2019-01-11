@@ -23,8 +23,6 @@
     <string name="next_day">&#160;(siguiente día)</string>
     <string name="sun_switch">Usa tiempos de amanecer/atardecer</string>
     <string name="location_unavailable">Incapaz de localizar tu última ubicación conocida.</string>
-    <string name="like_this_app">¿Te gusta esta aplicación?</string>
-    <string name="get_donation">Si te gusta esta aplicación, usted puede considerar obtener la versión de donación de esta aplicación. Aunque no posee las características adicionales que tiene esta versión, muestra su apoyo y aprecio a la aplicación, y motivará al desarrollador y soporte el desarrollo de esta aplicación :)</string>
     <string name="kcal_preservce_value_msg">Mantener los valores actuales de KCAL</string>
     <string name="title_activity_about">Sobre</string>
     <string name="contributors">Contribuyentes</string>
@@ -123,7 +121,6 @@
     <string name="light_theme_desc">Enables light theme with light background and slightly different looks.</string>
     <string name="show_support">Show support</string>
     <string name="rate">Rate this app</string>
-    <string name="paypal">Donate using PayPal</string>
-    <string name="get_donate">Get donate version</string>
+    <string name="get_donate">Donate</string>
     <string name="translate">Translate this app</string>
 </resources>

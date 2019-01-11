@@ -23,8 +23,6 @@
     <string name="next_day">&#160;(Następny dzień)</string>
     <string name="sun_switch">Użyj ustawień czasu słońca / wschodu słońca</string>
     <string name="location_unavailable">Nie można uzyskać ostatnio znanej lokalizacji</string>
-    <string name="like_this_app">Lubisz tą aplikcaje?</string>
-    <string name="get_donation">Jeśli podoba ci się ta aplikacja, możesz rozważyć uzyskanie płatnej wersji aplikacji. Mimo że nie ma ona żadnych dodatkowych funkcji niż ta wersja, pokazujesz swoje wsparcie i uznanie dla aplikacji, a to zmotywuje programistę i wspomoże rozwój aplikacji :)</string>
     <string name="kcal_preservce_value_msg">Zachowaj aktualne wartości KCAL</string>
     <string name="title_activity_about">O aplikacji</string>
     <string name="contributors"><u>Współtwórcy</u></string>
@@ -123,7 +121,6 @@
     <string name="light_theme_desc">Włącz jasny motyw z jasnym tłem i nieco innym wyglądem.</string>
     <string name="show_support">Pokaż wsparcie</string>
     <string name="rate">Oceń tę aplikację</string>
-    <string name="paypal">Wesprzyj przez PayPal</string>
-    <string name="get_donate">Uzyskaj wersję dotacyjną aplikacji</string>
+    <string name="get_donate">Donate</string>
     <string name="translate">Przetłumacz aplikację</string>
 </resources>

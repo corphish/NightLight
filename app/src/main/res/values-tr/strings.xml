@@ -23,8 +23,6 @@
     <string name="next_day">&#160;(Sonraki gün)</string>
     <string name="sun_switch">Günbatımı/gündoğumu zamanlamalarını kullan</string>
     <string name="location_unavailable">Bilinen son konumunuz alınamıyor.</string>
-    <string name="like_this_app">Bu uygulamayı sevdiniz mi?</string>
-    <string name="get_donation">Eğer bu uygulamayı severseniz, uygulamanın bağış sürümünü almayı düşünebilirsiniz. Bu sürümden daha fazla özellikli olmamasına rağmen, uygulamaya desteğinizi ve memnuniyetinizi gösterir ve geliştiricileri motive edecek ve uygulamanın gelişimini destekleyecektir:)</string>
     <string name="kcal_preservce_value_msg">Mevcut KCAL değerlerini koru</string>
     <string name="title_activity_about">Hakkında</string>
     <string name="contributors">Katkıda Bulunanlar</string>
@@ -123,7 +121,6 @@
     <string name="light_theme_desc">Enables light theme with light background and slightly different looks.</string>
     <string name="show_support">Show support</string>
     <string name="rate">Rate this app</string>
-    <string name="paypal">Donate using PayPal</string>
-    <string name="get_donate">Get donate version</string>
+    <string name="get_donate">Donate</string>
     <string name="translate">Translate this app</string>
 </resources>

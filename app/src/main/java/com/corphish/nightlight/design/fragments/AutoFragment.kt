@@ -73,8 +73,6 @@ class AutoFragment : FullyExpandedBottomSheetDialogFragment(), LocationListener 
             PreferenceHelper.putBoolean(context, Constants.PREF_AUTO_SWITCH, b)
 
             enableOrDisableAutoSwitchViews(b)
-
-            registerInfoViews(infoAuto, infoDarkHours)
         }
 
         sunEnable.setOnCheckedChangeListener { _, b ->
@@ -122,6 +120,8 @@ class AutoFragment : FullyExpandedBottomSheetDialogFragment(), LocationListener 
         darkStartTime.setValueText(PreferenceHelper.getString(context, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)!!)
 
         enableOrDisableAutoSwitchViews(autoSwitchStatus)
+
+        registerInfoViews(infoAuto, infoDarkHours)
     }
 
     /**

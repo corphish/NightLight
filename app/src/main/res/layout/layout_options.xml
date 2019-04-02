@@ -22,6 +22,7 @@
     <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/defaultPadding"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
@@ -36,13 +37,16 @@
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:paddingBottom="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"
+        android:layout_marginBottom="@dimen/layout_margin"
         android:textSize="@dimen/text_desc"
         android:text="@string/light_theme_desc"/>
 
     <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/defaultPadding"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
@@ -57,7 +61,9 @@
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:paddingBottom="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"
+        android:layout_marginBottom="@dimen/layout_margin"
         android:textSize="@dimen/text_desc"
         android:text="@string/show_info_desc"/>
 </LinearLayout>

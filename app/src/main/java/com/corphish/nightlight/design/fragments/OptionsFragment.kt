@@ -30,8 +30,12 @@ class OptionsFragment: BaseBottomSheetDialogFragment() {
             dismiss()
         }
 
-        FontUtils().setCustomFont(context!!, lightTheme)
+        showInfo.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_SHOW_INFO, Constants.DEFAULT_SHOW_INFO)
 
-        registerInfoViews(infoTheme)
+        showInfo.setOnCheckedChangeListener { _, b ->
+            PreferenceHelper.putBoolean(context, Constants.PREF_SHOW_INFO, b)
+        }
+
+        FontUtils().setCustomFont(context!!, lightTheme, showInfo)
     }
 }

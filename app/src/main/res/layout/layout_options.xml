@@ -17,7 +17,7 @@
         android:layout_margin="@dimen/layout_margin"
         android:textSize="12sp"
         android:textColor="@color/colorPrimary"
-        android:text="@string/theme"/>
+        android:text="@string/options"/>
 
     <Switch
         android:layout_width="match_parent"

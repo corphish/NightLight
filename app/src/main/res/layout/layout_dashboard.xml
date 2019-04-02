@@ -59,9 +59,9 @@
                 android:id="@+id/nlSubStatus"/>
 
             <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cornerRadius="4dp"
+                app:cornerRadius="32dp"
                 android:padding="8dp"
                 android:textAppearance="?android:attr/textAppearance"
                 android:layout_marginStart="@dimen/defaultPadding"

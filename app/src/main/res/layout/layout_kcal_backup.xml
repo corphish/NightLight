@@ -41,12 +41,12 @@
         android:checked="true"/>
 
     <com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/configureKcalBackup"
         android:layout_gravity="end"
-        android:layout_margin="@dimen/layout_margin"
-        app:cornerRadius="4dp"
+        android:layout_margin="8dp"
+        app:cornerRadius="32dp"
         android:padding="8dp"
         android:textAppearance="?android:attr/textAppearance"
         android:text="@string/kcal_backup_set"/>

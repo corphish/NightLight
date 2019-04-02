@@ -25,6 +25,7 @@
         android:textSize="@dimen/text_desc"
         android:paddingEnd="@dimen/layout_padding"
         android:paddingBottom="8dp"
+        android:id="@+id/infoManualColors"
         android:paddingStart="@dimen/layout_padding"/>
 
     <com.gregacucnik.EditableSeekBar

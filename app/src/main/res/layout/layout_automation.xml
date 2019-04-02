@@ -37,6 +37,7 @@
         android:paddingBottom="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_desc"
+        android:id="@+id/infoAuto"
         android:text="@string/auto_enable_desc"/>
 
     <Switch
@@ -88,6 +89,7 @@
         android:paddingBottom="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_desc"
+        android:id="@+id/infoDarkHours"
         android:text="@string/dark_hours_desc"/>
 
     <com.corphish.widgets.KeyValueView

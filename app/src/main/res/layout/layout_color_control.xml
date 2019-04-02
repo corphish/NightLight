@@ -42,6 +42,7 @@
             android:paddingBottom="@dimen/layout_padding"
             android:layout_margin="@dimen/layout_margin"
             android:textSize="@dimen/text_desc"
+            android:id="@+id/infoIntensityType"
             android:text="@string/intensity_type_desc"/>
 
         <androidx.appcompat.widget.AppCompatSpinner

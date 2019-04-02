@@ -38,5 +38,6 @@
         android:paddingBottom="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_desc"
+        android:id="@+id/infoTheme"
         android:text="@string/light_theme_desc"/>
 </LinearLayout>

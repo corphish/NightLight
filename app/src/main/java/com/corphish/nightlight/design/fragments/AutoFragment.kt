@@ -73,6 +73,8 @@ class AutoFragment : FullyExpandedBottomSheetDialogFragment(), LocationListener 
             PreferenceHelper.putBoolean(context, Constants.PREF_AUTO_SWITCH, b)
 
             enableOrDisableAutoSwitchViews(b)
+
+            registerInfoViews(infoAuto, infoDarkHours)
         }
 
         sunEnable.setOnCheckedChangeListener { _, b ->

@@ -31,5 +31,7 @@ class ThemeFragment: BaseBottomSheetDialogFragment() {
         }
 
         FontUtils().setCustomFont(context!!, lightTheme)
+
+        registerInfoViews(infoTheme)
     }
 }

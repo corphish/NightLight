@@ -26,6 +26,7 @@
         android:paddingBottom="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="@dimen/text_desc"
+        android:id="@+id/infoTemperature"
         android:text="@string/color_temperature_desc"/>
 
     <com.gregacucnik.EditableSeekBar

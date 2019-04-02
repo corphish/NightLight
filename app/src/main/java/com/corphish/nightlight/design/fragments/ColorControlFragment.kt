@@ -58,6 +58,8 @@ class ColorControlFragment : FullyExpandedBottomSheetDialogFragment() {
         initManualViews()
         initTemperatureViews()
         setSliderValues()
+
+        registerInfoViews(infoIntensityType, infoTemperature, infoManualColors)
     }
 
     private fun initManualViews() {

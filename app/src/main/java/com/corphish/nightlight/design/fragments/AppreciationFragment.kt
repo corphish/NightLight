@@ -23,6 +23,7 @@ class AppreciationFragment: BaseBottomSheetDialogFragment() {
         super.onActivityCreated(savedInstanceState)
 
         val optionsAdapter = OptionsAdapter()
+        val isGeneric = BuildConfig.FLAVOR == "generic"
 
         val captionList = listOf(
                 R.string.rate,
@@ -37,9 +38,9 @@ class AppreciationFragment: BaseBottomSheetDialogFragment() {
         )
 
         val links = listOf(
-                "market://details?id=com.corphish.nightlight." + (if (BuildConfig.FLAVOR.equals("donate")) "donate" else "generic"),
+                "market://details?id=com.corphish.nightlight." + (if (!isGeneric) "donate" else "generic"),
                 "https://github.com/corphish/NightLight/blob/master/notes/translate.md",
-                "market://details?id=com.corphish.donationpackage"
+                if (isGeneric)"market://details?id=com.corphish.donationpackage" else "https://paypal.me/corphish"
         )
 
         optionsAdapter.captionRes = captionList

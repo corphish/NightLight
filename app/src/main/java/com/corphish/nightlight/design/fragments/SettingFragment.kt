@@ -67,7 +67,7 @@ class SettingFragment: Fragment() {
                 SettingOption(R.string.section_sob, R.drawable.ic_timer_white_24dp, SetOnBootDelayFragment()),
                 SettingOption(R.string.profile_title, R.drawable.ic_profiles_24dp, activityClass =  ProfilesActivity::class.java),
                 SettingOption(R.string.kcal_driver_information_short, R.drawable.ic_driver_24dp, KCALDriverInfoFragment()),
-                SettingOption(R.string.theme, R.drawable.ic_format_paint, ThemeFragment()),
+                SettingOption(R.string.theme, R.drawable.ic_format_paint, OptionsFragment()),
                 SettingOption(R.string.show_support, R.drawable.ic_thumb_up_24dp, AppreciationFragment())
         )
 

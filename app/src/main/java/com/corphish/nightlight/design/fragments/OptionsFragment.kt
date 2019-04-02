@@ -10,13 +10,13 @@ import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragme
 import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
-import kotlinx.android.synthetic.main.layout_theme.*
+import kotlinx.android.synthetic.main.layout_options.*
 
-class ThemeFragment: BaseBottomSheetDialogFragment() {
+class OptionsFragment: BaseBottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.layout_theme, container, false)
+        return inflater.inflate(R.layout.layout_options, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

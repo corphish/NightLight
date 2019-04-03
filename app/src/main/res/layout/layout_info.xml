@@ -38,11 +38,11 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_desc"
             android:id="@+id/githubLink"
-            app:cornerRadius="4dp"
+            app:cornerRadius="32dp"
             android:textAppearance="?android:attr/textAppearance"
             android:layout_margin="@dimen/layout_margin"
-            android:paddingStart="@dimen/layout_padding"
-            android:paddingEnd="@dimen/layout_padding"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text="@string/github"/>
 
         <com.google.android.material.button.MaterialButton
@@ -51,11 +51,11 @@
             android:textSize="@dimen/text_desc"
             android:layout_toEndOf="@id/githubLink"
             android:id="@+id/contributorsLink"
-            app:cornerRadius="4dp"
+            app:cornerRadius="32dp"
             android:textAppearance="?android:attr/textAppearance"
             android:layout_margin="@dimen/layout_margin"
-            android:paddingStart="@dimen/layout_padding"
-            android:paddingEnd="@dimen/layout_padding"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text="@string/contributors"/>
 
         <com.google.android.material.button.MaterialButton
@@ -64,12 +64,11 @@
             android:textSize="@dimen/text_desc"
             android:layout_toEndOf="@id/contributorsLink"
             android:id="@+id/xdaLink"
-            app:cornerRadius="4dp"
+            app:cornerRadius="32dp"
             android:textAppearance="?android:attr/textAppearance"
             android:layout_margin="@dimen/layout_margin"
-            android:paddingStart="@dimen/layout_padding"
-            android:paddingEnd="@dimen/layout_padding"
-            android:paddingBottom="@dimen/layout_padding"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text="@string/xda"/>
     </RelativeLayout>
 

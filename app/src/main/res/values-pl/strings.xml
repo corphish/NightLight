@@ -116,11 +116,12 @@
     <string name="impl_format">Specyfikacja formatu</string>
     <string name="version">Wersja</string>
     <string name="overview">Opis</string>
-    <string name="theme">Motyw</string>
     <string name="light_theme_title">Włącz jasny motyw</string>
     <string name="light_theme_desc">Włącz jasny motyw z jasnym tłem i nieco innym wyglądem.</string>
     <string name="show_support">Pokaż wsparcie</string>
     <string name="rate">Oceń tę aplikację</string>
     <string name="get_donate">Wesprzyj</string>
     <string name="translate">Przetłumacz aplikację</string>
+    <string name="show_info_title">Show info</string>
+    <string name="show_info_desc">Shows information about various controls</string>
 </resources>

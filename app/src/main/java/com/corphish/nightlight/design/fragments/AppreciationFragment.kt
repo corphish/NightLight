@@ -40,7 +40,7 @@ class AppreciationFragment: BaseBottomSheetDialogFragment() {
         val links = listOf(
                 "market://details?id=com.corphish.nightlight." + (if (!isGeneric) "donate" else "generic"),
                 "https://github.com/corphish/NightLight/blob/master/notes/translate.md",
-                if (isGeneric)"market://details?id=com.corphish.donationpackage" else "https://paypal.me/corphish"
+                if (isGeneric)"market://details?id=com.corphish.nightlight.donate" else "https://paypal.me/corphish"
         )
 
         optionsAdapter.captionRes = captionList

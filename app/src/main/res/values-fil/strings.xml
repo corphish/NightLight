@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="master_switch">Paganahin ang Night Light</string>
+    <string name="master_switch_desc">Master switch upang paganahin/huwag paganahin ang Night Light.</string>
+    <string name="no_root_access">Walang root access</string>
+    <string name="no_root_desc">Kinakailangan ang root access para sa Night Light upang gumana.</string>
+    <string name="no_kcal">Hindi kaayon</string>
+    <string name="no_kcal_desc">Ang iyong kernel ay hindi sumusuporta sa KCAL. Ang KCAL ay isang display na tampok ng tuning ng driver para sa mga aparatong Qualcomm. KCAL support ay kailangan para sa Night Light upang gumana.</string>
+    <string name="auto_enable">Awtomatikong switch</string>
+    <string name="auto_enable_desc">Awtomatikong paganahin ang Night Light sa pagitan ng tinukoy na oras. Ay awtomatikong hindi pinagana ang Night Light sa labas ng saklaw ng oras na ito.</string>
+    <string name="start_time">Oras ng simula</string>
+    <string name="end_time">Oras ng pagtatapos</string>
+    <string name="about">Tungkol Dito</string>
+    <string name="app_desc">Ang Night Light ay gumagamit ng KCAL, na isang display tuning feature para sa mga bagong henerasyon ng mga aparatong Qualcomm, upang ayusin ang intensity ng blue light, na ginagawang mas kumportable para sa iyong mga mata kapag ginagamit mo ang iyong telepono sa madilim at tinutulungan kang matulog. Dahil gumagawa ito ng mga pagbabago sa antas ng driver, at hindi ito gumagamit ng anumang overlay ng software, ito ay friendly na baterya at ang pagbabago ay makikita sa lahat ng dako sa display.</string>
+    <string name="shortcut_toggle">I-toggle ang on/off</string>
+    <string name="next_day">&#160;(Susunod na araw)</string>
+    <string name="sun_switch">Gumamit ng mga oras ng paglubog ng araw/pagsikat ng araw</string>
+    <string name="location_unavailable">Hindi makuha ang iyong huling kilalang lokasyon.</string>
+    <string name="kcal_preservce_value_msg">Panatilihin ang mga kasalukuyang halaga ng KCAL</string>
+    <string name="contributors">Mga Kontribyutor</string>
+</resources>

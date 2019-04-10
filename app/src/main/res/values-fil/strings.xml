@@ -15,8 +15,6 @@
     <string name="dark_hours_desc">This enables the use of minimum and maximum intensities as a part of automated time schedule. If enabled, the minimum intensity will be applied from start time to dark hours start time, and maximum intensity will be used then on until the schedule ends.</string>
     <string name="dark_hours_start_time">Dark hours start time</string>
     <string name="dark_hours_set_error">Time must be in between schedule start time and end time</string>
-    <string name="on">Bukas</string>
-    <string name="off">Off</string>
     <string name="about">Tungkol Dito</string>
     <string name="app_desc">Ang Night Light ay gumagamit ng KCAL, na isang display tuning feature para sa mga bagong henerasyon ng mga aparatong Qualcomm, upang ayusin ang intensity ng blue light, na ginagawang mas kumportable para sa iyong mga mata kapag ginagamit mo ang iyong telepono sa madilim at tinutulungan kang matulog. Dahil gumagawa ito ng mga pagbabago sa antas ng driver, at hindi ito gumagamit ng anumang overlay ng software, ito ay friendly na baterya at ang pagbabago ay makikita sa lahat ng dako sa display.</string>
     <string name="shortcut_toggle">I-toggle ang on / off</string>
@@ -24,7 +22,6 @@
     <string name="sun_switch">Gumamit ng mga oras ng paglubog ng araw / pagsikat ng araw</string>
     <string name="location_unavailable">Hindi makuha ang iyong huling kilalang lokasyon.</string>
     <string name="kcal_preservce_value_msg">Panatilihin ang mga kasalukuyang halaga ng KCAL</string>
-    <string name="title_activity_about">Tungkol Dito</string>
     <string name="contributors">Mga Kontribyutor</string>
     <string name="color_temperature_title">Color Temperature</string>
     <string name="color_temperature_desc">Value of the color temperature to be set. Lower temperatures are better suitable for low light viewing.</string>

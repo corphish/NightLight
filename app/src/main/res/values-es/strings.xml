@@ -15,8 +15,6 @@
     <string name="dark_hours_desc">This enables the use of minimum and maximum intensities as a part of automated time schedule. If enabled, the minimum intensity will be applied from start time to dark hours start time, and maximum intensity will be used then on until the schedule ends.</string>
     <string name="dark_hours_start_time">Dark hours start time</string>
     <string name="dark_hours_set_error">Time must be in between schedule start time and end time</string>
-    <string name="on">Encendido</string>
-    <string name="off">Apagado</string>
     <string name="about">Sobre</string>
     <string name="app_desc">Night Light usa KCAL, que es una función de ajuste que controla la pantalla para la nueva generación de equipos Qualcomm, para ajustar la intensidad de la luz azul, permitiendo que sea más cómodo para tus ojos cuando estés usando tu telefono en la oscuridad y te ayudaría a dormirte. Ya que hace cambios a nivel del driver, y no usa superposiciones de software, es amigable con la batería y el cambio puede ser visto en toda la pantalla.</string>
     <string name="shortcut_toggle">Alternado encendido/apagado</string>
@@ -24,7 +22,6 @@
     <string name="sun_switch">Usa tiempos de amanecer/atardecer</string>
     <string name="location_unavailable">Incapaz de localizar tu última ubicación conocida.</string>
     <string name="kcal_preservce_value_msg">Mantener los valores actuales de KCAL</string>
-    <string name="title_activity_about">Sobre</string>
     <string name="contributors">Contribuyentes</string>
     <string name="color_temperature_title">Color Temperature</string>
     <string name="color_temperature_desc">Value of the color temperature to be set. Lower temperatures are better suitable for low light viewing.</string>

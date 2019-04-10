@@ -15,8 +15,6 @@
     <string name="dark_hours_desc">This enables the use of minimum and maximum intensities as a part of automated time schedule. If enabled, the minimum intensity will be applied from start time to dark hours start time, and maximum intensity will be used then on until the schedule ends.</string>
     <string name="dark_hours_start_time">Dark hours start time</string>
     <string name="dark_hours_set_error">Time must be in between schedule start time and end time</string>
-    <string name="on">Aktif</string>
-    <string name="off">Nonaktif</string>
     <string name="about">Tentang</string>
     <string name="app_desc">Cahaya malam menggunakan KCAL, yang merupakan display driver tuning fitur untuk generasi baru perangkat Qualcomm, untuk mengatur intensitas cahaya biru, yang membuatnya lebih nyaman untuk mata anda ketika anda menggunakan ponsel anda dalam gelap dan membantu anda tertidur. Sejak itu membuat perubahan di tingkat driver, dan tidak menggunakan software apapun overlay, ini adalah baterai ramah dan perubahan dapat dilihat di mana-mana pada layar.</string>
     <string name="shortcut_toggle">Beralih hidup/mati</string>
@@ -24,7 +22,6 @@
     <string name="sun_switch">Gunakan timing matahari terbit/matahari terbenam</string>
     <string name="location_unavailable">Tidak bisa mendapatkan lokasi terakhir yang diketahui.</string>
     <string name="kcal_preservce_value_msg">Melestarikan saat ini KCAL nilai-nilai</string>
-    <string name="title_activity_about">Tentang</string>
     <string name="contributors">Kontributor</string>
     <string name="color_temperature_title">Color Temperature</string>
     <string name="color_temperature_desc">Value of the color temperature to be set. Lower temperatures are better suitable for low light viewing.</string>

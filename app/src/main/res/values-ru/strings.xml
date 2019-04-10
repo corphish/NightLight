@@ -15,8 +15,6 @@
     <string name="dark_hours_desc">This enables the use of minimum and maximum intensities as a part of automated time schedule. If enabled, the minimum intensity will be applied from start time to dark hours start time, and maximum intensity will be used then on until the schedule ends.</string>
     <string name="dark_hours_start_time">Dark hours start time</string>
     <string name="dark_hours_set_error">Time must be in between schedule start time and end time</string>
-    <string name="on">Вкл.</string>
-    <string name="off">Выкл.</string>
     <string name="about">О приложении</string>
     <string name="app_desc">Ночной свет использует KCAL, который является функцией настройки драйвера дисплея для нового поколения Qualcomm устройств. Ночной свет регулирует интенсивность синего света, что делает его более удобным для ваших глаз, когда вы используете телефон в тёмное время суток и это помогает вам заснуть. Поскольку данное приложение вносит изменения на уровне драйвера и не использует никакие наложения программного обеспечения, то батарея более дружественная, и изменение можно увидеть повсюду на дисплее.</string>
     <string name="shortcut_toggle">Вкл./Откл.</string>
@@ -24,7 +22,6 @@
     <string name="sun_switch">От заката до рассвета</string>
     <string name="location_unavailable">Невозможно получить ваше последнее известное местоположение.</string>
     <string name="kcal_preservce_value_msg">Оберегать исходные параметры KCAL</string>
-    <string name="title_activity_about">О приложении</string>
     <string name="contributors"><u>Авторы</u></string>
     <string name="color_temperature_title">Цветовая температура</string>
     <string name="color_temperature_desc">Здесь вы устанавливаете значение цветовой температуры. Более низкие температуры лучше подходят для просмотра в недостаточной освещенности.</string>

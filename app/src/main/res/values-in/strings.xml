@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="master_switch">Mengaktifkan Night Light</string>
+    <string name="master_switch_desc">Beralih master untuk mengaktifkan/menonaktifkan Night Light.</string>
+    <string name="no_root_access">Tidak ada akses root</string>
+    <string name="no_root_desc">Akses Root diperlukan untuk Cahaya Malam untuk bekerja.</string>
+    <string name="no_kcal_desc">Kernel anda tidak mendukung KCAL. KCAL adalah sebuah display driver tuning fitur untuk perangkat Qualcomm. KCAL dukungan yang dibutuhkan untuk Cahaya Malam untuk bekerja.</string>
+    <string name="auto_enable_desc">Secara otomatis mengaktifkan Night Light antara waktu yang ditentukan. Malam Cahaya akan otomatis dinonaktifkan di luar rentang waktu ini.</string>
+    <string name="app_desc">Cahaya malam menggunakan KCAL, yang merupakan display driver tuning fitur untuk generasi baru perangkat Qualcomm, untuk mengatur intensitas cahaya biru, yang membuatnya lebih nyaman untuk mata anda ketika anda menggunakan ponsel anda dalam gelap dan membantu anda tertidur. Sejak itu membuat perubahan di tingkat driver, dan tidak menggunakan software apapun overlay, ini adalah baterai ramah dan perubahan dapat dilihat di mana-mana pada layar.</string>
+    <string name="no_kcal">Tidak kompatibel</string>
+    <string name="auto_enable">Saklar otomatis</string>
+    <string name="about">Tentang</string>
+    <string name="shortcut_toggle">Beralih hidup/mati</string>
+    <string name="next_day">&#160;(hari Berikutnya)</string>
+    <string name="sun_switch">Gunakan timing matahari terbit/matahari terbenam</string>
+    <string name="location_unavailable">Tidak bisa mendapatkan lokasi terakhir yang diketahui.</string>
+    <string name="kcal_preservce_value_msg">Melestarikan saat ini KCAL nilai-nilai</string>
+    <string name="contributors">Kontributor</string>
+</resources>

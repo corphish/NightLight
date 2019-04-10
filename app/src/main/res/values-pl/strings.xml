@@ -15,8 +15,6 @@
     <string name="dark_hours_desc">Umożliwia to stosowanie minimalnych i maksymalnych natężeń w ramach zautomatyzowanego harmonogramu. Jeśli włączone, zostaną zastosowane minimalne natężenie od godziny rozpoczęcia do godziny rozpoczęcia czasu ciemnego, a maksymalna intensywność będzie używany następnie do czasu zakończenia harmonogramu.</string>
     <string name="dark_hours_start_time">Godzina rozpoczęcia ciemnych godzin</string>
     <string name="dark_hours_set_error">Czas musi być pomiędzy harmonogramem czas rozpoczęcia i czas zakończenia</string>
-    <string name="on">Włącz</string>
-    <string name="off">Wyłącz</string>
     <string name="about">O aplikacji</string>
     <string name="app_desc">Night light używa KCAL, który jest podrasowanym sterownikiem ekranowynm dla urządzeń z procesorem od Qualcomm. Pozwala on na dostosowanie intensywności zielonego i niebieskiego swiatła co czyni ekran bardziej konfortowy do czytania w ciemnych pomieszczeniach i pozwala także łatwiej zasnąć. Zmiany które wprowadza są w warstwie sterownika i nie używa on żadnego oprogramowania nadpisującego ekran. Także jest on przyjazny dla bateri i zmiany możemy zobaczyć w każdej aplikacji</string>
     <string name="shortcut_toggle">Włącz/Wyłącz</string>
@@ -24,7 +22,6 @@
     <string name="sun_switch">Użyj ustawień czasu słońca / wschodu słońca</string>
     <string name="location_unavailable">Nie można uzyskać ostatnio znanej lokalizacji</string>
     <string name="kcal_preservce_value_msg">Zachowaj aktualne wartości KCAL</string>
-    <string name="title_activity_about">O aplikacji</string>
     <string name="contributors">Współtwórcy</string>
     <string name="color_temperature_title">Temperatura kolorów</string>
     <string name="color_temperature_desc">Wartośc temperatury kolorów. Im niższa temperatura tym konfortowsze jest patrzenie na ekran przy słabym świetle.</string>

@@ -15,8 +15,6 @@
     <string name="dark_hours_desc">This enables the use of minimum and maximum intensities as a part of automated time schedule. If enabled, the minimum intensity will be applied from start time to dark hours start time, and maximum intensity will be used then on until the schedule ends.</string>
     <string name="dark_hours_start_time">Dark hours start time</string>
     <string name="dark_hours_set_error">Time must be in between schedule start time and end time</string>
-    <string name="on">Açık</string>
-    <string name="off">Kapalı</string>
     <string name="about">Hakkında</string>
     <string name="app_desc">Night Lamb, karanlıkta telefonunuzu kullandığınızda gözleriniz için daha uygun olan mavi ışığın yoğunluğunu ayarlamak amacıyla Qualcomm cihazlarının yeni üretimi için ekran sürücüsü ayarlama özelliği olan KCAL\'ı kullanır ve uykuya dalmanıza yardım eder. Sürücü seviyesinde değişiklikler yaptığı ve yazılım bindirmesi kullanmadığı için batarya dostudur ve değişim ekranın her yerinde görülebilir.</string>
     <string name="shortcut_toggle">Aç/kapa</string>
@@ -24,7 +22,6 @@
     <string name="sun_switch">Günbatımı/gündoğumu zamanlamalarını kullan</string>
     <string name="location_unavailable">Bilinen son konumunuz alınamıyor.</string>
     <string name="kcal_preservce_value_msg">Mevcut KCAL değerlerini koru</string>
-    <string name="title_activity_about">Hakkında</string>
     <string name="contributors">Katkıda Bulunanlar</string>
     <string name="color_temperature_title">Color Temperature</string>
     <string name="color_temperature_desc">Value of the color temperature to be set. Lower temperatures are better suitable for low light viewing.</string>

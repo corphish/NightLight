@@ -20,6 +20,7 @@ import com.corphish.nightlight.design.views.ProfileCreator
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.extensions.toArrayOfInts
 import com.corphish.nightlight.interfaces.ThemeChangeListener
+import com.corphish.nightlight.services.RGBFadeService
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.layout_header.*
@@ -60,6 +61,8 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         applyProfileIfNecessary()
 
         handleIntent()
+
+        startService(Intent(this, RGBFadeService::class.java))
     }
 
     private fun init() {
@@ -186,6 +189,8 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
     public override fun onDestroy() {
         super.onDestroy()
         NightLightAppService.instance.destroy()
+
+        stopService(Intent(this, RGBFadeService::class.java))
     }
 
     /**

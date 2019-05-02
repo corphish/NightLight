@@ -88,6 +88,10 @@
             android:permission="android.permission.BIND_JOB_SERVICE"
             android:process=":booting" />
 
+        <service
+            android:name=".services.RGBFadeService"
+            android:exported="false" />
+
         <receiver android:name=".receivers.TaskerIntentReceiver"
             android:permission="">
             <intent-filter>

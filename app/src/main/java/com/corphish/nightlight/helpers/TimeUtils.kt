@@ -121,4 +121,23 @@ object TimeUtils {
 
         return Math.round((startTimeMinutes - curTime).toDouble()/60).toInt()
     }
+
+    /**
+     * Returns msecs system representation for given time for the day
+     * If msec representation is less than currentTime, the same for the next day is returned
+     */
+    fun getTimeAsMSecs(time: String): Long {
+        val calendar = Calendar.getInstance()
+        val timeParts = getTimeAsHourAndMinutes(time)
+
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.set(Calendar.HOUR_OF_DAY, timeParts[0])
+        calendar.set(Calendar.MINUTE, timeParts[1])
+
+        var mSecs = calendar.timeInMillis
+        if (currentTimeAsMinutes > getTimeInMinutes(time))
+            mSecs += 86400000L
+
+        return mSecs
+    }
 }

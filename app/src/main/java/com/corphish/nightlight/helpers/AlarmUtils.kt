@@ -47,18 +47,10 @@ object AlarmUtils {
                  receiverClass: Class<*>,
                  requestCode: Int) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        var timeInMillis: Long
+        val timeInMillis = TimeUtils.getTimeAsMSecs(time)
 
         val intent = Intent(context, receiverClass)
         val alarmIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
-
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = System.currentTimeMillis()
-        calendar.set(Calendar.HOUR_OF_DAY, TimeUtils.getTimeAsHourAndMinutes(time)[0])
-        calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(time)[1])
-
-        timeInMillis = calendar.timeInMillis
-        if (TimeUtils.currentTimeAsMinutes > TimeUtils.getTimeInMinutes(time)) timeInMillis += 86400000L
 
         if (repeating)
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, alarmIntent)

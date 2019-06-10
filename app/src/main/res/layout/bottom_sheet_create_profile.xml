@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/profile_name_set_layout"
                 android:padding="@dimen/layout_padding"
+                app:passwordToggleDrawable="@null"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText

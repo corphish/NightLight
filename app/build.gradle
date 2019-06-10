@@ -68,9 +68,9 @@ dependencies {
 
     implementation 'com.github.corphish:widgets:1.2.1'
 
-    genericImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
-    donateImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
+    genericImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    donateImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation 'androidx.core:core-ktx:1.0.1'
+    implementation 'androidx.core:core-ktx:1.0.2'
 }

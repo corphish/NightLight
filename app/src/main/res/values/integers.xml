@@ -2,7 +2,7 @@
 <resources>
     <integer name="gridSpanCount">3</integer>
 
-    <integer name="minTemp">2500</integer>
+    <integer name="minTemp">2000</integer>
     <integer name="maxTemp">5000</integer>
     <integer name="defaultTemp">4000</integer>
 </resources>

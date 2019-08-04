@@ -4,25 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.R
+import com.corphish.nightlight.design.adapters.GenericOptionsAdapter
 import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment
-import com.corphish.nightlight.helpers.ExternalLink
-import kotlinx.android.synthetic.main.layout_appreciation.*
+import kotlinx.android.synthetic.main.layout_generic_options.*
 
 class AppreciationFragment: BaseBottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.layout_appreciation, container, false)
+                              savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.layout_generic_options, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val optionsAdapter = OptionsAdapter()
+        val optionsAdapter = GenericOptionsAdapter(context!!)
         val isGeneric = BuildConfig.FLAVOR == "generic"
 
         val captionList = listOf(
@@ -43,6 +40,8 @@ class AppreciationFragment: BaseBottomSheetDialogFragment() {
                 if (isGeneric)"market://details?id=com.corphish.nightlight.donate" else "https://paypal.me/corphish"
         )
 
+        title.setText(R.string.show_support)
+
         optionsAdapter.captionRes = captionList
         optionsAdapter.imageRes = imageList
         optionsAdapter.links = links
@@ -55,39 +54,5 @@ class AppreciationFragment: BaseBottomSheetDialogFragment() {
         recyclerView.setHasFixedSize(false)
 
         optionsAdapter.notifyDataSetChanged()
-    }
-
-    private inner class OptionsAdapter: RecyclerView.Adapter<OptionsAdapter.OptionsViewHolder>() {
-        lateinit var captionRes: List<Int>
-        lateinit var imageRes: List<Int>
-        lateinit var links: List<String>
-
-        inner class OptionsViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-            internal var icon = v.findViewById<ImageButton>(R.id.settingOptionIcon)
-            internal var caption = v.findViewById<TextView>(R.id.settingOptionCaption)
-
-            init {
-                v.setOnClickListener(this)
-                icon.setOnClickListener(this)
-            }
-
-            override fun onClick(v: View?) {
-                ExternalLink.open(context, links[adapterPosition])
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OptionsViewHolder {
-            val itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.setting_option_item, parent, false)
-
-            return OptionsViewHolder(itemView)
-        }
-
-        override fun onBindViewHolder(holder: OptionsViewHolder, position: Int) {
-            holder.icon.setImageResource(imageRes[position])
-            holder.caption.setText(captionRes[position])
-        }
-
-        override fun getItemCount() = links.size
     }
 }

@@ -58,9 +58,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:backgroundTint="@color/colorPrimary"
-                    app:cornerRadius="4dp"
                     android:layout_marginStart="4dp"
-                    android:textAppearance="?android:attr/textAppearance"
+                    style="@style/MaterialButtonStyle"
                     android:layout_marginEnd="4dp"
                     android:layout_alignParentEnd="true"
                     android:id="@+id/positiveButton"
@@ -69,5 +68,4 @@
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

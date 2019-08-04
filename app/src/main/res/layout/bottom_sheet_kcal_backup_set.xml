@@ -66,9 +66,8 @@
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
-            app:cornerRadius="32dp"
             android:padding="8dp"
-            android:textAppearance="?android:attr/textAppearance"
+            style="@style/MaterialButtonStyle"
             android:text="@android:string/ok"
             android:id="@+id/button_ok"
             app:backgroundTint="@color/colorPrimary"

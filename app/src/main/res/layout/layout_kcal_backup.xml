@@ -46,8 +46,7 @@
         android:id="@+id/configureKcalBackup"
         android:layout_gravity="end"
         android:layout_margin="8dp"
-        app:cornerRadius="32dp"
         android:padding="8dp"
-        android:textAppearance="?android:attr/textAppearance"
+        style="@style/MaterialButtonStyle"
         android:text="@string/kcal_backup_set"/>
 </LinearLayout>

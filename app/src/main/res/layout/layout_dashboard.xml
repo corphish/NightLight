@@ -61,9 +61,8 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cornerRadius="32dp"
                 android:padding="8dp"
-                android:textAppearance="?android:attr/textAppearance"
+                style="@style/MaterialButtonStyle"
                 android:layout_marginStart="@dimen/defaultPadding"
                 android:layout_marginTop="@dimen/defaultPadding"
                 android:id="@+id/nlDashboardAction"

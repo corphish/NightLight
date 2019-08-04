@@ -15,8 +15,8 @@
         android:paddingEnd="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
         android:textSize="12sp"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/show_support"/>
+        android:id="@+id/title"
+        android:textColor="@color/colorPrimary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

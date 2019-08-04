@@ -60,6 +60,10 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         applyProfileIfNecessary()
 
         handleIntent()
+
+        fab.setOnClickListener {
+            ProfileCreator(this@MainActivity, ProfileCreator.MODE_CREATE, getProfileForCurrentSettings()) {}.show()
+        }
     }
 
     private fun init() {
@@ -78,10 +82,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                 .add(containerId, DashboardFragment())
                 .add(containerId, MasterSwitchFragment())
                 .commit()
-
-        fab.setOnClickListener { _ ->
-            ProfileCreator(this@MainActivity, ProfileCreator.MODE_CREATE, getProfileForCurrentSettings()) {}.show()
-        }
     }
 
     override fun onSwitchClicked(checkStatus: Boolean) {

@@ -44,4 +44,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="MaterialButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="cornerRadius">32dp</item>
+        <item name="android:textAppearance">?android:textAppearance</item>
+        <item name="android:textColor">?attr/onColorText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

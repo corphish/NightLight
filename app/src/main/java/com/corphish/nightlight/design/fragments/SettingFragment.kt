@@ -61,14 +61,14 @@ class SettingFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val settingsAdapter = SettingsAdapter()
         settingsOptions = listOf(
-                SettingOption(R.string.section_color, R.drawable.ic_color_white_24dp, ColorControlFragment()),
-                SettingOption(R.string.section_auto, R.drawable.ic_alarm_white_24dp, AutoFragment()),
-                SettingOption(R.string.section_kcal_backup, R.drawable.ic_settings_backup_restore_white_24dp, KCALBackupSettingsFragment()),
-                SettingOption(R.string.section_sob, R.drawable.ic_timer_white_24dp, SetOnBootDelayFragment()),
-                SettingOption(R.string.profile_title, R.drawable.ic_profiles_24dp, activityClass =  ProfilesActivity::class.java),
-                SettingOption(R.string.kcal_driver_information_short, R.drawable.ic_driver_24dp, KCALDriverInfoFragment()),
-                SettingOption(R.string.options, R.drawable.ic_settings_white_24dp, OptionsFragment()),
-                SettingOption(R.string.show_support, R.drawable.ic_thumb_up_24dp, AppreciationFragment())
+                SettingOption(R.string.section_color, R.drawable.ic_color, ColorControlFragment()),
+                SettingOption(R.string.section_auto, R.drawable.ic_alarm, AutoFragment()),
+                SettingOption(R.string.section_kcal_backup, R.drawable.ic_settings_backup_restore, KCALBackupSettingsFragment()),
+                SettingOption(R.string.section_sob, R.drawable.ic_timer, SetOnBootDelayFragment()),
+                SettingOption(R.string.profile_title, R.drawable.ic_profiles, activityClass =  ProfilesActivity::class.java),
+                SettingOption(R.string.kcal_driver_information_short, R.drawable.ic_driver, KCALDriverInfoFragment()),
+                SettingOption(R.string.options, R.drawable.ic_settings, OptionsFragment()),
+                SettingOption(R.string.show_support, R.drawable.ic_thumb_up, AppreciationFragment())
         )
 
         settingsAdapter.list = settingsOptions

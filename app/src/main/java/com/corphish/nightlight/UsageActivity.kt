@@ -19,7 +19,7 @@ class UsageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_usage)
 
         banner_title.text = getString(R.string.faq)
-        banner_icon.setImageResource(R.drawable.ic_help_24dp)
+        banner_icon.setImageResource(R.drawable.ic_help)
         init()
     }
 

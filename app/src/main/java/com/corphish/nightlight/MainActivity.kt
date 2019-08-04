@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         super.onResume()
 
         banner_title.text = getString(R.string.overview)
-        banner_icon.setImageResource(R.drawable.ic_home_24dp)
+        banner_icon.setImageResource(R.drawable.ic_home)
     }
 
     private fun showFAQ() {

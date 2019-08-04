@@ -32,9 +32,9 @@ class AppreciationFragment: BaseBottomSheetDialogFragment() {
         )
 
         val imageList = listOf(
-                R.drawable.ic_star_24dp,
-                R.drawable.ic_translate_24dp,
-                R.drawable.ic_money_24dp
+                R.drawable.ic_star,
+                R.drawable.ic_translate,
+                R.drawable.ic_money
         )
 
         val links = listOf(

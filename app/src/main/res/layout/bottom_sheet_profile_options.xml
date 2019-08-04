@@ -46,7 +46,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        android:drawableStart="@drawable/ic_apply_24dp"
+        android:drawableStart="@drawable/ic_apply"
         android:text="@string/apply"/>
 
     <TextView
@@ -61,7 +61,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        android:drawableStart="@drawable/ic_edit_24dp"
+        android:drawableStart="@drawable/ic_edit"
         android:text="@string/edit"/>
 
     <TextView
@@ -76,7 +76,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        android:drawableStart="@drawable/ic_delete_24dp"
+        android:drawableStart="@drawable/ic_delete"
         android:text="@string/delete"/>
 
 </LinearLayout>

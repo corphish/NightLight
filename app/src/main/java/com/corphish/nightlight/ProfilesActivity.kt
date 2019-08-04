@@ -62,7 +62,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         }
 
         banner_title.text = getString(R.string.profile_title)
-        banner_icon.setImageResource(R.drawable.ic_profiles_24dp)
+        banner_icon.setImageResource(R.drawable.ic_profiles)
 
         initProfilesManager()
         initViews()

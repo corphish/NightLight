@@ -117,6 +117,7 @@
 
     <string name="github" translatable="false">Github</string>
     <string name="xda" translatable="false">XDA Developers</string>
+    <string name="links">Links</string>
 
     <string name="dashboard">Dashboard</string>
     <string name="dashboard_nl_on">Night Light is on</string>

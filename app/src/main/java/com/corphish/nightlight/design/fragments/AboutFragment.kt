@@ -27,9 +27,6 @@ class AboutFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         view?.setOnClickListener { ExternalLink.open(context, "market://details?id=" + context!!.packageName) }
-        contributorsLink.setOnClickListener { ExternalLink.open(context, "https://github.com/corphish/NightLight/graphs/contributors") }
-        githubLink.setOnClickListener { ExternalLink.open(context, "https://github.com/corphish/NightLight/") }
-        xdaLink.setOnClickListener { ExternalLink.open(context, "https://forum.xda-developers.com/android/apps-games/app-night-light-kcal-t3689090") }
 
         val versionText = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
         version.text = versionText

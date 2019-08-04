@@ -29,43 +29,6 @@
         android:layout_margin="@dimen/layout_margin"
         android:text="@string/app_desc"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/githubLink"
-            style="@style/MaterialButtonStyle"
-            android:layout_margin="@dimen/layout_margin"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="@string/github"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/MaterialButtonStyle"
-            android:layout_toEndOf="@id/githubLink"
-            android:id="@+id/contributorsLink"
-            android:layout_margin="@dimen/layout_margin"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="@string/contributors"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/contributorsLink"
-            android:id="@+id/xdaLink"
-            style="@style/MaterialButtonStyle"
-            android:layout_margin="@dimen/layout_margin"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="@string/xda"/>
-    </RelativeLayout>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

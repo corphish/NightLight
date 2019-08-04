@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.corphish.nightlight.design.ThemeUtils
 
 import com.corphish.nightlight.design.fragments.AboutFragment
+import com.corphish.nightlight.design.fragments.LinksFragment
+import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.layout_header.*
 
 class AboutActivity : AppCompatActivity() {
@@ -18,6 +20,10 @@ class AboutActivity : AppCompatActivity() {
         banner_icon.setImageResource(R.drawable.ic_info)
 
         if (savedInstanceState == null) viewInit()
+
+        fab.setOnClickListener {
+            LinksFragment().show(supportFragmentManager, "")
+        }
     }
 
     private fun viewInit() {

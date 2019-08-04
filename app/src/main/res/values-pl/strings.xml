@@ -89,6 +89,7 @@
     <string name="dark_hours_idea_answer">The main purpose of dark hours feature is to give the intensity types (minimum and maximum intensity) an automatic control. If dark hours setting is set, minimum intensity is applied from start of the automatic period to this time, and the maximum intensity is applied until the end of the schedule.</string>
     <string name="donate_question">Q. Do I get any extra feature in the donate version?</string>
     <string name="donate_answer">No. Two versions are basically the same functionality wise. Donate version is there if you really love my work and want to show support to it and motivate me to keep on doing the work. It is absolutely fine if you choose not to donate and keep using the generic version.</string>
+    <string name="links">Links</string>
     <string name="dashboard">Pulpit nawigacyjny</string>
     <string name="dashboard_nl_on">Night Light jest włączony</string>
     <string name="dashboard_nl_off">Night Light jest wyłączony</string>

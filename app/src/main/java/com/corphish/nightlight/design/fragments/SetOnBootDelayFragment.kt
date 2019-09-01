@@ -39,6 +39,7 @@ class SetOnBootDelayFragment : BaseBottomSheetDialogFragment() {
         setOnBootSwitch.setOnCheckedChangeListener { _, b ->
             PreferenceHelper.putBoolean(context, Constants.PREF_SET_ON_BOOT, b)
             setOnBootStatus.setText(if (b) R.string.set_on_boot_switch_enabled_desc else R.string.set_on_boot_switch_disabled_desc)
+            setOnBootDelay.isEnabled = b
         }
 
         setOnBootSwitch.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_SET_ON_BOOT, Constants.DEFAULT_SET_ON_BOOT)

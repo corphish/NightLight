@@ -4,7 +4,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorAccent</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:fontFamily">@font/cust_font</item>
         <item name="themeCircleBackground">@color/circleBackgroundDark</item>
@@ -17,7 +17,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">#dcdcdc</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorAccent</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:fontFamily">@font/cust_font</item>
         <item name="themeCircleBackground">@color/circleBackgroundLight</item>
@@ -36,13 +36,11 @@
     </style>
 
     <style name="BottomSheetDialogDark" parent="Theme.MaterialComponents.BottomSheetDialog">
-        <item name="android:colorBackground">#333333</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="BottomSheetDialogLight" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-        <item name="android:colorBackground">#fafafa</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
@@ -52,5 +50,6 @@
         <item name="android:textAppearance">?android:textAppearance</item>
         <item name="android:textColor">?attr/onColorText</item>
         <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@color/colorAccent</item>
     </style>
 </resources>

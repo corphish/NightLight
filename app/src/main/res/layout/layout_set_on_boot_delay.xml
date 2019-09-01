@@ -19,12 +19,43 @@
         android:textColor="@color/colorPrimary"
         android:text="@string/section_sob"/>
 
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:layout_marginBottom="2dp"
+        android:textSize="@dimen/text_caption"
+        android:text="@string/set_on_boot_switch_title"
+        android:id="@+id/setOnBootSwitch"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
+        android:paddingBottom="@dimen/layout_padding"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"
+        android:layout_marginBottom="@dimen/layout_margin"
+        android:layout_marginTop="2dp"
+        android:text="@string/set_on_boot_switch_enabled_desc"
+        android:textSize="@dimen/text_desc"
+        android:id="@+id/setOnBootStatus"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:layout_marginBottom="2dp"
         android:textSize="@dimen/text_caption"
         android:textAppearance="?android:textAppearance"
         android:text="@string/set_on_boot_delay_title"/>
@@ -35,7 +66,10 @@
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:paddingBottom="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"
+        android:layout_marginBottom="@dimen/layout_margin"
+        android:layout_marginTop="2dp"
         android:textSize="@dimen/text_desc"
         android:id="@+id/setOnBootDesc"
         android:text="@string/set_on_boot_delay_desc"/>

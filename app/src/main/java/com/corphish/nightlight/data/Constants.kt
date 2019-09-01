@@ -45,6 +45,7 @@ object Constants {
     const val PREF_LIGHT_THEME = "light_theme"
     const val PREF_THEME_CHANGE_EVENT = "theme_change_temp"
     const val PREF_SHOW_INFO = "show_info"
+    const val PREF_SET_ON_BOOT = "set_on_boot"
 
     /**
      * Fixed const values (default, max const values)
@@ -66,6 +67,7 @@ object Constants {
     const val DEFAULT_BOOT_DELAY = 20
     const val DEFAULT_LIGHT_THEME = false
     const val DEFAULT_SHOW_INFO = true
+    const val DEFAULT_SET_ON_BOOT = true
 
     /**
      * Night light setting modes

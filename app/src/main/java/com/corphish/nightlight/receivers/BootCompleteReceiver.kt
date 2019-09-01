@@ -4,8 +4,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import com.corphish.nightlight.data.Constants
 
 import com.corphish.nightlight.helpers.BootUtils
+import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.BootCompleteJobService
 
 /**
@@ -17,6 +19,7 @@ class BootCompleteReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         if (Intent.ACTION_BOOT_COMPLETED != intent.action) return
+        if (!PreferenceHelper.getBoolean(context, Constants.PREF_SET_ON_BOOT, Constants.DEFAULT_SET_ON_BOOT)) return
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             BootCompleteJobService.schedule(context)

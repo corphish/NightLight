@@ -36,6 +36,13 @@ class SetOnBootDelayFragment : BaseBottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setOnBootSwitch.setOnCheckedChangeListener { _, b ->
+            PreferenceHelper.putBoolean(context, Constants.PREF_SET_ON_BOOT, b)
+            setOnBootStatus.setText(if (b) R.string.set_on_boot_switch_enabled_desc else R.string.set_on_boot_switch_disabled_desc)
+        }
+
+        setOnBootSwitch.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_SET_ON_BOOT, Constants.DEFAULT_SET_ON_BOOT)
+
         setOnBootDesc.text = getString(R.string.set_on_boot_delay_desc, bootDelay.toString() + "s")
 
         setOnBootDelay.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {

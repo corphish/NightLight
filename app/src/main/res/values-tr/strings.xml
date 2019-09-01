@@ -25,7 +25,7 @@
     <string name="contributors">Katkıda Bulunanlar</string>
     <string name="color_temperature_title">Color Temperature</string>
     <string name="color_temperature_desc">Value of the color temperature to be set. Lower temperatures are better suitable for low light viewing.</string>
-    <string name="set_on_boot_delay_title">Set on boot delay</string>
+    <string name="set_on_boot_delay_title">Delay</string>
     <string name="set_on_boot_delay_desc">Set the delay after which Night Light settings will be restored and applied after boot. Night Light settings will be applied after %s delay.</string>
     <string name="set_on_boot_delay_warn">Looks like Night Light settings were restored but could not be applied after most recent boot. Consider increasing this delay so that settings can be successfully restored and applied after boot.</string>
     <string name="section_kcal_backup">KCAL Backup</string>
@@ -122,4 +122,7 @@
     <string name="translate">Translate this app</string>
     <string name="show_info_title">Show info</string>
     <string name="show_info_desc">Shows information about various controls</string>
+    <string name="set_on_boot_switch_title">Enabled</string>
+    <string name="set_on_boot_switch_enabled_desc">Night Light settings will be restored on boot.</string>
+    <string name="set_on_boot_switch_disabled_desc">Night Light settings will not be restored on boot.</string>
 </resources>

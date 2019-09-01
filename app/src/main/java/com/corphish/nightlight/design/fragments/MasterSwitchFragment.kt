@@ -36,7 +36,7 @@ class MasterSwitchFragment : Fragment() {
         enabled = PreferenceHelper.getBoolean(context, Constants.PREF_MASTER_SWITCH)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
 
         // This makes sure that the container activity has implemented

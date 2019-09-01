@@ -1,7 +1,7 @@
 package com.corphish.nightlight.helpers
 
 import android.content.Context
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import androidx.core.content.edit
 
 import com.corphish.nightlight.data.Constants
@@ -91,8 +91,8 @@ object PreferenceHelper {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
         return doubleArrayOf(
-                sharedPreferences.getString(Constants.LAST_LOC_LONGITUDE, Constants.DEFAULT_LONGITUDE).toDouble(),
-                sharedPreferences.getString(Constants.LAST_LOC_LATITUDE, Constants.DEFAULT_LATITUDE).toDouble()
+                sharedPreferences.getString(Constants.LAST_LOC_LONGITUDE, Constants.DEFAULT_LONGITUDE)!!.toDouble(),
+                sharedPreferences.getString(Constants.LAST_LOC_LATITUDE, Constants.DEFAULT_LATITUDE)!!.toDouble()
         )
     }
 

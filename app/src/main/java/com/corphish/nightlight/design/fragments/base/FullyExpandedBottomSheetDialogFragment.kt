@@ -11,7 +11,7 @@ abstract class FullyExpandedBottomSheetDialogFragment: BaseBottomSheetDialogFrag
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // From https://stackoverflow.com/questions/35937453/set-state-of-bottomsheetdialogfragment-to-expanded
-        dialog.setOnShowListener {
+        dialog?.setOnShowListener {
             val d = it as BottomSheetDialog
             val bottomSheetInternal = d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             BottomSheetBehavior.from(bottomSheetInternal!!).setState(BottomSheetBehavior.STATE_EXPANDED)

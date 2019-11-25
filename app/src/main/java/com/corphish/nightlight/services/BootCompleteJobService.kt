@@ -26,7 +26,7 @@ class BootCompleteJobService : JobService() {
     }
 
     override fun onStartJob(params: JobParameters): Boolean {
-        BootUtils.applyOnBoot(this, { stopSelf() })
+        BootUtils.applyOnBoot(this) { stopSelf() }
 
         return false
     }

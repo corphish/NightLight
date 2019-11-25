@@ -44,6 +44,11 @@ class GenericKCALManager : KCALAbstraction {
         val reading = RootUtils.readOneLine(KCAL_COLOR)
         val colorReadings = reading.trim().split(" ".toRegex())
 
+        // Error case, return default value instead
+        if (colorReadings.size != 3) {
+            return intArrayOf(255, 255, 255)
+        }
+
         return intArrayOf(
                 colorReadings[0].toInt(),
                 colorReadings[1].toInt(),

@@ -7,12 +7,14 @@ import java.io.File
  * Generic KCAL implementation.
  * Good old KCAL
  */
+
+/*
+ * File paths
+ */
+// File paths
+private const val KCAL_SWITCH = "/sys/devices/platform/kcal_ctrl.0/kcal_enable"
+private const val KCAL_COLOR = "/sys/devices/platform/kcal_ctrl.0/kcal"
 class GenericKCALManager : KCALAbstraction {
-
-    // File paths
-    private val KCAL_SWITCH = "/sys/devices/platform/kcal_ctrl.0/kcal_enable"
-    private val KCAL_COLOR = "/sys/devices/platform/kcal_ctrl.0/kcal"
-
     /**
      * A function to determine whether the implementation is supported by device
      */

@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.ProfilesActivity
 import com.corphish.nightlight.R
@@ -74,9 +76,9 @@ class SettingFragment: Fragment() {
         settingsAdapter.list = settingsOptions
 
         recyclerView.invalidateItemDecorations()
-        recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, resources.getInteger(R.integer.gridSpanCount))
+        recyclerView.layoutManager = GridLayoutManager(context, resources.getInteger(R.integer.gridSpanCount))
         recyclerView.adapter = settingsAdapter
-        recyclerView.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.isNestedScrollingEnabled = false
         recyclerView.setHasFixedSize(false)
 

@@ -15,6 +15,7 @@
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tint="?themeColorText"
         android:layout_gravity="bottom|center"
         app:srcCompat="@drawable/ic_link" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

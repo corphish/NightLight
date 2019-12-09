@@ -10,7 +10,7 @@
         <item name="themeCircleBackground">@color/circleBackgroundDark</item>
         <item name="themeCircleForeground">@color/circleForegroundDark</item>
         <item name="themeStroke">@color/strokeDark</item>
-        <item name="onColorText">@color/buttonTextDark</item>
+        <item name="themeColorText">@color/buttonTextDark</item>
     </style>
 
     <style name="AppThemeLight" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -24,7 +24,7 @@
         <item name="themeCircleForeground">@color/circleForegroundLight</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="themeStroke">@color/strokeLight</item>
-        <item name="onColorText">@color/buttonTextLight</item>
+        <item name="themeColorText">#fafafa</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -48,7 +48,7 @@
     <style name="MaterialButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="cornerRadius">32dp</item>
         <item name="android:textAppearance">?android:textAppearance</item>
-        <item name="android:textColor">?attr/onColorText</item>
+        <item name="android:textColor">?themeColorText</item>
         <item name="android:textStyle">bold</item>
         <item name="backgroundTint">@color/colorAccent</item>
     </style>

@@ -1,6 +1,5 @@
 package com.corphish.nightlight.design
 
-
 import android.content.Context
 import android.graphics.Color
 
@@ -52,6 +51,6 @@ object ThemeUtils {
             }
         }
 
-        return Color.parseColor("#333333")
+        return Color.parseColor("#000000")
     }
 }

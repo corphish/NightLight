@@ -6,13 +6,13 @@
     <color name="colorAccent">#ff531a</color>
 
     <color name="circleBackgroundDark">#cc7a00</color>
-    <color name="circleForegroundDark">#333333</color>
+    <color name="circleForegroundDark">#000000</color>
     <color name="circleBackgroundLight">#ffe0b3</color>
     <color name="circleForegroundLight">#cc7a00</color>
 
     <color name="strokeDark">#505050</color>
     <color name="strokeLight">#b0b0b0</color>
 
-    <color name="buttonTextDark">#333333</color>
+    <color name="buttonTextDark">#000000</color>
     <color name="buttonTextLight">#fafafa</color>
 </resources>

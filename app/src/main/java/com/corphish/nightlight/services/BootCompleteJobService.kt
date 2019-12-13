@@ -32,9 +32,8 @@ class BootCompleteJobService : JobService() {
     }
 
     companion object {
-
-        private val JOB_ID = 1
-        private val LATENCY = 1000
+        private const val JOB_ID = 1
+        private const val LATENCY = 1000
 
         // From https://blog.klinkerapps.com/android-o-background-services/
         fun schedule(context: Context) {

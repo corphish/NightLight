@@ -168,7 +168,7 @@ class ProfilesManager(private val context: Context) {
         // Will look like -> "Profile; 1; [100]"
         // DO NOT alter the sequence of data
         // In future if other fields are added, simply append at the end
-        fun toProfileString() = "$name;$isSettingEnabled;$settingMode;${Arrays.toString(settings)};$apiVersion"
+        fun toProfileString() = "$name;$isSettingEnabled;$settingMode;${settings.contentToString()};$apiVersion"
 
         fun apply(context: Context) {
             Core.applyNightModeAsync(isSettingEnabled, context, settingMode, settings)
@@ -183,7 +183,7 @@ class ProfilesManager(private val context: Context) {
             return other.name == this.name &&
                     other.isSettingEnabled == this.isSettingEnabled &&
                     other.settingMode == settingMode &&
-                    Arrays.equals(other.settings, this.settings) &&
+                    other.settings.contentEquals(this.settings) &&
                     other.apiVersion == this.apiVersion
         }
 

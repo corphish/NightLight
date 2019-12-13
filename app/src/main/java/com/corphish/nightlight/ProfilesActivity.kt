@@ -111,7 +111,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
             emptyView.visibility = View.GONE
     }
 
-    private inner class ProfilesAdapter : RecyclerView.Adapter<ProfilesActivity.ProfilesAdapter.CustomViewHolder>() {
+    private inner class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.CustomViewHolder>() {
         private var profiles: List<ProfilesManager.Profile>? = null
 
         internal fun setProfiles(profiles: MutableList<ProfilesManager.Profile>?) {
@@ -187,7 +187,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         val delete = optionsView.findViewById<View>(R.id.delete)
 
         selectedProfileName.text = profile?.name
-        selectedProfileInfo.text = "${arrayOf(getString(R.string.color_temperature_title), "RGB")[profile?.settingMode!!]}: ${Arrays.toString(profile?.settings!!)}"
+        selectedProfileInfo.text = "${arrayOf(getString(R.string.color_temperature_title), "RGB")[profile?.settingMode!!]}: ${profile?.settings.contentToString()}"
 
         apply.setOnClickListener {
             if (curProfile != null) {
@@ -195,7 +195,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
                 PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_PROFILE)
                 PreferenceHelper.putBoolean(context, Constants.PREF_CUR_APPLY_EN, curProfile!!.isSettingEnabled)
                 PreferenceHelper.putInt(context, Constants.PREF_CUR_PROF_MODE, curProfile!!.settingMode)
-                PreferenceHelper.putString(context, Constants.PREF_CUR_PROF_VAL, Arrays.toString(curProfile!!.settings))
+                PreferenceHelper.putString(context, Constants.PREF_CUR_PROF_VAL, curProfile!!.settings.contentToString())
             }
             optionsDialog.dismiss()
         }

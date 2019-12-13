@@ -33,7 +33,7 @@ class TaskerIntentReceiver : BroadcastReceiver() {
             PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_PROFILE)
             PreferenceHelper.putBoolean(context, Constants.PREF_CUR_APPLY_EN, profile.isSettingEnabled)
             PreferenceHelper.putInt(context, Constants.PREF_CUR_PROF_MODE, profile.settingMode)
-            PreferenceHelper.putString(context, Constants.PREF_CUR_PROF_VAL, Arrays.toString(profile.settings))
+            PreferenceHelper.putString(context, Constants.PREF_CUR_PROF_VAL, profile.settings.contentToString())
         }
     }
 }

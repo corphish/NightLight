@@ -287,13 +287,16 @@ object Core {
             this.context = context
             this.toUpdateGlobalState = toUpdateGlobalState
 
-            if (mode == Constants.NL_SETTING_MODE_MANUAL) {
-                redColor = settings[0]
-                greenColor = settings[1]
-                blueColor = settings[2]
-            } else if (mode == Constants.NL_SETTING_MODE_TEMP) {
-                temperature = settings[0]
-            } else {/* There to filter out invalid modes if any */
+            when (mode) {
+                Constants.NL_SETTING_MODE_MANUAL -> {
+                    redColor = settings[0]
+                    greenColor = settings[1]
+                    blueColor = settings[2]
+                }
+                Constants.NL_SETTING_MODE_TEMP -> {
+                    temperature = settings[0]
+                }
+                else -> { /* There to filter out invalid modes if any */ }
             }
         }
 

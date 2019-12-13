@@ -63,14 +63,18 @@ class StartActivity : AppCompatActivity() {
         val shortcutID: String
 
         if (intent.action != null) {
-            if (intent.action == SHORTCUT_INTENT_STRING_NL_TOGGLE) {
-                shortcutID = SHORTCUT_ID_TOGGLE
-                doToggle()
-            } else if (intent.action == SHORTCUT_INTENT_STRING_INTENSITY_TOGGLE) {
-                shortcutID = SHORTCUT_ID_INTENSITY
-                doIntensityToggle()
-            } else {
-                shortcutID = ""
+            when (intent.action) {
+                SHORTCUT_INTENT_STRING_NL_TOGGLE -> {
+                    shortcutID = SHORTCUT_ID_TOGGLE
+                    doToggle()
+                }
+                SHORTCUT_INTENT_STRING_INTENSITY_TOGGLE -> {
+                    shortcutID = SHORTCUT_ID_INTENSITY
+                    doIntensityToggle()
+                }
+                else -> {
+                    shortcutID = ""
+                }
             }
         } else
             return false

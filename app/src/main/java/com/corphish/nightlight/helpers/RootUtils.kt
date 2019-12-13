@@ -55,13 +55,13 @@ object RootUtils {
      * @param file File whose contents is to be read
      * @return Contents of file
      */
-    fun readContents(file: String): List<String>? {
+    private fun readContents(file: String): List<String>? {
         return Shell.SU.run("cat $file")
     }
 
     fun doesFileExist(file: String): Boolean {
         val output = Shell.SU.run("ls $file")
-        return output != null && !output.isEmpty() && output[0] == file
+        return output != null && output.isNotEmpty() && output[0] == file
     }
 
     /**

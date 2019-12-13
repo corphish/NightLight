@@ -216,7 +216,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode != REQ_CODE) return
-        setResult(AppCompatActivity.RESULT_OK, data)
+        setResult(RESULT_OK, data)
         finish()
     }
 

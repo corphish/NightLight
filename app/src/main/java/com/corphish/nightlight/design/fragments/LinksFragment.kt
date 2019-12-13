@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.R
 import com.corphish.nightlight.design.adapters.GenericOptionsAdapter
 import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment

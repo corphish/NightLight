@@ -161,7 +161,7 @@ class KCALBackupSettingsFragment: BaseBottomSheetDialogFragment() {
         kcalBackupSettingsView.findViewById<View>(R.id.button_cancel).setOnClickListener { bottomSheetDialog.dismiss() }
 
         kcalBackupSettingsView.findViewById<View>(R.id.button_ok).setOnClickListener {
-            PreferenceHelper.putString(context, Constants.KCAL_PRESERVE_VAL, r.toString() + " " + g + " " + b)
+            PreferenceHelper.putString(context, Constants.KCAL_PRESERVE_VAL, "$r $g $b")
             bottomSheetDialog.dismiss()
         }
     }

@@ -1,5 +1,8 @@
 package com.corphish.nightlight.extensions
 
+import kotlin.math.ln
+import kotlin.math.pow
+
 /**
  * Extension function to convert an int (whose unit is presumable in Kelvins) to RGB int array equivalent
  * Based on http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
@@ -18,12 +21,12 @@ fun Int.fromColorTemperatureToRGBIntArray(): IntArray {
 
     if (colorTemperature < 67) {
         red = 255
-        green = (99.4708025861f * Math.log(colorTemperature.toDouble()) - 161.1195681661f).toInt()
+        green = (99.4708025861f * ln(colorTemperature.toDouble()) - 161.1195681661f).toInt()
 
-        blue = if (colorTemperature < 20) 0 else (138.5177312231 * Math.log((colorTemperature - 10).toDouble()) - 305.0447927307f).toInt()
+        blue = if (colorTemperature < 20) 0 else (138.5177312231 * ln((colorTemperature - 10).toDouble()) - 305.0447927307f).toInt()
     } else {
-        red = (329.698727446f * Math.pow((colorTemperature - 60).toDouble(), -0.1332047592)).toInt()
-        green = (288.1221695283f * Math.pow((colorTemperature - 60).toDouble(), -0.0755148492)).toInt()
+        red = (329.698727446f * (colorTemperature - 60).toDouble().pow(-0.1332047592)).toInt()
+        green = (288.1221695283f * (colorTemperature - 60).toDouble().pow(-0.0755148492)).toInt()
         blue = 255
     }
 

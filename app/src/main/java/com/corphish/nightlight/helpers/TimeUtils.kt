@@ -1,6 +1,7 @@
 package com.corphish.nightlight.helpers
 
 import java.util.Calendar
+import kotlin.math.roundToInt
 
 /**
  * Created by Avinaba on 10/4/2017.
@@ -40,7 +41,7 @@ object TimeUtils {
      * @param minutes Value of 'minutes'.
      * @return The resultant value of minutes after conversion
      */
-    fun getTimeInMinutes(hour: Int, minutes: Int): Int {
+    private fun getTimeInMinutes(hour: Int, minutes: Int): Int {
         return hour * 60 + minutes
     }
 
@@ -106,7 +107,7 @@ object TimeUtils {
         // Means endTime is next day and curTime is today
         if (endTimeMinutes < curTime) endTimeMinutes += 24 * 60
 
-        return Math.round((endTimeMinutes - curTime).toDouble()/60).toInt()
+        return ((endTimeMinutes - curTime).toDouble() / 60).roundToInt()
     }
 
     /**
@@ -119,6 +120,6 @@ object TimeUtils {
         // Means endTime is next day and curTime is today
         if (startTimeMinutes < curTime) startTimeMinutes += 24 * 60
 
-        return Math.round((startTimeMinutes - curTime).toDouble()/60).toInt()
+        return ((startTimeMinutes - curTime).toDouble() / 60).roundToInt()
     }
 }

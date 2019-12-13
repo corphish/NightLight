@@ -2,6 +2,7 @@ package com.corphish.nightlight.design
 
 import android.content.Context
 import android.graphics.Color
+import androidx.core.content.ContextCompat
 
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
@@ -22,7 +23,7 @@ object ThemeUtils {
                 false -> Color.parseColor("#e6e6e6")
                 true -> when (intensityType) {
                     Constants.INTENSITY_TYPE_MAXIMUM -> Color.parseColor("#ffd6cc")
-                    else -> context.resources.getColor(R.color.circleBackgroundLight)
+                    else ->  ContextCompat.getColor(context, R.color.circleBackgroundLight)
                 }
             }
         }
@@ -30,8 +31,8 @@ object ThemeUtils {
             return when (enabled) {
                 false -> Color.parseColor("#666666")
                 true -> when (intensityType) {
-                    Constants.INTENSITY_TYPE_MAXIMUM -> context.resources.getColor(R.color.colorAccent)
-                    else -> context.resources.getColor(R.color.colorPrimary)
+                    Constants.INTENSITY_TYPE_MAXIMUM ->  ContextCompat.getColor(context, R.color.colorAccent)
+                    else ->  ContextCompat.getColor(context, R.color.colorPrimary)
                 }
             }
 
@@ -45,8 +46,8 @@ object ThemeUtils {
             return when (enabled) {
                 false -> Color.parseColor("#666666")
                 true -> when (intensityType) {
-                    Constants.INTENSITY_TYPE_MAXIMUM -> context.resources.getColor(R.color.colorAccent)
-                    else -> context.resources.getColor(R.color.colorPrimary)
+                    Constants.INTENSITY_TYPE_MAXIMUM -> ContextCompat.getColor(context, R.color.colorAccent)
+                    else ->  ContextCompat.getColor(context, R.color.colorPrimary)
                 }
             }
         }

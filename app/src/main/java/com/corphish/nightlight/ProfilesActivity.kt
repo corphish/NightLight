@@ -20,6 +20,7 @@ import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.design.views.ProfileCreator
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_profiles.*
 import kotlinx.android.synthetic.main.content_profiles.*
@@ -132,6 +133,11 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
                 } else {
                     curProfile = profiles!![adapterPosition]
                     optionsDialog = BottomSheetDialog(this@ProfilesActivity, ThemeUtils.getBottomSheetTheme(context))
+                    optionsDialog.setOnShowListener {
+                        val d = it as BottomSheetDialog
+                        val bottomSheetInternal = d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+                        BottomSheetBehavior.from(bottomSheetInternal!!).setState(BottomSheetBehavior.STATE_EXPANDED)
+                    }
                     getOptionsView(curProfile!!)
                     optionsDialog.setContentView(optionsView)
                     optionsDialog.show()

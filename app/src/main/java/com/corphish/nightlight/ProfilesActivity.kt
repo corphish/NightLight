@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -22,8 +23,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_profiles.*
 import kotlinx.android.synthetic.main.content_profiles.*
 import kotlinx.android.synthetic.main.layout_header.*
-
-import java.util.Arrays
 
 class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener {
 
@@ -164,8 +163,8 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         }
 
         private fun setIconBackground(textView: TextView, color: Int) {
-            val drawable = resources.getDrawable(R.drawable.circle)
-            drawable.setColorFilter(color, PorterDuff.Mode.SRC)
+            val drawable = ResourcesCompat.getDrawable(resources, R.drawable.circle, theme)
+            drawable?.setColorFilter(color, PorterDuff.Mode.SRC)
 
             textView.background = drawable
         }
@@ -204,9 +203,10 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
             ProfileCreator(this@ProfilesActivity, ProfileCreator.MODE_EDIT, profile,
                     onFinishListener =  fun(status: Int) {
                         if (status == ProfileCreator.STATUS_SUCCESS) {
+                            profilesManager.loadProfiles()
                             profiles = profilesManager.profilesList
-                            profilesAdapter.notifyDataSetChanged()
                         }
+                        profilesAdapter.notifyDataSetChanged()
                     }).show()
             optionsDialog.dismiss()
         }

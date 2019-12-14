@@ -10,73 +10,263 @@
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
     android:padding="8dp">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/defaultMargin"
+        android:layout_marginTop="@dimen/defaultMargin">
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:textSize="24sp"
+            android:id="@+id/selectedProfileTitle"
+            android:layout_margin="@dimen/layout_margin"
+            android:gravity="center"
+            android:background="@drawable/circle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/defaultMargin"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/selectedProfileTitle"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_caption"
+                android:textAppearance="?android:attr/textAppearance"
+                android:text="@string/profile_title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/selectedProfileName"/>
+        </LinearLayout>
+    </RelativeLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingTop="@dimen/layout_padding"
-        android:textAppearance="?android:textAppearance"
+        android:text="@string/properties"
+        android:textSize="@dimen/text_desc"
+        android:textColor="@color/colorPrimary"
         android:layout_marginStart="@dimen/layout_margin"
         android:layout_marginEnd="@dimen/layout_margin"
-        android:layout_marginTop="@dimen/layout_margin"
-        android:id="@+id/selectedProfileName"/>
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:textAppearance="?android:attr/textAppearanceButton" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingBottom="12dp"
+        android:text="@string/properties_desc"
         android:layout_marginStart="@dimen/layout_margin"
         android:layout_marginEnd="@dimen/layout_margin"
-        android:layout_marginBottom="@dimen/layout_margin"
-        android:id="@+id/selectedProfileInfo"/>
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:textSize="@dimen/text_sub_desc"/>
 
-    <TextView
+    <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/layout_padding"
-        android:textAppearance="?android:textAppearance"
-        android:layout_margin="@dimen/layout_margin"
-        android:id="@+id/apply"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:drawableStart="@drawable/ic_apply"
-        android:text="@string/apply"/>
+        android:layout_margin="@dimen/defaultMargin"
+        app:columnCount="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_gravity="fill_horizontal"
+            app:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/defaultMargin"
+            android:padding="@dimen/defaultPadding">
+
+            <ImageButton
+                android:contentDescription="@null"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/powerIcon"
+                app:srcCompat="@drawable/ic_power"
+                android:tint="?themeCircleForeground"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/defaultMargin"
+                android:background="@drawable/circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearance" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/powerCaption"
+                android:textSize="@dimen/text_desc"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_gravity="fill_horizontal"
+            app:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/defaultMargin"
+            android:padding="@dimen/defaultPadding">
+
+            <ImageButton
+                android:contentDescription="@null"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/colorIcon"
+                app:srcCompat="@drawable/ic_color"
+                android:tint="?themeCircleForeground"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/defaultMargin"
+                android:background="@drawable/circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/colorTitle"
+                android:textSize="@dimen/text_desc"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearance" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/colorCaption"
+                android:textSize="@dimen/text_desc"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+    </androidx.gridlayout.widget.GridLayout>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/actions"
+        android:textSize="@dimen/text_desc"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:textAppearance="?android:attr/textAppearanceButton" />
+
+    <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/layout_padding"
-        android:textAppearance="?android:textAppearance"
-        android:layout_margin="@dimen/layout_margin"
-        android:id="@+id/edit"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:drawableStart="@drawable/ic_edit"
-        android:text="@string/edit"/>
+        android:layout_margin="@dimen/defaultMargin"
+        app:columnCount="3">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/layout_padding"
-        android:textAppearance="?android:textAppearance"
-        android:layout_margin="@dimen/layout_margin"
-        android:id="@+id/delete"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:drawableStart="@drawable/ic_delete"
-        android:text="@string/delete"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_gravity="fill_horizontal"
+            app:layout_columnWeight="1"
+            android:id="@+id/apply"
+            android:orientation="vertical"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="@dimen/defaultMargin"
+            android:padding="@dimen/defaultPadding">
 
+            <ImageButton
+                android:contentDescription="@null"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/applyIcon"
+                app:srcCompat="@drawable/ic_apply"
+                android:tint="?themeCircleForeground"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/defaultMargin"
+                android:background="@drawable/circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/settingOptionCaption"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/apply"
+                android:textAppearance="?android:attr/textAppearance" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_gravity="fill_horizontal"
+            app:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/edit"
+            android:layout_margin="@dimen/defaultMargin"
+            android:padding="@dimen/defaultPadding">
+
+            <ImageButton
+                android:contentDescription="@null"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/editIcon"
+                app:srcCompat="@drawable/ic_edit"
+                android:tint="?themeCircleForeground"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/defaultMargin"
+                android:background="@drawable/circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/edit"
+                android:textAppearance="?android:attr/textAppearance" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_gravity="fill_horizontal"
+            app:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:id="@+id/delete"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="@dimen/defaultMargin"
+            android:padding="@dimen/defaultPadding">
+
+            <ImageButton
+                android:contentDescription="@null"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:srcCompat="@drawable/ic_delete"
+                android:id="@+id/deleteIcon"
+                android:tint="?themeCircleForeground"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/defaultMargin"
+                android:background="@drawable/circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/delete"
+                android:textAppearance="?android:attr/textAppearance" />
+        </LinearLayout>
+    </androidx.gridlayout.widget.GridLayout>
 </LinearLayout>

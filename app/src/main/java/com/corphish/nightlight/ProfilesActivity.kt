@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -148,25 +149,12 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
         override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
             val profile = profiles!![position]
-            val profileValue = profile.settings.sum()
-            val profileIntensity =
-                    if (profile.settingMode == Constants.NL_SETTING_MODE_TEMP)
-                        if (profileValue > midTemp) Constants.INTENSITY_TYPE_MINIMUM else Constants.INTENSITY_TYPE_MAXIMUM
-                    else
-                        if (profileValue > midKCALSum) Constants.INTENSITY_TYPE_MINIMUM else Constants.INTENSITY_TYPE_MAXIMUM
 
             holder.icon.text = if (profile.name.isNotEmpty()) "${profile.name.toUpperCase()[0]}" else ""
-            setIconBackground(holder.icon, ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled, profileIntensity))
-            holder.icon.setTextColor(ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled, profileIntensity))
+            setIconBackground(holder.icon, ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled, getProfileIntensity(profile)))
+            holder.icon.setTextColor(ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled, getProfileIntensity(profile)))
 
             holder.title.text = profile.name
-        }
-
-        private fun setIconBackground(textView: TextView, color: Int) {
-            val drawable = ResourcesCompat.getDrawable(resources, R.drawable.circle, theme)
-            drawable?.setColorFilter(color, PorterDuff.Mode.SRC)
-
-            textView.background = drawable
         }
 
         override fun getItemCount(): Int {
@@ -174,21 +162,64 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         }
     }
 
+    private fun getProfileIntensity(profile: ProfilesManager.Profile): Int {
+        val profileValue = profile.settings.sum()
 
+        return if (profile.settingMode == Constants.NL_SETTING_MODE_TEMP)
+            if (profileValue > midTemp) Constants.INTENSITY_TYPE_MINIMUM else Constants.INTENSITY_TYPE_MAXIMUM
+        else
+            if (profileValue > midKCALSum) Constants.INTENSITY_TYPE_MINIMUM else Constants.INTENSITY_TYPE_MAXIMUM
+    }
+
+    private fun setIconBackground(textView: TextView, color: Int) {
+        val drawable = ResourcesCompat.getDrawable(resources, R.drawable.circle, theme)
+        drawable?.setColorFilter(color, PorterDuff.Mode.SRC)
+
+        textView.background = drawable
+    }
 
     private fun getOptionsView(profile: ProfilesManager.Profile?) {
         optionsView = View.inflate(this, R.layout.bottom_sheet_profile_options, null)
 
+        val selectedProfileTitle = optionsView.findViewById<TextView>(R.id.selectedProfileTitle)
         val selectedProfileName = optionsView.findViewById<TextView>(R.id.selectedProfileName)
-        val selectedProfileInfo = optionsView.findViewById<TextView>(R.id.selectedProfileInfo)
+        val powerIcon = optionsView.findViewById<ImageButton>(R.id.powerIcon)
+        val powerText = optionsView.findViewById<TextView>(R.id.powerCaption)
+        val colorIcon = optionsView.findViewById<ImageButton>(R.id.colorIcon)
+        val colorText = optionsView.findViewById<TextView>(R.id.colorCaption)
+        val colorTitle = optionsView.findViewById<TextView>(R.id.colorTitle)
         val apply = optionsView.findViewById<View>(R.id.apply)
         val edit = optionsView.findViewById<View>(R.id.edit)
         val delete = optionsView.findViewById<View>(R.id.delete)
+        val applyIcon = optionsView.findViewById<View>(R.id.applyIcon)
+        val editIcon = optionsView.findViewById<View>(R.id.editIcon)
+        val deleteIcon = optionsView.findViewById<View>(R.id.deleteIcon)
 
-        selectedProfileName.text = profile?.name
-        selectedProfileInfo.text = "${arrayOf(getString(R.string.color_temperature_title), "RGB")[profile?.settingMode!!]}: ${profile?.settings.contentToString()}"
+        selectedProfileTitle.text = "${profile?.name!![0]}"
 
-        apply.setOnClickListener {
+        val background = ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled, getProfileIntensity(profile))
+        val foreground = ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled, getProfileIntensity(profile))
+
+        selectedProfileTitle.setTextColor(foreground)
+        setIconBackground(selectedProfileTitle, background)
+
+        selectedProfileName.text = profile.name
+
+        powerIcon.background?.setColorFilter(background, PorterDuff.Mode.SRC_ATOP)
+        powerIcon.setColorFilter(foreground)
+        powerText.setText(if (profile.isSettingEnabled) R.string.on else R.string.off)
+
+        colorIcon.background?.setColorFilter(background, PorterDuff.Mode.SRC_ATOP)
+        colorIcon.setColorFilter(foreground)
+        if (profile.settingMode == Constants.NL_SETTING_MODE_TEMP) {
+            colorText.text = "${profile.settings[0]}K"
+            colorTitle.setText(R.string.color_temperature_title)
+        } else {
+            colorText.text = "(${profile.settings[0]}, ${profile.settings[1]}, ${profile.settings[2]})"
+            colorTitle.setText(R.string.manual_mode_title)
+        }
+
+        val applyClickListener = View.OnClickListener {
             if (curProfile != null) {
                 curProfile!!.apply(this@ProfilesActivity)
                 PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_PROFILE)
@@ -199,7 +230,10 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
             optionsDialog.dismiss()
         }
 
-        edit.setOnClickListener {
+        apply.setOnClickListener(applyClickListener)
+        applyIcon.setOnClickListener(applyClickListener)
+
+        val editClickListener = View.OnClickListener {
             ProfileCreator(this@ProfilesActivity, ProfileCreator.MODE_EDIT, profile,
                     onFinishListener =  fun(status: Int) {
                         if (status == ProfileCreator.STATUS_SUCCESS) {
@@ -211,7 +245,10 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
             optionsDialog.dismiss()
         }
 
-        delete.setOnClickListener {
+        edit.setOnClickListener(editClickListener)
+        editIcon.setOnClickListener(editClickListener)
+
+        val deleteClickListener = View.OnClickListener {
             showAlert(R.string.delete, getString(R.string.delete_details, curProfile!!.name), View.OnClickListener {
                 profilesManager.deleteProfile(curProfile!!)
                 val prof = curProfile
@@ -221,6 +258,9 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
             })
             optionsDialog.dismiss()
         }
+
+        delete.setOnClickListener(deleteClickListener)
+        deleteIcon.setOnClickListener(deleteClickListener)
     }
 
     fun returnBack(name: String?) {

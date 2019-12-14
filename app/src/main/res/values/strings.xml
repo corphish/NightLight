@@ -164,4 +164,11 @@
     <string name="set_on_boot_switch_title">Enabled</string>
     <string name="set_on_boot_switch_enabled_desc">Night Light settings will be restored on boot.</string>
     <string name="set_on_boot_switch_disabled_desc">Night Light settings will not be restored on boot.</string>
+
+    <string name="on">On</string>
+    <string name="off">Off</string>
+
+    <string name="properties">Properties</string>
+    <string name="properties_desc">Following properties will be applied when this profile is applied. If night light is off, color setting will not be applied.</string>
+    <string name="actions">Actions</string>
 </resources>

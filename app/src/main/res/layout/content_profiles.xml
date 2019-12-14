@@ -22,7 +22,9 @@
             android:paddingStart="@dimen/layout_padding"
             android:paddingEnd="@dimen/layout_padding"
             android:paddingTop="@dimen/layout_padding"
-            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:textSize="12sp"
             android:textColor="@color/colorPrimary"
             android:text="@string/profile_title"/>
@@ -33,7 +35,9 @@
             android:paddingStart="@dimen/layout_padding"
             android:paddingEnd="@dimen/layout_padding"
             android:paddingBottom="@dimen/layout_padding"
-            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:textSize="@dimen/text_desc"
             android:text="@string/profiles_desc"/>
 

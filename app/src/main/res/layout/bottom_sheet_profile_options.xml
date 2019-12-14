@@ -57,7 +57,7 @@
         android:layout_marginEnd="@dimen/layout_margin"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
-        android:textAppearance="?android:attr/textAppearanceButton" />
+        android:textAppearance="?attr/textAppearanceButton" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -161,7 +161,7 @@
         android:layout_marginEnd="@dimen/layout_margin"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
-        android:textAppearance="?android:attr/textAppearanceButton" />
+        android:textAppearance="?attr/textAppearanceButton" />
 
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"

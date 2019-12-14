@@ -4,7 +4,6 @@ import android.content.Context
 import android.preference.PreferenceManager
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.extensions.toArrayOfInts
-import java.util.*
 
 class ProfilesManager(private val context: Context) {
 

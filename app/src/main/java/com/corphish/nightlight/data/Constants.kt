@@ -46,6 +46,7 @@ object Constants {
     const val PREF_THEME_CHANGE_EVENT = "theme_change_temp"
     const val PREF_SHOW_INFO = "show_info"
     const val PREF_SET_ON_BOOT = "set_on_boot"
+    const val PREF_ICON_SHAPE = "icon_shape"
 
     /**
      * Fixed const values (default, max const values)
@@ -68,6 +69,7 @@ object Constants {
     const val DEFAULT_LIGHT_THEME = false
     const val DEFAULT_SHOW_INFO = true
     const val DEFAULT_SET_ON_BOOT = true
+    const val DEFAULT_ICON_SHAPE = 0
 
     /**
      * Night light setting modes
@@ -110,4 +112,10 @@ object Constants {
      * Profile version
      */
     const val PROFILE_API_VERSION = 1
+
+    /**
+     * Icon shapes
+     */
+    const val ICON_SHAPE_CIRCLE = 0
+    const val ICON_SHAPE_SQUARE = 1
 }

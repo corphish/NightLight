@@ -9,8 +9,15 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.helpers.PreferenceHelper
 
 object ThemeUtils {
-    fun getAppTheme(context: Context) =
-            if (PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)) R.style.AppThemeLightCircular else R.style.AppThemeCircular
+    private val THEMES = mapOf(
+            Constants.ICON_SHAPE_CIRCLE to arrayOf(R.style.AppThemeCircular, R.style.AppThemeLightCircular),
+            Constants.ICON_SHAPE_SQUARE to arrayOf(R.style.AppThemeSquare, R.style.AppThemeLightSquare)
+    )
+
+    fun getAppTheme(context: Context): Int {
+        val lightIndex = if (PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)) 1 else 0
+        return (THEMES[PreferenceHelper.getInt(context, Constants.PREF_ICON_SHAPE, Constants.DEFAULT_ICON_SHAPE)] ?: error(""))[lightIndex]
+    }
 
     fun getBottomSheetTheme(context: Context) =
             if (PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)) R.style.BottomSheetDialogLight else R.style.BottomSheetDialogDark

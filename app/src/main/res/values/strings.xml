@@ -171,4 +171,8 @@
     <string name="properties">Properties</string>
     <string name="properties_desc">Following properties will be applied when this profile is applied. If night light is off, color setting will not be applied.</string>
     <string name="actions">Actions</string>
+
+    <string name="icon_shape">Icon shape</string>
+    <string name="square">Square</string>
+    <string name="circle">Circle</string>
 </resources>

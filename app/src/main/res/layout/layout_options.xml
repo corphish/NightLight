@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/layout_padding"
-    android:layout_margin="@dimen/layout_margin"
+    android:padding="8dp"
     android:orientation="vertical">
 
     <TextView
@@ -42,6 +41,40 @@
         android:layout_marginBottom="@dimen/layout_margin"
         android:textSize="@dimen/text_desc"
         android:text="@string/light_theme_desc"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/iconShape"
+        android:foreground="?selectableItemBackground">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/defaultPadding"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:layout_margin="@dimen/layout_margin"
+            android:textSize="@dimen/text_caption"
+            android:textAppearance="?android:textAppearance"
+            android:text="@string/icon_shape"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingBottom="@dimen/layout_padding"
+            android:layout_marginStart="@dimen/layout_margin"
+            android:layout_marginEnd="@dimen/layout_margin"
+            android:layout_marginBottom="@dimen/layout_margin"
+            android:textSize="@dimen/text_desc"
+            android:id="@+id/iconShapeDesc"
+            android:text="@string/circle"/>
+    </LinearLayout>
 
     <Switch
         android:layout_width="match_parent"

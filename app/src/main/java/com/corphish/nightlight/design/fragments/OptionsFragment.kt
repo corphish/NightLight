@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment
@@ -22,6 +23,11 @@ class OptionsFragment: BaseBottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val iconShapes = arrayOf(
+                getString(R.string.circle),
+                getString(R.string.square)
+        )
+
         lightTheme.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)
 
         lightTheme.setOnCheckedChangeListener { _, b ->
@@ -34,6 +40,18 @@ class OptionsFragment: BaseBottomSheetDialogFragment() {
 
         showInfo.setOnCheckedChangeListener { _, b ->
             PreferenceHelper.putBoolean(context, Constants.PREF_SHOW_INFO, b)
+        }
+
+        iconShapeDesc.text = iconShapes[PreferenceHelper.getInt(context, Constants.PREF_ICON_SHAPE, Constants.DEFAULT_ICON_SHAPE)]
+        iconShape.setOnClickListener {
+            val selector = AlertDialog.Builder(context!!)
+            selector.setTitle(R.string.icon_shape)
+            selector.setItems(iconShapes) { _, i ->
+                PreferenceHelper.putInt(context, Constants.PREF_ICON_SHAPE, i)
+                NightLightAppService.instance.notifyThemeChanged(PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME))
+                dismiss()
+            }
+            selector.show()
         }
 
         FontUtils().setCustomFont(context!!, lightTheme, showInfo)

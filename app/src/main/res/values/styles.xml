@@ -62,6 +62,37 @@
         <item name="themeButtonRadius">0dp</item>
     </style>
 
+    <style name="AppThemeRoundedSquare" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/cust_font</item>
+        <item name="themeCircleBackground">@color/circleBackgroundDark</item>
+        <item name="themeCircleForeground">@color/circleForegroundDark</item>
+        <item name="themeStroke">@color/strokeDark</item>
+        <item name="themeColorText">@color/buttonTextDark</item>
+        <item name="themeDrawable">@drawable/rounded_square</item>
+        <item name="themeButtonRadius">8dp</item>
+    </style>
+
+    <style name="AppThemeLightRoundedSquare" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#dcdcdc</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/cust_font</item>
+        <item name="themeCircleBackground">@color/circleBackgroundLight</item>
+        <item name="themeCircleForeground">@color/circleForegroundLight</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="themeStroke">@color/strokeLight</item>
+        <item name="themeColorText">@color/buttonTextLight</item>
+        <item name="themeDrawable">@drawable/rounded_square</item>
+        <item name="themeButtonRadius">8dp</item>
+    </style>
+
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="colorPrimary">@color/colorPrimary</item>

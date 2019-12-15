@@ -11,7 +11,8 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 object ThemeUtils {
     private val THEMES = mapOf(
             Constants.ICON_SHAPE_CIRCLE to arrayOf(R.style.AppThemeCircular, R.style.AppThemeLightCircular),
-            Constants.ICON_SHAPE_SQUARE to arrayOf(R.style.AppThemeSquare, R.style.AppThemeLightSquare)
+            Constants.ICON_SHAPE_SQUARE to arrayOf(R.style.AppThemeSquare, R.style.AppThemeLightSquare),
+            Constants.ICON_SHAPE_ROUNDED_SQUARE to arrayOf(R.style.AppThemeRoundedSquare, R.style.AppThemeLightRoundedSquare)
     )
 
     fun getAppTheme(context: Context): Int {
@@ -65,6 +66,7 @@ object ThemeUtils {
     fun getThemeIconShape(context: Context) =
             arrayOf(
                     R.drawable.circle,
-                    R.drawable.square
+                    R.drawable.square,
+                    R.drawable.rounded_square
             )[PreferenceHelper.getInt(context, Constants.PREF_ICON_SHAPE, Constants.DEFAULT_ICON_SHAPE)]
 }

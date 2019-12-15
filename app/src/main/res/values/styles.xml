@@ -12,6 +12,7 @@
         <item name="themeStroke">@color/strokeDark</item>
         <item name="themeColorText">@color/buttonTextDark</item>
         <item name="themeDrawable">@drawable/circle</item>
+        <item name="themeButtonRadius">32dp</item>
     </style>
 
     <style name="AppThemeLightCircular" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -27,6 +28,7 @@
         <item name="themeStroke">@color/strokeLight</item>
         <item name="themeColorText">@color/buttonTextLight</item>
         <item name="themeDrawable">@drawable/circle</item>
+        <item name="themeButtonRadius">32dp</item>
     </style>
 
     <style name="AppThemeSquare" parent="Theme.MaterialComponents.NoActionBar">
@@ -41,6 +43,7 @@
         <item name="themeStroke">@color/strokeDark</item>
         <item name="themeColorText">@color/buttonTextDark</item>
         <item name="themeDrawable">@drawable/square</item>
+        <item name="themeButtonRadius">0dp</item>
     </style>
 
     <style name="AppThemeLightSquare" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -56,6 +59,7 @@
         <item name="themeStroke">@color/strokeLight</item>
         <item name="themeColorText">@color/buttonTextLight</item>
         <item name="themeDrawable">@drawable/square</item>
+        <item name="themeButtonRadius">0dp</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -77,7 +81,7 @@
     </style>
 
     <style name="MaterialButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
-        <item name="cornerRadius">32dp</item>
+        <item name="cornerRadius">?themeButtonRadius</item>
         <item name="android:textAppearance">?android:textAppearance</item>
         <item name="android:textColor">?themeColorText</item>
         <item name="android:textStyle">bold</item>

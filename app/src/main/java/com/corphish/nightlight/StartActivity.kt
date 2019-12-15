@@ -140,7 +140,7 @@ class StartActivity : AppCompatActivity() {
 
     private fun showAlertDialog(caption: Int, msg: Int) {
         if (isFinishing || isDestroyed) return
-        val builder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AppTheme))
+        val builder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AppThemeCircular))
         builder.setTitle(caption)
         builder.setMessage(msg)
         builder.setPositiveButton(android.R.string.ok) { _, _ -> finish() }

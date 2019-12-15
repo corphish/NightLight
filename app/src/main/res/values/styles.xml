@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="AppThemeCircular" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -11,9 +11,10 @@
         <item name="themeCircleForeground">@color/circleForegroundDark</item>
         <item name="themeStroke">@color/strokeDark</item>
         <item name="themeColorText">@color/buttonTextDark</item>
+        <item name="themeDrawable">@drawable/circle</item>
     </style>
 
-    <style name="AppThemeLight" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppThemeLightCircular" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">#dcdcdc</item>
@@ -25,6 +26,36 @@
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="themeStroke">@color/strokeLight</item>
         <item name="themeColorText">@color/buttonTextLight</item>
+        <item name="themeDrawable">@drawable/circle</item>
+    </style>
+
+    <style name="AppThemeSquare" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/cust_font</item>
+        <item name="themeCircleBackground">@color/circleBackgroundDark</item>
+        <item name="themeCircleForeground">@color/circleForegroundDark</item>
+        <item name="themeStroke">@color/strokeDark</item>
+        <item name="themeColorText">@color/buttonTextDark</item>
+        <item name="themeDrawable">@drawable/square</item>
+    </style>
+
+    <style name="AppThemeLightSquare" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#dcdcdc</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/cust_font</item>
+        <item name="themeCircleBackground">@color/circleBackgroundLight</item>
+        <item name="themeCircleForeground">@color/circleForegroundLight</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="themeStroke">@color/strokeLight</item>
+        <item name="themeColorText">@color/buttonTextLight</item>
+        <item name="themeDrawable">@drawable/square</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">

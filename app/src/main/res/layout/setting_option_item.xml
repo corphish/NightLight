@@ -18,7 +18,7 @@
         android:tint="?themeCircleForeground"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/defaultMargin"
-        android:background="@drawable/circle"/>
+        android:background="?themeDrawable"/>
 
     <TextView
         android:layout_width="wrap_content"

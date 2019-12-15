@@ -10,7 +10,7 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 
 object ThemeUtils {
     fun getAppTheme(context: Context) =
-            if (PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)) R.style.AppThemeLight else R.style.AppTheme
+            if (PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)) R.style.AppThemeLightCircular else R.style.AppThemeCircular
 
     fun getBottomSheetTheme(context: Context) =
             if (PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)) R.style.BottomSheetDialogLight else R.style.BottomSheetDialogDark

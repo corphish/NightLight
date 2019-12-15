@@ -12,7 +12,8 @@ object ThemeUtils {
     private val THEMES = mapOf(
             Constants.ICON_SHAPE_CIRCLE to arrayOf(R.style.AppThemeCircular, R.style.AppThemeLightCircular),
             Constants.ICON_SHAPE_SQUARE to arrayOf(R.style.AppThemeSquare, R.style.AppThemeLightSquare),
-            Constants.ICON_SHAPE_ROUNDED_SQUARE to arrayOf(R.style.AppThemeRoundedSquare, R.style.AppThemeLightRoundedSquare)
+            Constants.ICON_SHAPE_ROUNDED_SQUARE to arrayOf(R.style.AppThemeRoundedSquare, R.style.AppThemeLightRoundedSquare),
+            Constants.ICON_SHAPE_TEARDROP to arrayOf(R.style.AppThemeTeardrop, R.style.AppThemeLightTeardrop)
     )
 
     fun getAppTheme(context: Context): Int {
@@ -67,6 +68,7 @@ object ThemeUtils {
             arrayOf(
                     R.drawable.circle,
                     R.drawable.square,
-                    R.drawable.rounded_square
+                    R.drawable.rounded_square,
+                    R.drawable.teardrop
             )[PreferenceHelper.getInt(context, Constants.PREF_ICON_SHAPE, Constants.DEFAULT_ICON_SHAPE)]
 }

@@ -26,7 +26,8 @@ class OptionsFragment: BaseBottomSheetDialogFragment() {
         val iconShapes = arrayOf(
                 getString(R.string.circle),
                 getString(R.string.square),
-                getString(R.string.rounded_square)
+                getString(R.string.rounded_square),
+                getString(R.string.teardrop)
         )
 
         lightTheme.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)

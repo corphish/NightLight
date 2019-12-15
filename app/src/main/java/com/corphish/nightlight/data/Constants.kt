@@ -119,4 +119,5 @@ object Constants {
     const val ICON_SHAPE_CIRCLE = 0
     const val ICON_SHAPE_SQUARE = 1
     const val ICON_SHAPE_ROUNDED_SQUARE = 2
+    const val ICON_SHAPE_TEARDROP = 3
 }

@@ -178,7 +178,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
     }
 
     private fun setIconBackground(textView: TextView, color: Int) {
-        val drawable = ResourcesCompat.getDrawable(resources, R.drawable.circle, theme)
+        val drawable = ResourcesCompat.getDrawable(resources, ThemeUtils.getThemeIconShape(this), theme)
         drawable?.setColorFilter(color, PorterDuff.Mode.SRC)
 
         textView.background = drawable

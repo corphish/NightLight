@@ -61,4 +61,10 @@ object ThemeUtils {
 
         return Color.parseColor("#000000")
     }
+
+    fun getThemeIconShape(context: Context) =
+            arrayOf(
+                    R.drawable.circle,
+                    R.drawable.square
+            )[PreferenceHelper.getInt(context, Constants.PREF_ICON_SHAPE, Constants.DEFAULT_ICON_SHAPE)]
 }

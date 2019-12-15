@@ -23,7 +23,7 @@
             android:id="@+id/selectedProfileTitle"
             android:layout_margin="@dimen/layout_margin"
             android:gravity="center"
-            android:background="@drawable/circle" />
+            android:background="?themeDrawable" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,7 +93,7 @@
                 android:tint="?themeCircleForeground"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/defaultMargin"
-                android:background="@drawable/circle"/>
+                android:background="?themeDrawable"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
                 android:tint="?themeCircleForeground"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/defaultMargin"
-                android:background="@drawable/circle"/>
+                android:background="?themeDrawable"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -191,7 +191,7 @@
                 android:tint="?themeCircleForeground"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/defaultMargin"
-                android:background="@drawable/circle"/>
+                android:background="?themeDrawable"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -225,7 +225,7 @@
                 android:tint="?themeCircleForeground"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/defaultMargin"
-                android:background="@drawable/circle"/>
+                android:background="?themeDrawable"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -258,7 +258,7 @@
                 android:tint="?themeCircleForeground"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/defaultMargin"
-                android:background="@drawable/circle"/>
+                android:background="?themeDrawable"/>
 
             <TextView
                 android:layout_width="wrap_content"

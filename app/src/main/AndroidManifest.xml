@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="GoogleAppIndexingWarning"
-    package="com.corphish.nightlight">
+    package="com.corphish.nightlight"
+    tools:ignore="GoogleAppIndexingWarning">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -17,6 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeCircular">
+        <activity
+            android:name=".activities.ColorActivity"
+            android:label="@string/title_activity_color"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.corphish.nightlight.activities.MainActivity" />
+        </activity>
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
@@ -77,7 +85,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.corphish.nightlight.activities.MainActivity" />
         </activity>
-
         <activity
             android:name=".activities.UsageActivity"
             android:parentActivityName=".activities.MainActivity">
@@ -91,7 +98,8 @@
             android:permission="android.permission.BIND_JOB_SERVICE"
             android:process=":booting" />
 
-        <receiver android:name=".receivers.TaskerIntentReceiver"
+        <receiver
+            android:name=".receivers.TaskerIntentReceiver"
             android:permission="">
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
@@ -107,7 +115,9 @@
                 android:value="com.corphish.nightlight.activities.MainActivity" />
         </activity>
 
-        <meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_temperature">
+
+    <fragment
+        android:id="@+id/navigation_temperature"
+        android:name="com.corphish.nightlight.activities.ui.dashboard.TemperatureFragment"
+        android:label="@string/color_temperature_title"
+        tools:layout="@layout/fragment_temperature" />
+
+    <fragment
+        android:id="@+id/navigation_manual"
+        android:name="com.corphish.nightlight.activities.ui.home.ManualFragment"
+        android:label="@string/manual_mode_title"
+        tools:layout="@layout/fragment_manual" />
+</navigation>

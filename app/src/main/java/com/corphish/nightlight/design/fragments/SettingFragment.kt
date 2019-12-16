@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.activities.ProfilesActivity
 import com.corphish.nightlight.R
+import com.corphish.nightlight.activities.ColorActivity
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
@@ -63,7 +64,7 @@ class SettingFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val settingsAdapter = SettingsAdapter()
         settingsOptions = listOf(
-                SettingOption(R.string.section_color, R.drawable.ic_color, ColorControlFragment()),
+                SettingOption(R.string.section_color, R.drawable.ic_color, activityClass = ColorActivity::class.java),
                 SettingOption(R.string.section_auto, R.drawable.ic_alarm, AutoFragment()),
                 SettingOption(R.string.section_kcal_backup, R.drawable.ic_settings_backup_restore, KCALBackupSettingsFragment()),
                 SettingOption(R.string.section_sob, R.drawable.ic_timer, SetOnBootDelayFragment()),

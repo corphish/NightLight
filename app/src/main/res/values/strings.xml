@@ -177,4 +177,8 @@
     <string name="circle">Circle</string>
     <string name="rounded_square">Rounded square</string>
     <string name="teardrop">Teardrop</string>
+    <string name="title_activity_color">ColorActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

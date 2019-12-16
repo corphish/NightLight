@@ -39,7 +39,7 @@ class ColorControlFragment : FullyExpandedBottomSheetDialogFragment() {
         super.onCreate(savedInstanceState)
 
         type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
-        getValues()
+        //  getValues()
         mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
         state = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
     }
@@ -54,15 +54,15 @@ class ColorControlFragment : FullyExpandedBottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        initIntensityTypeView()
+        /*initIntensityTypeView()
         initManualViews()
         initTemperatureViews()
         setSliderValues()
 
-        registerInfoViews(infoIntensityType, infoTemperature, infoManualColors)
+        registerInfoViews(infoIntensityType, infoTemperature, infoManualColors)**/
     }
 
-    private fun initManualViews() {
+    /*private fun initManualViews() {
         FontUtils().setCustomFont(context!!, manualModeSwitch)
 
         // Disable them by default
@@ -84,8 +84,6 @@ class ColorControlFragment : FullyExpandedBottomSheetDialogFragment() {
             if (isChecked && NightLightAppService.instance.isInitDone()) {
                 Core.applyNightModeAsync(isChecked, context, redColor, greenColor, blueColor)
             }
-
-            temperatureModeSwitch.isChecked = !isChecked
         }
 
         red.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
@@ -289,5 +287,5 @@ class ColorControlFragment : FullyExpandedBottomSheetDialogFragment() {
         super.onDestroy()
 
         Core.fixNightMode(context, state)
-    }
+    }*/
 }

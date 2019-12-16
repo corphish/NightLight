@@ -112,9 +112,9 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
     }
 
     override fun onModeChanged(newMode: Int) {
-        for (fragment in supportFragmentManager.fragments) {
+        /*for (fragment in supportFragmentManager.fragments) {
             (fragment as? ColorControlFragment)?.onStateChanged(newMode)
-        }
+        }*/
     }
 
     private fun setViews(show: Boolean) {

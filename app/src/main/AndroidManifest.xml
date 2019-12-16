@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeCircular">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true"
             android:label="@string/app_name">
             <meta-data
@@ -49,7 +49,7 @@
         </receiver>
 
         <activity
-            android:name=".StartActivity"
+            android:name=".activities.StartActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -70,20 +70,20 @@
             android:value="ee5e2aeeae7ccde693df6be64bd35d8e8e9f5196" />
 
         <activity
-            android:name=".AboutActivity"
+            android:name=".activities.AboutActivity"
             android:label="@string/about"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.corphish.nightlight.MainActivity" />
+                android:value="com.corphish.nightlight.activities.MainActivity" />
         </activity>
 
         <activity
-            android:name=".UsageActivity"
-            android:parentActivityName=".MainActivity">
+            android:name=".activities.UsageActivity"
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.corphish.nightlight.MainActivity" />
+                android:value="com.corphish.nightlight.activities.MainActivity" />
         </activity>
 
         <service
@@ -99,12 +99,12 @@
         </receiver>
 
         <activity
-            android:name=".ProfilesActivity"
+            android:name=".activities.ProfilesActivity"
             android:label="@string/profile_title"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.corphish.nightlight.MainActivity" />
+                android:value="com.corphish.nightlight.activities.MainActivity" />
         </activity>
 
         <meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts" />

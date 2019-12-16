@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
-    tools:context="com.corphish.nightlight.AboutActivity">
+    tools:context="com.corphish.nightlight.activities.AboutActivity">
 
     <include layout="@layout/content_about" />
 

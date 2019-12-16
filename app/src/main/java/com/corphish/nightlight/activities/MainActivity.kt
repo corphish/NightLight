@@ -1,4 +1,4 @@
-package com.corphish.nightlight
+package com.corphish.nightlight.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.corphish.nightlight.BuildConfig
+import com.corphish.nightlight.R
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils

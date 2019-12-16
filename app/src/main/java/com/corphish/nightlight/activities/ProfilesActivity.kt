@@ -1,4 +1,4 @@
-package com.corphish.nightlight
+package com.corphish.nightlight.activities
 
 import android.content.Context
 import android.content.Intent
@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.corphish.nightlight.R
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils

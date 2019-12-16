@@ -1,7 +1,8 @@
-package com.corphish.nightlight
+package com.corphish.nightlight.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.corphish.nightlight.R
 import com.corphish.nightlight.design.ThemeUtils
 
 import com.corphish.nightlight.design.fragments.AboutFragment

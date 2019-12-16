@@ -7,7 +7,7 @@
         <intent
             android:action="android.intent.action.TOGGLE"
             android:targetPackage="com.corphish.nightlight.generic"
-            android:targetClass="com.corphish.nightlight.StartActivity" />
+            android:targetClass="com.corphish.nightlight.activities.StartActivity" />
     </shortcut>
     <shortcut
         android:shortcutId="intensity"
@@ -17,6 +17,6 @@
         <intent
             android:action="android.intent.action.INTENSITY_TOGGLE"
             android:targetPackage="com.corphish.nightlight.generic"
-            android:targetClass="com.corphish.nightlight.StartActivity" />
+            android:targetClass="com.corphish.nightlight.activities.StartActivity" />
     </shortcut>
 </shortcuts>

@@ -1,4 +1,4 @@
-package com.corphish.nightlight
+package com.corphish.nightlight.activities
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.corphish.nightlight.R
 import com.corphish.nightlight.design.ThemeUtils
 import kotlinx.android.synthetic.main.content_usage.*
 import kotlinx.android.synthetic.main.layout_header.*
@@ -62,7 +63,7 @@ class UsageActivity : AppCompatActivity() {
 
         inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v) {
             internal val question: TextView = v.findViewById(R.id.question)
-            internal val answer: TextView = v.findViewById(R.id.answer  )
+            internal val answer: TextView = v.findViewById(R.id.answer)
         }
 
 

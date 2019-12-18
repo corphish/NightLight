@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_temperature"
-        android:name="com.corphish.nightlight.activities.ui.dashboard.TemperatureFragment"
+        android:name="com.corphish.nightlight.design.fragments.TemperatureFragment"
         android:label="@string/color_temperature_title"
         tools:layout="@layout/fragment_temperature" />
 
     <fragment
         android:id="@+id/navigation_manual"
-        android:name="com.corphish.nightlight.activities.ui.home.ManualFragment"
+        android:name="com.corphish.nightlight.design.fragments.ManualFragment"
         android:label="@string/manual_mode_title"
         tools:layout="@layout/fragment_manual" />
 </navigation>

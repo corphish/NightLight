@@ -1,4 +1,4 @@
-package com.corphish.nightlight.activities.ui.home
+package com.corphish.nightlight.design.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

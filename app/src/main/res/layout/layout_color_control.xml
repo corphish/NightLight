@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_margin="@dimen/defaultMargin"
     android:layout_width="match_parent"
@@ -17,23 +18,88 @@
         android:textAppearance="?android:attr/textAppearance"
         android:text="@string/intensity_type_title"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingBottom="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
-        android:textSize="@dimen/text_desc"
-        android:id="@+id/infoIntensityType"
-        android:text="@string/intensity_type_desc"/>
-
-    <androidx.appcompat.widget.AppCompatSpinner
+    <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
-        android:prompt="@string/maximum"
-        android:entries="@array/intensityTypes"
-        android:id="@+id/intensityTypeChooser"/>
+        android:layout_margin="@dimen/defaultMargin"
+        app:columnCount="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_gravity="fill_horizontal"
+            app:layout_columnWeight="1"
+            android:id="@+id/maxLayout"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/defaultMargin"
+            android:padding="@dimen/defaultPadding">
+
+            <ImageButton
+                android:contentDescription="@null"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/maxIcon"
+                app:srcCompat="@drawable/ic_max"
+                android:tint="?themeCircleForeground"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/defaultMargin"
+                android:background="?themeDrawable"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/maximum"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearance" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/powerCaption"
+                android:textSize="@dimen/text_desc"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_gravity="fill_horizontal"
+            app:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:id="@+id/minLayout"
+            android:layout_margin="@dimen/defaultMargin"
+            android:padding="@dimen/defaultPadding">
+
+            <ImageButton
+                android:contentDescription="@null"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/minIcon"
+                app:srcCompat="@drawable/ic_min"
+                android:tint="?themeCircleForeground"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/defaultMargin"
+                android:background="?themeDrawable"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/colorTitle"
+                android:text="@string/minimum"
+                android:textSize="@dimen/text_desc"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearance" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/colorCaption"
+                android:textSize="@dimen/text_desc"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+    </androidx.gridlayout.widget.GridLayout>
 </LinearLayout>

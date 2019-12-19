@@ -149,4 +149,20 @@
         <item name="android:textStyle">bold</item>
         <item name="backgroundTint">@color/colorAccent</item>
     </style>
+
+    <style name="MaterialInfoButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="cornerRadius">?themeButtonRadius</item>
+        <item name="android:textAppearance">?android:textAppearance</item>
+        <item name="android:textColor">?themeColorText</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_desc</item>
+        <item name="backgroundTint">@color/colorAccent</item>
+        <item name="icon">@drawable/ic_info</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="iconSize">12dp</item>
+        <item name="android:text">@string/info</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
 </resources>

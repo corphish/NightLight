@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ImageButton
 import android.widget.SeekBar
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
@@ -37,6 +39,7 @@ class TemperatureFragment: Fragment() {
 
         intensityType = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
 
+        initHeader(root)
         initIntensityTypeView()
         initSlider()
 
@@ -93,5 +96,13 @@ class TemperatureFragment: Fragment() {
 
     private fun setSliderValues() {
         temperatureValue.value = colorTemperature
+    }
+
+    private fun initHeader(root: View) {
+        val bannerTitle = root.findViewById<TextView>(R.id.banner_title)
+        val bannerIcon = root.findViewById<ImageButton>(R.id.banner_icon)
+
+        bannerTitle.text = getString(R.string.section_color)
+        bannerIcon.setImageResource(R.drawable.ic_color)
     }
 }

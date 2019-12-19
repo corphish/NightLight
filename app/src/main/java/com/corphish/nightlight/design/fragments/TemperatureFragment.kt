@@ -12,9 +12,11 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
+import com.google.android.material.button.MaterialButton
 import com.gregacucnik.EditableSeekBar
 
 class TemperatureFragment: Fragment() {
@@ -40,6 +42,7 @@ class TemperatureFragment: Fragment() {
         intensityType = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
 
         initHeader(root)
+        initInfoButton(root)
         initIntensityTypeView()
         initSlider()
 
@@ -104,5 +107,17 @@ class TemperatureFragment: Fragment() {
 
         bannerTitle.text = getString(R.string.section_color)
         bannerIcon.setImageResource(R.drawable.ic_color)
+    }
+
+    private fun initInfoButton(root: View) {
+        val infoButton = root.findViewById<MaterialButton>(R.id.intensityInfo)
+
+        infoButton.setOnClickListener {
+            val infoDialog = BottomSheetAlertDialog(context!!)
+            infoDialog.setTitle(R.string.intensity_type_title)
+            infoDialog.setMessage(R.string.intensity_type_desc)
+            infoDialog.setPositiveButton(android.R.string.ok, View.OnClickListener { infoDialog.dismiss() })
+            infoDialog.show()
+        }
     }
 }

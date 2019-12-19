@@ -79,4 +79,8 @@ class BottomSheetAlertDialog(val context: Context) {
 
         return true
     }
+
+    fun dismiss() {
+        bottomSheetDialog.dismiss()
+    }
 }

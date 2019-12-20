@@ -4,36 +4,70 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ImageButton
 import android.widget.SeekBar
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
+import com.google.android.material.button.MaterialButton
 import com.gregacucnik.EditableSeekBar
 
 class ManualFragment : Fragment() {
 
     private val _type = Constants.NL_SETTING_MODE_MANUAL
+    private var intensityType = Constants.INTENSITY_TYPE_MINIMUM
+
+    private var redColor = Constants.DEFAULT_RED_COLOR[intensityType]
+    private var greenColor = Constants.DEFAULT_GREEN_COLOR[intensityType]
+    private var blueColor = Constants.DEFAULT_BLUE_COLOR[intensityType]
+
+    // Views
+    private lateinit var intensityTypeChooser: AppCompatSpinner
+    private lateinit var red: EditableSeekBar
+    private lateinit var green: EditableSeekBar
+    private lateinit var blue: EditableSeekBar
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        var redColor = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR[_type], Constants.DEFAULT_RED_COLOR[_type])
-        var greenColor = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR[_type], Constants.DEFAULT_GREEN_COLOR[_type])
-        var blueColor = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR[_type], Constants.DEFAULT_BLUE_COLOR[_type])
-
         val root = inflater.inflate(R.layout.fragment_manual, container, false)
 
-        val red = root.findViewById<EditableSeekBar>(R.id.red)
-        val green = root.findViewById<EditableSeekBar>(R.id.green)
-        val blue = root.findViewById<EditableSeekBar>(R.id.blue)
+        red = root.findViewById(R.id.red)
+        green = root.findViewById(R.id.green)
+        blue = root.findViewById(R.id.blue)
+        intensityTypeChooser = root.findViewById(R.id.intensityTypeChooser)
 
+        intensityType = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
 
+        getValues()
+        initHeader(root)
+        initInfoButton(root)
+        initIntensityTypeView()
+        initSliders()
 
+        PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, _type)
+
+        Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
+
+        return root
+    }
+
+    private fun getValues() {
+        redColor = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR[intensityType], Constants.DEFAULT_RED_COLOR[intensityType])
+        greenColor = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR[intensityType], Constants.DEFAULT_GREEN_COLOR[intensityType])
+        blueColor = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR[intensityType], Constants.DEFAULT_BLUE_COLOR[intensityType])
+    }
+
+    private fun initSliders() {
         red.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
             override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {}
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
@@ -51,7 +85,7 @@ class ManualFragment : Fragment() {
                 redColor = value
 
                 if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR[Constants.NL_SETTING_MODE_MANUAL], redColor)
+                    PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR[intensityType], redColor)
                     Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 }
@@ -75,7 +109,7 @@ class ManualFragment : Fragment() {
                 greenColor = value
 
                 if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR[Constants.NL_SETTING_MODE_MANUAL], greenColor)
+                    PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR[intensityType], greenColor)
                     Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 }
@@ -100,19 +134,55 @@ class ManualFragment : Fragment() {
 
 
                 if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR[Constants.NL_SETTING_MODE_MANUAL], blueColor)
+                    PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR[intensityType], blueColor)
                     Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 }
             }
         })
 
+        setSliderValues()
+    }
+
+    private fun setSliderValues() {
         red.value = redColor
         green.value = greenColor
         blue.value = blueColor
+    }
 
-        PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, _type)
+    private fun initIntensityTypeView() {
+        intensityTypeChooser.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                intensityType = position
+                PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, position)
 
-        return root
+                getValues()
+                setSliderValues()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+        intensityTypeChooser.setSelection(intensityType)
+    }
+
+    private fun initHeader(root: View) {
+        val bannerTitle = root.findViewById<TextView>(R.id.banner_title)
+        val bannerIcon = root.findViewById<ImageButton>(R.id.banner_icon)
+
+        bannerTitle.text = getString(R.string.section_color)
+        bannerIcon.setImageResource(R.drawable.ic_color)
+    }
+
+    private fun initInfoButton(root: View) {
+        val infoButton = root.findViewById<MaterialButton>(R.id.intensityInfo)
+
+        infoButton.setOnClickListener {
+            val infoDialog = BottomSheetAlertDialog(context!!)
+            infoDialog.setTitle(R.string.intensity_type_title)
+            infoDialog.setMessage(R.string.intensity_type_desc)
+            infoDialog.setPositiveButton(android.R.string.ok, View.OnClickListener { infoDialog.dismiss() })
+            infoDialog.show()
+        }
     }
 }

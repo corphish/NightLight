@@ -66,10 +66,10 @@
     <string name="root_question">Q. Perché l\'app richiede l\'accesso root?</string>
     <string name="root_answer">È richiesto l\'accesso root per modificare i valori KCAL.</string>
     <string name="master_switch_function_question">Q. Cosa fa lo switch principale?</string>
-    <string name="master_switch_function_answer">It basically enables all the functions of the app. If master switch is off, none of the functions will be enabled, and vice versa.</string>
-    <string name="master_switch_exist_question">Q. OK then why does master switch exist? We would have to enable master switch anyway to use the app.</string>
-    <string name="master_switch_exist_answer">Since Night Light supports features like automation and set on boot, it is necessary for such switch to exist, so that such external requests can be dealt with accordingly. Imagine you have this app installed, but for some reason you don\'t use the app, if master switch was not present at all, a previously set automation schedule could still turn on Night Light.</string>
-    <string name="kcal_backup_question">Q. What does the KCAL backup options do?</string>
+    <string name="master_switch_function_answer">In sostanza attiva tutte le funzioni dell\'app. Se lo switch è disattivato, nessuna funzione verrà attivata, e viceversa.</string>
+    <string name="master_switch_exist_question">Q. Perché esiste lo switch principale? Dovremmo sempre abilitare lo switch per utilizzare l\'app.</string>
+    <string name="master_switch_exist_answer">Dal momento che Night Light supporta funzionalità di automazione e l\'attivazione all\'avvio è necessaria la presenza di questo switch. Immagina di avere l\'app installata, ma preferisci non utilizzarla. Se lo switch princiapale non fosse presente, un programma di automazione come Tasker, se configurato in precedenza, potrebbe comunque attivare Night Light.</string>
+    <string name="kcal_backup_question">Q. Come funzionana il backup dei valori KCAL?</string>
     <string name="kcal_backup_answer">This option takes account of the user\'s custom KCAL settings. So that while turning off Night Light, the app is able to restore user\'s settings.</string>
     <string name="sob_question">Q. Since KCAL values are reset after boot, will the app will still be able function after that?</string>
     <string name="sob_answer">Yes. After a reboot, app will re-apply night light values to KCAL, and re-set all the automation schedules. However it does not apply user\'s custom KCAL values (if night light should be off after boot). If for some reason, things were not applied properly after boot, consider increasing Set On boot delay. If the problem persists, please open an issue in github, or mention about the same in XDA thread. Links for them can be found in About section.</string>

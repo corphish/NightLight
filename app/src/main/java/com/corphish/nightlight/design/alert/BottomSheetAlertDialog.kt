@@ -1,14 +1,15 @@
 package com.corphish.nightlight.design.alert
 
 import android.content.Context
-import androidx.annotation.StringRes
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import androidx.appcompat.widget.AppCompatButton
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
-
-import com.corphish.nightlight.R
+import androidx.annotation.StringRes
+import androidx.appcompat.widget.AppCompatButton
 import com.corphish.nightlight.design.ThemeUtils
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.corphish.nightlight.R
+
 
 /**
  * Created by avinabadalal on 06/03/18.
@@ -74,10 +75,16 @@ class BottomSheetAlertDialog(val context: Context) {
     }
 
     fun show(): Boolean {
+        expandPositiveButton()
         bottomSheetDialog.setContentView(contentView)
         bottomSheetDialog.show()
 
         return true
+    }
+
+    private fun expandPositiveButton() {
+        if (negativeButton.visibility != View.VISIBLE)
+            positiveButton.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
     }
 
     fun dismiss() {

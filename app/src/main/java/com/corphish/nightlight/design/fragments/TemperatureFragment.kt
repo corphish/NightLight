@@ -48,6 +48,8 @@ class TemperatureFragment: Fragment() {
 
         PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, _type)
 
+        Core.applyNightModeAsync(true, context, colorTemperature)
+
         return root
     }
 

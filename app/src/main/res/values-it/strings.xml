@@ -18,8 +18,8 @@
     <string name="about">Info su</string>
     <string name="app_desc">Night Light utilizza KCAL, che è una funzione di controllo dei driver per i dispositivi di nuova generazione Qualcomm, per regolare l\'intensità della luce blu, che rende più confortevole gli occhi quando usi il telefono al buio e ti aiuta ad addormentarti. Dal momento che agisce a livello del driver e non utilizza sovrapposizioni software, non influenza la durata della batteria e il cambiamento può essere visto ovunque sul display.</string>
     <string name="shortcut_toggle">Attiva/Disattiva</string>
-    <string name="next_day">&#160;(Next day)</string>
-    <string name="sun_switch">Use sunset/sunrise timings</string>
+    <string name="next_day">&#160;(giorno successivo)</string>
+    <string name="sun_switch">Usa i tempi del tramonto/alba</string>
     <string name="location_unavailable">Unable to get your last known location.</string>
     <string name="kcal_preservce_value_msg">Preserve current KCAL values</string>
     <string name="contributors">Contributors</string>

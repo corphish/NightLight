@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
@@ -49,6 +50,12 @@ class ManualFragment : Fragment() {
 
         intensityType = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
         originalState = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                activity?.finish()
+            }
+        })
 
         getValues()
         initHeader(root)

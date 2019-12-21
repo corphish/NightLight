@@ -41,6 +41,7 @@ class TemperatureFragment: Fragment() {
 
         intensityType = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
 
+        getValues()
         initHeader(root)
         initInfoButton(root)
         initIntensityTypeView()

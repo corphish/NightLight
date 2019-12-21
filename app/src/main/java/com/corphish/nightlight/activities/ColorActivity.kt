@@ -7,7 +7,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.corphish.nightlight.R
+import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
+import com.corphish.nightlight.helpers.PreferenceHelper
 
 class ColorActivity : AppCompatActivity() {
 
@@ -20,5 +22,8 @@ class ColorActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
 
         navView.setupWithNavController(navController)
+
+        val settingType = PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
+        navView.selectedItemId = arrayOf(R.id.navigation_temperature, R.id.navigation_manual)[settingType]
     }
 }

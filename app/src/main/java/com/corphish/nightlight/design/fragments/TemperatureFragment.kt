@@ -28,7 +28,6 @@ class TemperatureFragment: Fragment() {
     // Views
     private lateinit var intensityTypeChooser: AppCompatSpinner
     private lateinit var temperatureValue: EditableSeekBar
-    private var originalState = false
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -41,7 +40,6 @@ class TemperatureFragment: Fragment() {
         temperatureValue = root.findViewById(R.id.temperatureValue)
 
         intensityType = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
-        originalState = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
 
         initHeader(root)
         initInfoButton(root)
@@ -123,11 +121,5 @@ class TemperatureFragment: Fragment() {
             infoDialog.setPositiveButton(android.R.string.ok, View.OnClickListener { infoDialog.dismiss() })
             infoDialog.show()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        Core.fixNightMode(context, originalState)
     }
 }

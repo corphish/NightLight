@@ -28,7 +28,6 @@ class ManualFragment : Fragment() {
     private var redColor = Constants.DEFAULT_RED_COLOR[intensityType]
     private var greenColor = Constants.DEFAULT_GREEN_COLOR[intensityType]
     private var blueColor = Constants.DEFAULT_BLUE_COLOR[intensityType]
-    private var originalState = false
 
     // Views
     private lateinit var intensityTypeChooser: AppCompatSpinner
@@ -49,7 +48,6 @@ class ManualFragment : Fragment() {
         intensityTypeChooser = root.findViewById(R.id.intensityTypeChooser)
 
         intensityType = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
-        originalState = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -193,11 +191,5 @@ class ManualFragment : Fragment() {
             infoDialog.setPositiveButton(android.R.string.ok, View.OnClickListener { infoDialog.dismiss() })
             infoDialog.show()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        Core.fixNightMode(context, originalState)
     }
 }

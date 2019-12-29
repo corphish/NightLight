@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/profile_name_set_layout"
                 android:padding="@dimen/layout_padding"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:passwordToggleDrawable="@null"
                 app:errorEnabled="true">
 
@@ -56,7 +57,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/profile_name_set"
                     android:hint="@string/profile_create_name" />
-
             </com.google.android.material.textfield.TextInputLayout>
 
             <Switch
@@ -155,37 +155,14 @@
                 android:enabled="false"
                 android:id="@+id/profile_night_light_setting_param3"/>
 
-            <RelativeLayout
+            <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
-                android:padding="@dimen/layout_padding"
-                android:layout_margin="@dimen/layout_margin"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    style="@style/MaterialButtonStyle"
-                    android:padding="8dp"
-                    android:text="@android:string/ok"
-                    android:id="@+id/button_ok"
-                    app:backgroundTint="@color/colorPrimary"
-                    android:layout_alignParentEnd="true"
-                    android:layout_height="wrap_content" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/layout_padding"
-                    android:paddingStart="@dimen/layout_padding"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="@dimen/layout_padding"
-                    android:id="@+id/button_cancel"
-                    android:textAppearance="?android:textAppearance"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/colorAccent"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:text="@android:string/cancel"
-                    android:layout_toStartOf="@id/button_ok"/>
-            </RelativeLayout>
+                style="@style/MaterialButtonStyle"
+                android:padding="8dp"
+                android:text="@android:string/ok"
+                android:id="@+id/button_ok"
+                app:backgroundTint="@color/colorPrimary"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

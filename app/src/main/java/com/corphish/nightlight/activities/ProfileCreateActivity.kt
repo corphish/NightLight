@@ -36,7 +36,7 @@ class ProfileCreateActivity : AppCompatActivity() {
         profile = ProfilesManager.Profile(
                 if (isProfileNull) "" else intent.getStringExtra(Constants.PROFILE_DATA_NAME)!!,
                 intent.getBooleanExtra(Constants.PROFILE_DATA_SETTING_ENABLED, false),
-                intent.getIntExtra(Constants.PROFILE_DATA_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP),
+                intent.getIntExtra(Constants.PROFILE_DATA_SETTING_MODE, PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)),
                 if (isProfileNull) intArrayOf() else intent.getIntArrayExtra(Constants.PROFILE_DATA_SETTING)!!
         )
 
@@ -82,11 +82,11 @@ class ProfileCreateActivity : AppCompatActivity() {
         if (!isProfileNull) {
             nlSwitch.isChecked = profile.isSettingEnabled
             editText.setText(profile.name)
-            modes.setSelection(profile.settingMode)
             modes.isEnabled = false
         } else  {
             modes.isEnabled = true
         }
+        modes.setSelection(profile.settingMode)
 
         banner_title.setText(
                 if (operationMode == Constants.MODE_CREATE) R.string.profile_create_title else R.string.profile_edit_title

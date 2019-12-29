@@ -41,6 +41,8 @@ class ProfileCreateActivity : AppCompatActivity() {
 
         operationMode = intent.getIntExtra(Constants.PROFILE_MODE, Constants.MODE_CREATE)
 
+        banner_icon.setImageResource(R.drawable.ic_profiles)
+
         fab.setOnClickListener {
             val retval = if (operationMode == Constants.MODE_CREATE)
                 createProfileWithCurrentSelections()

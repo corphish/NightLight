@@ -30,6 +30,7 @@ class ProfileCreateActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile_create)
 
         profilesManager = ProfilesManager(this)
+        profilesManager.loadProfiles()
 
         isProfileNull = !intent.getBooleanExtra(Constants.PROFILE_DATA_PRESENT, false)
         profile = ProfilesManager.Profile(

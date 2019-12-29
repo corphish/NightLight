@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.activities.ProfilesActivity
 import com.corphish.nightlight.R
+import com.corphish.nightlight.activities.AboutActivity
 import com.corphish.nightlight.activities.ColorActivity
+import com.corphish.nightlight.activities.UsageActivity
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
@@ -71,7 +73,9 @@ class SettingFragment: Fragment() {
                 SettingOption(R.string.profile_title, R.drawable.ic_profiles, activityClass =  ProfilesActivity::class.java),
                 SettingOption(R.string.kcal_driver_information_short, R.drawable.ic_driver, KCALDriverInfoFragment()),
                 SettingOption(R.string.options, R.drawable.ic_settings, OptionsFragment()),
-                SettingOption(R.string.show_support, R.drawable.ic_thumb_up, AppreciationFragment())
+                SettingOption(R.string.show_support, R.drawable.ic_thumb_up, AppreciationFragment()),
+                SettingOption(R.string.about, R.drawable.ic_info, activityClass = AboutActivity::class.java),
+                SettingOption(R.string.faq, R.drawable.ic_help, activityClass = UsageActivity::class.java)
         )
 
         settingsAdapter.list = settingsOptions

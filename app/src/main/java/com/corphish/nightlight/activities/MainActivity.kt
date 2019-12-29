@@ -38,9 +38,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(bottom_app_bar)
-        bottom_app_bar.overflowIcon = getDrawable(R.drawable.ic_more_vert)
-
         NightLightAppService.instance
                 .registerNightLightStateListener(this)
                 .registerNightLightSettingModeChangeListener(this)
@@ -65,7 +62,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
     private fun init() {
         masterSwitchEnabled = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH)
-        adjustFABVisibility(masterSwitchEnabled)
     }
 
     private fun viewInit() {
@@ -89,11 +85,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
             startActivityForResult(intent, REQ_CODE)
         }
         setViews(checkStatus)
-        adjustFABVisibility(checkStatus)
-    }
-
-    private fun adjustFABVisibility(masterStatus: Boolean) {
-        if (masterStatus) fab.show() else fab.hide()
     }
 
     override fun onStateChanged(newState: Boolean) {
@@ -138,38 +129,11 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         return BuildConfig.DEBUG || resources.getBoolean(id)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-
-        if (id == R.id.about_menu) showAbout()
-        if (id == R.id.about_faq) showFAQ()
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun showAbout() {
-        startActivity(Intent(this, AboutActivity::class.java))
-    }
-
     override fun onResume() {
         super.onResume()
 
         banner_title.text = getString(R.string.overview)
         banner_icon.setImageResource(R.drawable.ic_home)
-    }
-
-    private fun showFAQ() {
-        startActivity(Intent(this, UsageActivity::class.java))
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,

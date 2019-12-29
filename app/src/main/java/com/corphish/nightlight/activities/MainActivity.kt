@@ -18,7 +18,6 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.interfaces.NightLightSettingModeListener
 import com.corphish.nightlight.interfaces.NightLightStateListener
 import com.corphish.nightlight.services.NightLightAppService
-import com.corphish.nightlight.design.views.ProfileCreator
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.extensions.toArrayOfInts
 import com.corphish.nightlight.interfaces.ThemeChangeListener
@@ -62,10 +61,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         applyProfileIfNecessary()
 
         handleIntent()
-
-        fab.setOnClickListener {
-            ProfileCreator(this@MainActivity, ProfileCreator.MODE_CREATE, getProfileForCurrentSettings()) {}.show()
-        }
     }
 
     private fun init() {

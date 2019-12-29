@@ -120,4 +120,20 @@ object Constants {
     const val ICON_SHAPE_SQUARE = 1
     const val ICON_SHAPE_ROUNDED_SQUARE = 2
     const val ICON_SHAPE_TEARDROP = 3
+
+    /**
+     * Profile create options
+     */
+    const val MODE_CREATE = 0
+    const val MODE_EDIT = 1
+
+    /**
+     * Profile migration data keys
+     */
+    const val PROFILE_DATA_PRESENT = "dataPresent"
+    const val PROFILE_DATA_NAME = "name"
+    const val PROFILE_DATA_SETTING_ENABLED = "settingEnabled"
+    const val PROFILE_DATA_SETTING_MODE = "settingMode"
+    const val PROFILE_DATA_SETTING = "setting"
+    const val PROFILE_MODE = "profileMode"
 }

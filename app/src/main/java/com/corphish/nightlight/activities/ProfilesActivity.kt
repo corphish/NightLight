@@ -1,5 +1,6 @@
 package com.corphish.nightlight.activities
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
@@ -18,7 +19,6 @@ import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
-import com.corphish.nightlight.design.views.ProfileCreator
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -45,6 +45,9 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
     private var midTemp = 0
     private var midKCALSum = 0
 
+    private val _createProfileCode = 6
+    private val _updateProfileCode = 9
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
@@ -53,14 +56,11 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         context = this
 
         fab.setOnClickListener {
-            ProfileCreator(this@ProfilesActivity, ProfileCreator.MODE_CREATE,
-                    onFinishListener =  fun(status: Int) {
-                        if (status == ProfileCreator.STATUS_SUCCESS) {
-                            profilesManager.loadProfiles()
-                            profiles = profilesManager.profilesList
-                            profilesAdapter.notifyDataSetChanged()
-                        }
-                    }).show()
+            val intent = Intent(this@ProfilesActivity, ProfileCreateActivity::class.java)
+            intent.putExtra(Constants.PROFILE_DATA_PRESENT, false)
+            intent.putExtra(Constants.PROFILE_MODE, Constants.MODE_CREATE)
+
+            startActivityForResult(intent, _createProfileCode)
         }
 
         banner_title.text = getString(R.string.profile_title)
@@ -185,6 +185,22 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         textView.background = drawable
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == _createProfileCode && resultCode == Activity.RESULT_OK) {
+            profilesManager.loadProfiles()
+            profiles = profilesManager.profilesList
+            profilesAdapter.notifyDataSetChanged()
+        } else if (requestCode == _updateProfileCode) {
+            if (resultCode == Activity.RESULT_OK) {
+                profilesManager.loadProfiles()
+                profiles = profilesManager.profilesList
+            }
+            profilesAdapter.notifyDataSetChanged()
+        }
+    }
+
     private fun getOptionsView(profile: ProfilesManager.Profile?) {
         optionsView = View.inflate(this, R.layout.bottom_sheet_profile_options, null)
 
@@ -241,14 +257,17 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         applyIcon.setOnClickListener(applyClickListener)
 
         val editClickListener = View.OnClickListener {
-            ProfileCreator(this@ProfilesActivity, ProfileCreator.MODE_EDIT, profile,
-                    onFinishListener =  fun(status: Int) {
-                        if (status == ProfileCreator.STATUS_SUCCESS) {
-                            profilesManager.loadProfiles()
-                            profiles = profilesManager.profilesList
-                        }
-                        profilesAdapter.notifyDataSetChanged()
-                    }).show()
+            val intent = Intent(this@ProfilesActivity, ProfileCreateActivity::class.java)
+
+            intent.putExtra(Constants.PROFILE_DATA_PRESENT, true)
+            intent.putExtra(Constants.PROFILE_MODE, Constants.MODE_EDIT)
+            intent.putExtra(Constants.PROFILE_DATA_NAME, profile.name)
+            intent.putExtra(Constants.PROFILE_DATA_SETTING_ENABLED, profile.isSettingEnabled)
+            intent.putExtra(Constants.PROFILE_DATA_SETTING_MODE, profile.settingMode)
+            intent.putExtra(Constants.PROFILE_DATA_SETTING, profile.settings)
+
+            startActivityForResult(intent, _updateProfileCode)
+
             optionsDialog.dismiss()
         }
 

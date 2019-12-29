@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeCircular">
+        <activity android:name=".activities.ProfileCreateActivity"></activity>
         <activity
             android:name=".activities.ColorActivity"
             android:label="@string/title_activity_color"

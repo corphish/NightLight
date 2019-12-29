@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.corphish.nightlight.activities.ProfileCreateActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/defaultMargin"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/actionDesc"
+            android:text="@string/profile_create_desc"
+            android:textSize="@dimen/text_desc"
+            android:paddingTop="2dp"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingBottom="12dp"
+            android:paddingStart="@dimen/layout_padding"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextLayout"
+            android:padding="@dimen/layout_padding"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:passwordToggleDrawable="@null"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText"
+                android:hint="@string/profile_create_name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/group_padding"
+            android:paddingBottom="@dimen/group_padding"
+            android:textSize="@dimen/text_caption"
+            android:text="@string/profile_nl_switch"
+            android:id="@+id/nlSwitch"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/group_padding"
+            android:textSize="@dimen/text_caption"
+            android:textAppearance="?android:textAppearance"
+            android:text="@string/profile_setting_mode"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="2dp"
+            android:paddingBottom="@dimen/group_padding"
+            android:prompt="@string/color_temperature_title"
+            android:entries="@array/settingModes"
+            android:id="@+id/modes"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/group_padding"
+            android:enabled="false"
+            android:textSize="@dimen/text_caption"
+            android:textAppearance="?android:textAppearance"
+            android:id="@+id/settingTitle1"
+            android:text="@string/profile_nl_setting_unavailable"/>
+
+        <com.gregacucnik.EditableSeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:enabled="false"
+            android:id="@+id/settingParam1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/group_padding"
+            android:enabled="false"
+            android:textSize="@dimen/text_caption"
+            android:textAppearance="?android:textAppearance"
+            android:id="@+id/settingTitle2"
+            android:text="@string/profile_nl_setting_unavailable"/>
+
+        <com.gregacucnik.EditableSeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:enabled="false"
+            android:id="@+id/settingParam2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingTop="@dimen/group_padding"
+            android:enabled="false"
+            android:textSize="@dimen/text_caption"
+            android:textAppearance="?android:textAppearance"
+            android:id="@+id/settingTitle3"
+            android:text="@string/profile_nl_setting_unavailable"/>
+
+        <com.gregacucnik.EditableSeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingBottom="@dimen/group_padding"
+            android:enabled="false"
+            android:id="@+id/settingParam3"/>
+
+        <include layout="@layout/fab_placeholder" />
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>

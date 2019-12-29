@@ -58,8 +58,8 @@ class ProfileCreateActivity : AppCompatActivity() {
             }
         }
 
-        initViews()
         initViewEventListeners()
+        initViews()
     }
 
     override fun onBackPressed() {
@@ -71,7 +71,7 @@ class ProfileCreateActivity : AppCompatActivity() {
     private fun initViewEventListeners() {
         modes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val currentModeSelection = profile.settingMode
+                val currentModeSelection = if (isProfileNull) position else profile.settingMode
                 updateProfileCreatorParams(currentModeSelection)
             }
 

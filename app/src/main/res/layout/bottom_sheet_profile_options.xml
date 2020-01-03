@@ -37,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_caption"
+                android:textStyle="bold"
                 android:textAppearance="?android:attr/textAppearance"
                 android:text="@string/profile_title"/>
 

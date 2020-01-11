@@ -136,4 +136,9 @@ object Constants {
     const val PROFILE_DATA_SETTING_MODE = "settingMode"
     const val PROFILE_DATA_SETTING = "setting"
     const val PROFILE_MODE = "profileMode"
+
+    /**
+     * Automation constants
+     */
+    const val AUTOMATE_PROFILE_NAME = "profileName"
 }

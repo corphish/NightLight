@@ -1,11 +1,11 @@
 def taskRequests = getGradle().getStartParameter().getTaskRequests().toString()
-def isPlaystore = taskRequests.contains("generic") || taskRequests.contains("Generic") || taskRequests.contains("donate") || taskRequests.contains("Donate")
+def isPlayStore = taskRequests.contains("generic") || taskRequests.contains("Generic") || taskRequests.contains("donate") || taskRequests.contains("Donate")
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-if (isPlaystore) {
+if (isPlayStore) {
     apply plugin: 'io.fabric'
 }
 
@@ -59,7 +59,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.2.0-alpha02'
+    implementation 'com.google.android.material:material:1.2.0-alpha03'
 
     implementation 'eu.chainfire:libsuperuser:1.0.0.201704021214'
 
@@ -69,11 +69,11 @@ dependencies {
     implementation 'com.github.corphish:widgets:1.2.1'
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.navigation:navigation-fragment:2.0.0'
-    implementation 'androidx.navigation:navigation-ui:2.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.1.0'
+    implementation 'androidx.navigation:navigation-ui:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
     genericImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     donateImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

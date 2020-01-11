@@ -45,8 +45,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/version"
-        android:layout_margin="@dimen/layout_margin"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hash"
+        android:textSize="@dimen/text_sub_desc"
+        android:textStyle="italic"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"
         android:paddingBottom="@dimen/layout_padding"/>
 </LinearLayout>

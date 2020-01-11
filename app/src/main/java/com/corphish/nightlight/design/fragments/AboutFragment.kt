@@ -30,5 +30,6 @@ class AboutFragment : Fragment() {
 
         val versionText = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
         version.text = versionText
+        hash.text = BuildConfig.GitHash
     }
 }

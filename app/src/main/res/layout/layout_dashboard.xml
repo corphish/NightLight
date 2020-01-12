@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/defaultPadding"
                 android:textSize="@dimen/text_caption"
+                android:textStyle="bold"
                 android:textAppearance="?android:attr/textAppearance"
                 android:id="@+id/nlMainStatus"/>
 

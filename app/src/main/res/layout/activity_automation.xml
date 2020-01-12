@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_header" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:orientation="vertical">
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/autoEnable"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
+                android:layout_margin="@dimen/layout_margin"
+                android:textSize="@dimen/text_caption"
+                android:text="@string/auto_enable"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
+                android:paddingBottom="@dimen/layout_padding"
+                android:layout_margin="@dimen/layout_margin"
+                android:textSize="@dimen/text_desc"
+                android:id="@+id/infoAuto"
+                android:text="@string/auto_enable_desc"/>
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sunEnable"
+                android:padding="@dimen/layout_padding"
+                android:layout_margin="@dimen/layout_margin"
+                android:textSize="@dimen/text_caption"
+                android:text="@string/sun_switch"/>
+
+            <com.corphish.widgets.KeyValueView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/startTime"
+                android:padding="@dimen/layout_padding"
+                android:layout_margin="@dimen/layout_margin"
+                custom:keyText="@string/start_time"
+                custom:keySize="@dimen/text_normal"
+                custom:valueText="@string/start_time_default"
+                custom:valueSize="@dimen/text_desc"/>
+
+            <com.corphish.widgets.KeyValueView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/endTime"
+                android:padding="@dimen/layout_padding"
+                android:layout_margin="@dimen/layout_margin"
+                custom:keyText="@string/end_time"
+                custom:keySize="@dimen/text_normal"
+                custom:valueText="@string/end_time_default"
+                custom:valueSize="@dimen/text_desc"/>
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/darkHoursEnable"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
+                android:layout_margin="@dimen/layout_margin"
+                android:textSize="@dimen/text_caption"
+                android:text="@string/dark_hours_title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/layout_padding"
+                android:paddingEnd="@dimen/layout_padding"
+                android:paddingBottom="@dimen/layout_padding"
+                android:layout_margin="@dimen/layout_margin"
+                android:textSize="@dimen/text_desc"
+                android:id="@+id/infoDarkHours"
+                android:text="@string/dark_hours_desc"/>
+
+            <com.corphish.widgets.KeyValueView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/darkStartTime"
+                android:padding="@dimen/layout_padding"
+                android:layout_margin="@dimen/layout_margin"
+                custom:keyText="@string/dark_hours_start_time"
+                custom:keySize="@dimen/text_normal"
+                custom:valueText="@string/end_time_default"
+                custom:valueSize="@dimen/text_desc"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

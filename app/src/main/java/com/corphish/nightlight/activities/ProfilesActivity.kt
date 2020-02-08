@@ -218,7 +218,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         val editIcon = optionsView.findViewById<View>(R.id.editIcon)
         val deleteIcon = optionsView.findViewById<View>(R.id.deleteIcon)
 
-        selectedProfileTitle.text = "${profile?.name!![0]}"
+        selectedProfileTitle.text = if (profile?.name!!.isNotEmpty()) "${profile.name[0]}" else ""
 
         val background = ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled, getProfileIntensity(profile))
         val foreground = ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled, getProfileIntensity(profile))

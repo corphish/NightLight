@@ -46,10 +46,14 @@ class SDM845KCALManager : KCALAbstraction {
      * A function get current KCAL color readings
      */
     override fun getColorReadings(): IntArray {
+        val redStr = RootUtils.readOneLine(KCAL_RED)
+        val greenStr = RootUtils.readOneLine(KCAL_GREEN)
+        val blueStr = RootUtils.readOneLine(KCAL_BLUE)
+
         return intArrayOf(
-                RootUtils.readOneLine(KCAL_RED).toInt(),
-                RootUtils.readOneLine(KCAL_GREEN).toInt(),
-                RootUtils.readOneLine(KCAL_BLUE).toInt()
+                if (redStr.isEmpty()) 255 else redStr.toInt(),
+                if (greenStr.isEmpty()) 255 else greenStr.toInt(),
+                if (blueStr.isEmpty()) 255 else blueStr.toInt()
         )
     }
 

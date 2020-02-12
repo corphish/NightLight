@@ -21,7 +21,9 @@
         android:id="@+id/nlMainStatus"
         android:layout_gravity="center_horizontal"
         android:text="@string/dashboard"
-        android:layout_margin="@dimen/defaultMargin"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="@dimen/defaultMargin"
+        android:layout_marginEnd="@dimen/defaultMargin"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearance" />

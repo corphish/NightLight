@@ -1,17 +1,22 @@
 package com.corphish.nightlight.design.fragments
 
 import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
-import kotlinx.android.synthetic.main.layout_dashboard.*
+import kotlinx.android.synthetic.main.layout_dashboard_v2.*
 
 class DashboardFragment: Fragment() {
     var type = Constants.INTENSITY_TYPE_MAXIMUM
@@ -37,7 +42,7 @@ class DashboardFragment: Fragment() {
      * @return Return the View for the fragment's UI, or null.
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.layout_dashboard, container, false)
+        return inflater.inflate(R.layout.layout_dashboard_v2, container, false)
     }
 
     /**
@@ -52,28 +57,20 @@ class DashboardFragment: Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         updateDashboard()
-
-        nlDashboardAction.setOnClickListener {
-            val curState = !PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
-
-            Core.applyNightModeAsync(curState, context)
-        }
     }
 
     fun updateDashboard() {
-        val masterSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_MASTER_SWITCH, false)
         val nlState = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
 
-        if (!masterSwitch) {
-            onMasterSwitchDisabled()
+        forceStatus.setText(if(nlState) R.string.on else R.string.off)
 
-            return
-        }
+        nlBulb.setImageResource(if (nlState) R.drawable.ic_lightbulb_solid else R.drawable.ic_lightbulb_regular)
 
         type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
 
-        val colors = arrayOf(context?.resources?.getColor(R.color.colorAccent), context?.resources?.getColor(R.color.colorPrimary))
-        nlBulb.setColorFilter(if (nlState) colors[type]!! else Color.GRAY)
+        nlBulb.setColorFilter(ThemeUtils.getNLStatusIconBackground(context!!, nlState, type))
+        forceToggleIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, nlState, type), BlendModeCompat.SRC_ATOP)
+        forceToggleIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, nlState, type))
 
         nlBulb.setOnClickListener {
             if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)) return@setOnClickListener
@@ -81,32 +78,25 @@ class DashboardFragment: Fragment() {
             Core.toggleIntensities(context)
         }
 
-        nlMainStatus.text = getString(if (nlState) R.string.dashboard_nl_on else R.string.dashboard_nl_off)
+        intensityStatus.setText(arrayOf(R.string.maximum, R.string.minimum)[type])
+        intensityIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, nlState, type), BlendModeCompat.SRC_ATOP)
+        intensityIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, nlState, type))
 
         val autoSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH, false)
         val autoStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, null)
         val autoEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, null)
 
         if (autoStartTime == null || autoEndTime == null || !autoSwitch) {
-            nlSubStatus.setText(R.string.dashboard_auto_not_configured)
+            automationStatus.setText(R.string.off)
         } else {
             val autoStatus = TimeUtils.determineWhetherNLShouldBeOnOrNot(autoStartTime, autoEndTime)
             val remainingHours = if (autoStatus) TimeUtils.getRemainingTimeInSchedule(autoEndTime) else TimeUtils.getRemainingTimeToSchedule(autoStartTime)
 
             if (autoStatus) {
-                nlSubStatus.text = getString(R.string.dashboard_inside_auto, remainingHours)
+                automationStatus.text = getString(R.string.dashboard_inside_auto, remainingHours)
             } else {
-                nlSubStatus.text = getString(R.string.dashboard_outside_auto, remainingHours)
+                automationStatus.text = getString(R.string.dashboard_outside_auto, remainingHours)
             }
         }
-
-        nlDashboardAction.visibility = View.VISIBLE
-    }
-
-    private fun onMasterSwitchDisabled() {
-        nlBulb.setColorFilter(Color.GRAY)
-        nlMainStatus.text = getString(R.string.dashboard_nl_disabled)
-        nlSubStatus.text = getString(R.string.dashboard_enable_master)
-        nlDashboardAction.visibility = View.GONE
     }
 }

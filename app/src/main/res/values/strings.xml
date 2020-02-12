@@ -125,15 +125,15 @@
     <string name="dashboard_nl_disabled">Night Light is disabled</string>
     <string name="dashboard_enable_master">Turn on master switch to enable Night Light.</string>
     <string name="dashboard_auto_not_configured">Automatic schedule is not configured.</string>
-    <string name="dashboard_inside_auto">Inside of automatic schedule time period. Night Light will be automatically turned off in about %1$d hour(s).</string>
-    <string name="dashboard_outside_auto">Outside of automatic schedule time period. Night Light will be automatically turned on in about %1$d hour(s).</string>
+    <string name="dashboard_inside_auto">Turns off in about %1$d hour(s)</string>
+    <string name="dashboard_outside_auto">Turns on in about %1$d hour(s)</string>
 
     <string name="options">Options</string>
 
     <string name="manual_mode_title">Manual Mode</string>
     <string name="manual_mode_desc">Manual KCAL color controls gives you full freedom on how you would like to tune display colors so that your needs are met.</string>
 
-    <string name="intensity_type_title">Intensity type</string>
+    <string name="intensity_type_title">Intensity</string>
     <string name="intensity_type_desc">Type of color intensity to be applied. There are 2 intensity types available: Maximum and Minimum. You may want to use the maximum intensity in dark environments, and the minimum intensity in lighted environments at evening. Tap the bulb in dashboard to switch between intensity types when Night Light is on.</string>
     <string name="maximum">Maximum</string>
     <string name="minimum">Minimum</string>

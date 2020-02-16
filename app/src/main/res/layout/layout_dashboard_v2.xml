@@ -1,155 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:layout_marginBottom="8dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/defaultMargin">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="256dp"
-        android:layout_height="256dp"
-        android:contentDescription="@null"
-        android:id="@+id/nlBulb"
-        android:layout_margin="@dimen/defaultMargin"
-        app:srcCompat="@drawable/ic_lightbulb_regular"
-        android:layout_gravity="center_horizontal"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nlMainStatus"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/dashboard"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="@dimen/defaultMargin"
-        android:layout_marginEnd="@dimen/defaultMargin"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearance" />
-
-    <androidx.gridlayout.widget.GridLayout
-        app:columnCount="3"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/defaultMargin">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:id="@+id/forceToggleView"
-            app:layout_columnWeight="1"
+        <ImageView
+            android:layout_width="224dp"
+            android:layout_height="224dp"
+            android:contentDescription="@null"
+            android:id="@+id/nlBulb"
             android:layout_margin="@dimen/defaultMargin"
-            android:padding="@dimen/defaultPadding">
+            app:srcCompat="@drawable/ic_lightbulb_regular"
+            android:layout_gravity="center_horizontal"/>
 
-            <ImageButton
-                android:contentDescription="@null"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:id="@+id/forceToggleIcon"
-                app:srcCompat="@drawable/ic_power"
-                android:tint="?themeCircleForeground"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/defaultMargin"
-                android:background="?themeDrawable"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:text="@string/app_name"
-                android:textAppearance="?android:attr/textAppearance" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_sub_desc"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:id="@+id/forceStatus" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:id="@+id/intensityToggleView"
-            app:layout_columnWeight="1"
-            android:layout_margin="@dimen/defaultMargin"
-            android:padding="@dimen/defaultPadding">
+            android:id="@+id/nlMainStatus"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/dashboard"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="@dimen/defaultMargin"
+            android:layout_marginEnd="@dimen/defaultMargin"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearance" />
 
-            <ImageButton
-                android:contentDescription="@null"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:id="@+id/intensityIcon"
-                app:srcCompat="@drawable/ic_temperature"
-                android:tint="?themeCircleForeground"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/defaultMargin"
-                android:background="?themeDrawable"/>
+        <androidx.gridlayout.widget.GridLayout
+            app:columnCount="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:text="@string/intensity_type_title"
-                android:textAppearance="?android:attr/textAppearance" />
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/forceToggleView"
+                app:layout_columnWeight="1"
+                android:layout_margin="@dimen/defaultMargin"
+                android:padding="@dimen/defaultPadding">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <ImageButton
+                    android:contentDescription="@null"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/forceToggleIcon"
+                    app:srcCompat="@drawable/ic_power"
+                    android:tint="?themeCircleForeground"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/defaultMargin"
+                    android:background="?themeDrawable"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="@string/app_name"
+                    android:textAppearance="?android:attr/textAppearance" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_sub_desc"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/forceStatus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_sub_desc"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:id="@+id/intensityStatus" />
-        </LinearLayout>
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/intensityToggleView"
+                app:layout_columnWeight="1"
+                android:layout_margin="@dimen/defaultMargin"
+                android:padding="@dimen/defaultPadding">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_columnWeight="1"
-            android:layout_margin="@dimen/defaultMargin"
-            android:padding="@dimen/defaultPadding">
+                <ImageButton
+                    android:contentDescription="@null"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/intensityIcon"
+                    app:srcCompat="@drawable/ic_temperature"
+                    android:tint="?themeCircleForeground"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/defaultMargin"
+                    android:background="?themeDrawable"/>
 
-            <ImageButton
-                android:contentDescription="@null"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:srcCompat="@drawable/ic_alarm"
-                android:tint="?themeCircleForeground"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/defaultMargin"
-                android:id="@+id/automationIcon"
-                android:background="?themeDrawable"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="@string/intensity_type_title"
+                    android:textAppearance="?android:attr/textAppearance" />
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_sub_desc"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/intensityStatus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:text="@string/section_auto"
-                android:textAppearance="?android:attr/textAppearance" />
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_columnWeight="1"
+                android:layout_margin="@dimen/defaultMargin"
+                android:padding="@dimen/defaultPadding">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_sub_desc"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:id="@+id/automationStatus" />
-        </LinearLayout>
-    </androidx.gridlayout.widget.GridLayout>
-</LinearLayout>
+                <ImageButton
+                    android:contentDescription="@null"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:srcCompat="@drawable/ic_alarm"
+                    android:tint="?themeCircleForeground"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/defaultMargin"
+                    android:id="@+id/automationIcon"
+                    android:background="?themeDrawable"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="@string/section_auto"
+                    android:textAppearance="?android:attr/textAppearance" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_sub_desc"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/automationStatus" />
+            </LinearLayout>
+        </androidx.gridlayout.widget.GridLayout>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        style="@style/MaterialButtonStyle"
+        android:text="@string/options"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/moreOptions"/>
+</RelativeLayout>

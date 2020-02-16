@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
         fragmentTransaction
                 .add(containerId, DashboardFragment())
-                .add(containerId, MasterSwitchFragment())
+                //.add(containerId, MasterSwitchFragment())
                 .commit()
     }
 
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
         if (show) {
             // Add all others conditionally
-            if (isSupported(R.bool.setting_fragment_enabled)) fragmentTransaction.add(containerId, SettingFragment())
+            //if (isSupported(R.bool.setting_fragment_enabled)) fragmentTransaction.add(containerId, SettingFragment())
         } else {
             val fragmentList = supportFragmentManager.fragments
             for (fragment in fragmentList) {

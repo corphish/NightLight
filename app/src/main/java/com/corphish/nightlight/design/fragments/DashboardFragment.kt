@@ -68,9 +68,9 @@ class DashboardFragment: Fragment() {
 
         type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
 
-        nlBulb.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, nlState, type))
+        nlBulb.setColorFilter(ThemeUtils.getNLStatusIconBackground(context!!, nlState, type))
         forceToggleIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, nlState, Constants.INTENSITY_TYPE_MINIMUM), BlendModeCompat.SRC_ATOP)
-        forceToggleIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, nlState, type))
+        forceToggleIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, nlState, Constants.INTENSITY_TYPE_MINIMUM))
 
         nlBulb.setOnClickListener {
             if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)) return@setOnClickListener
@@ -86,8 +86,8 @@ class DashboardFragment: Fragment() {
         val autoStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, null)
         val autoEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, null)
 
-        automationIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, nlState, Constants.INTENSITY_TYPE_MINIMUM), BlendModeCompat.SRC_ATOP)
-        automationIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, nlState, type))
+        automationIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, autoSwitch, Constants.INTENSITY_TYPE_MINIMUM), BlendModeCompat.SRC_ATOP)
+        automationIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, autoSwitch, Constants.INTENSITY_TYPE_MINIMUM))
 
         if (autoStartTime == null || autoEndTime == null || !autoSwitch) {
             automationStatus.setText(R.string.off)

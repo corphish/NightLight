@@ -7,19 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.*
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.fragments.base.FullyExpandedBottomSheetDialogFragment
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.layout_settings.*
 
-class SettingFragment: Fragment() {
+class SettingFragment: DialogFragment() {
     private lateinit var settingsOptions: List<SettingOption>
 
     private val THEME_FRAGMENT_INDEX = 6

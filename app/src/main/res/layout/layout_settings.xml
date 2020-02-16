@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/options"
-        android:layout_marginStart="@dimen/defaultMargin"
-        android:layout_marginEnd="@dimen/defaultMargin"
-        android:padding="@dimen/defaultPadding"
-        android:textColor="@color/colorPrimary"
-        android:textAppearance="?attr/textAppearanceButton"
-        android:textSize="@dimen/text_sub_desc"/>
+        android:gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textStyle="bold"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:layout_margin="@dimen/defaultMargin"
+        android:textSize="20sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

@@ -101,5 +101,9 @@ class DashboardFragment: Fragment() {
                 automationStatus.text = getString(R.string.dashboard_outside_auto, remainingHours)
             }
         }
+
+        moreOptions.setOnClickListener {
+            SettingFragment().show(childFragmentManager, "")
+        }
     }
 }

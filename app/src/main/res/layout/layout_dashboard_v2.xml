@@ -13,8 +13,8 @@
         android:layout_margin="@dimen/defaultMargin">
 
         <ImageView
-            android:layout_width="224dp"
-            android:layout_height="224dp"
+            android:layout_width="@dimen/bulb_size"
+            android:layout_height="@dimen/bulb_size"
             android:contentDescription="@null"
             android:id="@+id/nlBulb"
             android:layout_margin="@dimen/defaultMargin"

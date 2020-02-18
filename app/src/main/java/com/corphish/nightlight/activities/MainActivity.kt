@@ -129,13 +129,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         return BuildConfig.DEBUG || resources.getBoolean(id)
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        banner_title.text = getString(R.string.overview)
-        banner_icon.setImageResource(R.drawable.ic_home)
-    }
-
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {
         val fragments = supportFragmentManager.fragments

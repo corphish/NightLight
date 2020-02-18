@@ -42,5 +42,5 @@
         android:layout_marginStart="@dimen/defaultMargin"
         android:layout_marginEnd="@dimen/defaultMargin"
         android:textSize="@dimen/text_desc"
-        android:text="@string/master_switch_desc"/>
+        android:text="@string/master_switch_desc_off"/>
 </LinearLayout>

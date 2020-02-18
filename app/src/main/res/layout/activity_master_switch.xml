@@ -11,8 +11,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/section_main"
+        android:layout_centerHorizontal="true"
+        android:text="@string/app_name"
         android:layout_marginBottom="32dp"
         android:layout_marginStart="@dimen/defaultMargin"
         android:layout_marginEnd="@dimen/defaultMargin"
@@ -27,6 +27,7 @@
         android:layout_height="@dimen/bulb_size"
         android:layout_centerInParent="true"
         app:srcCompat="@drawable/ic_power"
+        android:tint="?themeStroke"
         android:id="@+id/masterSwitch"
         android:contentDescription="@null" />
 

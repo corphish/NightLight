@@ -3,8 +3,8 @@
     <string name="app_name_full" translatable="false">Night Light (KCAL)</string>
 
     <string name="master_switch">Enable Night Light</string>
-    <string name="master_switch_desc_off">Master switch is off. Turn it on to enable all the features of the app.</string>
-    <string name="master_switch_desc_on">Master switch is on. All the features of the app are enabled. Turn it off to disable all the features of the app.</string>
+    <string name="master_switch_desc_off">Master switch is off. Turn it on to enable all the features of the app. To turn it on, tap the power button above.</string>
+    <string name="master_switch_desc_on">Master switch is on. All the features of the app are enabled. Turn it off to disable all the features of the app. To turn it off, tap the power button above.</string>
 
     <string name="no_root_access">No root access</string>
     <string name="no_root_desc">Root access is needed for Night Light to work.</string>

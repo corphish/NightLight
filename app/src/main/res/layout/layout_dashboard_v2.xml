@@ -12,6 +12,20 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/defaultMargin">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nlMainStatus"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/dashboard"
+            android:layout_marginBottom="32dp"
+            android:layout_marginStart="@dimen/defaultMargin"
+            android:layout_marginEnd="@dimen/defaultMargin"
+            android:layout_marginTop="@dimen/defaultMargin"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearance" />
+
         <ImageView
             android:layout_width="@dimen/bulb_size"
             android:layout_height="@dimen/bulb_size"
@@ -21,21 +35,9 @@
             app:srcCompat="@drawable/ic_lightbulb_regular"
             android:layout_gravity="center_horizontal"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/nlMainStatus"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/dashboard"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="@dimen/defaultMargin"
-            android:layout_marginEnd="@dimen/defaultMargin"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearance" />
-
         <androidx.gridlayout.widget.GridLayout
             app:columnCount="3"
+            android:layout_marginTop="32dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

@@ -141,4 +141,6 @@ object Constants {
      * Automation constants
      */
     const val AUTOMATE_PROFILE_NAME = "profileName"
+
+    const val FRESH_START = "fresh_start"
 }

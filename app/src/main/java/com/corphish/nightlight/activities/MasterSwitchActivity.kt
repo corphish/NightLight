@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_master_switch.*
 class MasterSwitchActivity : AppCompatActivity() {
 
     private var masterSwitchStatus = false
+    private var freshStart = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +21,7 @@ class MasterSwitchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_master_switch)
 
         masterSwitchStatus = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH, false)
+        freshStart = intent.getBooleanExtra(Constants.FRESH_START, false)
 
         setViews(masterSwitchStatus)
         setOnClickListeners()
@@ -28,10 +30,10 @@ class MasterSwitchActivity : AppCompatActivity() {
 
     private fun setViews(b: Boolean) {
         if (b) {
-            masterSwitch.setColorFilter(ResourcesCompat.getColor(resources, R.color.colorPrimary, theme))
+            masterSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, true, Constants.INTENSITY_TYPE_MAXIMUM))
             masterSwitchDesc.setText(R.string.master_switch_desc_on)
         } else {
-            masterSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, false, Constants.INTENSITY_TYPE_MINIMUM))
+            masterSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, false, Constants.INTENSITY_TYPE_MAXIMUM))
             masterSwitchDesc.setText(R.string.master_switch_desc_off)
         }
     }
@@ -42,11 +44,13 @@ class MasterSwitchActivity : AppCompatActivity() {
 
             setViews(masterSwitchStatus)
             conditionallySwitchToMain()
+
+            PreferenceHelper.putBoolean(this, Constants.PREF_MASTER_SWITCH, masterSwitchStatus)
         }
     }
 
     private fun conditionallySwitchToMain() {
-        if (masterSwitchStatus) {
+        if (freshStart && masterSwitchStatus) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

@@ -3,8 +3,6 @@ package com.corphish.nightlight.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.R
@@ -21,9 +19,7 @@ import com.corphish.nightlight.services.NightLightAppService
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.extensions.toArrayOfInts
 import com.corphish.nightlight.interfaces.ThemeChangeListener
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.layout_header.*
 
 class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener, NightLightSettingModeListener, ThemeChangeListener {
 
@@ -45,7 +41,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                 .startService()
 
         if (savedInstanceState == null) {
-            init()
             viewInit()
             setViews(masterSwitchEnabled)
         }
@@ -127,6 +122,13 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
     private fun isSupported(id: Int): Boolean {
         return BuildConfig.DEBUG || resources.getBoolean(id)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        init()
+        if (!masterSwitchEnabled) finish()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,

@@ -174,7 +174,9 @@ class StartActivity : AppCompatActivity() {
     }
 
     private fun switchToMain() {
-        startActivity(Intent(this, MasterSwitchActivity::class.java))
+        val intent = Intent(this, MasterSwitchActivity::class.java)
+        intent.putExtra(Constants.FRESH_START, true)
+        startActivity(intent)
         finish()
     }
 

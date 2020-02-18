@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/defaultMargin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.corphish.nightlight.activities.MasterSwitchActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/section_main"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="@dimen/defaultMargin"
+        android:layout_marginEnd="@dimen/defaultMargin"
+        android:layout_marginTop="@dimen/defaultMargin"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:textAppearance="?android:attr/textAppearance" />
+
+    <ImageView
+        android:layout_width="@dimen/bulb_size"
+        android:layout_height="@dimen/bulb_size"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/ic_power"
+        android:id="@+id/masterSwitch"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="@dimen/text_desc"
+        android:text="@string/master_switch_desc_off"
+        android:layout_below="@id/masterSwitch"
+        android:gravity="center_horizontal"
+        android:id="@+id/masterSwitchDesc" />
+</RelativeLayout>

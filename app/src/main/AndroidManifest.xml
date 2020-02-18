@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeCircular">
-        <activity android:name=".activities.AutomationActivity"></activity>
+        <activity android:name=".activities.MasterSwitchActivity"></activity>
+        <activity android:name=".activities.AutomationActivity" />
         <activity android:name=".activities.ProfileCreateActivity" />
         <activity
             android:name=".activities.ColorActivity"

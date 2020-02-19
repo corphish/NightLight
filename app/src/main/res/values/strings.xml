@@ -126,8 +126,8 @@
     <string name="dashboard_nl_disabled">Night Light is disabled</string>
     <string name="dashboard_enable_master">Turn on master switch to enable Night Light.</string>
     <string name="dashboard_auto_not_configured">Automatic schedule is not configured.</string>
-    <string name="dashboard_inside_auto">Turns off in about %1$d hour(s)</string>
-    <string name="dashboard_outside_auto">Turns on in about %1$d hour(s)</string>
+    <string name="dashboard_inside_auto">Turns off in %1$d hour(s)</string>
+    <string name="dashboard_outside_auto">Turns on in %1$d hour(s)</string>
 
     <string name="options">Options</string>
 

@@ -1,8 +1,6 @@
 package com.corphish.nightlight.design.fragments
 
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +9,7 @@ import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
+import com.corphish.nightlight.activities.AutomationActivity
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.engine.Core
@@ -57,6 +56,36 @@ class DashboardFragment: Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         updateDashboard()
+
+        moreOptions.setOnClickListener {
+            SettingFragment().show(childFragmentManager, "")
+        }
+
+        val nlOptionClickListener = View.OnClickListener { toggleNightLight() }
+        val intensityOptionClickListener = View.OnClickListener { toggleIntensities() }
+        val automateOptionClickListener = View.OnClickListener { context?.startActivity(Intent(context, AutomationActivity::class.java)) }
+
+        forceToggleView.setOnClickListener(nlOptionClickListener)
+        forceToggleIcon.setOnClickListener(nlOptionClickListener)
+
+        intensityToggleView.setOnClickListener(intensityOptionClickListener)
+        intensityIcon.setOnClickListener(intensityOptionClickListener)
+
+        automationView.setOnClickListener(automateOptionClickListener)
+        automationIcon.setOnClickListener(automateOptionClickListener)
+    }
+
+    private fun toggleNightLight() {
+        val curState = !PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
+
+        Core.applyNightModeAsync(curState, context)
+    }
+
+    private fun toggleIntensities() {
+        if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false))
+            return
+
+        Core.toggleIntensities(context)
     }
 
     fun updateDashboard() {
@@ -72,11 +101,7 @@ class DashboardFragment: Fragment() {
         forceToggleIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, nlState, Constants.INTENSITY_TYPE_MINIMUM), BlendModeCompat.SRC_ATOP)
         forceToggleIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, nlState, Constants.INTENSITY_TYPE_MINIMUM))
 
-        nlBulb.setOnClickListener {
-            if (!PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)) return@setOnClickListener
-
-            Core.toggleIntensities(context)
-        }
+        nlBulb.setOnClickListener { toggleIntensities() }
 
         intensityStatus.setText(arrayOf(R.string.maximum, R.string.minimum)[type])
         intensityIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, nlState, type), BlendModeCompat.SRC_ATOP)
@@ -100,10 +125,6 @@ class DashboardFragment: Fragment() {
             } else {
                 automationStatus.text = getString(R.string.dashboard_outside_auto, remainingHours)
             }
-        }
-
-        moreOptions.setOnClickListener {
-            SettingFragment().show(childFragmentManager, "")
         }
     }
 }

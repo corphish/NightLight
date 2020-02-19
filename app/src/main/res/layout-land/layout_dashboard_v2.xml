@@ -126,6 +126,7 @@
                 android:layout_height="wrap_content"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
+                android:id="@+id/automationView"
                 android:focusable="true"
                 app:layout_columnWeight="1"
                 android:layout_margin="@dimen/defaultMargin"

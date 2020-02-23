@@ -174,4 +174,7 @@
     <string name="title_activity_color">ColorActivity</string>
 
     <string name="info">Info</string>
+
+    <string name="bulb_info">Press the bulb above to toggle night light. Long press the bulb above to toggle intensities.</string>
+    <string name="states">States</string>
 </resources>

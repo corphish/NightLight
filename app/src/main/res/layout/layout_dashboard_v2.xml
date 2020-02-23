@@ -34,9 +34,31 @@
             app:srcCompat="@drawable/ic_lightbulb_regular"
             android:layout_gravity="center_horizontal"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/text_sub_desc"
+            android:text="@string/bulb_info"
+            android:layout_margin="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/text_caption"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearance"
+            android:text="@string/states"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"/>
+
         <androidx.gridlayout.widget.GridLayout
             app:columnCount="3"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

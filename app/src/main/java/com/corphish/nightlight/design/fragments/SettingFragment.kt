@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.layout_settings.*
 class SettingFragment: DialogFragment() {
     private lateinit var settingsOptions: List<SettingOption>
 
-    private val THEME_FRAGMENT_INDEX = 6
+    private val _optionsFragmentIndex = 6
 
     private var toResumeThemeChangeAction = false
 
@@ -161,7 +161,7 @@ class SettingFragment: DialogFragment() {
 
     private fun resumeThemeChangeAction() {
         if (PreferenceHelper.getBoolean(context, Constants.PREF_THEME_CHANGE_EVENT, false)) {
-            settingsOptions[THEME_FRAGMENT_INDEX].fragment?.show(childFragmentManager, "")
+            settingsOptions[_optionsFragmentIndex].fragment?.show(childFragmentManager, "")
             PreferenceHelper.putBoolean(context, Constants.PREF_THEME_CHANGE_EVENT, false)
         }
 

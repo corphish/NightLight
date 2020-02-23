@@ -78,10 +78,7 @@ class ProfilesManager(private val context: Context) {
             val prevType = profile.settingMode
             if (prevType >= data.size) return null
 
-            val newType = data[prevType]
-
-            if (newType == null)
-                return null
+            val newType = data[prevType] ?: return null
 
             profile.settingMode = newType
             profile.apiVersion = i + 1

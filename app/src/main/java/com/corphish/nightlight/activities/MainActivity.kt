@@ -21,13 +21,13 @@ import com.corphish.nightlight.extensions.toArrayOfInts
 import com.corphish.nightlight.interfaces.ThemeChangeListener
 import kotlinx.android.synthetic.main.content_main.*
 
+const val REQ_CODE = 100
 class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener, NightLightSettingModeListener, ThemeChangeListener {
 
     private var masterSwitchEnabled: Boolean = false
     private val containerId = R.id.container
 
     private var taskerError: Boolean = false
-    private val REQ_CODE = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,10 +105,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
-        if (show) {
-            // Add all others conditionally
-            //if (isSupported(R.bool.setting_fragment_enabled)) fragmentTransaction.add(containerId, SettingFragment())
-        } else {
+        if (!show) {
             val fragmentList = supportFragmentManager.fragments
             for (fragment in fragmentList) {
                 if (fragment !is DashboardFragment && fragment !is MasterSwitchFragment) fragmentTransaction.remove(fragment)
@@ -118,10 +115,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         fragmentTransaction.commit()
 
         NightLightAppService.instance.notifyNewSettingMode(PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP))
-    }
-
-    private fun isSupported(id: Int): Boolean {
-        return BuildConfig.DEBUG || resources.getBoolean(id)
     }
 
     override fun onResume() {
@@ -182,34 +175,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         bottomSheetAlertDialog.setMessage(R.string.tasker_error_desc)
         bottomSheetAlertDialog.setPositiveButton(android.R.string.ok, View.OnClickListener { })
         bottomSheetAlertDialog.show()
-    }
-
-    private fun getProfileForCurrentSettings(): ProfilesManager.Profile {
-        // Setting mode
-        val mode = PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
-
-        val type = PreferenceHelper.getInt(this, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
-
-        val settings =
-                if (mode == Constants.NL_SETTING_MODE_MANUAL)
-                    intArrayOf(
-                            PreferenceHelper.getInt(this, Constants.PREF_RED_COLOR[type], Constants.DEFAULT_RED_COLOR[type]),
-                            PreferenceHelper.getInt(this, Constants.PREF_GREEN_COLOR[type], Constants.DEFAULT_GREEN_COLOR[type]),
-                            PreferenceHelper.getInt(this, Constants.PREF_BLUE_COLOR[type], Constants.DEFAULT_BLUE_COLOR[type])
-                    )
-                else
-                    intArrayOf(
-                            PreferenceHelper.getInt(this, Constants.PREF_COLOR_TEMP[type], Constants.DEFAULT_COLOR_TEMP[type])
-                    )
-
-        val status = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH, false)
-
-        return ProfilesManager.Profile(
-                name = "",
-                isSettingEnabled = status,
-                settingMode = mode,
-                settings = settings
-        )
     }
 
     override fun onThemeChanged(isLightTheme: Boolean) {

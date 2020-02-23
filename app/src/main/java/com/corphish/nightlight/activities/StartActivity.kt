@@ -19,19 +19,18 @@ import com.corphish.nightlight.helpers.RootUtils
 import com.corphish.nightlight.helpers.CrashlyticsHelper
 import kotlinx.android.synthetic.main.activity_splash.*
 
+/*
+ * Declare the shortcut intent strings and id
+ */
+const val SHORTCUT_INTENT_STRING_NL_TOGGLE = "android.intent.action.NL_TOGGLE"
+const val SHORTCUT_INTENT_STRING_INTENSITY_TOGGLE = "android.intent.action.INTENSITY_TOGGLE"
+const val SHORTCUT_ID_TOGGLE = "toggle"
+const val SHORTCUT_ID_INTENSITY = "intensity"
+
+const val TASKER_PLUGIN_INTENT = "com.twofortyfouram.locale.intent.action.EDIT_SETTING"
+const val TASKER_INTENT_RQC = 100
+
 class StartActivity : AppCompatActivity() {
-
-    /**
-     * Declare the shortcut intent strings and id
-     */
-    private val SHORTCUT_INTENT_STRING_NL_TOGGLE = "android.intent.action.NL_TOGGLE"
-    private val SHORTCUT_INTENT_STRING_INTENSITY_TOGGLE = "android.intent.action.INTENSITY_TOGGLE"
-    private val SHORTCUT_ID_TOGGLE = "toggle"
-    private val SHORTCUT_ID_INTENSITY = "intensity"
-
-
-    private val TASKER_PLUGIN_INTENT = "com.twofortyfouram.locale.intent.action.EDIT_SETTING"
-    private val TASKER_INTENT_RQC = 100
 
     private var checkBypass = 7
 
@@ -42,8 +41,7 @@ class StartActivity : AppCompatActivity() {
 
         if (handleIntent())
             finish()
-        else if (handleTaskerIntent()) {
-        } else {
+        else if (!handleTaskerIntent()) {
             if (!PreferenceHelper.getBoolean(this, Constants.COMPATIBILITY_TEST))
                 CompatibilityChecker().execute()
             else

@@ -65,7 +65,7 @@ private constructor() {
     /**
      * Total number of fragments which would be added
      */
-    private val TOTAL_VIEWS = 1
+    private val _totalViews = 1
 
     /**
      * Starts this service
@@ -136,7 +136,7 @@ private constructor() {
      * @return App init status
      */
     fun isInitDone(): Boolean {
-        return isInitDone && viewInitCount == TOTAL_VIEWS
+        return isInitDone && viewInitCount == _totalViews
     }
 
     /**

@@ -7,13 +7,13 @@ import java.io.File
  * KCAL implementation for newer kernels (starting with v4.4)\
  * This implementation was first seen in kernels in devices with SDM845, hence the name.
  */
+
+// File paths
+const val KCAL_RED = "/sys/module/msm_drm/parameters/kcal_red"
+const val KCAL_GREEN = "/sys/module/msm_drm/parameters/kcal_green"
+const val KCAL_BLUE = "/sys/module/msm_drm/parameters/kcal_blue"
+
 class SDM845KCALManager : KCALAbstraction {
-
-    // File paths
-    private val KCAL_RED = "/sys/module/msm_drm/parameters/kcal_red"
-    private val KCAL_GREEN = "/sys/module/msm_drm/parameters/kcal_green"
-    private val KCAL_BLUE = "/sys/module/msm_drm/parameters/kcal_blue"
-
     /**
      * A function to determine whether the implementation is supported by device
      */

@@ -8,8 +8,6 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 
-import java.util.Arrays
-
 /**
  * Created by avinabadalal on 03/03/18.
  * Tasker service

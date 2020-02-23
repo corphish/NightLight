@@ -101,7 +101,14 @@ class DashboardFragment: Fragment() {
         forceToggleIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, nlState, Constants.INTENSITY_TYPE_MINIMUM), BlendModeCompat.SRC_ATOP)
         forceToggleIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, nlState, Constants.INTENSITY_TYPE_MINIMUM))
 
-        nlBulb.setOnClickListener { toggleIntensities() }
+        nlBulb.setOnClickListener {
+            toggleNightLight()
+        }
+
+        nlBulb.setOnLongClickListener {
+            toggleIntensities()
+            true
+        }
 
         intensityStatus.setText(arrayOf(R.string.maximum, R.string.minimum)[type])
         intensityIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, nlState, type), BlendModeCompat.SRC_ATOP)

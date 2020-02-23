@@ -26,6 +26,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_profiles.*
 import kotlinx.android.synthetic.main.content_profiles.*
 import kotlinx.android.synthetic.main.layout_header.*
+import java.util.*
 
 class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener {
 
@@ -157,7 +158,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
             val profile = profiles!![position]
 
-            holder.icon.text = if (profile.name.isNotEmpty()) "${profile.name.toUpperCase()[0]}" else ""
+            holder.icon.text = if (profile.name.isNotEmpty()) "${profile.name.toUpperCase(Locale.getDefault())[0]}" else ""
             setIconBackground(holder.icon, ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled, getProfileIntensity(profile)))
             holder.icon.setTextColor(ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled, getProfileIntensity(profile)))
 

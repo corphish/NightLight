@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="master_switch">Mengaktifkan Night Light</string>
-    <string name="master_switch_desc">Beralih master untuk mengaktifkan/menonaktifkan Night Light.</string>
     <string name="no_root_access">Tidak ada akses root</string>
     <string name="no_root_desc">Akses Root diperlukan untuk Cahaya Malam untuk bekerja.</string>
     <string name="no_kcal_desc">Kernel anda tidak mendukung KCAL. KCAL adalah sebuah display driver tuning fitur untuk perangkat Qualcomm. KCAL dukungan yang dibutuhkan untuk Cahaya Malam untuk bekerja.</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="master_switch">Paganahin ang Night Light</string>
-    <string name="master_switch_desc">Master switch upang paganahin/huwag paganahin ang Night Light.</string>
     <string name="no_root_access">Walang root access</string>
     <string name="no_root_desc">Kinakailangan ang root access para sa Night Light upang gumana.</string>
     <string name="no_kcal">Hindi kaayon</string>

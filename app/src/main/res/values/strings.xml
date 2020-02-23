@@ -121,11 +121,6 @@
     <string name="links">Links</string>
 
     <string name="dashboard">Dashboard</string>
-    <string name="dashboard_nl_on">Night Light is on</string>
-    <string name="dashboard_nl_off">Night Light is off</string>
-    <string name="dashboard_nl_disabled">Night Light is disabled</string>
-    <string name="dashboard_enable_master">Turn on master switch to enable Night Light.</string>
-    <string name="dashboard_auto_not_configured">Automatic schedule is not configured.</string>
     <string name="dashboard_inside_auto">Turns off in %1$d hour(s)</string>
     <string name="dashboard_outside_auto">Turns on in %1$d hour(s)</string>
 
@@ -148,8 +143,6 @@
     <string name="impl_format">Format specification</string>
 
     <string name="version">Version</string>
-
-    <string name="overview">Overview</string>
 
     <string name="light_theme_title">Enable light theme</string>
     <string name="light_theme_desc">Enables light theme with light background and slightly different looks.</string>
@@ -179,9 +172,6 @@
     <string name="rounded_square">Rounded square</string>
     <string name="teardrop">Teardrop</string>
     <string name="title_activity_color">ColorActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 
     <string name="info">Info</string>
 </resources>

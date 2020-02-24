@@ -105,7 +105,7 @@ class StartActivity : AppCompatActivity() {
         val masterSwitchEnabled = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH)
         val intent: Intent
 
-        intent = Intent(this, if (masterSwitchEnabled) ProfilesActivity::class.java else MainActivity::class.java)
+        intent = Intent(this, if (masterSwitchEnabled) ProfilesActivity::class.java else MasterSwitchActivity::class.java)
         intent.putExtra(Constants.TASKER_ERROR_STATUS, !masterSwitchEnabled)
         startActivityForResult(intent, TASKER_INTENT_RQC)
 

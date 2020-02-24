@@ -3,20 +3,16 @@ package com.corphish.nightlight.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.View
-import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.R
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
-import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.design.fragments.*
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.interfaces.NightLightSettingModeListener
 import com.corphish.nightlight.interfaces.NightLightStateListener
 import com.corphish.nightlight.services.NightLightAppService
-import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.extensions.toArrayOfInts
 import com.corphish.nightlight.interfaces.ThemeChangeListener
 import kotlinx.android.synthetic.main.content_main.*
@@ -26,8 +22,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
 
     private var masterSwitchEnabled: Boolean = false
     private val containerId = R.id.container
-
-    private var taskerError: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +45,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                 .notifyInitDone()
 
         applyProfileIfNecessary()
-
-        handleIntent()
     }
 
     private fun init() {
@@ -73,12 +65,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
     }
 
     override fun onSwitchClicked(checkStatus: Boolean) {
-        if (taskerError && checkStatus) {
-            taskerError = false
-            val intent = Intent(this, ProfilesActivity::class.java)
-            intent.putExtra(Constants.TASKER_ERROR_STATUS, false)
-            startActivityForResult(intent, REQ_CODE)
-        }
         setViews(checkStatus)
     }
 
@@ -92,11 +78,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         }
     }
 
-    override fun onModeChanged(newMode: Int) {
-        /*for (fragment in supportFragmentManager.fragments) {
-            (fragment as? ColorControlFragment)?.onStateChanged(newMode)
-        }*/
-    }
+    override fun onModeChanged(newMode: Int) {}
 
     private fun setViews(show: Boolean) {
         NightLightAppService.instance
@@ -153,28 +135,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                     PreferenceHelper.getString(this, Constants.PREF_CUR_PROF_VAL, null)!!.toArrayOfInts(",")
             )
         }
-    }
-
-    private fun handleIntent() {
-        if (intent.getBooleanExtra(Constants.TASKER_ERROR_STATUS, false)) {
-            taskerError = true
-            showTaskerErrorMessage()
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode != REQ_CODE) return
-        setResult(RESULT_OK, data)
-        finish()
-    }
-
-    private fun showTaskerErrorMessage() {
-        val bottomSheetAlertDialog = BottomSheetAlertDialog(this)
-        bottomSheetAlertDialog.setTitle(R.string.tasker_error_title)
-        bottomSheetAlertDialog.setMessage(R.string.tasker_error_desc)
-        bottomSheetAlertDialog.setPositiveButton(android.R.string.ok, View.OnClickListener { })
-        bottomSheetAlertDialog.show()
     }
 
     override fun onThemeChanged(isLightTheme: Boolean) {

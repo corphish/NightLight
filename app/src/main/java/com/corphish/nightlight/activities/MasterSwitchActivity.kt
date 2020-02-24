@@ -11,6 +11,7 @@ import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.helpers.PreferenceHelper
 import kotlinx.android.synthetic.main.activity_master_switch.*
 
+const val REQ_CODE = 100
 class MasterSwitchActivity : AppCompatActivity() {
 
     private var masterSwitchStatus = false

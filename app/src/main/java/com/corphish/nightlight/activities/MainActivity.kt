@@ -1,6 +1,5 @@
 package com.corphish.nightlight.activities
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.corphish.nightlight.R
@@ -17,8 +16,7 @@ import com.corphish.nightlight.extensions.toArrayOfInts
 import com.corphish.nightlight.interfaces.ThemeChangeListener
 import kotlinx.android.synthetic.main.content_main.*
 
-const val REQ_CODE = 100
-class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClickListener, NightLightStateListener, NightLightSettingModeListener, ThemeChangeListener {
+class MainActivity : AppCompatActivity(), NightLightStateListener, NightLightSettingModeListener, ThemeChangeListener {
 
     private var masterSwitchEnabled: Boolean = false
     private val containerId = R.id.container
@@ -64,10 +62,6 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
                 .commit()
     }
 
-    override fun onSwitchClicked(checkStatus: Boolean) {
-        setViews(checkStatus)
-    }
-
     override fun onStateChanged(newState: Boolean) {
         // Sync the force switch in ForceSwitch fragment
         for (fragment in supportFragmentManager.fragments) {
@@ -90,7 +84,7 @@ class MainActivity : AppCompatActivity(), MasterSwitchFragment.MasterSwitchClick
         if (!show) {
             val fragmentList = supportFragmentManager.fragments
             for (fragment in fragmentList) {
-                if (fragment !is DashboardFragment && fragment !is MasterSwitchFragment) fragmentTransaction.remove(fragment)
+                if (fragment !is DashboardFragment) fragmentTransaction.remove(fragment)
             }
         }
 

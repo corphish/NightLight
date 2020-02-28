@@ -19,7 +19,7 @@
         android:textColor="@color/colorPrimary"
         android:text="@string/kcal_driver_information_full"/>
 
-    <com.corphish.widgets.KeyValueView
+    <com.corphish.widgets.ktx.KeyValueView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/implName"
@@ -29,7 +29,7 @@
         custom:keySize="@dimen/text_normal"
         custom:valueSize="@dimen/text_desc"/>
 
-    <com.corphish.widgets.KeyValueView
+    <com.corphish.widgets.ktx.KeyValueView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/implSwitchPath"
@@ -39,7 +39,7 @@
         custom:keySize="@dimen/text_normal"
         custom:valueSize="@dimen/text_desc"/>
 
-    <com.corphish.widgets.KeyValueView
+    <com.corphish.widgets.ktx.KeyValueView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/implFilePaths"
@@ -49,7 +49,7 @@
         custom:keySize="@dimen/text_normal"
         custom:valueSize="@dimen/text_desc"/>
 
-    <com.corphish.widgets.KeyValueView
+    <com.corphish.widgets.ktx.KeyValueView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/implFormat"

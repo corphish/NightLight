@@ -22,9 +22,9 @@ class KCALDriverInfoFragment : BaseBottomSheetDialogFragment() {
 
         val kcalImplementation = KCALManager.kcalImplementation
 
-        implName.valueTextView.text = kcalImplementation.getImplementationName()
-        implSwitchPath.valueTextView.text = kcalImplementation.getImplementationSwitchPath()
-        implFilePaths.valueTextView.text = kcalImplementation.getImplementationFilePaths()
-        implFormat.valueTextView.text = kcalImplementation.getImplementationFormat()
+        implName.valueText = kcalImplementation.getImplementationName()
+        implSwitchPath.valueText = kcalImplementation.getImplementationSwitchPath()
+        implFilePaths.valueText = kcalImplementation.getImplementationFilePaths()
+        implFormat.valueText = kcalImplementation.getImplementationFormat()
     }
 }

@@ -19,7 +19,7 @@ import com.corphish.nightlight.helpers.AlarmUtils
 import com.corphish.nightlight.helpers.LocationUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
-import com.corphish.widgets.KeyValueView
+import com.corphish.widgets.ktx.KeyValueView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_automation.*
 import kotlinx.android.synthetic.main.layout_header.*
@@ -74,8 +74,8 @@ class AutomationActivity : AppCompatActivity(), LocationListener {
                 val prevStartTime = PreferenceHelper.getString(this, Constants.PREF_LAST_START_TIME, Constants.DEFAULT_START_TIME)
                 val prevEndTime = PreferenceHelper.getString(this, Constants.PREF_LAST_END_TIME, Constants.DEFAULT_END_TIME)
 
-                startTime.setValueText(prevStartTime!!)
-                endTime.setValueText(prevEndTime!!)
+                startTime.valueText = prevStartTime!!
+                endTime.valueText = prevEndTime!!
 
                 PreferenceHelper.putString(this, Constants.PREF_START_TIME, prevStartTime)
                 PreferenceHelper.putString(this, Constants.PREF_END_TIME, prevEndTime)
@@ -92,8 +92,8 @@ class AutomationActivity : AppCompatActivity(), LocationListener {
         startTime.setOnClickListener { showTimePickerDialog(startTime, Constants.PREF_START_TIME) }
         endTime.setOnClickListener { showTimePickerDialog(endTime, Constants.PREF_END_TIME) }
 
-        startTime.setValueText(PreferenceHelper.getString(this, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!)
-        endTime.setValueText(PreferenceHelper.getString(this, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!)
+        startTime.valueText = PreferenceHelper.getString(this, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!
+        endTime.valueText = PreferenceHelper.getString(this, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!
 
         addNextDayIfNecessary()
 
@@ -107,7 +107,7 @@ class AutomationActivity : AppCompatActivity(), LocationListener {
         darkHoursEnable.isChecked = darkHoursEnabled
 
         darkStartTime.setOnClickListener { showTimePickerDialog(darkStartTime, Constants.PREF_DARK_HOURS_START) }
-        darkStartTime.setValueText(PreferenceHelper.getString(this, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)!!)
+        darkStartTime.valueText = PreferenceHelper.getString(this, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)!!
 
         enableOrDisableAutoSwitchViews(autoSwitchStatus)
     }
@@ -156,7 +156,7 @@ class AutomationActivity : AppCompatActivity(), LocationListener {
             // To get the prefKey for backup, its "last_" + prefKey
             PreferenceHelper.putString(this, "last_$prefKey", timeString)
 
-            viewWhoIsCallingIt!!.setValueText(timeString)
+            viewWhoIsCallingIt!!.valueText = timeString
 
             addNextDayIfNecessary()
             fixDarkHoursStartTime()
@@ -176,7 +176,7 @@ class AutomationActivity : AppCompatActivity(), LocationListener {
 
         val b = TimeUtils.determineWhetherNLShouldBeOnOrNot(start, end, test)
         if (!b) {
-            darkStartTime.setValueText(start)
+            darkStartTime.valueText = start
             PreferenceHelper.putString(this, Constants.PREF_DARK_HOURS_START, start)
             Toast.makeText(this, R.string.dark_hours_set_error, Toast.LENGTH_SHORT).show()
         }
@@ -189,7 +189,7 @@ class AutomationActivity : AppCompatActivity(), LocationListener {
         val sStartTime = PreferenceHelper.getString(this, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
         val sEndTime = PreferenceHelper.getString(this, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
         if (TimeUtils.getTimeInMinutes(sEndTime!!) < TimeUtils.getTimeInMinutes(sStartTime!!))
-            endTime.setValueText(sEndTime + getString(R.string.next_day))
+            endTime.valueText = "$sEndTime + ${getString(R.string.next_day)}"
     }
 
     /**
@@ -273,8 +273,8 @@ class AutomationActivity : AppCompatActivity(), LocationListener {
                 .computeAndSaveTime(this) {
                     doCurrentAutoFunctions(false)
 
-                    startTime.setValueText(PreferenceHelper.getString(this, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!)
-                    endTime.setValueText(PreferenceHelper.getString(this, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!)
+                    startTime.valueText = PreferenceHelper.getString(this, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!
+                    endTime.valueText = PreferenceHelper.getString(this, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!
                 }
 
         addNextDayIfNecessary()

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="master_switch">Abilita Night Light</string>
-    <string name="master_switch_desc">Interruttore principale per attivare/disattivare Night Light.</string>
+    <string name="master_switch_desc_off">Master switch is off. Turn it on to enable all the features of the app. To turn it on, tap the power button above.</string>
+    <string name="master_switch_desc_on">Master switch is on. All the features of the app are enabled. Turn it off to disable all the features of the app. To turn it off, tap the power button above.</string>
     <string name="no_root_access">Nessun accesso Root</string>
     <string name="no_root_desc">È necessario l\'accesso root per far funzionare Night Light.</string>
     <string name="no_kcal">Incompatibile</string>
@@ -90,17 +91,12 @@
     <string name="donate_answer">No. Two versions are basically the same functionality wise. Donate version is there if you really love my work and want to show support to it and motivate me to keep on doing the work. It is absolutely fine if you choose not to donate and keep using the generic version.</string>
     <string name="links">Links</string>
     <string name="dashboard">Dashboard</string>
-    <string name="dashboard_nl_on">Night Light is on</string>
-    <string name="dashboard_nl_off">Night Light is off</string>
-    <string name="dashboard_nl_disabled">Night Light is disabled</string>
-    <string name="dashboard_enable_master">Turn on master switch to enable Night Light.</string>
-    <string name="dashboard_auto_not_configured">Automatic schedule is not configured.</string>
-    <string name="dashboard_inside_auto">Inside of automatic schedule time period. Night Light will be automatically turned off in about %1$d hour(s).</string>
-    <string name="dashboard_outside_auto">Outside of automatic schedule time period. Night Light will be automatically turned on in about %1$d hour(s).</string>
+    <string name="dashboard_inside_auto">Turns off in %1$d hour(s)</string>
+    <string name="dashboard_outside_auto">Turns on in %1$d hour(s)</string>
     <string name="options">Options</string>
     <string name="manual_mode_title">Manual Mode</string>
     <string name="manual_mode_desc">Manual KCAL color controls gives you full freedom on how you would like to tune display colors so that your needs are met.</string>
-    <string name="intensity_type_title">Tipo di intensità</string>
+    <string name="intensity_type_title">Intensity</string>
     <string name="intensity_type_desc">Tipo di intensità del colore da applicare. Ci sono 2 tipi di intensità disponibili: Massimo e Minimo. Puoi utilizzare l\'intensità massima in ambienti scuri e l\'intensità minima in ambienti illuminati la sera. Tocca la lampadina nella dashboard per cambiare intensità quando Night Light è attiva.</string>
     <string name="maximum">Massimo</string>
     <string name="minimum">Minimo</string>
@@ -112,7 +108,6 @@
     <string name="impl_rgb_file_paths">Percorso del file RGB</string>
     <string name="impl_format">Specifiche del formato</string>
     <string name="version">Versione</string>
-    <string name="overview">Panoramica</string>
     <string name="light_theme_title">Attiva tema chiaro</string>
     <string name="light_theme_desc">Attiva il tema chiaro con sfondo chiaro e un aspetto leggermente diverso.</string>
     <string name="show_support">Supporta il progetto</string>
@@ -124,4 +119,18 @@
     <string name="set_on_boot_switch_title">Abilitato</string>
     <string name="set_on_boot_switch_enabled_desc">Night Light sarà ripristinata all\'avvio.</string>
     <string name="set_on_boot_switch_disabled_desc">Night Light non sarà ripristinata all\'avvio.</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="properties">Properties</string>
+    <string name="properties_desc">Following properties will be applied when this profile is applied. If night light is off, color setting will not be applied.</string>
+    <string name="actions">Actions</string>
+    <string name="icon_shape">Icon shape</string>
+    <string name="square">Square</string>
+    <string name="circle">Circle</string>
+    <string name="rounded_square">Rounded square</string>
+    <string name="teardrop">Teardrop</string>
+    <string name="title_activity_color">ColorActivity</string>
+    <string name="info">Info</string>
+    <string name="bulb_info">Press the bulb above to toggle night light. Long press the bulb above to toggle intensities.</string>
+    <string name="states">States</string>
 </resources>

@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/navigation_temperature"
-        android:icon="@drawable/ic_temperature_states"
+        android:icon="@drawable/ic_temperature"
         android:title="@string/color_temperature_title" />
 
     <item
         android:id="@+id/navigation_manual"
-        android:icon="@drawable/ic_manual_states"
+        android:icon="@drawable/ic_manual"
         android:title="@string/manual_mode_title" />
 </menu>

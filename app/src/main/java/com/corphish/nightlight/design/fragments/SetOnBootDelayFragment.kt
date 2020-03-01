@@ -81,8 +81,6 @@ class SetOnBootDelayFragment : BaseBottomSheetDialogFragment() {
 
         setOnBootWarn.visibility = if (PreferenceHelper.getBoolean(context, Constants.PREF_LAST_BOOT_RES, true)) View.GONE else View.VISIBLE
 
-        registerInfoViews(setOnBootDesc)
-
         FontUtils().setCustomFont(context!!, setOnBootSwitch)
     }
 }

@@ -38,12 +38,6 @@ class OptionsFragment: BaseBottomSheetDialogFragment() {
             dismiss()
         }
 
-        showInfo.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_SHOW_INFO, Constants.DEFAULT_SHOW_INFO)
-
-        showInfo.setOnCheckedChangeListener { _, b ->
-            PreferenceHelper.putBoolean(context, Constants.PREF_SHOW_INFO, b)
-        }
-
         iconShapeDesc.text = iconShapes[PreferenceHelper.getInt(context, Constants.PREF_ICON_SHAPE, Constants.DEFAULT_ICON_SHAPE)]
         iconShape.setOnClickListener {
             val selector = AlertDialog.Builder(context!!)
@@ -56,6 +50,6 @@ class OptionsFragment: BaseBottomSheetDialogFragment() {
             selector.show()
         }
 
-        FontUtils().setCustomFont(context!!, lightTheme, showInfo)
+        FontUtils().setCustomFont(context!!, lightTheme)
     }
 }

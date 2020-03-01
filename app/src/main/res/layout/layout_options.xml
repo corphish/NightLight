@@ -70,28 +70,4 @@
             android:id="@+id/iconShapeDesc"
             android:text="@string/circle"/>
     </LinearLayout>
-
-    <Switch
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/defaultPadding"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:layout_margin="@dimen/layout_margin"
-        android:textSize="@dimen/text_caption"
-        android:textAppearance="?android:textAppearance"
-        android:id="@+id/showInfo"
-        android:text="@string/show_info_title"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingBottom="@dimen/layout_padding"
-        android:layout_marginStart="@dimen/layout_margin"
-        android:layout_marginEnd="@dimen/layout_margin"
-        android:layout_marginBottom="@dimen/layout_margin"
-        android:textSize="@dimen/text_desc"
-        android:text="@string/show_info_desc"/>
 </LinearLayout>

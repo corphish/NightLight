@@ -44,7 +44,6 @@ object Constants {
     const val PREF_DARK_HOURS_START = "dark_hours_start"
     const val PREF_LIGHT_THEME = "light_theme"
     const val PREF_THEME_CHANGE_EVENT = "theme_change_temp"
-    const val PREF_SHOW_INFO = "show_info"
     const val PREF_SET_ON_BOOT = "set_on_boot"
     const val PREF_ICON_SHAPE = "icon_shape"
 
@@ -67,7 +66,6 @@ object Constants {
     const val DEFAULT_MIN_COLOR_TEMP = 4500
     const val DEFAULT_BOOT_DELAY = 20
     const val DEFAULT_LIGHT_THEME = false
-    const val DEFAULT_SHOW_INFO = true
     const val DEFAULT_SET_ON_BOOT = true
     const val DEFAULT_ICON_SHAPE = 0
 

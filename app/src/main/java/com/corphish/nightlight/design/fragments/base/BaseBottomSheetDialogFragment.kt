@@ -13,13 +13,4 @@ abstract class BaseBottomSheetDialogFragment: BottomSheetDialogFragment() {
 
         setStyle(STYLE_NORMAL, ThemeUtils.getBottomSheetTheme(context!!))
     }
-
-    fun registerInfoViews(vararg views: View?) {
-        val showInfo = PreferenceHelper.getBoolean(context, Constants.PREF_SHOW_INFO, Constants.DEFAULT_SHOW_INFO)
-        if (!showInfo) {
-            for (v in views) {
-                if (v != null) v.visibility = View.GONE
-            }
-        }
-    }
 }

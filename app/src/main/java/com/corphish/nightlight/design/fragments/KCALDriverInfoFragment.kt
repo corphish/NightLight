@@ -20,7 +20,7 @@ class KCALDriverInfoFragment : BaseBottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val kcalImplementation = KCALManager.kcalImplementation
+        val kcalImplementation = KCALManager.implementation
 
         implName.valueText = kcalImplementation.getImplementationName()
         implSwitchPath.valueText = kcalImplementation.getImplementationSwitchPath()

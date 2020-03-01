@@ -17,12 +17,25 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 
 object KCALManager {
 
-    var kcalImplementation: KCALAbstraction
+    // Default implementation to DummyKCALManager
+    var implementation: KCALAbstraction = DummyKCALManager()
+
+    // List of supported implementations
+    private val supportedImplementations = arrayOf(
+            GenericKCALManager(),
+            SDM845KCALManager()
+    )
 
     init {
-        kcalImplementation = GenericKCALManager()
-        if (!kcalImplementation.isSupported()) kcalImplementation = SDM845KCALManager()
-        if (!kcalImplementation.isSupported()) kcalImplementation = DummyKCALManager()
+        var implementationSupported = false
+
+        // Generalize implementation detection logic
+        for (impl in supportedImplementations) {
+            if (!implementationSupported) {
+                implementation = impl
+                implementationSupported = implementation.isSupported()
+            }
+        }
     }
 
     /**
@@ -30,10 +43,14 @@ object KCALManager {
      * @return A boolean indicating whether KCAL support is available or not
      */
     val isKCALAvailable: Boolean
-        get() = kcalImplementation.isSupported()
+        get() = implementation.isSupported()
 
+    /**
+     * Checks whether KCAL is enabled by the kernel
+     * @return A boolean indicating whether KCAL is enabled or not
+     */
     private val isKCALEnabled: Boolean
-        get() = kcalImplementation.isEnabled()
+        get() = implementation.isEnabled()
 
     /**
      * Gets current KCAL RGB values irrespective of whether it is enabled or not
@@ -41,7 +58,7 @@ object KCALManager {
      */
     private val kcalValuesAsRawString: String
         get() {
-            val reading = kcalImplementation.getColorReadings()
+            val reading = implementation.getColorReadings()
 
             return "${reading[0]} ${reading[1]} ${reading[2]}"
         }
@@ -50,7 +67,7 @@ object KCALManager {
      * Enables KCAL
      */
     fun enableKCAL() {
-        kcalImplementation.turnOn()
+        implementation.turnOn()
     }
 
     /**
@@ -59,7 +76,7 @@ object KCALManager {
      * Even if input is invalid, driver takes care of it
      * @param rawValue Input values in form of "<Red> <Green> <Blue>" as supported by driver
      * @return Whether setting KCAL values was success or not
-    </Blue></Green></Red> */
+     */
     fun updateKCALValues(rawValue: String?): Boolean {
         // If operation is successful, there should be no output
         // Otherwise we would get output like "Permission denied"
@@ -80,7 +97,7 @@ object KCALManager {
      * @return Whether setting KCAL values was success or not
      */
     fun updateKCALValues(red: Int, green: Int, blue: Int): Boolean {
-        return kcalImplementation.setColors(red, green, blue)
+        return implementation.setColors(red, green, blue)
     }
 
     /**
@@ -94,6 +111,10 @@ object KCALManager {
         return updateKCALValues(rgb[0], rgb[1], rgb[2])
     }
 
+    /**
+     * Updates KCAL with default values
+     * @return Whether setting KCAL values was success or not
+     */
     fun updateKCALWithDefaultValues(): Boolean {
         return updateKCALValues(256, 256, 256)
     }
@@ -107,7 +128,7 @@ object KCALManager {
      * @param context Context is needed for PreferenceHelper
      */
     fun backupCurrentKCALValues(context: Context?) {
-        // Dont backup if KCAL is off currently
+        // Don't backup if KCAL is off currently
         if (!isKCALEnabled) return
 
         // Don't backup if KCAL preserve switch is off (less likely case tho)
@@ -124,6 +145,10 @@ object KCALManager {
         PreferenceHelper.putString(context, Constants.KCAL_PRESERVE_VAL, currentReading)
     }
 
+    /**
+     * Gets current night light reading as RGB value string
+     * @return A String indicating current night light reading as RGB values
+     */
     private fun getCurrentNightLightSettingReading(context: Context?, type: Int) =
             if (PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP) == Constants.NL_SETTING_MODE_TEMP)
                 PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP[type], Constants.DEFAULT_COLOR_TEMP[type]).fromColorTemperatureToRGBString()

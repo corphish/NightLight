@@ -10,13 +10,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceButton"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingTop="@dimen/layout_padding"
+        style="@style/SectionHeader"
         android:layout_margin="@dimen/layout_margin"
-        android:textSize="12sp"
-        android:textColor="@color/colorPrimary"
         android:text="@string/section_sob"/>
 
     <Switch

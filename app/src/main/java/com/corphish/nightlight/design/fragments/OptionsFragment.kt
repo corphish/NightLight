@@ -38,7 +38,7 @@ class OptionsFragment: BaseBottomSheetDialogFragment() {
             dismiss()
         }
 
-        iconShapeDesc.text = iconShapes[PreferenceHelper.getInt(context, Constants.PREF_ICON_SHAPE, Constants.DEFAULT_ICON_SHAPE)]
+        iconShape.valueText = iconShapes[PreferenceHelper.getInt(context, Constants.PREF_ICON_SHAPE, Constants.DEFAULT_ICON_SHAPE)]
         iconShape.setOnClickListener {
             val selector = AlertDialog.Builder(context!!)
             selector.setTitle(R.string.icon_shape)

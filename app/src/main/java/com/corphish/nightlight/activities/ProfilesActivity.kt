@@ -121,29 +121,44 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
             this.profiles = profiles
         }
 
-        inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+        inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener, View.OnLongClickListener {
             internal val icon: TextView = v.findViewById(R.id.profileIcon)
             internal val title: TextView = v.findViewById(R.id.profileTitle)
 
             init {
                 v.setOnClickListener(this)
+                v.setOnLongClickListener(this)
             }
 
             override fun onClick(v: View) {
                 if (!intent.getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
                     showAlert(R.string.confirm, getString(R.string.tasker_confirm_selection, profiles!![adapterPosition].name), View.OnClickListener { returnBack(profiles!![adapterPosition].name) })
                 } else {
-                    curProfile = profiles!![adapterPosition]
-                    optionsDialog = BottomSheetDialog(this@ProfilesActivity, ThemeUtils.getBottomSheetTheme(context))
-                    optionsDialog.setOnShowListener {
-                        val d = it as BottomSheetDialog
-                        val bottomSheetInternal = d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-                        BottomSheetBehavior.from(bottomSheetInternal!!).setState(BottomSheetBehavior.STATE_EXPANDED)
-                    }
-                    getOptionsView(curProfile!!)
-                    optionsDialog.setContentView(optionsView)
-                    optionsDialog.show()
+                    showProfileOverviewDialog(adapterPosition)
                 }
+            }
+
+            private fun showProfileOverviewDialog(pos: Int) {
+                curProfile = profiles!![pos]
+                optionsDialog = BottomSheetDialog(this@ProfilesActivity, ThemeUtils.getBottomSheetTheme(context))
+                optionsDialog.setOnShowListener {
+                    val d = it as BottomSheetDialog
+                    val bottomSheetInternal = d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+                    BottomSheetBehavior.from(bottomSheetInternal!!).setState(BottomSheetBehavior.STATE_EXPANDED)
+                }
+                getOptionsView(curProfile!!)
+                optionsDialog.setContentView(optionsView)
+                optionsDialog.show()
+            }
+
+            override fun onLongClick(v: View?): Boolean {
+                if (!intent.getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
+                    showProfileOverviewDialog(adapterPosition)
+
+                    return true
+                }
+
+                return false
             }
         }
 

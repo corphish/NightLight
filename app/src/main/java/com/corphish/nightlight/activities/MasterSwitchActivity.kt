@@ -55,15 +55,13 @@ class MasterSwitchActivity : AppCompatActivity() {
 
     private fun conditionallySwitchToMain() {
         if (freshStart && masterSwitchStatus) {
-            if (taskerError) {
-                taskerError = false
-                val intent = Intent(this, ProfilesActivity::class.java)
-                intent.putExtra(Constants.TASKER_ERROR_STATUS, false)
-                startActivityForResult(intent, REQ_CODE)
-            } else {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
+        } else if (masterSwitchStatus && taskerError) {
+            taskerError = false
+            val intent = Intent(this, ProfilesActivity::class.java)
+            intent.putExtra(Constants.TASKER_ERROR_STATUS, false)
+            startActivityForResult(intent, REQ_CODE)
         }
     }
 

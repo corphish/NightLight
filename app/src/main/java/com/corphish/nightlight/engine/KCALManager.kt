@@ -27,13 +27,11 @@ object KCALManager {
     )
 
     init {
-        var implementationSupported = false
-
         // Generalize implementation detection logic
         for (impl in supportedImplementations) {
-            if (!implementationSupported) {
+            if (impl.isSupported()) {
                 implementation = impl
-                implementationSupported = implementation.isSupported()
+                break
             }
         }
     }

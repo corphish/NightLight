@@ -14,13 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/kcal_backup_set_title"
-        android:textSize="12sp"
-        android:textAppearance="?attr/textAppearanceButton"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:paddingEnd="@dimen/layout_padding"
-        android:paddingTop="@dimen/layout_padding"
-        android:paddingStart="@dimen/layout_padding"/>
+        android:layout_margin="@dimen/layout_margin"
+        style="@style/SectionHeader"/>
 
     <TextView
         android:layout_width="wrap_content"

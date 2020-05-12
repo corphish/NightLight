@@ -6,12 +6,11 @@ import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.R
@@ -21,6 +20,7 @@ import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
+import com.corphish.widgets.ktx.adapters.Adapters
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_profiles.*
@@ -36,8 +36,6 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
     private var curProfile: ProfilesManager.Profile? = null
 
     private lateinit var profilesManager: ProfilesManager
-
-    private lateinit var profilesAdapter: ProfilesAdapter
 
     private var profiles: MutableList<ProfilesManager.Profile>? = null
 
@@ -94,17 +92,23 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
     }
 
     private fun initViews() {
-        profilesAdapter = ProfilesAdapter()
-        profilesAdapter.setProfiles(profiles)
-
         recyclerView.invalidateItemDecorations()
         recyclerView.layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.gridSpanCount))
-        recyclerView.adapter = profilesAdapter
-        recyclerView.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.isNestedScrollingEnabled = false
         recyclerView.setHasFixedSize(false)
+        recyclerView.adapter = Adapters.newStaticAdapter<ProfilesManager.Profile, CustomViewHolder> {
+            layoutResourceId = R.layout.layout_profile_item
+            listItems = profiles?.toList()!!
+            viewHolder = { view -> CustomViewHolder(view) }
+            binding = { holder, profile ->
+                holder.icon.text = if (profile.name.isNotEmpty()) "${profile.name.toUpperCase(Locale.getDefault())[0]}" else ""
+                setIconBackground(holder.icon, ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled, getProfileIntensity(profile)))
+                holder.icon.setTextColor(ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled, getProfileIntensity(profile)))
 
-        profilesAdapter.notifyDataSetChanged()
+                holder.title.text = profile.name
+            }
+        }
     }
 
     override fun onDataChanged(newDataSize: Int) {
@@ -114,74 +118,43 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
             emptyView.visibility = View.GONE
     }
 
-    private inner class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.CustomViewHolder>() {
-        private var profiles: List<ProfilesManager.Profile>? = null
+    private inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener, View.OnLongClickListener {
+        internal val icon: TextView = v.findViewById(R.id.profileIcon)
+        internal val title: TextView = v.findViewById(R.id.profileTitle)
 
-        internal fun setProfiles(profiles: MutableList<ProfilesManager.Profile>?) {
-            this.profiles = profiles
+        init {
+            v.setOnClickListener(this)
+            v.setOnLongClickListener(this)
         }
 
-        inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener, View.OnLongClickListener {
-            internal val icon: TextView = v.findViewById(R.id.profileIcon)
-            internal val title: TextView = v.findViewById(R.id.profileTitle)
-
-            init {
-                v.setOnClickListener(this)
-                v.setOnLongClickListener(this)
-            }
-
-            override fun onClick(v: View) {
-                if (!intent.getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
-                    showAlert(R.string.confirm, getString(R.string.tasker_confirm_selection, profiles!![adapterPosition].name), View.OnClickListener { returnBack(profiles!![adapterPosition].name) })
-                } else {
-                    showProfileOverviewDialog(adapterPosition)
-                }
-            }
-
-            private fun showProfileOverviewDialog(pos: Int) {
-                curProfile = profiles!![pos]
-                optionsDialog = BottomSheetDialog(this@ProfilesActivity, ThemeUtils.getBottomSheetTheme(context))
-                optionsDialog.setOnShowListener {
-                    val d = it as BottomSheetDialog
-                    val bottomSheetInternal = d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-                    BottomSheetBehavior.from(bottomSheetInternal!!).setState(BottomSheetBehavior.STATE_EXPANDED)
-                }
-                getOptionsView(curProfile!!)
-                optionsDialog.setContentView(optionsView)
-                optionsDialog.show()
-            }
-
-            override fun onLongClick(v: View?): Boolean {
-                if (!intent.getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
-                    showProfileOverviewDialog(adapterPosition)
-
-                    return true
-                }
-
-                return false
+        override fun onClick(v: View) {
+            if (!intent.getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
+                showAlert(R.string.confirm, getString(R.string.tasker_confirm_selection, profiles!![adapterPosition].name), View.OnClickListener { returnBack(profiles!![adapterPosition].name) })
+            } else {
+                showProfileOverviewDialog(adapterPosition)
             }
         }
 
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
-            val itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.layout_profile_item, parent, false)
-
-            return CustomViewHolder(itemView)
+        private fun showProfileOverviewDialog(pos: Int) {
+            curProfile = profiles!![pos]
+            optionsDialog = BottomSheetDialog(this@ProfilesActivity, ThemeUtils.getBottomSheetTheme(context))
+            optionsDialog.setOnShowListener {
+                val d = it as BottomSheetDialog
+                val bottomSheetInternal = d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+                BottomSheetBehavior.from(bottomSheetInternal!!).setState(BottomSheetBehavior.STATE_EXPANDED)
+            }
+            getOptionsView(curProfile!!)
+            optionsDialog.setContentView(optionsView)
+            optionsDialog.show()
         }
 
-        override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-            val profile = profiles!![position]
+        override fun onLongClick(v: View?): Boolean {
+            if (!intent.getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
+                showProfileOverviewDialog(adapterPosition)
 
-            holder.icon.text = if (profile.name.isNotEmpty()) "${profile.name.toUpperCase(Locale.getDefault())[0]}" else ""
-            setIconBackground(holder.icon, ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled, getProfileIntensity(profile)))
-            holder.icon.setTextColor(ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled, getProfileIntensity(profile)))
-
-            holder.title.text = profile.name
-        }
-
-        override fun getItemCount(): Int {
-            return profiles!!.size
+                return true
+            }
+            return false
         }
     }
 
@@ -207,13 +180,13 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         if (requestCode == _createProfileCode && resultCode == Activity.RESULT_OK) {
             profilesManager.loadProfiles()
             profiles = profilesManager.profilesList
-            profilesAdapter.notifyDataSetChanged()
+            recyclerView.adapter?.notifyDataSetChanged()
         } else if (requestCode == _updateProfileCode) {
             if (resultCode == Activity.RESULT_OK) {
                 profilesManager.loadProfiles()
                 profiles = profilesManager.profilesList
             }
-            profilesAdapter.notifyDataSetChanged()
+            recyclerView.adapter?.notifyDataSetChanged()
         }
     }
 
@@ -296,7 +269,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
                 val prof = curProfile
                 profiles!!.remove(prof)
                 curProfile = null
-                profilesAdapter.notifyDataSetChanged()
+                recyclerView.adapter?.notifyDataSetChanged()
             })
             optionsDialog.dismiss()
         }

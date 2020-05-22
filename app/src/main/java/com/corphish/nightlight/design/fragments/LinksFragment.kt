@@ -18,7 +18,7 @@ class LinksFragment: BaseBottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val optionsAdapter = GenericOptionsAdapter(context!!)
+        val optionsAdapter = GenericOptionsAdapter(requireContext())
 
         val captionList = listOf(
                 R.string.contributors,

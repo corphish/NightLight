@@ -40,7 +40,7 @@ class OptionsFragment: BaseBottomSheetDialogFragment() {
 
         iconShape.valueText = iconShapes[PreferenceHelper.getInt(context, Constants.PREF_ICON_SHAPE, Constants.DEFAULT_ICON_SHAPE)]
         iconShape.setOnClickListener {
-            val selector = AlertDialog.Builder(context!!)
+            val selector = AlertDialog.Builder(requireContext())
             selector.setTitle(R.string.icon_shape)
             selector.setItems(iconShapes) { _, i ->
                 PreferenceHelper.putInt(context, Constants.PREF_ICON_SHAPE, i)
@@ -50,6 +50,6 @@ class OptionsFragment: BaseBottomSheetDialogFragment() {
             selector.show()
         }
 
-        FontUtils().setCustomFont(context!!, lightTheme)
+        FontUtils().setCustomFont(requireContext(), lightTheme)
     }
 }

@@ -19,7 +19,7 @@ class AppreciationFragment: BaseBottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val optionsAdapter = GenericOptionsAdapter(context!!)
+        val optionsAdapter = GenericOptionsAdapter(requireContext())
         val isGeneric = BuildConfig.FLAVOR == "generic"
 
         val captionList = listOf(

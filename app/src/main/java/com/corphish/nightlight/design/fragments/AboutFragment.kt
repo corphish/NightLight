@@ -26,7 +26,7 @@ class AboutFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        view?.setOnClickListener { ExternalLink.open(context, "market://details?id=" + context!!.packageName) }
+        view?.setOnClickListener { ExternalLink.open(context, "market://details?id=" + requireContext().packageName) }
 
         val versionText = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
         version.text = versionText

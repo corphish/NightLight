@@ -52,7 +52,7 @@ class KCALBackupSettingsFragment: BaseBottomSheetDialogFragment() {
             bottomSheetDialog.show()
         })
 
-        FontUtils().setCustomFont(context!!, preserveSwitch, backupEveryTimeSwitch)
+        FontUtils().setCustomFont(requireContext(), preserveSwitch, backupEveryTimeSwitch)
     }
 
     private fun initKCALBackupView() {

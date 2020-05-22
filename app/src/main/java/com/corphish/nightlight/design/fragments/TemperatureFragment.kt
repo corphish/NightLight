@@ -116,7 +116,7 @@ class TemperatureFragment: Fragment() {
         val infoButton = root.findViewById<MaterialButton>(R.id.intensityInfo)
 
         infoButton.setOnClickListener {
-            val infoDialog = BottomSheetAlertDialog(context!!)
+            val infoDialog = BottomSheetAlertDialog(requireContext())
             infoDialog.setTitle(R.string.intensity_type_title)
             infoDialog.setMessage(R.string.intensity_type_desc)
             infoDialog.setPositiveButton(android.R.string.ok, View.OnClickListener { infoDialog.dismiss() })

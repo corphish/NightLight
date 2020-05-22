@@ -97,9 +97,9 @@ class DashboardFragment: Fragment() {
 
         type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
 
-        nlBulb.setColorFilter(ThemeUtils.getNLStatusIconBackground(context!!, nlState, type))
-        forceToggleIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, nlState, Constants.INTENSITY_TYPE_MINIMUM), BlendModeCompat.SRC_ATOP)
-        forceToggleIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, nlState, Constants.INTENSITY_TYPE_MINIMUM))
+        nlBulb.setColorFilter(ThemeUtils.getNLStatusIconBackground(requireContext(), nlState, type))
+        forceToggleIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(requireContext(), nlState, Constants.INTENSITY_TYPE_MINIMUM), BlendModeCompat.SRC_ATOP)
+        forceToggleIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(requireContext(), nlState, Constants.INTENSITY_TYPE_MINIMUM))
 
         nlBulb.setOnClickListener {
             toggleNightLight()
@@ -111,15 +111,15 @@ class DashboardFragment: Fragment() {
         }
 
         intensityStatus.setText(arrayOf(R.string.maximum, R.string.minimum)[type])
-        intensityIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, nlState, type), BlendModeCompat.SRC_ATOP)
-        intensityIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, nlState, type))
+        intensityIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(requireContext(), nlState, type), BlendModeCompat.SRC_ATOP)
+        intensityIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(requireContext(), nlState, type))
 
         val autoSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH, false)
         val autoStartTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, null)
         val autoEndTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, null)
 
-        automationIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(context!!, autoSwitch, Constants.INTENSITY_TYPE_MINIMUM), BlendModeCompat.SRC_ATOP)
-        automationIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(context!!, autoSwitch, Constants.INTENSITY_TYPE_MINIMUM))
+        automationIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(requireContext(), autoSwitch, Constants.INTENSITY_TYPE_MINIMUM), BlendModeCompat.SRC_ATOP)
+        automationIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(requireContext(), autoSwitch, Constants.INTENSITY_TYPE_MINIMUM))
 
         if (autoStartTime == null || autoEndTime == null || !autoSwitch) {
             automationStatus.setText(R.string.off)

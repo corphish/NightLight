@@ -1,5 +1,6 @@
 package com.corphish.nightlight.activities
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -190,6 +191,7 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getOptionsView(profile: ProfilesManager.Profile?) {
         optionsView = View.inflate(this, R.layout.bottom_sheet_profile_options, null)
 

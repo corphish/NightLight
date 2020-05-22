@@ -1,7 +1,4 @@
 <resources>
-
-    <string name="master_switch">Ενεργοποίηση Night Light</string>
-
     <string name="no_root_access">Δεν υπάρχει root πρόσβαση</string>
     <string name="no_root_desc">Απαιτείται root πρόσβαση για να λειτουργήσει το Night Light.</string>
 

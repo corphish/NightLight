@@ -2,7 +2,6 @@
     <string name="app_name" translatable="false">Night Light</string>
     <string name="app_name_full" translatable="false">Night Light (KCAL)</string>
 
-    <string name="master_switch">Enable Night Light</string>
     <string name="master_switch_desc_off">Master switch is off. Turn it on to enable all the features of the app. To turn it on, tap the power button above.</string>
     <string name="master_switch_desc_on">Master switch is on. All the features of the app are enabled. Turn it off to disable all the features of the app. To turn it off, tap the power button above.</string>
 
@@ -153,8 +152,6 @@
 
     <string name="translate">Translate this app</string>
 
-    <string name="show_info_title">Show info</string>
-    <string name="show_info_desc">Shows information about various controls</string>
     <string name="set_on_boot_switch_title">Enabled</string>
     <string name="set_on_boot_switch_enabled_desc">Night Light settings will be restored on boot.</string>
     <string name="set_on_boot_switch_disabled_desc">Night Light settings will not be restored on boot.</string>

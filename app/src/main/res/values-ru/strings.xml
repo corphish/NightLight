@@ -1,7 +1,4 @@
 <resources>
-
-    <string name="master_switch">Включить Night Light</string>
-
     <string name="auto_enable">Автоматическое вкл. Night Light</string>
     <string name="auto_enable_desc">Автоматическое включение ночного света между указанным диапазоном временем. Ночной свет будет автоматически отключен за пределами этого диапазона времени.</string>
     <string name="sun_switch">От заката до рассвета</string>

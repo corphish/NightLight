@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="master_switch">Abilita Night Light</string>
     <string name="master_switch_desc_off">Master switch is off. Turn it on to enable all the features of the app. To turn it on, tap the power button above.</string>
     <string name="master_switch_desc_on">Master switch is on. All the features of the app are enabled. Turn it off to disable all the features of the app. To turn it off, tap the power button above.</string>
     <string name="no_root_access">Nessun accesso Root</string>
@@ -114,8 +113,6 @@
     <string name="rate">Vota questa app</string>
     <string name="get_donate">Dona</string>
     <string name="translate">Traduci l\'app</string>
-    <string name="show_info_title">Mostra info</string>
-    <string name="show_info_desc">Mostra informazioni sui vari controlli</string>
     <string name="set_on_boot_switch_title">Abilitato</string>
     <string name="set_on_boot_switch_enabled_desc">Night Light sarà ripristinata all\'avvio.</string>
     <string name="set_on_boot_switch_disabled_desc">Night Light non sarà ripristinata all\'avvio.</string>

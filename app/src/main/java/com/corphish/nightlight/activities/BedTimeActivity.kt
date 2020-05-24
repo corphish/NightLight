@@ -28,8 +28,10 @@ class BedTimeActivity : AppCompatActivity() {
             setViews(bedTimeSwitchStatus)
             PreferenceHelper.putBoolean(this, Constants.PREF_WIND_DOWN, bedTimeSwitchStatus)
             if (!bedTimeSwitchStatus) {
-                if (freshBedTime) startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                if (freshBedTime) {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
             }
         }
     }

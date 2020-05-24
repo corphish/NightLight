@@ -77,8 +77,8 @@ class GenericKCALManager : KCALAbstraction {
     /**
      * Function to set saturation
      */
-    override fun setSaturation(value: Int) {
-        RootUtils.writeToFile("$value", KCAL_SAT)
+    override fun setSaturation(value: Int): Boolean {
+       return RootUtils.writeToFile("$value", KCAL_SAT)
     }
 
     override fun getImplementationName() = "Generic KCAL"

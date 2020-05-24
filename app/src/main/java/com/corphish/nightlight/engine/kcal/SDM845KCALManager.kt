@@ -70,8 +70,8 @@ class SDM845KCALManager : KCALAbstraction {
     /**
      * Function to set saturation
      */
-    override fun setSaturation(value: Int) {
-
+    override fun setSaturation(value: Int): Boolean {
+        return false
     }
 
     override fun getImplementationName() = "KCAL for v4.4 kernels"

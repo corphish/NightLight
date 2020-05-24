@@ -43,7 +43,7 @@ interface KCALAbstraction {
     /**
      * Function to set saturation
      */
-    fun setSaturation(value: Int)
+    fun setSaturation(value: Int): Boolean
 
     /**
      * Driver information

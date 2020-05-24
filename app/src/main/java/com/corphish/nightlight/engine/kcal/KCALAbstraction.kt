@@ -31,10 +31,26 @@ interface KCALAbstraction {
     fun getColorReadings() : IntArray
 
     /**
+     * Function to determine whether saturation is supported
+     */
+    fun isSaturationSupported(): Boolean
+
+    /**
+     * Function to get saturation
+     */
+    fun getSaturation(): Int
+
+    /**
+     * Function to set saturation
+     */
+    fun setSaturation(value: Int)
+
+    /**
      * Driver information
      */
     fun getImplementationName(): String
     fun getImplementationSwitchPath(): String
     fun getImplementationFilePaths(): String
     fun getImplementationFormat(): String
+    fun getSaturationPath(): String
 }

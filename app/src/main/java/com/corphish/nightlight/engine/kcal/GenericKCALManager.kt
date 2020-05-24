@@ -14,6 +14,8 @@ import java.io.File
 // File paths
 private const val KCAL_SWITCH = "/sys/devices/platform/kcal_ctrl.0/kcal_enable"
 private const val KCAL_COLOR = "/sys/devices/platform/kcal_ctrl.0/kcal"
+private const val KCAL_SAT = "/sys/devices/platform/kcal_ctrl.0/kcal_sat"
+
 class GenericKCALManager : KCALAbstraction {
     /**
      * A function to determine whether the implementation is supported by device
@@ -58,6 +60,27 @@ class GenericKCALManager : KCALAbstraction {
         )
     }
 
+    /**
+     * Function to determine whether saturation is supported
+     */
+    override fun isSaturationSupported() = true
+
+    /**
+     * Function to get saturation
+     */
+    override fun getSaturation(): Int {
+        val reading = RootUtils.readOneLine(KCAL_SAT)
+
+        return reading.toInt()
+    }
+
+    /**
+     * Function to set saturation
+     */
+    override fun setSaturation(value: Int) {
+        RootUtils.writeToFile("$value", KCAL_SAT)
+    }
+
     override fun getImplementationName() = "Generic KCAL"
 
     override fun getImplementationSwitchPath() = KCAL_SWITCH
@@ -65,4 +88,6 @@ class GenericKCALManager : KCALAbstraction {
     override fun getImplementationFilePaths() = KCAL_COLOR
 
     override fun getImplementationFormat() = "%d %d %d"
+
+    override fun getSaturationPath() = KCAL_SAT
 }

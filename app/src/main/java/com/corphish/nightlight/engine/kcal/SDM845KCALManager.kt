@@ -57,6 +57,23 @@ class SDM845KCALManager : KCALAbstraction {
         )
     }
 
+    /**
+     * Function to determine whether saturation is supported
+     */
+    override fun isSaturationSupported() = false
+
+    /**
+     * Function to get saturation
+     */
+    override fun getSaturation() = 255
+
+    /**
+     * Function to set saturation
+     */
+    override fun setSaturation(value: Int) {
+
+    }
+
     override fun getImplementationName() = "KCAL for v4.4 kernels"
 
     override fun getImplementationSwitchPath() = "Not Available"
@@ -64,4 +81,6 @@ class SDM845KCALManager : KCALAbstraction {
     override fun getImplementationFilePaths() = "$KCAL_RED\n$KCAL_GREEN\n$KCAL_BLUE"
 
     override fun getImplementationFormat() = "%d"
+
+    override fun getSaturationPath() = "Not available"
 }

@@ -87,6 +87,8 @@
 
     <string name="kcal_backup_every_time_before_enabling">Backup current KCAL values every time before Night Light is enabled</string>
 
+    <string name="faq">F.A.Q</string>
+
     <string name="github" translatable="false">Github</string>
     <string name="xda" translatable="false">XDA Developers</string>
     <string name="links">Links</string>

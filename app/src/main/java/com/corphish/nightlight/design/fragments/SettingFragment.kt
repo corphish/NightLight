@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.layout_settings.*
 class SettingFragment: DialogFragment() {
     private lateinit var settingsOptions: List<SettingOption>
 
-    private val _optionsFragmentIndex = 7
+    private val _optionsFragmentIndex = 8
 
     private var toResumeThemeChangeAction = false
 

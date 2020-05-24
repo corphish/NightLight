@@ -118,6 +118,22 @@ object KCALManager {
     }
 
     /**
+     * Enables grayscale
+     * @return Operation result
+     */
+    fun enableGrayScale(): Boolean {
+        return implementation.setSaturation(128)
+    }
+
+    /**
+     * Disables grayscale
+     * @return Operation result
+     */
+    fun disableGrayScale() {
+        implementation.setSaturation(255)
+    }
+
+    /**
      * Safely back up current KCAL values
      * Safely in the sense, if the current KCAL reading is same as user selected ones for Night Light, then don't backup
      * Situations may occur that night light KCAL values are tried to be backed up, avoid those situations

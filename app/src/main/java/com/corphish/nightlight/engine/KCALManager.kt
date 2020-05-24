@@ -51,6 +51,12 @@ object KCALManager {
         get() = implementation.isEnabled()
 
     /**
+     * Property indicating whether grayscale is supported or not
+     */
+    val isGrayScaleSupported: Boolean
+        get() = implementation.isSaturationSupported()
+
+    /**
      * Gets current KCAL RGB values irrespective of whether it is enabled or not
      * @return Current KCAL RGB values as written by driver
      */

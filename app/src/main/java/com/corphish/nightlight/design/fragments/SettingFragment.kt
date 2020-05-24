@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.*
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -73,7 +74,7 @@ class SettingFragment: DialogFragment() {
                 SettingOption(R.string.options, R.drawable.ic_settings, OptionsFragment()),
                 SettingOption(R.string.show_support, R.drawable.ic_thumb_up, AppreciationFragment()),
                 SettingOption(R.string.about, R.drawable.ic_info, activityClass = AboutActivity::class.java),
-                SettingOption(R.string.faq, R.drawable.ic_help, activityClass = UsageActivity::class.java)
+                SettingOption(R.string.faq, R.drawable.ic_help, link = "https://github.com/corphish/NightLight/blob/master/notes/usage.md")
         )
 
         settingsAdapter.list = settingsOptions
@@ -115,10 +116,10 @@ class SettingFragment: DialogFragment() {
                 val activityClass = list[adapterPosition].activityClass
                 if (fragment != null)
                     fragment.show(childFragmentManager, "")
-                else {
-                    if (activityClass != null) {
-                        context?.startActivity(Intent(context, activityClass))
-                    } // else case should never happen
+                else if (activityClass != null) {
+                    context?.startActivity(Intent(context, activityClass))
+                } else if (list[adapterPosition].link != null) {
+                    ExternalLink.open(context, list[adapterPosition].link!!)
                 }
             }
         }
@@ -151,7 +152,8 @@ class SettingFragment: DialogFragment() {
             val name: Int,
             val iconId: Int,
             val fragment: BottomSheetDialogFragment? = null,
-            val activityClass: Class<*>? = null
+            val activityClass: Class<*>? = null,
+            val link: String? = null
     )
 
     override fun onRequestPermissionsResult(requestCode: Int,

@@ -61,6 +61,7 @@
     <string name="section_profiles_list">Elenco dei profili creati</string>
     <string name="profiles_desc">I profili sono una raccolta di impostazioni che possono essere applicate con un click, o applicali con app come Tasker utilizzando le funzionalità di automazione che forniscono.</string>
     <string name="kcal_backup_every_time_before_enabling">Backup dei valori KCAL correnti ogni volta prima che Night Light è abilitata</string>
+    <string name="faq">F.A.Q</string>
     <string name="links">Links</string>
     <string name="dashboard">Dashboard</string>
     <string name="dashboard_inside_auto">Turns off in %1$d hour(s)</string>

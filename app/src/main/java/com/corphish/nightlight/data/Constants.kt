@@ -46,6 +46,7 @@ object Constants {
     const val PREF_THEME_CHANGE_EVENT = "theme_change_temp"
     const val PREF_SET_ON_BOOT = "set_on_boot"
     const val PREF_ICON_SHAPE = "icon_shape"
+    const val PREF_WIND_DOWN = "wind_down"
 
     /**
      * Fixed const values (default, max const values)
@@ -68,12 +69,14 @@ object Constants {
     const val DEFAULT_LIGHT_THEME = false
     const val DEFAULT_SET_ON_BOOT = true
     const val DEFAULT_ICON_SHAPE = 0
+    const val DEFAULT_WIND_DOWN = false
 
     /**
      * Night light setting modes
      */
     const val NL_SETTING_MODE_TEMP = 0
     const val NL_SETTING_MODE_MANUAL = 1
+    const val NL_SETTING_MODE_GRAYS_SCALE = 2
 
     /**
      * Apply types

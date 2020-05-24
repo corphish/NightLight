@@ -79,6 +79,24 @@ object Core {
     }
 
     /**
+     * Enables grayscale
+     * @param context Context is needed for PreferenceHelper
+     */
+    private fun enableGrayScale(context: Context?) {
+        KCALManager.enableKCAL()
+
+        val isModeBooting = PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false)
+
+        // Assume that set on boot failed by default
+        if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
+
+        val ret = KCALManager.enableGrayScale()
+        if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
+
+        PreferenceHelper.putBoolean(context, Constants.PREF_WIND_DOWN, true)
+    }
+
+    /**
      * Disables night light by setting default color values
      * It does not disable KCAL switch though
      * But it does disable force switch
@@ -99,6 +117,16 @@ object Core {
         }
 
         PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, false)
+    }
+
+    /**
+     * Disables grayscale
+     * @param context Context is needed to read Preference values
+     */
+    private fun disableGrayScale(context: Context?) {
+        val ret = KCALManager.disableGrayScale()
+
+        PreferenceHelper.putBoolean(context, Constants.PREF_WIND_DOWN, true)
     }
 
     /**
@@ -143,6 +171,18 @@ object Core {
             enableNightMode(context, temperature)
         else
             disableNightMode(context)
+    }
+
+    /**
+     * Driver method to enable or disable grayscale
+     * @param e Boolean indicating whether or not to enable grayscale
+     * @param context Context is needed to read Preference values
+     */
+    fun applyGrayScale(e: Boolean, context: Context?) {
+        if (e)
+            enableGrayScale(context)
+        else
+            disableGrayScale(context)
     }
 
     /**
@@ -235,6 +275,15 @@ object Core {
     }
 
     /**
+     * Driver method to enable or disable grayscale asynchronously.
+     * @param e Boolean indicating whether or not to enable grayscale
+     * @param context Context is needed to read Preference values
+     */
+    fun applyGrayScaleAsync(b: Boolean, context: Context?) {
+        NightModeApplier(b, context, Constants.NL_SETTING_MODE_GRAYS_SCALE).execute()
+    }
+
+    /**
      * Toggles intensities, and then applies it
      * @param context Tough love for context eh?
      */
@@ -260,6 +309,12 @@ object Core {
         internal var blueColor: Int = 0
         internal var temperature: Int = 0
         internal var context: Context?
+
+        internal constructor(e: Boolean, context: Context?, mode: Int) {
+            this.context = context
+            this.enabled = e
+            this.mode = mode
+        }
 
         internal constructor(enabled: Boolean, context: Context?, redValue: Int, greenValue: Int, blueValue: Int, toUpdateGlobalState: Boolean) {
             this.enabled = enabled
@@ -303,8 +358,10 @@ object Core {
         override fun doInBackground(vararg bubbles: Any): Any? {
             if (mode == Constants.NL_SETTING_MODE_MANUAL)
                 applyNightMode(enabled, context, redColor, greenColor, blueColor)
-            else
+            else if (mode == Constants.NL_SETTING_MODE_TEMP)
                 applyNightMode(enabled, context, temperature)
+            else
+                applyGrayScale(enabled, context)
             return null
         }
 

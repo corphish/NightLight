@@ -33,6 +33,27 @@ class DummyKCALManager : KCALAbstraction {
         return intArrayOf(0, 0, 0)
     }
 
+    /**
+     * Function to determine whether saturation is supported
+     */
+    override fun isSaturationSupported(): Boolean {
+        return false
+    }
+
+    /**
+     * Function to get saturation
+     */
+    override fun getSaturation(): Int {
+        return 0
+    }
+
+    /**
+     * Function to set saturation
+     */
+    override fun setSaturation(value: Int): Boolean {
+        return false
+    }
+
     override fun getImplementationName() = "Dummy KCAL Manager"
 
     override fun getImplementationSwitchPath() = "Not available"
@@ -40,4 +61,5 @@ class DummyKCALManager : KCALAbstraction {
     override fun getImplementationFilePaths() = "Not available"
 
     override fun getImplementationFormat() = "Not applicable"
+    override fun getSaturationPath() = "Not available"
 }

@@ -173,4 +173,16 @@
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:padding">@dimen/defaultPadding</item>
     </style>
+
+    <style name="ExperimentalBadge">
+        <item name="android:text">@string/experimental</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceButton</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="backgroundColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

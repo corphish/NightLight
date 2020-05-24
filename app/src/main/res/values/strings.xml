@@ -151,4 +151,5 @@
 
     <string name="bed_time_title">Bed time</string>
     <string name="bed_time_desc">Bed time mode makes your screen grayscale which can make you fall asleep faster. This is an independent mode which does not depend on and interfere with other Night Light settings. In order to use normal Night Light, you need to disable this mode. tap on the bed icon to enable or disable this mode.</string>
+    <string name="experimental">Experimental</string>
 </resources>

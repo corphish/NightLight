@@ -66,6 +66,7 @@ class SettingFragment: DialogFragment() {
         settingsOptions = listOf(
                 SettingOption(R.string.section_main, R.drawable.ic_power, activityClass = MasterSwitchActivity::class.java),
                 SettingOption(R.string.section_color, R.drawable.ic_color, activityClass = ColorActivity::class.java),
+                SettingOption(R.string.bed_time_title, R.drawable.ic_bed_time_icon, activityClass = BedTimeActivity::class.java),
                 SettingOption(R.string.section_auto, R.drawable.ic_alarm, activityClass = AutomationActivity::class.java),
                 SettingOption(R.string.section_kcal_backup, R.drawable.ic_settings_backup_restore, KCALBackupSettingsFragment()),
                 SettingOption(R.string.section_sob, R.drawable.ic_timer, SetOnBootDelayFragment()),

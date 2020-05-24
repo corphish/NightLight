@@ -144,4 +144,5 @@ object Constants {
     const val AUTOMATE_PROFILE_NAME = "profileName"
 
     const val FRESH_START = "fresh_start"
+    const val FRESH_BED_TIME = "fresh_bed_time"
 }

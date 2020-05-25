@@ -9,9 +9,10 @@ import java.io.File
  */
 
 // File paths
-const val KCAL_RED = "/sys/module/msm_drm/parameters/kcal_red"
-const val KCAL_GREEN = "/sys/module/msm_drm/parameters/kcal_green"
-const val KCAL_BLUE = "/sys/module/msm_drm/parameters/kcal_blue"
+private const val KCAL_RED = "/sys/module/msm_drm/parameters/kcal_red"
+private const val KCAL_GREEN = "/sys/module/msm_drm/parameters/kcal_green"
+private const val KCAL_BLUE = "/sys/module/msm_drm/parameters/kcal_blue"
+private const val KCAL_SAT = "/sys/module/msm_drm/parameters/kcal_sat"
 
 class SDM845KCALManager : KCALAbstraction {
     /**
@@ -60,18 +61,22 @@ class SDM845KCALManager : KCALAbstraction {
     /**
      * Function to determine whether saturation is supported
      */
-    override fun isSaturationSupported() = false
+    override fun isSaturationSupported() = true
 
     /**
      * Function to get saturation
      */
-    override fun getSaturation() = 255
+    override fun getSaturation(): Int {
+        val reading = RootUtils.readOneLine(KCAL_SAT)
+
+        return reading.toInt()
+    }
 
     /**
      * Function to set saturation
      */
     override fun setSaturation(value: Int): Boolean {
-        return false
+        return RootUtils.writeToFile("$value", KCAL_SAT)
     }
 
     override fun getImplementationName() = "KCAL for v4.4 kernels"
@@ -82,5 +87,5 @@ class SDM845KCALManager : KCALAbstraction {
 
     override fun getImplementationFormat() = "%d"
 
-    override fun getSaturationPath() = "Not available"
+    override fun getSaturationPath() = KCAL_SAT
 }

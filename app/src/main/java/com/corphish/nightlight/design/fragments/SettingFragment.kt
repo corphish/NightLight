@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.*
 import com.corphish.nightlight.data.Constants
@@ -63,7 +64,7 @@ class SettingFragment: DialogFragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val settingsAdapter = SettingsAdapter()
-        settingsOptions = listOf(
+        settingsOptions = listOfNotNull(
                 SettingOption(R.string.section_main, R.drawable.ic_power, activityClass = MasterSwitchActivity::class.java),
                 SettingOption(R.string.section_color, R.drawable.ic_color, activityClass = ColorActivity::class.java),
                 SettingOption(R.string.bed_time_title, R.drawable.ic_bed_time_icon, activityClass = BedTimeActivity::class.java),
@@ -74,6 +75,7 @@ class SettingFragment: DialogFragment() {
                 SettingOption(R.string.kcal_driver_information_short, R.drawable.ic_driver, KCALDriverInfoFragment()),
                 SettingOption(R.string.options, R.drawable.ic_settings, OptionsFragment()),
                 SettingOption(R.string.show_support, R.drawable.ic_thumb_up, AppreciationFragment()),
+                if (BuildConfig.FLAVOR == "generic") SettingOption(R.string.pro_short_title, R.drawable.ic_pro, ProFragment()) else null,
                 SettingOption(R.string.about, R.drawable.ic_info, activityClass = AboutActivity::class.java),
                 SettingOption(R.string.faq, R.drawable.ic_help, link = "https://github.com/corphish/NightLight/blob/master/notes/usage.md")
         )

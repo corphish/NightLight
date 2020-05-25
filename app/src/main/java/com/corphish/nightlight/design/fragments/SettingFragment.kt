@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.*
 import com.corphish.nightlight.data.Constants
-import com.corphish.nightlight.engine.KCALManager
 import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
@@ -64,14 +63,14 @@ class SettingFragment: DialogFragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val settingsAdapter = SettingsAdapter()
-        settingsOptions = listOfNotNull(
+        settingsOptions = listOf(
                 SettingOption(R.string.section_main, R.drawable.ic_power, activityClass = MasterSwitchActivity::class.java),
                 SettingOption(R.string.section_color, R.drawable.ic_color, activityClass = ColorActivity::class.java),
-                if (KCALManager.isGrayScaleSupported) SettingOption(R.string.bed_time_title, R.drawable.ic_bed_time_icon, activityClass = BedTimeActivity::class.java) else null,
+                SettingOption(R.string.bed_time_title, R.drawable.ic_bed_time_icon, activityClass = BedTimeActivity::class.java),
                 SettingOption(R.string.section_auto, R.drawable.ic_alarm, activityClass = AutomationActivity::class.java),
                 SettingOption(R.string.section_kcal_backup, R.drawable.ic_settings_backup_restore, KCALBackupSettingsFragment()),
                 SettingOption(R.string.section_sob, R.drawable.ic_timer, SetOnBootDelayFragment()),
-                SettingOption(R.string.profile_title, R.drawable.ic_profiles, activityClass = ProfilesActivity::class.java),
+                SettingOption(R.string.profile_title, R.drawable.ic_profiles, activityClass =  ProfilesActivity::class.java),
                 SettingOption(R.string.kcal_driver_information_short, R.drawable.ic_driver, KCALDriverInfoFragment()),
                 SettingOption(R.string.options, R.drawable.ic_settings, OptionsFragment()),
                 SettingOption(R.string.show_support, R.drawable.ic_thumb_up, AppreciationFragment()),

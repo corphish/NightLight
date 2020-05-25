@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        style="@style/Description"
+        android:textSize="13sp"
         android:text="@string/bed_time_desc"
         android:layout_below="@id/bedTimeSwitch"
         android:gravity="center_horizontal" />

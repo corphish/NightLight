@@ -38,9 +38,9 @@ class BedTimeActivity : AppCompatActivity() {
 
     private fun setViews(b: Boolean) {
         if (b) {
-            bedTimeSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, true, Constants.INTENSITY_TYPE_MINIMUM, darkColors = true))
+            bedTimeSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, true, Constants.INTENSITY_TYPE_MINIMUM))
         } else {
-            bedTimeSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, false, Constants.INTENSITY_TYPE_MINIMUM, darkColors = true))
+            bedTimeSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, false, Constants.INTENSITY_TYPE_MINIMUM))
         }
     }
 }

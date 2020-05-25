@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.*
@@ -18,6 +17,8 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
+import com.corphish.widgets.ktx.adapters.Adapters
+import com.corphish.widgets.ktx.viewholders.ClickableViewHolder
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.layout_settings.*
 
@@ -63,7 +64,6 @@ class SettingFragment: DialogFragment() {
      * from a previous saved state as given here.
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val settingsAdapter = SettingsAdapter()
         settingsOptions = listOfNotNull(
                 SettingOption(R.string.section_main, R.drawable.ic_power, activityClass = MasterSwitchActivity::class.java),
                 SettingOption(R.string.section_color, R.drawable.ic_color, activityClass = ColorActivity::class.java),
@@ -80,16 +80,40 @@ class SettingFragment: DialogFragment() {
                 SettingOption(R.string.faq, R.drawable.ic_help, link = "https://github.com/corphish/NightLight/blob/master/notes/usage.md")
         )
 
-        settingsAdapter.list = settingsOptions
+        val onClickHandler: (View, SettingOption) -> Unit = { _: View, i: SettingOption ->
+            val fragment = i.fragment
+            val activityClass = i.activityClass
+            when {
+                fragment != null -> fragment.show(childFragmentManager, "")
+                activityClass != null -> {
+                    context?.startActivity(Intent(context, activityClass))
+                }
+                i.link != null -> {
+                    ExternalLink.open(context, i.link)
+                }
+            }
+        }
 
         recyclerView.invalidateItemDecorations()
         recyclerView.layoutManager = GridLayoutManager(context, resources.getInteger(R.integer.gridSpanCount))
-        recyclerView.adapter = settingsAdapter
+        recyclerView.adapter = Adapters.newStaticAdapter<SettingOption, ClickableViewHolder> {
+            layoutResourceId = R.layout.setting_option_item
+            listItems = settingsOptions
+            viewHolder = { v ->
+                ClickableViewHolder(v, listOf(R.id.settingOptionIcon, R.id.settingOptionCaption)) {view, i -> onClickHandler(view, settingsOptions[i]) }
+            }
+            binding = { clickableViewHolder, item ->
+                clickableViewHolder.getViewById<ImageButton>(R.id.settingOptionIcon)?.setImageResource(item.iconId)
+                clickableViewHolder.getViewById<ImageButton>(R.id.settingOptionIcon)?.setOnClickListener {
+                    onClickHandler(it, item)
+                }
+                clickableViewHolder.getViewById<TextView>(R.id.settingOptionCaption)?.text = getString(item.name)
+            }
+            notifyDataSetChanged = true
+        }
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.isNestedScrollingEnabled = false
         recyclerView.setHasFixedSize(false)
-
-        settingsAdapter.notifyDataSetChanged()
 
         NightLightAppService.instance.incrementViewInitCount()
 
@@ -100,47 +124,6 @@ class SettingFragment: DialogFragment() {
         super.onCreate(savedInstanceState)
 
         toResumeThemeChangeAction = savedInstanceState != null
-    }
-
-    private inner class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.CustomViewHolder>() {
-        lateinit var list: List<SettingOption>
-
-        inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-            internal var icon = v.findViewById<ImageButton>(R.id.settingOptionIcon)
-            internal var caption = v.findViewById<TextView>(R.id.settingOptionCaption)
-
-            init {
-                v.setOnClickListener(this)
-                icon.setOnClickListener(this)
-            }
-
-            override fun onClick(v: View) {
-                val fragment = list[adapterPosition].fragment
-                val activityClass = list[adapterPosition].activityClass
-                if (fragment != null)
-                    fragment.show(childFragmentManager, "")
-                else if (activityClass != null) {
-                    context?.startActivity(Intent(context, activityClass))
-                } else if (list[adapterPosition].link != null) {
-                    ExternalLink.open(context, list[adapterPosition].link!!)
-                }
-            }
-        }
-
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
-            val itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.setting_option_item, parent, false)
-
-            return CustomViewHolder(itemView)
-        }
-
-        override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-            holder.icon.setImageResource(list[position].iconId)
-            holder.caption.setText(list[position].name)
-        }
-
-        override fun getItemCount() = list.size
     }
 
     /**

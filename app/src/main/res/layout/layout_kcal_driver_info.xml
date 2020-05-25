@@ -53,4 +53,14 @@
         custom:keyText="@string/impl_format"
         custom:keySize="@dimen/text_normal"
         custom:valueSize="@dimen/text_desc"/>
+
+    <com.corphish.widgets.ktx.KeyValueView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/satPath"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        custom:keyText="@string/saturation_path"
+        custom:keySize="@dimen/text_normal"
+        custom:valueSize="@dimen/text_desc"/>
 </LinearLayout>

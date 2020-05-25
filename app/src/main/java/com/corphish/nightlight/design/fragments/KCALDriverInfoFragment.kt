@@ -26,5 +26,6 @@ class KCALDriverInfoFragment : BaseBottomSheetDialogFragment() {
         implSwitchPath.valueText = kcalImplementation.getImplementationSwitchPath()
         implFilePaths.valueText = kcalImplementation.getImplementationFilePaths()
         implFormat.valueText = kcalImplementation.getImplementationFormat()
+        satPath.valueText = kcalImplementation.getSaturationPath()
     }
 }

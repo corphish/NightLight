@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.corphish.nightlight.R
-import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment
 import com.corphish.nightlight.helpers.ExternalLink
 import kotlinx.android.synthetic.main.bottom_sheet_msg.*

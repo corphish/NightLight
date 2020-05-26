@@ -35,3 +35,9 @@ A. Dark hours is a time period, usually from the time set by the user to the end
 __Q. What is the point of having dark hours?__
 A. The main purpose of dark hours feature is to give the intensity types (minimum and maximum intensity) an automatic control. If dark hours setting is set, minimum intensity is applied from start of the automatic period to this time, and the maximum intensity is applied until the end of the schedule.
 
+__Q. Is there any additional feature in Pro version?__
+A. Yes, starting with version 2.6.0, Night Light Pro is available which replaces the former Night Light Donate version. And it has additional features like better UI and more functionality.
+
+__Q. Is the Pro version open source?__
+A. No, the Pro version is not open source. It shares the same codebase as the generic version, with additional pro enhancements. Functionality wise, what you can do in Pro version, you can do it in generic version as well. Pro version just makes that easier for you.
+

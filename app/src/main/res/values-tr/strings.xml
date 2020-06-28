@@ -12,7 +12,7 @@
     <string name="end_time">Bitiş zamanı</string>
     <string name="dark_hours_title">Karanlık zamanları etkinleştir</string>
     <string name="dark_hours_desc">Bu, otomatik zaman çizelgesinin bir parçası olarak minimum ve maksimum yoğunlukların kullanılmasını sağlar. Etkinleştirilirse, minimum yoğunluk başlangıç ​​zamanından karanlık saat başlangıç ​​zamanına kadar uygulanır ve maksimum yoğunluk daha sonra program sona erene kadar kullanılacaktır.</string>
-    <string name="dark_hours_start_time">Karanlık sürelerin başlama zamanı</string>
+    <string name="dark_hours_start_time">Karanlık zamanların başlama zamanı</string>
     <string name="dark_hours_set_error">Zaman, program başlangıç ​​zamanı ve bitiş zamanı arasında olmalıdır</string>
     <string name="about">Hakkında</string>
     <string name="app_desc">Night Lamb, karanlıkta telefonunuzu kullandığınızda gözleriniz için daha uygun olan mavi ışığın yoğunluğunu ayarlamak amacıyla Qualcomm cihazlarının yeni üretimi için ekran sürücüsü ayarlama özelliği olan KCAL\'ı kullanır ve uykuya dalmanıza yardım eder. Sürücü seviyesinde değişiklikler yaptığı ve yazılım bindirmesi kullanmadığı için batarya dostudur ve değişim ekranın her yerinde görülebilir.</string>

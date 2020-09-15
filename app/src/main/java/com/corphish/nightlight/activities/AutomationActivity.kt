@@ -12,7 +12,6 @@ import androidx.core.app.ActivityCompat
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
-import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.engine.TwilightManager
 import com.corphish.nightlight.helpers.AlarmUtils
@@ -24,50 +23,70 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_automation.*
 import kotlinx.android.synthetic.main.layout_header.*
 
+/**
+ * This activity provides user the interface to customise the
+ * automation capabilities provided by the app.
+ */
 class AutomationActivity : AppCompatActivity(), LocationListener {
-    private var sunSwitchStatus: Boolean = false
-    private var autoSwitchStatus: Boolean = false
+
+    // We have 3 switches:
+    // 1. Auto switch - Master switch to enable the automation.
+    // 2. Sun switch - Switch to toggle whether sunset/sunrise times are
+    //    used or not.
+    // 3. Dark switch - Switch to enable or disable dark hours.
+    private var autoSwitchStatus = false
+    private var sunSwitchStatus = false
     private var darkHoursEnabled = false
 
+    // Location variables
+    // Location is used to determine sunset/sunrise times.
     private val locationRequestCode = 69
     private var locationPermissionAvailable = false
-
     private var location: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Apply theme based on user selection
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_automation)
 
+        // Populate header
         banner_title.text = getString(R.string.section_auto)
         banner_icon.setImageResource(R.drawable.ic_alarm)
 
+        // Initialize switch values from Preference.
         autoSwitchStatus = PreferenceHelper.getBoolean(this, Constants.PREF_AUTO_SWITCH)
         sunSwitchStatus = PreferenceHelper.getBoolean(this, Constants.PREF_SUN_SWITCH)
         darkHoursEnabled = PreferenceHelper.getBoolean(this, Constants.PREF_DARK_HOURS_ENABLE)
 
+        // Finally init views
         initViews()
     }
 
+    /**
+     * Associates view click listeners and initializes them.
+     */
     private fun initViews() {
-        FontUtils().setCustomFont(this, autoEnable, sunEnable, darkHoursEnable)
-
+        // Handle auto switch changes
         autoEnable.setOnCheckedChangeListener { _, b ->
             autoSwitchStatus = b
-            if (b)
+
+            if (b) {
                 doCurrentAutoFunctions(true)
-            else {
+            } else {
                 Core.applyNightModeAsync(true, this)
             }
 
             PreferenceHelper.putBoolean(this, Constants.PREF_AUTO_SWITCH, b)
-
             enableOrDisableAutoSwitchViews(b)
         }
 
+        // Handle sun switch changes
         sunEnable.setOnCheckedChangeListener { _, b ->
             PreferenceHelper.putBoolean(this, Constants.PREF_SUN_SWITCH, b)
             sunSwitchStatus = b
+
             if (b) {
                 doLocationStuff()
             } else {
@@ -83,20 +102,16 @@ class AutomationActivity : AppCompatActivity(), LocationListener {
                 addNextDayIfNecessary()
                 doCurrentAutoFunctions(true)
             }
+
             fixDarkHoursStartTime()
             enableOrDisableAutoSwitchViews(autoEnable.isChecked)
         }
-        autoEnable.isChecked = autoSwitchStatus
-        sunEnable.isChecked = sunSwitchStatus
 
+        // Set time click listeners
         startTime.setOnClickListener { showTimePickerDialog(startTime, Constants.PREF_START_TIME) }
         endTime.setOnClickListener { showTimePickerDialog(endTime, Constants.PREF_END_TIME) }
 
-        startTime.valueText = PreferenceHelper.getString(this, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!
-        endTime.valueText = PreferenceHelper.getString(this, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!
-
-        addNextDayIfNecessary()
-
+        // Handle dark hours switch click
         darkHoursEnable.setOnCheckedChangeListener { _, b ->
             darkHoursEnabled = b
             PreferenceHelper.putBoolean(this, Constants.PREF_DARK_HOURS_ENABLE, b)
@@ -104,9 +119,18 @@ class AutomationActivity : AppCompatActivity(), LocationListener {
             fixDarkHoursStartTime()
         }
 
-        darkHoursEnable.isChecked = darkHoursEnabled
-
+        // Handle dark start time click
         darkStartTime.setOnClickListener { showTimePickerDialog(darkStartTime, Constants.PREF_DARK_HOURS_START) }
+
+        autoEnable.isChecked = autoSwitchStatus
+        sunEnable.isChecked = sunSwitchStatus
+
+        startTime.valueText = PreferenceHelper.getString(this, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!
+        endTime.valueText = PreferenceHelper.getString(this, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!
+
+        addNextDayIfNecessary()
+
+        darkHoursEnable.isChecked = darkHoursEnabled
         darkStartTime.valueText = PreferenceHelper.getString(this, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)!!
 
         enableOrDisableAutoSwitchViews(autoSwitchStatus)
@@ -146,7 +170,7 @@ class AutomationActivity : AppCompatActivity(), LocationListener {
      */
     private fun showTimePickerDialog(viewWhoIsCallingIt: KeyValueView?, prefKey: String) {
         val time = TimeUtils.currentTimeAsHourAndMinutes
-        val timePickerDialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { _, i, i1 ->
+        val timePickerDialog = TimePickerDialog(this, { _, i, i1 ->
             val selectedHour = if (i < 10) "0$i" else "" + i
             val selectedMinute = if (i1 < 10) "0$i1" else "" + i1
             val timeString = "$selectedHour:$selectedMinute"
@@ -166,15 +190,23 @@ class AutomationActivity : AppCompatActivity(), LocationListener {
         timePickerDialog.show()
     }
 
+    /**
+     * This method fixes dark start time by checking if the input
+     * time is within the schedule or not.
+     *
+     * @param darkTime Dark start time as entered by user.
+     */
     private fun fixDarkHoursStartTime(darkTime: String? = null) {
         val start = PreferenceHelper.getString(this, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
         val end = PreferenceHelper.getString(this, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
-        val test = darkTime ?: PreferenceHelper.getString(this, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)
+        val test = darkTime
+                ?: PreferenceHelper.getString(this, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)
 
         // Unnecessary null checks but enables smart casting
         if (start == null || end == null) return
 
         val b = TimeUtils.determineWhetherNLShouldBeOnOrNot(start, end, test)
+
         if (!b) {
             darkStartTime.valueText = start
             PreferenceHelper.putString(this, Constants.PREF_DARK_HOURS_START, start)

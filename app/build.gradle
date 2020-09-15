@@ -79,27 +79,36 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Kotlin core
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Android core
     implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation "androidx.preference:preference-ktx:1.1.1"
+
+    // UI
     implementation 'com.google.android.material:material:1.3.0-alpha02'
-
-    implementation 'eu.chainfire:libsuperuser:1.0.0.201704021214'
-
-    implementation 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
-    implementation 'com.github.mc0239:EditableSeekBar:v1.3.0'
-
-    implementation 'com.github.corphish:widgets-ktx:0.3.2'
-
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
     implementation 'androidx.navigation:navigation-ui:2.3.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+    implementation 'com.github.mc0239:EditableSeekBar:v1.3.0'
+    implementation 'com.github.corphish:widgets-ktx:0.3.2'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+
+    // Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    // Root
+    implementation 'eu.chainfire:libsuperuser:1.0.0.201704021214'
+
+    // Utilities
+    implementation 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
+
+    // Crash reporting
     genericImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     donateImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.gridlayout:gridlayout:1.0.0'
-    implementation "androidx.preference:preference-ktx:1.1.1"
 }

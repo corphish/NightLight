@@ -107,6 +107,7 @@ dependencies {
 
     // Utilities
     implementation 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
+    implementation 'androidx.preference:preference:1.1.1'
 
     // Crash reporting
     genericImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'

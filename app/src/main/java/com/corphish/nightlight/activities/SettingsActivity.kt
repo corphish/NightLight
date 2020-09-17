@@ -5,17 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.corphish.nightlight.R
+import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.design.ThemeUtils
 
 private const val TITLE_TAG = "settingsActivityTitle"
 
-class SettingsActivity : AppCompatActivity(),
+class SettingsActivity : BaseActivity(),
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.settings_activity)
+
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
@@ -23,11 +25,15 @@ class SettingsActivity : AppCompatActivity(),
                     .commit()
         } else {
             title = savedInstanceState.getCharSequence(TITLE_TAG)
+            setActionBarTitle(title.toString())
         }
+
+        useCustomActionBar()
+        setActionBarTitle(R.string.title_activity_settings)
 
         supportFragmentManager.addOnBackStackChangedListener {
             if (supportFragmentManager.backStackEntryCount == 0) {
-                setTitle(R.string.title_activity_settings)
+                setActionBarTitle(R.string.title_activity_settings)
             }
         }
 

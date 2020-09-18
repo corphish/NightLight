@@ -123,6 +123,7 @@
     <string name="light_theme_desc">Enables light theme with light background and slightly different looks.</string>
 
     <string name="show_support">Show support</string>
+    <string name="support_desc">Your appreciation and support keeps me motivated to keep on working on this project.</string>
     <string name="rate">Rate this app</string>
     <string name="get_donate">Donate</string>
 

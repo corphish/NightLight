@@ -1,6 +1,8 @@
 package com.corphish.nightlight.activities
 
+import android.graphics.Color
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.corphish.nightlight.BuildConfig
@@ -12,6 +14,7 @@ import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.widgets.ktx.dialogs.MessageAlertDialog
 import com.corphish.widgets.ktx.dialogs.SingleChoiceAlertDialog
+import com.corphish.widgets.ktx.dialogs.properties.IconProperties
 
 private const val TITLE_TAG = "settingsActivityTitle"
 
@@ -114,9 +117,17 @@ class SettingsActivity : BaseActivity(),
 
             // Show appreciation fragment
             findPreference<Preference>("show_support")?.setOnPreferenceClickListener {
+                val background = ContextCompat.getDrawable(requireContext(), ThemeUtils.getThemeIconShape(requireContext()))
+
                 SingleChoiceAlertDialog(requireContext()).apply {
                     titleResId = R.string.show_support
+                    messageResId = R.string.support_desc
                     dismissOnChoiceSelection = false
+                    animationResourceLayout = R.raw.appreciate
+                    iconProperties = IconProperties(
+                            iconColor = if (ThemeUtils.isLightTheme(requireContext())) Color.WHITE else Color.BLACK,
+                            backgroundDrawable = background
+                    )
                     choiceList = listOf(
                             SingleChoiceAlertDialog.ChoiceItem(
                                     titleResId = R.string.rate,

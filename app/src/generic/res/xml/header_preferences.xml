@@ -1,94 +1,107 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Preference
+    <com.corphish.nightlight.design.preference.SectionPreference
+        app:allowDividerBelow="false"
         app:icon="@drawable/ic_power"
         app:title="@string/section_main">
         <intent
             android:targetClass="com.corphish.nightlight.activities.MasterSwitchActivity"
             android:targetPackage="com.corphish.nightlight.generic" />
-    </Preference>
+    </com.corphish.nightlight.design.preference.SectionPreference>
 
-    <Preference
+    <com.corphish.nightlight.design.preference.SectionPreference
+        app:allowDividerBelow="false"
         app:icon="@drawable/ic_color"
         app:title="@string/section_color">
         <intent
             android:targetClass="com.corphish.nightlight.activities.ColorActivity"
             android:targetPackage="com.corphish.nightlight.generic" />
-    </Preference>
+    </com.corphish.nightlight.design.preference.SectionPreference>
 
-    <Preference
+    <com.corphish.nightlight.design.preference.SectionPreference
+        app:allowDividerBelow="false"
         app:icon="@drawable/ic_bed_time_icon"
         app:title="@string/bed_time_title">
         <intent
             android:targetClass="com.corphish.nightlight.activities.BedTimeActivity"
             android:targetPackage="com.corphish.nightlight.generic" />
-    </Preference>
+    </com.corphish.nightlight.design.preference.SectionPreference>
 
-    <Preference
+    <com.corphish.nightlight.design.preference.SectionPreference
+        app:allowDividerBelow="false"
         app:fragment="com.corphish.nightlight.design.fragments.AutomationFragment"
         app:icon="@drawable/ic_alarm"
         app:title="@string/section_auto" />
 
-    <Preference
+    <com.corphish.nightlight.design.preference.SectionPreference
+        app:allowDividerBelow="false"
         app:fragment="com.corphish.nightlight.design.fragments.KCALBackupSettingsFragment"
         app:icon="@drawable/ic_settings_backup_restore"
         app:summary="@string/kcal_backup_set_desc"
         app:title="@string/section_kcal_backup" />
 
-    <Preference
+    <com.corphish.nightlight.design.preference.SectionPreference
+        app:allowDividerBelow="false"
         app:fragment="com.corphish.nightlight.design.fragments.SetOnBootDelayFragment"
         app:icon="@drawable/ic_timer"
         app:title="@string/section_sob" />
 
-    <Preference
+    <com.corphish.nightlight.design.preference.SectionPreference
         app:icon="@drawable/ic_profiles"
         app:key="profiles"
         app:title="@string/profile_title">
         <intent
             android:targetClass="com.corphish.nightlight.activities.ProfilesActivity"
             android:targetPackage="com.corphish.nightlight.generic" />
-    </Preference>
+    </com.corphish.nightlight.design.preference.SectionPreference>
 
-    <PreferenceCategory app:title="@string/title_activity_settings">
-        <Preference
+    <PreferenceCategory
+        app:allowDividerBelow="false"
+        app:title="@string/title_activity_settings">
+        <com.corphish.nightlight.design.preference.SectionPreference
             app:fragment="com.corphish.nightlight.design.fragments.OptionsFragment"
             app:icon="@drawable/ic_settings"
             app:title="@string/title_activity_settings" />
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/info">
-        <Preference
+    <PreferenceCategory
+        app:allowDividerBelow="false"
+        app:title="@string/info">
+        <com.corphish.nightlight.design.preference.SectionPreference
+            app:allowDividerBelow="false"
             app:fragment="com.corphish.nightlight.design.fragments.KCALDriverInfoFragment"
             app:icon="@drawable/ic_driver"
             app:key="kcal_driver"
             app:title="@string/kcal_driver_information_short" />
 
-        <Preference
+        <com.corphish.nightlight.design.preference.SectionPreference
+            app:allowDividerBelow="false"
             app:icon="@drawable/ic_info"
             app:key="about"
             app:title="@string/about">
             <intent
                 android:targetClass="com.corphish.nightlight.activities.AboutActivity"
                 android:targetPackage="com.corphish.nightlight.generic" />
-        </Preference>
+        </com.corphish.nightlight.design.preference.SectionPreference>
 
-        <Preference
+        <com.corphish.nightlight.design.preference.SectionPreference
             app:icon="@drawable/ic_help"
-            app:title="@string/faq"
-            app:key="@string/faq" />
+            app:key="@string/faq"
+            app:title="@string/faq" />
     </PreferenceCategory>
 
-    <PreferenceCategory>
-
-        <Preference
-            app:key="show_support"
+    <PreferenceCategory app:allowDividerBelow="false">
+        <com.corphish.nightlight.design.preference.SectionPreference
+            app:allowDividerBelow="false"
             app:icon="@drawable/ic_thumb_up"
+            app:key="show_support"
             app:title="@string/show_support" />
 
-        <Preference
-            app:key="pro_version"
+        <com.corphish.nightlight.design.preference.SectionPreference
+            app:allowDividerBelow="false"
             app:icon="@drawable/ic_pro"
+            app:key="pro_version"
             app:title="@string/pro_short_title" />
     </PreferenceCategory>
 </PreferenceScreen>

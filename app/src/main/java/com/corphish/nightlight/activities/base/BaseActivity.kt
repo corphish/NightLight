@@ -1,9 +1,12 @@
 package com.corphish.nightlight.activities.base
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.corphish.nightlight.R
+import com.corphish.nightlight.design.ThemeUtils
 import kotlinx.android.synthetic.main.layout_action_bar.*
 
 /**
@@ -17,6 +20,18 @@ open class BaseActivity: AppCompatActivity() {
     fun useCustomActionBar() {
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.layout_action_bar)
+
+        // According to the docs, colorPrimary attribute defines
+        // action bar color. In dark theme this does not hold true,
+        // as it is black by default. But in light theme, it is as
+        // expected. We would like to have light background in light
+        // theme, hence this change.
+        if (ThemeUtils.isLightTheme(this)) {
+            supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#fefefe")))
+            if (tvTitle != null) {
+                tvTitle.setTextColor(Color.BLACK)
+            }
+        }
     }
 
     /**

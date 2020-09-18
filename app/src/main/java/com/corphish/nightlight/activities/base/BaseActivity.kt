@@ -28,6 +28,7 @@ open class BaseActivity: AppCompatActivity() {
         // theme, hence this change.
         if (ThemeUtils.isLightTheme(this)) {
             supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#fefefe")))
+            supportActionBar?.elevation = 0f
             if (tvTitle != null) {
                 tvTitle.setTextColor(Color.BLACK)
             }

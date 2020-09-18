@@ -96,7 +96,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     implementation 'com.github.mc0239:EditableSeekBar:v1.3.0'
-    implementation 'com.github.corphish:widgets-ktx:0.3.3'
+    implementation 'com.github.corphish:widgets-ktx:0.3.4'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
     // Lifecycle

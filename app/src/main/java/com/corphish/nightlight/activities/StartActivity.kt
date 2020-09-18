@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.View
+import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.R
 
 import com.corphish.nightlight.data.Constants
@@ -166,6 +167,10 @@ class StartActivity : AppCompatActivity() {
                 alertPlaceholder.visibility = View.VISIBLE
             } else {
                 PreferenceHelper.putBoolean(applicationContext, Constants.COMPATIBILITY_TEST, true)
+                switchToMain()
+            }
+
+            if (BuildConfig.DEBUG) {
                 switchToMain()
             }
         }

@@ -1,8 +1,8 @@
 package com.corphish.nightlight.activities
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.corphish.nightlight.R
+import com.corphish.nightlight.activities.base.BaseActivity
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
@@ -16,7 +16,7 @@ import com.corphish.nightlight.extensions.toArrayOfInts
 import com.corphish.nightlight.interfaces.ThemeChangeListener
 import kotlinx.android.synthetic.main.content_main.*
 
-class MainActivity : AppCompatActivity(), NightLightStateListener, NightLightSettingModeListener, ThemeChangeListener {
+class MainActivity : BaseActivity(), NightLightStateListener, NightLightSettingModeListener, ThemeChangeListener {
 
     private var masterSwitchEnabled: Boolean = false
     private val containerId = R.id.container
@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity(), NightLightStateListener, NightLightSet
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_main)
+
+        useCustomActionBar()
+        setActionBarTitle(R.string.dashboard)
 
         NightLightAppService.instance
                 .registerNightLightStateListener(this)

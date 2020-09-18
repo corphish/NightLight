@@ -12,13 +12,13 @@
     <string name="no_kcal_desc">Your kernel does not support KCAL. KCAL is a display driver tuning feature for Qualcomm devices. KCAL support is needed for Night Light to work.</string>
 
     <string name="auto_enable">Automatic switch</string>
-    <string name="auto_enable_desc">Automatically enable Night Light between the specified time. Night Light will be automatically disabled outside this time range.</string>
+    <string name="auto_enable_desc">Automatically enable Night Light between the specified time and disable outside the specified time.</string>
     <string name="start_time">Start time</string>
     <string name="end_time">End time</string>
     <string name="dark_hours_title">Enable dark hours</string>
-    <string name="dark_hours_desc">This enables the use of minimum and maximum intensities as a part of automated time schedule. If enabled, the minimum intensity will be applied from start time to dark hours start time, and maximum intensity will be used then on until the schedule ends.</string>
+    <string name="dark_hours_desc">Set the time when maximum intensity will be applied. Minimum intensity will be applied before this.</string>
     <string name="dark_hours_start_time">Dark hours start time</string>
-    <string name="dark_hours_set_error">Time must be in between schedule start time and end time</string>
+    <string name="dark_hours_set_error">Time must be in between schedule start time and end time.</string>
 
     <string name="start_time_default" translatable="false">00:00</string>
     <string name="end_time_default" translatable="false">06:00</string>
@@ -34,7 +34,8 @@
 
     <string name="location_unavailable">Unable to get your last known location.</string>
 
-    <string name="kcal_preservce_value_msg">Preserve current KCAL values</string>
+    <string name="kcal_preserve_value_title">Preserve KCAL values</string>
+    <string name="kcal_preserve_value_msg">Preserves old KCAL values before Night Light is turned on, and the applies the same when it is turned off.</string>
     <string name="contributors">Contributors</string>
 
     <string name="color_temperature_title">Color Temperature</string>
@@ -45,8 +46,8 @@
     <string name="set_on_boot_delay_warn">Looks like Night Light settings were restored but could not be applied after most recent boot. Consider increasing this delay so that settings can be successfully restored and applied after boot.</string>
 
     <string name="section_kcal_backup">KCAL Backup</string>
-    <string name="kcal_backup_set_title">KCAL Backup Settings</string>
-    <string name="kcal_backup_set_desc">You can configure your old KCAL settings here. These settings will applied when night light is turned off.</string>
+    <string name="kcal_backup_set_title">Configure KCAL value</string>
+    <string name="kcal_backup_set_desc">Configure your old KCAL settings, which will be applied when night light is turned off.</string>
     <string name="red">Red</string>
     <string name="green">Green</string>
     <string name="blue">Blue</string>
@@ -83,9 +84,10 @@
     <string name="section_auto">Automation</string>
     <string name="section_profiles_list">List of profiles created</string>
 
-    <string name="profiles_desc">Profiles are collection of settings which can be applied with one click, or let apps like Tasker to apply it for you using the automation capabilities that they provide.</string>
+    <string name="profiles_desc">Profiles are collection of settings which can be applied with one click, or let apps like Tasker to apply it for you using the automation capabilities that they provide.</string>"
 
-    <string name="kcal_backup_every_time_before_enabling">Backup current KCAL values every time before Night Light is enabled</string>
+    <string name="kcal_backup_every_time_title">Backup every time</string>
+    <string name="kcal_backup_every_time_before_enabling">Backup current KCAL values every time before Night Light is enabled.</string>
 
     <string name="faq">F.A.Q</string>
 
@@ -157,20 +159,6 @@
     <string name="pro_short_title">Pro version</string>
     <string name="pro_long_title">Get Pro version</string>
     <string name="pro_desc">The pro version of Night Light has even better UI and cool new features and functions. By getting the pro version, you also show appreciation and support for the project and motivate me to continue working on it. Do you want to get pro version now?</string>
-    <string name="title_activity_settings">SettingsActivity</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>

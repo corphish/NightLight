@@ -1,86 +1,45 @@
 package com.corphish.nightlight.design.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.SeekBar
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SeekBarPreference
 
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
-import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment
-import com.corphish.nightlight.design.utils.FontUtils
-import com.corphish.nightlight.helpers.PreferenceHelper
-import com.gregacucnik.EditableSeekBar
-import kotlinx.android.synthetic.main.layout_set_on_boot_delay.*
 
 /**
  * Created by avinabadalal on 13/02/18.
  * Set on boot delay fragment
  */
+class SetOnBootDelayFragment : PreferenceFragmentCompat() {
+    /**
+     * Called during [.onCreate] to supply the preferences for this fragment.
+     * Subclasses are expected to call [.setPreferenceScreen] either
+     * directly or via helper methods such as [.addPreferencesFromResource].
+     *
+     * @param savedInstanceState If the fragment is being re-created from a previous saved state,
+     * this is the state.
+     * @param rootKey            If non-null, this preference fragment should be rooted at the
+     * [PreferenceScreen] with this key.
+     */
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.set_on_boot_delay_preference, rootKey)
 
-class SetOnBootDelayFragment : BaseBottomSheetDialogFragment() {
-    private var bootDelay: Int = 0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        bootDelay = PreferenceHelper.getInt(context, Constants.PREF_BOOT_DELAY, Constants.DEFAULT_BOOT_DELAY)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.layout_set_on_boot_delay, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        setOnBootSwitch.setOnCheckedChangeListener { _, b ->
-            PreferenceHelper.putBoolean(context, Constants.PREF_SET_ON_BOOT, b)
-            setOnBootStatus.setText(if (b) R.string.set_on_boot_switch_enabled_desc else R.string.set_on_boot_switch_disabled_desc)
-            setOnBootDelay.isEnabled = b
+        val delayPref = findPreference<SeekBarPreference>(Constants.PREF_BOOT_DELAY)
+        delayPref?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
+            /**
+             * Called when a preference has been changed by the user. This is called before the state
+             * of the preference is about to be updated and before the state is persisted.
+             *
+             * @param preference The changed preference
+             * @param newValue   The new value of the preference
+             * @return `true` to update the state of the preference with the new value
+             */
+            preference.summary = getString(R.string.set_on_boot_delay_desc, newValue.toString() + "s")
+            true
         }
 
-        setOnBootSwitch.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_SET_ON_BOOT, Constants.DEFAULT_SET_ON_BOOT)
-
-        setOnBootDesc.text = getString(R.string.set_on_boot_delay_desc, bootDelay.toString() + "s")
-
-        setOnBootDelay.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
-            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-                bootDelay = seekBar.progress
-                setOnBootDesc.text = getString(R.string.set_on_boot_delay_desc, bootDelay.toString() + "s")
-                PreferenceHelper.putInt(context, Constants.PREF_BOOT_DELAY, bootDelay)
-            }
-
-            override fun onEnteredValueTooHigh() {
-                setOnBootDelay.value = 60
-            }
-
-            override fun onEnteredValueTooLow() {
-                setOnBootDelay.value = 0
-            }
-
-            override fun onEditableSeekBarValueChanged(value: Int) {
-                bootDelay = value
-                setOnBootDesc.text = getString(R.string.set_on_boot_delay_desc, bootDelay.toString() + "s")
-                PreferenceHelper.putInt(context, Constants.PREF_BOOT_DELAY, bootDelay)
-            }
-        })
-
-        setOnBootDelay.value = bootDelay
-
-        setOnBootWarn.visibility = if (PreferenceHelper.getBoolean(context, Constants.PREF_LAST_BOOT_RES, true)) View.GONE else View.VISIBLE
-
-        FontUtils().setCustomFont(requireContext(), setOnBootSwitch)
+        delayPref?.summary = getString(R.string.set_on_boot_delay_desc, delayPref?.value.toString() + "s")
     }
 }

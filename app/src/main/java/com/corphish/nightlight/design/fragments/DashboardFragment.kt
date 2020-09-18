@@ -9,7 +9,7 @@ import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
-import com.corphish.nightlight.activities.AutomationActivity
+import com.corphish.nightlight.activities.SettingsActivity
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.engine.Core
@@ -58,12 +58,13 @@ class DashboardFragment: Fragment() {
         updateDashboard()
 
         moreOptions.setOnClickListener {
-            SettingFragment().show(childFragmentManager, "")
+            // SettingFragment().show(childFragmentManager, "")
+            requireContext().startActivity(Intent(requireContext(), SettingsActivity::class.java))
         }
 
         val nlOptionClickListener = View.OnClickListener { toggleNightLight() }
         val intensityOptionClickListener = View.OnClickListener { toggleIntensities() }
-        val automateOptionClickListener = View.OnClickListener { context?.startActivity(Intent(context, AutomationActivity::class.java)) }
+        val automateOptionClickListener = View.OnClickListener { context?.startActivity(Intent(context, AutomationFragment::class.java)) }
 
         forceToggleView.setOnClickListener(nlOptionClickListener)
         forceToggleIcon.setOnClickListener(nlOptionClickListener)

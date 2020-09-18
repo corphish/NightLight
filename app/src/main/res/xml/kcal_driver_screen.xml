@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Preference
+        app:key="kcal_impl_name"
+        app:title="@string/impl_name" />
+
+    <Preference
+        app:key="kcal_impl_switch_path"
+        app:title="@string/impl_switch_path" />
+
+    <Preference
+        app:key="kcal_impl_rgb_path"
+        app:title="@string/impl_rgb_file_paths" />
+
+    <Preference
+        app:key="kcal_format_spec"
+        app:title="@string/impl_rgb_file_paths" />
+
+    <Preference
+        app:key="kcal_sat_path"
+        app:title="@string/saturation_path" />
+</PreferenceScreen>

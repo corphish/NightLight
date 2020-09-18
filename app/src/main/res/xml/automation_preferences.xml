@@ -1,0 +1,39 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        app:key="auto_switch"
+        app:summary="@string/auto_enable_desc"
+        app:title="@string/auto_enable" />
+
+    <PreferenceCategory>
+
+        <SwitchPreferenceCompat
+            app:dependency="auto_switch"
+            app:disableDependentsState="true"
+            app:key="sun_switch"
+            app:title="@string/sun_switch" />
+
+        <Preference
+            app:dependency="sun_switch"
+            app:key="start_time"
+            app:title="@string/start_time" />
+
+        <Preference
+            app:dependency="sun_switch"
+            app:key="end_time"
+            app:title="@string/end_time" />
+    </PreferenceCategory>
+
+    <PreferenceCategory>
+        <SwitchPreferenceCompat
+            app:dependency="auto_switch"
+            app:key="dark_hours_enable"
+            app:summary="@string/dark_hours_desc"
+            app:title="@string/dark_hours_title" />
+
+        <Preference
+            app:dependency="dark_hours_enable"
+            app:key="dark_hours_start"
+            app:title="@string/dark_hours_start_time" />
+    </PreferenceCategory>
+</PreferenceScreen>

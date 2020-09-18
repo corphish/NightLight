@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        app:defaultValue="true"
+        app:key="set_on_boot"
+        app:summaryOff="@string/set_on_boot_switch_disabled_desc"
+        app:summaryOn="@string/set_on_boot_switch_enabled_desc"
+        app:title="@string/set_on_boot_switch_title" />
+
+    <SeekBarPreference
+        android:max="60"
+        app:defaultValue="20"
+        app:dependency="set_on_boot"
+        app:key="boot_delay"
+        app:min="0"
+        app:showSeekBarValue="true"
+        app:title="@string/set_on_boot_delay_title" />
+</PreferenceScreen>

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppThemeCircular" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="AppThemeCircular" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -15,7 +15,7 @@
         <item name="themeButtonRadius">32dp</item>
     </style>
 
-    <style name="AppThemeLightCircular" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppThemeLightCircular" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">#dcdcdc</item>
@@ -31,7 +31,7 @@
         <item name="themeButtonRadius">32dp</item>
     </style>
 
-    <style name="AppThemeSquare" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="AppThemeSquare" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -46,7 +46,7 @@
         <item name="themeButtonRadius">0dp</item>
     </style>
 
-    <style name="AppThemeLightSquare" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppThemeLightSquare" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">#dcdcdc</item>
@@ -62,7 +62,7 @@
         <item name="themeButtonRadius">0dp</item>
     </style>
 
-    <style name="AppThemeRoundedSquare" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="AppThemeRoundedSquare" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -77,7 +77,7 @@
         <item name="themeButtonRadius">8dp</item>
     </style>
 
-    <style name="AppThemeLightRoundedSquare" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppThemeLightRoundedSquare" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">#dcdcdc</item>
@@ -93,7 +93,7 @@
         <item name="themeButtonRadius">8dp</item>
     </style>
 
-    <style name="AppThemeTeardrop" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="AppThemeTeardrop" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -108,7 +108,7 @@
         <item name="themeButtonRadius">32dp</item>
     </style>
 
-    <style name="AppThemeLightTeardrop" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppThemeLightTeardrop" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">#dcdcdc</item>

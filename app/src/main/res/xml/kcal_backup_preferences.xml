@@ -1,0 +1,23 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreferenceCompat
+        app:defaultValue="true"
+        app:key="kcal_preserve_switch"
+        app:summary="@string/kcal_preserve_value_msg"
+        app:title="@string/kcal_preserve_value_title" />
+
+    <SwitchPreferenceCompat
+        app:defaultValue="true"
+        app:dependency="kcal_preserve_switch"
+        app:key="kcal_backup_everytime"
+        app:summary="@string/kcal_backup_every_time_before_enabling"
+        app:title="@string/kcal_backup_every_time_title" />
+
+    <PreferenceCategory
+        app:title="@string/kcal_backup_set">
+
+        <Preference
+            app:dependency="kcal_preserve_switch"
+            app:key="kcal_preserve_const val"
+            app:title="@string/kcal_backup_set_title" />
+    </PreferenceCategory>
+</PreferenceScreen>

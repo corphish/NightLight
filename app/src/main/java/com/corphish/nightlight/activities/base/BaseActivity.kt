@@ -36,6 +36,8 @@ open class BaseActivity: AppCompatActivity() {
      * @param str String.
      */
     fun setActionBarTitle(str: String) {
-        tvTitle.text = str
+        if (tvTitle != null) {
+            tvTitle.text = str
+        }
     }
 }

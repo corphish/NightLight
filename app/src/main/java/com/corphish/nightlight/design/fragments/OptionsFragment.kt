@@ -1,55 +1,42 @@
 package com.corphish.nightlight.design.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
+import androidx.preference.ListPreference
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
-import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment
-import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.NightLightAppService
-import kotlinx.android.synthetic.main.layout_options.*
 
-class OptionsFragment: BaseBottomSheetDialogFragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.layout_options, container, false)
-    }
+/**
+ * Shows app customisation options
+ */
+class OptionsFragment: PreferenceFragmentCompat() {
+    /**
+     * Called during [.onCreate] to supply the preferences for this fragment.
+     * Subclasses are expected to call [.setPreferenceScreen] either
+     * directly or via helper methods such as [.addPreferencesFromResource].
+     *
+     * @param savedInstanceState If the fragment is being re-created from a previous saved state,
+     * this is the state.
+     * @param rootKey            If non-null, this preference fragment should be rooted at the
+     * [PreferenceScreen] with this key.
+     */
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.settings_preference, rootKey)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        val iconShapes = arrayOf(
-                getString(R.string.circle),
-                getString(R.string.square),
-                getString(R.string.rounded_square),
-                getString(R.string.teardrop)
-        )
-
-        lightTheme.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)
-
-        lightTheme.setOnCheckedChangeListener { _, b ->
-            PreferenceHelper.putBoolean(context, Constants.PREF_LIGHT_THEME, b)
-            NightLightAppService.instance.notifyThemeChanged(b)
-            dismiss()
+        val lightThemePref: SwitchPreferenceCompat? = findPreference(Constants.PREF_LIGHT_THEME)
+        lightThemePref?.setOnPreferenceChangeListener { _, newValue ->
+            NightLightAppService.instance.notifyThemeChanged(newValue as Boolean)
+            requireActivity().recreate()
+            true
         }
 
-        iconShape.valueText = iconShapes[PreferenceHelper.getInt(context, Constants.PREF_ICON_SHAPE, Constants.DEFAULT_ICON_SHAPE)]
-        iconShape.setOnClickListener {
-            val selector = AlertDialog.Builder(requireContext())
-            selector.setTitle(R.string.icon_shape)
-            selector.setItems(iconShapes) { _, i ->
-                PreferenceHelper.putInt(context, Constants.PREF_ICON_SHAPE, i)
-                NightLightAppService.instance.notifyThemeChanged(PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME))
-                dismiss()
-            }
-            selector.show()
+        findPreference<ListPreference>(Constants.PREF_ICON_SHAPE)?.setOnPreferenceChangeListener { _, _ ->
+            NightLightAppService.instance.notifyThemeChanged(PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME))
+            requireActivity().recreate()
+            true
         }
-
-        FontUtils().setCustomFont(requireContext(), lightTheme)
     }
 }

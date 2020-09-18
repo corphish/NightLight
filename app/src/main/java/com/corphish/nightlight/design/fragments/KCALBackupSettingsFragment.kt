@@ -1,21 +1,18 @@
 package com.corphish.nightlight.design.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
-import com.corphish.nightlight.design.fragments.base.BaseBottomSheetDialogFragment
-import com.corphish.nightlight.design.utils.FontUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.layout_kcal_backup.*
 import com.gregacucnik.EditableSeekBar
 
-class KCALBackupSettingsFragment: BaseBottomSheetDialogFragment() {
+class KCALBackupSettingsFragment: PreferenceFragmentCompat() {
 
     private lateinit var kcalBackupSettingsView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -23,46 +20,21 @@ class KCALBackupSettingsFragment: BaseBottomSheetDialogFragment() {
     private var g: Int = 0
     private var b: Int = 0
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.layout_kcal_backup, container, false)
-    }
+    /**
+     * Called during [.onCreate] to supply the preferences for this fragment.
+     * Subclasses are expected to call [.setPreferenceScreen] either
+     * directly or via helper methods such as [.addPreferencesFromResource].
+     *
+     * @param savedInstanceState If the fragment is being re-created from a previous saved state,
+     * this is the state.
+     * @param rootKey            If non-null, this preference fragment should be rooted at the
+     * [PreferenceScreen] with this key.
+     */
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.kcal_backup_preferences, rootKey)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        preserveSwitch.isChecked = PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, true)
-        preserveSwitch.setOnCheckedChangeListener { _, b ->
-            PreferenceHelper.putBoolean(context, Constants.KCAL_PRESERVE_SWITCH, b)
-            backupEveryTimeSwitch.isEnabled = b
-        }
-
-        backupEveryTimeSwitch.isChecked = PreferenceHelper.getBoolean(context, Constants.PREF_KCAL_BACKUP_EVERY_TIME, true)
-        backupEveryTimeSwitch.setOnCheckedChangeListener {_, b ->
-            PreferenceHelper.putBoolean(context, Constants.PREF_KCAL_BACKUP_EVERY_TIME, b)
-        }
-
-
-        configureKcalBackup.setOnClickListener(View.OnClickListener {
-            val context = context ?: return@OnClickListener
-            bottomSheetDialog = BottomSheetDialog(context, ThemeUtils.getBottomSheetTheme(context))
-            initKCALBackupView()
-            bottomSheetDialog.setContentView(kcalBackupSettingsView)
-            bottomSheetDialog.show()
-        })
-
-        FontUtils().setCustomFont(requireContext(), preserveSwitch, backupEveryTimeSwitch)
-    }
-
-    private fun initKCALBackupView() {
-        kcalBackupSettingsView = View.inflate(context, R.layout.bottom_sheet_kcal_backup_set, null)
-
+        // Initialise old KCAL values
         val backedUpValues = PreferenceHelper.getString(context, Constants.KCAL_PRESERVE_VAL)
-
-        val red = kcalBackupSettingsView.findViewById<EditableSeekBar>(R.id.red)
-        val green = kcalBackupSettingsView.findViewById<EditableSeekBar>(R.id.green)
-        val blue = kcalBackupSettingsView.findViewById<EditableSeekBar>(R.id.blue)
 
         if (backedUpValues == null) {
             b = 256
@@ -75,18 +47,37 @@ class KCALBackupSettingsFragment: BaseBottomSheetDialogFragment() {
             b = Integer.parseInt(parts[2])
         }
 
+        updateConfigSummary()
+
+        findPreference<Preference>(Constants.KCAL_PRESERVE_VAL)?.setOnPreferenceClickListener { _ ->
+            bottomSheetDialog = BottomSheetDialog(requireContext(), ThemeUtils.getBottomSheetTheme(requireContext()))
+            initKCALBackupView()
+            bottomSheetDialog.setContentView(kcalBackupSettingsView)
+            bottomSheetDialog.show()
+
+            true
+        }
+    }
+
+    /**
+     * Builds and shows the dialog for setting KCAL
+     * backup values.
+     *
+     */
+    private fun initKCALBackupView() {
+        kcalBackupSettingsView = View.inflate(context, R.layout.bottom_sheet_kcal_backup_set, null)
+
+        val red = kcalBackupSettingsView.findViewById<EditableSeekBar>(R.id.red)
+        val green = kcalBackupSettingsView.findViewById<EditableSeekBar>(R.id.green)
+        val blue = kcalBackupSettingsView.findViewById<EditableSeekBar>(R.id.blue)
+
         red.value = r
         green.value = g
         blue.value = b
 
         red.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
-            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-
-            }
+            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {}
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 r = seekBar.progress
@@ -106,13 +97,8 @@ class KCALBackupSettingsFragment: BaseBottomSheetDialogFragment() {
         })
 
         green.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
-            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-
-            }
+            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {}
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 g = seekBar.progress
@@ -132,13 +118,8 @@ class KCALBackupSettingsFragment: BaseBottomSheetDialogFragment() {
         })
 
         blue.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener {
-            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-
-            }
+            override fun onEditableSeekBarProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {}
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 b = seekBar.progress
@@ -161,8 +142,16 @@ class KCALBackupSettingsFragment: BaseBottomSheetDialogFragment() {
         kcalBackupSettingsView.findViewById<View>(R.id.button_cancel).setOnClickListener { bottomSheetDialog.dismiss() }
 
         kcalBackupSettingsView.findViewById<View>(R.id.button_ok).setOnClickListener {
+            updateConfigSummary()
             PreferenceHelper.putString(context, Constants.KCAL_PRESERVE_VAL, "$r $g $b")
             bottomSheetDialog.dismiss()
         }
+    }
+
+    /**
+     * Updates the configure preference summary.
+     */
+    private fun updateConfigSummary() {
+        findPreference<Preference>(Constants.KCAL_PRESERVE_VAL)?.summary = "RGB($r, $g, $b)"
     }
 }

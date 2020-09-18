@@ -21,4 +21,20 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <!-- Shape names as array -->
+    <string-array name="shape_names">
+        <item>@string/circle</item>
+        <item>@string/square</item>
+        <item>@string/rounded_square</item>
+        <item>@string/teardrop</item>
+    </string-array>
+
+    <!-- Shape values as array -->
+    <string-array name="shape_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

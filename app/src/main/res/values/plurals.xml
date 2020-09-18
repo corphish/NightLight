@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="profile_count">
+        <item quantity="zero">%1$d profile created.</item>
+        <item quantity="one">%1$d profile created.</item>
+        <item quantity="few">%1$d profiles created.</item>
+        <item quantity="many">%1$d profiles created.</item>
+        <item quantity="two">%1$d profiles created.</item>
+        <item quantity="other">%1$d profiles created.</item>
+    </plurals>
+</resources>

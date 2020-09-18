@@ -22,7 +22,6 @@
             android:label="@string/title_activity_settings"/>
         <activity android:name=".activities.BedTimeActivity" />
         <activity android:name=".activities.MasterSwitchActivity" />
-        <activity android:name=".activities.AutomationActivity" />
         <activity android:name=".activities.ProfileCreateActivity" />
         <activity
             android:name=".activities.ColorActivity"

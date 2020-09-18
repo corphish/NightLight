@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.corphish.nightlight.R
+import com.corphish.nightlight.activities.base.BaseActivity
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
@@ -29,7 +29,7 @@ import kotlinx.android.synthetic.main.content_profiles.*
 import kotlinx.android.synthetic.main.layout_header.*
 import java.util.*
 
-class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener {
+class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
 
     private lateinit var optionsDialog: BottomSheetDialog
     private lateinit var optionsView: View
@@ -53,6 +53,9 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_profiles)
 
+        useCustomActionBar()
+        setActionBarTitle(R.string.profile_title)
+
         context = this
 
         fab.setOnClickListener {
@@ -62,9 +65,6 @@ class ProfilesActivity : AppCompatActivity(), ProfilesManager.DataChangeListener
 
             startActivityForResult(intent, _createProfileCode)
         }
-
-        banner_title.text = getString(R.string.profile_title)
-        banner_icon.setImageResource(R.drawable.ic_profiles)
 
         initProfilesManager()
         initViews()

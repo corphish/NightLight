@@ -11,34 +11,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/bed_time_title"
-        android:layout_marginStart="@dimen/defaultMargin"
-        android:layout_marginEnd="@dimen/defaultMargin"
-        android:layout_marginTop="@dimen/defaultMargin"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:id="@+id/header"
-        android:textAppearance="?android:attr/textAppearance" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         style="@style/ExperimentalBadge"
-
         android:layout_marginBottom="32dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/header" />
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="@dimen/bulb_size"
         android:layout_height="@dimen/bulb_size"
         android:layout_centerInParent="true"
         app:srcCompat="@drawable/ic_bed_time"
-        android:tint="?themeStroke"
         android:id="@+id/bedTimeSwitch"
-        android:contentDescription="@null" />
+        android:contentDescription="@null"
+        app:tint="?themeStroke" />
 
     <TextView
         android:layout_width="wrap_content"

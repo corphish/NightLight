@@ -1,10 +1,10 @@
 package com.corphish.nightlight.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.corphish.nightlight.R
+import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
@@ -12,7 +12,7 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 import kotlinx.android.synthetic.main.activity_master_switch.*
 
 const val REQ_CODE = 100
-class MasterSwitchActivity : AppCompatActivity() {
+class MasterSwitchActivity :BaseActivity() {
 
     private var masterSwitchStatus = false
     private var freshStart = false
@@ -23,6 +23,9 @@ class MasterSwitchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_master_switch)
+
+        useCustomActionBar()
+        setActionBarTitle(R.string.app_name)
 
         masterSwitchStatus = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH, false)
         freshStart = intent.getBooleanExtra(Constants.FRESH_START, false)

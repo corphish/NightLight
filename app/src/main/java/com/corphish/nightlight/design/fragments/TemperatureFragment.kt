@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ImageButton
 import android.widget.SeekBar
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
@@ -42,7 +40,6 @@ class TemperatureFragment: Fragment() {
         intensityType = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
 
         getValues()
-        initHeader(root)
         initInfoButton(root)
         initIntensityTypeView()
         initSlider()
@@ -104,14 +101,6 @@ class TemperatureFragment: Fragment() {
         temperatureValue.value = colorTemperature
     }
 
-    private fun initHeader(root: View) {
-        val bannerTitle = root.findViewById<TextView>(R.id.banner_title)
-        val bannerIcon = root.findViewById<ImageButton>(R.id.banner_icon)
-
-        bannerTitle.text = getString(R.string.section_color)
-        bannerIcon.setImageResource(R.drawable.ic_color)
-    }
-
     private fun initInfoButton(root: View) {
         val infoButton = root.findViewById<MaterialButton>(R.id.intensityInfo)
 
@@ -119,7 +108,7 @@ class TemperatureFragment: Fragment() {
             val infoDialog = BottomSheetAlertDialog(requireContext())
             infoDialog.setTitle(R.string.intensity_type_title)
             infoDialog.setMessage(R.string.intensity_type_desc)
-            infoDialog.setPositiveButton(android.R.string.ok, View.OnClickListener { infoDialog.dismiss() })
+            infoDialog.setPositiveButton(android.R.string.ok) { infoDialog.dismiss() }
             infoDialog.show()
         }
     }

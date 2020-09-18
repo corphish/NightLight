@@ -2,16 +2,16 @@ package com.corphish.nightlight.activities
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.corphish.nightlight.R
+import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 
-class ColorActivity : AppCompatActivity() {
+class ColorActivity : BaseActivity() {
 
     private var originalState = false
 
@@ -19,6 +19,9 @@ class ColorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_color)
+
+        useCustomActionBar()
+        setActionBarTitle(R.string.title_activity_color)
 
         originalState = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH, false)
 

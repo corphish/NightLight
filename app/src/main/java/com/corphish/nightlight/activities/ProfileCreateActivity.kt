@@ -1,12 +1,12 @@
 package com.corphish.nightlight.activities
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.SeekBar
 import com.corphish.nightlight.R
+import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.utils.FontUtils
@@ -15,9 +15,8 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 import com.gregacucnik.EditableSeekBar
 import kotlinx.android.synthetic.main.activity_profile_create.*
 import kotlinx.android.synthetic.main.content_profile_create.*
-import kotlinx.android.synthetic.main.layout_header.*
 
-class ProfileCreateActivity : AppCompatActivity() {
+class ProfileCreateActivity : BaseActivity() {
 
     private lateinit var profile: ProfilesManager.Profile
     private var isProfileNull = true
@@ -28,6 +27,8 @@ class ProfileCreateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_profile_create)
+
+        useCustomActionBar()
 
         profilesManager = ProfilesManager(this)
         profilesManager.loadProfiles()
@@ -41,8 +42,6 @@ class ProfileCreateActivity : AppCompatActivity() {
         )
 
         operationMode = intent.getIntExtra(Constants.PROFILE_MODE, Constants.MODE_CREATE)
-
-        banner_icon.setImageResource(R.drawable.ic_profiles)
 
         fab.setOnClickListener {
             val retval = if (operationMode == Constants.MODE_CREATE)
@@ -88,7 +87,7 @@ class ProfileCreateActivity : AppCompatActivity() {
         }
         modes.setSelection(profile.settingMode)
 
-        banner_title.setText(
+        setActionBarTitle(
                 if (operationMode == Constants.MODE_CREATE) R.string.profile_create_title else R.string.profile_edit_title
         )
 

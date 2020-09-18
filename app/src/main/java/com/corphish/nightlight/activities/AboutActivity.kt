@@ -1,20 +1,19 @@
 package com.corphish.nightlight.activities
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.corphish.nightlight.R
+import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.design.ThemeUtils
 
 import com.corphish.nightlight.design.fragments.AboutFragment
 import com.corphish.nightlight.design.fragments.LinksFragment
 import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.layout_header.*
 
 /**
  * This activity holds the AboutFragment and the LinksFragment.
  * These show the information and credits section of the app.
  */
-class AboutActivity : AppCompatActivity() {
+class AboutActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +22,8 @@ class AboutActivity : AppCompatActivity() {
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_about)
 
-        // Populate the header
-        banner_title.text = getString(R.string.about)
-        banner_icon.setImageResource(R.drawable.ic_info)
+        useCustomActionBar()
+        setActionBarTitle(R.string.about)
 
         // Avoid showing the fragment more than one time
         if (savedInstanceState == null) {

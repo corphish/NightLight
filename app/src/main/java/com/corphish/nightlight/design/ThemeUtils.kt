@@ -16,6 +16,14 @@ object ThemeUtils {
             Constants.ICON_SHAPE_TEARDROP to arrayOf(R.style.AppThemeTeardrop, R.style.AppThemeLightTeardrop)
     )
 
+    /**
+     * Method to check if light theme is being used or not.
+     *
+     * @return Boolean indicating whether light theme is used or not.
+     */
+    fun isLightTheme(context: Context) =
+            PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)
+
     fun getAppTheme(context: Context): Int {
         val lightIndex = if (PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)) 1 else 0
         return (THEMES[PreferenceHelper.getString(context, Constants.PREF_ICON_SHAPE, Constants.DEFAULT_ICON_SHAPE)?.toInt()] ?: error(""))[lightIndex]

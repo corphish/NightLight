@@ -36,14 +36,14 @@ object ForegroundServiceManager {
         // Check if it is necessary to start the service.
         // Check if any feature that needs this is enabled
         // by the user.
-        var serviceNecessary = false
+        var serviceNecessary = true
 
         for (pref in foregroundFeatureList) {
             if (startedService == pref) {
                 continue
             }
 
-            serviceNecessary = serviceNecessary || PreferenceHelper.getBoolean(context, pref, false)
+            serviceNecessary = serviceNecessary && PreferenceHelper.getBoolean(context, pref, false)
         }
 
         // Bail out if service not required

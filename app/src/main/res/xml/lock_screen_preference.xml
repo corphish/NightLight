@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreferenceCompat
+        app:key="disable_in_lock_screen"
+        app:title="@string/disable_in_lock_screen"
+        app:summary="@string/disable_in_lock_screen_msg" />
+</PreferenceScreen>

@@ -162,4 +162,8 @@
     <string name="pro_desc">The pro version of Night Light has even better UI and cool new features and functions. By getting the pro version, you also show appreciation and support for the project and motivate me to continue working on it. Do you want to get pro version now?</string>
 
     <string name="title_activity_settings">Settings</string>
+
+    <string name="lock_screen">Lock screen</string>
+    <string name="disable_in_lock_screen">Disable in lock screen</string>
+    <string name="disable_in_lock_screen_msg">Disables Night Light in lock screen. Turns it back on (if required) when you unlock.</string>
 </resources>

@@ -48,6 +48,12 @@
         app:title="@string/section_sob" />
 
     <com.corphish.nightlight.design.preference.SectionPreference
+        app:allowDividerBelow="false"
+        app:fragment="com.corphish.nightlight.design.fragments.LockScreenFragment"
+        app:icon="@drawable/ic_lock"
+        app:title="@string/lock_screen" />
+
+    <com.corphish.nightlight.design.preference.SectionPreference
         app:icon="@drawable/ic_profiles"
         app:key="profiles"
         app:title="@string/profile_title">

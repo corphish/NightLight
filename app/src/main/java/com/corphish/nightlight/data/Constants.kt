@@ -49,6 +49,7 @@ object Constants {
     const val PREF_WIND_DOWN = "wind_down"
     const val PREF_SERVICE_STATE = "foreground_service_running"
     const val PREF_DISABLE_IN_LOCK_SCREEN = "disable_in_lock_screen"
+    const val PREF_DISABLED_BY_LOCK_SCREEN = "disabled_by_lock_screen"
 
     /**
      * Fixed const values (default, max const values)

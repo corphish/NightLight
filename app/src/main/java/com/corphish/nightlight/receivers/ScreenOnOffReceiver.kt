@@ -14,13 +14,12 @@ import com.corphish.nightlight.helpers.PreferenceHelper
  */
 class ScreenOnOffReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        Log.d("NL_ScreenOff", "Hit")
         if (context == null || intent == null) {
             return
         }
 
         // Validate intent
-        if (Intent.ACTION_USER_PRESENT != intent.action) {
+        if (Intent.ACTION_USER_PRESENT != intent.action && Intent.ACTION_SCREEN_OFF != intent.action) {
             return
         }
 
@@ -33,7 +32,26 @@ class ScreenOnOffReceiver: BroadcastReceiver() {
             return
         }
 
-        // Turn off Night Light when screen is off
-        Core.applyNightModeAsync(false, context)
+        if (Intent.ACTION_SCREEN_OFF == intent.action) {
+            Log.d("NL_ScreenOnOff", "Screen off")
+            // Turn off Night Light when screen is off if it is on
+            if (PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)) {
+                Core.applyNightModeAsync(false, context)
+
+                // Also notify that it was turned off as part of the event.
+                // This is done so that there is a way to know that the
+                // night light must not be turned on when it is set off
+                // by the user.
+                PreferenceHelper.putBoolean(context, Constants.PREF_DISABLED_BY_LOCK_SCREEN, true)
+            }
+        } else {
+            Log.d("NL_ScreenOnOff", "Screen unlocked")
+
+            // Only turn on when it was turned off by lock screen setting.
+            if (PreferenceHelper.getBoolean(context, Constants.PREF_DISABLED_BY_LOCK_SCREEN, false)) {
+                Core.applyNightModeAsync(true, context)
+                PreferenceHelper.putBoolean(context, Constants.PREF_DISABLED_BY_LOCK_SCREEN, false)
+            }
+        }
     }
 }

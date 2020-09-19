@@ -120,12 +120,13 @@ object ForegroundServiceManager {
      *
      * @param context Context.
      * @param toStart Boolean indicating whether to start or stop the service.
+     * @param key     Preference key.
      */
-    fun manageService(context: Context, toStart: Boolean) {
+    fun manageService(context: Context, toStart: Boolean, key: String? = null) {
         if (toStart) {
-            startForegroundService(context)
+            startForegroundService(context, key)
         } else {
-            stopForegroundService(context)
+            stopForegroundService(context, key)
         }
     }
 

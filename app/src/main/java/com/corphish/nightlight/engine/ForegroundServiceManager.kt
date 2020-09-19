@@ -24,6 +24,8 @@ object ForegroundServiceManager {
      * Starts the foreground service of the app.
      * It will only be started if any features that
      * require the foreground service is enabled bu the user.
+     *
+     * @param context Context.
      */
     fun startForegroundService(context: Context) {
         // Check if it is necessary to start the service.
@@ -48,6 +50,43 @@ object ForegroundServiceManager {
         // Start the service
         Intent(context, ForegroundService::class.java).also {
             it.action = Constants.ACTION_START
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(it)
+            } else {
+                context.startService(it)
+            }
+        }
+    }
+
+    /**
+     * Stops the foreground service.
+     * Will stop only if all the features depending on the service are off.
+     *
+     * @param context Context.
+     */
+    private fun stopForegroundService(context: Context) {
+        // Check if it is necessary to stop the service.
+        // Check if any feature that needs this is enabled
+        // by the user.
+        var serviceNecessary = false
+
+        for (pref in foregroundFeatureList) {
+            serviceNecessary = serviceNecessary || PreferenceHelper.getBoolean(context, pref, false)
+        }
+
+        // Bail out if service is needed to be run
+        if (serviceNecessary) {
+            return
+        }
+
+        // Check if the service is running already or not
+        if (!PreferenceHelper.getBoolean(context, Constants.PREF_SERVICE_STATE, false)) {
+            return
+        }
+
+        // Start the service
+        Intent(context, ForegroundService::class.java).also {
+            it.action = Constants.ACTION_STOP
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 context.startForegroundService(it)
             } else {

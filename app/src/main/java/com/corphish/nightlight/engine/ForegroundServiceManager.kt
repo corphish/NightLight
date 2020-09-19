@@ -27,14 +27,22 @@ object ForegroundServiceManager {
      * require the foreground service is enabled bu the user.
      *
      * @param context Context.
+     * @param startedService There is a race condition when the new preference value is actually
+     *                       committed and this method is called. So we need the key whose change
+     *                       caused this method to be called so that we can ignore this key while
+     *                       checking.
      */
-    fun startForegroundService(context: Context) {
+    fun startForegroundService(context: Context, startedService: String? = null) {
         // Check if it is necessary to start the service.
         // Check if any feature that needs this is enabled
         // by the user.
         var serviceNecessary = false
 
         for (pref in foregroundFeatureList) {
+            if (startedService == pref) {
+                continue
+            }
+
             serviceNecessary = serviceNecessary || PreferenceHelper.getBoolean(context, pref, false)
         }
 
@@ -66,14 +74,21 @@ object ForegroundServiceManager {
      * Will stop only if all the features depending on the service are off.
      *
      * @param context Context.
+     * @param stoppedService There is a race condition when the new preference value is actually
+     *                       committed and this method is called. So we need the key whose change
+     *                       caused this method to be called so that we can ignore this key while
+     *                       checking.
      */
-    private fun stopForegroundService(context: Context) {
+    private fun stopForegroundService(context: Context, stoppedService: String? = null) {
         // Check if it is necessary to stop the service.
         // Check if any feature that needs this is enabled
         // by the user.
         var serviceNecessary = false
 
         for (pref in foregroundFeatureList) {
+            if (pref == stoppedService) {
+                continue
+            }
             serviceNecessary = serviceNecessary || PreferenceHelper.getBoolean(context, pref, false)
         }
 

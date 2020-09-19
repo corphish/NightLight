@@ -25,8 +25,8 @@ class LockScreenFragment: PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.lock_screen_preference, rootKey)
 
         val lockPref: SwitchPreferenceCompat? = findPreference(Constants.PREF_DISABLE_IN_LOCK_SCREEN)
-        lockPref?.setOnPreferenceChangeListener { _, newValue ->
-            ForegroundServiceManager.manageService(requireContext(), newValue as Boolean)
+        lockPref?.setOnPreferenceChangeListener { p, newValue ->
+            ForegroundServiceManager.manageService(requireContext(), newValue as Boolean, p.key)
             true
         }
     }

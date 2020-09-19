@@ -94,4 +94,18 @@ object ForegroundServiceManager {
             }
         }
     }
+
+    /**
+     * Driver method to manage service.
+     *
+     * @param context Context.
+     * @param toStart Boolean indicating whether to start or stop the service.
+     */
+    fun manageService(context: Context, toStart: Boolean) {
+        if (toStart) {
+            startForegroundService(context)
+        } else {
+            stopForegroundService(context)
+        }
+    }
 }

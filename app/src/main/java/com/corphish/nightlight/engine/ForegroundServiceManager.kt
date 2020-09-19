@@ -128,4 +128,36 @@ object ForegroundServiceManager {
             stopForegroundService(context)
         }
     }
+
+    /**
+     * Force starts the service.
+     *
+     * @param context Context.
+     */
+    fun forceStart(context: Context) {
+        Intent(context, ForegroundService::class.java).also {
+            it.action = Constants.ACTION_START
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(it)
+            } else {
+                context.startService(it)
+            }
+        }
+    }
+
+    /**
+     * Force stops the service.
+     *
+     * @param context Context.
+     */
+    fun forceStop(context: Context) {
+        Intent(context, ForegroundService::class.java).also {
+            it.action = Constants.ACTION_STOP
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(it)
+            } else {
+                context.startService(it)
+            }
+        }
+    }
 }

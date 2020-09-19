@@ -27,7 +27,7 @@ class ForegroundService : Service() {
     override fun onBind(intent: Intent): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        // Log.d("onStartCommand executed with startId: $startId")
+        Log.d("NL_Foreground","onStartCommand executed with startId: $startId")
 
         if (intent != null) {
             val action = intent.action

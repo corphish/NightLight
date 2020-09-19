@@ -3,6 +3,7 @@ package com.corphish.nightlight.engine
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.services.ForegroundService
@@ -39,11 +40,13 @@ object ForegroundServiceManager {
 
         // Bail out if service not required
         if (!serviceNecessary) {
+            Log.e("NL_FSM", "Not starting service as it is not needed")
             return
         }
 
         // Check if the service is running already or not
         if (PreferenceHelper.getBoolean(context, Constants.PREF_SERVICE_STATE, false)) {
+            Log.e("NL_FSM", "Not starting service as it is running")
             return
         }
 
@@ -76,11 +79,13 @@ object ForegroundServiceManager {
 
         // Bail out if service is needed to be run
         if (serviceNecessary) {
+            Log.e("NL_FSM", "Not stopping service as it is needed")
             return
         }
 
         // Check if the service is running already or not
         if (!PreferenceHelper.getBoolean(context, Constants.PREF_SERVICE_STATE, false)) {
+            Log.e("NL_FSM", "Not not stopped because it is not running?")
             return
         }
 

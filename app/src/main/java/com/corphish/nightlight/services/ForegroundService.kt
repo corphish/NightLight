@@ -145,6 +145,12 @@ class ForegroundService : Service() {
                 .build()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        setServiceState(this, false)
+    }
+
     /**
      * Sets global service status indicator.
      *

@@ -18,6 +18,7 @@ import com.corphish.nightlight.engine.KCALManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.RootUtils
 import com.corphish.nightlight.helpers.CrashlyticsHelper
+import com.corphish.nightlight.services.ForegroundService
 import kotlinx.android.synthetic.main.activity_splash.*
 
 /*
@@ -34,6 +35,15 @@ const val TASKER_INTENT_RQC = 100
 class StartActivity : AppCompatActivity() {
 
     private var checkBypass = 7
+
+    /*
+     * List of features that need the foreground service.
+     * By design, all the features that needs this service
+     * MUST be disabled by default.
+     */
+    private val _foregroundFeatureList = listOf(
+            Constants.PREF_DISABLE_IN_LOCK_SCREEN
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -188,5 +198,41 @@ class StartActivity : AppCompatActivity() {
         if (requestCode != TASKER_INTENT_RQC) return
         setResult(RESULT_OK, data)
         finish()
+    }
+
+    /**
+     * Starts the foreground service of the app.
+     * It will only be started if any features that
+     * require the foreground service is enabled bu the user.
+     */
+    private fun startForegroundService() {
+        // Check if it is necessary to start the service.
+        // Check if any feature that needs this is enabled
+        // by the user.
+        var serviceNecessary = false
+
+        for (pref in _foregroundFeatureList) {
+            serviceNecessary = serviceNecessary || PreferenceHelper.getBoolean(this, pref, false)
+        }
+
+        // Bail out if service not required
+        if (!serviceNecessary) {
+            return
+        }
+
+        // Check if the service is running already or not
+        if (PreferenceHelper.getBoolean(this, Constants.PREF_SERVICE_STATE, false)) {
+            return
+        }
+
+        // Start the service
+        Intent(this, ForegroundService::class.java).also {
+            it.action = Constants.ACTION_START
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(it)
+            } else {
+                startService(it)
+            }
+        }
     }
 }

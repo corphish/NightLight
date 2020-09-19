@@ -53,6 +53,7 @@
         <receiver android:name=".receivers.StartNLReceiver" />
         <receiver android:name=".receivers.StopNLReceiver" />
         <receiver android:name=".receivers.DarkStartNLReceiver" />
+        <receiver android:name=".receivers.ScreenOnOffReceiver" />
         <receiver
             android:name=".receivers.BootCompleteReceiver"
             android:enabled="true"
@@ -113,7 +114,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.corphish.nightlight.activities.MainActivity" />
         </activity>
-
+        <service
+            android:name=".services.ForegroundService"
+            android:enabled="true"
+            android:exported="false">
+        </service>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

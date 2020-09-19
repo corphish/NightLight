@@ -64,7 +64,11 @@ class DashboardFragment: Fragment() {
 
         val nlOptionClickListener = View.OnClickListener { toggleNightLight() }
         val intensityOptionClickListener = View.OnClickListener { toggleIntensities() }
-        val automateOptionClickListener = View.OnClickListener { context?.startActivity(Intent(context, AutomationFragment::class.java)) }
+        val automateOptionClickListener = View.OnClickListener {
+            val intent = Intent(context, SettingsActivity::class.java)
+            intent.putExtra(Constants.SIMULATE_AUTOMATION_SECTION, true)
+            context?.startActivity(intent)
+        }
 
         forceToggleView.setOnClickListener(nlOptionClickListener)
         forceToggleIcon.setOnClickListener(nlOptionClickListener)

@@ -32,6 +32,7 @@
         app:allowDividerBelow="false"
         app:fragment="com.corphish.nightlight.design.fragments.AutomationFragment"
         app:icon="@drawable/ic_alarm"
+        app:key="auto"
         app:title="@string/section_auto" />
 
     <com.corphish.nightlight.design.preference.SectionPreference

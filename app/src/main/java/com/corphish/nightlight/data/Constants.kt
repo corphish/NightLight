@@ -149,4 +149,9 @@ object Constants {
      */
     const val ACTION_START = "start"
     const val ACTION_STOP = "stop"
+
+    /**
+     * Automation section simulation
+     */
+    const val SIMULATE_AUTOMATION_SECTION = "sim_auto_section"
 }

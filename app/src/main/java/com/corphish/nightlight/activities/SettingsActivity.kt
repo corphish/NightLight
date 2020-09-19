@@ -8,7 +8,9 @@ import androidx.preference.PreferenceFragmentCompat
 import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
+import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
+import com.corphish.nightlight.design.fragments.AutomationFragment
 import com.corphish.nightlight.engine.KCALManager
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.ExternalLink
@@ -26,10 +28,19 @@ class SettingsActivity : BaseActivity(),
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.settings_activity)
 
+        // Simulation
+        val autoSim = intent?.getBooleanExtra(Constants.SIMULATE_AUTOMATION_SECTION, false) ?: false
+
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.settings, HeaderFragment())
+                    .replace(
+                            R.id.settings,
+                            when {
+                                autoSim -> AutomationFragment()
+                                else -> HeaderFragment()
+                            }
+                    )
                     .commit()
         } else {
             title = savedInstanceState.getCharSequence(TITLE_TAG)

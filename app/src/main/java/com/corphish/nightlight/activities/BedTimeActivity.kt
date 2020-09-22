@@ -1,7 +1,6 @@
 package com.corphish.nightlight.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
@@ -28,7 +27,7 @@ class BedTimeActivity : BaseActivity() {
 
         bedTimeSwitch.setOnClickListener {
             bedTimeSwitchStatus = !bedTimeSwitchStatus
-            Core.applyGrayScale(bedTimeSwitchStatus, this)
+            Core.applyGrayScaleAsync(bedTimeSwitchStatus, this)
             setViews(bedTimeSwitchStatus)
             PreferenceHelper.putBoolean(this, Constants.PREF_WIND_DOWN, bedTimeSwitchStatus)
             if (!bedTimeSwitchStatus) {

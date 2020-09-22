@@ -4,10 +4,10 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import androidx.core.app.NotificationCompat
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.MainActivity
 import com.corphish.nightlight.data.Constants
@@ -24,15 +24,17 @@ class ForegroundService : Service() {
     // Receivers associated with the service
     private var screenOnOffReceiver: ScreenOnOffReceiver? = null
 
+    // Notification channel
+    private var _notificationChannelId = "NLForegroundService"
+
     override fun onBind(intent: Intent): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d("NL_Foreground","onStartCommand executed with startId: $startId")
 
         if (intent != null) {
-            val action = intent.action
             // Log.d("using an intent with action $action")
-            when (action) {
+            when (intent.action) {
                 Constants.ACTION_START -> startService()
                 Constants.ACTION_STOP -> stopService()
                 else -> Log.d("NL_ForegroundService", "This should never happen. No action in the received intent")
@@ -105,43 +107,23 @@ class ForegroundService : Service() {
     }
 
     private fun createNotification(): Notification {
-        val notificationChannelId = "ENDLESS SERVICE CHANNEL"
-
-        // depending on the Android API that we're dealing with we will have
+        // Depending on the Android API that we're dealing with we will have
         // to use a specific method to create the notification
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             val channel = NotificationChannel(
-                    notificationChannelId,
-                    "Endless Service notifications channel",
-                    NotificationManager.IMPORTANCE_HIGH
-            ).let {
-                it.description = "Endless Service channel"
-                it.enableLights(true)
-                it.lightColor = Color.RED
-                it.enableVibration(true)
-                it.vibrationPattern = longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
-                it
-            }
+                    _notificationChannelId,
+                    getString(R.string.notification_channel_name),
+                    NotificationManager.IMPORTANCE_MIN
+            )
             notificationManager.createNotificationChannel(channel)
         }
 
-        val pendingIntent: PendingIntent = Intent(this, MainActivity::class.java).let { notificationIntent ->
-            PendingIntent.getActivity(this, 0, notificationIntent, 0)
-        }
-
-        val builder: Notification.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) Notification.Builder(
-                this,
-                notificationChannelId
-        ) else Notification.Builder(this)
-
-        return builder
-                .setContentTitle("Endless Service")
-                .setContentText("This is your favorite endless service working")
-                .setContentIntent(pendingIntent)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setTicker("Ticker text")
-                .setPriority(Notification.PRIORITY_HIGH) // for under android 26 compatibility
+        return NotificationCompat.Builder(this, _notificationChannelId)
+                .setSmallIcon(R.drawable.ic_lightbulb_solid)
+                .setContentText(getString(R.string.notification_running))
+                .setOngoing(true)
+                .setPriority(NotificationCompat.PRIORITY_MIN)
                 .build()
     }
 

@@ -166,4 +166,7 @@
     <string name="lock_screen">Lock screen</string>
     <string name="disable_in_lock_screen">Disable in lock screen</string>
     <string name="disable_in_lock_screen_msg">Disables Night Light in lock screen. Turns it back on (if required) when you unlock.</string>
+
+    <string name="notification_channel_name">Service</string>
+    <string name="notification_running">Service is running</string>
 </resources>

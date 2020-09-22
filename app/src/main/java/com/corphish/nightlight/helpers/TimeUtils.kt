@@ -122,4 +122,48 @@ object TimeUtils {
 
         return ((startTimeMinutes - curTime).toDouble() / 60).roundToInt()
     }
+
+    /**
+     * Returns the time difference of 2 given times.
+     * If the end time is, by value, lesser than start time, it
+     * is assumed that the end time falls on next day.
+     *
+     * @param startTime Start time.
+     * @param endTime   End time.
+     * @return          Time difference in form of hour and minutes as array.
+     */
+    fun getTimeDifference(startTime: String, endTime: String): IntArray {
+        val start = getTimeAsHourAndMinutes(startTime)
+        val end = getTimeAsHourAndMinutes(endTime)
+
+        // Check if end time is lesser than start or not,
+        // if so, assume it in next day.
+        if (end[0] < start[0] || (end[0] == start[0] && end[1] < start[1])) {
+            // We break the process into 2 parts.
+            // We first find diff of start time and day end.
+            // Then we find diff between day start and end time.
+            // We finally sum up the differences and return.
+            val res1 = getTimeDifference(startTime, "23:59")
+            val res2 = getTimeDifference("00:00", endTime)
+
+            res1[0] += res2[0]
+            res1[1] += res2[1]
+
+            return res1
+        }
+
+        // Calculate diff
+        var hourDiff = end[0] - start[0]
+        var minDiff = end[1] - start[1]
+
+        // If minute difference is negative, that is
+        // minute value of end time less than start time,
+        // adjust accordingly
+        if (minDiff < 0) {
+            minDiff += 60
+            hourDiff--
+        }
+
+        return intArrayOf(hourDiff, minDiff)
+    }
 }

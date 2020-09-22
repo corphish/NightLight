@@ -9,7 +9,6 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.corphish.nightlight.R
-import com.corphish.nightlight.activities.MainActivity
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.receivers.ScreenOnOffReceiver
@@ -123,6 +122,7 @@ class ForegroundService : Service() {
                 .setSmallIcon(R.drawable.ic_lightbulb_solid)
                 .setContentText(getString(R.string.notification_running))
                 .setOngoing(true)
+                .setCategory(Notification.CATEGORY_SERVICE)
                 .setPriority(NotificationCompat.PRIORITY_MIN)
                 .build()
     }

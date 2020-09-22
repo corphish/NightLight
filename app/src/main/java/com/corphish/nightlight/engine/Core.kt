@@ -1,13 +1,15 @@
 package com.corphish.nightlight.engine
 
 import android.content.Context
-import android.os.AsyncTask
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.extensions.fromColorTemperatureToRGBIntArray
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
 import com.corphish.nightlight.services.NightLightAppService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * Created by Avinaba on 10/4/2017.
@@ -332,25 +334,29 @@ object Core {
     }
 
     /**
-     * AsyncTask to enable/disable night light
+     * Internal class to enable/disable night light.
+     * Originally written in AsyncTask, switched to kotlin coroutines.
      */
-    private class NightModeApplier : AsyncTask<Any, Any, Any> {
-        internal var enabled: Boolean = false
-        internal var toUpdateGlobalState: Boolean = false
-        internal var mode: Int = 0
-        internal var redColor: Int = 0
-        internal var greenColor: Int = 0
-        internal var blueColor: Int = 0
-        internal var temperature: Int = 0
-        internal var context: Context?
+    private class NightModeApplier {
+        /**
+         * Night mode properties.
+         */
+        var enabled: Boolean = false
+        var toUpdateGlobalState: Boolean = false
+        var mode: Int = 0
+        var redColor: Int = 0
+        var greenColor: Int = 0
+        var blueColor: Int = 0
+        var temperature: Int = 0
+        var context: Context?
 
-        internal constructor(e: Boolean, context: Context?, mode: Int) {
+        constructor(e: Boolean, context: Context?, mode: Int) {
             this.context = context
             this.enabled = e
             this.mode = mode
         }
 
-        internal constructor(enabled: Boolean, context: Context?, redValue: Int, greenValue: Int, blueValue: Int, toUpdateGlobalState: Boolean) {
+        constructor(enabled: Boolean, context: Context?, redValue: Int, greenValue: Int, blueValue: Int, toUpdateGlobalState: Boolean) {
             this.enabled = enabled
             this.context = context
             this.redColor = redValue
@@ -361,7 +367,7 @@ object Core {
             mode = Constants.NL_SETTING_MODE_MANUAL
         }
 
-        internal constructor(enabled: Boolean, context: Context?, temperature: Int, toUpdateGlobalState: Boolean) {
+        constructor(enabled: Boolean, context: Context?, temperature: Int, toUpdateGlobalState: Boolean) {
             this.enabled = enabled
             this.context = context
             this.temperature = temperature
@@ -370,7 +376,7 @@ object Core {
             mode = Constants.NL_SETTING_MODE_TEMP
         }
 
-        internal constructor(enabled: Boolean, context: Context?, mode: Int, settings: IntArray, toUpdateGlobalState: Boolean) {
+        constructor(enabled: Boolean, context: Context?, mode: Int, settings: IntArray, toUpdateGlobalState: Boolean) {
             this.enabled = enabled
             this.mode = mode
             this.context = context
@@ -390,23 +396,28 @@ object Core {
             }
         }
 
-        override fun doInBackground(vararg bubbles: Any): Any? {
-            if (mode == Constants.NL_SETTING_MODE_MANUAL)
-                applyNightMode(enabled, context, redColor, greenColor, blueColor)
-            else if (mode == Constants.NL_SETTING_MODE_TEMP)
-                applyNightMode(enabled, context, temperature)
-            else
-                applyGrayScale(enabled, context)
-            return null
-        }
+        /**
+         * Executes the background task.
+         */
+        fun execute() {
+            GlobalScope.launch(Dispatchers.IO) {
+                when (mode) {
+                    Constants.NL_SETTING_MODE_MANUAL -> applyNightMode(enabled, context, redColor, greenColor, blueColor)
+                    Constants.NL_SETTING_MODE_TEMP -> applyNightMode(enabled, context, temperature)
+                    else -> applyGrayScale(enabled, context)
+                }
 
-        override fun onPostExecute(bubble: Any?) {
-            // If this is run by set on boot units, set BOOT_MODE false
-            if (PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false))
-                PreferenceHelper.putBoolean(context, Constants.PREF_BOOT_MODE, false)
+                GlobalScope.launch(Dispatchers.Main) {
+                    // If this is run by set on boot units, set BOOT_MODE false
+                    if (PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false)) {
+                        PreferenceHelper.putBoolean(context, Constants.PREF_BOOT_MODE, false)
+                    }
 
-            if (NightLightAppService.instance.isAppServiceRunning && toUpdateGlobalState)
-                NightLightAppService.instance.notifyUpdatedState(enabled)
+                    if (NightLightAppService.instance.isAppServiceRunning && toUpdateGlobalState) {
+                        NightLightAppService.instance.notifyUpdatedState(enabled)
+                    }
+                }
+            }
         }
     }
 }

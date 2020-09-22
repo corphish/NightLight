@@ -11,16 +11,20 @@ import com.corphish.nightlight.services.NightLightAppService
 
 /**
  * Created by Avinaba on 10/4/2017.
- * Basic functions of the app
+ *
+ * Provides methods to asynchronously update KCAL.
+ * It provides various convenience method which can
+ * be used for various use cases.
  */
 
 object Core {
     /**
      * Enables night light based on blueLight and greenLight intensity.
-     * It enables KCAL, and writes the intensity
-     * Conditionally backup KCAL values if FORCE_SWITCH is off before turning it on
-     * Also enable force switch when Night Light is enabled
-     * @param context Context is needed for PreferenceHelper
+     * It enables KCAL, and writes the intensity.
+     * Conditionally backup KCAL values if FORCE_SWITCH is off before turning it on.
+     * Also enable force switch when Night Light is enabled.
+     *
+     * @param context Context is needed for PreferenceHelper.
      * @param redValue Value of red light to be set.
      * @param greenValue Value of green light to be set.
      * @param blueValue Value of blue light to be set.
@@ -39,7 +43,9 @@ object Core {
         val isModeBooting = PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false)
 
         // Assume that set on boot failed by default
-        if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
+        if (isModeBooting) {
+            PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
+        }
 
         val ret = KCALManager.updateKCALValues(redValue, greenValue, blueValue)
         if (isModeBooting) {
@@ -50,12 +56,13 @@ object Core {
     }
 
     /**
-     * Enables night light based on color temperature
-     * It enables KCAL, and writes the intensity
-     * Conditionally backup KCAL values if FORCE_SWITCH is off before turning it on
-     * Also enable force switch when Night Light is enabled
-     * @param context Context is needed for PreferenceHelper
-     * @param temperature Color temperature for night light
+     * Enables night light based on color temperature.
+     * It enables KCAL, and writes the intensity.
+     * Conditionally backup KCAL values if FORCE_SWITCH is off before turning it on.
+     * Also enable force switch when Night Light is enabled.
+     *
+     * @param context Context is needed for PreferenceHelper.
+     * @param temperature Color temperature for night light.
      */
     private fun enableNightMode(context: Context?, temperature: Int) {
         KCALManager.enableKCAL()
@@ -70,17 +77,22 @@ object Core {
         val isModeBooting = PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false)
 
         // Assume that set on boot failed by default
-        if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
+        if (isModeBooting) {
+            PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
+        }
 
         val ret = KCALManager.updateKCALValues(temperature.fromColorTemperatureToRGBIntArray())
-        if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
+        if (isModeBooting) {
+            PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
+        }
 
         PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, true)
     }
 
     /**
-     * Enables grayscale
-     * @param context Context is needed for PreferenceHelper
+     * Enables grayscale.
+     *
+     * @param context Context is needed for PreferenceHelper.
      */
     private fun enableGrayScale(context: Context?) {
         KCALManager.enableKCAL()
@@ -88,20 +100,25 @@ object Core {
         val isModeBooting = PreferenceHelper.getBoolean(context, Constants.PREF_BOOT_MODE, false)
 
         // Assume that set on boot failed by default
-        if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
+        if (isModeBooting) {
+            PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
+        }
 
         val ret = KCALManager.enableGrayScale()
-        if (isModeBooting) PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
+        if (isModeBooting) {
+            PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
+        }
 
         PreferenceHelper.putBoolean(context, Constants.PREF_WIND_DOWN, true)
     }
 
     /**
-     * Disables night light by setting default color values
-     * It does not disable KCAL switch though
-     * But it does disable force switch
-     * Set the user preserved values for KCAL only if it was enabled and only if **FORCE_SWITCH was on.**
-     * @param context Context is needed to read Preference values
+     * Disables night light by setting default color values.
+     * It does not disable KCAL switch though.
+     * But it does disable force switch.
+     * Set the user preserved values for KCAL only if it was enabled and only if **FORCE_SWITCH was on.**.
+     *
+     * @param context Context is needed to read Preference values.
      */
     private fun disableNightMode(context: Context?) {
         // First check if KCAL value backup is enabled or not
@@ -110,29 +127,32 @@ object Core {
         // If KCAL was preserved (enabled by default), set preserved values
         // Otherwise set default values
         if (PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH)) {
-            if (kcalPreserved)
+            if (kcalPreserved) {
                 KCALManager.updateKCALValues(PreferenceHelper.getString(context, Constants.KCAL_PRESERVE_VAL, Constants.DEFAULT_KCAL_VALUES))
-            else
+            } else {
                 KCALManager.updateKCALWithDefaultValues()
+            }
         }
 
         PreferenceHelper.putBoolean(context, Constants.PREF_FORCE_SWITCH, false)
     }
 
     /**
-     * Disables grayscale
-     * @param context Context is needed to read Preference values
+     * Disables grayscale.
+     *
+     * @param context Context is needed to read Preference values.
      */
     private fun disableGrayScale(context: Context?) {
-        val ret = KCALManager.disableGrayScale()
+        KCALManager.disableGrayScale()
 
         PreferenceHelper.putBoolean(context, Constants.PREF_WIND_DOWN, true)
     }
 
     /**
-     * Fixes Night Mode setting depending on user preferences
-     * @param context Context is needed to fetch user preferences and automation schedules
-     * @param prevState Previous state of night light. Will be used in case automation isn't used
+     * Fixes Night Mode setting depending on user preferences.
+     *
+     * @param context Context is needed to fetch user preferences and automation schedules.
+     * @param prevState Previous state of night light. Will be used in case automation isn't used.
      */
     fun fixNightMode(context: Context?, prevState: Boolean = false) {
         val autoEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH, false)
@@ -146,25 +166,28 @@ object Core {
     }
 
     /**
-     * Driver method to enable/disable night light
-     * @param e A boolean indicating whether night light should be turned on or off
+     * Driver method to enable/disable night light.
+     *
+     * @param e A boolean indicating whether night light should be turned on or off.
      * @param context Context is needed to read Preference values
      * @param redValue Value of red light to be set.
      * @param greenValue Value of green light to be set.
      * @param blueValue Value of blue light to be set.
      */
     fun applyNightMode(e: Boolean, context: Context?, redValue: Int, greenValue: Int, blueValue: Int) {
-        if (e)
+        if (e) {
             enableNightMode(context, redValue, greenValue, blueValue)
-        else
+        } else {
             disableNightMode(context)
+        }
     }
 
     /**
-     * Driver method to enable/disable night light
-     * @param e A boolean indicating whether night light should be turned on or off
-     * @param context Context is needed to read Preference values
-     * @param temperature Color temperature for Night Light
+     * Driver method to enable/disable night light.
+     *
+     * @param e A boolean indicating whether night light should be turned on or off.
+     * @param context Context is needed to read Preference values.
+     * @param temperature Color temperature for Night Light.
      */
     fun applyNightMode(e: Boolean, context: Context?, temperature: Int) {
         if (e)
@@ -174,22 +197,25 @@ object Core {
     }
 
     /**
-     * Driver method to enable or disable grayscale
-     * @param e Boolean indicating whether or not to enable grayscale
-     * @param context Context is needed to read Preference values
+     * Driver method to enable or disable grayscale.
+     *
+     * @param e Boolean indicating whether or not to enable grayscale.
+     * @param context Context is needed to read Preference values.
      */
     fun applyGrayScale(e: Boolean, context: Context?) {
-        if (e)
+        if (e) {
             enableGrayScale(context)
-        else
+        } else {
             disableGrayScale(context)
+        }
     }
 
     /**
      * Driver method to enable/disable night light asynchronously.
-     * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background
-     * @param b A boolean indicating whether night light should be turned on or off
-     * @param context Context is needed to read Preference values
+     * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background.
+     *
+     * @param b A boolean indicating whether night light should be turned on or off.
+     * @param context Context is needed to read Preference values.
      * @param redValue Value of red light to be set.
      * @param greenValue Value of green light to be set.
      * @param blueValue Value of blue light to be set.
@@ -200,9 +226,10 @@ object Core {
 
     /**
      * Driver method to enable/disable night light asynchronously.
-     * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background
-     * @param b A boolean indicating whether night light should be turned on or off
-     * @param context Context is needed to read Preference values
+     * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background.
+     *
+     * @param b A boolean indicating whether night light should be turned on or off.
+     * @param context Context is needed to read Preference values.
      * @param redValue Value of red light to be set.
      * @param blueValue Value of blue light to be set.
      * @param greenValue Value of green light to be set.
@@ -214,10 +241,11 @@ object Core {
 
     /**
      * Driver method to enable/disable night light asynchronously.
-     * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background
-     * @param b A boolean indicating whether night light should be turned on or off
-     * @param context Context is needed to read Preference values
-     * @param temperature Color Temperature for night light
+     * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background.
+     *
+     * @param b A boolean indicating whether night light should be turned on or off.
+     * @param context Context is needed to read Preference values.
+     * @param temperature Color Temperature for night light.
      */
     fun applyNightModeAsync(b: Boolean, context: Context?, temperature: Int) {
         NightModeApplier(b, context, temperature, true).execute()
@@ -225,11 +253,12 @@ object Core {
 
     /**
      * Driver method to enable/disable night light asynchronously.
-     * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background
-     * @param b A boolean indicating whether night light should be turned on or off
-     * @param context Context is needed to read Preference values
-     * @param temperature Color temperature for Night Light
-     * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated
+     * This is used by QS Tile, AlarmManagers and BroadcastReceivers to do the changes in background.
+     *
+     * @param b A boolean indicating whether night light should be turned on or off.
+     * @param context Context is needed to read Preference values.
+     * @param temperature Color temperature for Night Light.
+     * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated.
      */
     fun applyNightModeAsync(b: Boolean, context: Context?, temperature: Int, toUpdateGlobalState: Boolean) {
         NightModeApplier(b, context, temperature, toUpdateGlobalState).execute()
@@ -237,15 +266,17 @@ object Core {
 
     /**
      * Driver method to enable/disable night light asynchronously.
-     * @param b A boolean indicating whether night light should be turned on or off
-     * @param context A context parameter to read the intensity values from preferences
-     * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated
-     * @param intensityType Intensity type. Null if type is to be fetched
+     *
+     * @param b A boolean indicating whether night light should be turned on or off.
+     * @param context A context parameter to read the intensity values from preferences.
+     * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated.
+     * @param intensityType Intensity type. Null if type is to be fetched.
      */
     @JvmOverloads
     fun applyNightModeAsync(b: Boolean, context: Context?, toUpdateGlobalState: Boolean = true, intensityType: Int? = null) {
         val mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
-        val type = intensityType ?: PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
+        val type = intensityType
+                ?: PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
         if (mode == Constants.NL_SETTING_MODE_MANUAL) {
             applyNightModeAsync(b,
                     context,
@@ -263,11 +294,12 @@ object Core {
 
     /**
      * Driver method to enable/disable night light asynchronously.
-     * @param b A boolean indicating whether night light should be turned on or off
+     *
+     * @param b A boolean indicating whether night light should be turned on or off.
      * @param context Tough love for context eh?
-     * @param mode Mode of night light setting
-     * @param settings Settings for night light
-     * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated
+     * @param mode Mode of night light setting.
+     * @param settings Settings for night light.
+     * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated.
      */
     @JvmOverloads
     fun applyNightModeAsync(b: Boolean, context: Context?, mode: Int, settings: IntArray, toUpdateGlobalState: Boolean = false) {
@@ -276,15 +308,17 @@ object Core {
 
     /**
      * Driver method to enable or disable grayscale asynchronously.
-     * @param e Boolean indicating whether or not to enable grayscale
-     * @param context Context is needed to read Preference values
+     *
+     * @param b Boolean indicating whether or not to enable grayscale.
+     * @param context Context is needed to read Preference values.
      */
     fun applyGrayScaleAsync(b: Boolean, context: Context?) {
         NightModeApplier(b, context, Constants.NL_SETTING_MODE_GRAYS_SCALE).execute()
     }
 
     /**
-     * Toggles intensities, and then applies it
+     * Toggles intensities, and then applies it.
+     *
      * @param context Tough love for context eh?
      */
     fun toggleIntensities(context: Context?) {
@@ -351,7 +385,8 @@ object Core {
                 Constants.NL_SETTING_MODE_TEMP -> {
                     temperature = settings[0]
                 }
-                else -> { /* There to filter out invalid modes if any */ }
+                else -> { /* There to filter out invalid modes if any */
+                }
             }
         }
 

@@ -4,6 +4,7 @@ import android.content.Context
 
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.extensions.fromColorTemperatureToRGBIntArray
+import com.corphish.nightlight.helpers.FadeUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
 import com.corphish.nightlight.services.NightLightAppService
@@ -83,7 +84,10 @@ object Core {
             PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
         }
 
-        val ret = KCALManager.updateKCALValues(temperature.fromColorTemperatureToRGBIntArray())
+        // Apply faded temperature
+        val fadedTemperature = FadeUtils.getColorTemperatureForCurrentTime(context!!) ?: temperature
+
+        val ret = KCALManager.updateKCALValues(fadedTemperature.fromColorTemperatureToRGBIntArray())
         if (isModeBooting) {
             PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
         }

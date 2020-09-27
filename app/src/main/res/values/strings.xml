@@ -15,10 +15,16 @@
     <string name="auto_enable_desc">Automatically enable Night Light between the specified time and disable outside the specified time.</string>
     <string name="start_time">Start time</string>
     <string name="end_time">End time</string>
-    <string name="dark_hours_title">Enable dark hours</string>
-    <string name="dark_hours_desc">Set the time when maximum intensity will be applied. Minimum intensity will be applied before this.</string>
-    <string name="dark_hours_start_time">Dark hours start time</string>
+    <string name="dark_hours_title">Enable fading</string>
+    <string name="dark_hours_desc">Night light intensity will fade from minimum intensity to maximum intensity.</string>
+    <string name="dark_hours_start_time">Fade stop time</string>
     <string name="dark_hours_set_error">Time must be in between schedule start time and end time.</string>
+    <string name="fade_poll_rate">Fade poll rate</string>
+    <string name="min_5">5 minutes</string>
+    <string name="min_10">10 minutes</string>
+    <string name="min_15">15 minutes</string>
+    <string name="min_30">30 minutes</string>
+    <string name="min_60">60 minutes</string>
 
     <string name="start_time_default" translatable="false">00:00</string>
     <string name="end_time_default" translatable="false">06:00</string>

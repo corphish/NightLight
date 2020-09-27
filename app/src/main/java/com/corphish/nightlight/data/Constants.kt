@@ -51,6 +51,7 @@ object Constants {
     const val PREF_DISABLE_IN_LOCK_SCREEN = "disable_in_lock_screen"
     const val PREF_DISABLED_BY_LOCK_SCREEN = "disabled_by_lock_screen"
     const val PREF_FADE_ENABLED = "fade_enabled"
+    const val PREF_FADE_POLL_RATE_MINS = "fade_poll_rate"
 
     /**
      * Fixed const values (default, max const values)

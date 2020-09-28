@@ -3,7 +3,6 @@ package com.corphish.nightlight.engine
 import android.content.Context
 
 import com.corphish.nightlight.data.Constants
-import com.corphish.nightlight.helpers.AlarmUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
 import com.luckycatlabs.sunrisesunset.SunriseSunsetCalculator
@@ -64,7 +63,7 @@ class TwilightManager {
      * @param eventFinishCallback Callback for event finish
      * @return Current instance
      */
-    fun computeAndSaveTime(context: Context, eventFinishCallback: (() -> Unit)? = null): TwilightManager {
+    fun computeAndSaveTime(context: Context, eventFinishCallback: ((String, String) -> Unit)? = null): TwilightManager {
         val mLocation = Location(latitude, longitude)
 
         val sunriseSunsetCalculator = SunriseSunsetCalculator(mLocation, TimeZone.getDefault())
@@ -73,7 +72,6 @@ class TwilightManager {
         val sunsetTime = sunriseSunsetCalculator.getOfficialSunsetForDate(calendar)
         val sunriseTime = sunriseSunsetCalculator.getOfficialSunriseForDate(calendar)
 
-        val darkHoursEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_DARK_HOURS_ENABLE, false)
         var darkStartTime = PreferenceHelper.getString(context, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)
 
         PreferenceHelper.putString(context, Constants.PREF_START_TIME, sunsetTime)
@@ -84,9 +82,7 @@ class TwilightManager {
             PreferenceHelper.putString(context, Constants.PREF_DARK_HOURS_START, darkStartTime)
         }
 
-        AlarmUtils.setAlarms(context, sunsetTime, sunriseTime, darkHoursEnabled, darkStartTime, false)
-
-        eventFinishCallback?.invoke()
+        eventFinishCallback?.invoke(sunsetTime, sunriseTime)
 
         return this
     }

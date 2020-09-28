@@ -51,9 +51,7 @@
             </intent-filter>
         </service>
 
-        <receiver android:name=".receivers.StartNLReceiver" />
-        <receiver android:name=".receivers.StopNLReceiver" />
-        <receiver android:name=".receivers.DarkStartNLReceiver" />
+        <receiver android:name=".receivers.AutomateSignalReceiver" />
         <receiver android:name=".receivers.ScreenOnOffReceiver" />
         <receiver
             android:name=".receivers.BootCompleteReceiver"

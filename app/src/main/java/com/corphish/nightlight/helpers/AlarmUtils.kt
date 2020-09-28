@@ -4,65 +4,63 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import com.corphish.nightlight.receivers.DarkStartNLReceiver
-
-import com.corphish.nightlight.receivers.StartNLReceiver
-import com.corphish.nightlight.receivers.StopNLReceiver
+import com.corphish.nightlight.receivers.AutomateSignalReceiver
 
 import java.util.Calendar
 
 /**
  * Created by Avinaba on 10/6/2017.
- * Helper class to deal with alarms
+ * Helper class to deal with alarms.
+ *
+ * As part of 3.0 update in 2020, alarms set will no longer will be
+ * repeating, as only one alarm will be set at any given time. When this alarm
+ * is fired, it will set subsequent alarms accordingly.
  */
 
 object AlarmUtils {
-
-    private const val REQUEST_CODE_START = 0
-    private const val REQUEST_CODE_STOP = 0
+    // Request code
+    private const val REQUEST_CODE = 42
 
     /**
-     * Sets the start and end alarms on user specified time
-     * @param context Needed by intent, pendingIntent and to get the AlarmManager service
-     * @param startTime Starting time for alarm
-     * @param endTime Ending time for alarm
+     * Sets a non-repeating alarm in a given time of day.
+     * If the time specified is lesser than current time, alarm will be set for
+     * next day.
+     *
+     * @param context Context.
+     * @param time    Absolute time.
      */
-    fun setAlarms(context: Context, startTime: String, endTime: String, darkHoursEnabled: Boolean = false, darkStartTime: String? = null, repeating: Boolean) {
-        // Set start alarm
-        setAlarm(context, startTime, repeating, StartNLReceiver::class.java, REQUEST_CODE_START)
+    fun setAlarmAbsolute(context: Context, time: String) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AutomateSignalReceiver::class.java)
+        val alarmIntent = PendingIntent.getBroadcast(context, REQUEST_CODE, intent, 0)
 
-        if (darkHoursEnabled && darkStartTime != null) // Set start alarm
-            setAlarm(context, darkStartTime, repeating, DarkStartNLReceiver::class.java, REQUEST_CODE_START)
+        val calendar = Calendar.getInstance()
+        val splitTime = TimeUtils.getTimeAsHourAndMinutes(time)
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.set(Calendar.HOUR_OF_DAY, splitTime[0])
+        calendar.set(Calendar.MINUTE, splitTime[1])
 
-        // Set end alarm
-        setAlarm(context, endTime, repeating, StopNLReceiver::class.java, REQUEST_CODE_STOP)
+        var timeInMillis = calendar.timeInMillis
+        if (TimeUtils.currentTimeAsMinutes > TimeUtils.getTimeInMinutes(time)) {
+            timeInMillis += 86400000L
+        }
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent)
     }
 
     /**
-     * Sets alarm based on given arguments
+     * Sets a non-repeating alarm after given minutes from current time.
+     *
+     * @param context Context.
+     * @param minutes Minutes after which alarm must be set.
      */
-    private fun setAlarm(context: Context,
-                 time: String,
-                 repeating: Boolean,
-                 receiverClass: Class<*>,
-                 requestCode: Int) {
+    fun setAlarmRelative(context: Context, minutes: Int) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        var timeInMillis: Long
+        val intent = Intent(context, AutomateSignalReceiver::class.java)
+        val alarmIntent = PendingIntent.getBroadcast(context, REQUEST_CODE, intent, 0)
 
-        val intent = Intent(context, receiverClass)
-        val alarmIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
+        val targetMillis = System.currentTimeMillis() + (minutes * 60L * 1000)
 
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = System.currentTimeMillis()
-        calendar.set(Calendar.HOUR_OF_DAY, TimeUtils.getTimeAsHourAndMinutes(time)[0])
-        calendar.set(Calendar.MINUTE, TimeUtils.getTimeAsHourAndMinutes(time)[1])
-
-        timeInMillis = calendar.timeInMillis
-        if (TimeUtils.currentTimeAsMinutes > TimeUtils.getTimeInMinutes(time)) timeInMillis += 86400000L
-
-        if (repeating)
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, alarmIntent)
-        else
-            alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent)
+        alarmManager.set(AlarmManager.RTC_WAKEUP, targetMillis, alarmIntent)
     }
 }

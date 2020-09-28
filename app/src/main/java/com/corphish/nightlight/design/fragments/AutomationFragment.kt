@@ -103,7 +103,7 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
         }
 
         // Handle dark hours switch click
-        findPreference<SwitchPreferenceCompat>(Constants.PREF_DARK_HOURS_ENABLE)?.setOnPreferenceChangeListener() { _, _ ->
+        findPreference<SwitchPreferenceCompat>(Constants.PREF_DARK_HOURS_ENABLE)?.setOnPreferenceChangeListener { _, _ ->
             fixDarkHoursStartTime()
 
             true
@@ -219,7 +219,7 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
         Core.applyNightModeAsync(toEnable, requireContext(), true, if (darkHoursEnabled) intensity else null)
 
         if (setAlarms) {
-            AlarmUtils.setAlarms(requireContext(), prefStartTime, prefEndTime, darkHoursEnabled, prefDarkStartTime, true)
+            AlarmUtils.setAlarmAbsolute(requireContext(), prefStartTime)
         }
     }
 
@@ -272,11 +272,11 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
 
         TwilightManager.newInstance()
                 .atLocation(currentLocation.longitude, currentLocation.latitude)
-                .computeAndSaveTime(requireContext()) {
+                .computeAndSaveTime(requireContext()) { a, b ->
                     doCurrentAutoFunctions(false)
 
-                    findPreference<Preference>(Constants.PREF_START_TIME)?.summary = PreferenceHelper.getString(requireContext(), Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)!!
-                    findPreference<Preference>(Constants.PREF_END_TIME)?.summary = PreferenceHelper.getString(requireContext(), Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)!!
+                    findPreference<Preference>(Constants.PREF_START_TIME)?.summary = a
+                    findPreference<Preference>(Constants.PREF_END_TIME)?.summary = b
                 }
 
         addNextDayIfNecessary()

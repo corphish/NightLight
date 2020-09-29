@@ -82,7 +82,7 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
                 PreferenceHelper.putString(requireContext(), Constants.PREF_START_TIME, prevStartTime)
                 PreferenceHelper.putString(requireContext(), Constants.PREF_END_TIME, prevEndTime)
 
-                addNextDayIfNecessary()
+                addNextDayIfNecessary(Constants.PREF_END_TIME)
                 doCurrentAutoFunctions(true)
             }
 
@@ -121,7 +121,9 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
         findPreference<Preference>(Constants.PREF_START_TIME)?.summary = PreferenceHelper.getString(requireContext(), Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
         findPreference<Preference>(Constants.PREF_END_TIME)?.summary = PreferenceHelper.getString(requireContext(), Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
         findPreference<Preference>(Constants.PREF_DARK_HOURS_START)?.summary = PreferenceHelper.getString(requireContext(), Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)
-        addNextDayIfNecessary()
+
+        addNextDayIfNecessary(Constants.PREF_END_TIME)
+        addNextDayIfNecessary(Constants.PREF_DARK_HOURS_START)
     }
 
     /**
@@ -151,7 +153,7 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
 
             viewWhoIsCallingIt?.summary = timeString
 
-            addNextDayIfNecessary()
+            addNextDayIfNecessary(Constants.PREF_END_TIME)
             fixDarkHoursStartTime()
 
             doCurrentAutoFunctions(true)
@@ -184,13 +186,18 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
     }
 
     /**
-     * Adds localised (Next Day) string if necessary
+     * Adds localised (Next Day) string if necessary.
+     *
+     * @param prefKey Preference to change.
+     * @param defaultValue Optional parameter to supply default value.
      */
-    private fun addNextDayIfNecessary() {
+    private fun addNextDayIfNecessary(prefKey: String, defaultValue: String = Constants.DEFAULT_END_TIME) {
         val sStartTime = PreferenceHelper.getString(requireContext(), Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
-        val sEndTime = PreferenceHelper.getString(requireContext(), Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
-        if (TimeUtils.getTimeInMinutes(sEndTime!!) < TimeUtils.getTimeInMinutes(sStartTime!!))
-            findPreference<Preference>(Constants.PREF_END_TIME)?.summary = "$sEndTime ${getString(R.string.next_day)}"
+
+        val sEndTime = PreferenceHelper.getString(requireContext(), prefKey, defaultValue)
+        if (TimeUtils.getTimeInMinutes(sEndTime!!) < TimeUtils.getTimeInMinutes(sStartTime!!)) {
+            findPreference<Preference>(prefKey)?.summary = "$sEndTime ${getString(R.string.next_day)}"
+        }
     }
 
     /**
@@ -282,7 +289,7 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
                     findPreference<Preference>(Constants.PREF_END_TIME)?.summary = b
                 }
 
-        addNextDayIfNecessary()
+        addNextDayIfNecessary(Constants.PREF_END_TIME)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,

@@ -33,6 +33,8 @@ class ColorActivity : BaseActivity() {
 
         val settingType = PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
         navView.selectedItemId = arrayOf(R.id.navigation_temperature, R.id.navigation_manual)[settingType]
+
+        setActionBarTitle(title.toString())
     }
 
     override fun onDestroy() {

@@ -26,7 +26,7 @@
         <activity android:name=".activities.ProfileCreateActivity" />
         <activity
             android:name=".activities.ColorActivity"
-            android:label="@string/title_activity_color"
+            android:label="@string/section_color"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

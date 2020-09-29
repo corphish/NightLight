@@ -13,7 +13,6 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
-import com.corphish.nightlight.services.NightLightAppService
 import com.google.android.material.button.MaterialButton
 import com.gregacucnik.EditableSeekBar
 
@@ -59,6 +58,7 @@ class TemperatureFragment: Fragment() {
 
                 getValues()
                 setSliderValues()
+                Core.applyNightModeAsync(true, context, colorTemperature)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -86,11 +86,9 @@ class TemperatureFragment: Fragment() {
             }
 
             override fun onEditableSeekBarValueChanged(value: Int) {
-                if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP[intensityType], value)
-                    Core.applyNightModeAsync(true, context, value)
-                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
-                }
+                PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP[intensityType], value)
+                Core.applyNightModeAsync(true, context, value)
+                PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
             }
         })
 

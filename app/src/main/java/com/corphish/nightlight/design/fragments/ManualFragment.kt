@@ -14,7 +14,6 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
-import com.corphish.nightlight.services.NightLightAppService
 import com.google.android.material.button.MaterialButton
 import com.gregacucnik.EditableSeekBar
 
@@ -88,11 +87,9 @@ class ManualFragment : Fragment() {
             override fun onEditableSeekBarValueChanged(value: Int) {
                 redColor = value
 
-                if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR[intensityType], redColor)
-                    Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
-                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
-                }
+                PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR[intensityType], redColor)
+                Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
+                PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
             }
         })
 
@@ -112,11 +109,9 @@ class ManualFragment : Fragment() {
             override fun onEditableSeekBarValueChanged(value: Int) {
                 greenColor = value
 
-                if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR[intensityType], greenColor)
-                    Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
-                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
-                }
+                PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR[intensityType], greenColor)
+                Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
+                PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
             }
         })
 
@@ -136,12 +131,9 @@ class ManualFragment : Fragment() {
             override fun onEditableSeekBarValueChanged(value: Int) {
                 blueColor = value
 
-
-                if (NightLightAppService.instance.isInitDone()) {
-                    PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR[intensityType], blueColor)
-                    Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
-                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
-                }
+                PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR[intensityType], blueColor)
+                Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
+                PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
             }
         })
 
@@ -162,6 +154,7 @@ class ManualFragment : Fragment() {
 
                 getValues()
                 setSliderValues()
+                Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}

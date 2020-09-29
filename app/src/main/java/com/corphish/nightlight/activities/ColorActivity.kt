@@ -35,8 +35,6 @@ class ColorActivity : BaseActivity() {
         navView.selectedItemId = arrayOf(R.id.navigation_temperature, R.id.navigation_manual)[settingType]
     }
 
-
-
     override fun onDestroy() {
         super.onDestroy()
 

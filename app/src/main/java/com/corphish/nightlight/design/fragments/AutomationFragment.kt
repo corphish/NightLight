@@ -106,6 +106,7 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
         findPreference<SwitchPreferenceCompat>(Constants.PREF_DARK_HOURS_ENABLE)?.setOnPreferenceChangeListener { _, _ ->
             fixDarkHoursStartTime()
             doCurrentAutoFunctions(true)
+            PreferenceHelper.putBoolean(requireContext(), Constants.PREF_FADE_ENABLED, true)
 
             true
         }

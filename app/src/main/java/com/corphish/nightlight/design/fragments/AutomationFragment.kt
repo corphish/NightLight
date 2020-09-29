@@ -105,6 +105,7 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
         // Handle dark hours switch click
         findPreference<SwitchPreferenceCompat>(Constants.PREF_DARK_HOURS_ENABLE)?.setOnPreferenceChangeListener { _, _ ->
             fixDarkHoursStartTime()
+            doCurrentAutoFunctions(true)
 
             true
         }
@@ -219,7 +220,7 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
         Core.applyNightModeAsync(toEnable, requireContext(), true, if (darkHoursEnabled) intensity else null)
 
         if (setAlarms) {
-            AlarmUtils.setAlarmAbsolute(requireContext(), prefStartTime)
+            AlarmUtils.setAlarmRelative(requireContext(), 0)
         }
     }
 

@@ -54,6 +54,12 @@ object FadeUtils {
 
         val pollMinutes = PreferenceHelper.getString(context, Constants.PREF_FADE_POLL_RATE_MINS, "5")?.toInt() ?: 5
 
+        // Poll minutes can now be 0 by value, indicating infinite selection.
+        // In such cases we return the min temp, as outside the fade schedule, max will be applied.
+        if (pollMinutes == 0) {
+            return minTemp
+        }
+
         val difference = TimeUtils.getTimeDifference(startTime, endTime)
         val minuteDifference = difference[0] * 60 + difference[1]
         val step = (minuteDifference.toFloat()/pollMinutes).roundToInt()

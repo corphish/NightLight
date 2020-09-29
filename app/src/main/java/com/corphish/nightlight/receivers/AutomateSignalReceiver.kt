@@ -62,7 +62,14 @@ class AutomateSignalReceiver : BroadcastReceiver() {
                 if (insideFadeSchedule) {
                     // Set relative alarms
                     val pollRate = PreferenceHelper.getString(context, Constants.PREF_FADE_POLL_RATE_MINS, "5")?.toInt() ?: 5
-                    AlarmUtils.setAlarmRelative(context!!, pollRate)
+
+                    // If infinite poll is selected, then it will behave same as what
+                    // dark hours start would behave. In this case we set an absolute alarm.
+                    if (pollRate == 0) {
+                        AlarmUtils.setAlarmAbsolute(context!!, endTime)
+                    } else {
+                        AlarmUtils.setAlarmRelative(context!!, pollRate)
+                    }
                 } else {
                     // We set alarm for end time
                     AlarmUtils.setAlarmAbsolute(context!!, endTime)

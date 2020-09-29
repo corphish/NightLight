@@ -45,6 +45,7 @@
         <item>@string/min_15</item>
         <item>@string/min_30</item>
         <item>@string/min_60</item>
+        <item>@string/infinite</item>
     </string-array>
 
     <!-- Poll rate values as array -->
@@ -54,5 +55,6 @@
         <item>15</item>
         <item>30</item>
         <item>60</item>
+        <item>0</item>
     </string-array>
 </resources>

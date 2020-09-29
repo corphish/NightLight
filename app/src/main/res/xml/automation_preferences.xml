@@ -38,7 +38,7 @@
 
         <ListPreference
             app:key="fade_poll_rate"
-            app:dependency="dark_hours_enabled"
+            app:dependency="dark_hours_enable"
             app:title="@string/fade_poll_rate"
             app:entries="@array/poll_rate_names"
             app:entryValues="@array/poll_rate_values"

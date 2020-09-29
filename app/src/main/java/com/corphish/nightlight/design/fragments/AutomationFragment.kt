@@ -276,6 +276,7 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
                 .atLocation(currentLocation.longitude, currentLocation.latitude)
                 .computeAndSaveTime(requireContext()) { a, b ->
                     doCurrentAutoFunctions(false)
+                    fixDarkHoursStartTime()
 
                     findPreference<Preference>(Constants.PREF_START_TIME)?.summary = a
                     findPreference<Preference>(Constants.PREF_END_TIME)?.summary = b

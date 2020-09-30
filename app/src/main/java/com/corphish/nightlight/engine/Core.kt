@@ -324,13 +324,31 @@ object Core {
 
     /**
      * Toggles intensities, and then applies it.
+     * Also supports fading behavior now.
      *
      * @param context Tough love for context eh?
      */
     fun toggleIntensities(context: Context?) {
+        // The way it will work is, since we have maximum intensity value as 0 and minimum
+        // intensity value as 1, we will increment the intensity variable by 1 for each toggle
+        // and mod by 2. When the new value becomes 0, we consider fading. Once this state is
+        // toggled, we will have intensity value 0 which will be toggled to 1, so in such cases
+        // we have to prevent the increment accordingly.
         var type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
+        val fadingEnabled = FadeUtils.isFadingEnabled(context!!)
+        val fadeState = PreferenceHelper.getBoolean(context, Constants.PREF_FADE_ENABLED, false)
+
+        // Check pre-condition and adjust.
+        if (type == 0 && fadeState) {
+            type++
+            PreferenceHelper.putBoolean(context, Constants.PREF_FADE_ENABLED, false)
+        }
 
         type = (type + 1) % 2
+
+        if (type == 0 && fadingEnabled) {
+            PreferenceHelper.putBoolean(context, Constants.PREF_FADE_ENABLED, true)
+        }
 
         PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, type)
 

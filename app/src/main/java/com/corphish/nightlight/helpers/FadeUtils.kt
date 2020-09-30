@@ -78,7 +78,7 @@ object FadeUtils {
      * @return        Boolean indicating whether fading can take place
      *                or not.
      */
-    fun isFadingEnabled(context: Context): Boolean {
+    fun isFadingEnabled(context: Context, fadeSettingOverride: Boolean? = null): Boolean {
         // Get the switch status
         val autoEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH, false)
         val fadeEnabled = autoEnabled && PreferenceHelper.getBoolean(context, Constants.PREF_DARK_HOURS_ENABLE, false)
@@ -89,7 +89,7 @@ object FadeUtils {
         }
 
         // Check if fade setting is enabled
-        val fadeSettingEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_FADE_ENABLED, false)
+        val fadeSettingEnabled = fadeSettingOverride ?: PreferenceHelper.getBoolean(context, Constants.PREF_FADE_ENABLED, false)
         if (!fadeSettingEnabled) {
             return false
         }

@@ -13,6 +13,7 @@ import com.corphish.nightlight.activities.SettingsActivity
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.engine.Core
+import com.corphish.nightlight.helpers.FadeUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
 import kotlinx.android.synthetic.main.layout_dashboard_v2.*
@@ -95,6 +96,8 @@ class DashboardFragment: Fragment() {
 
     fun updateDashboard() {
         val nlState = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
+        val fadingEnabled = PreferenceHelper.getBoolean(requireContext(), Constants.PREF_FADE_ENABLED, false) &&
+                FadeUtils.isFadingEnabled(requireContext())
 
         forceStatus.setText(if(nlState) R.string.on else R.string.off)
 
@@ -115,7 +118,13 @@ class DashboardFragment: Fragment() {
             true
         }
 
-        intensityStatus.setText(arrayOf(R.string.maximum, R.string.minimum)[type])
+        intensityStatus.setText(
+                when {
+                    !nlState -> R.string.none
+                    fadingEnabled -> R.string.fading_in
+                    else -> arrayOf(R.string.maximum, R.string.minimum)[type]
+                }
+        )
         intensityIcon.background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ThemeUtils.getNLStatusIconBackground(requireContext(), nlState, type), BlendModeCompat.SRC_ATOP)
         intensityIcon.setColorFilter(ThemeUtils.getNLStatusIconForeground(requireContext(), nlState, type))
 

@@ -176,4 +176,7 @@
 
     <string name="notification_channel_name">Service</string>
     <string name="notification_running">Service is running</string>
+
+    <string name="fading_in">Fading in</string>
+    <string name="none">None</string>
 </resources>

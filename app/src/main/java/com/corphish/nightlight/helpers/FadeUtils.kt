@@ -47,9 +47,10 @@ object FadeUtils {
         val endTime = PreferenceHelper.getString(context, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)
                 ?: Constants.DEFAULT_START_TIME
 
-        // Check if current time is in schedule or not
+        // Check if current time is in schedule or not.
+        // If not then we return max temp.
         if (!TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, endTime)) {
-            return null
+            return maxTemp
         }
 
         val pollMinutes = PreferenceHelper.getString(context, Constants.PREF_FADE_POLL_RATE_MINS, "5")?.toInt() ?: 5

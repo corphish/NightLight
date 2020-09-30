@@ -335,20 +335,18 @@ object Core {
         // toggled, we will have intensity value 0 which will be toggled to 1, so in such cases
         // we have to prevent the increment accordingly.
         var type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
-        val fadingEnabled = FadeUtils.isFadingEnabled(context!!)
+        val fadingEnabled = FadeUtils.isFadingEnabled(context!!, true)
         val fadeState = PreferenceHelper.getBoolean(context, Constants.PREF_FADE_ENABLED, false)
 
         // Check pre-condition and adjust.
-        if (type == 0 && fadeState) {
+        if (fadingEnabled && fadeState) {
             type++
             PreferenceHelper.putBoolean(context, Constants.PREF_FADE_ENABLED, false)
+        } else if (type == 0 && fadingEnabled) {
+            PreferenceHelper.putBoolean(context, Constants.PREF_FADE_ENABLED, true)
         }
 
         type = (type + 1) % 2
-
-        if (type == 0 && fadingEnabled) {
-            PreferenceHelper.putBoolean(context, Constants.PREF_FADE_ENABLED, true)
-        }
 
         PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, type)
 

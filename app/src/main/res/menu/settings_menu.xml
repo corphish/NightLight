@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:title="@string/about"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_faq"
+        android:orderInCategory="101"
+        android:title="@string/faq"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_support"
+        android:orderInCategory="102"
+        android:title="@string/show_support"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_rate"
+        android:orderInCategory="104"
+        android:title="@string/rate"
+        android:icon="@drawable/ic_star"
+        app:showAsAction="ifRoom" />
+</menu>

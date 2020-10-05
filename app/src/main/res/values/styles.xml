@@ -209,7 +209,7 @@
     </style>
 
     <style name="AppThemeCircular.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppThemeCircular.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppThemeCircular.PopupOverlay" parent="ThemeOverlay.AppCompat" />
 
     <style name="AppThemeLightCircular.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -225,7 +225,7 @@
     </style>
 
     <style name="AppThemeSquare.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppThemeSquare.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppThemeSquare.PopupOverlay" parent="ThemeOverlay.AppCompat" />
 
     <style name="AppThemeLightSquare.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -241,7 +241,7 @@
     </style>
 
     <style name="AppThemeRoundedSquare.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppThemeRoundedSquare.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppThemeRoundedSquare.PopupOverlay" parent="ThemeOverlay.AppCompat" />
 
     <style name="AppThemeLightRoundedSquare.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -257,7 +257,7 @@
     </style>
 
     <style name="AppThemeTeardrop.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppThemeTeardrop.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppThemeTeardrop.PopupOverlay" parent="ThemeOverlay.AppCompat" />
 
     <style name="AppThemeLightTeardrop.NoActionBar">
         <item name="windowActionBar">false</item>

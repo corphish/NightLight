@@ -1,7 +1,11 @@
 package com.corphish.nightlight.activities
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -58,6 +62,38 @@ class SettingsActivity : BaseActivity(),
         }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.settings_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.action_about -> {
+                startActivity(Intent(this, AboutActivity::class.java))
+                true
+            }
+            R.id.action_faq -> {
+                ExternalLink.open(this, "https://github.com/corphish/NightLight/blob/master/notes/usage.md")
+                true
+            }
+            R.id.action_support -> {
+                showSupport()
+                true
+            }
+            R.id.action_rate -> {
+                ExternalLink.open(
+                        this,
+                        "market://details?id=com.corphish.nightlight." + (if (BuildConfig.FLAVOR != "generic") "donate" else "generic")
+                )
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -118,58 +154,9 @@ class SettingsActivity : BaseActivity(),
             // Show driver info
             findPreference<Preference>("kcal_driver")?.summary = KCALManager.implementation.getImplementationName()
 
-            // Show app version
-            findPreference<Preference>("about")?.summary = BuildConfig.VERSION_NAME
-
-            // Show FAQ
-            findPreference<Preference>("faq")?.setOnPreferenceClickListener {
-                ExternalLink.open(requireContext(), "https://github.com/corphish/NightLight/blob/master/notes/usage.md")
-                true
-            }
-
             // Show appreciation fragment
             findPreference<Preference>("show_support")?.setOnPreferenceClickListener {
-                val background = ContextCompat.getDrawable(requireContext(), ThemeUtils.getThemeIconShape(requireContext()))
 
-                SingleChoiceAlertDialog(requireContext()).apply {
-                    titleResId = R.string.show_support
-                    messageResId = R.string.support_desc
-                    dismissOnChoiceSelection = false
-                    animationResourceLayout = R.raw.appreciate
-                    iconProperties = IconProperties(
-                            iconColor = if (ThemeUtils.isLightTheme(requireContext())) Color.WHITE else Color.BLACK,
-                            backgroundDrawable = background
-                    )
-                    choiceList = listOf(
-                            SingleChoiceAlertDialog.ChoiceItem(
-                                    titleResId = R.string.rate,
-                                    iconResId = R.drawable.ic_star,
-                                    action = {
-                                        ExternalLink.open(
-                                                requireContext(),
-                                                "market://details?id=com.corphish.nightlight." + (if (BuildConfig.FLAVOR != "generic") "donate" else "generic")
-                                        )
-                                    }),
-                            SingleChoiceAlertDialog.ChoiceItem(
-                                    titleResId = R.string.translate,
-                                    iconResId = R.drawable.ic_translate,
-                                    action = {
-                                        ExternalLink.open(
-                                                requireContext(),
-                                                "https://github.com/corphish/NightLight/blob/master/notes/translate.md"
-                                        )
-                                    }),
-                            SingleChoiceAlertDialog.ChoiceItem(
-                                    titleResId = R.string.get_donate,
-                                    iconResId = R.drawable.ic_money,
-                                    action = {
-                                        ExternalLink.open(
-                                                requireContext(),
-                                                "https://paypal.me/corphish"
-                                        )
-                                    })
-                    )
-                }.show()
 
                 true
             }
@@ -218,6 +205,50 @@ class SettingsActivity : BaseActivity(),
 
             updateProfileCount()
         }
+    }
+
+    private fun showSupport() {
+        val background = ContextCompat.getDrawable(this, ThemeUtils.getThemeIconShape(this))
+
+        SingleChoiceAlertDialog(this).apply {
+            titleResId = R.string.show_support
+            messageResId = R.string.support_desc
+            dismissOnChoiceSelection = false
+            animationResourceLayout = R.raw.appreciate
+            iconProperties = IconProperties(
+                    iconColor = if (ThemeUtils.isLightTheme(this@SettingsActivity)) Color.WHITE else Color.BLACK,
+                    backgroundDrawable = background
+            )
+            choiceList = listOf(
+                    SingleChoiceAlertDialog.ChoiceItem(
+                            titleResId = R.string.rate,
+                            iconResId = R.drawable.ic_star,
+                            action = {
+                                ExternalLink.open(
+                                        this@SettingsActivity,
+                                        "market://details?id=com.corphish.nightlight." + (if (BuildConfig.FLAVOR != "generic") "donate" else "generic")
+                                )
+                            }),
+                    SingleChoiceAlertDialog.ChoiceItem(
+                            titleResId = R.string.translate,
+                            iconResId = R.drawable.ic_translate,
+                            action = {
+                                ExternalLink.open(
+                                        this@SettingsActivity,
+                                        "https://github.com/corphish/NightLight/blob/master/notes/translate.md"
+                                )
+                            }),
+                    SingleChoiceAlertDialog.ChoiceItem(
+                            titleResId = R.string.get_donate,
+                            iconResId = R.drawable.ic_money,
+                            action = {
+                                ExternalLink.open(
+                                        this@SettingsActivity,
+                                        "https://paypal.me/corphish"
+                                )
+                            })
+            )
+        }.show()
     }
 
     override fun onResume() {

@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppThemeCircular">
+        android:theme="@style/AppThemeCircular.NoActionBar">
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"/>

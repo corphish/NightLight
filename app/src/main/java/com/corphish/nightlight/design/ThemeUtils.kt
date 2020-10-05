@@ -10,10 +10,10 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 
 object ThemeUtils {
     private val THEMES = mapOf(
-            Constants.ICON_SHAPE_CIRCLE to arrayOf(R.style.AppThemeCircular, R.style.AppThemeLightCircular),
-            Constants.ICON_SHAPE_SQUARE to arrayOf(R.style.AppThemeSquare, R.style.AppThemeLightSquare),
-            Constants.ICON_SHAPE_ROUNDED_SQUARE to arrayOf(R.style.AppThemeRoundedSquare, R.style.AppThemeLightRoundedSquare),
-            Constants.ICON_SHAPE_TEARDROP to arrayOf(R.style.AppThemeTeardrop, R.style.AppThemeLightTeardrop)
+            Constants.ICON_SHAPE_CIRCLE to arrayOf(R.style.AppThemeCircular_NoActionBar, R.style.AppThemeLightCircular_NoActionBar),
+            Constants.ICON_SHAPE_SQUARE to arrayOf(R.style.AppThemeSquare_NoActionBar, R.style.AppThemeLightSquare_NoActionBar),
+            Constants.ICON_SHAPE_ROUNDED_SQUARE to arrayOf(R.style.AppThemeRoundedSquare_NoActionBar, R.style.AppThemeLightRoundedSquare_NoActionBar),
+            Constants.ICON_SHAPE_TEARDROP to arrayOf(R.style.AppThemeTeardrop_NoActionBar, R.style.AppThemeLightTeardrop_NoActionBar)
     )
 
     /**

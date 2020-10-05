@@ -26,9 +26,9 @@ class SettingsActivity : BaseActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
-        setContentView(R.layout.settings_activity)
+        setContentView(R.layout.activity_settings)
 
-        // Simulation
+        // SimulationT
         val autoSim = intent?.getBooleanExtra(Constants.SIMULATE_AUTOMATION_SECTION, false) ?: false
 
         if (savedInstanceState == null) {
@@ -47,8 +47,9 @@ class SettingsActivity : BaseActivity(),
             setActionBarTitle(title.toString())
         }
 
-        useCustomActionBar()
+        useCollapsingActionBar()
         setActionBarTitle(R.string.title_activity_settings)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         supportFragmentManager.addOnBackStackChangedListener {
             if (supportFragmentManager.backStackEntryCount == 0) {

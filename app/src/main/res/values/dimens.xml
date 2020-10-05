@@ -10,4 +10,6 @@
     <dimen name="layout_padding">4dp</dimen>
 
     <dimen name="group_padding">12dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

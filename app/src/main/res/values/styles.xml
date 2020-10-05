@@ -13,6 +13,8 @@
         <item name="themeColorText">@color/buttonTextDark</item>
         <item name="themeDrawable">@drawable/circle</item>
         <item name="themeButtonRadius">32dp</item>
+        <item name="themeAppBarOverlay">@style/AppThemeCircular.AppBarOverlay</item>
+        <item name="themePopupOverlay">@style/AppThemeCircular.PopupOverlay</item>
     </style>
 
     <style name="AppThemeLightCircular" parent="Theme.MaterialComponents.Light">
@@ -29,6 +31,8 @@
         <item name="themeColorText">@color/buttonTextLight</item>
         <item name="themeDrawable">@drawable/circle</item>
         <item name="themeButtonRadius">32dp</item>
+        <item name="themeAppBarOverlay">@style/AppThemeLightCircular.AppBarOverlay</item>
+        <item name="themePopupOverlay">@style/AppThemeLightCircular.PopupOverlay</item>
     </style>
 
     <style name="AppThemeSquare" parent="Theme.MaterialComponents">
@@ -44,6 +48,8 @@
         <item name="themeColorText">@color/buttonTextDark</item>
         <item name="themeDrawable">@drawable/square</item>
         <item name="themeButtonRadius">0dp</item>
+        <item name="themeAppBarOverlay">@style/AppThemeSquare.AppBarOverlay</item>
+        <item name="themePopupOverlay">@style/AppThemeSquare.PopupOverlay</item>
     </style>
 
     <style name="AppThemeLightSquare" parent="Theme.MaterialComponents.Light">
@@ -60,6 +66,8 @@
         <item name="themeColorText">@color/buttonTextLight</item>
         <item name="themeDrawable">@drawable/square</item>
         <item name="themeButtonRadius">0dp</item>
+        <item name="themeAppBarOverlay">@style/AppThemeLightSquare.AppBarOverlay</item>
+        <item name="themePopupOverlay">@style/AppThemeLightSquare.PopupOverlay</item>
     </style>
 
     <style name="AppThemeRoundedSquare" parent="Theme.MaterialComponents">
@@ -75,6 +83,8 @@
         <item name="themeColorText">@color/buttonTextDark</item>
         <item name="themeDrawable">@drawable/rounded_square</item>
         <item name="themeButtonRadius">8dp</item>
+        <item name="themeAppBarOverlay">@style/AppThemeRoundedSquare.AppBarOverlay</item>
+        <item name="themePopupOverlay">@style/AppThemeRoundedSquare.PopupOverlay</item>
     </style>
 
     <style name="AppThemeLightRoundedSquare" parent="Theme.MaterialComponents.Light">
@@ -91,6 +101,8 @@
         <item name="themeColorText">@color/buttonTextLight</item>
         <item name="themeDrawable">@drawable/rounded_square</item>
         <item name="themeButtonRadius">8dp</item>
+        <item name="themeAppBarOverlay">@style/AppThemeLightRoundedSquare.AppBarOverlay</item>
+        <item name="themePopupOverlay">@style/AppThemeLightRoundedSquare.PopupOverlay</item>
     </style>
 
     <style name="AppThemeTeardrop" parent="Theme.MaterialComponents">
@@ -106,6 +118,8 @@
         <item name="themeColorText">@color/buttonTextDark</item>
         <item name="themeDrawable">@drawable/teardrop</item>
         <item name="themeButtonRadius">32dp</item>
+        <item name="themeAppBarOverlay">@style/AppThemeTeardrop.AppBarOverlay</item>
+        <item name="themePopupOverlay">@style/AppThemeTeardrop.PopupOverlay</item>
     </style>
 
     <style name="AppThemeLightTeardrop" parent="Theme.MaterialComponents.Light">
@@ -122,6 +136,8 @@
         <item name="themeColorText">@color/buttonTextLight</item>
         <item name="themeDrawable">@drawable/teardrop</item>
         <item name="themeButtonRadius">32dp</item>
+        <item name="themeAppBarOverlay">@style/AppThemeLightTeardrop.AppBarOverlay</item>
+        <item name="themePopupOverlay">@style/AppThemeLightTeardrop.PopupOverlay</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -186,4 +202,68 @@
         <item name="android:textColor">?themeColorText</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="AppThemeCircular.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeCircular.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppThemeCircular.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppThemeLightCircular.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeLightCircular.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppThemeLightCircular.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppThemeSquare.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeSquare.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppThemeSquare.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppThemeLightSquare.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeLightSquare.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppThemeLightSquare.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppThemeRoundedSquare.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeRoundedSquare.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppThemeRoundedSquare.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppThemeLightRoundedSquare.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeLightRoundedSquare.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppThemeLightRoundedSquare.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppThemeTeardrop.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeTeardrop.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppThemeTeardrop.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppThemeLightTeardrop.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeLightTeardrop.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppThemeLightTeardrop.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

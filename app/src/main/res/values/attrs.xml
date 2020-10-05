@@ -7,5 +7,7 @@
         <attr name="themeColorText" format="color" />
         <attr name="themeDrawable" format="reference" />
         <attr name="themeButtonRadius" format="dimension" />
+        <attr name="themeAppBarOverlay" format="reference" />
+        <attr name="themePopupOverlay" format="reference" />
     </declare-styleable>
 </resources>

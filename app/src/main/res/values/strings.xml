@@ -189,4 +189,6 @@
     <string name="automation_intro_4">Sets the interval at which the night light intensity fades in.</string>
 
     <string name="sunset_sunrise">Sunset to sunrise</string>
+
+    <string name="functionality">Functionality</string>
 </resources>

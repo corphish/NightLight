@@ -12,6 +12,12 @@ import kotlinx.android.synthetic.main.activity_about.*
 /**
  * This activity holds the AboutFragment and the LinksFragment.
  * These show the information and credits section of the app.
+ *
+ * Animation credits:
+ * alarm - https://lottiefiles.com/7988-alarm-clock
+ * appreciation - https://lottiefiles.com/23029-submission-thumbs-up
+ * day_night - https://lottiefiles.com/175-day-night-cycle
+ * time - https://lottiefiles.com/30782-time-icon
  */
 class AboutActivity : BaseActivity() {
 

@@ -19,6 +19,7 @@ import com.corphish.nightlight.helpers.AlarmUtils
 import com.corphish.nightlight.helpers.LocationUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.TimeUtils
+import com.corphish.widgets.ktx.dialogs.OnBoardingDialog
 
 /**
  * This activity provides user the interface to customise the
@@ -124,6 +125,36 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
 
         addNextDayIfNecessary(Constants.PREF_END_TIME)
         addNextDayIfNecessary(Constants.PREF_DARK_HOURS_START)
+
+        // Tutorial
+        findPreference<Preference>("auto_tutorial")?.setOnPreferenceClickListener {
+            OnBoardingDialog(requireActivity()).apply {
+                slides = listOf(
+                        OnBoardingDialog.Slide(
+                                titleResId = R.string.section_auto,
+                                messageResId = R.string.automation_intro_1,
+                                animation = R.raw.alarm
+                        ),
+                        OnBoardingDialog.Slide(
+                                titleResId = R.string.sunset_sunrise,
+                                messageResId = R.string.automation_intro_2,
+                                animation = R.raw.day_night
+                        ),
+                        OnBoardingDialog.Slide(
+                                titleResId = R.string.fading_in,
+                                messageResId = R.string.automation_intro_3,
+                                animation = R.raw.day_night
+                        ),
+                        OnBoardingDialog.Slide(
+                                titleResId = R.string.fade_poll_rate,
+                                messageResId = R.string.automation_intro_4,
+                                animation = R.raw.time
+                        ),
+                )
+            }.show()
+
+            true
+        }
     }
 
     /**

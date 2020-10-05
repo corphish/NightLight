@@ -45,4 +45,12 @@
             app:defaultValue="5"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="@string/tutorial_title">
+
+        <Preference
+            app:title="@string/tutorial_desc"
+            app:key="auto_tutorial" />
+    </PreferenceCategory>
 </PreferenceScreen>

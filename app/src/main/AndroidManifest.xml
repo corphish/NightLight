@@ -20,6 +20,7 @@
         android:theme="@style/AppThemeCircular.NoActionBar">
         <activity
             android:name=".activities.SettingsActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:label="@string/title_activity_settings"/>
         <activity android:name=".activities.BedTimeActivity" />
         <activity android:name=".activities.MasterSwitchActivity" />
@@ -86,7 +87,7 @@
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/about"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".activities.SettingsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.corphish.nightlight.activities.MainActivity" />
@@ -108,7 +109,7 @@
         <activity
             android:name=".activities.ProfilesActivity"
             android:label="@string/profile_title"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".activities.SettingsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.corphish.nightlight.activities.MainActivity" />

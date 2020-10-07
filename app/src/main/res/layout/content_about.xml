@@ -1,22 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.corphish.nightlight.activities.AboutActivity"
     tools:showIn="@layout/activity_main">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/layout_container"
-            android:orientation="vertical"/>
+            android:layout_margin="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:text="@string/about"
+            android:textAppearance="?android:attr/textAppearance"
+            android:textColor="@color/colorAccent" />
 
-        <include layout="@layout/fab_placeholder" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:text="@string/app_desc"
+            android:textAppearance="?android:attr/textAppearance" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:text="@string/version"
+            android:textAppearance="?android:attr/textAppearance"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin"
+            android:layout_marginEnd="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:textAppearance="?android:attr/textAppearance" />
+
+        <TextView
+            android:id="@+id/hash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin"
+            android:layout_marginEnd="@dimen/layout_margin"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingBottom="@dimen/layout_padding"
+            android:textSize="@dimen/text_sub_desc"
+            android:textStyle="italic" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

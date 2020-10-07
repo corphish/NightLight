@@ -1,13 +1,18 @@
 package com.corphish.nightlight.activities
 
+import android.graphics.Color
 import android.os.Bundle
+import androidx.core.content.ContextCompat
+import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.design.ThemeUtils
 
-import com.corphish.nightlight.design.fragments.AboutFragment
-import com.corphish.nightlight.design.fragments.LinksFragment
+import com.corphish.nightlight.helpers.ExternalLink
+import com.corphish.widgets.ktx.dialogs.SingleChoiceAlertDialog
+import com.corphish.widgets.ktx.dialogs.properties.IconProperties
 import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.content_about.*
 
 /**
  * This activity holds the AboutFragment and the LinksFragment.
@@ -28,31 +33,54 @@ class AboutActivity : BaseActivity() {
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_about)
 
-        useCustomActionBar()
+        useCollapsingActionBar()
         setActionBarTitle(R.string.about)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Avoid showing the fragment more than one time
-        if (savedInstanceState == null) {
-            viewInit()
-        }
+        val versionText = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+        version.text = versionText
+        hash.text = BuildConfig.GitHash
 
         // Handle the FAB click
         fab.setOnClickListener {
-            LinksFragment().show(supportFragmentManager, "")
+            showLinks()
         }
     }
 
     /**
-     * Method to initialize and show the AboutFragment.
+     * Shows links associated with the app.
      */
-    private fun viewInit() {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-
-        val containerId = R.id.layout_container
-
-        fragmentTransaction.add(containerId, AboutFragment())
-
-        fragmentTransaction.commit()
+    private fun showLinks() {
+        val background = ContextCompat.getDrawable(this, ThemeUtils.getThemeIconShape(this))
+        SingleChoiceAlertDialog(this).apply {
+            titleResId = R.string.links
+            iconProperties = IconProperties(
+                    iconColor = if (ThemeUtils.isLightTheme(this@AboutActivity)) Color.WHITE else Color.BLACK,
+                    backgroundDrawable = background
+            )
+            choiceList = listOf(
+                    SingleChoiceAlertDialog.ChoiceItem(
+                            titleResId = R.string.contributors,
+                            iconResId = R.drawable.ic_link,
+                            action = { ExternalLink.open(this@AboutActivity, "https://github.com/corphish/NightLight/graphs/contributors") }
+                    ),
+                    SingleChoiceAlertDialog.ChoiceItem(
+                            titleResId = R.string.github,
+                            iconResId = R.drawable.ic_link,
+                            action = { ExternalLink.open(this@AboutActivity, "https://github.com/corphish/NightLight") }
+                    ),
+                    SingleChoiceAlertDialog.ChoiceItem(
+                            titleResId = R.string.xda,
+                            iconResId = R.drawable.ic_link,
+                            action = { ExternalLink.open(this@AboutActivity, "https://forum.xda-developers.com/android/apps-games/app-night-light-kcal-t3689090") }
+                    ),
+                    SingleChoiceAlertDialog.ChoiceItem(
+                            titleResId = R.string.animations,
+                            iconResId = R.drawable.ic_link,
+                            action = { ExternalLink.open(this@AboutActivity, "https://github.com/corphish/NightLight/blob/master/notes/animations.md") }
+                    ),
+            )
+        }.show()
     }
 }

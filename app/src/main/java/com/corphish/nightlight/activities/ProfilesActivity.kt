@@ -26,7 +26,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_profiles.*
 import kotlinx.android.synthetic.main.content_profiles.*
-import kotlinx.android.synthetic.main.layout_header.*
 import java.util.*
 
 class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
@@ -53,8 +52,9 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_profiles)
 
-        useCustomActionBar()
+        useCollapsingActionBar()
         setActionBarTitle(R.string.profile_title)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         context = this
 

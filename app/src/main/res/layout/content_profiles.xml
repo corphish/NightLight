@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.corphish.nightlight.activities.ProfilesActivity"
     tools:showIn="@layout/activity_profiles">
 
@@ -16,43 +16,41 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceButton"
-            android:paddingStart="@dimen/layout_padding"
-            android:paddingEnd="@dimen/layout_padding"
-            android:paddingTop="@dimen/layout_padding"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:textColor="@color/colorPrimary"
-            android:text="@string/profile_title"/>
+            android:layout_marginEnd="8dp"
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingTop="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:text="@string/profile_title"
+            android:textAppearance="?android:attr/textAppearance"
+            android:textColor="@color/colorAccent" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/layout_padding"
-            android:paddingEnd="@dimen/layout_padding"
-            android:paddingBottom="@dimen/layout_padding"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:textSize="@dimen/text_desc"
-            android:text="@string/profiles_desc"/>
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/layout_padding"
+            android:paddingBottom="@dimen/layout_padding"
+            android:text="@string/profiles_desc"
+            android:textSize="@dimen/text_desc" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceButton"
-            android:padding="@dimen/layout_padding"
             android:layout_margin="8dp"
-            android:textSize="12sp"
-            android:textColor="@color/colorPrimary"
-            android:text="@string/section_profiles_list"/>
+            android:padding="@dimen/layout_padding"
+            android:text="@string/section_profiles_list"
+            android:textAppearance="?android:attr/textAppearance"
+            android:textColor="@color/colorAccent" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_margin="8dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -64,11 +62,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                app:viewTint="?themeStroke"
                 android:paddingTop="32dp"
-                app:titleText="@string/profile_empty_title"
                 app:descriptionText="@string/profile_empty_desc"
-                app:srcCompat="@drawable/ic_error_large"/>
+                app:srcCompat="@drawable/ic_error_large"
+                app:titleText="@string/profile_empty_title"
+                app:viewTint="?themeStroke" />
         </RelativeLayout>
 
         <include layout="@layout/fab_placeholder" />

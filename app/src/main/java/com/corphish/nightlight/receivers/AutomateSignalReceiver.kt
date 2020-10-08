@@ -23,7 +23,7 @@ class AutomateSignalReceiver : BroadcastReceiver() {
         val masterSwitchEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_MASTER_SWITCH)
         val autoSwitchEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH)
         val fadeEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_DARK_HOURS_ENABLE)
-        var toTurnOn = false
+        var toTurnOn: Boolean
 
         // Both of the switches must be on to proceed
         if (!autoSwitchEnabled || !masterSwitchEnabled) {
@@ -82,10 +82,7 @@ class AutomateSignalReceiver : BroadcastReceiver() {
             toTurnOn = true
         }
 
-        // Finally we turn on/off night light depending force switch
-        val forceSwitch = PreferenceHelper.getBoolean(context, Constants.PREF_FORCE_SWITCH, false)
-        if (forceSwitch) {
-            Core.applyNightModeAsync(toTurnOn, context)
-        }
+        // Finally we turn on/off night light
+        Core.applyNightModeAsync(toTurnOn, context)
     }
 }

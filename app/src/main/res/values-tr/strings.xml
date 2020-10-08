@@ -129,4 +129,13 @@
     <string name="notification_running">Service is running</string>
     <string name="fading_in">Fading in</string>
     <string name="none">None</string>
+    <string name="tutorial_title">Tutorial</string>
+    <string name="tutorial_desc">Show tutorial</string>
+    <string name="automation_intro_1">You can let the app to automatically to turn the night light on and off at specific times. Simply enable automation, set start and end times and you are good to go. Fire and forget!</string>
+    <string name="automation_intro_2">You can also set the automation schedule from sunset to sunrise. Night light will turn on at sunset and turn off at sunrise.</string>
+    <string name="automation_intro_3">Slowly transitions from minimum intensity to maximum intensity. Fade in will start at the start of automation and end at the fade stop time.</string>
+    <string name="automation_intro_4">Sets the interval at which the night light intensity fades in.</string>
+    <string name="sunset_sunrise">Sunset to sunrise</string>
+    <string name="functionality">Functionality</string>
+    <string name="animations">Animations</string>
 </resources>

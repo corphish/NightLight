@@ -28,7 +28,9 @@ class ProfileCreateActivity : BaseActivity() {
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_profile_create)
 
-        useCustomActionBar()
+        useCollapsingActionBar()
+        setActionBarTitle(R.string.profile_create_title)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         profilesManager = ProfilesManager(this)
         profilesManager.loadProfiles()

@@ -9,6 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/color_temperature_title"
+            android:textAppearance="?android:attr/textAppearance"
+            android:textSize="24sp" />
+
         <include layout="@layout/layout_color_control" />
         <include layout="@layout/layout_temperature" />
     </LinearLayout>

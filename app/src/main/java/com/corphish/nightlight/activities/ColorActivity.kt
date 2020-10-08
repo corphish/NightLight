@@ -20,8 +20,9 @@ class ColorActivity : BaseActivity() {
         setTheme(ThemeUtils.getAppTheme(this))
         setContentView(R.layout.activity_color)
 
-        useCustomActionBar()
-        setActionBarTitle(R.string.title_activity_color)
+        useCollapsingActionBar()
+        setActionBarTitle(R.string.section_color)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         originalState = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH, false)
 

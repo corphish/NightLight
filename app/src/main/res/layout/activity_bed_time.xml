@@ -9,9 +9,21 @@
     tools:context="com.corphish.nightlight.activities.MasterSwitchActivity">
 
     <TextView
+        android:id="@+id/head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="@string/bed_time_title"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textSize="24sp" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/ExperimentalBadge"
+        android:layout_below="@id/head"
+        android:layout_marginTop="2dp"
         android:layout_marginBottom="32dp"
         android:layout_centerHorizontal="true" />
 

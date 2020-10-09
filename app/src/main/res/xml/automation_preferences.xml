@@ -5,7 +5,7 @@
         app:summary="@string/auto_enable_desc"
         app:title="@string/auto_enable" />
 
-    <PreferenceCategory>
+    <PreferenceCategory app:title="@string/sunset_sunrise">
 
         <SwitchPreferenceCompat
             app:dependency="auto_switch"
@@ -24,7 +24,7 @@
             app:title="@string/end_time" />
     </PreferenceCategory>
 
-    <PreferenceCategory>
+    <PreferenceCategory app:title="@string/fading_in">
         <SwitchPreferenceCompat
             app:dependency="auto_switch"
             app:key="dark_hours_enable"
@@ -37,20 +37,19 @@
             app:title="@string/dark_hours_start_time" />
 
         <ListPreference
-            app:key="fade_poll_rate"
+            app:defaultValue="5"
             app:dependency="dark_hours_enable"
-            app:title="@string/fade_poll_rate"
             app:entries="@array/poll_rate_names"
             app:entryValues="@array/poll_rate_values"
-            app:defaultValue="5"
+            app:key="fade_poll_rate"
+            app:title="@string/fade_poll_rate"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
-    <PreferenceCategory
-        app:title="@string/tutorial_title">
+    <PreferenceCategory app:title="@string/tutorial_title">
 
         <Preference
-            app:title="@string/tutorial_desc"
-            app:key="auto_tutorial" />
+            app:key="auto_tutorial"
+            app:title="@string/tutorial_desc" />
     </PreferenceCategory>
 </PreferenceScreen>

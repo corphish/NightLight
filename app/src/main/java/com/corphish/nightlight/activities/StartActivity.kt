@@ -71,7 +71,7 @@ class StartActivity : AppCompatActivity() {
                 }
                 SHORTCUT_INTENT_STRING_INTENSITY_TOGGLE -> {
                     shortcutID = SHORTCUT_ID_INTENSITY
-                    doIntensityToggle()
+                    // TODO: Remove
                 }
                 else -> {
                     shortcutID = ""
@@ -128,15 +128,6 @@ class StartActivity : AppCompatActivity() {
             PreferenceHelper.putBoolean(this, Constants.PREF_MASTER_SWITCH, true)
 
         Core.applyNightModeAsync(state, this)
-    }
-
-    private fun doIntensityToggle() {
-        val state = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH)
-        val masterSwitch = PreferenceHelper.getBoolean(this, Constants.PREF_MASTER_SWITCH)
-
-        // Toggle only if both are on
-        if (state && masterSwitch)
-            Core.toggleIntensities(this)
     }
 
     private fun showAlertDialog(caption: Int, msg: Int) {

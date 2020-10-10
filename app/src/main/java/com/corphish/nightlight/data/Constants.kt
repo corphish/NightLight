@@ -11,12 +11,6 @@ object Constants {
      */
     const val PREF_MASTER_SWITCH = "switch"
     const val PREF_FORCE_SWITCH = "force_switch"
-    const val PREF_MAX_BLUE_COLOR = "max_blue_color"
-    const val PREF_MAX_GREEN_COLOR = "max_green_color"
-    const val PREF_MAX_RED_COLOR = "max_red_color"
-    const val PREF_MIN_BLUE_COLOR = "min_blue_color"
-    const val PREF_MIN_GREEN_COLOR = "min_green_color"
-    const val PREF_MIN_RED_COLOR = "min_red_color"
     const val PREF_AUTO_SWITCH = "auto_switch"
     const val PREF_SUN_SWITCH = "sun_switch"
     const val PREF_START_TIME = "start_time"
@@ -28,9 +22,6 @@ object Constants {
     const val COMPATIBILITY_TEST = "compatibility_test"
     const val KCAL_PRESERVE_SWITCH = "kcal_preserve_switch"
     const val KCAL_PRESERVE_VAL = "kcal_preserve_const val"
-    const val PREF_SETTING_MODE = "nl_setting_mode"
-    const val PREF_MAX_COLOR_TEMP = "max_color_temp"
-    const val PREF_MIN_COLOR_TEMP = "min_color_temp"
     const val PREF_BOOT_MODE = "boot_mode"
     const val PREF_LAST_BOOT_RES = "last_boot_result"
     const val PREF_BOOT_DELAY = "boot_delay"
@@ -59,12 +50,6 @@ object Constants {
      */
     const val DEFAULT_START_TIME = "00:00"
     const val DEFAULT_END_TIME = "06:00"
-    const val DEFAULT_MAX_BLUE_COLOR = 166
-    const val DEFAULT_MAX_GREEN_COLOR = 205
-    const val DEFAULT_MAX_RED_COLOR = 255
-    const val DEFAULT_MIN_BLUE_COLOR = 187
-    const val DEFAULT_MIN_GREEN_COLOR = 217
-    const val DEFAULT_MIN_RED_COLOR = 255
     const val DEFAULT_LONGITUDE = "0.00"
     const val DEFAULT_LATITUDE = "0.00"
     const val DEFAULT_KCAL_VALUES = "256 256 256"
@@ -96,23 +81,18 @@ object Constants {
     const val TASKER_SETTING = "tasker_setting"
 
     /**
-     * Intensity types
+     * Color control prefs and arrays.
      */
-    const val INTENSITY_TYPE_MAXIMUM = 0
-    const val INTENSITY_TYPE_MINIMUM = 1
+    const val PREF_SETTING_MODE = "nl_setting_mode"
+    const val PREF_RED_COLOR = "color_red"
+    const val PREF_GREEN_COLOR = "color_green"
+    const val PREF_BLUE_COLOR = "color_blue"
+    const val PREF_COLOR_TEMP = "color_temp"
 
-    /**
-     * Color control arrays
-     */
-    val PREF_RED_COLOR = arrayOf(PREF_MAX_RED_COLOR, PREF_MIN_RED_COLOR)
-    val PREF_GREEN_COLOR = arrayOf(PREF_MAX_GREEN_COLOR, PREF_MIN_GREEN_COLOR)
-    val PREF_BLUE_COLOR = arrayOf(PREF_MAX_BLUE_COLOR, PREF_MIN_BLUE_COLOR)
-    val PREF_COLOR_TEMP = arrayOf(PREF_MAX_COLOR_TEMP, PREF_MIN_COLOR_TEMP)
-
-    val DEFAULT_RED_COLOR = arrayOf(DEFAULT_MAX_RED_COLOR, DEFAULT_MIN_RED_COLOR)
-    val DEFAULT_GREEN_COLOR = arrayOf(DEFAULT_MAX_GREEN_COLOR, DEFAULT_MIN_GREEN_COLOR)
-    val DEFAULT_BLUE_COLOR = arrayOf(DEFAULT_MAX_BLUE_COLOR, DEFAULT_MIN_BLUE_COLOR)
-    val DEFAULT_COLOR_TEMP = arrayOf(DEFAULT_MAX_COLOR_TEMP, DEFAULT_MIN_COLOR_TEMP)
+    const val DEFAULT_BLUE_COLOR = 166
+    const val DEFAULT_GREEN_COLOR = 205
+    const val DEFAULT_RED_COLOR = 255
+    const val DEFAULT_COLOR_TEMP = 4000
 
     /**
      * Profile version

@@ -4,23 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
-import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
-import com.google.android.material.button.MaterialButton
 import com.gregacucnik.EditableSeekBar
 
 class TemperatureFragment: Fragment() {
     // Data
     private val _type = Constants.NL_SETTING_MODE_TEMP
-    private var intensityType = Constants.INTENSITY_TYPE_MINIMUM
-    private var colorTemperature = Constants.DEFAULT_COLOR_TEMP[intensityType]
+    private var colorTemperature = Constants.DEFAULT_COLOR_TEMP
 
     // Views
     private lateinit var intensityTypeChooser: AppCompatSpinner
@@ -36,11 +32,7 @@ class TemperatureFragment: Fragment() {
         intensityTypeChooser = root.findViewById(R.id.intensityTypeChooser)
         temperatureValue = root.findViewById(R.id.temperatureValue)
 
-        intensityType = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
-
         getValues()
-        initInfoButton(root)
-        initIntensityTypeView()
         initSlider()
 
         PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, _type)
@@ -50,25 +42,8 @@ class TemperatureFragment: Fragment() {
         return root
     }
 
-    private fun initIntensityTypeView() {
-        intensityTypeChooser.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                intensityType = position
-                PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, position)
-
-                getValues()
-                setSliderValues()
-                Core.applyNightModeAsync(true, context, colorTemperature)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-
-        intensityTypeChooser.setSelection(intensityType)
-    }
-
     private fun getValues() {
-        colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP[intensityType], Constants.DEFAULT_COLOR_TEMP[intensityType])
+        colorTemperature = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
     }
 
     private fun initSlider() {
@@ -86,7 +61,7 @@ class TemperatureFragment: Fragment() {
             }
 
             override fun onEditableSeekBarValueChanged(value: Int) {
-                PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP[intensityType], value)
+                PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, value)
                 Core.applyNightModeAsync(true, context, value)
                 PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
             }
@@ -97,17 +72,5 @@ class TemperatureFragment: Fragment() {
 
     private fun setSliderValues() {
         temperatureValue.value = colorTemperature
-    }
-
-    private fun initInfoButton(root: View) {
-        val infoButton = root.findViewById<MaterialButton>(R.id.intensityInfo)
-
-        infoButton.setOnClickListener {
-            val infoDialog = BottomSheetAlertDialog(requireContext())
-            infoDialog.setTitle(R.string.intensity_type_title)
-            infoDialog.setMessage(R.string.intensity_type_desc)
-            infoDialog.setPositiveButton(android.R.string.ok) { infoDialog.dismiss() }
-            infoDialog.show()
-        }
     }
 }

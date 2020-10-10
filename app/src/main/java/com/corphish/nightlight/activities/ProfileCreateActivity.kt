@@ -103,8 +103,6 @@ class ProfileCreateActivity : BaseActivity() {
     }
 
     private fun updateProfileCreatorParams(mode: Int) {
-        val type = PreferenceHelper.getInt(this, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
-
         if (mode == Constants.NL_SETTING_MODE_MANUAL) {
             settingParam1.isEnabled = true
             settingParam1.setMinValue(0)
@@ -131,9 +129,9 @@ class ProfileCreateActivity : BaseActivity() {
                 settingParam2.value = profile.settings[1]
                 settingParam3.value = profile.settings[2]
             } else {
-                settingParam1.value = PreferenceHelper.getInt(this, Constants.PREF_RED_COLOR[type], Constants.DEFAULT_RED_COLOR[type])
-                settingParam2.value = PreferenceHelper.getInt(this, Constants.PREF_GREEN_COLOR[type], Constants.DEFAULT_GREEN_COLOR[type])
-                settingParam3.value = PreferenceHelper.getInt(this, Constants.PREF_BLUE_COLOR[type], Constants.DEFAULT_BLUE_COLOR[type])
+                settingParam1.value = PreferenceHelper.getInt(this, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)
+                settingParam2.value = PreferenceHelper.getInt(this, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)
+                settingParam3.value = PreferenceHelper.getInt(this, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
             }
 
             settingParam1.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener{
@@ -205,7 +203,7 @@ class ProfileCreateActivity : BaseActivity() {
             if (!isProfileNull) {
                 settingParam1.value = profile.settings[0]
             } else {
-                settingParam1.value = PreferenceHelper.getInt(this, Constants.PREF_COLOR_TEMP[type], Constants.DEFAULT_COLOR_TEMP[type])
+                settingParam1.value = PreferenceHelper.getInt(this, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
             }
 
             settingParam1.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener{

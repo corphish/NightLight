@@ -37,10 +37,10 @@ class MasterSwitchActivity :BaseActivity() {
 
     private fun setViews(b: Boolean) {
         if (b) {
-            masterSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, true, Constants.INTENSITY_TYPE_MAXIMUM))
+            masterSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, true))
             masterSwitchDesc.setText(R.string.master_switch_desc_on)
         } else {
-            masterSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, false, Constants.INTENSITY_TYPE_MAXIMUM))
+            masterSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, false))
             masterSwitchDesc.setText(R.string.master_switch_desc_off)
         }
     }

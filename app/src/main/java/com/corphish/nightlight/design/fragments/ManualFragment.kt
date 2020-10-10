@@ -4,30 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.SeekBar
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
-import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
-import com.google.android.material.button.MaterialButton
 import com.gregacucnik.EditableSeekBar
 
 class ManualFragment : Fragment() {
 
     private val _type = Constants.NL_SETTING_MODE_MANUAL
-    private var intensityType = Constants.INTENSITY_TYPE_MINIMUM
 
-    private var redColor = Constants.DEFAULT_RED_COLOR[intensityType]
-    private var greenColor = Constants.DEFAULT_GREEN_COLOR[intensityType]
-    private var blueColor = Constants.DEFAULT_BLUE_COLOR[intensityType]
+    private var redColor = Constants.DEFAULT_RED_COLOR
+    private var greenColor = Constants.DEFAULT_GREEN_COLOR
+    private var blueColor = Constants.DEFAULT_BLUE_COLOR
 
     // Views
-    private lateinit var intensityTypeChooser: AppCompatSpinner
     private lateinit var red: EditableSeekBar
     private lateinit var green: EditableSeekBar
     private lateinit var blue: EditableSeekBar
@@ -42,9 +36,6 @@ class ManualFragment : Fragment() {
         red = root.findViewById(R.id.red)
         green = root.findViewById(R.id.green)
         blue = root.findViewById(R.id.blue)
-        intensityTypeChooser = root.findViewById(R.id.intensityTypeChooser)
-
-        intensityType = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -53,8 +44,6 @@ class ManualFragment : Fragment() {
         })
 
         getValues()
-        initInfoButton(root)
-        initIntensityTypeView()
         initSliders()
 
         PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, _type)
@@ -65,9 +54,9 @@ class ManualFragment : Fragment() {
     }
 
     private fun getValues() {
-        redColor = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR[intensityType], Constants.DEFAULT_RED_COLOR[intensityType])
-        greenColor = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR[intensityType], Constants.DEFAULT_GREEN_COLOR[intensityType])
-        blueColor = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR[intensityType], Constants.DEFAULT_BLUE_COLOR[intensityType])
+        redColor = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)
+        greenColor = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)
+        blueColor = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
     }
 
     private fun initSliders() {
@@ -87,7 +76,7 @@ class ManualFragment : Fragment() {
             override fun onEditableSeekBarValueChanged(value: Int) {
                 redColor = value
 
-                PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR[intensityType], redColor)
+                PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR, redColor)
                 Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
                 PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
             }
@@ -109,7 +98,7 @@ class ManualFragment : Fragment() {
             override fun onEditableSeekBarValueChanged(value: Int) {
                 greenColor = value
 
-                PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR[intensityType], greenColor)
+                PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR, greenColor)
                 Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
                 PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
             }
@@ -131,7 +120,7 @@ class ManualFragment : Fragment() {
             override fun onEditableSeekBarValueChanged(value: Int) {
                 blueColor = value
 
-                PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR[intensityType], blueColor)
+                PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR, blueColor)
                 Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
                 PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
             }
@@ -144,34 +133,5 @@ class ManualFragment : Fragment() {
         red.value = redColor
         green.value = greenColor
         blue.value = blueColor
-    }
-
-    private fun initIntensityTypeView() {
-        intensityTypeChooser.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                intensityType = position
-                PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, position)
-
-                getValues()
-                setSliderValues()
-                Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-
-        intensityTypeChooser.setSelection(intensityType)
-    }
-
-    private fun initInfoButton(root: View) {
-        val infoButton = root.findViewById<MaterialButton>(R.id.intensityInfo)
-
-        infoButton.setOnClickListener {
-            val infoDialog = BottomSheetAlertDialog(requireContext())
-            infoDialog.setTitle(R.string.intensity_type_title)
-            infoDialog.setMessage(R.string.intensity_type_desc)
-            infoDialog.setPositiveButton(android.R.string.ok) { infoDialog.dismiss() }
-            infoDialog.show()
-        }
     }
 }

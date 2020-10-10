@@ -32,40 +32,30 @@ object ThemeUtils {
     fun getBottomSheetTheme(context: Context) =
             if (PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)) R.style.BottomSheetDialogLight else R.style.BottomSheetDialogDark
 
-    fun getNLStatusIconBackground(context: Context, enabled: Boolean, intensityType: Int): Int {
+    fun getNLStatusIconBackground(context: Context, enabled: Boolean): Int {
         val lightThemeEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)
 
-        if (lightThemeEnabled) {
-            return when (enabled) {
+        return if (lightThemeEnabled) {
+            when (enabled) {
                 false -> Color.parseColor("#e6e6e6")
-                true -> when (intensityType) {
-                    Constants.INTENSITY_TYPE_MAXIMUM -> Color.parseColor("#ffd6cc")
-                    else ->  ContextCompat.getColor(context, R.color.circleBackgroundLight)
-                }
+                true -> ContextCompat.getColor(context, R.color.circleBackgroundLight)
             }
-        }
-        else {
-            return when (enabled) {
+        } else {
+            when (enabled) {
                 false -> Color.parseColor("#666666")
-                true -> when (intensityType) {
-                    Constants.INTENSITY_TYPE_MAXIMUM ->  ContextCompat.getColor(context, R.color.colorAccent)
-                    else ->  ContextCompat.getColor(context, R.color.colorPrimary)
-                }
+                true -> ContextCompat.getColor(context, R.color.colorPrimary)
             }
 
         }
     }
 
-    fun getNLStatusIconForeground(context: Context, enabled: Boolean, intensityType: Int): Int {
+    fun getNLStatusIconForeground(context: Context, enabled: Boolean): Int {
         val lightThemeEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_LIGHT_THEME, Constants.DEFAULT_LIGHT_THEME)
 
         if (lightThemeEnabled) {
             return when (enabled) {
                 false -> Color.parseColor("#666666")
-                true -> when (intensityType) {
-                    Constants.INTENSITY_TYPE_MAXIMUM -> ContextCompat.getColor(context, R.color.colorAccent)
-                    else ->  ContextCompat.getColor(context, R.color.colorPrimary)
-                }
+                true -> ContextCompat.getColor(context, R.color.colorPrimary)
             }
         }
 

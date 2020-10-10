@@ -18,7 +18,6 @@
             android:textAppearance="?android:attr/textAppearance"
             android:textSize="24sp" />
 
-        <include layout="@layout/layout_color_control" />
         <include layout="@layout/layout_temperature" />
     </LinearLayout>
 </ScrollView>

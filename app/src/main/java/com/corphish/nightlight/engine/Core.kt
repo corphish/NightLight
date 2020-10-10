@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 object Core {
     /**
      * Enables night light based on blueLight and greenLight intensity.
-     * It enables KCAL, and writes the intensity.
+     * It enables KCAL.
      * Conditionally backup KCAL values if FORCE_SWITCH is off before turning it on.
      * Also enable force switch when Night Light is enabled.
      *
@@ -60,7 +60,7 @@ object Core {
 
     /**
      * Enables night light based on color temperature.
-     * It enables KCAL, and writes the intensity.
+     * It enables KCAL.
      * Conditionally backup KCAL values if FORCE_SWITCH is off before turning it on.
      * Also enable force switch when Night Light is enabled.
      *
@@ -272,24 +272,22 @@ object Core {
      * @param b A boolean indicating whether night light should be turned on or off.
      * @param context A context parameter to read the intensity values from preferences.
      * @param toUpdateGlobalState Boolean indicating whether or not global state should be updated.
-     * @param intensityType Intensity type. Null if type is to be fetched.
      */
     @JvmOverloads
-    fun applyNightModeAsync(b: Boolean, context: Context?, toUpdateGlobalState: Boolean = true, intensityType: Int? = null) {
+    fun applyNightModeAsync(b: Boolean, context: Context?, toUpdateGlobalState: Boolean = true) {
         val mode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
-        val type = intensityType
-                ?: PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
+
         if (mode == Constants.NL_SETTING_MODE_MANUAL) {
             applyNightModeAsync(b,
                     context,
-                    PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR[type], Constants.DEFAULT_RED_COLOR[type]),
-                    PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR[type], Constants.DEFAULT_GREEN_COLOR[type]),
-                    PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR[type], Constants.DEFAULT_BLUE_COLOR[type]),
+                    PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR),
+                    PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR),
+                    PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR),
                     toUpdateGlobalState)
         } else {
             applyNightModeAsync(b,
                     context,
-                    PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP[type], Constants.DEFAULT_COLOR_TEMP[type]),
+                    PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP),
                     toUpdateGlobalState)
         }
     }
@@ -316,37 +314,6 @@ object Core {
      */
     fun applyGrayScaleAsync(b: Boolean, context: Context?) {
         NightModeApplier(b, context, Constants.NL_SETTING_MODE_GRAYS_SCALE).execute()
-    }
-
-    /**
-     * Toggles intensities, and then applies it.
-     * Also supports fading behavior now.
-     *
-     * @param context Tough love for context eh?
-     */
-    fun toggleIntensities(context: Context?) {
-        // The way it will work is, since we have maximum intensity value as 0 and minimum
-        // intensity value as 1, we will increment the intensity variable by 1 for each toggle
-        // and mod by 2. When the new value becomes 0, we consider fading. Once this state is
-        // toggled, we will have intensity value 0 which will be toggled to 1, so in such cases
-        // we have to prevent the increment accordingly.
-        var type = PreferenceHelper.getInt(context, Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
-        val fadingEnabled = FadeUtils.isFadingEnabled(context!!, true)
-        val fadeState = PreferenceHelper.getBoolean(context, Constants.PREF_FADE_ENABLED, false)
-
-        // Check pre-condition and adjust.
-        if (fadingEnabled && fadeState) {
-            type++
-            PreferenceHelper.putBoolean(context, Constants.PREF_FADE_ENABLED, false)
-        } else if (type == 0 && fadingEnabled) {
-            PreferenceHelper.putBoolean(context, Constants.PREF_FADE_ENABLED, true)
-        }
-
-        type = (type + 1) % 2
-
-        PreferenceHelper.putInt(context, Constants.PREF_INTENSITY_TYPE, type)
-
-        applyNightModeAsync(true, context)
     }
 
     /**

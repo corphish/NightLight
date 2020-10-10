@@ -41,9 +41,6 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
 
     private lateinit var context: Context
 
-    private var midTemp = 0
-    private var midKCALSum = 0
-
     private val _createProfileCode = 6
     private val _updateProfileCode = 9
 
@@ -68,21 +65,6 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
 
         initProfilesManager()
         initViews()
-        initMidValues()
-    }
-
-    private fun initMidValues() {
-        midTemp = (PreferenceHelper.getInt(context, Constants.PREF_MAX_COLOR_TEMP, Constants.DEFAULT_MAX_COLOR_TEMP) +
-                PreferenceHelper.getInt(context, Constants.PREF_MIN_COLOR_TEMP, Constants.DEFAULT_MIN_COLOR_TEMP))/2
-
-        midKCALSum = (PreferenceHelper.getInt(context, Constants.PREF_MAX_RED_COLOR, Constants.DEFAULT_MAX_RED_COLOR) +
-                PreferenceHelper.getInt(context, Constants.PREF_MIN_RED_COLOR, Constants.DEFAULT_MIN_RED_COLOR))/2
-                +
-                (PreferenceHelper.getInt(context, Constants.PREF_MAX_GREEN_COLOR, Constants.DEFAULT_MAX_GREEN_COLOR) +
-                        PreferenceHelper.getInt(context, Constants.PREF_MIN_GREEN_COLOR, Constants.DEFAULT_MIN_GREEN_COLOR))/2
-                +
-                (PreferenceHelper.getInt(context, Constants.PREF_MAX_BLUE_COLOR, Constants.DEFAULT_MAX_BLUE_COLOR) +
-                        PreferenceHelper.getInt(context, Constants.PREF_MIN_BLUE_COLOR, Constants.DEFAULT_MIN_BLUE_COLOR))/2
     }
 
     private fun initProfilesManager() {
@@ -104,8 +86,8 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
             viewHolder = { view -> CustomViewHolder(view) }
             binding = { holder, profile ->
                 holder.icon.text = if (profile.name.isNotEmpty()) "${profile.name.toUpperCase(Locale.getDefault())[0]}" else ""
-                setIconBackground(holder.icon, ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled, getProfileIntensity(profile)))
-                holder.icon.setTextColor(ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled, getProfileIntensity(profile)))
+                setIconBackground(holder.icon, ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled))
+                holder.icon.setTextColor(ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled))
 
                 holder.title.text = profile.name
             }
@@ -159,15 +141,6 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
         }
     }
 
-    private fun getProfileIntensity(profile: ProfilesManager.Profile): Int {
-        val profileValue = profile.settings.sum()
-
-        return if (profile.settingMode == Constants.NL_SETTING_MODE_TEMP)
-            if (profileValue > midTemp) Constants.INTENSITY_TYPE_MINIMUM else Constants.INTENSITY_TYPE_MAXIMUM
-        else
-            if (profileValue > midKCALSum) Constants.INTENSITY_TYPE_MINIMUM else Constants.INTENSITY_TYPE_MAXIMUM
-    }
-
     private fun setIconBackground(textView: TextView, color: Int) {
         val drawable = ResourcesCompat.getDrawable(resources, ThemeUtils.getThemeIconShape(this), theme)
         drawable?.setColorFilter(color, PorterDuff.Mode.SRC)
@@ -211,8 +184,8 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
 
         selectedProfileTitle.text = if (profile?.name!!.isNotEmpty()) "${profile.name[0]}" else ""
 
-        val background = ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled, getProfileIntensity(profile))
-        val foreground = ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled, getProfileIntensity(profile))
+        val background = ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled)
+        val foreground = ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled)
 
         selectedProfileTitle.setTextColor(foreground)
         setIconBackground(selectedProfileTitle, background)

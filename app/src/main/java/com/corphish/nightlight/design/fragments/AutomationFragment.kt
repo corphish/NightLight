@@ -238,25 +238,10 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
     private fun doCurrentAutoFunctions(setAlarms: Boolean) {
         val prefStartTime = PreferenceHelper.getString(requireContext(), Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
         val prefEndTime = PreferenceHelper.getString(requireContext(), Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
-        val prefDarkStartTime = PreferenceHelper.getString(requireContext(), Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_START_TIME)
-        val darkHoursEnabled = PreferenceHelper.getBoolean(requireContext(), Constants.PREF_DARK_HOURS_ENABLE, false)
 
         val toEnable = TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime!!, prefEndTime!!)
 
-        val isMinIntensity = TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime, prefDarkStartTime!!)
-        val isMaxIntensity = TimeUtils.determineWhetherNLShouldBeOnOrNot(prefDarkStartTime, prefEndTime)
-
-        var intensity: Int? = null
-
-        if (isMinIntensity) {
-            intensity = Constants.INTENSITY_TYPE_MINIMUM
-            PreferenceHelper.putInt(requireContext(), Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MINIMUM)
-        } else if (isMaxIntensity) {
-            intensity = Constants.INTENSITY_TYPE_MAXIMUM
-            PreferenceHelper.putInt(requireContext(), Constants.PREF_INTENSITY_TYPE, Constants.INTENSITY_TYPE_MAXIMUM)
-        }
-
-        Core.applyNightModeAsync(toEnable, requireContext(), true, if (darkHoursEnabled) intensity else null)
+        Core.applyNightModeAsync(toEnable, requireContext(), true)
 
         if (setAlarms) {
             AlarmUtils.setAlarmRelative(requireContext(), 0)

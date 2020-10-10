@@ -144,7 +144,6 @@ object Constants {
     const val PROFILE_MODE = "profileMode"
 
     const val FRESH_START = "fresh_start"
-    const val FRESH_BED_TIME = "fresh_bed_time"
 
     /**
      * Foreground service actions

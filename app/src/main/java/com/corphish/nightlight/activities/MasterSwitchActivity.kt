@@ -58,13 +58,7 @@ class MasterSwitchActivity :BaseActivity() {
 
     private fun conditionallySwitchToMain() {
         if (freshStart && masterSwitchStatus) {
-            val bedTimeStatus = PreferenceHelper.getBoolean(this, Constants.PREF_WIND_DOWN, Constants.DEFAULT_WIND_DOWN)
-            if (bedTimeStatus) {
-                val intent = Intent(this, BedTimeActivity::class.java)
-                intent.putExtra(Constants.FRESH_BED_TIME, true)
-                startActivity(intent)
-            } else
-                startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else if (masterSwitchStatus && taskerError) {
             taskerError = false

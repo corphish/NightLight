@@ -24,12 +24,10 @@
 
         <Preference
             app:allowDividerBelow="false"
+            app:fragment="com.corphish.nightlight.design.fragments.BedTimeFragment"
             app:icon="@drawable/ic_bed_time_icon"
-            app:title="@string/bed_time_title">
-            <intent
-                android:targetClass="com.corphish.nightlight.activities.BedTimeActivity"
-                android:targetPackage="com.corphish.nightlight.generic" />
-        </Preference>
+            app:key="bed"
+            app:title="@string/bed_time_title" />
 
         <Preference
             app:allowDividerBelow="false"

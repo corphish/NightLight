@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="@string/title_activity_settings">
+
+        <SwitchPreferenceCompat
+            app:title="@string/set_on_boot_switch_title"
+            app:key="wind_down"
+            app:defaultValue="false"
+            app:summaryOn="@string/wind_down_enabled"
+            app:summaryOff="@string/wind_down_disabled"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="@string/tutorial_title">
+
+        <Preference
+            app:key="wind_down_tutorial"
+            app:title="@string/tutorial_desc" />
+    </PreferenceCategory>
+</PreferenceScreen>

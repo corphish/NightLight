@@ -192,4 +192,7 @@
 
     <string name="functionality">Functionality</string>
     <string name="animations">Animations</string>
+
+    <string name="wind_down_enabled">Bed time mode is enabled.</string>
+    <string name="wind_down_disabled">Bed time mode is disabled.</string>
 </resources>

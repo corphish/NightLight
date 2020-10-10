@@ -18,6 +18,7 @@ import com.corphish.nightlight.design.fragments.AutomationFragment
 import com.corphish.nightlight.engine.KCALManager
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.ExternalLink
+import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.widgets.ktx.dialogs.MessageAlertDialog
 import com.corphish.widgets.ktx.dialogs.SingleChoiceAlertDialog
 import com.corphish.widgets.ktx.dialogs.properties.IconProperties
@@ -154,12 +155,16 @@ class SettingsActivity : BaseActivity(),
             // Show driver info
             findPreference<Preference>("kcal_driver")?.summary = KCALManager.implementation.getImplementationName()
 
-            // Show appreciation fragment
-            findPreference<Preference>("show_support")?.setOnPreferenceClickListener {
-
-
-                true
+            // Bed time preference
+            // Disable if saturation not supported
+            val bedTimePref = findPreference<Preference>("bed")
+            if (!KCALManager.isGrayScaleSupported) {
+                bedTimePref?.isEnabled = false
             }
+
+            // Bed time summary
+            val bedTimeEnabled = PreferenceHelper.getBoolean(requireContext(), Constants.PREF_WIND_DOWN, false)
+            bedTimePref?.summary = getString(if (bedTimeEnabled) R.string.on else R.string.off)
 
             // Pro version
             findPreference<Preference>("pro_version")?.setOnPreferenceClickListener {

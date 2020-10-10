@@ -59,9 +59,10 @@ class SDM845KCALManager : KCALAbstraction {
     }
 
     /**
-     * Function to determine whether saturation is supported
+     * Function to determine whether saturation is supported.
+     * Saturation does not work as expected on SDM845 drivers.
      */
-    override fun isSaturationSupported() = true
+    override fun isSaturationSupported() = false
 
     /**
      * Function to get saturation
@@ -76,7 +77,7 @@ class SDM845KCALManager : KCALAbstraction {
      * Function to set saturation
      */
     override fun setSaturation(value: Int): Boolean {
-        return RootUtils.writeToFile("$value", KCAL_SAT)
+        return false
     }
 
     override fun getImplementationName() = "KCAL for v4.4 kernels"

@@ -101,7 +101,6 @@ class MainActivity : BaseActivity(), NightLightStateListener, NightLightSettingM
 
         init()
         if (!masterSwitchEnabled) finish()
-        if (PreferenceHelper.getBoolean(this, Constants.PREF_WIND_DOWN, Constants.DEFAULT_WIND_DOWN)) finish()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,

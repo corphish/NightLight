@@ -114,8 +114,6 @@ object Core {
         if (isModeBooting) {
             PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
         }
-
-        PreferenceHelper.putBoolean(context, Constants.PREF_WIND_DOWN, true)
     }
 
     /**
@@ -150,8 +148,6 @@ object Core {
      */
     private fun disableGrayScale(context: Context?) {
         KCALManager.disableGrayScale()
-
-        PreferenceHelper.putBoolean(context, Constants.PREF_WIND_DOWN, true)
     }
 
     /**

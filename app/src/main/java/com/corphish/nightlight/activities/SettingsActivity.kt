@@ -161,10 +161,7 @@ class SettingsActivity : BaseActivity(),
             if (!KCALManager.isGrayScaleSupported) {
                 bedTimePref?.isEnabled = false
             }
-
-            // Bed time summary
-            val bedTimeEnabled = PreferenceHelper.getBoolean(requireContext(), Constants.PREF_WIND_DOWN, false)
-            bedTimePref?.summary = getString(if (bedTimeEnabled) R.string.on else R.string.off)
+            updateBedTimeSummary()
 
             // Pro version
             findPreference<Preference>("pro_version")?.setOnPreferenceClickListener {
@@ -205,10 +202,17 @@ class SettingsActivity : BaseActivity(),
                     requireContext().resources.getQuantityString(R.plurals.profile_count, count, count)
         }
 
+        private fun updateBedTimeSummary() {
+            // Bed time summary
+            val bedTimeEnabled = PreferenceHelper.getBoolean(requireContext(), Constants.PREF_WIND_DOWN, false)
+            findPreference<Preference>("bed")?.summary = getString(if (bedTimeEnabled) R.string.on else R.string.off)
+        }
+
         override fun onResume() {
             super.onResume()
 
             updateProfileCount()
+            updateBedTimeSummary()
         }
     }
 

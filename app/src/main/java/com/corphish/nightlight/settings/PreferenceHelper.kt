@@ -1,18 +1,13 @@
-package com.corphish.nightlight.helpers
+package com.corphish.nightlight.settings
 
 import android.content.Context
-import androidx.preference.PreferenceManager
 import androidx.core.content.edit
-
-import com.corphish.nightlight.data.Constants
+import androidx.preference.PreferenceManager
 
 /**
- * Created by Avinaba on 10/13/2017.
- * A helper class to deal with preferences
+ * Object to make working with SharedPreferences easier.
  */
-
-object PreferenceHelper {
-
+internal object PreferenceHelper {
     /**
      * Gets boolean value of Preference for given key
      * @param context Context is needed for accessing SharedPreferences
@@ -20,8 +15,7 @@ object PreferenceHelper {
      * @param defaultValue Default value to return if preference for given key is not found
      * @return The boolean value of shared preference for given key
      */
-    fun getBoolean(context: Context?, key: String, defaultValue: Boolean = false)
-        = PreferenceManager.getDefaultSharedPreferences(context)
+    private fun getBoolean(context: Context, key: String, defaultValue: Boolean = false) = PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean(key, defaultValue)
 
     /**
@@ -30,7 +24,7 @@ object PreferenceHelper {
      * @param key Key for shared preference
      * @param value Value to be put
      */
-    fun putBoolean(context: Context?, key: String, value: Boolean) {
+    private fun putBoolean(context: Context, key: String, value: Boolean) {
         PreferenceManager.getDefaultSharedPreferences(context).edit {
             putBoolean(key, value)
         }
@@ -43,8 +37,7 @@ object PreferenceHelper {
      * @param defaultValue Default value to return if shared preference for given key is not found
      * @return Value as int of required shared preference
      */
-    fun getInt(context: Context?, key: String, defaultValue: Int)
-        = PreferenceManager.getDefaultSharedPreferences(context)
+    private fun getInt(context: Context, key: String, defaultValue: Int) = PreferenceManager.getDefaultSharedPreferences(context)
             .getInt(key, defaultValue)
 
     /**
@@ -53,7 +46,7 @@ object PreferenceHelper {
      * @param key Shared Preference key
      * @param value Value to put
      */
-    fun putInt(context: Context?, key: String, value: Int) {
+    private fun putInt(context: Context, key: String, value: Int) {
         PreferenceManager.getDefaultSharedPreferences(context).edit {
             putInt(key, value)
         }
@@ -66,9 +59,9 @@ object PreferenceHelper {
      * @param defaultValue Default value to return if shared preference for given key is not found
      * @return Value as String of required shared preference
      */
-    fun getString(context: Context?, key: String, defaultValue: String? = null): String? =
+    private fun getString(context: Context, key: String, defaultValue: String): String =
             PreferenceManager.getDefaultSharedPreferences(context)
-                    .getString(key, defaultValue)
+                    .getString(key, defaultValue) ?: defaultValue
 
     /**
      * Puts String in required shared preference
@@ -76,36 +69,44 @@ object PreferenceHelper {
      * @param key Shared Preference key
      * @param value Value to put
      */
-    fun putString(context: Context?, key: String, value: String) {
+    private fun putString(context: Context, key: String, value: String) {
         PreferenceManager.getDefaultSharedPreferences(context).edit {
             putString(key, value)
         }
     }
 
     /**
-     * Gets saved location
-     * @param context ¯\_(ツ)_/¯
-     * @return A double array indicating the location as {Longitude, Latitude}
+     * Generic wrapper for getting preference values.
+     *
+     * @param T Type.
+     * @param context Context.
+     * @param prefKey Preference key.
+     * @param defaultValue Default value.
+     * @return Preference value
      */
-    fun getLocation(context: Context?): DoubleArray {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-
-        return doubleArrayOf(
-                sharedPreferences.getString(Constants.LAST_LOC_LONGITUDE, Constants.DEFAULT_LONGITUDE)!!.toDouble(),
-                sharedPreferences.getString(Constants.LAST_LOC_LATITUDE, Constants.DEFAULT_LATITUDE)!!.toDouble()
-        )
-    }
+    @Suppress("UNCHECKED_CAST")
+    fun <T> get(context: Context, prefKey: String, defaultValue: T): T =
+            when (defaultValue) {
+                is Int -> getInt(context, prefKey, defaultValue) as T
+                is Boolean -> getBoolean(context, prefKey, defaultValue) as T
+                is String -> getString(context, prefKey, defaultValue) as T
+                else -> defaultValue
+            }
 
     /**
-     * Saves location co-ordinates as string
-     * @param context ¯\_(ツ)_/¯
-     * @param longitude Longitude to be saved
-     * @param latitude Latitude to be saved
+     * Generic wrapper for putting preference values.
+     *
+     * @param T Type.
+     * @param context Context.
+     * @param prefKey Preference key.
+     * @param value Value.
+     * @return Preference value
      */
-    fun putLocation(context: Context?, longitude: Double, latitude: Double) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit {
-            putString(Constants.LAST_LOC_LONGITUDE, longitude.toString())
-            putString(Constants.LAST_LOC_LATITUDE, latitude.toString())
+    fun <T> put(context: Context, prefKey: String, value: T) {
+        when (value) {
+            is Int -> putInt(context, prefKey, value)
+            is Boolean -> putBoolean(context, prefKey, value)
+            is String -> putString(context, prefKey, value)
         }
     }
 }

@@ -122,4 +122,15 @@ class UserSettings(private val context: Context) {
      * Lock screen service switches.
      */
     val disabledInLockScreenSwitch = Setting(context, Constants.PREF_DISABLE_IN_LOCK_SCREEN, false)
+
+    /*
+     * Color settings.
+     * Mode: Setting mode (temperature/manual)
+     * Each entry for RGB color and temperature.
+     */
+    val nightLightSettingMode = Setting(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
+    val redColor = Setting(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)
+    val greenColor = Setting(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)
+    val blueColor = Setting(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
+    val colorTemperature = Setting(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
 }

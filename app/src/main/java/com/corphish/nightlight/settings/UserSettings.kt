@@ -2,6 +2,7 @@ package com.corphish.nightlight.settings
 
 import android.content.Context
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.engine.models.RGB
 
 /**
  * This class will provide easy way to access user settings.
@@ -133,4 +134,16 @@ class UserSettings(private val context: Context) {
     val greenColor = Setting(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)
     val blueColor = Setting(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
     val colorTemperature = Setting(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
+
+    val manualColorRGB: RGB
+        get() = RGB(
+                redValue = redColor.value,
+                greenValue = greenColor.value,
+                blueValue = blueColor.value
+        )
+
+    val temperatureRGB: RGB
+        get() = RGB.fromTemperature(colorTemperature.value)
+
+    val colorSettingRGB = if (nightLightSettingMode.value == Constants.NL_SETTING_MODE_TEMP) temperatureRGB else manualColorRGB
 }

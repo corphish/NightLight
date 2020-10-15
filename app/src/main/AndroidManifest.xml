@@ -19,9 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeCircular.NoActionBar">
         <activity
+            android:name=".activities.ColorControlActivity"
+            android:label="@string/title_activity_color_control"
+            android:theme="@style/AppThemeCircular.NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".activities.SettingsActivity"
-            android:parentActivityName=".activities.MainActivity"
-            android:label="@string/title_activity_settings"/>
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".activities.MainActivity" />
         <activity android:name=".activities.MasterSwitchActivity" />
         <activity android:name=".activities.ProfileCreateActivity" />
         <activity
@@ -113,11 +117,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.corphish.nightlight.activities.MainActivity" />
         </activity>
+
         <service
             android:name=".services.ForegroundService"
             android:enabled="true"
-            android:exported="false">
-        </service>
+            android:exported="false"></service>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -14,6 +14,5 @@
     <string name="next_day">&#160;(Susunod na araw)</string>
     <string name="sun_switch">Gumamit ng mga oras ng paglubog ng araw/pagsikat ng araw</string>
     <string name="location_unavailable">Hindi makuha ang iyong huling kilalang lokasyon.</string>
-    <string name="kcal_preservce_value_msg">Panatilihin ang mga kasalukuyang halaga ng KCAL</string>
     <string name="contributors">Mga Kontribyutor</string>
 </resources>

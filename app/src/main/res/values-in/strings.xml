@@ -12,6 +12,5 @@
     <string name="next_day">&#160;(hari Berikutnya)</string>
     <string name="sun_switch">Gunakan timing matahari terbit/matahari terbenam</string>
     <string name="location_unavailable">Tidak bisa mendapatkan lokasi terakhir yang diketahui.</string>
-    <string name="kcal_preservce_value_msg">Melestarikan saat ini KCAL nilai-nilai</string>
     <string name="contributors">Kontributor</string>
 </resources>

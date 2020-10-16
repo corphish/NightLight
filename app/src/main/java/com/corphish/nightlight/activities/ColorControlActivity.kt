@@ -1,6 +1,8 @@
 package com.corphish.nightlight.activities
 
+import android.graphics.Color
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
@@ -11,6 +13,7 @@ import com.corphish.nightlight.design.fragments.TemperatureFragment
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.widgets.ktx.dialogs.SingleChoiceAlertDialog
+import com.corphish.widgets.ktx.dialogs.properties.IconProperties
 
 class ColorControlActivity : BaseActivity() {
 
@@ -23,12 +26,18 @@ class ColorControlActivity : BaseActivity() {
         setContentView(R.layout.activity_color_control)
 
         useCollapsingActionBar()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         originalState = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH, false)
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
+            val background = ContextCompat.getDrawable(this, ThemeUtils.getThemeIconShape(this))
             SingleChoiceAlertDialog(this).apply {
                 titleResId = R.string.profile_setting_mode
+                iconProperties = IconProperties(
+                        iconColor = if (ThemeUtils.isLightTheme(this@ColorControlActivity)) Color.WHITE else Color.BLACK,
+                        backgroundDrawable = background
+                )
                 dismissOnChoiceSelection = true
                 choiceList = listOf(
                         SingleChoiceAlertDialog.ChoiceItem(

@@ -20,7 +20,8 @@
         android:theme="@style/AppThemeCircular.NoActionBar">
         <activity
             android:name=".activities.ColorControlActivity"
-            android:label="@string/section_color" />
+            android:label="@string/section_color"
+            android:parentActivityName=".activities.SettingsActivity"/>
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"

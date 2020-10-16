@@ -19,9 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeCircular.NoActionBar">
         <activity
-            android:name=".activities.ColorControlActivity"
-            android:label="@string/title_activity_color_control"
-            android:theme="@style/AppThemeCircular.NoActionBar.NoActionBar"></activity>
+            android:name=".activities.ColorControlActivity" />
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"

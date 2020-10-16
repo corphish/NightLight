@@ -2,6 +2,7 @@ package com.corphish.nightlight.helpers
 
 import android.content.Context
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.extensions.fromColorTemperatureToRGBIntArray
 import kotlin.math.roundToInt
 
 /**
@@ -13,7 +14,9 @@ import kotlin.math.roundToInt
  */
 object FadeUtils {
     /**
-     * Calculates the color temperature for current time.
+     * Calculates the scaled down RGB for current time.
+     * This scales down from the default KCAL value (256, 256, 256) or the
+     * set backup values to the selected color.
      * This method will be called every time when night light
      * would be enabled, so it is very necessary to perform the
      * necessary checks whether the scaled setting must be applied
@@ -23,22 +26,43 @@ object FadeUtils {
      * @return Scaled colored temperature. Null is returned when this
      *         setting should not be applied.
      */
-    fun getColorTemperatureForCurrentTime(context: Context): Int? {
+    fun getColorRGBForCurrentTime(context: Context): IntArray? {
         // Check if fading can take place or not
         if (!isFadingEnabled(context)) {
             return null
         }
 
-        // Get the temperatures
-        var minTemp = PreferenceHelper.getInt(context, Constants.PREF_MIN_COLOR_TEMP, Constants.DEFAULT_MIN_COLOR_TEMP)
-        var maxTemp = PreferenceHelper.getInt(context, Constants.PREF_MAX_COLOR_TEMP, Constants.DEFAULT_MAX_COLOR_TEMP)
+        // Get the from and to colors
+        // If KCAL backup is on, we use the backed up values
+        val rFrom: Int
+        val gFrom: Int
+        val bFrom: Int
 
-        // Usually, by value, max temperature is lower than min temperature.
-        // But in case if it is not, we have to swap.
-        if (maxTemp > minTemp) {
-            minTemp += maxTemp
-            maxTemp = minTemp - maxTemp
-            minTemp -= maxTemp
+        if (PreferenceHelper.getBoolean(context, Constants.KCAL_PRESERVE_SWITCH, false)) {
+            val values = PreferenceHelper.getString(context, Constants.KCAL_PRESERVE_VAL, Constants.DEFAULT_KCAL_VALUES)!!.split(" ".toRegex())
+            rFrom = values[0].toInt()
+            gFrom = values[1].toInt()
+            bFrom = values[2].toInt()
+        } else {
+            rFrom = 256
+            gFrom = 256
+            bFrom = 256
+        }
+
+        // To values
+        val rTo: Int
+        val gTo: Int
+        val bTo: Int
+
+        if (PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP) == Constants.NL_SETTING_MODE_TEMP) {
+            val temp = PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP).fromColorTemperatureToRGBIntArray()
+            rTo = temp[0]
+            gTo = temp[1]
+            bTo = temp[2]
+        } else {
+            rTo = PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)
+            gTo = PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_BLUE_COLOR)
+            bTo = PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
         }
 
         // Get start and end times
@@ -50,7 +74,7 @@ object FadeUtils {
         // Check if current time is in schedule or not.
         // If not then we return max temp.
         if (!TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, endTime)) {
-            return maxTemp
+            return intArrayOf(rFrom, gFrom, bFrom)
         }
 
         val pollMinutes = PreferenceHelper.getString(context, Constants.PREF_FADE_POLL_RATE_MINS, "5")?.toInt() ?: 5
@@ -58,16 +82,23 @@ object FadeUtils {
         // Poll minutes can now be 0 by value, indicating infinite selection.
         // In such cases we return the min temp, as outside the fade schedule, max will be applied.
         if (pollMinutes == 0) {
-            return minTemp
+            return intArrayOf(rTo, gTo, bTo)
         }
 
         val difference = TimeUtils.getTimeDifference(startTime, endTime)
         val minuteDifference = difference[0] * 60 + difference[1]
         val step = (minuteDifference.toFloat()/pollMinutes).roundToInt()
-        val tempStep = (minTemp - maxTemp)/step
         val timeStep = (TimeUtils.currentTimeAsMinutes - TimeUtils.getTimeInMinutes(startTime))/pollMinutes
 
-        return minTemp - (tempStep * timeStep)
+        val rStep = (rTo - rFrom)/step
+        val gStep = (gTo - gFrom)/step
+        val bStep = (bTo - bFrom)/step
+
+        return intArrayOf(
+                rFrom - (rStep * timeStep),
+                gFrom - (gStep * timeStep),
+                bFrom - (bStep * timeStep),
+        )
     }
 
     /**

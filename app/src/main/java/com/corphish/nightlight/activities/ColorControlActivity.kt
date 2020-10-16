@@ -55,9 +55,6 @@ class ColorControlActivity : BaseActivity() {
      * @param mode Mode.
      */
     private fun showUIForMode(mode: Int) {
-        setActionBarTitle(
-                if (mode == Constants.NL_SETTING_MODE_TEMP) R.string.color_temperature_title else R.string.manual_mode_title
-        )
         supportFragmentManager.beginTransaction()
                 .replace(
                         R.id.fragmentHolder,

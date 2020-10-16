@@ -18,7 +18,7 @@
             app:icon="@drawable/ic_color"
             app:title="@string/section_color">
             <intent
-                android:targetClass="com.corphish.nightlight.activities.ColorActivity"
+                android:targetClass="com.corphish.nightlight.activities.ColorControlActivity"
                 android:targetPackage="com.corphish.nightlight.generic" />
         </Preference>
 

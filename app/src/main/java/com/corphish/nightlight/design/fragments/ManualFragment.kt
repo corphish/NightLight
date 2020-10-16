@@ -31,7 +31,7 @@ class ManualFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_manual, container, false)
+        val root = inflater.inflate(R.layout.layout_manual_colors, container, false)
 
         red = root.findViewById(R.id.red)
         green = root.findViewById(R.id.green)

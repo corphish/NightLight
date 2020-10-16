@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
@@ -19,7 +18,6 @@ class TemperatureFragment: Fragment() {
     private var colorTemperature = Constants.DEFAULT_COLOR_TEMP
 
     // Views
-    private lateinit var intensityTypeChooser: AppCompatSpinner
     private lateinit var temperatureValue: EditableSeekBar
 
     override fun onCreateView(
@@ -27,9 +25,8 @@ class TemperatureFragment: Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_temperature, container, false)
+        val root = inflater.inflate(R.layout.layout_temperature, container, false)
 
-        intensityTypeChooser = root.findViewById(R.id.intensityTypeChooser)
         temperatureValue = root.findViewById(R.id.temperatureValue)
 
         getValues()

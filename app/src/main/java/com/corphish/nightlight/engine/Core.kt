@@ -50,7 +50,10 @@ object Core {
             PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
         }
 
-        val ret = KCALManager.updateKCALValues(redValue, greenValue, blueValue)
+        // Apply faded RGB
+        val fadedRGB = FadeUtils.getColorRGBForCurrentTime(context!!) ?: intArrayOf(redValue, greenValue, blueValue)
+
+        val ret = KCALManager.updateKCALValues(fadedRGB)
         if (isModeBooting) {
             PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
         }
@@ -84,10 +87,10 @@ object Core {
             PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, false)
         }
 
-        // Apply faded temperature
-        val fadedTemperature = FadeUtils.getColorTemperatureForCurrentTime(context!!) ?: temperature
+        // Apply faded RGB
+        val fadedRGB = FadeUtils.getColorRGBForCurrentTime(context!!) ?: temperature.fromColorTemperatureToRGBIntArray()
 
-        val ret = KCALManager.updateKCALValues(fadedTemperature.fromColorTemperatureToRGBIntArray())
+        val ret = KCALManager.updateKCALValues(fadedRGB)
         if (isModeBooting) {
             PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
         }

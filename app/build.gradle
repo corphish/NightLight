@@ -31,8 +31,8 @@ android {
         applicationId "com.corphish.nightlight"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 55
-        versionName "3.0.0-pre-beta-02"
+        versionCode 56
+        versionName "3.0.0-pre-beta-03"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 

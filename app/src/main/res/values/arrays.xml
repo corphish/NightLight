@@ -4,10 +4,7 @@
         <item>@string/color_temperature_title</item>
         <item>@string/manual_mode_title</item>
     </string-array>
-    <string-array name="intensityTypes">
-        <item>@string/maximum</item>
-        <item>@string/minimum</item>
-    </string-array>
+
     <array name="preloaded_fonts">
         <item>@font/cust_font</item>
     </array>

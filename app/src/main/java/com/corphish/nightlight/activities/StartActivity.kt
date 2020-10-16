@@ -24,9 +24,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
  * Declare the shortcut intent strings and id
  */
 const val SHORTCUT_INTENT_STRING_NL_TOGGLE = "android.intent.action.NL_TOGGLE"
-const val SHORTCUT_INTENT_STRING_INTENSITY_TOGGLE = "android.intent.action.INTENSITY_TOGGLE"
 const val SHORTCUT_ID_TOGGLE = "toggle"
-const val SHORTCUT_ID_INTENSITY = "intensity"
 
 const val TASKER_PLUGIN_INTENT = "com.twofortyfouram.locale.intent.action.EDIT_SETTING"
 const val TASKER_INTENT_RQC = 100
@@ -66,10 +64,6 @@ class StartActivity : AppCompatActivity() {
                 SHORTCUT_INTENT_STRING_NL_TOGGLE -> {
                     shortcutID = SHORTCUT_ID_TOGGLE
                     doToggle()
-                }
-                SHORTCUT_INTENT_STRING_INTENSITY_TOGGLE -> {
-                    shortcutID = SHORTCUT_ID_INTENSITY
-                    // TODO: Remove
                 }
                 else -> {
                     shortcutID = ""

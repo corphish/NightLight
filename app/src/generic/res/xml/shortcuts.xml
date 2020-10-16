@@ -9,14 +9,4 @@
             android:targetPackage="com.corphish.nightlight.generic"
             android:targetClass="com.corphish.nightlight.activities.StartActivity" />
     </shortcut>
-    <shortcut
-        android:shortcutId="intensity"
-        android:enabled="true"
-        android:icon="@drawable/ic_shortcut_intensity_toggle"
-        android:shortcutShortLabel="@string/intensity_toggle">
-        <intent
-            android:action="android.intent.action.INTENSITY_TOGGLE"
-            android:targetPackage="com.corphish.nightlight.generic"
-            android:targetClass="com.corphish.nightlight.activities.StartActivity" />
-    </shortcut>
 </shortcuts>

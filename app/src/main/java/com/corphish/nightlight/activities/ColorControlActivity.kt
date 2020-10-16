@@ -20,6 +20,9 @@ class ColorControlActivity : BaseActivity() {
     // Original state
     private var originalState = false
 
+    // We temporarily disable fade setting when in this activity
+    private var originalFadeSetting = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
@@ -29,6 +32,10 @@ class ColorControlActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         originalState = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH, false)
+
+
+        originalFadeSetting = PreferenceHelper.getBoolean(this, Constants.PREF_FADE_ENABLED, false)
+        PreferenceHelper.putBoolean(this, Constants.PREF_FADE_ENABLED, false)
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             val background = ContextCompat.getDrawable(this, ThemeUtils.getThemeIconShape(this))
@@ -75,6 +82,7 @@ class ColorControlActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
 
+        PreferenceHelper.putBoolean(this, Constants.PREF_FADE_ENABLED, originalFadeSetting)
         Core.fixNightMode(this, originalState)
     }
 }

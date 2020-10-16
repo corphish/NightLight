@@ -115,7 +115,7 @@
     <string name="bulb_info">Gece lambasını açıp kapatmak için yukarıdaki ampule basın. Yoğunlukları değiştirmek için yukarıdaki ampule uzun basın.</string>
     <string name="states">Devletler</string>
     <string name="bed_time_title">Uyku vakti</string>
-    <string name="bed_time_desc">Uyku vakti modu ekranınızın gri tonlamasını yapar ve bu da sizi daha hızlı uykuya dalmanzı sağlar. Bu, diğer Gece Işığı ayarlarına bağlı olmayan ve buna müdahale etmeyen bağımsız bir moddur. Normal Gece Işığını kullanmak için bu modu devre dışı bırakmanız gerekir. bu modu etkinleştirmek veya devre dışı bırakmak için yatak simgesine dokunun.</string>
+    <string name="bed_time_desc">Bed time mode makes your screen grayscale which can make you fall asleep faster. This is an independent mode which does not depend on and interfere with other Night Light settings. In order to use normal Night Light, you need to disable this mode.</string>
     <string name="experimental">Deneysel</string>
     <string name="saturation_path">Doygunluk yolu</string>
     <string name="pro_short_title">Pro sürümü</string>
@@ -138,4 +138,6 @@
     <string name="sunset_sunrise">Sunset to sunrise</string>
     <string name="functionality">Functionality</string>
     <string name="animations">Animations</string>
+    <string name="wind_down_enabled">Bed time mode is enabled.</string>
+    <string name="wind_down_disabled">Bed time mode is disabled.</string>
 </resources>

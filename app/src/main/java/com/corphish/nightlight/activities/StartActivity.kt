@@ -18,7 +18,6 @@ import com.corphish.nightlight.engine.ForegroundServiceManager
 import com.corphish.nightlight.engine.KCALManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.RootUtils
-import com.corphish.nightlight.helpers.CrashlyticsHelper
 import kotlinx.android.synthetic.main.activity_splash.*
 
 /*
@@ -38,7 +37,6 @@ class StartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        CrashlyticsHelper.start(this)
         setContentView(R.layout.activity_splash)
 
         if (handleIntent())

@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 if (isPlayStore) {
-    apply plugin: 'io.fabric'
+    apply plugin: 'com.google.firebase.crashlytics'
 }
 
 repositories {
@@ -110,6 +110,6 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.1'
 
     // Crash reporting
-    genericImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    donateImplementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    genericImplementation 'com.google.firebase:firebase-crashlytics:17.2.2'
+    donateImplementation 'com.google.firebase:firebase-crashlytics:17.2.2'
 }

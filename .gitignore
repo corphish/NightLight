@@ -10,5 +10,5 @@
 app/donate
 app/generic
 *.jks
-app/fabric.properties
+app/google-services.json
 *.aab

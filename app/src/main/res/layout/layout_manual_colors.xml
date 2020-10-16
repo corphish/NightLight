@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,48 +9,54 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/layout_padding"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
         android:layout_margin="@dimen/layout_margin"
-        android:textSize="@dimen/text_caption"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:text="@string/manual_mode_title"
         android:textAppearance="?android:attr/textAppearance"
-        android:text="@string/manual_mode_title"/>
+        android:textSize="@dimen/text_caption" />
 
     <TextView
+        android:id="@+id/infoManualColors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/manual_mode_desc"
-        android:textSize="@dimen/text_desc"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"
+        android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:paddingBottom="8dp"
-        android:id="@+id/infoManualColors"
-        android:paddingStart="@dimen/layout_padding"/>
+        android:text="@string/manual_mode_desc"
+        android:textSize="@dimen/text_desc" />
 
     <com.gregacucnik.EditableSeekBar
         android:id="@+id/red"
-        android:layout_margin="@dimen/layout_margin"
-        android:padding="@dimen/layout_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:esbTitle="@string/red"
-        app:esbMax="256" />
+        android:layout_margin="@dimen/layout_margin"
+        android:padding="@dimen/layout_padding"
+        app:esbMax="256"
+        app:esbTitle="@string/red" />
 
     <com.gregacucnik.EditableSeekBar
         android:id="@+id/green"
-        android:layout_margin="@dimen/layout_margin"
-        android:padding="@dimen/layout_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:esbTitle="@string/green"
-        app:esbMax="256" />
+        android:layout_margin="@dimen/layout_margin"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"
+        android:padding="@dimen/layout_padding"
+        app:esbMax="256"
+        app:esbTitle="@string/green" />
 
     <com.gregacucnik.EditableSeekBar
         android:id="@+id/blue"
-        android:layout_margin="@dimen/layout_margin"
-        android:padding="@dimen/layout_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:esbTitle="@string/blue"
-        app:esbMax="256" />
+        android:layout_margin="@dimen/layout_margin"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginEnd="@dimen/layout_margin"
+        android:padding="@dimen/layout_padding"
+        app:esbMax="256"
+        app:esbTitle="@string/blue" />
 </LinearLayout>

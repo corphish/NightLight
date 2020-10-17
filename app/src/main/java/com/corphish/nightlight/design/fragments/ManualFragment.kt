@@ -1,5 +1,6 @@
 package com.corphish.nightlight.design.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
+import com.corphish.nightlight.interfaces.ColorPickerCallback
 import com.gregacucnik.EditableSeekBar
 
 class ManualFragment : Fragment() {
@@ -25,6 +27,11 @@ class ManualFragment : Fragment() {
     private lateinit var red: EditableSeekBar
     private lateinit var green: EditableSeekBar
     private lateinit var blue: EditableSeekBar
+
+    // Color picking mode
+    private lateinit var colorPickerCallback: ColorPickerCallback
+    private var colorPickingMode = false
+    private val colorPickedData = Bundle()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -75,10 +82,18 @@ class ManualFragment : Fragment() {
 
             override fun onEditableSeekBarValueChanged(value: Int) {
                 redColor = value
-
-                PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR, redColor)
                 Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
-                PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+
+                if (!colorPickingMode) {
+                    PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR, redColor)
+                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+                } else {
+                    colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_MANUAL)
+                    colorPickedData.putInt(Constants.PREF_RED_COLOR, redColor)
+                    colorPickedData.putInt(Constants.PREF_GREEN_COLOR, greenColor)
+                    colorPickedData.putInt(Constants.PREF_BLUE_COLOR, blueColor)
+                    colorPickerCallback.onColorPicked(colorPickedData)
+                }
             }
         })
 
@@ -97,10 +112,18 @@ class ManualFragment : Fragment() {
 
             override fun onEditableSeekBarValueChanged(value: Int) {
                 greenColor = value
-
-                PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR, greenColor)
                 Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
-                PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+
+                if (!colorPickingMode) {
+                    PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR, greenColor)
+                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+                }else {
+                    colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_MANUAL)
+                    colorPickedData.putInt(Constants.PREF_RED_COLOR, redColor)
+                    colorPickedData.putInt(Constants.PREF_GREEN_COLOR, greenColor)
+                    colorPickedData.putInt(Constants.PREF_BLUE_COLOR, blueColor)
+                    colorPickerCallback.onColorPicked(colorPickedData)
+                }
             }
         })
 
@@ -119,10 +142,18 @@ class ManualFragment : Fragment() {
 
             override fun onEditableSeekBarValueChanged(value: Int) {
                 blueColor = value
-
-                PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR, blueColor)
                 Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
-                PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+
+                if (!colorPickingMode) {
+                    PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR, blueColor)
+                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+                } else {
+                    colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_MANUAL)
+                    colorPickedData.putInt(Constants.PREF_RED_COLOR, redColor)
+                    colorPickedData.putInt(Constants.PREF_GREEN_COLOR, greenColor)
+                    colorPickedData.putInt(Constants.PREF_BLUE_COLOR, blueColor)
+                    colorPickerCallback.onColorPicked(colorPickedData)
+                }
             }
         })
 
@@ -133,5 +164,18 @@ class ManualFragment : Fragment() {
         red.value = redColor
         green.value = greenColor
         blue.value = blueColor
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        colorPickerCallback = context as ColorPickerCallback
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Check if it is color picking mode
+        colorPickingMode = arguments?.getBoolean(Constants.COLOR_PICKER_MODE) ?: false
     }
 }

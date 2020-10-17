@@ -132,4 +132,9 @@ object Constants {
      * Automation section simulation
      */
     const val SIMULATE_AUTOMATION_SECTION = "sim_auto_section"
+
+    /**
+     * Support color picking.
+     */
+    const val COLOR_PICKER_MODE = "color_picker"
 }

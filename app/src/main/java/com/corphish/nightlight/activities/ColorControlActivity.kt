@@ -3,6 +3,7 @@ package com.corphish.nightlight.activities
 import android.graphics.Color
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
@@ -12,16 +13,20 @@ import com.corphish.nightlight.design.fragments.ManualFragment
 import com.corphish.nightlight.design.fragments.TemperatureFragment
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
+import com.corphish.nightlight.interfaces.ColorPickerCallback
 import com.corphish.widgets.ktx.dialogs.SingleChoiceAlertDialog
 import com.corphish.widgets.ktx.dialogs.properties.IconProperties
 
-class ColorControlActivity : BaseActivity() {
+class ColorControlActivity : BaseActivity(), ColorPickerCallback {
 
     // Original state
     private var originalState = false
 
     // We temporarily disable fade setting when in this activity
     private var originalFadeSetting = false
+
+    // Color picker mode
+    private var colorPickingMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +37,12 @@ class ColorControlActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         originalState = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH, false)
+        colorPickingMode = intent.getBooleanExtra(Constants.COLOR_PICKER_MODE, false)
 
+        // By default, set color picking as cancelled
+        if (colorPickingMode) {
+            setResult(RESULT_CANCELED)
+        }
 
         originalFadeSetting = PreferenceHelper.getBoolean(this, Constants.PREF_FADE_ENABLED, false)
         PreferenceHelper.putBoolean(this, Constants.PREF_FADE_ENABLED, false)
@@ -71,10 +81,19 @@ class ColorControlActivity : BaseActivity() {
      * @param mode Mode.
      */
     private fun showUIForMode(mode: Int) {
+        // Set color picking mode
+        val colorPickingModeData = Bundle()
+        colorPickingModeData.putBoolean(Constants.COLOR_PICKER_MODE, colorPickingMode)
+
+        val fragment: Fragment = if (mode == Constants.NL_SETTING_MODE_TEMP)
+            TemperatureFragment() else ManualFragment()
+
+        fragment.arguments = colorPickingModeData
+
         supportFragmentManager.beginTransaction()
                 .replace(
                         R.id.fragmentHolder,
-                        if (mode == Constants.NL_SETTING_MODE_TEMP) TemperatureFragment() else ManualFragment()
+                        fragment
                 )
                 .commit()
     }
@@ -84,5 +103,25 @@ class ColorControlActivity : BaseActivity() {
 
         PreferenceHelper.putBoolean(this, Constants.PREF_FADE_ENABLED, originalFadeSetting)
         Core.fixNightMode(this, originalState)
+    }
+
+    /**
+     * Called when user picks a color.
+     *
+     * @param pickedData Picked color.
+     */
+    override fun onColorPicked(pickedData: Bundle) {
+        setResult(RESULT_OK)
+
+        val pickedMode = pickedData.getInt(Constants.PREF_SETTING_MODE)
+        intent.putExtra(Constants.PREF_SETTING_MODE, pickedMode)
+
+        if (pickedMode == Constants.NL_SETTING_MODE_TEMP) {
+            intent.putExtra(Constants.PREF_COLOR_TEMP, pickedData.getInt(Constants.PREF_COLOR_TEMP))
+        } else {
+            intent.putExtra(Constants.PREF_RED_COLOR, pickedData.getInt(Constants.PREF_RED_COLOR))
+            intent.putExtra(Constants.PREF_GREEN_COLOR, pickedData.getInt(Constants.PREF_GREEN_COLOR))
+            intent.putExtra(Constants.PREF_BLUE_COLOR, pickedData.getInt(Constants.PREF_BLUE_COLOR))
+        }
     }
 }

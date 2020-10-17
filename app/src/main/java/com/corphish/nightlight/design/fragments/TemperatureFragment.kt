@@ -1,5 +1,6 @@
 package com.corphish.nightlight.design.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
+import com.corphish.nightlight.interfaces.ColorPickerCallback
 import com.gregacucnik.EditableSeekBar
 
 class TemperatureFragment: Fragment() {
@@ -19,6 +21,11 @@ class TemperatureFragment: Fragment() {
 
     // Views
     private lateinit var temperatureValue: EditableSeekBar
+
+    // Color picking mode
+    private lateinit var colorPickerCallback: ColorPickerCallback
+    private var colorPickingMode = false
+    private val colorPickedData = Bundle()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -58,9 +65,16 @@ class TemperatureFragment: Fragment() {
             }
 
             override fun onEditableSeekBarValueChanged(value: Int) {
-                PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, value)
                 Core.applyNightModeAsync(true, context, value)
-                PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+
+                if (!colorPickingMode) {
+                    PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, value)
+                    PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
+                } else {
+                    colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
+                    colorPickedData.putInt(Constants.PREF_COLOR_TEMP, value)
+                    colorPickerCallback.onColorPicked(colorPickedData)
+                }
             }
         })
 
@@ -69,5 +83,18 @@ class TemperatureFragment: Fragment() {
 
     private fun setSliderValues() {
         temperatureValue.value = colorTemperature
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        colorPickerCallback = context as ColorPickerCallback
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Check if it is color picking mode
+        colorPickingMode = arguments?.getBoolean(Constants.COLOR_PICKER_MODE) ?: false
     }
 }

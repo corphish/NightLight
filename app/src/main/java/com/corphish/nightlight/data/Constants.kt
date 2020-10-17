@@ -52,8 +52,6 @@ object Constants {
     const val DEFAULT_LONGITUDE = "0.00"
     const val DEFAULT_LATITUDE = "0.00"
     const val DEFAULT_KCAL_VALUES = "256 256 256"
-    const val DEFAULT_MAX_COLOR_TEMP = 4000
-    const val DEFAULT_MIN_COLOR_TEMP = 4500
     const val DEFAULT_BOOT_DELAY = 20
     const val DEFAULT_LIGHT_THEME = false
     const val DEFAULT_SET_ON_BOOT = true

@@ -156,5 +156,6 @@
         android:layout_margin="16dp"
         app:srcCompat="@drawable/ic_settings"
         app:tint="?themeColorText"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@null" />
 </RelativeLayout>

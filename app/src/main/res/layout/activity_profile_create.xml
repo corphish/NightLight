@@ -42,5 +42,6 @@
         android:layout_gravity="bottom|center"
         android:layout_margin="16dp"
         app:srcCompat="@drawable/ic_save"
-        app:tint="?themeColorText" />
+        app:tint="?themeColorText"
+        android:contentDescription="@null" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

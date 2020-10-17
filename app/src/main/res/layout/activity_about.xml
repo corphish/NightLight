@@ -41,6 +41,7 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@drawable/ic_link"
-        app:tint="?themeColorText" />
+        app:tint="?themeColorText"
+        android:contentDescription="@null" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

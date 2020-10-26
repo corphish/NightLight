@@ -2,6 +2,7 @@ package com.corphish.nightlight.activities
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,9 +40,9 @@ class ColorControlActivity : BaseActivity(), ColorPickerCallback {
         originalState = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH, false)
         colorPickingMode = intent.getBooleanExtra(Constants.COLOR_PICKER_MODE, false)
 
-        // By default, set color picking as cancelled
+        // By default, set color picking as ok
         if (colorPickingMode) {
-            setResult(RESULT_CANCELED)
+            setResult(RESULT_OK)
         }
 
         originalFadeSetting = PreferenceHelper.getBoolean(this, Constants.PREF_FADE_ENABLED, false)
@@ -111,8 +112,7 @@ class ColorControlActivity : BaseActivity(), ColorPickerCallback {
      * @param pickedData Picked color.
      */
     override fun onColorPicked(pickedData: Bundle) {
-        setResult(RESULT_OK)
-
+        Log.d("NL_ColorPicker", "onColorPicked")
         val pickedMode = pickedData.getInt(Constants.PREF_SETTING_MODE)
         intent.putExtra(Constants.PREF_SETTING_MODE, pickedMode)
 
@@ -123,5 +123,7 @@ class ColorControlActivity : BaseActivity(), ColorPickerCallback {
             intent.putExtra(Constants.PREF_GREEN_COLOR, pickedData.getInt(Constants.PREF_GREEN_COLOR))
             intent.putExtra(Constants.PREF_BLUE_COLOR, pickedData.getInt(Constants.PREF_BLUE_COLOR))
         }
+
+        setResult(RESULT_OK, intent)
     }
 }

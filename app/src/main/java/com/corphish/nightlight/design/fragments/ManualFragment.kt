@@ -57,6 +57,10 @@ class ManualFragment : Fragment() {
 
         Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
 
+        if (colorPickingMode) {
+            pickColors()
+        }
+
         return root
     }
 
@@ -88,11 +92,7 @@ class ManualFragment : Fragment() {
                     PreferenceHelper.putInt(context, Constants.PREF_RED_COLOR, redColor)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 } else {
-                    colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_MANUAL)
-                    colorPickedData.putInt(Constants.PREF_RED_COLOR, redColor)
-                    colorPickedData.putInt(Constants.PREF_GREEN_COLOR, greenColor)
-                    colorPickedData.putInt(Constants.PREF_BLUE_COLOR, blueColor)
-                    colorPickerCallback.onColorPicked(colorPickedData)
+                    pickColors()
                 }
             }
         })
@@ -118,11 +118,7 @@ class ManualFragment : Fragment() {
                     PreferenceHelper.putInt(context, Constants.PREF_GREEN_COLOR, greenColor)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 }else {
-                    colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_MANUAL)
-                    colorPickedData.putInt(Constants.PREF_RED_COLOR, redColor)
-                    colorPickedData.putInt(Constants.PREF_GREEN_COLOR, greenColor)
-                    colorPickedData.putInt(Constants.PREF_BLUE_COLOR, blueColor)
-                    colorPickerCallback.onColorPicked(colorPickedData)
+                    pickColors()
                 }
             }
         })
@@ -148,11 +144,7 @@ class ManualFragment : Fragment() {
                     PreferenceHelper.putInt(context, Constants.PREF_BLUE_COLOR, blueColor)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 } else {
-                    colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_MANUAL)
-                    colorPickedData.putInt(Constants.PREF_RED_COLOR, redColor)
-                    colorPickedData.putInt(Constants.PREF_GREEN_COLOR, greenColor)
-                    colorPickedData.putInt(Constants.PREF_BLUE_COLOR, blueColor)
-                    colorPickerCallback.onColorPicked(colorPickedData)
+                    pickColors()
                 }
             }
         })
@@ -170,6 +162,17 @@ class ManualFragment : Fragment() {
         super.onAttach(context)
 
         colorPickerCallback = context as ColorPickerCallback
+    }
+
+    /**
+     * Picks colors in color picking mode.
+     */
+    private fun pickColors() {
+        colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_MANUAL)
+        colorPickedData.putInt(Constants.PREF_RED_COLOR, redColor)
+        colorPickedData.putInt(Constants.PREF_GREEN_COLOR, greenColor)
+        colorPickedData.putInt(Constants.PREF_BLUE_COLOR, blueColor)
+        colorPickerCallback.onColorPicked(colorPickedData)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,27 +1,33 @@
 package com.corphish.nightlight.activities
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.SeekBar
+import android.util.Log
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
-import com.corphish.nightlight.design.utils.FontUtils
+import com.corphish.nightlight.design.steps.ProfileDataStep
+import com.corphish.nightlight.design.steps.ProfileNameStep
+import com.corphish.nightlight.design.steps.ProfileSwitchStep
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
-import com.gregacucnik.EditableSeekBar
-import kotlinx.android.synthetic.main.activity_profile_create.*
+import com.corphish.widgets.ktx.dialogs.MessageAlertDialog
+import ernestoyaquello.com.verticalstepperform.listener.StepperFormListener
 import kotlinx.android.synthetic.main.content_profile_create.*
 
-class ProfileCreateActivity : BaseActivity() {
+class ProfileCreateActivity : BaseActivity(), StepperFormListener {
 
-    private lateinit var profile: ProfilesManager.Profile
+    private var profile: ProfilesManager.Profile? = null
     private var isProfileNull = true
     private var operationMode = Constants.MODE_CREATE
     private lateinit var profilesManager: ProfilesManager
+
+    // Steps
+    private lateinit var profileNameStep: ProfileNameStep
+    private lateinit var profileSwitchStep: ProfileSwitchStep
+    private lateinit var profileDataStep: ProfileDataStep
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,31 +41,19 @@ class ProfileCreateActivity : BaseActivity() {
         profilesManager = ProfilesManager(this)
         profilesManager.loadProfiles()
 
+        // Check if existing profile is being edited
         isProfileNull = !intent.getBooleanExtra(Constants.PROFILE_DATA_PRESENT, false)
-        profile = ProfilesManager.Profile(
-                if (isProfileNull) "" else intent.getStringExtra(Constants.PROFILE_DATA_NAME)!!,
-                intent.getBooleanExtra(Constants.PROFILE_DATA_SETTING_ENABLED, false),
-                intent.getIntExtra(Constants.PROFILE_DATA_SETTING_MODE, PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)),
-                if (isProfileNull) intArrayOf() else intent.getIntArrayExtra(Constants.PROFILE_DATA_SETTING)!!
-        )
+        if (!isProfileNull) {
+            profile = ProfilesManager.Profile(
+                    intent.getStringExtra(Constants.PROFILE_DATA_NAME)!!,
+                    intent.getBooleanExtra(Constants.PROFILE_DATA_SETTING_ENABLED, false),
+                    intent.getIntExtra(Constants.PROFILE_DATA_SETTING_MODE, PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)),
+                    intent.getIntArrayExtra(Constants.PROFILE_DATA_SETTING)!!
+            )
+        }
 
         operationMode = intent.getIntExtra(Constants.PROFILE_MODE, Constants.MODE_CREATE)
 
-        fab.setOnClickListener {
-            val retval = if (operationMode == Constants.MODE_CREATE)
-                createProfileWithCurrentSelections()
-            else
-                updateProfileWithCurrentSelections()
-
-            if (retval) {
-                setResult(Activity.RESULT_OK)
-                finish()
-            } else {
-                editTextLayout.error = getString(R.string.profile_create_name_error)
-            }
-        }
-
-        initViewEventListeners()
         initViews()
     }
 
@@ -69,183 +63,120 @@ class ProfileCreateActivity : BaseActivity() {
         super.onBackPressed()
     }
 
-    private fun initViewEventListeners() {
-        modes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val currentModeSelection = if (isProfileNull) position else profile.settingMode
-                updateProfileCreatorParams(currentModeSelection)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-    }
     private fun initViews() {
-        if (!isProfileNull) {
-            nlSwitch.isChecked = profile.isSettingEnabled
-            editText.setText(profile.name)
-            modes.isEnabled = false
-        } else  {
-            modes.isEnabled = true
+        profileNameStep = ProfileNameStep(getString(R.string.profile_create_name))
+        profileDataStep = ProfileDataStep(this, getString(R.string.section_color))
+        profileSwitchStep = ProfileSwitchStep(getString(R.string.profile_nl_switch)) {
+            profileDataStep.isStepAvailable = it
         }
-        modes.setSelection(profile.settingMode)
 
-        setActionBarTitle(
-                if (operationMode == Constants.MODE_CREATE) R.string.profile_create_title else R.string.profile_edit_title
-        )
-
-        actionDesc.setText(
-                if (operationMode == Constants.MODE_CREATE) R.string.profile_create_desc else R.string.profile_edit_desc
-        )
-
-        editTextLayout.error = null
-
-        FontUtils().setCustomFont(this, nlSwitch)
-    }
-
-    private fun updateProfileCreatorParams(mode: Int) {
-        if (mode == Constants.NL_SETTING_MODE_MANUAL) {
-            settingParam1.isEnabled = true
-            settingParam1.setMinValue(0)
-            settingParam1.setMaxValue(256)
-
-            settingParam2.isEnabled = true
-            settingParam1.setMinValue(0)
-            settingParam2.setMaxValue(256)
-
-            settingParam3.isEnabled = true
-            settingParam1.setMinValue(0)
-            settingParam3.setMaxValue(256)
-
-            settingTitle1.isEnabled = true
-            settingTitle2.isEnabled = true
-            settingTitle3.isEnabled = true
-
-            settingTitle1.setText(R.string.red)
-            settingTitle2.setText(R.string.green)
-            settingTitle3.setText(R.string.blue)
-
-            if (!isProfileNull) {
-                settingParam1.value = profile.settings[0]
-                settingParam2.value = profile.settings[1]
-                settingParam3.value = profile.settings[2]
-            } else {
-                settingParam1.value = PreferenceHelper.getInt(this, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)
-                settingParam2.value = PreferenceHelper.getInt(this, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)
-                settingParam3.value = PreferenceHelper.getInt(this, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)
-            }
-
-            settingParam1.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener{
-                override fun onEditableSeekBarProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {}
-
-                override fun onEnteredValueTooLow() {
-                    settingParam1.value = 0
-                }
-
-                override fun onStartTrackingTouch(p0: SeekBar?) {}
-                override fun onEditableSeekBarValueChanged(p0: Int) {}
-
-                override fun onEnteredValueTooHigh() {
-                    settingParam1.value = 256
-                }
-
-                override fun onStopTrackingTouch(p0: SeekBar?) {}
-            })
-
-            settingParam2.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener{
-                override fun onEditableSeekBarProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {}
-
-                override fun onEnteredValueTooLow() {
-                    settingParam1.value = 0
-                }
-
-                override fun onStartTrackingTouch(p0: SeekBar?) {}
-                override fun onEditableSeekBarValueChanged(p0: Int) {}
-
-                override fun onEnteredValueTooHigh() {
-                    settingParam1.value = 256
-                }
-
-                override fun onStopTrackingTouch(p0: SeekBar?) {}
-            })
-
-            settingParam3.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener{
-                override fun onEditableSeekBarProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {}
-
-                override fun onEnteredValueTooLow() {
-                    settingParam1.value = 0
-                }
-
-                override fun onStartTrackingTouch(p0: SeekBar?) {}
-                override fun onEditableSeekBarValueChanged(p0: Int) {}
-
-                override fun onEnteredValueTooHigh() {
-                    settingParam1.value = 256
-                }
-
-                override fun onStopTrackingTouch(p0: SeekBar?) {}
-            })
-
-        } else {
-            settingParam1.isEnabled = true
-            settingParam1.setMinValue(resources.getInteger(R.integer.minTemp))
-            settingParam1.setMaxValue(resources.getInteger(R.integer.maxTemp))
-
-            settingParam2.isEnabled = false
-            settingParam3.isEnabled = false
-
-            settingTitle1.isEnabled = true
-            settingTitle2.isEnabled = false
-            settingTitle3.isEnabled = false
-
-            settingTitle1.setText(R.string.color_temperature_title)
-            settingTitle2.setText(R.string.profile_nl_setting_unavailable)
-
-            if (!isProfileNull) {
-                settingParam1.value = profile.settings[0]
-            } else {
-                settingParam1.value = PreferenceHelper.getInt(this, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
-            }
-
-            settingParam1.setOnEditableSeekBarChangeListener(object : EditableSeekBar.OnEditableSeekBarChangeListener{
-                override fun onEditableSeekBarProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {}
-                override fun onStartTrackingTouch(p0: SeekBar?) {}
-                override fun onEditableSeekBarValueChanged(p0: Int) {}
-
-                override fun onEnteredValueTooHigh() {
-                    settingParam1.value = resources.getInteger(R.integer.maxTemp)
-                }
-
-                override fun onEnteredValueTooLow() {
-                    settingParam1.value = resources.getInteger(R.integer.minTemp)
-                }
-
-                override fun onStopTrackingTouch(p0: SeekBar?) {}
-            })
-        }
+        profileCreateForm
+                .setup(this, profileNameStep, profileSwitchStep, profileDataStep)
+                .init()
     }
 
     private fun createProfileWithCurrentSelections(): Boolean {
+        val data = profileDataStep.stepData
+        val mode = data.getInt(Constants.PREF_SETTING_MODE)
+
+        val settings: IntArray = if (mode == Constants.NL_SETTING_MODE_TEMP)
+            intArrayOf(data.getInt(Constants.PREF_COLOR_TEMP))
+        else
+            intArrayOf(
+                    data.getInt(Constants.PREF_RED_COLOR),
+                    data.getInt(Constants.PREF_GREEN_COLOR),
+                    data.getInt(Constants.PREF_GREEN_COLOR)
+            )
+
         return profilesManager.createProfile(
-                nlSwitch.isChecked,
-                editText.editableText.toString(),
-                modes.selectedItemPosition,
-                if (modes.selectedItemId == Constants.NL_SETTING_MODE_TEMP.toLong())
-                    intArrayOf(settingParam1.value)
-                else
-                    intArrayOf(settingParam1.value, settingParam2.value, settingParam3.value)
+                profileSwitchStep.stepData,
+                profileNameStep.stepData,
+                mode, // Mode
+                settings, // Setting as array
         )
     }
 
     private fun updateProfileWithCurrentSelections(): Boolean {
-        return  profilesManager.updateProfile(
-                profile,
-                nlSwitch.isChecked,
-                editText.editableText.toString(),
-                modes.selectedItemPosition,
-                if (modes.selectedItemId == Constants.NL_SETTING_MODE_TEMP.toLong())
-                    intArrayOf(settingParam1.value)
-                else
-                    intArrayOf(settingParam1.value, settingParam2.value, settingParam3.value)
-        )
+        val data = profileDataStep.stepData
+        val mode = data.getInt(Constants.PREF_SETTING_MODE)
+
+        val settings: IntArray = if (mode == Constants.NL_SETTING_MODE_TEMP)
+            intArrayOf(data.getInt(Constants.PREF_COLOR_TEMP))
+        else
+            intArrayOf(
+                    data.getInt(Constants.PREF_RED_COLOR),
+                    data.getInt(Constants.PREF_GREEN_COLOR),
+                    data.getInt(Constants.PREF_GREEN_COLOR)
+            )
+
+        return if (profile == null) false else
+            profilesManager.updateProfile(
+                    profile!!,
+                    profileSwitchStep.stepData,
+                    profileNameStep.stepData,
+                    mode, // Mode
+                    settings, // Setting as array
+            )
+    }
+
+    /**
+     * This method will be called when the user clicks on the last button after all the steps have
+     * been marked as completed. It can be used to trigger showing loaders, sending the data, etc.
+     *
+     * Before this method gets called, the form disables the navigation between steps, as well as
+     * all the buttons. To revert the form to normal, call cancelFormCompletionOrCancellationAttempt().
+     */
+    override fun onCompletedForm() {
+        val retVal = if (operationMode == Constants.MODE_CREATE)
+            createProfileWithCurrentSelections()
+        else
+            updateProfileWithCurrentSelections()
+
+        if (retVal) {
+            setResult(Activity.RESULT_OK)
+            finish()
+        } else {
+            MessageAlertDialog(this).apply {
+                titleResId = R.string.profile_create_title
+                messageResId = R.string.profile_create_name_error
+                positiveButtonProperties = MessageAlertDialog.ButtonProperties(
+                        buttonTitleResId = android.R.string.ok,
+                        buttonAction = { dismissDialog() }
+                )
+            }.show()
+        }
+    }
+
+    /**
+     * This method will be called when the form has been cancelled, which would generally mean that
+     * the user has decided to not save/send the data (for example, by clicking on the cancellation
+     * button of the confirmation step).
+     *
+     * Before this method gets called, the form disables the navigation between steps, as well as
+     * all the buttons. To revert the form to normal, call cancelFormCompletionOrCancellationAttempt().
+     */
+    override fun onCancelledForm() {
+        setResult(RESULT_CANCELED)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        Log.d("NL_ProfileCreate", "onActivityResult, result ok = ${resultCode == RESULT_OK}, $requestCode")
+
+        if (requestCode == 43 && resultCode == RESULT_OK && data != null) {
+            val pickedData = Bundle()
+            val mode = data.getIntExtra(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
+            pickedData.putInt(Constants.PREF_SETTING_MODE, mode)
+            if (mode == Constants.NL_SETTING_MODE_TEMP) {
+                pickedData.putInt(Constants.PREF_COLOR_TEMP, data.getIntExtra(Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP))
+            } else {
+                pickedData.putInt(Constants.PREF_RED_COLOR, data.getIntExtra(Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR))
+                pickedData.putInt(Constants.PREF_GREEN_COLOR, data.getIntExtra(Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR))
+                pickedData.putInt(Constants.PREF_BLUE_COLOR, data.getIntExtra(Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR))
+            }
+
+            profileDataStep.updateData(pickedData)
+        }
     }
 }

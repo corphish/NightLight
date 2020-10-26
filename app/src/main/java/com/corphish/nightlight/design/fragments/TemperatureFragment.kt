@@ -43,6 +43,10 @@ class TemperatureFragment: Fragment() {
 
         Core.applyNightModeAsync(true, context, colorTemperature)
 
+        if (colorPickingMode) {
+            pickColors()
+        }
+
         return root
     }
 
@@ -65,20 +69,28 @@ class TemperatureFragment: Fragment() {
             }
 
             override fun onEditableSeekBarValueChanged(value: Int) {
+                colorTemperature = value
                 Core.applyNightModeAsync(true, context, value)
 
                 if (!colorPickingMode) {
                     PreferenceHelper.putInt(context, Constants.PREF_COLOR_TEMP, value)
                     PreferenceHelper.putInt(context, Constants.PREF_CUR_APPLY_TYPE, Constants.APPLY_TYPE_NON_PROFILE)
                 } else {
-                    colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
-                    colorPickedData.putInt(Constants.PREF_COLOR_TEMP, value)
-                    colorPickerCallback.onColorPicked(colorPickedData)
+                    pickColors()
                 }
             }
         })
 
         setSliderValues()
+    }
+
+    /**
+     * Picks colors in color picking mode.
+     */
+    private fun pickColors() {
+        colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
+        colorPickedData.putInt(Constants.PREF_COLOR_TEMP, colorTemperature)
+        colorPickerCallback.onColorPicked(colorPickedData)
     }
 
     private fun setSliderValues() {

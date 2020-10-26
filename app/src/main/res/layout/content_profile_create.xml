@@ -1,147 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.corphish.nightlight.activities.ProfileCreateActivity">
 
-    <LinearLayout
+    <ernestoyaquello.com.verticalstepperform.VerticalStepperFormView
+        android:id="@+id/profileCreateForm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/defaultMargin"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/actionDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/layout_padding"
-                android:paddingTop="2dp"
-                android:paddingEnd="@dimen/layout_padding"
-                android:paddingBottom="12dp"
-                android:text="@string/profile_create_desc"
-                android:textSize="@dimen/text_desc" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/editTextLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/layout_padding"
-                app:errorEnabled="true"
-                app:passwordToggleDrawable="@null">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/profile_create_name" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Switch
-                android:id="@+id/nlSwitch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/layout_padding"
-                android:paddingTop="@dimen/group_padding"
-                android:paddingEnd="@dimen/layout_padding"
-                android:paddingBottom="@dimen/group_padding"
-                android:text="@string/profile_nl_switch"
-                android:textSize="@dimen/text_caption" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/layout_padding"
-                android:paddingTop="@dimen/group_padding"
-                android:paddingEnd="@dimen/layout_padding"
-                android:text="@string/profile_setting_mode"
-                android:textAppearance="?android:textAppearance"
-                android:textSize="@dimen/text_caption" />
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/modes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/settingModes"
-                android:paddingStart="@dimen/layout_padding"
-                android:paddingTop="2dp"
-                android:paddingEnd="@dimen/layout_padding"
-                android:paddingBottom="@dimen/group_padding"
-                android:prompt="@string/color_temperature_title" />
-
-            <TextView
-                android:id="@+id/settingTitle1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:paddingStart="@dimen/layout_padding"
-                android:paddingTop="@dimen/group_padding"
-                android:paddingEnd="@dimen/layout_padding"
-                android:text="@string/profile_nl_setting_unavailable"
-                android:textAppearance="?android:textAppearance"
-                android:textSize="@dimen/text_caption" />
-
-            <com.gregacucnik.EditableSeekBar
-                android:id="@+id/settingParam1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:enabled="false"
-                android:paddingStart="@dimen/layout_padding"
-                android:paddingEnd="@dimen/layout_padding" />
-
-            <TextView
-                android:id="@+id/settingTitle2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:paddingStart="@dimen/layout_padding"
-                android:paddingTop="@dimen/group_padding"
-                android:paddingEnd="@dimen/layout_padding"
-                android:text="@string/profile_nl_setting_unavailable"
-                android:textAppearance="?android:textAppearance"
-                android:textSize="@dimen/text_caption" />
-
-            <com.gregacucnik.EditableSeekBar
-                android:id="@+id/settingParam2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:enabled="false"
-                android:paddingStart="@dimen/layout_padding"
-                android:paddingEnd="@dimen/layout_padding" />
-
-            <TextView
-                android:id="@+id/settingTitle3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:paddingStart="@dimen/layout_padding"
-                android:paddingTop="@dimen/group_padding"
-                android:paddingEnd="@dimen/layout_padding"
-                android:text="@string/profile_nl_setting_unavailable"
-                android:textAppearance="?android:textAppearance"
-                android:textSize="@dimen/text_caption" />
-
-            <com.gregacucnik.EditableSeekBar
-                android:id="@+id/settingParam3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:enabled="false"
-                android:paddingStart="@dimen/layout_padding"
-                android:paddingEnd="@dimen/layout_padding"
-                android:paddingBottom="@dimen/group_padding" />
-
-            <include layout="@layout/fab_placeholder" />
-        </LinearLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+        android:layout_height="match_parent"
+        app:form_circle_background_color="@color/colorAccent"
+        app:form_circle_text_color="?themeColorText"
+        app:form_next_button_background_color="@color/colorPrimary"
+        app:form_title_text_color="?android:attr/textColorPrimary"
+        app:form_next_button_pressed_background_color="@color/colorPrimaryDark"
+        app:form_next_button_text_color="?themeColorText" />
+</LinearLayout>

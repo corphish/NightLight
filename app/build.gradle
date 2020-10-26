@@ -94,6 +94,7 @@ dependencies {
     implementation 'com.github.mc0239:EditableSeekBar:v1.3.0'
     implementation 'com.github.corphish:widgets-ktx:0.3.5'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'com.ernestoyaquello.stepperform:vertical-stepper-form:2.3.0'
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'

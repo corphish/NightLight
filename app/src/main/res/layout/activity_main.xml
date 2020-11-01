@@ -7,5 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.corphish.nightlight.activities.MainActivity">
 
-    <include layout="@layout/content_main" />
+    <include
+        android:id="@+id/included"
+        layout="@layout/content_main" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

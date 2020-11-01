@@ -75,6 +75,10 @@ android {
             dimension "buildVariant"
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {

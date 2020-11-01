@@ -1,6 +1,5 @@
 package com.corphish.nightlight.services
 
-import com.corphish.nightlight.interfaces.NightLightSettingModeListener
 import com.corphish.nightlight.interfaces.NightLightStateListener
 import com.corphish.nightlight.interfaces.ThemeChangeListener
 
@@ -41,31 +40,9 @@ private constructor() {
     private var nightLightStateListener: NightLightStateListener? = null
 
     /**
-     * This night light setting mode change listener listens to setting mode changes and requests to make proper changes
-     */
-    private var nightLightSettingModeListener: NightLightSettingModeListener? = null
-
-    /**
      * A listener for theme change event
      */
     private var themeChangeListener: ThemeChangeListener? = null
-
-    /**
-     * This variable indicates whether initial app startup has completed or not.
-     * Based on this, other units can perform certain tasks when on init, and other tasks when after init is done.
-     */
-    private var isInitDone = false
-
-    /**
-     * This variable denotes number of fragments which have been completely added in MainActivity
-     * This is a part of init process
-     */
-    private var viewInitCount = 0
-
-    /**
-     * Total number of fragments which would be added
-     */
-    private val _totalViews = 1
 
     /**
      * Starts this service
@@ -86,17 +63,6 @@ private constructor() {
     }
 
     /**
-     * This sets the defined nl setting mode listener in this service
-     * @param nightLightSettingModeListener Defined nl setting mode listener
-     * @return This instance to allow chaining of calls
-     */
-    fun registerNightLightSettingModeChangeListener(nightLightSettingModeListener: NightLightSettingModeListener): NightLightAppService {
-        this.nightLightSettingModeListener = nightLightSettingModeListener
-
-        return this
-    }
-
-    /**
      * This sets the defined theme change listener in this service
      * @param themeChangeListener Defined theme change listener
      * @return This instance to allow chaining of calls
@@ -112,15 +78,9 @@ private constructor() {
      * @param newState New state of night light
      */
     fun notifyUpdatedState(newState: Boolean) {
-        if (nightLightStateListener != null) nightLightStateListener!!.onStateChanged(newState)
-    }
-
-    /**
-     * Notifies other units that setting mode has been changed
-     * @param newMode New setting mode
-     */
-    fun notifyNewSettingMode(newMode: Int) {
-        if (nightLightSettingModeListener != null) nightLightSettingModeListener!!.onModeChanged(newMode)
+        if (nightLightStateListener != null) {
+            nightLightStateListener!!.onStateChanged(newState)
+        }
     }
 
     /**
@@ -128,38 +88,9 @@ private constructor() {
      * @param isLightTheme A boolean indicating whether the new theme is light or not
      */
     fun notifyThemeChanged(isLightTheme: Boolean) {
-        if (themeChangeListener != null) themeChangeListener!!.onThemeChanged(isLightTheme)
-    }
-
-    /**
-     * Returns whether app init has been completed or not
-     * @return App init status
-     */
-    fun isInitDone(): Boolean {
-        return isInitDone && viewInitCount == _totalViews
-    }
-
-    /**
-     * Notifies that init has been done
-     */
-    fun notifyInitDone() {
-        isInitDone = true
-    }
-
-    /**
-     * Increments view init count
-     * This notifies that a fragment has completed adding its view
-     * Must be called at the end of every fragment's onActivityCreated
-     */
-    fun incrementViewInitCount() {
-        viewInitCount++
-    }
-
-    /**
-     * Resets view init count
-     */
-    fun resetViewCount() {
-        viewInitCount = 0
+        if (themeChangeListener != null) {
+            themeChangeListener!!.onThemeChanged(isLightTheme)
+        }
     }
 
     /**
@@ -168,7 +99,6 @@ private constructor() {
      */
     fun destroy() {
         nightLightStateListener = null
-        nightLightSettingModeListener = null
         isAppServiceRunning = false
     }
 

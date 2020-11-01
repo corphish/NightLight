@@ -10,13 +10,12 @@ import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.fragments.*
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.helpers.PreferenceHelper
-import com.corphish.nightlight.interfaces.NightLightSettingModeListener
 import com.corphish.nightlight.interfaces.NightLightStateListener
 import com.corphish.nightlight.services.NightLightAppService
 import com.corphish.nightlight.extensions.toArrayOfInts
 import com.corphish.nightlight.interfaces.ThemeChangeListener
 
-class MainActivity : BaseActivity(), NightLightStateListener, NightLightSettingModeListener, ThemeChangeListener {
+class MainActivity : BaseActivity(), NightLightStateListener, ThemeChangeListener {
 
     private var masterSwitchEnabled: Boolean = false
 
@@ -35,20 +34,14 @@ class MainActivity : BaseActivity(), NightLightStateListener, NightLightSettingM
 
         NightLightAppService.instance
                 .registerNightLightStateListener(this)
-                .registerNightLightSettingModeChangeListener(this)
                 .registerThemeChangeListener(this)
                 .startService()
 
         if (savedInstanceState == null) {
             viewInit()
-            setViews(masterSwitchEnabled)
         }
 
         supportFragmentManager.executePendingTransactions()
-
-        NightLightAppService.instance
-                .notifyInitDone()
-
         applyProfileIfNecessary()
     }
 
@@ -77,27 +70,6 @@ class MainActivity : BaseActivity(), NightLightStateListener, NightLightSettingM
                 break
             }
         }
-    }
-
-    override fun onModeChanged(newMode: Int) {}
-
-    private fun setViews(show: Boolean) {
-        NightLightAppService.instance
-                .resetViewCount()
-
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-
-        if (!show) {
-            val fragmentList = supportFragmentManager.fragments
-            for (fragment in fragmentList) {
-                if (fragment !is DashboardFragment) fragmentTransaction.remove(fragment)
-            }
-        }
-
-        fragmentTransaction.commit()
-
-        NightLightAppService.instance.notifyNewSettingMode(PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP))
     }
 
     override fun onResume() {

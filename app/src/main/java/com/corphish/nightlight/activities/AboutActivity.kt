@@ -6,13 +6,12 @@ import androidx.core.content.ContextCompat
 import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
+import com.corphish.nightlight.databinding.ActivityAboutBinding
 import com.corphish.nightlight.design.ThemeUtils
 
 import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.widgets.ktx.dialogs.SingleChoiceAlertDialog
 import com.corphish.widgets.ktx.dialogs.properties.IconProperties
-import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.content_about.*
 
 /**
  * This activity holds the AboutFragment and the LinksFragment.
@@ -31,7 +30,10 @@ class AboutActivity : BaseActivity() {
 
         // Apply theme based on user selections
         setTheme(ThemeUtils.getAppTheme(this))
-        setContentView(R.layout.activity_about)
+
+        // ViewBinding
+        val binding = ActivityAboutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         useCollapsingActionBar()
         setActionBarTitle(R.string.about)
@@ -39,11 +41,11 @@ class AboutActivity : BaseActivity() {
 
         // Avoid showing the fragment more than one time
         val versionText = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
-        version.text = versionText
-        hash.text = BuildConfig.GitHash
+        binding.included.version.text = versionText
+        binding.included.hash.text = BuildConfig.GitHash
 
         // Handle the FAB click
-        fab.setOnClickListener {
+        binding.fab.setOnClickListener {
             showLinks()
         }
     }

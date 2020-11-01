@@ -7,6 +7,7 @@ import android.util.Log
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.databinding.ActivityProfileCreateBinding
 import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.steps.ProfileDataStep
 import com.corphish.nightlight.design.steps.ProfileNameStep
@@ -15,7 +16,6 @@ import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.widgets.ktx.dialogs.MessageAlertDialog
 import ernestoyaquello.com.verticalstepperform.listener.StepperFormListener
-import kotlinx.android.synthetic.main.content_profile_create.*
 
 class ProfileCreateActivity : BaseActivity(), StepperFormListener {
 
@@ -29,10 +29,15 @@ class ProfileCreateActivity : BaseActivity(), StepperFormListener {
     private lateinit var profileSwitchStep: ProfileSwitchStep
     private lateinit var profileDataStep: ProfileDataStep
 
+    // View binding
+    private lateinit var binding: ActivityProfileCreateBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
-        setContentView(R.layout.activity_profile_create)
+
+        binding = ActivityProfileCreateBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         useCollapsingActionBar()
         setActionBarTitle(R.string.profile_create_title)
@@ -70,7 +75,7 @@ class ProfileCreateActivity : BaseActivity(), StepperFormListener {
             profileDataStep.isStepAvailable = it
         }
 
-        profileCreateForm
+        binding.included.profileCreateForm
                 .setup(this, profileNameStep, profileSwitchStep, profileDataStep)
                 .init()
     }

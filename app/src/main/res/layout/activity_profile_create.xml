@@ -33,5 +33,7 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_profile_create" />
+    <include
+        android:id="@+id/included"
+        layout="@layout/content_profile_create" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

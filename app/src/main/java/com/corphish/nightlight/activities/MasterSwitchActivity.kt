@@ -6,23 +6,28 @@ import android.view.View
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.databinding.ActivityMasterSwitchBinding
 import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.helpers.PreferenceHelper
-import kotlinx.android.synthetic.main.activity_master_switch.*
 
 const val REQ_CODE = 100
-class MasterSwitchActivity :BaseActivity() {
+class MasterSwitchActivity : BaseActivity() {
 
     private var masterSwitchStatus = false
     private var freshStart = false
 
     private var taskerError = false
 
+    // ViewBinding
+    private lateinit var binding: ActivityMasterSwitchBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
-        setContentView(R.layout.activity_master_switch)
+
+        binding = ActivityMasterSwitchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         useCustomActionBar()
         setActionBarTitle(R.string.app_name)
@@ -37,16 +42,16 @@ class MasterSwitchActivity :BaseActivity() {
 
     private fun setViews(b: Boolean) {
         if (b) {
-            masterSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, true))
-            masterSwitchDesc.setText(R.string.master_switch_desc_on)
+            binding.masterSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, true))
+            binding.masterSwitchDesc.setText(R.string.master_switch_desc_on)
         } else {
-            masterSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, false))
-            masterSwitchDesc.setText(R.string.master_switch_desc_off)
+            binding.masterSwitch.setColorFilter(ThemeUtils.getNLStatusIconBackground(this, false))
+            binding.masterSwitchDesc.setText(R.string.master_switch_desc_off)
         }
     }
 
     private fun setOnClickListeners() {
-        masterSwitch.setOnClickListener {
+        binding.masterSwitch.setOnClickListener {
             masterSwitchStatus = !masterSwitchStatus
 
             setViews(masterSwitchStatus)

@@ -58,29 +58,29 @@ class AboutActivity : BaseActivity() {
         SingleChoiceAlertDialog(this).apply {
             titleResId = R.string.links
             iconProperties = IconProperties(
-                    iconColor = if (ThemeUtils.isLightTheme(this@AboutActivity)) Color.WHITE else Color.BLACK,
+                    iconColor = if (ThemeUtils.isLightTheme(context)) Color.WHITE else Color.BLACK,
                     backgroundDrawable = background
             )
             choiceList = listOf(
                     SingleChoiceAlertDialog.ChoiceItem(
                             titleResId = R.string.contributors,
                             iconResId = R.drawable.ic_link,
-                            action = { ExternalLink.open(this@AboutActivity, "https://github.com/corphish/NightLight/graphs/contributors") }
+                            action = { ExternalLink.open(context, "https://github.com/corphish/NightLight/graphs/contributors") }
                     ),
                     SingleChoiceAlertDialog.ChoiceItem(
                             titleResId = R.string.github,
                             iconResId = R.drawable.ic_link,
-                            action = { ExternalLink.open(this@AboutActivity, "https://github.com/corphish/NightLight") }
+                            action = { ExternalLink.open(context, "https://github.com/corphish/NightLight") }
                     ),
                     SingleChoiceAlertDialog.ChoiceItem(
                             titleResId = R.string.xda,
                             iconResId = R.drawable.ic_link,
-                            action = { ExternalLink.open(this@AboutActivity, "https://forum.xda-developers.com/android/apps-games/app-night-light-kcal-t3689090") }
+                            action = { ExternalLink.open(context, "https://forum.xda-developers.com/android/apps-games/app-night-light-kcal-t3689090") }
                     ),
                     SingleChoiceAlertDialog.ChoiceItem(
                             titleResId = R.string.animations,
                             iconResId = R.drawable.ic_link,
-                            action = { ExternalLink.open(this@AboutActivity, "https://github.com/corphish/NightLight/blob/master/notes/animations.md") }
+                            action = { ExternalLink.open(context, "https://github.com/corphish/NightLight/blob/master/notes/animations.md") }
                     ),
             )
         }.show()

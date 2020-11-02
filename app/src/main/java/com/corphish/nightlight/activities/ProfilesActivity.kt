@@ -6,12 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
 
@@ -22,7 +21,8 @@ import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
-import com.corphish.widgets.ktx.adapters.Adapters
+import com.corphish.widgets.ktx.adapters.MutableListAdaptable
+import com.corphish.widgets.ktx.adapters.MutableListAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
@@ -36,7 +36,8 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
 
     private lateinit var profilesManager: ProfilesManager
 
-    private var profiles: MutableList<ProfilesManager.Profile>? = null
+    // Profile adapter
+    private lateinit var profileAdapter: MutableListAdapter<ProfilesManager.Profile, CustomViewHolder>
 
     private lateinit var context: Context
 
@@ -75,27 +76,34 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
         profilesManager = ProfilesManager(this)
         profilesManager.registerDataChangeListener(this)
         profilesManager.loadProfiles()
-        profiles = profilesManager.profilesList
     }
 
     private fun initViews() {
-        binding.included.recyclerView.invalidateItemDecorations()
-        binding.included.recyclerView.layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.gridSpanCount))
-        binding.included.recyclerView.itemAnimator = DefaultItemAnimator()
-        binding.included.recyclerView.isNestedScrollingEnabled = false
-        binding.included.recyclerView.setHasFixedSize(false)
-        binding.included.recyclerView.adapter = Adapters.newStaticAdapter<ProfilesManager.Profile, CustomViewHolder> {
-            layoutResourceId = R.layout.layout_profile_item
-            listItems = profiles?.toList()!!
-            viewHolder = { view -> CustomViewHolder(view) }
-            binding = { holder, profile ->
-                holder.icon.text = if (profile.name.isNotEmpty()) "${profile.name.toUpperCase(Locale.getDefault())[0]}" else ""
-                setIconBackground(holder.icon, ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled))
-                holder.icon.setTextColor(ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled))
+        binding.included.recyclerView.layoutManager =  GridLayoutManager(this, resources.getInteger(R.integer.gridSpanCount))
+        profileAdapter = object: MutableListAdaptable<ProfilesManager.Profile, CustomViewHolder>() {
+            override fun bind(viewHolder: CustomViewHolder, item: ProfilesManager.Profile, position: Int) {
+                viewHolder.icon.text = if (item.name.isNotEmpty()) "${item.name.toUpperCase(Locale.getDefault())[0]}" else ""
+                setIconBackground(viewHolder.icon, ThemeUtils.getNLStatusIconBackground(context, item.isSettingEnabled))
+                viewHolder.icon.setTextColor(ThemeUtils.getNLStatusIconForeground(context, item.isSettingEnabled))
 
-                holder.title.text = profile.name
+                viewHolder.title.text = item.name
             }
-        }
+
+            override fun getDiffUtilItemCallback() = object: DiffUtil.ItemCallback<ProfilesManager.Profile>() {
+                override fun areItemsTheSame(oldItem: ProfilesManager.Profile, newItem: ProfilesManager.Profile) =
+                        oldItem.name == newItem.name
+
+                override fun areContentsTheSame(oldItem: ProfilesManager.Profile, newItem: ProfilesManager.Profile) =
+                        false
+            }
+
+            override fun getLayoutResource(viewType: Int) = R.layout.layout_profile_item
+            override fun getViewHolder(view: View, viewType: Int) = CustomViewHolder(view)
+
+        }.buildAdapter()
+
+        binding.included.recyclerView.adapter = profileAdapter
+        profileAdapter.submitList(profilesManager.profilesList)
     }
 
     override fun onDataChanged(newDataSize: Int) {
@@ -117,14 +125,14 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
 
         override fun onClick(v: View) {
             if (!intent.getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
-                showAlert(R.string.confirm, getString(R.string.tasker_confirm_selection, profiles!![adapterPosition].name)) { returnBack(profiles!![adapterPosition].name) }
+                showAlert(R.string.confirm, getString(R.string.tasker_confirm_selection, profilesManager.profilesList[adapterPosition].name)) { returnBack(profilesManager.profilesList[adapterPosition].name) }
             } else {
                 showProfileOverviewDialog(adapterPosition)
             }
         }
 
         private fun showProfileOverviewDialog(pos: Int) {
-            curProfile = profiles!![pos]
+            curProfile = profilesManager.profilesList[pos]
             optionsDialog = BottomSheetDialog(this@ProfilesActivity, ThemeUtils.getBottomSheetTheme(context))
             optionsDialog.setOnShowListener {
                 val d = it as BottomSheetDialog
@@ -156,16 +164,10 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == _createProfileCode && resultCode == Activity.RESULT_OK) {
+        if ((requestCode == _createProfileCode || requestCode == _updateProfileCode) && resultCode == Activity.RESULT_OK) {
             profilesManager.loadProfiles()
-            profiles = profilesManager.profilesList
-            binding.included.recyclerView.adapter?.notifyDataSetChanged()
-        } else if (requestCode == _updateProfileCode) {
-            if (resultCode == Activity.RESULT_OK) {
-                profilesManager.loadProfiles()
-                profiles = profilesManager.profilesList
-            }
-            binding.included.recyclerView.adapter?.notifyDataSetChanged()
+            Log.d("NL_Profile", "New size = ${profilesManager.profilesList.size}")
+            profileAdapter.updateList(profilesManager.profilesList)
         }
     }
 
@@ -233,10 +235,8 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
         val deleteClickListener = View.OnClickListener {
             showAlert(R.string.delete, getString(R.string.delete_details, curProfile!!.name)) {
                 profilesManager.deleteProfile(curProfile!!)
-                val prof = curProfile
-                profiles!!.remove(prof)
                 curProfile = null
-                binding.included.recyclerView.adapter?.notifyDataSetChanged()
+                profileAdapter.updateList(profilesManager.profilesList)
             }
             optionsDialog.dismiss()
         }

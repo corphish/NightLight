@@ -13,12 +13,12 @@ import com.corphish.nightlight.BuildConfig
 import com.corphish.nightlight.R
 
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.databinding.ActivitySplashBinding
 import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.engine.ForegroundServiceManager
 import com.corphish.nightlight.engine.KCALManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.RootUtils
-import kotlinx.android.synthetic.main.activity_splash.*
 
 /*
  * Declare the shortcut intent strings and id
@@ -33,9 +33,14 @@ class StartActivity : AppCompatActivity() {
 
     private var checkBypass = 7
 
+    // ViewBinding
+    private lateinit var binding: ActivitySplashBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         if (handleIntent())
             finish()
@@ -46,7 +51,7 @@ class StartActivity : AppCompatActivity() {
                 switchToMain()
         }
 
-        splashContainer.setOnClickListener {
+        binding.splashContainer.setOnClickListener {
             checkBypass--
             if (checkBypass == 0) switchToMain()
         }
@@ -132,8 +137,8 @@ class StartActivity : AppCompatActivity() {
     }
 
     private inner class CompatibilityChecker : AsyncTask<String, String, String>() {
-        internal var rootAccessAvailable = false
-        internal var kcalSupported = false
+        var rootAccessAvailable = false
+        var kcalSupported = false
 
         override fun doInBackground(vararg booms: String): String? {
             rootAccessAvailable = RootUtils.rootAccess
@@ -142,13 +147,13 @@ class StartActivity : AppCompatActivity() {
         }
 
         override fun onPostExecute(boom: String?) {
-            progressBar.visibility = View.GONE
+            binding.progressBar.visibility = View.GONE
             if (!rootAccessAvailable) {
                 showAlertDialog(R.string.no_root_access, R.string.no_root_desc)
-                alertPlaceholder.visibility = View.VISIBLE
+                binding.alertPlaceholder.visibility = View.VISIBLE
             } else if (!kcalSupported) {
                 showAlertDialog(R.string.no_kcal, R.string.no_kcal_desc)
-                alertPlaceholder.visibility = View.VISIBLE
+                binding.alertPlaceholder.visibility = View.VISIBLE
             } else {
                 PreferenceHelper.putBoolean(applicationContext, Constants.COMPATIBILITY_TEST, true)
                 switchToMain()

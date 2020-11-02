@@ -40,7 +40,6 @@ class ProfileCreateActivity : BaseActivity(), StepperFormListener {
         setContentView(binding.root)
 
         useCollapsingActionBar()
-        setActionBarTitle(R.string.profile_create_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         profilesManager = ProfilesManager(this)
@@ -55,6 +54,9 @@ class ProfileCreateActivity : BaseActivity(), StepperFormListener {
                     intent.getIntExtra(Constants.PROFILE_DATA_SETTING_MODE, PreferenceHelper.getInt(this, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)),
                     intent.getIntArrayExtra(Constants.PROFILE_DATA_SETTING)!!
             )
+            setActionBarTitle(R.string.profile_edit_title)
+        } else {
+            setActionBarTitle(R.string.profile_create_title)
         }
 
         operationMode = intent.getIntExtra(Constants.PROFILE_MODE, Constants.MODE_CREATE)
@@ -78,6 +80,24 @@ class ProfileCreateActivity : BaseActivity(), StepperFormListener {
         binding.included.profileCreateForm
                 .setup(this, profileNameStep, profileSwitchStep, profileDataStep)
                 .init()
+
+        if (!isProfileNull && profile != null) {
+            profileNameStep.restoreStepData(profile!!.name)
+            profileSwitchStep.restoreStepData(profile!!.isSettingEnabled)
+
+            val data = Bundle()
+            data.putInt(Constants.PREF_SETTING_MODE, profile!!.settingMode)
+
+            if (profile!!.settingMode == Constants.NL_SETTING_MODE_TEMP) {
+                data.putInt(Constants.PREF_COLOR_TEMP, profile!!.settings[0])
+            } else {
+                data.putInt(Constants.PREF_RED_COLOR, profile!!.settings[0])
+                data.putInt(Constants.PREF_GREEN_COLOR, profile!!.settings[1])
+                data.putInt(Constants.PREF_BLUE_COLOR, profile!!.settings[2])
+            }
+
+            profileDataStep.restoreStepData(data)
+        }
     }
 
     private fun createProfileWithCurrentSelections(): Boolean {

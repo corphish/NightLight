@@ -140,4 +140,9 @@
     <string name="animations">Animations</string>
     <string name="wind_down_enabled">Bed time mode is enabled.</string>
     <string name="wind_down_disabled">Bed time mode is disabled.</string>
+    <string name="profile_data_edit_msg">Tap to select colors</string>
+    <string name="profile_data_edit_error">Please select a color configuration to proceed</string>
+    <string name="not_selected">Not selected</string>
+    <string name="not_applicable_title">Not applicable</string>
+    <string name="not_applicable_desc">Because you chose to not enable Night Light!</string>
 </resources>

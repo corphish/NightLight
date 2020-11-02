@@ -7,7 +7,6 @@ import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -17,6 +16,8 @@ import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
 
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.databinding.ActivityProfilesBinding
+import com.corphish.nightlight.databinding.BottomSheetProfileOptionsBinding
 import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.alert.BottomSheetAlertDialog
 import com.corphish.nightlight.engine.ProfilesManager
@@ -24,8 +25,6 @@ import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.widgets.ktx.adapters.Adapters
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.activity_profiles.*
-import kotlinx.android.synthetic.main.content_profiles.*
 import java.util.*
 
 class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
@@ -44,10 +43,15 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
     private val _createProfileCode = 6
     private val _updateProfileCode = 9
 
+    // View binding
+    private lateinit var binding: ActivityProfilesBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.getAppTheme(this))
-        setContentView(R.layout.activity_profiles)
+
+        binding = ActivityProfilesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         useCollapsingActionBar()
         setActionBarTitle(R.string.profile_title)
@@ -55,7 +59,7 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
 
         context = this
 
-        fab.setOnClickListener {
+        binding.fab.setOnClickListener {
             val intent = Intent(this@ProfilesActivity, ProfileCreateActivity::class.java)
             intent.putExtra(Constants.PROFILE_DATA_PRESENT, false)
             intent.putExtra(Constants.PROFILE_MODE, Constants.MODE_CREATE)
@@ -75,12 +79,12 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
     }
 
     private fun initViews() {
-        recyclerView.invalidateItemDecorations()
-        recyclerView.layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.gridSpanCount))
-        recyclerView.itemAnimator = DefaultItemAnimator()
-        recyclerView.isNestedScrollingEnabled = false
-        recyclerView.setHasFixedSize(false)
-        recyclerView.adapter = Adapters.newStaticAdapter<ProfilesManager.Profile, CustomViewHolder> {
+        binding.included.recyclerView.invalidateItemDecorations()
+        binding.included.recyclerView.layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.gridSpanCount))
+        binding.included.recyclerView.itemAnimator = DefaultItemAnimator()
+        binding.included.recyclerView.isNestedScrollingEnabled = false
+        binding.included.recyclerView.setHasFixedSize(false)
+        binding.included.recyclerView.adapter = Adapters.newStaticAdapter<ProfilesManager.Profile, CustomViewHolder> {
             layoutResourceId = R.layout.layout_profile_item
             listItems = profiles?.toList()!!
             viewHolder = { view -> CustomViewHolder(view) }
@@ -95,15 +99,16 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
     }
 
     override fun onDataChanged(newDataSize: Int) {
-        if (newDataSize < 1)
-            emptyView.visibility = View.VISIBLE
-        else
-            emptyView.visibility = View.GONE
+        if (newDataSize < 1) {
+            binding.included.emptyView.visibility = View.VISIBLE
+        } else {
+            binding.included.emptyView.visibility = View.GONE
+        }
     }
 
-    private inner class CustomViewHolder internal constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener, View.OnLongClickListener {
-        internal val icon: TextView = v.findViewById(R.id.profileIcon)
-        internal val title: TextView = v.findViewById(R.id.profileTitle)
+    private inner class CustomViewHolder constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener, View.OnLongClickListener {
+        val icon: TextView = v.findViewById(R.id.profileIcon)
+        val title: TextView = v.findViewById(R.id.profileTitle)
 
         init {
             v.setOnClickListener(this)
@@ -112,7 +117,7 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
 
         override fun onClick(v: View) {
             if (!intent.getBooleanExtra(Constants.TASKER_ERROR_STATUS, true)) {
-                showAlert(R.string.confirm, getString(R.string.tasker_confirm_selection, profiles!![adapterPosition].name), View.OnClickListener { returnBack(profiles!![adapterPosition].name) })
+                showAlert(R.string.confirm, getString(R.string.tasker_confirm_selection, profiles!![adapterPosition].name)) { returnBack(profiles!![adapterPosition].name) }
             } else {
                 showProfileOverviewDialog(adapterPosition)
             }
@@ -154,56 +159,43 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
         if (requestCode == _createProfileCode && resultCode == Activity.RESULT_OK) {
             profilesManager.loadProfiles()
             profiles = profilesManager.profilesList
-            recyclerView.adapter?.notifyDataSetChanged()
+            binding.included.recyclerView.adapter?.notifyDataSetChanged()
         } else if (requestCode == _updateProfileCode) {
             if (resultCode == Activity.RESULT_OK) {
                 profilesManager.loadProfiles()
                 profiles = profilesManager.profilesList
             }
-            recyclerView.adapter?.notifyDataSetChanged()
+            binding.included.recyclerView.adapter?.notifyDataSetChanged()
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun getOptionsView(profile: ProfilesManager.Profile?) {
         optionsView = View.inflate(this, R.layout.bottom_sheet_profile_options, null)
+        val profileBinding = BottomSheetProfileOptionsBinding.bind(optionsView)
 
-        val selectedProfileTitle = optionsView.findViewById<TextView>(R.id.selectedProfileTitle)
-        val selectedProfileName = optionsView.findViewById<TextView>(R.id.selectedProfileName)
-        val powerIcon = optionsView.findViewById<ImageButton>(R.id.powerIcon)
-        val powerText = optionsView.findViewById<TextView>(R.id.powerCaption)
-        val colorIcon = optionsView.findViewById<ImageButton>(R.id.colorIcon)
-        val colorText = optionsView.findViewById<TextView>(R.id.colorCaption)
-        val colorTitle = optionsView.findViewById<TextView>(R.id.colorTitle)
-        val apply = optionsView.findViewById<View>(R.id.apply)
-        val edit = optionsView.findViewById<View>(R.id.edit)
-        val delete = optionsView.findViewById<View>(R.id.delete)
-        val applyIcon = optionsView.findViewById<View>(R.id.applyIcon)
-        val editIcon = optionsView.findViewById<View>(R.id.editIcon)
-        val deleteIcon = optionsView.findViewById<View>(R.id.deleteIcon)
-
-        selectedProfileTitle.text = if (profile?.name!!.isNotEmpty()) "${profile.name[0]}" else ""
+        profileBinding.selectedProfileTitle.text = if (profile?.name!!.isNotEmpty()) "${profile.name[0]}" else ""
 
         val background = ThemeUtils.getNLStatusIconBackground(context, profile.isSettingEnabled)
         val foreground = ThemeUtils.getNLStatusIconForeground(context, profile.isSettingEnabled)
 
-        selectedProfileTitle.setTextColor(foreground)
-        setIconBackground(selectedProfileTitle, background)
+        profileBinding.selectedProfileTitle.setTextColor(foreground)
+        setIconBackground(profileBinding.selectedProfileTitle, background)
 
-        selectedProfileName.text = profile.name
+        profileBinding.selectedProfileName.text = profile.name
 
-        powerIcon.background?.setColorFilter(background, PorterDuff.Mode.SRC_ATOP)
-        powerIcon.setColorFilter(foreground)
-        powerText.setText(if (profile.isSettingEnabled) R.string.on else R.string.off)
+        profileBinding.powerIcon.background?.setColorFilter(background, PorterDuff.Mode.SRC_ATOP)
+        profileBinding.powerIcon.setColorFilter(foreground)
+        profileBinding.powerCaption.setText(if (profile.isSettingEnabled) R.string.on else R.string.off)
 
-        colorIcon.background?.setColorFilter(background, PorterDuff.Mode.SRC_ATOP)
-        colorIcon.setColorFilter(foreground)
+        profileBinding.colorIcon.background?.setColorFilter(background, PorterDuff.Mode.SRC_ATOP)
+        profileBinding.colorIcon.setColorFilter(foreground)
         if (profile.settingMode == Constants.NL_SETTING_MODE_TEMP) {
-            colorText.text = "${profile.settings[0]}K"
-            colorTitle.setText(R.string.color_temperature_title)
+            profileBinding.colorCaption.text = "${profile.settings[0]}K"
+            profileBinding.colorTitle.setText(R.string.color_temperature_title)
         } else {
-            colorText.text = "(${profile.settings[0]}, ${profile.settings[1]}, ${profile.settings[2]})"
-            colorTitle.setText(R.string.manual_mode_title)
+            profileBinding.colorCaption.text = "(${profile.settings[0]}, ${profile.settings[1]}, ${profile.settings[2]})"
+            profileBinding.colorTitle.setText(R.string.manual_mode_title)
         }
 
         val applyClickListener = View.OnClickListener {
@@ -217,8 +209,8 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
             optionsDialog.dismiss()
         }
 
-        apply.setOnClickListener(applyClickListener)
-        applyIcon.setOnClickListener(applyClickListener)
+        profileBinding.apply.setOnClickListener(applyClickListener)
+        profileBinding.applyIcon.setOnClickListener(applyClickListener)
 
         val editClickListener = View.OnClickListener {
             val intent = Intent(this@ProfilesActivity, ProfileCreateActivity::class.java)
@@ -235,22 +227,22 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
             optionsDialog.dismiss()
         }
 
-        edit.setOnClickListener(editClickListener)
-        editIcon.setOnClickListener(editClickListener)
+        profileBinding.edit.setOnClickListener(editClickListener)
+        profileBinding.editIcon.setOnClickListener(editClickListener)
 
         val deleteClickListener = View.OnClickListener {
-            showAlert(R.string.delete, getString(R.string.delete_details, curProfile!!.name), View.OnClickListener {
+            showAlert(R.string.delete, getString(R.string.delete_details, curProfile!!.name)) {
                 profilesManager.deleteProfile(curProfile!!)
                 val prof = curProfile
                 profiles!!.remove(prof)
                 curProfile = null
-                recyclerView.adapter?.notifyDataSetChanged()
-            })
+                binding.included.recyclerView.adapter?.notifyDataSetChanged()
+            }
             optionsDialog.dismiss()
         }
 
-        delete.setOnClickListener(deleteClickListener)
-        deleteIcon.setOnClickListener(deleteClickListener)
+        profileBinding.delete.setOnClickListener(deleteClickListener)
+        profileBinding.deleteIcon.setOnClickListener(deleteClickListener)
     }
 
     fun returnBack(name: String?) {
@@ -270,7 +262,7 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
         bottomSheetAlertDialog.setTitle(title)
         bottomSheetAlertDialog.setMessage(message)
         bottomSheetAlertDialog.setPositiveButton(android.R.string.ok, positiveOnClickListener)
-        bottomSheetAlertDialog.setNegativeButton(android.R.string.cancel, View.OnClickListener { })
+        bottomSheetAlertDialog.setNegativeButton(android.R.string.cancel) { }
         bottomSheetAlertDialog.show()
     }
 }

@@ -3,7 +3,6 @@ package com.corphish.nightlight.activities
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.ShortcutManager
-import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,6 +18,9 @@ import com.corphish.nightlight.engine.ForegroundServiceManager
 import com.corphish.nightlight.engine.KCALManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.helpers.RootUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /*
  * Declare the shortcut intent strings and id
@@ -46,7 +48,7 @@ class StartActivity : AppCompatActivity() {
             finish()
         else if (!handleTaskerIntent()) {
             if (!PreferenceHelper.getBoolean(this, Constants.COMPATIBILITY_TEST))
-                CompatibilityChecker().execute()
+                checkCompatibility()
             else
                 switchToMain()
         }
@@ -136,31 +138,33 @@ class StartActivity : AppCompatActivity() {
         builder.show()
     }
 
-    private inner class CompatibilityChecker : AsyncTask<String, String, String>() {
-        var rootAccessAvailable = false
-        var kcalSupported = false
+    /**
+     * Performs compatibility checks during startup.
+     */
+    private fun checkCompatibility() {
+        var rootAccessAvailable: Boolean
+        var kcalSupported: Boolean
 
-        override fun doInBackground(vararg booms: String): String? {
+        GlobalScope.launch(Dispatchers.IO) {
             rootAccessAvailable = RootUtils.rootAccess
             kcalSupported = KCALManager.isKCALAvailable
-            return null
-        }
 
-        override fun onPostExecute(boom: String?) {
-            binding.progressBar.visibility = View.GONE
-            if (!rootAccessAvailable) {
-                showAlertDialog(R.string.no_root_access, R.string.no_root_desc)
-                binding.alertPlaceholder.visibility = View.VISIBLE
-            } else if (!kcalSupported) {
-                showAlertDialog(R.string.no_kcal, R.string.no_kcal_desc)
-                binding.alertPlaceholder.visibility = View.VISIBLE
-            } else {
-                PreferenceHelper.putBoolean(applicationContext, Constants.COMPATIBILITY_TEST, true)
-                switchToMain()
-            }
+            GlobalScope.launch(Dispatchers.Main) {
+                binding.progressBar.visibility = View.GONE
+                if (!rootAccessAvailable) {
+                    showAlertDialog(R.string.no_root_access, R.string.no_root_desc)
+                    binding.alertPlaceholder.visibility = View.VISIBLE
+                } else if (!kcalSupported) {
+                    showAlertDialog(R.string.no_kcal, R.string.no_kcal_desc)
+                    binding.alertPlaceholder.visibility = View.VISIBLE
+                } else {
+                    PreferenceHelper.putBoolean(applicationContext, Constants.COMPATIBILITY_TEST, true)
+                    switchToMain()
+                }
 
-            if (BuildConfig.DEBUG) {
-                switchToMain()
+                if (BuildConfig.DEBUG) {
+                    switchToMain()
+                }
             }
         }
     }

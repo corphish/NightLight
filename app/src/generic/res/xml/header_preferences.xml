@@ -39,7 +39,7 @@
         <Preference
             app:allowDividerBelow="false"
             app:fragment="com.corphish.nightlight.design.fragments.KCALBackupSettingsFragment"
-            app:icon="@drawable/ic_settings_backup_restore"
+            app:icon="@drawable/ic_default_kcal"
             app:summary="@string/kcal_backup_set_desc"
             app:title="@string/section_kcal_backup" />
 

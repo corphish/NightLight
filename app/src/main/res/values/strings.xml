@@ -52,9 +52,9 @@
     <string name="set_on_boot_delay_desc">Set the delay after which Night Light settings will be restored and applied after boot. Night Light settings will be applied after %s delay.</string>
     <string name="set_on_boot_delay_warn">Looks like Night Light settings were restored but could not be applied after most recent boot. Consider increasing this delay so that settings can be successfully restored and applied after boot.</string>
 
-    <string name="section_kcal_backup">KCAL Backup</string>
+    <string name="section_kcal_backup">Default KCAL values</string>
     <string name="kcal_backup_set_title">Configure KCAL value</string>
-    <string name="kcal_backup_set_desc">Configure your old KCAL settings, which will be applied when night light is turned off.</string>
+    <string name="kcal_backup_set_desc">Configure your default KCAL settings, which will be applied when night light is turned off.</string>
     <string name="red">Red</string>
     <string name="green">Green</string>
     <string name="blue">Blue</string>

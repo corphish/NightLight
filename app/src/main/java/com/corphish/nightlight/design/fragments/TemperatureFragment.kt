@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
+import com.corphish.nightlight.engine.models.PickedColorData
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.interfaces.ColorPickerCallback
 import com.gregacucnik.EditableSeekBar
@@ -25,7 +26,6 @@ class TemperatureFragment: Fragment() {
     // Color picking mode
     private lateinit var colorPickerCallback: ColorPickerCallback
     private var colorPickingMode = false
-    private val colorPickedData = Bundle()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -88,9 +88,10 @@ class TemperatureFragment: Fragment() {
      * Picks colors in color picking mode.
      */
     private fun pickColors() {
-        colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
-        colorPickedData.putInt(Constants.PREF_COLOR_TEMP, colorTemperature)
-        colorPickerCallback.onColorPicked(colorPickedData)
+        colorPickerCallback.onColorPicked(PickedColorData(
+                settingMode = Constants.NL_SETTING_MODE_TEMP,
+                settings = intArrayOf(colorTemperature)
+        ))
     }
 
     private fun setSliderValues() {

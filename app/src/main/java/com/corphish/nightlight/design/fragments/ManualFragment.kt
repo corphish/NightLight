@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
+import com.corphish.nightlight.engine.models.PickedColorData
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.interfaces.ColorPickerCallback
 import com.gregacucnik.EditableSeekBar
@@ -31,7 +32,6 @@ class ManualFragment : Fragment() {
     // Color picking mode
     private lateinit var colorPickerCallback: ColorPickerCallback
     private var colorPickingMode = false
-    private val colorPickedData = Bundle()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -168,11 +168,10 @@ class ManualFragment : Fragment() {
      * Picks colors in color picking mode.
      */
     private fun pickColors() {
-        colorPickedData.putInt(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_MANUAL)
-        colorPickedData.putInt(Constants.PREF_RED_COLOR, redColor)
-        colorPickedData.putInt(Constants.PREF_GREEN_COLOR, greenColor)
-        colorPickedData.putInt(Constants.PREF_BLUE_COLOR, blueColor)
-        colorPickerCallback.onColorPicked(colorPickedData)
+        colorPickerCallback.onColorPicked(PickedColorData(
+                settingMode = Constants.NL_SETTING_MODE_MANUAL,
+                settings = intArrayOf(redColor, greenColor, blueColor),
+        ))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

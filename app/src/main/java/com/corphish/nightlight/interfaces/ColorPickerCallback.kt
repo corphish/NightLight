@@ -1,6 +1,6 @@
 package com.corphish.nightlight.interfaces
 
-import android.os.Bundle
+import com.corphish.nightlight.engine.models.PickedColorData
 
 /**
  * Color control activity now supports picking colors.
@@ -15,5 +15,5 @@ interface ColorPickerCallback {
      *
      * @param pickedData Picked color.
      */
-    fun onColorPicked(pickedData: Bundle)
+    fun onColorPicked(pickedData: PickedColorData)
 }

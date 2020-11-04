@@ -2,7 +2,6 @@ package com.corphish.nightlight.activities
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -13,6 +12,7 @@ import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.fragments.ManualFragment
 import com.corphish.nightlight.design.fragments.TemperatureFragment
 import com.corphish.nightlight.engine.Core
+import com.corphish.nightlight.engine.models.PickedColorData
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.interfaces.ColorPickerCallback
 import com.corphish.widgets.ktx.dialogs.SingleChoiceAlertDialog
@@ -111,19 +111,8 @@ class ColorControlActivity : BaseActivity(), ColorPickerCallback {
      *
      * @param pickedData Picked color.
      */
-    override fun onColorPicked(pickedData: Bundle) {
-        Log.d("NL_ColorPicker", "onColorPicked")
-        val pickedMode = pickedData.getInt(Constants.PREF_SETTING_MODE)
-        intent.putExtra(Constants.PREF_SETTING_MODE, pickedMode)
-
-        if (pickedMode == Constants.NL_SETTING_MODE_TEMP) {
-            intent.putExtra(Constants.PREF_COLOR_TEMP, pickedData.getInt(Constants.PREF_COLOR_TEMP))
-        } else {
-            intent.putExtra(Constants.PREF_RED_COLOR, pickedData.getInt(Constants.PREF_RED_COLOR))
-            intent.putExtra(Constants.PREF_GREEN_COLOR, pickedData.getInt(Constants.PREF_GREEN_COLOR))
-            intent.putExtra(Constants.PREF_BLUE_COLOR, pickedData.getInt(Constants.PREF_BLUE_COLOR))
-        }
-
+    override fun onColorPicked(pickedData: PickedColorData) {
+        pickedData.updateIntent(intent)
         setResult(RESULT_OK, intent)
     }
 }

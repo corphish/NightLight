@@ -3,7 +3,6 @@ package com.corphish.nightlight.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.data.Constants
@@ -13,6 +12,7 @@ import com.corphish.nightlight.design.steps.ProfileDataStep
 import com.corphish.nightlight.design.steps.ProfileNameStep
 import com.corphish.nightlight.design.steps.ProfileSwitchStep
 import com.corphish.nightlight.engine.ProfilesManager
+import com.corphish.nightlight.engine.models.PickedColorData
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.widgets.ktx.dialogs.MessageAlertDialog
 import ernestoyaquello.com.verticalstepperform.listener.StepperFormListener
@@ -85,62 +85,32 @@ class ProfileCreateActivity : BaseActivity(), StepperFormListener {
             profileNameStep.restoreStepData(profile!!.name)
             profileSwitchStep.restoreStepData(profile!!.isSettingEnabled)
 
-            val data = Bundle()
-            data.putInt(Constants.PREF_SETTING_MODE, profile!!.settingMode)
-
-            if (profile!!.settingMode == Constants.NL_SETTING_MODE_TEMP) {
-                data.putInt(Constants.PREF_COLOR_TEMP, profile!!.settings[0])
-            } else {
-                data.putInt(Constants.PREF_RED_COLOR, profile!!.settings[0])
-                data.putInt(Constants.PREF_GREEN_COLOR, profile!!.settings[1])
-                data.putInt(Constants.PREF_BLUE_COLOR, profile!!.settings[2])
-            }
-
+            val data = PickedColorData(profile!!.settingMode, profile!!.settings)
             profileDataStep.restoreStepData(data)
         }
     }
 
     private fun createProfileWithCurrentSelections(): Boolean {
         val data = profileDataStep.stepData
-        val mode = data.getInt(Constants.PREF_SETTING_MODE)
-
-        val settings: IntArray = if (mode == Constants.NL_SETTING_MODE_TEMP)
-            intArrayOf(data.getInt(Constants.PREF_COLOR_TEMP))
-        else
-            intArrayOf(
-                    data.getInt(Constants.PREF_RED_COLOR),
-                    data.getInt(Constants.PREF_GREEN_COLOR),
-                    data.getInt(Constants.PREF_GREEN_COLOR)
-            )
 
         return profilesManager.createProfile(
                 profileSwitchStep.stepData,
                 profileNameStep.stepData,
-                mode, // Mode
-                settings, // Setting as array
+                data!!.settingMode, // Mode
+                data.settings, // Setting as array
         )
     }
 
     private fun updateProfileWithCurrentSelections(): Boolean {
         val data = profileDataStep.stepData
-        val mode = data.getInt(Constants.PREF_SETTING_MODE)
-
-        val settings: IntArray = if (mode == Constants.NL_SETTING_MODE_TEMP)
-            intArrayOf(data.getInt(Constants.PREF_COLOR_TEMP))
-        else
-            intArrayOf(
-                    data.getInt(Constants.PREF_RED_COLOR),
-                    data.getInt(Constants.PREF_GREEN_COLOR),
-                    data.getInt(Constants.PREF_GREEN_COLOR)
-            )
 
         return if (profile == null) false else
             profilesManager.updateProfile(
                     profile!!,
                     profileSwitchStep.stepData,
                     profileNameStep.stepData,
-                    mode, // Mode
-                    settings, // Setting as array
+                    data!!.settingMode, // Mode
+                    data.settings, // Setting as array
             )
     }
 
@@ -187,20 +157,8 @@ class ProfileCreateActivity : BaseActivity(), StepperFormListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        Log.d("NL_ProfileCreate", "onActivityResult, result ok = ${resultCode == RESULT_OK}, $requestCode")
-
         if (requestCode == 43 && resultCode == RESULT_OK && data != null) {
-            val pickedData = Bundle()
-            val mode = data.getIntExtra(Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
-            pickedData.putInt(Constants.PREF_SETTING_MODE, mode)
-            if (mode == Constants.NL_SETTING_MODE_TEMP) {
-                pickedData.putInt(Constants.PREF_COLOR_TEMP, data.getIntExtra(Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP))
-            } else {
-                pickedData.putInt(Constants.PREF_RED_COLOR, data.getIntExtra(Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR))
-                pickedData.putInt(Constants.PREF_GREEN_COLOR, data.getIntExtra(Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR))
-                pickedData.putInt(Constants.PREF_BLUE_COLOR, data.getIntExtra(Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR))
-            }
-
+            val pickedData = PickedColorData.fromIntent(intent)
             profileDataStep.updateData(pickedData)
         }
     }

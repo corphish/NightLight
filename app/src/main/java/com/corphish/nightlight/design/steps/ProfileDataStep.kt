@@ -2,20 +2,19 @@ package com.corphish.nightlight.design.steps
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.ColorControlActivity
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.engine.models.PickedColorData
 import ernestoyaquello.com.verticalstepperform.Step
 
-class ProfileDataStep(private val activity: Activity, stepTitle: String?): Step<Bundle>(stepTitle) {
+class ProfileDataStep(private val activity: Activity, stepTitle: String?): Step<PickedColorData?>(stepTitle) {
 
     // Bundle data
-    private var data = Bundle()
+    private var data: PickedColorData? = null
 
     // Views
     private lateinit var dataView: TextView
@@ -51,13 +50,12 @@ class ProfileDataStep(private val activity: Activity, stepTitle: String?): Step<
         return view
     }
 
-    override fun isStepDataValid(stepData: Bundle): IsDataValid {
+    override fun isStepDataValid(stepData: PickedColorData?): IsDataValid {
         // We allow no selections only if this step is not available
         return if (!isStepAvailable) {
             IsDataValid(true, "")
         } else {
-            val isSelected = data.containsKey(Constants.PREF_SETTING_MODE)
-            Log.d("NL_ProfileCreate", "IsStepDataValid: $isSelected")
+            val isSelected = data != null
 
             IsDataValid(isSelected, if (isSelected) "" else context.getString(R.string.profile_data_edit_error))
         }
@@ -70,23 +68,7 @@ class ProfileDataStep(private val activity: Activity, stepTitle: String?): Step<
             return context.getString(R.string.not_applicable_title)
         }
 
-        val isSelected = data.containsKey(Constants.PREF_SETTING_MODE)
-        if (!isSelected) {
-            return context.getString(R.string.not_selected)
-        }
-
-        val mode = data.getInt(Constants.PREF_SETTING_MODE)
-        if (mode == Constants.NL_SETTING_MODE_TEMP) {
-            val temp = data.getInt(Constants.PREF_COLOR_TEMP)
-
-            return "${context.getString(R.string.color_temperature_title)}: ${temp}K"
-        } else {
-            val red = data.getInt(Constants.PREF_RED_COLOR)
-            val green = data.getInt(Constants.PREF_GREEN_COLOR)
-            val blue = data.getInt(Constants.PREF_BLUE_COLOR)
-
-            return "RGB($red, $green, $blue)"
-        }
+        return data?.summarise(context) ?: context.getString(R.string.not_selected)
     }
 
     override fun onStepOpened(animated: Boolean) {}
@@ -97,7 +79,7 @@ class ProfileDataStep(private val activity: Activity, stepTitle: String?): Step<
 
     override fun onStepMarkedAsUncompleted(animated: Boolean) {}
 
-    override fun restoreStepData(stepData: Bundle) {
+    override fun restoreStepData(stepData: PickedColorData?) {
         // To restore the step after a configuration change, we restore the text of its EditText view.
         updateData(stepData)
     }
@@ -119,7 +101,7 @@ class ProfileDataStep(private val activity: Activity, stepTitle: String?): Step<
      *
      * @param data Updated data.
      */
-    fun updateData(data: Bundle) {
+    fun updateData(data: PickedColorData?) {
         this.data = data
 
         updateUI()

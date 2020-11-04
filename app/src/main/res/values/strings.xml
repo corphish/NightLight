@@ -185,7 +185,7 @@
 
     <string name="automation_intro_1">You can let the app to automatically to turn the night light on and off at specific times. Simply enable automation, set start and end times and you are good to go. Fire and forget!</string>
     <string name="automation_intro_2">You can also set the automation schedule from sunset to sunrise. Night light will turn on at sunset and turn off at sunrise.</string>
-    <string name="automation_intro_3">Slowly transitions from minimum intensity to maximum intensity. Fade in will start at the start of automation and end at the fade stop time.</string>
+    <string name="automation_intro_3">Slowly transitions from default KCAL value to the chosen Night Light KCAL value. Fade in will start at the start of automation and end at the fade stop time.</string>
     <string name="automation_intro_4">Sets the interval at which the night light intensity fades in.</string>
 
     <string name="sunset_sunrise">Sunset to sunrise</string>

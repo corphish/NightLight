@@ -1,4 +1,4 @@
-package com.corphish.nightlight.design.steps
+package com.corphish.nightlight.design.steps.profile
 
 import android.app.Activity
 import android.content.Intent

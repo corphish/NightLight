@@ -8,9 +8,9 @@ import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.databinding.ActivityProfileCreateBinding
 import com.corphish.nightlight.design.ThemeUtils
-import com.corphish.nightlight.design.steps.ProfileDataStep
-import com.corphish.nightlight.design.steps.ProfileNameStep
-import com.corphish.nightlight.design.steps.ProfileSwitchStep
+import com.corphish.nightlight.design.steps.profile.ProfileDataStep
+import com.corphish.nightlight.design.steps.profile.ProfileNameStep
+import com.corphish.nightlight.design.steps.profile.ProfileSwitchStep
 import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.engine.models.PickedColorData
 import com.corphish.nightlight.helpers.PreferenceHelper

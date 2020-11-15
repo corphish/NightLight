@@ -201,4 +201,19 @@
     <string name="not_selected">Not selected</string>
     <string name="not_applicable_title">Not applicable</string>
     <string name="not_applicable_desc">Because you chose to not enable Night Light!</string>
+
+    <string name="routine_name">Routine name</string>
+
+    <string name="fade_off">Fade off</string>
+    <string name="fade_in">Fade in</string>
+    <string name="fade_out">Fade out</string>
+
+    <string name="time_select">Tap to choose time.</string>
+    <string name="time_error_empty">Please set a time to continue.</string>
+    <string name="time_error_overlap">The time you have chosen overlaps with other routines. Please choose a different time to continue.</string>
+
+    <string name="sunset">Sunset</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="custom_time">Custom time</string>
+    <string name="pick_time">Pick time</string>
 </resources>

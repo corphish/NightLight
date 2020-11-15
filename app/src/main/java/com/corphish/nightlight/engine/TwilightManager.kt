@@ -87,6 +87,19 @@ class TwilightManager {
         return this
     }
 
+    /**
+     * Computes the times and returns it.
+     */
+    fun computeAndGet(): Pair<String, String> {
+        val mLocation = Location(latitude, longitude)
+
+        val sunriseSunsetCalculator = SunriseSunsetCalculator(mLocation, TimeZone.getDefault())
+        val calendar = Calendar.getInstance()
+
+        return sunriseSunsetCalculator.getOfficialSunsetForDate(calendar) to
+                sunriseSunsetCalculator.getOfficialSunriseForDate(calendar)
+    }
+
     companion object {
 
         fun newInstance(): TwilightManager {

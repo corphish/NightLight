@@ -96,16 +96,11 @@ data class AutomationRoutine(
         fun String.resolved(context: Context): String {
             // We only resolve strings identified the sunset/sunrise identifiers.
             if (this == TIME_SUNSET || this == TIME_SUNRISE) {
-                /*TwilightManager.newInstance()
+                val times = TwilightManager.newInstance()
                         .atLocation(PreferenceHelper.getLocation(context))
-                        .computeAndSaveTime(context) { sunset, sunrise ->
-                            return when(this) {
-                                TIME_SUNRISE -> sunrise
-                                TIME_SUNSET -> sunset
-                                else -> this
-                            }
-                        }*/
-                // TODO
+                        .computeAndGet()
+
+                return if (this == TIME_SUNSET) times.first else times.second
             }
 
             return this

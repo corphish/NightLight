@@ -151,15 +151,40 @@ object AutomationRoutineManager {
 
     /**
      * Gets current routine for the time.
+     * Returns null if no routine is available for present schedule.
      */
-    fun getCurrentRoutine(context: Context): AutomationRoutine {
+    fun getCurrentRoutine(context: Context): AutomationRoutine? {
         for (x in _automationRoutineList) {
             if (TimeUtils.isInRange(x.startTime.resolved(context), x.endTime.resolved(context))) {
                 return x
             }
         }
 
-        // TODO: Build automation routine for behavior outside schedule
-        return AutomationRoutine()
+        return null
+    }
+
+    /**
+     * Returns the upcoming routine.
+     */
+    fun getUpcomingRoutine(context: Context): AutomationRoutine {
+        // First we collect the start times of all the routines and sort them.
+        val startTimes = automationRoutineList.sortedBy { it.startTime }
+
+        // Get current time.
+        val currentTimeRaw = TimeUtils.currentTimeAsHourAndMinutes
+        val currentTime = String.format("%02d:%02d", currentTimeRaw[0], currentTimeRaw[1])
+
+        // Binary search to find the upcoming routine.
+        // Usually we expect that the current time will not be found in the collected times.
+        // In such cases, we invert the return value and increment it by one and then return
+        // the resulting routine.
+        // If the current time is directly found in the collected times, we return the
+        // routine with that time instead.
+        val idx = startTimes.binarySearchBy(currentTime) { it.startTime }
+        return if (idx >= 0) {
+            startTimes[idx]
+        } else {
+            startTimes[-idx - 1]
+        }
     }
 }

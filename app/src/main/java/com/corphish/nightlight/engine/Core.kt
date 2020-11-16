@@ -165,7 +165,7 @@ object Core {
         val endTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
 
         applyNightModeAsync(
-                (!autoEnabled && prevState) || (autoEnabled && startTime != null && endTime != null && TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, endTime)),
+                (!autoEnabled && prevState) || (autoEnabled && startTime != null && endTime != null && TimeUtils.isInRange(startTime, endTime)),
                 context
         )
     }

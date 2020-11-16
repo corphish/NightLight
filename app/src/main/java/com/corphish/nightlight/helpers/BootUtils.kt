@@ -34,7 +34,7 @@ object BootUtils {
             return
         }
 
-        val state = TimeUtils.determineWhetherNLShouldBeOnOrNot(sStartTime, sEndTime)
+        val state = TimeUtils.isInRange(sStartTime, sEndTime)
         Core.applyNightModeAsync(state, context)
 
         // The automate signal receiver handles the automation, so just ping it.

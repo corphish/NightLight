@@ -73,7 +73,7 @@ object FadeUtils {
 
         // Check if current time is in schedule or not.
         // If not then we return max temp.
-        if (!TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, endTime)) {
+        if (!TimeUtils.isInRange(startTime, endTime)) {
             return intArrayOf(rFrom, gFrom, bFrom)
         }
 
@@ -156,7 +156,7 @@ object FadeUtils {
             pollMinutes: Int = 5
     ): Int? {
         // Check if current time is in schedule or not
-        if (!TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, endTime, currentTime)) {
+        if (!TimeUtils.isInRange(startTime, endTime, currentTime)) {
             return null
         }
 

@@ -77,7 +77,7 @@ class TwilightManager {
         PreferenceHelper.putString(context, Constants.PREF_START_TIME, sunsetTime)
         PreferenceHelper.putString(context, Constants.PREF_END_TIME, sunriseTime)
 
-        if (!TimeUtils.determineWhetherNLShouldBeOnOrNot(sunsetTime, sunriseTime, darkStartTime)) {
+        if (!TimeUtils.isInRange(sunsetTime, sunriseTime, darkStartTime)) {
             darkStartTime = sunsetTime
             PreferenceHelper.putString(context, Constants.PREF_DARK_HOURS_START, darkStartTime)
         }

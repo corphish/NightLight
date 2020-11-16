@@ -33,7 +33,7 @@ class AutomateSignalReceiver : BroadcastReceiver() {
                 ?: Constants.DEFAULT_START_TIME
         val endTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
                 ?: Constants.DEFAULT_END_TIME
-        val insideSchedule = TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, endTime)
+        val insideSchedule = TimeUtils.isInRange(startTime, endTime)
 
         // If not inside schedule, we need to set a start alarm at start time.
         // Also, if sunset/sunrise is enabled, we have to calculate and set accordingly.
@@ -58,7 +58,7 @@ class AutomateSignalReceiver : BroadcastReceiver() {
                 // Check if we are in fade schedule
                 val fadeEndTime = PreferenceHelper.getString(context, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_END_TIME)
                         ?: Constants.DEFAULT_END_TIME
-                val insideFadeSchedule = TimeUtils.determineWhetherNLShouldBeOnOrNot(startTime, fadeEndTime)
+                val insideFadeSchedule = TimeUtils.isInRange(startTime, fadeEndTime)
                 if (insideFadeSchedule) {
                     // Set relative alarms
                     val pollRate = PreferenceHelper.getString(context, Constants.PREF_FADE_POLL_RATE_MINS, "5")?.toInt() ?: 5

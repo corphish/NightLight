@@ -109,7 +109,7 @@ class DashboardFragment: Fragment() {
         if (autoStartTime == null || autoEndTime == null || !autoSwitch) {
             automationStatus.setText(R.string.off)
         } else {
-            val autoStatus = TimeUtils.determineWhetherNLShouldBeOnOrNot(autoStartTime, autoEndTime)
+            val autoStatus = TimeUtils.isInRange(autoStartTime, autoEndTime)
             val remainingHours = if (autoStatus) TimeUtils.getRemainingTimeInSchedule(autoEndTime) else TimeUtils.getRemainingTimeToSchedule(autoStartTime)
 
             if (autoStatus) {

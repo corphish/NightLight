@@ -207,7 +207,7 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
         // Unnecessary null checks but enables smart casting
         if (start == null || end == null) return
 
-        val b = TimeUtils.determineWhetherNLShouldBeOnOrNot(start, end, test)
+        val b = TimeUtils.isInRange(start, end, test)
 
         if (!b) {
             findPreference<Preference>(Constants.PREF_DARK_HOURS_START)?.summary = start
@@ -239,7 +239,7 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
         val prefStartTime = PreferenceHelper.getString(requireContext(), Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
         val prefEndTime = PreferenceHelper.getString(requireContext(), Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
 
-        val toEnable = TimeUtils.determineWhetherNLShouldBeOnOrNot(prefStartTime!!, prefEndTime!!)
+        val toEnable = TimeUtils.isInRange(prefStartTime!!, prefEndTime!!)
 
         Core.applyNightModeAsync(toEnable, requireContext(), true)
 

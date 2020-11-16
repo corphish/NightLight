@@ -78,7 +78,7 @@ object AutomationRoutineManager {
             }
 
             // Check if start time overlaps.
-            if (TimeUtils.determineWhetherNLShouldBeOnOrNot(
+            if (TimeUtils.isInRange(
                             startTime = x.startTime.resolved(context),
                             endTime = x.endTime.resolved(context),
                             targetTime = automationRoutine.startTime.resolved(context))
@@ -87,7 +87,7 @@ object AutomationRoutineManager {
             }
 
             // Check if end time overlaps.
-            if (TimeUtils.determineWhetherNLShouldBeOnOrNot(
+            if (TimeUtils.isInRange(
                             startTime = x.startTime.resolved(context),
                             endTime = x.endTime.resolved(context),
                             targetTime = automationRoutine.endTime.resolved(context))
@@ -151,7 +151,7 @@ object AutomationRoutineManager {
      */
     fun getCurrentRoutine(context: Context): AutomationRoutine {
         for (x in _automationRoutineList) {
-            if (TimeUtils.determineWhetherNLShouldBeOnOrNot(x.startTime.resolved(context), x.endTime.resolved(context))) {
+            if (TimeUtils.isInRange(x.startTime.resolved(context), x.endTime.resolved(context))) {
                 return x
             }
         }

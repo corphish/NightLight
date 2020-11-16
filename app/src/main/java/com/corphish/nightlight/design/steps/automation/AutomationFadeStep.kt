@@ -7,7 +7,8 @@ import com.corphish.nightlight.R
 import com.google.android.material.radiobutton.MaterialRadioButton
 import ernestoyaquello.com.verticalstepperform.Step
 
-class AutomationFadeStep(stepTitle: String?): Step<Int>(stepTitle) {
+class AutomationFadeStep(stepTitle: String?,
+                         private val fadeChangeListener: (Boolean) -> Unit): Step<Int>(stepTitle) {
     // Chosen data.
     var pickedData = 0
 
@@ -34,6 +35,9 @@ class AutomationFadeStep(stepTitle: String?): Step<Int>(stepTitle) {
         val view = LayoutInflater.from(context).inflate(R.layout.layout_step_fade_behavior, null)
 
         radioGroup = view.findViewById(R.id.fadeBehaviors)
+        radioGroup.setOnCheckedChangeListener { _, i ->
+            fadeChangeListener(i == R.id.fadeOff)
+        }
 
         return view
     }

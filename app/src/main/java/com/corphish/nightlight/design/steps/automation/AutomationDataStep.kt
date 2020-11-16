@@ -11,7 +11,9 @@ import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.models.PickedColorData
 import ernestoyaquello.com.verticalstepperform.Step
 
-class AutomationDataStep(private val activity: Activity, stepTitle: String?): Step<PickedColorData?>(stepTitle) {
+class AutomationDataStep(private val activity: Activity,
+                         stepTitle: String?,
+                         private val reqCode: Int): Step<PickedColorData?>(stepTitle) {
 
     // Bundle data
     private var data: PickedColorData? = null
@@ -41,7 +43,7 @@ class AutomationDataStep(private val activity: Activity, stepTitle: String?): St
                 val colorPickerIntent = Intent(context, ColorControlActivity::class.java)
                 colorPickerIntent.putExtra(Constants.COLOR_PICKER_MODE, true)
 
-                activity.startActivityForResult(colorPickerIntent, 43)
+                activity.startActivityForResult(colorPickerIntent, reqCode)
             }
         }
 

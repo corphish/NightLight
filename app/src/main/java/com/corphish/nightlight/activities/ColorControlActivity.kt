@@ -1,5 +1,6 @@
 package com.corphish.nightlight.activities
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.core.content.ContextCompat
@@ -112,7 +113,8 @@ class ColorControlActivity : BaseActivity(), ColorPickerCallback {
      * @param pickedData Picked color.
      */
     override fun onColorPicked(pickedData: PickedColorData) {
-        pickedData.updateIntent(intent)
-        setResult(RESULT_OK, intent)
+        val resIntent = Intent()
+        pickedData.updateIntent(resIntent)
+        setResult(RESULT_OK, resIntent)
     }
 }

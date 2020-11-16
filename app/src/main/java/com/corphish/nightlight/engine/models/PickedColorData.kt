@@ -32,6 +32,7 @@ data class PickedColorData(
      */
     fun updateIntent(intent: Intent?) {
         if (intent != null) {
+            intent.putExtra(Constants.PREF_SETTING_MODE, settingMode)
             if (settingMode == Constants.NL_SETTING_MODE_TEMP) {
                 intent.putExtra(Constants.PREF_COLOR_TEMP, settings[0])
             } else {

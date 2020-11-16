@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.corphish.nightlight.activities.RoutineCreateActivity">
+
+    <ernestoyaquello.com.verticalstepperform.VerticalStepperFormView
+        android:id="@+id/routineCreateForm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:form_circle_background_color="@color/colorAccent"
+        app:form_circle_text_color="?themeColorText"
+        app:form_next_button_background_color="@color/colorPrimary"
+        app:form_title_text_color="?android:attr/textColorPrimary"
+        app:form_next_button_pressed_background_color="@color/colorPrimaryDark"
+        app:form_next_button_text_color="?themeColorText" />
+</LinearLayout>

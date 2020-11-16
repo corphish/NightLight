@@ -137,4 +137,9 @@ object Constants {
      * Support color picking.
      */
     const val COLOR_PICKER_MODE = "color_picker"
+
+    /**
+     * Index for updating automation routine.
+     */
+    const val ROUTINE_UPDATE_INDEX = "routineUpdateIndex"
 }

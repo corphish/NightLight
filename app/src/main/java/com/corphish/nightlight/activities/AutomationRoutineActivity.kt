@@ -9,15 +9,20 @@ import androidx.recyclerview.widget.DiffUtil
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.databinding.ActivityAutomationRoutineBinding
+import com.corphish.nightlight.engine.AutomationRoutineManager
 import com.corphish.nightlight.engine.models.AutomationRoutine
 import com.corphish.nightlight.engine.models.AutomationRoutine.Companion.resolved
 import com.corphish.widgets.ktx.adapters.MutableListAdaptable
+import com.corphish.widgets.ktx.adapters.MutableListAdapter
 import com.corphish.widgets.ktx.viewholders.ClickableViewHolder
 
 class AutomationRoutineActivity : AppCompatActivity() {
 
     // View binding.
     private lateinit var binding: ActivityAutomationRoutineBinding
+
+    // Mutable adapter.
+    private lateinit var adapter: MutableListAdapter<AutomationRoutine, ClickableViewHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +32,11 @@ class AutomationRoutineActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+        // Load routines.
+        AutomationRoutineManager.loadRoutines(this)
+
         // Setup the recyclerview
-        binding.included.recyclerView.adapter = object : MutableListAdaptable<AutomationRoutine, ClickableViewHolder>() {
+        adapter = object : MutableListAdaptable<AutomationRoutine, ClickableViewHolder>() {
             override fun bind(viewHolder: ClickableViewHolder, item: AutomationRoutine, position: Int) {
                 viewHolder.getViewById<TextView>(R.id.routineTitle)?.text = item.name
 
@@ -74,6 +82,20 @@ class AutomationRoutineActivity : AppCompatActivity() {
 
         }.buildAdapter()
 
-        binding.fab.setOnClickListener { view -> }
+        binding.included.recyclerView.adapter = adapter
+
+        binding.fab.setOnClickListener { view ->
+            startActivityForResult(Intent(this@AutomationRoutineActivity, RoutineCreateActivity::class.java), 73)
+        }
+
+        adapter.submitList(AutomationRoutineManager.automationRoutineList)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 73 && resultCode == RESULT_OK && data != null) {
+            adapter.submitList(AutomationRoutineManager.automationRoutineList)
+        }
     }
 }

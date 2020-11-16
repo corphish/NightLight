@@ -76,7 +76,9 @@ data class FadeBehavior(
             }
 
             // Trim and extract values
-            val parts = string.substring("FadeBehavior(".length, string.length - 1).split(";")
+            val parts = string.substring("FadeBehavior(".length, string.length - 1)
+                    .split(";")
+                    .map { it.trim() }
 
             // Parts must be of length 3
             if (parts.size != 4) {
@@ -84,16 +86,16 @@ data class FadeBehavior(
             }
 
             val type = parts[0].toInt()
-            val settingType = parts[1].trim().toInt()
+            val settingType = parts[1].toInt()
 
-            val fadeFrom = parts[1].trim()
-                    .substring(1, parts[1].lastIndexOf("]"))
+            val fadeFrom = parts[2]
+                    .substring(1, parts[2].lastIndexOf("]"))
                     .split(",")
                     .map { it.trim().toInt() }
                     .toIntArray()
 
-            val fadeTo = parts[2].trim()
-                    .substring(1, parts[2].lastIndexOf("]"))
+            val fadeTo = parts[3]
+                    .substring(1, parts[3].lastIndexOf("]"))
                     .split(",")
                     .map { it.trim().toInt() }
                     .toIntArray()

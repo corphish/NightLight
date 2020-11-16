@@ -21,6 +21,7 @@
         <activity
             android:name=".activities.RoutineCreateActivity"
             android:label="@string/title_activity_routine_create"
+            android:parentActivityName=".activities.AutomationRoutineActivity"
             android:theme="@style/AppThemeCircular.NoActionBar.NoActionBar"/>
         <activity
             android:name=".activities.AutomationRoutineActivity"

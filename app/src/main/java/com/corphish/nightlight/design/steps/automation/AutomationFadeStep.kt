@@ -37,6 +37,7 @@ class AutomationFadeStep(stepTitle: String?,
         radioGroup = view.findViewById(R.id.fadeBehaviors)
         radioGroup.setOnCheckedChangeListener { _, i ->
             fadeChangeListener(i == R.id.fadeOff)
+            pickedData = _ids.indexOf(i)
         }
 
         return view
@@ -44,7 +45,7 @@ class AutomationFadeStep(stepTitle: String?,
 
     override fun isStepDataValid(stepData: Int) = IsDataValid(true, "")
 
-    override fun getStepData() = _ids.indexOf(radioGroup.checkedRadioButtonId)
+    override fun getStepData() = pickedData
 
     override fun getStepDataAsHumanReadableString(): String {
         if (!isStepAvailable) {
@@ -65,11 +66,13 @@ class AutomationFadeStep(stepTitle: String?,
     override fun restoreStepData(stepData: Int) {
         // To restore the step after a configuration change, we restore the text of its EditText view.
         this.pickedData = stepData
+        updateUI()
     }
 
     private fun updateUI() {
         if (this::radioGroup.isInitialized) {
             radioGroup.isEnabled = isStepAvailable
+            radioGroup.check(_ids[pickedData])
         }
     }
 }

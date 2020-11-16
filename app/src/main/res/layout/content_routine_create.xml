@@ -14,7 +14,7 @@
         app:form_circle_background_color="@color/colorAccent"
         app:form_circle_text_color="?themeColorText"
         app:form_next_button_background_color="@color/colorPrimary"
-        app:form_title_text_color="?android:attr/textColorPrimary"
         app:form_next_button_pressed_background_color="@color/colorPrimaryDark"
-        app:form_next_button_text_color="?themeColorText" />
+        app:form_next_button_text_color="?themeColorText"
+        app:form_title_text_color="?android:attr/textColorPrimary" />
 </LinearLayout>

@@ -103,6 +103,7 @@ class AutomationTimeStep(stepTitle: String?, val index: Int = -1): Step<String?>
     override fun restoreStepData(stepData: String?) {
         // To restore the step after a configuration change, we restore the text of its EditText view.
         this.pickedData = stepData
+        updateUI()
     }
 
     private fun updateUI() {

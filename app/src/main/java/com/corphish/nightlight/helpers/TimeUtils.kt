@@ -70,24 +70,35 @@ object TimeUtils {
     }
 
     /**
-     * Determines whether or not Night Light should be on based on given times.
-     * Alarm times are unaffected tho, coz android will fire alarms at start and end time every day if enabled
-     * We need not worry about that.
-     * @param startTime Start time for automatic scheduling selected by user
-     * @param endTime End time selected by user
+     * Determines whether the target time is within the given start and end times or not.
+     *
+     * @param startTime Start time.
+     * @param endTime End time.
      * @param targetTime Target time to test. Null if current time is to be tested
-     * @return boolean indicating whether or not night light should be on
+     * @param startExclusive [Boolean] to indicate whether the start time needs to be considered
+     *                       while comparison or not.
+     * @param endExclusive [Boolean] to indicate whether the end time needs to be considered
+     *                       while comparison or not.
+     * @return [Boolean] indicating whether or target time is in range or not.
      */
-    fun isInRange(startTime: String, endTime: String, targetTime: String? = null): Boolean {
+    fun isInRange(startTime: String,
+                  endTime: String,
+                  targetTime: String? = null,
+                  startExclusive: Boolean = false,
+                  endExclusive: Boolean = true): Boolean {
         val iCurrentTime = if (targetTime == null) currentTimeAsMinutes else getTimeInMinutes(targetTime)
         val iStartTime = getTimeInMinutes(startTime)
         val iEndTime = getTimeInMinutes(endTime)
+
+        // Offset.
+        val startOffset = if (startExclusive) 1 else 0
+        val endOffset = if (endExclusive) 1 else 0
 
         // Borked case: if start and end times are same, return false
         if (iStartTime == iEndTime) return false
 
         // Simple case
-        if (iStartTime < iEndTime) return iCurrentTime in IntRange(iStartTime, iEndTime - 1)
+        if (iStartTime < iEndTime) return iCurrentTime in IntRange(iStartTime + startOffset, iEndTime - endOffset)
 
         // Complex case: endTime < startTime
 

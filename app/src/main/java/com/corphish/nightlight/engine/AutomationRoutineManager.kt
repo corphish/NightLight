@@ -81,7 +81,9 @@ object AutomationRoutineManager {
             if (TimeUtils.isInRange(
                             startTime = x.startTime.resolved(context),
                             endTime = x.endTime.resolved(context),
-                            targetTime = automationRoutine.startTime.resolved(context))
+                            targetTime = automationRoutine.startTime.resolved(context),
+                            startExclusive = true,
+                            endExclusive = true)
             ) {
                 return true
             }
@@ -90,8 +92,9 @@ object AutomationRoutineManager {
             if (TimeUtils.isInRange(
                             startTime = x.startTime.resolved(context),
                             endTime = x.endTime.resolved(context),
-                            targetTime = automationRoutine.endTime.resolved(context))
-            ) {
+                            targetTime = automationRoutine.endTime.resolved(context),
+                            startExclusive = true,
+                            endExclusive = true)) {
                 return true
             }
         }

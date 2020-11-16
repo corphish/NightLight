@@ -57,6 +57,11 @@ data class FadeBehavior(
         const val FADE_OUT = 2
 
         /**
+         * Unset RGB
+         */
+        val RGB_UNSET = intArrayOf(-1)
+
+        /**
          * Parses a FadeBehavior from persisted string.
          */
         fun fromString(string: String?): FadeBehavior {

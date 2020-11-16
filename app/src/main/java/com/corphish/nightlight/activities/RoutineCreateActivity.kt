@@ -78,8 +78,8 @@ class RoutineCreateActivity : AppCompatActivity(), StepperFormListener {
         val routine = AutomationRoutine(
                 name = nameStep.stepData,
                 switchState = switchStep.stepData,
-                startTime = startTimeStep.stepData ?: Constants.DEFAULT_START_TIME,
-                endTime = endTimeStep.stepData ?: Constants.DEFAULT_END_TIME,
+                startTime = startTimeStep.stepData ?: AutomationRoutine.TIME_UNSET,
+                endTime = endTimeStep.stepData ?: AutomationRoutine.TIME_UNSET,
                 fadeBehavior = FadeBehavior(
                         type = fadeStep.stepData,
                         fadeFrom = fromColorStep.stepData?.settings ?: intArrayOf(256, 256, 256),

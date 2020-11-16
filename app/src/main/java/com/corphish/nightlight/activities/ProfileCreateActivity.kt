@@ -3,6 +3,7 @@ package com.corphish.nightlight.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.data.Constants
@@ -158,7 +159,7 @@ class ProfileCreateActivity : BaseActivity(), StepperFormListener {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 43 && resultCode == RESULT_OK && data != null) {
-            val pickedData = PickedColorData.fromIntent(intent)
+            val pickedData = PickedColorData.fromIntent(data)
             profileDataStep.updateData(pickedData)
         }
     }

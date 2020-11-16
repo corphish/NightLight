@@ -82,8 +82,8 @@ class RoutineCreateActivity : AppCompatActivity(), StepperFormListener {
                 endTime = endTimeStep.stepData ?: AutomationRoutine.TIME_UNSET,
                 fadeBehavior = FadeBehavior(
                         type = fadeStep.stepData,
-                        fadeFrom = fromColorStep.stepData?.settings ?: intArrayOf(256, 256, 256),
-                        fadeTo = toColorStep.stepData?.settings ?: intArrayOf(256, 256, 256),
+                        fadeFrom = fromColorStep.stepData?.settings ?: FadeBehavior.RGB_UNSET,
+                        fadeTo = toColorStep.stepData?.settings ?: FadeBehavior.RGB_UNSET,
                 )
         )
 

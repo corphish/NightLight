@@ -1,9 +1,18 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreferenceCompat
         app:key="auto_switch"
         app:summary="@string/auto_enable_desc"
         app:title="@string/auto_enable" />
+
+    <Preference
+        app:allowDividerBelow="false"
+        app:title="@string/setup_automation">
+        <intent
+            android:targetClass="com.corphish.nightlight.activities.AutomationRoutineActivity"
+            android:targetPackage="com.corphish.nightlight.generic" />
+    </Preference>
 
     <PreferenceCategory app:title="@string/sunset_sunrise">
 

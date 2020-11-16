@@ -71,6 +71,10 @@ class RoutineCreateActivity : AppCompatActivity(), StepperFormListener {
         fromColorStep = AutomationDataStep(this, getString(R.string.start_color), 81)
         toColorStep = AutomationDataStep(this, getString(R.string.end_color), 82)
         nameStep = AutomationNameStep(getString(R.string.routine_name))
+
+        binding.included.routineCreateForm
+                .setup(this, switchStep, startTimeStep, endTimeStep, fadeStep, fromColorStep, toColorStep, nameStep)
+                .init()
     }
 
     override fun onCompletedForm() {
@@ -82,6 +86,7 @@ class RoutineCreateActivity : AppCompatActivity(), StepperFormListener {
                 endTime = endTimeStep.stepData ?: AutomationRoutine.TIME_UNSET,
                 fadeBehavior = FadeBehavior(
                         type = fadeStep.stepData,
+                        settingType = fromColorStep.stepData?.settingMode ?: Constants.NL_SETTING_MODE_TEMP,
                         fadeFrom = fromColorStep.stepData?.settings ?: FadeBehavior.RGB_UNSET,
                         fadeTo = toColorStep.stepData?.settings ?: FadeBehavior.RGB_UNSET,
                 )
@@ -108,7 +113,7 @@ class RoutineCreateActivity : AppCompatActivity(), StepperFormListener {
         super.onActivityResult(requestCode, resultCode, data)
 
         if ((requestCode == 81 || requestCode == 82) && resultCode == RESULT_OK && data != null) {
-            val pickedData = PickedColorData.fromIntent(intent)
+            val pickedData = PickedColorData.fromIntent(data)
             if (requestCode == 81) {
                 fromColorStep.updateData(pickedData)
             } else if (requestCode == 82) {

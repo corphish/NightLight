@@ -54,9 +54,17 @@ class AutomationRoutineActivity : AppCompatActivity() {
                             getString(R.string.not_applicable_title)
                         } else {
                             if (item.rgbTo[0] == -1) {
-                                "RGB(${item.rgbFrom[0]}, ${item.rgbFrom[1]}, ${item.rgbFrom[2]}"
+                                if (item.rgbFrom.size == 1) {
+                                    "${item.rgbFrom[0]}K"
+                                } else {
+                                    "RGB(${item.rgbFrom[0]}, ${item.rgbFrom[1]}, ${item.rgbFrom[2]}"
+                                }
                             } else {
-                                "RGB(${item.rgbFrom[0]}, ${item.rgbFrom[1]}, ${item.rgbFrom[2]} → RGB(${item.rgbTo[0]}, ${item.rgbTo[1]}, ${item.rgbTo[2]}"
+                                if (item.rgbFrom.size == 1) {
+                                    "${item.rgbFrom[0]}K → ${item.rgbTo[0]}K"
+                                } else {
+                                    "RGB(${item.rgbFrom[0]}, ${item.rgbFrom[1]}, ${item.rgbFrom[2]}) → RGB(${item.rgbTo[0]}, ${item.rgbTo[1]}, ${item.rgbTo[2]})"
+                                }
                             }
                         }
             }
@@ -94,8 +102,8 @@ class AutomationRoutineActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 73 && resultCode == RESULT_OK && data != null) {
-            adapter.submitList(AutomationRoutineManager.automationRoutineList)
+        if (requestCode == 73 && resultCode == RESULT_OK) {
+            adapter.updateList(AutomationRoutineManager.automationRoutineList)
         }
     }
 }

@@ -21,7 +21,7 @@
         <activity
             android:name=".activities.RoutineCreateActivity"
             android:label="@string/title_activity_routine_create"
-            android:theme="@style/AppThemeCircular.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppThemeCircular.NoActionBar.NoActionBar"/>
         <activity
             android:name=".activities.AutomationRoutineActivity"
             android:label="@string/title_activity_automation_routine"
@@ -35,7 +35,7 @@
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activities.MainActivity" />
         <activity android:name=".activities.MasterSwitchActivity" />
-        <activity android:name=".activities.ProfileCreateActivity" />
+        <activity android:name=".activities.ProfileCreateActivity"/>
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"

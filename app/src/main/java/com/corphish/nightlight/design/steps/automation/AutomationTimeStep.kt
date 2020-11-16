@@ -20,13 +20,6 @@ class AutomationTimeStep(stepTitle: String?, val index: Int = -1): Step<String?>
     private lateinit var dataView: TextView
     private lateinit var dataMsg: TextView
 
-    // Step availability.
-    var isStepAvailable = false
-        set(value) {
-            field = value
-            updateUI()
-        }
-
     override fun createStepContentLayout(): View {
         // Here we generate the view that will be used by the library as the content of the step.
         // In this case we do it programmatically, but we could also do it by inflating an XML layout.
@@ -36,37 +29,46 @@ class AutomationTimeStep(stepTitle: String?, val index: Int = -1): Step<String?>
         dataMsg = view.findViewById(R.id.dataMsg)
 
         view.setOnClickListener {
-            if (isStepAvailable) {
-                SingleChoiceAlertDialog(context).apply {
-                    titleResId = R.string.pick_time
-                    animationResourceLayout = R.raw.time
-                    choiceList = listOf(
-                            SingleChoiceAlertDialog.ChoiceItem(
-                                    titleResId = R.string.sunset,
-                                    iconResId = R.drawable.ic_alarm,
-                                    action = { pickedData = AutomationRoutine.TIME_SUNSET }
-                            ),
-                            SingleChoiceAlertDialog.ChoiceItem(
-                                    titleResId = R.string.sunrise,
-                                    iconResId = R.drawable.ic_alarm,
-                                    action = { pickedData = AutomationRoutine.TIME_SUNRISE }
-                            ),
-                            SingleChoiceAlertDialog.ChoiceItem(
-                                    titleResId = R.string.custom_time,
-                                    iconResId = R.drawable.ic_alarm,
-                                    action = {
-                                        val time = TimeUtils.currentTimeAsHourAndMinutes
-                                        val timePickerDialog = TimePickerDialog(context, { _, i, i1 ->
-                                            val selectedHour = if (i < 10) "0$i" else "" + i
-                                            val selectedMinute = if (i1 < 10) "0$i1" else "" + i1
-                                            pickedData = "$selectedHour:$selectedMinute"
-                                        }, time[0], time[1], false)
-                                        timePickerDialog.show()
-                                    }
-                            ),
-                    )
-                }.show()
-            }
+            SingleChoiceAlertDialog(context).apply {
+                titleResId = R.string.pick_time
+                animationResourceLayout = R.raw.time
+                dismissOnChoiceSelection = true
+                choiceList = listOf(
+                        SingleChoiceAlertDialog.ChoiceItem(
+                                titleResId = R.string.sunset,
+                                iconResId = R.drawable.ic_alarm,
+                                action = {
+                                    pickedData = AutomationRoutine.TIME_SUNSET
+                                    updateUI()
+                                    markAsCompletedOrUncompleted(true)
+                                }
+                        ),
+                        SingleChoiceAlertDialog.ChoiceItem(
+                                titleResId = R.string.sunrise,
+                                iconResId = R.drawable.ic_alarm,
+                                action = {
+                                    pickedData = AutomationRoutine.TIME_SUNRISE
+                                    updateUI()
+                                    markAsCompletedOrUncompleted(true)
+                                }
+                        ),
+                        SingleChoiceAlertDialog.ChoiceItem(
+                                titleResId = R.string.custom_time,
+                                iconResId = R.drawable.ic_alarm,
+                                action = {
+                                    val time = TimeUtils.currentTimeAsHourAndMinutes
+                                    val timePickerDialog = TimePickerDialog(context, { _, i, i1 ->
+                                        val selectedHour = if (i < 10) "0$i" else "" + i
+                                        val selectedMinute = if (i1 < 10) "0$i1" else "" + i1
+                                        pickedData = "$selectedHour:$selectedMinute"
+                                        updateUI()
+                                        markAsCompletedOrUncompleted(true)
+                                    }, time[0], time[1], false)
+                                    timePickerDialog.show()
+                                }
+                        ),
+                )
+            }.show()
         }
 
         updateUI()
@@ -76,25 +78,17 @@ class AutomationTimeStep(stepTitle: String?, val index: Int = -1): Step<String?>
 
     override fun isStepDataValid(stepData: String?): IsDataValid {
         // We allow no selections only if this step is not available
-        return if (!isStepAvailable) {
-            IsDataValid(true, "")
+        return if (pickedData == null) {
+            IsDataValid(false, context.getString(R.string.time_error_empty))
         } else {
-            if (pickedData == null) {
-                IsDataValid(false, context.getString(R.string.time_error_empty))
-            } else {
-                val isValid = !AutomationRoutineManager.doesOverlap(context, AutomationRoutine(startTime = pickedData!!), index)
-                IsDataValid(isValid, if (isValid) "" else context.getString(R.string.time_error_overlap))
-            }
+            val isValid = !AutomationRoutineManager.doesOverlap(context, AutomationRoutine(startTime = pickedData!!), index)
+            IsDataValid(isValid, if (isValid) "" else context.getString(R.string.time_error_overlap))
         }
     }
 
     override fun getStepData() = pickedData
 
     override fun getStepDataAsHumanReadableString(): String {
-        if (!isStepAvailable) {
-            return context.getString(R.string.not_applicable_title)
-        }
-
         return pickedData?.resolved(context) ?: ""
     }
 
@@ -113,13 +107,8 @@ class AutomationTimeStep(stepTitle: String?, val index: Int = -1): Step<String?>
 
     private fun updateUI() {
         if (this::dataView.isInitialized && this::dataMsg.isInitialized) {
-            if (!isStepAvailable) {
-                dataView.setText(R.string.not_applicable_title)
-                dataMsg.setText(R.string.not_applicable_desc)
-            } else {
-                dataMsg.setText(R.string.time_select)
-                dataView.text = stepDataAsHumanReadableString
-            }
+            dataMsg.setText(R.string.time_select)
+            dataView.text = stepDataAsHumanReadableString
         }
     }
 }

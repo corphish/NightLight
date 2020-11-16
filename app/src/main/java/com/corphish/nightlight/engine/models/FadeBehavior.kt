@@ -16,6 +16,11 @@ data class FadeBehavior(
         val type: Int = FADE_OFF,
 
         /**
+         * Night light setting type.
+         */
+        val settingType: Int = Constants.NL_SETTING_MODE_TEMP,
+
+        /**
          * RGB to fade from.
          */
         val fadeFrom: IntArray = intArrayOf(256, 256, 256),
@@ -23,7 +28,7 @@ data class FadeBehavior(
         /**
          * RGB to fade to.
          */
-        val fadeTo: IntArray = intArrayOf(Constants.DEFAULT_RED_COLOR, Constants.DEFAULT_GREEN_COLOR, Constants.DEFAULT_BLUE_COLOR)
+        val fadeTo: IntArray = intArrayOf(256, 256, 256)
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -46,7 +51,7 @@ data class FadeBehavior(
     }
 
     override fun toString() =
-            "FadeBehavior($type; [${fadeFrom[0]}, ${fadeFrom[1]}, ${fadeFrom[2]}]; [${fadeTo[0]}, ${fadeTo[1]}, ${fadeTo[2]}])"
+            "FadeBehavior($type; $settingType; ${fadeFrom.contentToString()}; ${fadeTo.contentToString()})"
 
     companion object {
         /**
@@ -59,7 +64,7 @@ data class FadeBehavior(
         /**
          * Unset RGB
          */
-        val RGB_UNSET = intArrayOf(-1)
+        val RGB_UNSET = intArrayOf(-1, -1, -1)
 
         /**
          * Parses a FadeBehavior from persisted string.
@@ -74,11 +79,12 @@ data class FadeBehavior(
             val parts = string.substring("FadeBehavior(".length, string.length - 1).split(";")
 
             // Parts must be of length 3
-            if (parts.size != 3) {
+            if (parts.size != 4) {
                 return FadeBehavior()
             }
 
             val type = parts[0].toInt()
+            val settingType = parts[1].trim().toInt()
 
             val fadeFrom = parts[1].trim()
                     .substring(1, parts[1].lastIndexOf("]"))
@@ -92,7 +98,7 @@ data class FadeBehavior(
                     .map { it.trim().toInt() }
                     .toIntArray()
 
-            return FadeBehavior(type, fadeFrom, fadeTo)
+            return FadeBehavior(type, settingType, fadeFrom, fadeTo)
         }
     }
 }

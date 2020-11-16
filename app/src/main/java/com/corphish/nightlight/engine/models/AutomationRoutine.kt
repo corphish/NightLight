@@ -89,6 +89,7 @@ data class AutomationRoutine(
          */
         const val TIME_SUNSET = "__sunset__"
         const val TIME_SUNRISE = "__sunrise__"
+        const val TIME_UNSET = "__unset__"
 
         /**
          * Extension function to resolve sunset/sunrise timings.

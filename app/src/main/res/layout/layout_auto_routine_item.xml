@@ -16,9 +16,8 @@
         android:id="@+id/routineTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(No title)"
         android:textAppearance="?android:attr/textAppearance"
-        android:textSize="@dimen/text_caption"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -26,7 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawablePadding="8dp"
-        android:text="00:00 - 06:00"
         android:textSize="@dimen/text_desc"
         app:drawableStartCompat="@drawable/ic_alarm_small" />
 
@@ -35,7 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawablePadding="8dp"
-        android:text="3500K"
         android:textSize="@dimen/text_desc"
         app:drawableStartCompat="@drawable/ic_color_small" />
 </LinearLayout>

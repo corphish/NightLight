@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.databinding.ActivityAutomationRoutineBinding
@@ -91,6 +92,7 @@ class AutomationRoutineActivity : AppCompatActivity() {
         }.buildAdapter()
 
         binding.included.recyclerView.adapter = adapter
+        binding.included.recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         binding.fab.setOnClickListener { view ->
             startActivityForResult(Intent(this@AutomationRoutineActivity, RoutineCreateActivity::class.java), 73)

@@ -74,7 +74,7 @@ class AutomateSignalReceiver : BroadcastReceiver() {
         } else {
             // We are not in routine, we apply default behavior and set alarm for
             // upcoming routine.
-            // TODO: Apply default behavior
+            AutomationRoutineManager.applyDefaultBehavior(context)
 
             // Schedule the alarm for next routine
             val nextRoutine = AutomationRoutineManager.getUpcomingRoutine(context)

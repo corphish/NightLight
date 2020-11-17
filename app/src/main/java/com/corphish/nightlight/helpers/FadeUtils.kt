@@ -2,6 +2,9 @@ package com.corphish.nightlight.helpers
 
 import android.content.Context
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.engine.models.AutomationRoutine
+import com.corphish.nightlight.engine.models.AutomationRoutine.Companion.resolved
+import com.corphish.nightlight.engine.models.FadeBehavior
 import com.corphish.nightlight.extensions.fromColorTemperatureToRGBIntArray
 import kotlin.math.roundToInt
 
@@ -26,6 +29,7 @@ object FadeUtils {
      * @return Scaled colored temperature. Null is returned when this
      *         setting should not be applied.
      */
+    @Deprecated("Use the new FadeBehavior API to implement fading.")
     fun getColorRGBForCurrentTime(context: Context): IntArray? {
         // Check if fading can take place or not
         if (!isFadingEnabled(context)) {
@@ -77,7 +81,8 @@ object FadeUtils {
             return intArrayOf(rFrom, gFrom, bFrom)
         }
 
-        val pollMinutes = PreferenceHelper.getString(context, Constants.PREF_FADE_POLL_RATE_MINS, "5")?.toInt() ?: 5
+        val pollMinutes = PreferenceHelper.getString(context, Constants.PREF_FADE_POLL_RATE_MINS, "5")?.toInt()
+                ?: 5
 
         // Poll minutes can now be 0 by value, indicating infinite selection.
         // In such cases we return the min temp, as outside the fade schedule, max will be applied.
@@ -87,12 +92,12 @@ object FadeUtils {
 
         val difference = TimeUtils.getTimeDifference(startTime, endTime)
         val minuteDifference = difference[0] * 60 + difference[1]
-        val step = (minuteDifference.toFloat()/pollMinutes).roundToInt()
-        val timeStep = (TimeUtils.currentTimeAsMinutes - TimeUtils.getTimeInMinutes(startTime))/pollMinutes
+        val step = (minuteDifference.toFloat() / pollMinutes).roundToInt()
+        val timeStep = (TimeUtils.currentTimeAsMinutes - TimeUtils.getTimeInMinutes(startTime)) / pollMinutes
 
-        val rStep = (rTo - rFrom)/step
-        val gStep = (gTo - gFrom)/step
-        val bStep = (bTo - bFrom)/step
+        val rStep = (rTo - rFrom) / step
+        val gStep = (gTo - gFrom) / step
+        val bStep = (bTo - bFrom) / step
 
         return intArrayOf(
                 rFrom - (rStep * timeStep),
@@ -120,7 +125,8 @@ object FadeUtils {
         }
 
         // Check if fade setting is enabled
-        val fadeSettingEnabled = fadeSettingOverride ?: PreferenceHelper.getBoolean(context, Constants.PREF_FADE_ENABLED, false)
+        val fadeSettingEnabled = fadeSettingOverride
+                ?: PreferenceHelper.getBoolean(context, Constants.PREF_FADE_ENABLED, false)
         if (!fadeSettingEnabled) {
             return false
         }
@@ -134,6 +140,105 @@ object FadeUtils {
         }
 
         return true
+    }
+
+    /**
+     * Gets faded RGB for an automation routine.
+     */
+    fun getFadedRGB(context: Context, automationRoutine: AutomationRoutine): IntArray {
+        val fadeBehavior = automationRoutine.fadeBehavior
+
+        // We only fade
+        if (fadeBehavior.type == FadeBehavior.FADE_OFF) {
+            return fadeBehavior.fadeFrom
+        }
+
+        val settingsFrom = if (fadeBehavior.settingType == Constants.NL_SETTING_MODE_TEMP) {
+            fadeBehavior.fadeFrom[0].fromColorTemperatureToRGBIntArray()
+        } else {
+            fadeBehavior.fadeFrom
+        }
+
+        var rFrom = settingsFrom[0]
+        var gFrom = settingsFrom[1]
+        var bFrom = settingsFrom[2]
+
+        val settingsTo = if (fadeBehavior.settingType == Constants.NL_SETTING_MODE_TEMP) {
+            fadeBehavior.fadeTo[0].fromColorTemperatureToRGBIntArray()
+        } else {
+            fadeBehavior.fadeTo
+        }
+
+        var rTo = settingsTo[0]
+        var gTo = settingsTo[1]
+        var bTo = settingsTo[2]
+
+        // We are also supporting fade in as well as fade out.
+        // For fade in, we scale down from a higher RGB value to lower one.
+        // We do the opposite for fade out.
+        // So it is important to adjust the from and to values based on the operation
+        // accordingly.
+        if (fadeBehavior.type == FadeBehavior.FADE_IN) {
+            // From must be greater than to
+            val diff = (rFrom - rTo) + (gFrom - gTo) + (bFrom - bTo)
+            if (diff < 0) {
+                rFrom = settingsTo[0]
+                gFrom = settingsTo[1]
+                bFrom = settingsTo[2]
+
+                rTo = settingsFrom[0]
+                gTo = settingsFrom[1]
+                bTo = settingsFrom[2]
+            }
+        } else {
+            // To must be greater than from
+            val diff = (rTo - rFrom) + (gTo - gFrom) + (bTo - bFrom)
+            if (diff < 0) {
+                rFrom = settingsTo[0]
+                gFrom = settingsTo[1]
+                bFrom = settingsTo[2]
+
+                rTo = settingsFrom[0]
+                gTo = settingsFrom[1]
+                bTo = settingsFrom[2]
+            }
+        }
+
+        // Get start and end times
+        val startTime = automationRoutine.startTime.resolved(context)
+        val endTime = automationRoutine.endTime.resolved(context)
+
+        // Check if current time is in schedule or not.
+        // If not then we return max temp.
+        if (!TimeUtils.isInRange(startTime, endTime)) {
+            return intArrayOf(rFrom, gFrom, bFrom)
+        }
+
+        val pollMinutes = PreferenceHelper.getString(context, Constants.PREF_FADE_POLL_RATE_MINS, "5")?.toInt()
+                ?: 5
+
+        // Poll minutes can now be 0 by value, indicating infinite selection.
+        // In such cases we return the min temp, as outside the fade schedule, max will be applied.
+        if (pollMinutes == 0) {
+            return intArrayOf(rTo, gTo, bTo)
+        }
+
+        val difference = TimeUtils.getTimeDifference(startTime, endTime)
+        val minuteDifference = difference[0] * 60 + difference[1]
+        val step = (minuteDifference.toFloat() / pollMinutes).roundToInt()
+        val timeStep = (TimeUtils.currentTimeAsMinutes - TimeUtils.getTimeInMinutes(startTime)) / pollMinutes
+
+        val rStep = (rFrom - rTo).toDouble() / step
+        val gStep = (gFrom - gTo).toDouble() / step
+        val bStep = (bFrom - bTo).toDouble() / step
+
+        val multiplier = if (fadeBehavior.type == FadeBehavior.FADE_IN) 1 else -1
+
+        return intArrayOf(
+                (rFrom - (multiplier) * (multiplier * rStep * timeStep).coerceAtLeast(0.0)).roundToInt(),
+                (gFrom - (multiplier) * (multiplier * gStep * timeStep).coerceAtLeast(0.0)).roundToInt(),
+                (bFrom - (multiplier) * (multiplier * bStep * timeStep).coerceAtLeast(0.0)).roundToInt(),
+        )
     }
 
     /**
@@ -162,9 +267,9 @@ object FadeUtils {
 
         val difference = TimeUtils.getTimeDifference(startTime, endTime)
         val minuteDifference = difference[0] * 60 + difference[1]
-        val step = (minuteDifference.toFloat()/pollMinutes).toInt()
-        val tempStep = (minTemp - maxTemp)/step
-        val timeStep = (TimeUtils.getTimeInMinutes(currentTime) - TimeUtils.getTimeInMinutes(startTime))/pollMinutes
+        val step = (minuteDifference.toFloat() / pollMinutes).toInt()
+        val tempStep = (minTemp - maxTemp) / step
+        val timeStep = (TimeUtils.getTimeInMinutes(currentTime) - TimeUtils.getTimeInMinutes(startTime)) / pollMinutes
 
         return minTemp - (tempStep * timeStep)
     }

@@ -103,7 +103,7 @@ class RoutineCreateActivity : AppCompatActivity(), StepperFormListener {
                 if (routine.endTime != AutomationRoutine.TIME_UNSET) {
                     endTimeStep.restoreStepData(routine.endTime)
                 }
-                fadeStep.restoreStepData(routine.fadeBehavior.settingType)
+                fadeStep.restoreStepData(routine.fadeBehavior.type)
                 if (!routine.rgbFrom.contentEquals(FadeBehavior.RGB_UNSET)) {
                     fromColorStep.restoreStepData(PickedColorData(
                             routine.fadeBehavior.settingType,

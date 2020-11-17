@@ -58,18 +58,21 @@ class AutomationRoutineActivity : AppCompatActivity() {
                         if (item.rgbFrom[0] == -1 && item.rgbTo[0] == -1) {
                             getString(R.string.not_applicable_title)
                         } else {
-                            if (item.rgbTo[0] == -1) {
-                                if (item.rgbFrom.size == 1) {
-                                    "${item.rgbFrom[0]}K"
-                                } else {
-                                    "RGB(${item.rgbFrom[0]}, ${item.rgbFrom[1]}, ${item.rgbFrom[2]}"
-                                }
+                            val fromString = if (item.fadeBehavior.settingType == Constants.NL_SETTING_MODE_TEMP) {
+                                "${item.rgbFrom[0]}K"
                             } else {
-                                if (item.rgbFrom.size == 1) {
-                                    "${item.rgbFrom[0]}K → ${item.rgbTo[0]}K"
+                                "RGB(${item.rgbFrom[0]}, ${item.rgbFrom[1]}, ${item.rgbFrom[2]})"
+                            }
+                            if (item.rgbTo[0] == -1) {
+                                fromString
+                            } else {
+                                val toString = if (item.fadeBehavior.settingType == Constants.NL_SETTING_MODE_TEMP) {
+                                    "${item.rgbTo[0]}K"
                                 } else {
-                                    "RGB(${item.rgbFrom[0]}, ${item.rgbFrom[1]}, ${item.rgbFrom[2]}) → RGB(${item.rgbTo[0]}, ${item.rgbTo[1]}, ${item.rgbTo[2]})"
+                                    "RGB(${item.rgbTo[0]}, ${item.rgbTo[1]}, ${item.rgbTo[2]})"
                                 }
+
+                                "$fromString → $toString"
                             }
                         }
             }

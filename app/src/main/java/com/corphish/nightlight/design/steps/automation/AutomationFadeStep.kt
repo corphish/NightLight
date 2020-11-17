@@ -40,6 +40,8 @@ class AutomationFadeStep(stepTitle: String?,
             pickedData = _ids.indexOf(i)
         }
 
+        updateUI()
+
         return view
     }
 

@@ -1,15 +1,19 @@
 package com.corphish.nightlight.design.steps.automation
 
 import android.app.TimePickerDialog
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.corphish.nightlight.R
+import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.engine.AutomationRoutineManager
 import com.corphish.nightlight.engine.models.AutomationRoutine
 import com.corphish.nightlight.engine.models.AutomationRoutine.Companion.resolved
 import com.corphish.nightlight.helpers.TimeUtils
 import com.corphish.widgets.ktx.dialogs.SingleChoiceAlertDialog
+import com.corphish.widgets.ktx.dialogs.properties.IconProperties
 import ernestoyaquello.com.verticalstepperform.Step
 
 class AutomationTimeStep(stepTitle: String?, val index: Int = -1): Step<String?>(stepTitle) {
@@ -33,6 +37,10 @@ class AutomationTimeStep(stepTitle: String?, val index: Int = -1): Step<String?>
                 titleResId = R.string.pick_time
                 animationResourceLayout = R.raw.time
                 dismissOnChoiceSelection = true
+                iconProperties = IconProperties(
+                        iconColor = if (ThemeUtils.isLightTheme(context)) Color.WHITE else Color.BLACK,
+                        backgroundDrawable = ContextCompat.getDrawable(context, ThemeUtils.getThemeIconShape(context))
+                )
                 choiceList = listOf(
                         SingleChoiceAlertDialog.ChoiceItem(
                                 titleResId = R.string.sunset,

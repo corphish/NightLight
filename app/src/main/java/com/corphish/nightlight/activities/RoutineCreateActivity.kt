@@ -39,6 +39,9 @@ class RoutineCreateActivity : AppCompatActivity(), StepperFormListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Apply theme based on user selections
+        setTheme(ThemeUtils.getAppTheme(this))
+
         binding = ActivityRoutineCreateBinding.inflate(layoutInflater)
 
         setContentView(binding.root)

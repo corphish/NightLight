@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.databinding.ActivityAutomationRoutineBinding
+import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.engine.AutomationRoutineManager
 import com.corphish.nightlight.engine.models.AutomationRoutine
 import com.corphish.nightlight.engine.models.AutomationRoutine.Companion.resolved
@@ -27,6 +28,9 @@ class AutomationRoutineActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Apply theme based on user selections
+        setTheme(ThemeUtils.getAppTheme(this))
 
         binding = ActivityAutomationRoutineBinding.inflate(layoutInflater)
         setContentView(binding.root)

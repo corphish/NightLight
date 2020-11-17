@@ -235,4 +235,7 @@
 
     <string name="outside_routine_title">Outside routine</string>
     <string name="outside_routine_desc">Choose whether or not to enable night light when no routines are active.</string>
+
+    <string name="choose_rgb">Choose RGB values</string>
+    <string name="custom_rgb">Custom RGB</string>
 </resources>

@@ -53,7 +53,9 @@ class ManualFragment : Fragment() {
         getValues()
         initSliders()
 
-        PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, _type)
+        if (!colorPickingMode) {
+            PreferenceHelper.putInt(context, Constants.PREF_SETTING_MODE, _type)
+        }
 
         Core.applyNightModeAsync(true, context, redColor, greenColor, blueColor)
 

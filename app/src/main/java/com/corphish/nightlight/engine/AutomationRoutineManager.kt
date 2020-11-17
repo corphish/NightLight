@@ -3,6 +3,7 @@ package com.corphish.nightlight.engine
 import android.content.Context
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.models.AutomationRoutine
 import com.corphish.nightlight.engine.models.AutomationRoutine.Companion.resolved
 import com.corphish.nightlight.helpers.AlarmUtils
@@ -195,12 +196,19 @@ object AutomationRoutineManager {
     /**
      * Schedules alarms.
      */
-    private fun scheduleAlarms(context: Context) {
+    fun scheduleAlarms(context: Context) {
+        // Bail out if there are no routines
+        if (_automationRoutineList.isEmpty()) {
+            applyDefaultBehavior(context)
+            return
+        }
+
         // Get current routine.
         val currentRoutine = getCurrentRoutine(context)
 
         if (currentRoutine == null) {
-            // TODO: Default behavior
+            // Apply default behavior
+            applyDefaultBehavior(context)
 
             // Set alarm for upcoming ones.
             val upcoming = getUpcomingRoutine(context)
@@ -209,6 +217,23 @@ object AutomationRoutineManager {
             // We have a current routine.
             // Schedule an alarm now.
             AlarmUtils.setAlarmRelative(context, 0)
+        }
+    }
+
+    /**
+     * Applies default behavior set by the user.
+     */
+    fun applyDefaultBehavior(context: Context) {
+        val defaultBehavior = AutomationRoutine.whenOutside(context)
+        if (!defaultBehavior.switchState) {
+            Core.applyNightModeAsync(false, context)
+        } else {
+            val rgb = defaultBehavior.rgbFrom
+            if (defaultBehavior.fadeBehavior.settingType == Constants.NL_SETTING_MODE_TEMP) {
+                Core.applyNightModeAsync(true, context, rgb[0])
+            } else {
+                Core.applyNightModeAsync(true, context, rgb[0], rgb[1], rgb[2])
+            }
         }
     }
 }

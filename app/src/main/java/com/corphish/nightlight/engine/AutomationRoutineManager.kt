@@ -171,7 +171,11 @@ object AutomationRoutineManager {
     /**
      * Returns the upcoming routine.
      */
-    fun getUpcomingRoutine(context: Context): AutomationRoutine {
+    fun getUpcomingRoutine(context: Context): AutomationRoutine? {
+        if (_automationRoutineList.isEmpty()) {
+            return null
+        }
+
         // First we collect the start times of all the routines and sort them.
         val startTimes = automationRoutineList.sortedBy { it.startTime.resolved(context) }
 
@@ -212,7 +216,9 @@ object AutomationRoutineManager {
 
             // Set alarm for upcoming ones.
             val upcoming = getUpcomingRoutine(context)
-            AlarmUtils.setAlarmAbsolute(context, upcoming.startTime.resolved(context))
+            if (upcoming != null) {
+                AlarmUtils.setAlarmAbsolute(context, upcoming.startTime.resolved(context))
+            }
         } else {
             // We have a current routine.
             // Schedule an alarm now.

@@ -55,7 +55,9 @@ class AutomateSignalReceiver : BroadcastReceiver() {
                     AlarmUtils.setAlarmAbsolute(context, currentRoutine.endTime.resolved(context))
                 } else {
                     val nextRoutine = AutomationRoutineManager.getUpcomingRoutine(context)
-                    AlarmUtils.setAlarmAbsolute(context, nextRoutine.startTime.resolved(context))
+                    if (nextRoutine != null) {
+                        AlarmUtils.setAlarmAbsolute(context, nextRoutine.startTime.resolved(context))
+                    }
                 }
             } else {
                 // Else we apply the faded RGB
@@ -78,7 +80,9 @@ class AutomateSignalReceiver : BroadcastReceiver() {
 
             // Schedule the alarm for next routine
             val nextRoutine = AutomationRoutineManager.getUpcomingRoutine(context)
-            AlarmUtils.setAlarmAbsolute(context, nextRoutine.startTime.resolved(context))
+            if (nextRoutine != null) {
+                AlarmUtils.setAlarmAbsolute(context, nextRoutine.startTime.resolved(context))
+            }
         }
     }
 }

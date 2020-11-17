@@ -4,11 +4,12 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.engine.AutomationRoutineManager
 import com.corphish.nightlight.engine.Core
-import com.corphish.nightlight.engine.TwilightManager
+import com.corphish.nightlight.engine.models.FadeBehavior
 import com.corphish.nightlight.helpers.AlarmUtils
+import com.corphish.nightlight.helpers.FadeUtils
 import com.corphish.nightlight.helpers.PreferenceHelper
-import com.corphish.nightlight.helpers.TimeUtils
 
 /**
  * Earlier we would have 3 separate receivers, one to turn on the night light,
@@ -22,67 +23,55 @@ class AutomateSignalReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         val masterSwitchEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_MASTER_SWITCH)
         val autoSwitchEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_AUTO_SWITCH)
-        val fadeEnabled = PreferenceHelper.getBoolean(context, Constants.PREF_DARK_HOURS_ENABLE)
-        var toTurnOn: Boolean
+
+        // Poll rate
+        val pollRate = PreferenceHelper.getString(context, Constants.PREF_FADE_POLL_RATE_MINS, "5")?.toInt() ?: 5
 
         // Both of the switches must be on to proceed
         if (!autoSwitchEnabled || !masterSwitchEnabled) {
             return
         }
-        val startTime = PreferenceHelper.getString(context, Constants.PREF_START_TIME, Constants.DEFAULT_START_TIME)
-                ?: Constants.DEFAULT_START_TIME
-        val endTime = PreferenceHelper.getString(context, Constants.PREF_END_TIME, Constants.DEFAULT_END_TIME)
-                ?: Constants.DEFAULT_END_TIME
-        val insideSchedule = TimeUtils.isInRange(startTime, endTime)
 
-        // If not inside schedule, we need to set a start alarm at start time.
-        // Also, if sunset/sunrise is enabled, we have to calculate and set accordingly.
-        if (!insideSchedule) {
-            if (PreferenceHelper.getBoolean(context, Constants.PREF_SUN_SWITCH)) {
-                TwilightManager.newInstance()
-                        .atLocation(PreferenceHelper.getLocation(context))
-                        .computeAndSaveTime(context!!) { sunsetTime, _ ->
-                            // Set alarm for the new start time
-                            AlarmUtils.setAlarmAbsolute(context, sunsetTime)
-                        }
+        // We only work with routines here.
+        // Load the routines
+        AutomationRoutineManager.loadRoutines(context!!)
+
+        // We get the current routine
+        val currentRoutine = AutomationRoutineManager.getCurrentRoutine(context)
+
+        // If we are in a routine period, current routine will not be null.
+        if (currentRoutine != null) {
+            // Apply the current routine.
+            val state = currentRoutine.switchState
+
+            if (!state) {
+                Core.applyNightModeAsync(state, context)
+
+                // Schedule the alarm for next routine
+                val nextRoutine = AutomationRoutineManager.getUpcomingRoutine(context)
+                AlarmUtils.setAlarmAbsolute(context, nextRoutine.startTime)
             } else {
-                // Set alarm for the selected start time
-                AlarmUtils.setAlarmAbsolute(context!!, startTime)
-            }
+                // Else we apply the faded RGB
+                val rgb = FadeUtils.getFadedRGB(context, currentRoutine)
+                Core.applyNightModeAsync(state, context, rgb[0], rgb[1], rgb[2])
 
-            // Since we are going to turn off nigh light outside schedule
-            toTurnOn = false
-        } else {
-            // If fade is enabled, we set relative alarms
-            if (fadeEnabled) {
-                // Check if we are in fade schedule
-                val fadeEndTime = PreferenceHelper.getString(context, Constants.PREF_DARK_HOURS_START, Constants.DEFAULT_END_TIME)
-                        ?: Constants.DEFAULT_END_TIME
-                val insideFadeSchedule = TimeUtils.isInRange(startTime, fadeEndTime)
-                if (insideFadeSchedule) {
-                    // Set relative alarms
-                    val pollRate = PreferenceHelper.getString(context, Constants.PREF_FADE_POLL_RATE_MINS, "5")?.toInt() ?: 5
-
-                    // If infinite poll is selected, then it will behave same as what
-                    // dark hours start would behave. In this case we set an absolute alarm.
-                    if (pollRate == 0) {
-                        AlarmUtils.setAlarmAbsolute(context!!, endTime)
-                    } else {
-                        AlarmUtils.setAlarmRelative(context!!, pollRate)
-                    }
+                // Depending on whether fading is on or off, we set alarms accordingly.
+                if (currentRoutine.fadeBehavior.type == FadeBehavior.FADE_OFF) {
+                    // We set alarm for end.
+                    AlarmUtils.setAlarmAbsolute(context, currentRoutine.endTime)
                 } else {
-                    // We set alarm for end time
-                    AlarmUtils.setAlarmAbsolute(context!!, endTime)
+                    // We set relative alarm for fade polling.
+                    AlarmUtils.setAlarmRelative(context, pollRate)
                 }
-            } else {
-                // If fading is not enabled, we set alarm for end
-                AlarmUtils.setAlarmAbsolute(context!!, endTime)
             }
+        } else {
+            // We are not in routine, we apply default behavior and set alarm for
+            // upcoming routine.
+            // TODO: Apply default behavior
 
-            toTurnOn = true
+            // Schedule the alarm for next routine
+            val nextRoutine = AutomationRoutineManager.getUpcomingRoutine(context)
+            AlarmUtils.setAlarmAbsolute(context, nextRoutine.startTime)
         }
-
-        // Finally we turn on/off night light
-        Core.applyNightModeAsync(toTurnOn, context)
     }
 }

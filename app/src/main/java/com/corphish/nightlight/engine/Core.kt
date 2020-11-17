@@ -51,9 +51,9 @@ object Core {
         }
 
         // Apply faded RGB
-        val fadedRGB = FadeUtils.getColorRGBForCurrentTime(context!!) ?: intArrayOf(redValue, greenValue, blueValue)
+        val rgb = intArrayOf(redValue, greenValue, blueValue)
 
-        val ret = KCALManager.updateKCALValues(fadedRGB)
+        val ret = KCALManager.updateKCALValues(rgb)
         if (isModeBooting) {
             PreferenceHelper.putBoolean(context, Constants.PREF_LAST_BOOT_RES, ret)
         }

@@ -148,15 +148,15 @@ object FadeUtils {
     fun getFadedRGB(context: Context, automationRoutine: AutomationRoutine): IntArray {
         val fadeBehavior = automationRoutine.fadeBehavior
 
-        // We only fade
-        if (fadeBehavior.type == FadeBehavior.FADE_OFF) {
-            return fadeBehavior.fadeFrom
-        }
-
         val settingsFrom = if (fadeBehavior.settingType == Constants.NL_SETTING_MODE_TEMP) {
             fadeBehavior.fadeFrom[0].fromColorTemperatureToRGBIntArray()
         } else {
             fadeBehavior.fadeFrom
+        }
+
+        // We only fade
+        if (fadeBehavior.type == FadeBehavior.FADE_OFF) {
+            return settingsFrom
         }
 
         var rFrom = settingsFrom[0]

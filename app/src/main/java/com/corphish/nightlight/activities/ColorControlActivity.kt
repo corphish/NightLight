@@ -16,6 +16,7 @@ import com.corphish.nightlight.engine.Core
 import com.corphish.nightlight.engine.models.PickedColorData
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.nightlight.interfaces.ColorPickerCallback
+import com.corphish.widgets.ktx.dialogs.OnBoardingDialog
 import com.corphish.widgets.ktx.dialogs.SingleChoiceAlertDialog
 import com.corphish.widgets.ktx.dialogs.properties.IconProperties
 
@@ -36,7 +37,6 @@ class ColorControlActivity : BaseActivity(), ColorPickerCallback {
         setContentView(R.layout.activity_color_control)
 
         useCollapsingActionBar()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         originalState = PreferenceHelper.getBoolean(this, Constants.PREF_FORCE_SWITCH, false)
         colorPickingMode = intent.getBooleanExtra(Constants.COLOR_PICKER_MODE, false)
@@ -44,7 +44,10 @@ class ColorControlActivity : BaseActivity(), ColorPickerCallback {
         // By default, set color picking as ok
         if (colorPickingMode) {
             setResult(RESULT_OK)
+            showColorPickingHelp()
         }
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(!colorPickingMode)
 
         originalFadeSetting = PreferenceHelper.getBoolean(this, Constants.PREF_FADE_ENABLED, false)
         PreferenceHelper.putBoolean(this, Constants.PREF_FADE_ENABLED, false)
@@ -116,5 +119,31 @@ class ColorControlActivity : BaseActivity(), ColorPickerCallback {
         val resIntent = Intent()
         pickedData.updateIntent(resIntent)
         setResult(RESULT_OK, resIntent)
+    }
+
+    /**
+     * Shows the color picking tutorial to the users.
+     */
+    private fun showColorPickingHelp() {
+        val prefKey = "pref_color_pick_help"
+        val isShown = PreferenceHelper.getBoolean(this, prefKey, false)
+
+        if (!isShown) {
+            OnBoardingDialog(this).apply {
+                slides = listOf(
+                        OnBoardingDialog.Slide(
+                                titleResId = R.string.color_picking_mode_title,
+                                messageResId = R.string.color_picking_slide_1,
+                                animation = R.raw.colors
+                        ),
+                        OnBoardingDialog.Slide(
+                                titleResId = R.string.color_picking_mode_title,
+                                messageResId = R.string.color_picking_slide_2,
+                                animation = R.raw.colors
+                        ),
+                )
+            }.show()
+            PreferenceHelper.putBoolean(this, prefKey, true)
+        }
     }
 }

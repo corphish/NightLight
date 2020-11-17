@@ -40,6 +40,7 @@
     <string name="sun_switch">Use sunset/sunrise timings</string>
 
     <string name="location_unavailable">Unable to get your last known location.</string>
+    <string name="location_available">Current location determined.</string>
 
     <string name="kcal_preserve_value_title">Preserve KCAL values</string>
     <string name="kcal_preserve_value_msg">Preserves old KCAL values before Night Light is turned on, and the applies the same when it is turned off.</string>
@@ -183,10 +184,10 @@
     <string name="tutorial_title">Tutorial</string>
     <string name="tutorial_desc">Show tutorial</string>
 
-    <string name="automation_intro_1">You can let the app to automatically to turn the night light on and off at specific times. Simply enable automation, set start and end times and you are good to go. Fire and forget!</string>
-    <string name="automation_intro_2">You can also set the automation schedule from sunset to sunrise. Night light will turn on at sunset and turn off at sunrise.</string>
-    <string name="automation_intro_3">Slowly transitions from default KCAL value to the chosen Night Light KCAL value. Fade in will start at the start of automation and end at the fade stop time.</string>
-    <string name="automation_intro_4">Sets the interval at which the night light intensity fades in.</string>
+    <string name="automation_intro_1">You can let the app to automatically to turn the night light on and off at specific times. Simply enable automation, set up automation routines and you are good to go. Fire and forget!</string>
+    <string name="automation_intro_2">Setting sunset and sunrise times are supported. Location permissions are needed for determining sunset and sunrise times.</string>
+    <string name="automation_intro_3">Slowly transitions from a selected KCAL value to the another KCAL value. Fade in/out will take place during the time period of an automation routine.</string>
+    <string name="automation_intro_4">Sets the interval at which the night light intensity fades in/out.</string>
 
     <string name="sunset_sunrise">Sunset to sunrise</string>
 
@@ -228,4 +229,10 @@
     <string name="end_color">Ending value</string>
 
     <string name="delete_routine">Are you sure you want to delete this routine?</string>
+
+    <string name="location">Location</string>
+    <string name="location_reset">Re-detect location</string>
+
+    <string name="outside_routine_title">Outside routine</string>
+    <string name="outside_routine_desc">Choose whether or not to enable night light when no routines are active.</string>
 </resources>

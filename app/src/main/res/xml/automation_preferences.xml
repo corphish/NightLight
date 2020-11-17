@@ -7,47 +7,36 @@
         app:title="@string/auto_enable" />
 
     <Preference
-        app:allowDividerBelow="false"
+        app:dependency="auto_switch"
         app:title="@string/setup_automation">
         <intent
             android:targetClass="com.corphish.nightlight.activities.AutomationRoutineActivity"
             android:targetPackage="com.corphish.nightlight.generic" />
     </Preference>
 
-    <PreferenceCategory app:title="@string/sunset_sunrise">
+    <com.corphish.nightlight.design.preferences.LongSummaryPreferenceCategory
+        app:title="@string/outside_routine_title"
+        app:summary="@string/outside_routine_desc">
 
         <SwitchPreferenceCompat
+            app:title="@string/profile_nl_switch"
             app:dependency="auto_switch"
-            app:disableDependentsState="true"
-            app:key="sun_switch"
-            app:title="@string/sun_switch" />
+            app:key="pref_routine_disabled_switch" />
+    </com.corphish.nightlight.design.preferences.LongSummaryPreferenceCategory>
+
+    <PreferenceCategory app:title="@string/location">
 
         <Preference
-            app:dependency="sun_switch"
-            app:key="start_time"
-            app:title="@string/start_time" />
-
-        <Preference
-            app:dependency="sun_switch"
-            app:key="end_time"
-            app:title="@string/end_time" />
+            app:dependency="auto_switch"
+            app:key="reset_location"
+            app:title="@string/location_reset" />
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/fading_in">
-        <SwitchPreferenceCompat
-            app:dependency="auto_switch"
-            app:key="dark_hours_enable"
-            app:summary="@string/dark_hours_desc"
-            app:title="@string/dark_hours_title" />
-
-        <Preference
-            app:dependency="dark_hours_enable"
-            app:key="dark_hours_start"
-            app:title="@string/dark_hours_start_time" />
+    <PreferenceCategory app:title="@string/fade_behavior">
 
         <ListPreference
             app:defaultValue="5"
-            app:dependency="dark_hours_enable"
+            app:dependency="auto_switch"
             app:entries="@array/poll_rate_names"
             app:entryValues="@array/poll_rate_values"
             app:key="fade_poll_rate"

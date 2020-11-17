@@ -5,6 +5,7 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.corphish.nightlight.engine.models.AutomationRoutine
 import com.corphish.nightlight.engine.models.AutomationRoutine.Companion.resolved
+import com.corphish.nightlight.helpers.AlarmUtils
 import com.corphish.nightlight.helpers.TimeUtils
 import java.util.*
 import kotlin.collections.ArrayList
@@ -46,6 +47,7 @@ object AutomationRoutineManager {
 
     /**
      * Stores the local routines.
+     * It also schedules alarms.
      *
      * @param context [Context].
      */
@@ -59,6 +61,8 @@ object AutomationRoutineManager {
                             }.toSet()
                     )
                 }
+
+        scheduleAlarms(context)
     }
 
     /**
@@ -168,7 +172,7 @@ object AutomationRoutineManager {
      */
     fun getUpcomingRoutine(context: Context): AutomationRoutine {
         // First we collect the start times of all the routines and sort them.
-        val startTimes = automationRoutineList.sortedBy { it.startTime }
+        val startTimes = automationRoutineList.sortedBy { it.startTime.resolved(context) }
 
         // Get current time.
         val currentTimeRaw = TimeUtils.currentTimeAsHourAndMinutes
@@ -185,6 +189,26 @@ object AutomationRoutineManager {
             startTimes[idx]
         } else {
             startTimes[-idx - 1]
+        }
+    }
+
+    /**
+     * Schedules alarms.
+     */
+    private fun scheduleAlarms(context: Context) {
+        // Get current routine.
+        val currentRoutine = getCurrentRoutine(context)
+
+        if (currentRoutine == null) {
+            // TODO: Default behavior
+
+            // Set alarm for upcoming ones.
+            val upcoming = getUpcomingRoutine(context)
+            AlarmUtils.setAlarmAbsolute(context, upcoming.startTime.resolved(context))
+        } else {
+            // We have a current routine.
+            // Schedule an alarm now.
+            AlarmUtils.setAlarmRelative(context, 0)
         }
     }
 }

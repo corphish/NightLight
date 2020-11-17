@@ -177,7 +177,7 @@ object AutomationRoutineManager {
         }
 
         // First we collect the start times of all the routines and sort them.
-        val startTimes = automationRoutineList.sortedBy { it.startTime.resolved(context) }
+        val startTimes = _automationRoutineList.sortedBy { it.startTime.resolved(context) }
 
         // Get current time.
         val currentTimeRaw = TimeUtils.currentTimeAsHourAndMinutes
@@ -193,7 +193,9 @@ object AutomationRoutineManager {
         return if (idx >= 0) {
             startTimes[idx]
         } else {
-            startTimes[-idx - 1]
+            var index = -idx - 1
+            if (index >= _automationRoutineList.size) index = _automationRoutineList.size - 1
+            startTimes[index]
         }
     }
 

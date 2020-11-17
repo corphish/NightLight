@@ -6,6 +6,8 @@ import android.content.Intent
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.AutomationRoutineManager
 import com.corphish.nightlight.engine.Core
+import com.corphish.nightlight.engine.models.AutomationRoutine
+import com.corphish.nightlight.engine.models.AutomationRoutine.Companion.resolved
 import com.corphish.nightlight.engine.models.FadeBehavior
 import com.corphish.nightlight.helpers.AlarmUtils
 import com.corphish.nightlight.helpers.FadeUtils
@@ -47,9 +49,14 @@ class AutomateSignalReceiver : BroadcastReceiver() {
             if (!state) {
                 Core.applyNightModeAsync(state, context)
 
-                // Schedule the alarm for next routine
-                val nextRoutine = AutomationRoutineManager.getUpcomingRoutine(context)
-                AlarmUtils.setAlarmAbsolute(context, nextRoutine.startTime)
+                // Schedule the alarm for next routine if current routine does not have
+                // end time set.
+                if (currentRoutine.endTime != AutomationRoutine.TIME_UNSET) {
+                    AlarmUtils.setAlarmAbsolute(context, currentRoutine.endTime.resolved(context))
+                } else {
+                    val nextRoutine = AutomationRoutineManager.getUpcomingRoutine(context)
+                    AlarmUtils.setAlarmAbsolute(context, nextRoutine.startTime.resolved(context))
+                }
             } else {
                 // Else we apply the faded RGB
                 val rgb = FadeUtils.getFadedRGB(context, currentRoutine)
@@ -58,7 +65,7 @@ class AutomateSignalReceiver : BroadcastReceiver() {
                 // Depending on whether fading is on or off, we set alarms accordingly.
                 if (currentRoutine.fadeBehavior.type == FadeBehavior.FADE_OFF) {
                     // We set alarm for end.
-                    AlarmUtils.setAlarmAbsolute(context, currentRoutine.endTime)
+                    AlarmUtils.setAlarmAbsolute(context, currentRoutine.endTime.resolved(context))
                 } else {
                     // We set relative alarm for fade polling.
                     AlarmUtils.setAlarmRelative(context, pollRate)
@@ -71,7 +78,7 @@ class AutomateSignalReceiver : BroadcastReceiver() {
 
             // Schedule the alarm for next routine
             val nextRoutine = AutomationRoutineManager.getUpcomingRoutine(context)
-            AlarmUtils.setAlarmAbsolute(context, nextRoutine.startTime)
+            AlarmUtils.setAlarmAbsolute(context, nextRoutine.startTime.resolved(context))
         }
     }
 }

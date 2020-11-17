@@ -2,6 +2,9 @@ package com.corphish.nightlight.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +17,10 @@ import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.engine.AutomationRoutineManager
 import com.corphish.nightlight.engine.models.AutomationRoutine
 import com.corphish.nightlight.engine.models.AutomationRoutine.Companion.resolved
+import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.widgets.ktx.adapters.MutableListAdaptable
 import com.corphish.widgets.ktx.adapters.MutableListAdapter
+import com.corphish.widgets.ktx.dialogs.MessageAlertDialog
 import com.corphish.widgets.ktx.viewholders.ClickableViewHolder
 
 class AutomationRoutineActivity : AppCompatActivity() {
@@ -36,6 +41,7 @@ class AutomationRoutineActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Load routines.
         AutomationRoutineManager.loadRoutines(this)
@@ -106,6 +112,11 @@ class AutomationRoutineActivity : AppCompatActivity() {
         }
 
         adapter.submitList(AutomationRoutineManager.automationRoutineList)
+        if (AutomationRoutineManager.automationRoutineList.isNotEmpty()) {
+            binding.included.placeHolder.visibility = View.GONE
+        } else {
+            binding.included.placeHolder.visibility = View.VISIBLE
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -113,6 +124,28 @@ class AutomationRoutineActivity : AppCompatActivity() {
 
         if (requestCode == 73 && resultCode == RESULT_OK) {
             adapter.updateList(AutomationRoutineManager.automationRoutineList)
+            if (AutomationRoutineManager.automationRoutineList.isNotEmpty()) {
+                binding.included.placeHolder.visibility = View.GONE
+            } else {
+                binding.included.placeHolder.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.automation_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.action_help -> {
+                ExternalLink.open(this, "https://github.com/corphish/NightLight/blob/master/notes/routines.md")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

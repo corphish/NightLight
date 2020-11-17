@@ -229,6 +229,8 @@
     <string name="end_color">Ending value</string>
 
     <string name="delete_routine">Are you sure you want to delete this routine?</string>
+    <string name="empty_routine_title">No routines created</string>
+    <string name="empty_routine_desc">Created routines will be listed here!</string>
 
     <string name="location">Location</string>
     <string name="location_reset">Re-detect location</string>

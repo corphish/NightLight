@@ -1,6 +1,8 @@
 package com.corphish.nightlight.engine.models
 
+import android.content.Context
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.helpers.PreferenceHelper
 
 /**
  * This data class defines a Fade behavior.
@@ -101,6 +103,21 @@ data class FadeBehavior(
                     .toIntArray()
 
             return FadeBehavior(type, settingType, fadeFrom, fadeTo)
+        }
+
+        fun defaultKCALRGB(context: Context): PickedColorData {
+            val defaultValue = PreferenceHelper.getString(context, Constants.KCAL_PRESERVE_VAL, Constants.DEFAULT_KCAL_VALUES)
+                    ?: Constants.DEFAULT_KCAL_VALUES
+            val parts = defaultValue.split(" ")
+
+            return PickedColorData(
+                    settingMode = Constants.NL_SETTING_MODE_MANUAL,
+                    settings = intArrayOf(
+                            parts[0].trim().toInt(),
+                            parts[1].trim().toInt(),
+                            parts[2].trim().toInt(),
+                    )
+            )
         }
     }
 }

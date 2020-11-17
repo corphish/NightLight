@@ -106,5 +106,36 @@ data class AutomationRoutine(
 
             return this
         }
+
+        /**
+         * Returns an automation routine of default behavior.
+         */
+        fun whenOutside(context: Context): AutomationRoutine {
+            // Get the switch value
+            val switchStatus = PreferenceHelper.getBoolean(context, "pref_routine_disabled_switch", false)
+
+            // Get the selected RGB
+            val settingMode = PreferenceHelper.getInt(context, Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
+            val settings = if (settingMode == Constants.NL_SETTING_MODE_TEMP) {
+                intArrayOf(
+                        PreferenceHelper.getInt(context, Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)
+                )
+            } else {
+                intArrayOf(
+                        PreferenceHelper.getInt(context, Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR),
+                        PreferenceHelper.getInt(context, Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR),
+                        PreferenceHelper.getInt(context, Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR),
+                )
+            }
+
+            return AutomationRoutine(
+                    switchState = switchStatus,
+                    fadeBehavior = FadeBehavior(
+                            type = FadeBehavior.FADE_OFF,
+                            settingType = settingMode,
+                            fadeFrom = settings
+                    )
+            )
+        }
     }
 }

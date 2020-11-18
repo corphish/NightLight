@@ -194,7 +194,11 @@ object AutomationRoutineManager {
             startTimes[idx]
         } else {
             var index = -idx - 1
-            if (index >= _automationRoutineList.size) index = _automationRoutineList.size - 1
+            if (index >= _automationRoutineList.size) {
+                index = _automationRoutineList.size - 1
+            } else if (index < 0) {
+                index = 0
+            }
             startTimes[index]
         }
     }

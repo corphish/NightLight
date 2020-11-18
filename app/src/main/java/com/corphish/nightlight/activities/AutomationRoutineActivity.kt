@@ -20,7 +20,6 @@ import com.corphish.nightlight.engine.models.AutomationRoutine.Companion.resolve
 import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.widgets.ktx.adapters.MutableListAdaptable
 import com.corphish.widgets.ktx.adapters.MutableListAdapter
-import com.corphish.widgets.ktx.dialogs.MessageAlertDialog
 import com.corphish.widgets.ktx.viewholders.ClickableViewHolder
 
 class AutomationRoutineActivity : AppCompatActivity() {
@@ -87,7 +86,7 @@ class AutomationRoutineActivity : AppCompatActivity() {
                 override fun areItemsTheSame(oldItem: AutomationRoutine, newItem: AutomationRoutine) = false
 
                 override fun areContentsTheSame(oldItem: AutomationRoutine, newItem: AutomationRoutine) =
-                        oldItem == newItem
+                        oldItem.startTime == newItem.startTime && oldItem.endTime == newItem.endTime
             }
 
             override fun getLayoutResource(viewType: Int) = R.layout.layout_auto_routine_item

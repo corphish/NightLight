@@ -108,6 +108,7 @@ dependencies {
 
     // Utilities
     implementation 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
 
     // Crash reporting
     genericImplementation 'com.google.firebase:firebase-crashlytics:17.2.2'

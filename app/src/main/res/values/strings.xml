@@ -243,4 +243,8 @@
     <string name="color_picking_mode_title">Color choosing</string>
     <string name="color_picking_slide_1">Choose the KCAL colors that you want. If you want to pick the colors in a different mode (temperature and manual RGB supported), tap the settings button to do so.</string>
     <string name="color_picking_slide_2">Once you have chosen the colors, tap the back button or perform the back gesture to confirm your selection. Do the same to dismiss this message 😊.</string>
+
+    <string name="reschedule_alarms">Re-apply routine alarms</string>
+    <string name="reschedule_alarm_desc">Re-applies the alarms that needs to be fired for the set routines.</string>
+    <string name="reschedule_alarms_msg">Routine alarms re-applied</string>
 </resources>

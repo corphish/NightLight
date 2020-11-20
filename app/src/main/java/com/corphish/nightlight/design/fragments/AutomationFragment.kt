@@ -101,6 +101,15 @@ class AutomationFragment : PreferenceFragmentCompat(), LocationListener {
 
             true
         }
+
+        findPreference<Preference>("refresh_alarms")?.setOnPreferenceClickListener {
+            AutomationRoutineManager.apply {
+                loadRoutines(requireContext())
+                scheduleAlarms(requireContext())
+            }
+
+            true
+        }
     }
 
     /**

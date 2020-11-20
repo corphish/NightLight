@@ -59,14 +59,15 @@ data class AutomationRoutine(
      * routine.
      *
      * @param other Some other [AutomationRoutine]
+     * @param context [Context]
      * @return True if the other routine overlaps with the current one, false otherwise.
      */
-    fun isOverlappingWith(other: AutomationRoutine): Boolean {
+    fun isOverlappingWith(context: Context, other: AutomationRoutine): Boolean {
         // Collect the timings.
-        val startTimeA = TimeUtils.getTimeAsHourAndMinutes(startTime)
-        val endTimeA = TimeUtils.getTimeAsHourAndMinutes(endTime)
-        val startTimeB = TimeUtils.getTimeAsHourAndMinutes(other.startTime)
-        val endTimeB = TimeUtils.getTimeAsHourAndMinutes(other.endTime)
+        val startTimeA = TimeUtils.getTimeAsHourAndMinutes(startTime.resolved(context))
+        val endTimeA = TimeUtils.getTimeAsHourAndMinutes(endTime.resolved(context))
+        val startTimeB = TimeUtils.getTimeAsHourAndMinutes(other.startTime.resolved(context))
+        val endTimeB = TimeUtils.getTimeAsHourAndMinutes(other.endTime.resolved(context))
 
         // Adjust the end times if they are lesser than start times, in such cases
         // we increase the end time by 24 hours to have easier comparison.

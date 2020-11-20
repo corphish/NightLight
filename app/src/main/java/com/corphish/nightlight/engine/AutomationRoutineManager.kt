@@ -82,24 +82,8 @@ object AutomationRoutineManager {
                 continue
             }
 
-            // Check if start time overlaps.
-            if (TimeUtils.isInRange(
-                            startTime = x.startTime.resolved(context),
-                            endTime = x.endTime.resolved(context),
-                            targetTime = automationRoutine.startTime.resolved(context),
-                            startExclusive = true,
-                            endExclusive = true)
-            ) {
-                return true
-            }
-
-            // Check if end time overlaps.
-            if (TimeUtils.isInRange(
-                            startTime = x.startTime.resolved(context),
-                            endTime = x.endTime.resolved(context),
-                            targetTime = automationRoutine.endTime.resolved(context),
-                            startExclusive = true,
-                            endExclusive = true)) {
+            // Check if time range overlaps.
+            if (x.isOverlappingWith(context, automationRoutine)) {
                 return true
             }
         }

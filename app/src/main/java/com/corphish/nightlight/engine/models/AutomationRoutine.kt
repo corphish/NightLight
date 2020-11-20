@@ -4,6 +4,7 @@ import android.content.Context
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.TwilightManager
 import com.corphish.nightlight.helpers.PreferenceHelper
+import com.corphish.nightlight.helpers.TimeUtils
 
 /**
  * Automation routine data class holds necessary data to define
@@ -52,6 +53,34 @@ data class AutomationRoutine(
 
     val rgbTo: IntArray
         get() = fadeBehavior.fadeTo
+
+    /**
+     * Method to check if some other routine is overlapping with this
+     * routine.
+     *
+     * @param other Some other [AutomationRoutine]
+     * @return True if the other routine overlaps with the current one, false otherwise.
+     */
+    fun isOverlappingWith(other: AutomationRoutine): Boolean {
+        // Collect the timings.
+        val startTimeA = TimeUtils.getTimeAsHourAndMinutes(startTime)
+        val endTimeA = TimeUtils.getTimeAsHourAndMinutes(endTime)
+        val startTimeB = TimeUtils.getTimeAsHourAndMinutes(other.startTime)
+        val endTimeB = TimeUtils.getTimeAsHourAndMinutes(other.endTime)
+
+        // Adjust the end times if they are lesser than start times, in such cases
+        // we increase the end time by 24 hours to have easier comparison.
+        if (endTimeA[0] < startTimeA[0] || (endTimeA[0] == startTimeA[0] && endTimeA[1] < startTimeA[1])) {
+            endTimeA[0] += 24
+        }
+
+        if (endTimeB[0] < startTimeB[0] || (endTimeB[0] == startTimeB[0] && endTimeB[1] < startTimeB[1])) {
+            endTimeB[0] += 24
+        }
+
+        return (startTimeA[0] < endTimeB[0] || (startTimeA[0] == endTimeB[0] && startTimeA[1] <= endTimeB[1])) && // startTimeA <= endTimeB
+                (endTimeA[0] > startTimeB[0] || (endTimeA[0] == startTimeB[0] && endTimeA[1] >= startTimeB[1])) // endTimeA >= startTimeB
+    }
 
     override fun toString() =
             "$switchState;;$startTime;;$endTime;;$fadeBehavior;;$name"

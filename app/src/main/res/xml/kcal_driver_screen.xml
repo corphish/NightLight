@@ -14,7 +14,7 @@
 
     <Preference
         app:key="kcal_format_spec"
-        app:title="@string/impl_rgb_file_paths" />
+        app:title="@string/impl_format" />
 
     <Preference
         app:key="kcal_sat_path"

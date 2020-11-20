@@ -72,7 +72,6 @@
     <string name="minimum">Minimum</string>
     <string name="intensity_toggle">Przełącz intensywność</string>
     <string name="kcal_driver_information_short">Sterownik KCAL</string>
-    <string name="kcal_driver_information_full">Informacje o sterowniku KCAL</string>
     <string name="impl_name">Nazwa implementacji KCAL</string>
     <string name="impl_switch_path">Ścieżka przełącznika</string>
     <string name="impl_rgb_file_paths">Ścieżki plików RGB</string>

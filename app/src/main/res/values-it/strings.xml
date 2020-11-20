@@ -72,7 +72,6 @@
     <string name="minimum">Minimo</string>
     <string name="intensity_toggle">Cambia intensità</string>
     <string name="kcal_driver_information_short">Driver KCAL</string>
-    <string name="kcal_driver_information_full">Informazioni driver KCAL</string>
     <string name="impl_name">Tipo di implementazione</string>
     <string name="impl_switch_path">Cambia percorso</string>
     <string name="impl_rgb_file_paths">Percorso del file RGB</string>

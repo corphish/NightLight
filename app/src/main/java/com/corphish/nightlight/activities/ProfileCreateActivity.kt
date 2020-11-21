@@ -3,7 +3,6 @@ package com.corphish.nightlight.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.base.BaseActivity
 import com.corphish.nightlight.data.Constants
@@ -39,8 +38,7 @@ class ProfileCreateActivity : BaseActivity(), StepperFormListener {
 
         binding = ActivityProfileCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        useCollapsingActionBar()
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         profilesManager = ProfilesManager(this)

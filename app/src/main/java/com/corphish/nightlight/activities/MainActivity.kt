@@ -30,7 +30,7 @@ class MainActivity : BaseActivity(), NightLightStateListener, ThemeChangeListene
         setContentView(binding.root)
 
         useCustomActionBar()
-        setActionBarTitle(R.string.dashboard)
+        setActionBarTitle(R.string.app_name)
 
         NightLightAppService.instance
                 .registerNightLightStateListener(this)

@@ -156,7 +156,7 @@
 
     <string name="info">Info</string>
 
-    <string name="bulb_info">Press the bulb above to toggle night light. Long press the bulb above to toggle intensities.</string>
+    <string name="bulb_info">Press the bulb above to toggle night light.</string>
     <string name="states">States</string>
 
     <string name="bed_time_title">Bed time</string>

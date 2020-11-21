@@ -1,161 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="8dp">
+    android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:gravity="center_horizontal"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/nlBulb"
+        android:layout_width="@dimen/bulb_size"
+        android:layout_height="@dimen/bulb_size"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_lightbulb_solid" />
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/defaultMargin"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:text="@string/dashboard"
-                android:textAppearance="?android:attr/textAppearance"
-                android:textSize="24sp"
-                android:layout_margin="@dimen/activity_horizontal_margin" />
-
-            <ImageView
-                android:id="@+id/nlBulb"
-                android:layout_width="@dimen/bulb_size"
-                android:layout_height="@dimen/bulb_size"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="@dimen/defaultMargin"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="@dimen/defaultMargin"
-                android:layout_marginBottom="@dimen/defaultMargin"
-                android:contentDescription="@null"
-                app:srcCompat="@drawable/ic_lightbulb_regular" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="16dp"
-                android:gravity="center_horizontal"
-                android:text="@string/bulb_info"
-                android:textSize="@dimen/text_sub_desc" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/states"
-                android:textAppearance="?android:attr/textAppearance"
-                android:textColor="@color/colorAccent" />
-
-            <androidx.gridlayout.widget.GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:columnCount="3">
-
-                <LinearLayout
-                    android:id="@+id/forceToggleView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/defaultMargin"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/defaultPadding"
-                    app:layout_columnWeight="1">
-
-                    <ImageButton
-                        android:id="@+id/forceToggleIcon"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="@dimen/defaultMargin"
-                        android:background="?themeDrawable"
-                        android:contentDescription="@null"
-                        android:tint="?themeCircleForeground"
-                        app:srcCompat="@drawable/ic_power" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center_horizontal"
-                        android:text="@string/app_name"
-                        android:textAppearance="?android:attr/textAppearance" />
-
-                    <TextView
-                        android:id="@+id/forceStatus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center_horizontal"
-                        android:textSize="@dimen/text_sub_desc" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/automationView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/defaultMargin"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/defaultPadding"
-                    app:layout_columnWeight="1">
-
-                    <ImageButton
-                        android:id="@+id/automationIcon"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="@dimen/defaultMargin"
-                        android:background="?themeDrawable"
-                        android:contentDescription="@null"
-                        android:tint="?themeCircleForeground"
-                        app:srcCompat="@drawable/ic_alarm" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center_horizontal"
-                        android:text="@string/section_auto"
-                        android:textAppearance="?android:attr/textAppearance" />
-
-                    <TextView
-                        android:id="@+id/automationStatus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center_horizontal"
-                        android:textSize="@dimen/text_sub_desc" />
-                </LinearLayout>
-            </androidx.gridlayout.widget.GridLayout>
-
-            <include layout="@layout/fab_placeholder" />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:text="@string/bulb_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nlBulb"
+        android:textSize="@dimen/text_sub_desc" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/moreOptions"
         style="@style/MaterialButtonStyle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_settings"
-        app:tint="?themeColorText"
         android:layout_centerHorizontal="true"
-        android:contentDescription="@null" />
-</RelativeLayout>
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/ic_settings"
+        app:tint="?themeColorText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

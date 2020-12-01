@@ -1,0 +1,1 @@
+Night light uses KCAL to adjust blue light intensity of the display colors.

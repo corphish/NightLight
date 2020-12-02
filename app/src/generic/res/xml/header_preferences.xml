@@ -7,6 +7,7 @@
         <Preference
             app:allowDividerBelow="false"
             app:icon="@drawable/ic_power"
+            app:summary="@string/on"
             app:title="@string/section_main">
             <intent
                 android:targetClass="com.corphish.nightlight.activities.MasterSwitchActivity"
@@ -16,6 +17,7 @@
         <Preference
             app:allowDividerBelow="false"
             app:icon="@drawable/ic_color"
+            app:key="color_controls"
             app:title="@string/section_color">
             <intent
                 android:targetClass="com.corphish.nightlight.activities.ColorControlActivity"
@@ -47,6 +49,7 @@
             app:allowDividerBelow="false"
             app:fragment="com.corphish.nightlight.design.fragments.SetOnBootDelayFragment"
             app:icon="@drawable/ic_timer"
+            app:key="set_on_boot_delay"
             app:title="@string/section_sob" />
 
         <Preference

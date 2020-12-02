@@ -208,11 +208,41 @@ class SettingsActivity : BaseActivity(),
             findPreference<Preference>("bed")?.summary = getString(if (bedTimeEnabled) R.string.on else R.string.off)
         }
 
+        // Updates color control setting summary
+        private fun updateColorSummary() {
+            var summary = ""
+
+            // Get the settings
+            val mode = PreferenceHelper.getInt(requireContext(), Constants.PREF_SETTING_MODE, Constants.NL_SETTING_MODE_TEMP)
+            if (mode == Constants.NL_SETTING_MODE_TEMP) {
+                summary = "${PreferenceHelper.getInt(requireContext(), Constants.PREF_COLOR_TEMP, Constants.DEFAULT_COLOR_TEMP)}K"
+            } else {
+                summary = "RGB(${PreferenceHelper.getInt(requireContext(), Constants.PREF_RED_COLOR, Constants.DEFAULT_RED_COLOR)}, ${PreferenceHelper.getInt(requireContext(), Constants.PREF_GREEN_COLOR, Constants.DEFAULT_GREEN_COLOR)}, ${PreferenceHelper.getInt(requireContext(), Constants.PREF_BLUE_COLOR, Constants.DEFAULT_BLUE_COLOR)})"
+            }
+
+            findPreference<Preference>("color_controls")?.summary = summary
+        }
+
+        private fun updateAutomationSummary() {
+            val automationEnabled = PreferenceHelper.getBoolean(requireContext(), Constants.PREF_AUTO_SWITCH, false)
+            findPreference<Preference>("auto")?.summary = getString(if (automationEnabled) R.string.on else R.string.off)
+        }
+
+        private fun updateSetOnBootSummary() {
+            val setOnBootDelayEnabled = PreferenceHelper.getBoolean(requireContext(), Constants.PREF_SET_ON_BOOT, Constants.DEFAULT_SET_ON_BOOT)
+            val delay = PreferenceHelper.getInt(requireContext(), Constants.PREF_BOOT_DELAY, Constants.DEFAULT_BOOT_DELAY)
+
+            findPreference<Preference>("set_on_boot_delay")?.summary = if (setOnBootDelayEnabled) "${delay}s" else getString(R.string.off)
+        }
+
         override fun onResume() {
             super.onResume()
 
             updateProfileCount()
             updateBedTimeSummary()
+            updateColorSummary()
+            updateAutomationSummary()
+            updateSetOnBootSummary()
         }
     }
 

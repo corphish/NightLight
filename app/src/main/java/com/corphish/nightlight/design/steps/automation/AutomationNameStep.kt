@@ -31,7 +31,7 @@ class AutomationNameStep(stepTitle: String?) : Step<String>(stepTitle) {
         return autoNameView
     }
 
-    override fun isStepDataValid(stepData: String) = IsDataValid(true, "")
+    override fun isStepDataValid(stepData: String) = IsDataValid(stepData.isNotEmpty(), context.getString(R.string.routine_name_error))
 
     override fun getStepData(): String {
         // We get the step's data from the value that the user has typed in the EditText view.

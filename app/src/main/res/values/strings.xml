@@ -247,4 +247,6 @@
     <string name="reschedule_alarms">Re-apply routine alarms</string>
     <string name="reschedule_alarm_desc">Re-applies the alarms that needs to be fired for the set routines.</string>
     <string name="reschedule_alarms_msg">Routine alarms re-applied</string>
+
+    <string name="routine_name_error">Please set a name of this routine.</string>
 </resources>

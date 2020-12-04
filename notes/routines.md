@@ -18,6 +18,6 @@ Here you will see the routines that you have created. Initially, it would be emp
 	- __Fade out__ - The night light intensity will fade out from a lower RGB value to a higher RGB value. In the upcoming sections, you will be asked to enter a starting RGB value and an ending RGB value, and the Night Light will fade out from the starting value to ending value. It is expected that the starting RGB value should be lower than the ending one, but the app will adjust the RGB inputs accordingly to match the set behavior.
 - __Starting RGB value__ - Starting RGB value. This value is also applied through out if Fade off behavior is set. This step is optional if you chose to disable night light in the routine.
 - __Ending RGB value__ - Ending RGB value. This step is optional if you chose to disable night light in the routine or you chose to not use any fading in the routine.
-- __Name__ - Although it is completely optional, a name can be supplied to identify it in the routine list.
+- __Name__ - Name of the routine, it does not have to be unique though, but a non-empty name must be supplied.
 
 Once done, you can review the steps and confirm, which will bring you to the previous screen where you can see your newly created routine. You create another routine, or modify an existing one in this screen.

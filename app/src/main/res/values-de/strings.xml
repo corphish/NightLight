@@ -157,7 +157,7 @@
     <string name="sunrise">Sunrise</string>
     <string name="custom_time">Custom time</string>
     <string name="pick_time">Pick time</string>
-    <string name="title_activity_automation_routine">Automation routines</string>
+    <string name="title_activity_automation_routine">Routines</string>
     <string name="setup_automation">Setup automation routines</string>
     <string name="title_activity_routine_create">Create routine</string>
     <string name="update_routine">Update routine</string>
@@ -179,4 +179,5 @@
     <string name="reschedule_alarms">Re-apply routine alarms</string>
     <string name="reschedule_alarm_desc">Re-applies the alarms that needs to be fired for the set routines.</string>
     <string name="reschedule_alarms_msg">Routine alarms re-applied</string>
+    <string name="routine_name_error">Please set a name of this routine.</string>
 </resources>

@@ -16,6 +16,7 @@ import com.corphish.nightlight.engine.AutomationRoutineManager
 import com.corphish.nightlight.engine.models.AutomationRoutine
 import com.corphish.nightlight.engine.models.FadeBehavior
 import com.corphish.nightlight.engine.models.PickedColorData
+import com.corphish.nightlight.helpers.TimeUtils
 import com.corphish.widgets.ktx.dialogs.MessageAlertDialog
 import ernestoyaquello.com.verticalstepperform.listener.StepperFormListener
 
@@ -72,8 +73,37 @@ class RoutineCreateActivity : AppCompatActivity(), StepperFormListener {
             toColorStep.isStepAvailable = it
         }
 
-        startTimeStep = AutomationTimeStep(getString(R.string.start_time), index)
-        endTimeStep = AutomationTimeStep(getString(R.string.end_time), index)
+        startTimeStep = AutomationTimeStep(getString(R.string.start_time)) {
+            // To verify start time, we build a temporary routine with start time
+            // as the picked time, and end time as start time + 1 (minute)
+            if (it == null) {
+                false
+            } else {
+                val endTime = TimeUtils.getTimeAsHourAndMinutes(it)
+                endTime[1]++
+
+                val tempRoutine = AutomationRoutine(
+                        startTime = it,
+                        endTime = TimeUtils.getTimeAsString(endTime)
+                )
+
+                !AutomationRoutineManager.doesOverlap(this, tempRoutine, index)
+            }
+        }
+        endTimeStep = AutomationTimeStep(getString(R.string.end_time)) {
+            // To verify the end time, we retrieve the start time and build a temporary
+            // routine to check for overlap.
+            if (it == null) {
+                false
+            } else {
+                val tempRoutine = AutomationRoutine(
+                        startTime = startTimeStep.stepData!!,
+                        endTime = it
+                )
+
+                !AutomationRoutineManager.doesOverlap(this, tempRoutine, index)
+            }
+        }
         fadeStep = AutomationFadeStep(getString(R.string.fade_behavior)) {
             toColorStep.isStepAvailable = !it
         }

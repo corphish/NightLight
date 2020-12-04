@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.corphish.nightlight.R
+import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.engine.AutomationRoutineManager
 import com.corphish.nightlight.engine.models.AutomationRoutine
@@ -16,7 +17,8 @@ import com.corphish.widgets.ktx.dialogs.SingleChoiceAlertDialog
 import com.corphish.widgets.ktx.dialogs.properties.IconProperties
 import ernestoyaquello.com.verticalstepperform.Step
 
-class AutomationTimeStep(stepTitle: String?, val index: Int = -1): Step<String?>(stepTitle) {
+class AutomationTimeStep(stepTitle: String?,
+                         val validator: (String?) -> Boolean) : Step<String?>(stepTitle) {
     // Chosen data.
     var pickedData: String? = null
 
@@ -89,7 +91,7 @@ class AutomationTimeStep(stepTitle: String?, val index: Int = -1): Step<String?>
         return if (pickedData == null) {
             IsDataValid(false, context.getString(R.string.time_error_empty))
         } else {
-            val isValid = !AutomationRoutineManager.doesOverlap(context, AutomationRoutine(startTime = pickedData!!), index)
+            val isValid = validator(pickedData)
             IsDataValid(isValid, if (isValid) "" else context.getString(R.string.time_error_overlap))
         }
     }

@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.databinding.ActivityAutomationRoutineBinding
@@ -21,6 +20,7 @@ import com.corphish.nightlight.helpers.ExternalLink
 import com.corphish.widgets.ktx.adapters.MutableListAdaptable
 import com.corphish.widgets.ktx.adapters.MutableListAdapter
 import com.corphish.widgets.ktx.viewholders.ClickableViewHolder
+import java.util.*
 
 class AutomationRoutineActivity : AppCompatActivity() {
 
@@ -71,7 +71,7 @@ class AutomationRoutineActivity : AppCompatActivity() {
                             if (item.rgbTo[0] == -1) {
                                 fromString
                             } else {
-                                val toString = if (item.fadeBehavior.settingType == Constants.NL_SETTING_MODE_TEMP) {
+                                val toString = if (item.rgbTo.size == 1) {
                                     "${item.rgbTo[0]}K"
                                 } else {
                                     "RGB(${item.rgbTo[0]}, ${item.rgbTo[1]}, ${item.rgbTo[2]})"
@@ -80,6 +80,12 @@ class AutomationRoutineActivity : AppCompatActivity() {
                                 "$fromString → $toString"
                             }
                         }
+
+                // Set icon text
+                viewHolder.getViewById<TextView>(R.id.routineIcon)?.text = "${item.name[0]}".toUpperCase(Locale.getDefault())
+                viewHolder.getViewById<TextView>(R.id.routineIcon)?.setTextColor(
+                        ThemeUtils.getNLStatusIconForeground(this@AutomationRoutineActivity, true)
+                )
             }
 
             override fun getDiffUtilItemCallback() = object : DiffUtil.ItemCallback<AutomationRoutine>() {
@@ -96,7 +102,7 @@ class AutomationRoutineActivity : AppCompatActivity() {
 
             override fun getViewHolder(view: View, viewType: Int) = ClickableViewHolder(
                     view,
-                    listOf(R.id.routineTitle, R.id.routineTime, R.id.routineColor)
+                    listOf(R.id.routineTitle, R.id.routineTime, R.id.routineColor, R.id.routineIcon)
             ) { _, pos ->
                 val intent = Intent(this@AutomationRoutineActivity, RoutineCreateActivity::class.java)
                 intent.putExtra(Constants.ROUTINE_UPDATE_INDEX, pos)
@@ -107,7 +113,6 @@ class AutomationRoutineActivity : AppCompatActivity() {
         }.buildAdapter()
 
         binding.included.recyclerView.adapter = adapter
-        binding.included.recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         binding.fab.setOnClickListener { view ->
             startActivityForResult(Intent(this@AutomationRoutineActivity, RoutineCreateActivity::class.java), 73)

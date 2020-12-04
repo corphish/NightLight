@@ -31,6 +31,7 @@
         android:layout_gravity="bottom|center"
         android:layout_margin="@dimen/fab_margin"
         android:contentDescription="@null"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_add"
+        app:tint="?themeColorText" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

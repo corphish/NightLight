@@ -70,6 +70,20 @@ object TimeUtils {
     }
 
     /**
+     * Returns the time represent as array of hours and minutes into time string.
+     * The input array must be of length 2 otherwise empty string will be returned.
+     *
+     * @param time Time as [IntArray].
+     * @return Input time as string.
+     */
+    fun getTimeAsString(time: IntArray) =
+            if (time.size != 2) {
+                ""
+            } else {
+                "${time[0] % 24}".padStart(2, '0') + ":" + "${time[1] % 60}".padStart(2, '0')
+            }
+
+    /**
      * Determines whether the target time is within the given start and end times or not.
      *
      * @param startTime Start time.

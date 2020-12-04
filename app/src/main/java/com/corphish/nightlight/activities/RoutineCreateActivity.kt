@@ -14,6 +14,7 @@ import com.corphish.nightlight.design.ThemeUtils
 import com.corphish.nightlight.design.steps.automation.*
 import com.corphish.nightlight.engine.AutomationRoutineManager
 import com.corphish.nightlight.engine.models.AutomationRoutine
+import com.corphish.nightlight.engine.models.AutomationRoutine.Companion.resolved
 import com.corphish.nightlight.engine.models.FadeBehavior
 import com.corphish.nightlight.engine.models.PickedColorData
 import com.corphish.nightlight.helpers.TimeUtils
@@ -79,11 +80,11 @@ class RoutineCreateActivity : AppCompatActivity(), StepperFormListener {
             if (it == null) {
                 false
             } else {
-                val endTime = TimeUtils.getTimeAsHourAndMinutes(it)
+                val endTime = TimeUtils.getTimeAsHourAndMinutes(it.resolved(this))
                 endTime[1]++
 
                 val tempRoutine = AutomationRoutine(
-                        startTime = it,
+                        startTime = it.resolved(this),
                         endTime = TimeUtils.getTimeAsString(endTime)
                 )
 
@@ -98,7 +99,7 @@ class RoutineCreateActivity : AppCompatActivity(), StepperFormListener {
             } else {
                 val tempRoutine = AutomationRoutine(
                         startTime = startTimeStep.stepData!!,
-                        endTime = it
+                        endTime = it.resolved(this)
                 )
 
                 !AutomationRoutineManager.doesOverlap(this, tempRoutine, index)

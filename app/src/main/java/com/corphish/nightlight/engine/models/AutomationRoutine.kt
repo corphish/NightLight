@@ -54,6 +54,19 @@ data class AutomationRoutine(
     val rgbTo: IntArray
         get() = fadeBehavior.fadeTo
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as AutomationRoutine
+
+        return this.name == other.name &&
+                this.switchState == other.switchState &&
+                this.startTime == other.startTime &&
+                this.endTime == other.endTime &&
+                this.fadeBehavior == other.fadeBehavior
+    }
+
     /**
      * Method to check if some other routine is overlapping with this
      * routine.
@@ -85,6 +98,15 @@ data class AutomationRoutine(
 
     override fun toString() =
             "$switchState;;$startTime;;$endTime;;$fadeBehavior;;$name"
+
+    override fun hashCode(): Int {
+        var result = name.hashCode()
+        result = 31 * result + switchState.hashCode()
+        result = 31 * result + startTime.hashCode()
+        result = 31 * result + endTime.hashCode()
+        result = 31 * result + fadeBehavior.hashCode()
+        return result
+    }
 
     companion object {
         /**

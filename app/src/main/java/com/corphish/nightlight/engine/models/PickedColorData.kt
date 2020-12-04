@@ -4,13 +4,15 @@ import android.content.Context
 import android.content.Intent
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
+import java.lang.IllegalArgumentException
 
 /**
  * This data class wraps up picked color so that the key aspects from
  * it can be easily accessed.
  * Colors are picked from [ColorControlActivity].
  */
-data class PickedColorData(
+@Suppress("DataClassPrivateConstructor")
+data class PickedColorData private constructor(
         /**
          * Setting mode of the picked color.
          * Can be either temperature or manual.
@@ -100,6 +102,39 @@ data class PickedColorData(
             }
 
             return PickedColorData(mode, settings)
+        }
+
+        /**
+         * Method to validate the input and update the settingMode based on
+         * input settings.
+         *
+         * @param settingMode Setting mode.
+         * @param settings Settings.
+         * @return Validated data.
+         */
+        operator fun invoke(settingMode: Int, settings: IntArray): PickedColorData {
+            // Check if settings is color temperature or RGB.
+            // If not, throw IllegalArgumentException
+            if (settings.size != 1 && settings.size != 3) {
+                throw IllegalArgumentException(
+                        "Settings array must be of length 1 or 3. Got size = ${settings.size}, contents = ${settings.contentToString()}"
+                )
+            }
+
+            // Temperature check
+            if (settings.size == 1 && settingMode != Constants.NL_SETTING_MODE_TEMP) {
+                return PickedColorData(
+                        settingMode = Constants.NL_SETTING_MODE_TEMP,
+                        settings = settings
+                )
+            } else if (settings.size == 3 && settingMode != Constants.NL_SETTING_MODE_MANUAL) {
+                return PickedColorData(
+                        settingMode = Constants.NL_SETTING_MODE_MANUAL,
+                        settings = settings
+                )
+            }
+
+            return PickedColorData(settingMode, settings)
         }
     }
 }

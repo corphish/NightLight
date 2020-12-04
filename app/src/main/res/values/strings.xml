@@ -217,7 +217,7 @@
     <string name="sunrise">Sunrise</string>
     <string name="custom_time">Custom time</string>
     <string name="pick_time">Pick time</string>
-    <string name="title_activity_automation_routine">Automation routines</string>
+    <string name="title_activity_automation_routine">Routines</string>
     <string name="setup_automation">Setup automation routines</string>
 
     <string name="title_activity_routine_create">Create routine</string>

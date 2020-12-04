@@ -83,10 +83,13 @@ class AutomationRoutineActivity : AppCompatActivity() {
             }
 
             override fun getDiffUtilItemCallback() = object : DiffUtil.ItemCallback<AutomationRoutine>() {
-                override fun areItemsTheSame(oldItem: AutomationRoutine, newItem: AutomationRoutine) = false
+                // This is still an experimental logic as we continue testing the recyclerview actions
+                // accordingly.
+                override fun areItemsTheSame(oldItem: AutomationRoutine, newItem: AutomationRoutine)
+                        = false
 
                 override fun areContentsTheSame(oldItem: AutomationRoutine, newItem: AutomationRoutine) =
-                        oldItem.startTime == newItem.startTime && oldItem.endTime == newItem.endTime
+                        oldItem == newItem
             }
 
             override fun getLayoutResource(viewType: Int) = R.layout.layout_auto_routine_item

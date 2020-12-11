@@ -3,16 +3,23 @@
 buildscript {
     ext.kotlin_version = '1.4.20'
 
+    // Build parameter to determine if the variant is for Play Store
+    def taskRequests = getGradle().getStartParameter().getTaskRequests().toString()
+    ext.isPlayStore = taskRequests.contains("generic") || taskRequests.contains("Generic") || taskRequests.contains("donate") || taskRequests.contains("Donate")
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.1'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        if (isPlayStore) {
+            classpath 'com.google.gms:google-services:4.3.4'
+            classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
+        }
     }
 }
 

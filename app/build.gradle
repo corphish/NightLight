@@ -1,16 +1,13 @@
-def taskRequests = getGradle().getStartParameter().getTaskRequests().toString()
-def isPlayStore = taskRequests.contains("generic") || taskRequests.contains("Generic") || taskRequests.contains("donate") || taskRequests.contains("Donate")
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 if (isPlayStore) {
     apply plugin: 'com.google.firebase.crashlytics'
+    apply plugin: 'com.google.gms.google-services'
 }
 
 repositories {
-    maven { url 'https://maven.fabric.io/public' }
     mavenCentral()
 }
 
@@ -111,5 +108,7 @@ dependencies {
 
     // Crash reporting
     genericImplementation 'com.google.firebase:firebase-crashlytics:17.3.0'
+    genericImplementation 'com.google.firebase:firebase-analytics:18.0.0'
     donateImplementation 'com.google.firebase:firebase-crashlytics:17.3.0'
+    donateImplementation 'com.google.firebase:firebase-analytics:18.0.0'
 }

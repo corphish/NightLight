@@ -7,6 +7,9 @@ import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
@@ -23,6 +26,7 @@ import com.corphish.nightlight.engine.ProfilesManager
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.widgets.ktx.adapters.MutableListAdaptable
 import com.corphish.widgets.ktx.adapters.MutableListAdapter
+import com.corphish.widgets.ktx.dialogs.OnBoardingDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
@@ -54,8 +58,7 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
         binding = ActivityProfilesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        useCollapsingActionBar()
-        setActionBarTitle(R.string.profile_title)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         context = this
@@ -79,7 +82,7 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
     }
 
     private fun initViews() {
-        binding.included.recyclerView.layoutManager =  GridLayoutManager(this, resources.getInteger(R.integer.gridSpanCount))
+        binding.included.recyclerView.layoutManager =  LinearLayoutManager(this)
         profileAdapter = object: MutableListAdaptable<ProfilesManager.Profile, CustomViewHolder>() {
             override fun bind(viewHolder: CustomViewHolder, item: ProfilesManager.Profile, position: Int) {
                 viewHolder.icon.text = if (item.name.isNotEmpty()) "${item.name.toUpperCase(Locale.getDefault())[0]}" else ""
@@ -264,5 +267,29 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
         bottomSheetAlertDialog.setPositiveButton(android.R.string.ok, positiveOnClickListener)
         bottomSheetAlertDialog.setNegativeButton(android.R.string.cancel) { }
         bottomSheetAlertDialog.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.automation_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.action_help -> {
+                OnBoardingDialog(this).apply {
+                    slides = listOf(
+                            OnBoardingDialog.Slide(
+                                    titleResId = R.string.profile_title,
+                                    messageResId = R.string.profiles_desc
+                            )
+                    )
+                }.show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,67 +8,21 @@
     tools:context="com.corphish.nightlight.activities.ProfilesActivity"
     tools:showIn="@layout/activity_profiles">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:clipToPadding="false"
+        android:paddingBottom="64dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:paddingStart="@dimen/layout_padding"
-            android:paddingTop="@dimen/layout_padding"
-            android:paddingEnd="@dimen/layout_padding"
-            android:text="@string/profile_title"
-            android:textAppearance="?android:attr/textAppearance"
-            android:textColor="@color/colorAccent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:paddingStart="@dimen/layout_padding"
-            android:paddingEnd="@dimen/layout_padding"
-            android:paddingBottom="@dimen/layout_padding"
-            android:text="@string/profiles_desc"
-            android:textSize="@dimen/text_desc" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="@dimen/layout_padding"
-            android:text="@string/section_profiles_list"
-            android:textAppearance="?android:attr/textAppearance"
-            android:textColor="@color/colorAccent" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <com.corphish.widgets.ktx.PlaceholderView
-                android:id="@+id/emptyView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:paddingTop="32dp"
-                app:descriptionText="@string/profile_empty_desc"
-                app:srcCompat="@drawable/ic_error_large"
-                app:titleText="@string/profile_empty_title"
-                app:viewTint="?themeStroke" />
-        </RelativeLayout>
-
-        <include layout="@layout/fab_placeholder" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    <com.corphish.widgets.ktx.PlaceholderView
+        android:id="@+id/emptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingTop="32dp"
+        app:descriptionText="@string/profile_empty_desc"
+        app:srcCompat="@drawable/ic_error_large"
+        app:titleText="@string/profile_empty_title"
+        app:viewTint="?themeStroke" />
+</RelativeLayout>

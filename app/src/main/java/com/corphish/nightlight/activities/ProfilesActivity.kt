@@ -97,7 +97,7 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
                         oldItem.name == newItem.name
 
                 override fun areContentsTheSame(oldItem: ProfilesManager.Profile, newItem: ProfilesManager.Profile) =
-                        false
+                        oldItem == newItem
             }
 
             override fun getLayoutResource(viewType: Int) = R.layout.layout_profile_item

@@ -12,6 +12,7 @@ import com.corphish.nightlight.design.steps.profile.ProfileDataStep
 import com.corphish.nightlight.design.steps.profile.ProfileNameStep
 import com.corphish.nightlight.design.steps.profile.ProfileSwitchStep
 import com.corphish.nightlight.engine.ProfilesManager
+import com.corphish.nightlight.engine.models.FadeBehavior
 import com.corphish.nightlight.engine.models.PickedColorData
 import com.corphish.nightlight.helpers.PreferenceHelper
 import com.corphish.widgets.ktx.dialogs.MessageAlertDialog
@@ -90,25 +91,25 @@ class ProfileCreateActivity : BaseActivity(), StepperFormListener {
     }
 
     private fun createProfileWithCurrentSelections(): Boolean {
-        val data = profileDataStep.stepData
+        val data = profileDataStep.stepData ?: FadeBehavior.defaultKCALRGB(this)
 
         return profilesManager.createProfile(
                 profileSwitchStep.stepData,
                 profileNameStep.stepData,
-                data!!.settingMode, // Mode
+                data.settingMode, // Mode
                 data.settings, // Setting as array
         )
     }
 
     private fun updateProfileWithCurrentSelections(): Boolean {
-        val data = profileDataStep.stepData
+        val data = profileDataStep.stepData ?: FadeBehavior.defaultKCALRGB(this)
 
         return if (profile == null) false else
             profilesManager.updateProfile(
                     profile!!,
                     profileSwitchStep.stepData,
                     profileNameStep.stepData,
-                    data!!.settingMode, // Mode
+                    data.settingMode, // Mode
                     data.settings, // Setting as array
             )
     }

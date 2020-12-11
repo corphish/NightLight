@@ -2,13 +2,19 @@ package com.corphish.nightlight.design.steps.profile
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.corphish.nightlight.R
 import com.corphish.nightlight.activities.ColorControlActivity
 import com.corphish.nightlight.data.Constants
+import com.corphish.nightlight.design.ThemeUtils
+import com.corphish.nightlight.engine.models.FadeBehavior
 import com.corphish.nightlight.engine.models.PickedColorData
+import com.corphish.widgets.ktx.dialogs.SingleChoiceAlertDialog
+import com.corphish.widgets.ktx.dialogs.properties.IconProperties
 import ernestoyaquello.com.verticalstepperform.Step
 
 class ProfileDataStep(private val activity: Activity, stepTitle: String?): Step<PickedColorData?>(stepTitle) {
@@ -38,10 +44,33 @@ class ProfileDataStep(private val activity: Activity, stepTitle: String?): Step<
 
         view.setOnClickListener {
             if (isStepAvailable) {
-                val colorPickerIntent = Intent(context, ColorControlActivity::class.java)
-                colorPickerIntent.putExtra(Constants.COLOR_PICKER_MODE, true)
+                SingleChoiceAlertDialog(context).apply {
+                    titleResId = R.string.choose_rgb
+                    dismissOnChoiceSelection = true
+                    iconProperties = IconProperties(
+                            iconColor = if (ThemeUtils.isLightTheme(context)) Color.WHITE else Color.BLACK,
+                            backgroundDrawable = ContextCompat.getDrawable(context, ThemeUtils.getThemeIconShape(context))
+                    )
+                    choiceList = listOf(
+                            SingleChoiceAlertDialog.ChoiceItem(
+                                    titleResId = R.string.section_kcal_backup,
+                                    iconResId = R.drawable.ic_color,
+                                    action = {
+                                        updateData(FadeBehavior.defaultKCALRGB(context))
+                                    }
+                            ),
+                            SingleChoiceAlertDialog.ChoiceItem(
+                                    titleResId = R.string.custom_rgb,
+                                    iconResId = R.drawable.ic_color,
+                                    action = {
+                                        val colorPickerIntent = Intent(context, ColorControlActivity::class.java)
+                                        colorPickerIntent.putExtra(Constants.COLOR_PICKER_MODE, true)
 
-                activity.startActivityForResult(colorPickerIntent, 43)
+                                        activity.startActivityForResult(colorPickerIntent, 43)
+                                    }
+                            )
+                    )
+                }.show()
             }
         }
 

@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         app:form_circle_background_color="@color/colorAccent"
         app:form_circle_text_color="?themeColorText"
+        app:form_display_bottom_navigation="false"
         app:form_next_button_background_color="@color/colorPrimary"
         app:form_next_button_pressed_background_color="@color/colorPrimaryDark"
         app:form_next_button_text_color="?themeColorText"

@@ -1,7 +1,7 @@
 package com.corphish.nightlight.engine
 
 import android.content.Context
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.extensions.toArrayOfInts
 

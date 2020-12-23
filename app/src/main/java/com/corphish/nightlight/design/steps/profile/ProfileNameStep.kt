@@ -5,9 +5,11 @@ import android.text.TextWatcher
 import android.text.Editable
 import android.view.View
 import com.corphish.nightlight.R
+import com.corphish.nightlight.engine.ProfilesManager
 import ernestoyaquello.com.verticalstepperform.Step
 
-class ProfileNameStep(stepTitle: String?) : Step<String>(stepTitle) {
+class ProfileNameStep(stepTitle: String?,
+                      private val validator: (String) -> Boolean) : Step<String>(stepTitle) {
     private lateinit var profileNameView: EditText
     
     override fun createStepContentLayout(): View {
@@ -31,7 +33,8 @@ class ProfileNameStep(stepTitle: String?) : Step<String>(stepTitle) {
         return profileNameView
     }
 
-    override fun isStepDataValid(stepData: String) = IsDataValid(true, "")
+    override fun isStepDataValid(stepData: String) = IsDataValid(
+            validator(stepData), context.getString(R.string.profile_create_name_error))
 
     override fun getStepData(): String {
         // We get the step's data from the value that the user has typed in the EditText view.

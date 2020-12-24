@@ -1,0 +1,2 @@
+- Made it mandatory for profile names to be unique.
+- Switched to uniform UI for bed time tutorial.

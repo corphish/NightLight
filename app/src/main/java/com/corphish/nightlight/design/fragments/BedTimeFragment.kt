@@ -7,7 +7,7 @@ import androidx.preference.SwitchPreferenceCompat
 import com.corphish.nightlight.R
 import com.corphish.nightlight.data.Constants
 import com.corphish.nightlight.engine.Core
-import com.corphish.widgets.ktx.dialogs.MessageAlertDialog
+import com.corphish.widgets.ktx.dialogs.OnBoardingDialog
 
 /**
  * Fragment to show bed time switch and tutorial.
@@ -26,12 +26,12 @@ class BedTimeFragment : PreferenceFragmentCompat() {
 
         // Tutorial
         findPreference<Preference>("wind_down_tutorial")?.setOnPreferenceClickListener {
-            MessageAlertDialog(requireContext()).apply {
-                titleResId = R.string.bed_time_title
-                messageResId = R.string.bed_time_desc
-                positiveButtonProperties = MessageAlertDialog.ButtonProperties(
-                        buttonTitleResId = android.R.string.ok,
-                        dismissDialogOnButtonClick = true
+            OnBoardingDialog(requireContext()).apply {
+                slides = listOf(
+                        OnBoardingDialog.Slide(
+                                titleResId = R.string.bed_time_title,
+                                messageResId = R.string.bed_time_desc
+                        )
                 )
             }.show()
 

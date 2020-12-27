@@ -1,0 +1,2 @@
+- Further improved RecyclerView operations in Profiles and Automation routines section.
+- Library updates.

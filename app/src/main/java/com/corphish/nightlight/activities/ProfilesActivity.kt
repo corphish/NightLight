@@ -106,7 +106,7 @@ class ProfilesActivity : BaseActivity(), ProfilesManager.DataChangeListener {
         }.buildAdapter()
 
         binding.included.recyclerView.adapter = profileAdapter
-        profileAdapter.submitList(profilesManager.profilesList)
+        profileAdapter.updateList(profilesManager.profilesList)
     }
 
     override fun onDataChanged(newDataSize: Int) {

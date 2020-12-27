@@ -118,7 +118,7 @@ class AutomationRoutineActivity : AppCompatActivity() {
             startActivityForResult(Intent(this@AutomationRoutineActivity, RoutineCreateActivity::class.java), 73)
         }
 
-        adapter.submitList(AutomationRoutineManager.automationRoutineList)
+        adapter.updateList(AutomationRoutineManager.automationRoutineList)
         if (AutomationRoutineManager.automationRoutineList.isNotEmpty()) {
             binding.included.placeHolder.visibility = View.GONE
         } else {

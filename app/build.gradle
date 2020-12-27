@@ -62,10 +62,7 @@ android {
             applicationId "com.corphish.nightlight.generic"
             dimension "buildVariant"
         }
-        donate {
-            applicationId "com.corphish.nightlight.donate"
-            dimension "buildVariant"
-        }
+
         foss {
             applicationId "com.corphish.nightlight.generic"
             dimension "buildVariant"
@@ -109,6 +106,4 @@ dependencies {
     // Crash reporting
     genericImplementation 'com.google.firebase:firebase-crashlytics:17.3.0'
     genericImplementation 'com.google.firebase:firebase-analytics:18.0.0'
-    donateImplementation 'com.google.firebase:firebase-crashlytics:17.3.0'
-    donateImplementation 'com.google.firebase:firebase-analytics:18.0.0'
 }

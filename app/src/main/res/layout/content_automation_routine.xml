@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        app:viewTint="?themeStroke"
+        app:animation="@raw/empty"
         app:titleText="@string/empty_routine_title"
         app:descriptionText="@string/empty_routine_desc"
         app:srcCompat="@drawable/ic_routines"

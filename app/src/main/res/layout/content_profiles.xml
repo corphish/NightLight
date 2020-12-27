@@ -21,9 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:paddingTop="32dp"
         app:descriptionText="@string/profile_empty_desc"
         app:srcCompat="@drawable/ic_error_large"
         app:titleText="@string/profile_empty_title"
-        app:viewTint="?themeStroke" />
+        app:animation="@raw/empty" />
 </RelativeLayout>

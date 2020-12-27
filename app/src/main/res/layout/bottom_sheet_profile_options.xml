@@ -37,7 +37,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_caption"
-                android:textStyle="bold"
                 android:textAppearance="?android:attr/textAppearance"
                 android:text="@string/profile_title"/>
 
@@ -53,12 +52,11 @@
         android:layout_height="wrap_content"
         android:text="@string/properties"
         android:textSize="@dimen/text_desc"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:layout_marginStart="@dimen/layout_margin"
         android:layout_marginEnd="@dimen/layout_margin"
         android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:textAppearance="?attr/textAppearanceButton" />
+        android:paddingEnd="@dimen/layout_padding" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -157,12 +155,11 @@
         android:layout_height="wrap_content"
         android:text="@string/actions"
         android:textSize="@dimen/text_desc"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:layout_marginStart="@dimen/layout_margin"
         android:layout_marginEnd="@dimen/layout_margin"
         android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding"
-        android:textAppearance="?attr/textAppearanceButton" />
+        android:paddingEnd="@dimen/layout_padding" />
 
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"

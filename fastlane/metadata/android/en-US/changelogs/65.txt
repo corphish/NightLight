@@ -1,0 +1,4 @@
+- Fixed shortcut toggle.
+- Improved shortcut toggling operation.
+- Fixed the duplicate profile name warning when updating a profile.
+- Fixed an RGB setting bug in Automation Routine.

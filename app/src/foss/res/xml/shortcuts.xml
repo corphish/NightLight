@@ -5,8 +5,8 @@
         android:icon="@drawable/ic_shortcut_lightbulb"
         android:shortcutShortLabel="@string/shortcut_toggle">
         <intent
-            android:action="android.intent.action.TOGGLE"
+            android:action="android.intent.action.NL_TOGGLE"
             android:targetPackage="com.corphish.nightlight.generic"
-            android:targetClass="com.corphish.nightlight.activities.StartActivity" />
+            android:targetClass="com.corphish.nightlight.activities.ShortcutActivity" />
     </shortcut>
 </shortcuts>

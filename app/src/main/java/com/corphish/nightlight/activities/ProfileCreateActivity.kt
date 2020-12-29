@@ -72,7 +72,7 @@ class ProfileCreateActivity : BaseActivity(), StepperFormListener {
 
     private fun initViews() {
         profileNameStep = ProfileNameStep(getString(R.string.profile_create_name)) {
-            profilesManager.isProfileNameUnique(it)
+            profilesManager.isProfileNameUnique(it, profile?.name)
         }
         profileDataStep = ProfileDataStep(this, getString(R.string.section_color))
         profileSwitchStep = ProfileSwitchStep(getString(R.string.profile_nl_switch)) {

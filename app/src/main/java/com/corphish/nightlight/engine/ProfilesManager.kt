@@ -104,10 +104,15 @@ class ProfilesManager(private val context: Context) {
      * Method to check if profile name is unique.
      *
      * @param name New profile name.
+     * @param whitelist Optional name to ignore.
      * @return Whether the given name is unique or not.
      */
-    fun isProfileNameUnique(name: String): Boolean =
-            !profilesList.map { it.name }.contains(name)
+    fun isProfileNameUnique(name: String, whitelist: String? = null): Boolean =
+            if (whitelist == null) {
+                !profilesList.map { it.name }.contains(name)
+            } else {
+                !profilesList.map { it.name }.filter { it != whitelist }.contains(name)
+            }
 
     /**
      * Creates a new profile, stores it in local set and then writes it to SP

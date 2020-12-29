@@ -36,6 +36,7 @@
             android:parentActivityName=".activities.MainActivity" />
         <activity android:name=".activities.MasterSwitchActivity" />
         <activity android:name=".activities.ProfileCreateActivity"/>
+        <activity android:name=".activities.ShortcutActivity" />
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
@@ -98,8 +99,7 @@
             android:process=":booting" />
 
         <receiver
-            android:name=".receivers.TaskerIntentReceiver"
-            android:permission="">
+            android:name=".receivers.TaskerIntentReceiver">
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
             </intent-filter>

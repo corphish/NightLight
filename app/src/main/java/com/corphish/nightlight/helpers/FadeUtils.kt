@@ -163,7 +163,7 @@ object FadeUtils {
         var gFrom = settingsFrom[1]
         var bFrom = settingsFrom[2]
 
-        val settingsTo = if (fadeBehavior.settingType == Constants.NL_SETTING_MODE_TEMP) {
+        val settingsTo = if (fadeBehavior.fadeTo.size == 1) {
             fadeBehavior.fadeTo[0].fromColorTemperatureToRGBIntArray()
         } else {
             fadeBehavior.fadeTo

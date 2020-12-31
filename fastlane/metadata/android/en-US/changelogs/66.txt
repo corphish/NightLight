@@ -1,0 +1,11 @@
+Night Light 3.0 is here!
+
+- Automation got even better with automation routines.
+- Set different Nigh Light settings for different time periods using automation routines.
+- Have your Night Light settings fade in/out to different settings using automation routines.
+- Removed maximum and minimum intensities in favor of automation routines and simplicity.
+- Added an option to automatically disable Night Light in lockscreen and automatically turn it back on when the device is unlocked.
+- Redesigned settings section.
+- Updated the interface for creating and listing profiles.
+- Fixed launcher shortcut toggle.
+- Other bug fixes.

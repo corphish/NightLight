@@ -3,14 +3,15 @@ Night light is an open-source app which uses KCAL to adjust blue light intensity
 Source - https://github.com/corphish/NightLight
 
 <b>Features</b>
-🌈 Uses KCAL to adjust blue light intensity.
-🕹️ Easy to use color controls.
-⚙️ Color intensities.
+🌈 Uses KCAL to adjust blue light intensity
+🕹️ Easy to use color controls
 🛏️ Bed time mode
-⏱️ Sophisticated automation.
-📕 Profiles.
-⚡ Tasker plugin integration.
-😍 Great UI.
+⏱️ Automation routines
+🌙 Intensity fade in/out
+📕 Profiles
+⚡ Tasker plugin integration
+🔒 Lock screen options
+😍 Great UI
 
 🌈 KCAL FOR THE WIN! 🌈
 KCAL is a display driver tuning feature for Qualcomm devices, written by savoca. This is used by Night Light to adjust blue light by manipulating screen RGB. Since the changes are done in driver level, this is THE MOST efficient blue light filter, with the changes being visible all over the screen anytime.
@@ -18,20 +19,23 @@ KCAL is a display driver tuning feature for Qualcomm devices, written by savoca.
 🕹️ COLOR CONTROLS 🕹️
 Night Light provides both simple and advanced color controls for the user. For those who want one simple control, the color temperature control is for them, while for the advanced users, the app lets full screen RGB control.
 
-⚙️ MINIMUM & MAXIMUM INTENSITIES ⚙️
-Night Light provides minimum & maximum intensities. Use minimum intensity setting when in night but artificial light, and maximum intensity in pitch dark conditions.
-
 🛏️ BED TIME MODE 🛏️
 Bed time mode makes your screen grayscale which can help you to fall asleep faster.
 
-⏱️ SOPHISTICATED AUTOMATION ⏱️
-Night Light provides simple and battery-friendly automation option, with options for setting custom standard start and end times, or use corresponding sunset and sunrise times. It also lets you set "bedtime" time where it will trigger maximum intensity.
+⏱️ AUTOMATION ROUTINES ⏱️
+With automation routines, you have total control on how Night Light settings are applied throughout the day. Set different routines for different time periods during which the Night Light intensity of your choice will be applied.
+
+🌙 INTENSITY FADE IN/OUT 🌙
+You can also choose to have Night Light fade in or out from one intensity to another intensity as part of an automation routine.
 
 📕 PROFILES 📕
 Night Light lets you create profiles, which are basically collection of settings, which you can easily apply later on with one click.
 
 ⚡ TASKER PLUGIN INTEGRATION ⚡
 If the automation features provided by the app is not sufficient for you, then you can use Tasker to handle the automation for you while Night Light does the blue light adjustment the way you want. Night Light is supported as a plugin for Tasker. You can get Tasker from https://tasker.joaoapps.com/.
+
+🔒 LOCK SCREEN 🔒
+Can automatically turn off the Night Light in lock screen, and turn it back on when the device is unlocked.
 
 😍 UI CAN BE SIMPLE YET AMAZING AT THE SAME TIME 😍
 Night Light features a simple and attractive UI, which uses the best of what Material Design has to offer, and provides a very easy-to-use user interface. It provides a neat dashboard which provides one click controls for commonly used features. It also provides dark and light theme and icon customization.
